@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create the main folders
-mkdir -p Data Intermediate Backup Environments 
+mkdir -p Intermediate Backup Environments 
 
 # Create the subfolders inside Backup
 mkdir -p Backup/Data Backup/Scripts Backup/Analysis Backup/Results
