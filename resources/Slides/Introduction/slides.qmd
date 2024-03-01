@@ -1,0 +1,741 @@
+---
+title: "Introduction to GenomeDK"
+subtitle: https://hds-sandbox.github.io/GDKworkshops
+author: 
+    - "Samuele Soraggi"
+    - "Dan Søndergaard"
+institute:
+    - Health Data Science sandbox, BiRC
+    - GenomeDK, Health
+date: 6.March 2024
+format: revealjs
+toc: true
+toc-depth: 1
+slide-number: h.v
+code-line-numbers: false
+logo: img/logos.png
+navigation-mode: vertical
+
+---
+
+# GenomeDK's ABC
+
+## Infrastructure
+
+GenomeDK is a **computing cluster**, i.e. a set of interconnected computers (nodes). GenomeDK has:
+
+- **computing nodes** used for running programs (~15000 cores)
+- **storage nodes** storing data in thousands of hard disks (23 PiB)
+- a **network** making nodes talk to each other
+- a **frontend** node from which you can send your programs to a node to be executed
+- a **queueing system** called *slurm* to prioritize the users' program to be run
+
+---
+
+![](./img/Main-components-of-a-computer-cluster.png)
+
+## Access
+
+- **Creating an account** happens through [this form](https://console.genome.au.dk/user-requests/create/) at genome.au.dk
+
+- **Logging into GenomeDK** happens through the command ^[both in Linux/Mac terminal and Windows Powershell]
+```
+[local]$  ssh USERNAME@login.genome.au.dk
+```
+
+- When first logged in, **setup the 2-factor authentication** by showing a QR-code with the command
+```
+[fe-open-01]$  gdk-auth-show-qr
+```
+and scanning it with your phone's Microsoft Authenticator app.
+
+## Access without password
+
+It is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer
+
+```{.bash}
+exit
+```
+
+&nbsp;
+
+Now we generate an RSA key.
+
+```{.bash}
+ssh-keygen -t rsa
+```
+
+Always press `Enter` and do not insert any password when asked. 
+
+---
+
+We create a folder on the cluster called `.ssh` to contain the RSA key we created
+
+```{.bash}
+ssh <USERNAME>@login.genome.au.dk mkdir -p .ssh
+```
+and finally send the RSA key itself to the cluster, into the file `authorized_keys`
+
+```{.bash}
+cat ~/.ssh/id_rsa.pub | ssh username@login.genome.au.dk 'cat >> .ssh/authorized_keys'
+```
+
+this time will be the last where you are asked your password when logging in from your computer.
+
+## Home on the cluster
+
+Every time you log in, you will find yourself into your private home folder. This is denoted by `~` or `/home/username/`. Your prompt will show something like this:
+
+&nbsp;
+
+```{.bash}
+[samuele@fe-open-02 ~]
+```
+
+&nbsp;
+
+which follows the format 
+
+```{.bash}
+[username@node current_folder]
+```
+
+---
+
+See the content of the current folder with 
+
+```{.bash}
+ls
+```
+
+or to see more details
+
+```{.bash}
+ls -lh
+```
+
+&nbsp;
+
+:::{.callout-warning}
+do not fill up your home with data. It has a **limited amount of storage**.
+:::
+
+## Access from VSCode
+
+An **IDE** (Integrated Development Environment) is an interface from which you can edit files, use the terminal, write code. You might now IDEs such as Rstudio (very dedicated to R and python) and jupyterlab (for basically any language).
+
+&nbsp;
+
+A good recommendation to interact with the cluster is the IDE [VSCode](https://code.visualstudio.com/). It has a very practical interface and many plugins that can make your life very easy once you get confident with it.
+
+---
+
+[Download VSCode](https://code.visualstudio.com/) and open it. Go to the plugin tab (red circle)
+
+![](img/vscode1.png)
+
+---
+
+Search for `remote development`. Open the plugin (red circle) and install
+
+![](img/vscode2.png)
+
+---
+
+When done, click on the remote symbol on the bottom-left corner (red circle), 
+
+![](img/vscode3.png)
+
+choose `Connect current window to host` then `Add new SSH host`, and type:
+```{.bash}
+ssh username@login.genome.au.dk
+```
+
+If asked, select the file `.ssh/config`
+
+---
+
+After some waiting for the first installation, you are **logged in**, and can do it again whenever you open VScode.
+
+Click on the browser tab (red circle), then `Open Folder` and choose your home by typing `/home/username`. You will see everything in your home in the browser on the left
+
+![](img/vscode4.png)
+
+---
+
+It can be useful to have other folders at hand, such as projects.
+
+Go to `File`--> `Add folder to workspace` and type a path of the type
+
+```
+/home/username/project
+```
+
+to see the project folder listed in the browser. You should see something like
+
+![](img/vscode6.png)
+
+---
+
+Also, why not having a terminal as well, without jumping beteeen windows all the time? We still need it to run jobs, create environments and so on. 
+
+&nbsp;
+
+On the top menu, go to `Terminal` --> `New Terminal` (it might ask which is the current folder, if you added folders to the workspace).
+
+&nbsp;
+
+Note that the terminal is also logged into GenomeDK
+
+# Project management
+
+## Creation
+
+You need a project from which you can run your programs. Request a project with the command
+
+```{.bash}
+gdk-project-request -g <project_name>
+```
+
+This creates a folder with the desired name. You should be able to go into that folder:
+
+```{.bash}
+cd <project_name>
+```
+
+&nbsp;
+
+You can see how many resources your projects are using with 
+
+```{.bash}
+gdk-project-usage
+```
+
+---
+
+## Users management
+
+**Only the creator** (owner) can see the project folder. You can add an user
+
+```{.bash}
+gdk-project-add-user -g <project name> -u <username>
+```
+
+or remove it
+
+```{.bash}
+gdk-project-remove-user -g <project name> -u <username>
+```
+
+&nbsp;
+
+More about user's management [in the documentation](https://genome.au.dk/docs/projects-and-accounting/#managing-a-project)
+ 
+---
+
+## Folders management
+
+It is important to
+
+- have a coherent folder structure
+- backup only important things (raw data, analysis scripts)
+
+&nbsp;
+
+Remember: Storage cost >> Computation cost
+
+---
+
+Example of structure, which backs up raw data and analysis
+
+![](img/structure.png)
+
+You can do it with a script:
+```{.bash}
+wget https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/5bbfc11e3796d5f4f1af39aecd6858721aca1612/Scripts/populate_project.sh
+bash populate_project.sh
+```
+
+---
+
+If your project has many users, a good structure can be
+
+![](img/multistructure.png)
+
+&nbsp; 
+
+```{.bash}
+mkdir -p Backup/Data Workspaces/username1 Workspaces/username2
+ln -s Backup/Data/ Data
+```
+
+---
+
+Each user can go in its folder inside the project and run the script to populate the folders
+
+&nbsp;
+
+```{.bash}
+cd Workspaces/username1
+wget https://github.com/hds-sandbox/GDKworkshops/blob/be7315365c152ecd75e94c1f56e1578062c2c096/Scripts/populate_project.sh
+chmod +x populate_project.sh
+./populate_project.sh
+```
+
+# Package/Environment management
+
+## Virtual environments
+
+Each project needs specific software versions dependent on each other for **reproducibility** - without interferring with other projects.
+
+&nbsp;
+
+:::{.callout-note title="Definition"}
+A **virtual environment** keeps project-specific softwares and their dependencies separated 
+
+&nbsp;
+
+A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
+:::
+---
+
+![](./img/virtualenvs.png)
+
+## Conda
+
+&nbsp;
+
+Conda is **both** a virtual environment and a package manager.
+
+- easy to use and understand
+- can handle quite big environments
+- environments are easily shareable
+- a [large archive](https://anaconda.org) (Anaconda) of packages
+- active community of people archiving their packages on Anaconda
+
+## Installation
+
+&nbsp;
+
+Just download and execute the installer by
+```{.bash}
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda-installer.sh
+bash ~/miniconda-installer.sh
+```
+
+After a few `ENTER`s and `YES`'s you should get the installation done. Run
+
+```{.bash}
+source ~/.bashrc
+```
+
+and doublecheck that `conda` works:
+
+```{.bash}
+conda info
+```
+
+```
+> active environment : base
+> active env location : /home/samuele/miniconda3
+> shell level : 1
+> .....
+```
+
+## Base environment
+is the environment containing conda itself. The current environment is in your prompt.
+
+```
+(base) [samuele@fe-open-02 ~]$
+```
+
+We update Conda with Mamba - a lot faster in installing many packages at once.
+
+```{.bash}
+conda install -n base conda-forge::mamba
+```
+
+&nbsp;
+
+:::{.callout-warning title="Don't touch the Base"}
+This is **the only time** you should install in the `base` environment!
+:::
+
+## Create an environment
+
+&nbsp;
+
+An empty environment called `test_1`:
+
+```{.bash}
+mamba create -n test_1
+```
+
+&nbsp;
+
+You can find it in your home folder at `~/miniconda3/envs/test_1`.
+
+```{.bash}
+mamba env list
+```
+```
+> # conda environments:
+> #
+> base      *  /home/samuele/miniconda3
+> test_1       /home/samuele/miniconda3/envs/test_1
+```
+
+---
+
+**Good practice:** create an environment out of your home by choosing the output folder (for example a project folder).
+
+&nbsp;
+
+```{.bash}
+mamba create -p ./my_project/test_3
+```
+
+&nbsp;
+
+Pros:
+
+- available to other members of a project
+- does not fill space in your `home`
+
+## Activate and deactivate
+
+&nbsp;
+
+To use an environment
+
+```{.bash}
+conda activate test_1
+```
+
+&nbsp;
+
+or from a specific folder
+
+```{.bash}
+conda activate ./my_project/test_3
+```
+
+&nbsp;
+
+Deactivation happens by
+
+```{.bash}
+conda deactivate
+```
+
+## Manage an environment
+
+### Package installation
+
+Conda puts together the dependency trees of requested packages to find all compatible dependencies versions.
+
+![Figure: A package's dependency tree with required versions on the edges](img/condatree.png)
+
+---
+
+To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
+
+![Figure: search DeSeq2 for R](img/anaconda1.png)
+
+---
+
+![Figure: suggested commands to install the package](img/anaconda2.png){width=10cm}
+
+:::{.callout-note title="Repositories"}
+
+packages are archived in repositories. Typical ones are `bioconda`, `conda-forge`, `r`, `anaconda`.
+
+`conda-forge` packges are often more up-to-date, but a few times show compatibility problems with other packages.
+:::
+
+---
+
+Install a couple of packages in the activated environment (NOT in `base`) - you can always specify a version restriction to each package:
+
+```{.bash}
+conda activate ./my_project/test_3
+mamba install bioconda::bioconductor-deseq2<=1.42.0 conda-forge::r-tidyr=1.3.1
+```
+
+:::{.callout-note}
+To install two packages, you need more than a hundred installations! Those are all dependencies arising from the **comparison of dependency trees**.
+:::
+
+&nbsp;
+
+Look for the package `tidyr` in your active environment:
+
+```{.bash}
+conda list | grep tidyr
+```
+
+---
+
+### Installation from a list of packages
+
+You can export all the packages you have installed over time in your environment:
+
+```{.bash}
+conda env export --from-history > environment.yml
+```
+
+which looks like 
+
+```{.yaml}
+name: test_1
+channels:
+ - bioconda
+ - conda-forge
+ - defaults
+ - r
+dependencies:
+ - bioconda::bioconductor-deseq2
+ - conda-forge::r-tidyr
+```
+
+---
+
+The same command without `--from-history` will create a very long file with ALL dependencies:
+
+```{.yaml}
+name: test_1
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - r
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - _r-mutex=1.0.1=anacondar_1
+  - argcomplete=3.2.2=pyhd8ed1ab_0
+  - binutils_impl_linux-64=2.40=hf600244_0
+```
+
+This is guaranteed to work only on the specific system where you created the environment!
+
+---
+
+You can use the `yml` file to create an environment:
+
+&nbsp;
+
+
+```
+mamba env create -p ./test_1_from_file -f ./environment.yml
+```
+
+&nbsp;
+
+Environment files are very useful when you want to share environments with others.
+
+---
+
+**Good practice:** You want to install a lot of packages in an environment? Clone it first!
+
+&nbsp;
+
+If you break something, you still have the old copy.
+
+&nbsp;
+
+```{.bash}
+mamba create -p ./test_1_cloned --clone test_1
+```
+
+# Running a Job
+
+## What is a job on a HPC
+
+A computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM).
+
+![](img/Job-on-cluster.png)
+
+---
+
+
+The command `gnodes` will tell you if there is heavy usage across the computing nodes
+
+![Usage of computing nodes. Each node has a name (e.g. cn-1001). The symbols for each node mean running a program (`0`), assigned to an user (`_`) and available (`.`)](./img/gnodes.png)
+
+If you want to venture more into checking the queueing status, Moi has done [a great interactive script](https://github.com/MoiColl/cluster_status) in R Shiny for that.
+
+---
+
+Front-end nodes are limited in memory and power, and **should only be for basic operations** such as
+
+- starting a new project
+
+- small folders and files management
+
+- small software installations
+
+and in general you **should not** use them to run computations. This might slow down other users.
+
+---
+
+## Interactive jobs
+
+Useful to run a **non-repetitive task interactively**
+
+Examples: 
+
+- splitting by chromosome that one `bam` file you just got 
+
+- open `python`/`R` and do some statistics 
+
+- compress/decompress multiple files, maybe in parallel
+
+Once you exit from the job, anything running into it will stop.
+
+---
+
+To run an interactive job simply use the command
+
+```
+[fe-open-01]$ srun --mem=<GB_of_RAM>g -c <nr_cores> --time=<days-hrs:mins:secs>  --account=<project_name> --pty /bin/bash
+```
+
+For example
+
+```
+[fe-open-01]$ srun --mem=32g -c 2 --time=6:0:0  --account=<project_name> --pty /bin/bash
+```
+
+The **queueing system** makes you wait based on the resources you ask and how busy the nodes are. When you get **assigned a node**, the resources are available. The node name is **shown in the prompt**.
+
+```
+[<username>@s21n32 ~]$
+```
+
+## Batch script (sbatch)
+
+Useful to **run a program non-interactively**, usually for longer time than a short interaction. A batch script contains 
+
+- the desired **resources**
+- the sequence of **commands** to be executed
+
+and
+
+- has a filename **without spaces** (forget spaces from now on)
+- starts with `#!/bin/bash` to know in which language ('bash') the commands are written into
+---
+
+### Example 
+
+A file called `align.sh` such that:
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account my_project
+#SBATCH --cpus-per-task= 8
+#SBATCH --mem 16g
+#SBATCH --time 04:00:00
+
+#activate environment
+eval "$(conda shell.bash hook)"
+conda activate ./bam_tools 
+#index the reference file
+bwa-mem2 index reference/chr2.fa
+#align data
+bwa-mem2 -t 8 reference/chr2.fa \
+             genomes/S_Korean-2.region.fq.gz \
+        | samtools sort \
+            -@ 7 \
+            -n \
+            -O BAM \
+        > alignment/S_Korean-2.sorted.bam
+
+exit 0
+```
+
+---
+
+Send the script to the queueing system:
+
+```{.bash}
+sbatch align.sh
+```
+```
+Submitted batch job 33735298
+```
+
+&nbsp;
+
+Interrogate SLURM about the specific job
+
+```{.bash}
+jobinfo 33735298
+```
+
+```
+>Name                : align.sh
+>User                : samuele
+>Account             : my_project
+>Partition           : short
+>Nodes               : s21n43
+>Cores               : 8
+>GPUs                : 0
+>State               : RUNNING
+>...
+```
+
+---
+
+or about all the queued jobs
+
+```{.bash}
+squeue -u <username>
+```
+
+```
+>JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+>33735928     short align.sh  samuele  R       1:12      1 s21n43
+```
+
+&nbsp;
+
+If you change your mind and want to cancel a job:
+
+```{.bash}
+scancel 33735928
+```
+
+## Other ways of running jobs
+
+Beyond `sbatch`, you can use other tools for workflows which are
+
+- **modular and composable**: sequences of commands can be applied in various contexts, composed together in the desired ordering
+- **scalable and parallel** handling many sequences of operations parallelly or interdependently
+- **flexible** where repetitive operations can be automatized over multiple applications
+
+---
+
+Some workflow tools:
+
+- [Snakemake](https://snakemake.readthedocs.io/en/stable/)
+- [NextFlow](https://www.nextflow.io/)
+- [Gwf](https://gwf.app/)
+
+&nbsp;
+
+`Gwf` has an easy `python` syntax instead of its own language to write workflows.
+
+&nbsp;
+
+You need to know some basic `python` to use `Gwf`, but it is worth the effort.
+
+# Useful links
+
+&nbsp;
+
+- [Conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) with all the things you can do to manage environments
+
+- [Anaconda](http://anaconda.org) where you can search for packages
+
+- [Quick guide](https://github.com/jeppebayer/cluster_tutorial/blob/main/docs/cluster_tutorial.md) from Jeppe Bayer at EcoInf

@@ -1,66 +1,29 @@
 ---
-title: "Introduction"
+title: "GenomeDK workshops"
 format: html
 date-modified: last-modified
 date-format: long
-date: 2024-01-01
-bibliography: resources/references.bib
+date: 2024-03-01
+#bibliography: resources/references.bib
 #https://emojidb.org/quarto-emojis for emojis copypaste
 ---
 
-**Here** is *where* you will write an abstract about the course. This is an example of the use of citations [@creative_commons_2022] and [@Garcia2020].
+```
+  _____                                ______ _   __
+ |  __ \                               |  _  \ | / /
+ | |  \/ ___ _ __   ___  _ __ ___   ___| | | | |/ /
+ | | __ / _ \ '_ \ / _ \| '_ ` _ \ / _ \ | | |    \
+ | |_\ \  __/ | | | (_) | | | | | |  __/ |/ /| |\  \
+  \____/\___|_| |_|\___/|_| |_| |_|\___|___/ \_| \_/
+```
 
-:::{.callout-note title="Course Overview"}
-    
-- 📖 **Syllabus:** 
+Here you can find the material of the workshops for GenomeDK (slides, scripts, etc).
 
-  1. First item  
-  2. Second item  
+Remember always that GenomeDK [has a documentation page](https://genome.au.dk/docs/overview/).
 
-- **Total Time Estimation:** X hours  
-[comment]: # (No Property in Bioschema)
-
-- :file_folder: **Supporting Materials:**  
-[comment]: # (Property in Bioschema: mentions)
-
-- :man_technologist: **Target Audience:** PhD, MsC, etc.
-[comment]: # (Property in Bioschema: audience)
-
-- :woman_student: **Level:** Beginner/Intermediate/Advanced
-[comment]: # (Property in Bioschema: educationalLevel)
-
-- :lock: **License:** [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) license.](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
-[comment]: # (Property in Biochema: licence)
-
-- :coin: **Funding:** This project was funded by the Novo Nordisk Fonden (NNF20OC0063268).
-[comment]: # (Funding by NNF and others)
-:::
-
-!!! warning "Course Requirements"
-    - First requirement
-    - Second requirement
-
-This is where you should write a longer introduction to the course.
-
-!!! info "Goals"
-    By the end of this workshop, you should be able to:
-
-    - Goal 1
-    - Goal 2
-    -   
+ 
 
 ### Acknowledgements
 
-- First acknowledgement
-
-### Print a table
-
-```{r}
-#| echo: false
-library(gt)
-# Load the data from CSV
-data <- read.csv("resources/samplesheet.csv")
-
-# Print the data as a table
-data %>% gt()
-```
+- Dan and Anders at GenomeDK
+- Health data science sandbox for setting up and running the workshops

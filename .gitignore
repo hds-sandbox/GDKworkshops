@@ -46,4 +46,7 @@ vignettes/*.pdf
 Data
 .quarto
 _site
+.quarto/
+
+slides_files/
 /.quarto/
