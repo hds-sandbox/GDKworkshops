@@ -422,9 +422,9 @@ Dan Søndergaard
 <ul>
 <li><a href="#/genomedks-abc" id="/toc-genomedks-abc">GenomeDK’s ABC</a></li>
 <li><a href="#/project-management" id="/toc-project-management">Project management</a></li>
+<li><a href="#/downloads-and-copies" id="/toc-downloads-and-copies">Downloads and Copies</a></li>
 <li><a href="#/packageenvironment-management" id="/toc-packageenvironment-management">Package/Environment management</a></li>
 <li><a href="#/running-a-job" id="/toc-running-a-job">Running a Job</a></li>
-<li><a href="#/useful-links" id="/toc-useful-links">Useful links</a></li>
 </ul>
 </nav>
 </section>
@@ -438,7 +438,7 @@ Dan Søndergaard
 <p>GenomeDK is a <strong>computing cluster</strong>, i.e.&nbsp;a set of interconnected computers (nodes). GenomeDK has:</p>
 <ul>
 <li><strong>computing nodes</strong> used for running programs (~15000 cores)</li>
-<li><strong>storage nodes</strong> storing data in thousands of hard disks (23 PiB)</li>
+<li><strong>storage nodes</strong> storing data in thousands of hard disks (~23 PiB)</li>
 <li>a <strong>network</strong> making nodes talk to each other</li>
 <li>a <strong>frontend</strong> node from which you can send your programs to a node to be executed</li>
 <li>a <strong>queueing system</strong> called <em>slurm</em> to prioritize the users’ program to be run</li>
@@ -447,7 +447,7 @@ Dan Søndergaard
 <section class="slide level2">
 
 
-<img data-src="./img/Main-components-of-a-computer-cluster.png" class="r-stretch"></section>
+<img data-src="./img/Main-components-of-a-computer-cluster.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="access" class="slide level2">
 <h2>Access</h2>
 <ul>
@@ -467,7 +467,7 @@ Dan Søndergaard
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Now we generate an RSA key.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> rsa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Always press <code>Enter</code> and do not insert any password when asked.</p>
 </section>
 <section class="slide level2">
@@ -480,7 +480,7 @@ Dan Søndergaard
 </section>
 <section id="home-on-the-cluster" class="slide level2">
 <h2>Home on the cluster</h2>
-<p>Every time you log in, you will find yourself into your private home folder. This is denoted by <code>~</code> or <code>/home/username/</code>. Your prompt will show something like this:</p>
+<p>Every time you log in, you will find yourself into your private home folder. This is denoted by <code>~</code> or equivalently <code>/home/username/</code>. Your prompt will show something like this:</p>
 <p>&nbsp;</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[samuele@fe-open-02</span> ~]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
@@ -503,56 +503,10 @@ Dan Søndergaard
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>do not fill up your home with data. It has a <strong>limited amount of storage</strong>.</p>
+<p>do not fill up your home with data. It has a <strong>limited amount of storage</strong> (a quota of 100GB).</p>
 </div>
 </div>
 </div>
-</section>
-<section id="access-from-vscode" class="slide level2">
-<h2>Access from VSCode</h2>
-<p>An <strong>IDE</strong> (Integrated Development Environment) is an interface from which you can edit files, use the terminal, write code. You might now IDEs such as Rstudio (very dedicated to R and python) and jupyterlab (for basically any language).</p>
-<p>&nbsp;</p>
-<p>A good recommendation to interact with the cluster is the IDE <a href="https://code.visualstudio.com/">VSCode</a>. It has a very practical interface and many plugins that can make your life very easy once you get confident with it.</p>
-</section>
-<section class="slide level2">
-
-<p><a href="https://code.visualstudio.com/">Download VSCode</a> and open it. Go to the plugin tab (red circle)</p>
-
-<img data-src="img/vscode1.png" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>Search for <code>remote development</code>. Open the plugin (red circle) and install</p>
-
-<img data-src="img/vscode2.png" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>When done, click on the remote symbol on the bottom-left corner (red circle),</p>
-
-<img data-src="img/vscode3.png" class="r-stretch"><p>choose <code>Connect current window to host</code> then <code>Add new SSH host</code>, and type:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@login.genome.au.dk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If asked, select the file <code>.ssh/config</code></p>
-</section>
-<section class="slide level2">
-
-<p>After some waiting for the first installation, you are <strong>logged in</strong>, and can do it again whenever you open VScode.</p>
-<p>Click on the browser tab (red circle), then <code>Open Folder</code> and choose your home by typing <code>/home/username</code>. You will see everything in your home in the browser on the left</p>
-
-<img data-src="img/vscode4.png" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>It can be useful to have other folders at hand, such as projects.</p>
-<p>Go to <code>File</code>–&gt; <code>Add folder to workspace</code> and type a path of the type</p>
-<pre><code>/home/username/project</code></pre>
-<p>to see the project folder listed in the browser. You should see something like</p>
-
-<img data-src="img/vscode6.png" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>Also, why not having a terminal as well, without jumping beteeen windows all the time? We still need it to run jobs, create environments and so on.</p>
-<p>&nbsp;</p>
-<p>On the top menu, go to <code>Terminal</code> –&gt; <code>New Terminal</code> (it might ask which is the current folder, if you added folders to the workspace).</p>
-<p>&nbsp;</p>
-<p>Note that the terminal is also logged into GenomeDK</p>
 </section></section>
 <section>
 <section id="project-management" class="title-slide slide level1 center">
@@ -562,19 +516,19 @@ Dan Søndergaard
 <section id="creation" class="slide level2">
 <h2>Creation</h2>
 <p>You need a project from which you can run your programs. Request a project with the command</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-request</span> <span class="at">-g</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-request</span> <span class="at">-g</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This creates a folder with the desired name. You should be able to go into that folder:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>You can see how many resources your projects are using with</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="users-management" class="slide level2">
 <h2>Users management</h2>
 <p><strong>Only the creator</strong> (owner) can see the project folder. You can add an user</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-add-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-add-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>or remove it</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-remove-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-remove-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>More about user’s management <a href="https://genome.au.dk/docs/projects-and-accounting/#managing-a-project">in the documentation</a></p>
 </section>
@@ -593,25 +547,138 @@ Dan Søndergaard
 <p>Example of structure, which backs up raw data and analysis</p>
 
 <img data-src="img/structure.png" class="r-stretch"><p>You can do it with a script:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/5bbfc11e3796d5f4f1af39aecd6858721aca1612/Scripts/populate_project.sh</span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> populate_project.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/5bbfc11e3796d5f4f1af39aecd6858721aca1612/Scripts/populate_project.sh</span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> populate_project.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>If your project has many users, a good structure can be</p>
 
 <img data-src="img/multistructure.png" class="r-stretch"><p>&nbsp;</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Backup/Data Workspaces/username1 Workspaces/username2</span>
-<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> Backup/Data/ Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Backup/Data Workspaces/username1 Workspaces/username2</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> Backup/Data/ Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Each user can go in its folder inside the project and run the script to populate the folders</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Workspaces/username1</span>
-<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/blob/be7315365c152ecd75e94c1f56e1578062c2c096/Scripts/populate_project.sh</span>
-<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x populate_project.sh</span>
-<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./populate_project.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Workspaces/username1</span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/blob/be7315365c152ecd75e94c1f56e1578062c2c096/Scripts/populate_project.sh</span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x populate_project.sh</span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./populate_project.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="downloads-and-copies" class="title-slide slide level1 center">
+<h1>Downloads and Copies</h1>
+<p>Downloads should always happens on the <code>front-end</code> nodes, and never using a compute node when working on <code>GenomeDK</code></p>
+</section>
+<section id="download-with-wget" class="slide level2">
+<h2>Download with wget</h2>
+<p><code>wget</code> is a utility for <strong>command-line-based downloads</strong>. It is already installed on <code>GenomeDK</code> and works with <code>http</code>, <code>https</code>, <code>ftp</code> protocols.</p>
+<p>&nbsp;</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./output.png <span class="dt">\</span></span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-c</span> <span class="dt">\</span></span>
+<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-b</span> <span class="dt">\</span></span>
+<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a>     https://example.com/image.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>downloads a <code>png</code> file and saves it as <code>output.png</code> (option <code>O</code>), downloads in background (<code>-b</code>) and if the download was interrupted earlier, it retrieves it from where it stopped (<code>-c</code>).</p>
+</section>
+<section class="slide level2">
+
+<p><code>wget</code> has many options you can use, but what shown in the example above is what you need most times. You can see them with the command</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Also, you can find <a href="https://opensource.com/sites/default/files/gated-content/osdc_cheatsheet-wget-2021.10.21.pdf">this cheatsheet</a> useful for remembering the commands to most of the things you can think about downloading files using wget. <a href="https://opensource.com/article/21/10/linux-wget-command">At this page</a> there are also some concrete examples for <code>wget</code>.</p>
+</section>
+<section id="scp-transfer" class="slide level2">
+<h2>SCP transfer</h2>
+<p><code>SCP</code> (Secure Copy Protocol) can transfer files securely</p>
+<ul>
+<li>between a LOCAL and a REMOTE host</li>
+<li>between TWO REMOTE hosts</li>
+</ul>
+<p>&nbsp;</p>
+<p>You can use it to transfer files <strong>from your pc to GenomeDK and viceversa</strong>, but also <strong>between GenomeDK and another computing cluster</strong> (for example, downloading data from a collaborator, which resides on a different remote computing system).</p>
+</section>
+<section class="slide level2">
+
+<p>To copy a file to GenomeDK from your local computer:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> /home/my_laptop/Documents/file.txt <span class="dt">\</span></span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a>    username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>The inverse operation just changes the order of the sender and receiver:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@login.genome.au.dk:/home/username/my_project/file.txt <span class="dt">\</span></span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>    /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>If you want to copy an entire folder, use the option -r (recursive copy). The previous examples become</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> /home/my_laptop/Documents/folder <span class="dt">\</span></span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>       username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>and</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>       /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>A few more options are available and you can see them with the command <code>scp --help</code>.</p>
+</section>
+<section id="rsync-transfer" class="slide level2">
+<h2>Rsync transfer</h2>
+<p>Differently from <code>scp</code>, you can use <code>rsync</code> to <strong>syncronize files and folders between two locations</strong>. It copies only the changes in the data and not all of it every time.</p>
+<p>&nbsp;</p>
+<p>Copying a file or a folder between your computer and <code>GenomeDK</code> works exactly as in <code>scp</code>. For example</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--progress</span> <span class="at">-r</span> <span class="dt">\</span></span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a>      username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a>      /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where we add an option to show a progress bar</p>
+</section>
+<section class="slide level2">
+
+<p>An interrupted syncronization can be retrieved if interrupted. <strong>To allow future retrieval of partial transfer</strong>, the previous command needs the additional option <code>--partial</code> (which keeps partial downloads without deleting them):</p>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--partial</span> <span class="at">--progress</span> <span class="at">-r</span> <span class="dt">\</span></span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a>      username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
+<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a>      /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>After an interruption, just rerun the exact same command to retrieve the syncronization.</p>
+<p>If you have <strong>large files</strong>, the option <code>-z</code> (compression) reduces the amount of data (and the time) to transfer.</p>
+</section>
+<section id="interactive-transfer" class="slide level2">
+<h2>Interactive transfer</h2>
+<p>You can also do transfering with an interactive software, such as <code>Filezilla</code>, which has an easy interface. <a href="https://filezilla-project.org/download.php?type=client">Download Filezilla</a>.</p>
+<p>&nbsp;</p>
+<p>When done, open <code>Filezilla</code> and use the following information on the login bar:</p>
+<ul>
+<li>Host: <code>login.genome.au.dk</code></li>
+<li>Username, Password: your <code>GenomeDK</code> username and password</li>
+<li>Port: <code>22</code></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Press on <code>Quick Connect</code>. As a result, you will establish a secure connection to <code>GenomeDK</code>. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on <code>GenomeDK</code> starting from your <code>home</code>.<br>
+</p>
+
+<img data-src="./img/filezilla1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+<p>If you right-click on any local file or folder, you can <strong>upload</strong> it immediately, or <strong>add it to the transfer queue</strong>. The file will end up in the selected folder of the right-side browser.</p>
+
+<img data-src="./img/filezilla2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+<p>The <strong>download</strong> process works similarly using the right-side browser and choosing the destination folder on the left-side browser.</p>
+
+<img data-src="./img/filezilla3.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+<p>If you have created a queue, this will be shown at the bottom of the window as a list. You can inspect destination folders from there and choose other options such as transfer priority.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./img/filezilla4.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<p>To start a queue, use <code>CTRL + P</code>, <code>Transfer --&gt; Process Queue</code> or press the button <img data-src="./img/filezilla5.png" width="100"> on the toolbar.</p>
 </section></section>
 <section>
 <section id="packageenvironment-management" class="title-slide slide level1 center">
@@ -660,24 +727,33 @@ Dan Søndergaard
 <h2>Installation</h2>
 <p>&nbsp;</p>
 <p>Just download and execute the installer by</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh <span class="at">-O</span> ~/miniconda-installer.sh</span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> ~/miniconda-installer.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
+<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
+<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
+<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./miniforge3/bin/conda</span> init bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After a few <code>ENTER</code>s and <code>YES</code>’s you should get the installation done. Run</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and doublecheck that <code>conda</code> works:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>&gt; active environment : base
-&gt; active env location : /home/samuele/miniconda3
-&gt; shell level : 1
-&gt; .....</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="conda-configuration" class="slide level2">
+<h2>Conda Configuration</h2>
+<p>You can add some default <em>channels</em> where to find archived packages. Here are some tipycal ones</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span>
+<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels genomedk</span>
+<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels r</span>
+<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We tell <code>conda</code> to look into channels in the order specified above. We also avoid opening the <code>base</code> environment (where <code>conda</code> is installed) at login.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="base-environment" class="slide level2">
 <h2>Base environment</h2>
-<p>is the environment containing conda itself. The current environment is in your prompt.</p>
-<pre><code>(base) [samuele@fe-open-02 ~]$</code></pre>
-<p>We update Conda with Mamba - a lot faster in installing many packages at once.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base conda-forge::mamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
+<p>is the environment containing conda itself. The current environment is in your prompt, but you will not see it again after disabling it at login.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">[samuele@fe-open-02</span> ~]$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We update Conda with <code>libmamba solver</code> - a lot faster in installing many packages at once.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div title="Don't touch the Base">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -688,48 +764,37 @@ Dan Søndergaard
 <p><strong>Don’t touch the Base</strong></p>
 </div>
 <div class="callout-content">
-<p>This is <strong>the only time</strong> you should install in the <code>base</code> environment!</p>
+<p>This is <strong>the only time</strong> you should install in the <code>base</code> environment! You might otherwise ruin the conda installation.</p>
 </div>
 </div>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
+<p>Look at the settings in your conda installation. They are saved in the file <code>~/.condarc</code></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.condarc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="create-an-environment" class="slide level2">
 <h2>Create an environment</h2>
 <p>&nbsp;</p>
 <p>An empty environment called <code>test_1</code>:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>You can find it in your home folder at <code>~/miniconda3/envs/test_1</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> env list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can list all the environments available:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>&gt; # conda environments:
 &gt; #
 &gt; base      *  /home/samuele/miniconda3
 &gt; test_1       /home/samuele/miniconda3/envs/test_1</code></pre>
 </section>
-<section class="slide level2">
-
-<p><strong>Good practice:</strong> create an environment out of your home by choosing the output folder (for example a project folder).</p>
-<p>&nbsp;</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-p</span> ./my_project/test_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>Pros:</p>
-<ul>
-<li>available to other members of a project</li>
-<li>does not fill space in your <code>home</code></li>
-</ul>
-</section>
 <section id="activate-and-deactivate" class="slide level2">
 <h2>Activate and deactivate</h2>
 <p>&nbsp;</p>
 <p>To use an environment</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>or from a specific folder</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate ./my_project/test_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Deactivation happens by</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="manage-an-environment" class="slide level2">
 <h2>Manage an environment</h2>
@@ -764,9 +829,9 @@ Dan Søndergaard
 </section>
 <section class="slide level2">
 
-<p>Install a couple of packages in the activated environment (NOT in <code>base</code>) - you can always specify a version restriction to each package:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate ./my_project/test_3</span>
-<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install bioconda::bioconductor-deseq2<span class="op">&lt;</span>=1.42.0 conda-forge::r-tidyr=1.3.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Install a couple of packages in the activated environment - you can always specify a version restriction to each package:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span>
+<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install bioconda::bioconductor-deseq2<span class="op">&lt;</span>=1.42.0 conda-forge::r-tidyr=1.3.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -782,56 +847,64 @@ Dan Søndergaard
 </div>
 <p>&nbsp;</p>
 <p>Look for the package <code>tidyr</code> in your active environment:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="kw">|</span> <span class="fu">grep</span> tidyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="kw">|</span> <span class="fu">grep</span> tidyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="installation-from-a-list-of-packages">Installation from a list of packages</h3>
 <p>You can export all the packages you have installed over time in your environment:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which looks like</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
-<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda</span></span>
-<span id="cb37-4"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb37-5"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb37-6"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> r</span></span>
-<span id="cb37-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb37-8"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda::bioconductor-deseq2</span></span>
-<span id="cb37-9"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge::r-tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> r</span></span>
+<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb43-8"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda::bioconductor-deseq2</span></span>
+<span id="cb43-9"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge::r-tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>The same command without <code>--from-history</code> will create a very long file with ALL dependencies:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
-<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> bioconda</span></span>
-<span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> r</span></span>
-<span id="cb38-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb38-8"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _libgcc_mutex=0.1=conda_forge</span></span>
-<span id="cb38-9"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _openmp_mutex=4.5=2_gnu</span></span>
-<span id="cb38-10"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _r-mutex=1.0.1=anacondar_1</span></span>
-<span id="cb38-11"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> argcomplete=3.2.2=pyhd8ed1ab_0</span></span>
-<span id="cb38-12"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> binutils_impl_linux-64=2.40=hf600244_0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is guaranteed to work only on the specific system where you created the environment!</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
+<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb44-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb44-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb44-6"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> r</span></span>
+<span id="cb44-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb44-8"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _libgcc_mutex=0.1=conda_forge</span></span>
+<span id="cb44-9"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _openmp_mutex=4.5=2_gnu</span></span>
+<span id="cb44-10"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _r-mutex=1.0.1=anacondar_1</span></span>
+<span id="cb44-11"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> argcomplete=3.2.2=pyhd8ed1ab_0</span></span>
+<span id="cb44-12"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> binutils_impl_linux-64=2.40=hf600244_0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is guaranteed to work <strong>only on the specific system</strong> where you created the environment!</p>
 </section>
 <section class="slide level2">
 
 <p>You can use the <code>yml</code> file to create an environment:</p>
 <p>&nbsp;</p>
-<pre><code>mamba env create -p ./test_1_from_file -f ./environment.yml</code></pre>
+<pre><code>conda env create -p test_1_from_file -f ./environment.yml</code></pre>
 <p>&nbsp;</p>
-<p>Environment files are very useful when you want to share environments with others.</p>
+<p>Environment files are very useful when you want to <strong>share environments with others</strong>, especially when the package list is long.</p>
 </section>
 <section class="slide level2">
 
-<p><strong>Good practice:</strong> You want to install a lot of packages in an environment? Clone it first!</p>
+<p><strong>Good practice:</strong> You want to install a lot of packages in an environment? Clone it first! If you break something, you still have the old copy.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-p</span> test_1_cloned <span class="at">--clone</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>If you break something, you still have the old copy.</p>
-<p>&nbsp;</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-p</span> ./test_1_cloned <span class="at">--clone</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If installations in the cloned environment go fine, then you can remove it</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> test_1_cloned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and repeat the installations on the original one.</p>
+</section>
+<section id="useful-links-for-conda" class="slide level2">
+<h2>Useful links for conda:</h2>
+<ul>
+<li><p><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Conda cheat sheet</a> with all the things you can do to manage environments</p></li>
+<li><p><a href="http://anaconda.org">Anaconda</a> where you can search for packages</p></li>
+</ul>
 </section></section>
 <section>
 <section id="running-a-job" class="title-slide slide level1 center">
@@ -842,7 +915,7 @@ Dan Søndergaard
 <h2>What is a job on a HPC</h2>
 <p>A computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM).</p>
 
-<img data-src="img/Job-on-cluster.png" class="r-stretch"></section>
+<img data-src="img/Job-on-cluster.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section class="slide level2">
 
 <p>The command <code>gnodes</code> will tell you if there is heavy usage across the computing nodes</p>
@@ -896,36 +969,36 @@ Dan Søndergaard
 
 <h3 id="example">Example</h3>
 <p>A file called <code>align.sh</code> such that:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account my_project</span></span>
-<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task= 8</span></span>
-<span id="cb44-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
-<span id="cb44-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
-<span id="cb44-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate environment</span></span>
-<span id="cb44-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
-<span id="cb44-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate ./bam_tools </span>
-<span id="cb44-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index the reference file</span></span>
-<span id="cb44-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index reference/chr2.fa</span>
-<span id="cb44-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
-<span id="cb44-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> <span class="at">-t</span> 8 reference/chr2.fa <span class="dt">\</span></span>
-<span id="cb44-14"><a aria-hidden="true" tabindex="-1"></a>             genomes/S_Korean-2.region.fq.gz <span class="dt">\</span></span>
-<span id="cb44-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
-<span id="cb44-16"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
-<span id="cb44-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
-<span id="cb44-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
-<span id="cb44-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> alignment/S_Korean-2.sorted.bam</span>
-<span id="cb44-20"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb51-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account my_project</span></span>
+<span id="cb51-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task= 8</span></span>
+<span id="cb51-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
+<span id="cb51-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
+<span id="cb51-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate environment</span></span>
+<span id="cb51-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
+<span id="cb51-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate ./bam_tools </span>
+<span id="cb51-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index the reference file</span></span>
+<span id="cb51-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index reference/chr2.fa</span>
+<span id="cb51-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
+<span id="cb51-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> <span class="at">-t</span> 8 reference/chr2.fa <span class="dt">\</span></span>
+<span id="cb51-14"><a aria-hidden="true" tabindex="-1"></a>             genomes/S_Korean-2.region.fq.gz <span class="dt">\</span></span>
+<span id="cb51-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
+<span id="cb51-16"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
+<span id="cb51-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb51-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb51-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> alignment/S_Korean-2.sorted.bam</span>
+<span id="cb51-20"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Send the script to the queueing system:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Submitted batch job 33735298</code></pre>
 <p>&nbsp;</p>
 <p>Interrogate SLURM about the specific job</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>&gt;Name                : align.sh
 &gt;User                : samuele
 &gt;Account             : my_project
@@ -939,12 +1012,21 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>or about all the queued jobs</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 &gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
 <p>&nbsp;</p>
 <p>If you change your mind and want to cancel a job:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>To observe in real time the latest output of the command in the job, you can refresh the last lines of the log file for the specific job:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>To look at the whole file, you can run at any time</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This can be useful for debugging, when for example a command gives an error and the job interrupts.</p>
 </section>
 <section id="other-ways-of-running-jobs" class="slide level2">
 <h2>Other ways of running jobs</h2>
@@ -967,15 +1049,6 @@ Dan Søndergaard
 <p><code>Gwf</code> has an easy <code>python</code> syntax instead of its own language to write workflows.</p>
 <p>&nbsp;</p>
 <p>You need to know some basic <code>python</code> to use <code>Gwf</code>, but it is worth the effort.</p>
-</section></section>
-<section id="useful-links" class="title-slide slide level1 center">
-<h1>Useful links</h1>
-<p>&nbsp;</p>
-<ul>
-<li><p><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Conda cheat sheet</a> with all the things you can do to manage environments</p></li>
-<li><p><a href="http://anaconda.org">Anaconda</a> where you can search for packages</p></li>
-<li><p><a href="https://github.com/jeppebayer/cluster_tutorial/blob/main/docs/cluster_tutorial.md">Quick guide</a> from Jeppe Bayer at EcoInf</p></li>
-</ul>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logos.png" class="slide-logo"></p>
@@ -983,8 +1056,7 @@ Dan Søndergaard
 
 </div>
 </div>
-</section>
-
+</section></section>
 
     </div>
   </div>

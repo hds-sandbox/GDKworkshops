@@ -60,7 +60,7 @@
     "href": "resources/Slides/Introduction/slides.html#infrastructure",
     "title": "Introduction to GenomeDK",
     "section": "Infrastructure",
-    "text": "Infrastructure\nGenomeDK is a computing cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores)\nstorage nodes storing data in thousands of hard disks (23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
+    "text": "Infrastructure\nGenomeDK is a computing cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores)\nstorage nodes storing data in thousands of hard disks (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#access",
@@ -74,21 +74,14 @@
     "href": "resources/Slides/Introduction/slides.html#access-without-password",
     "title": "Introduction to GenomeDK",
     "section": "Access without password",
-    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\nexit\n \nNow we generate an RSA key.\nssh-keygen -t rsa\nAlways press Enter and do not insert any password when asked."
+    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\nexit\n \nNow we generate an RSA key.\nssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#home-on-the-cluster",
     "href": "resources/Slides/Introduction/slides.html#home-on-the-cluster",
     "title": "Introduction to GenomeDK",
     "section": "Home on the cluster",
-    "text": "Home on the cluster\nEvery time you log in, you will find yourself into your private home folder. This is denoted by ~ or /home/username/. Your prompt will show something like this:\n \n[samuele@fe-open-02 ~]\n \nwhich follows the format\n[username@node current_folder]"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#access-from-vscode",
-    "href": "resources/Slides/Introduction/slides.html#access-from-vscode",
-    "title": "Introduction to GenomeDK",
-    "section": "Access from VSCode",
-    "text": "Access from VSCode\nAn IDE (Integrated Development Environment) is an interface from which you can edit files, use the terminal, write code. You might now IDEs such as Rstudio (very dedicated to R and python) and jupyterlab (for basically any language).\n \nA good recommendation to interact with the cluster is the IDE VSCode. It has a very practical interface and many plugins that can make your life very easy once you get confident with it."
+    "text": "Home on the cluster\nEvery time you log in, you will find yourself into your private home folder. This is denoted by ~ or equivalently /home/username/. Your prompt will show something like this:\n \n[samuele@fe-open-02 ~]\n \nwhich follows the format\n[username@node current_folder]"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#creation",
@@ -112,6 +105,34 @@
     "text": "Folders management\nIt is important to\n\nhave a coherent folder structure\nbackup only important things (raw data, analysis scripts)\n\n \nRemember: Storage cost &gt;&gt; Computation cost"
   },
   {
+    "objectID": "resources/Slides/Introduction/slides.html#download-with-wget",
+    "href": "resources/Slides/Introduction/slides.html#download-with-wget",
+    "title": "Introduction to GenomeDK",
+    "section": "Download with wget",
+    "text": "Download with wget\nwget is a utility for command-line-based downloads. It is already installed on GenomeDK and works with http, https, ftp protocols.\n \nExample:\nwget -O ./output.png \\\n     -c \\\n     -b \\\n     https://example.com/image.png\ndownloads a png file and saves it as output.png (option O), downloads in background (-b) and if the download was interrupted earlier, it retrieves it from where it stopped (-c)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#scp-transfer",
+    "href": "resources/Slides/Introduction/slides.html#scp-transfer",
+    "title": "Introduction to GenomeDK",
+    "section": "SCP transfer",
+    "text": "SCP transfer\nSCP (Secure Copy Protocol) can transfer files securely\n\nbetween a LOCAL and a REMOTE host\nbetween TWO REMOTE hosts\n\n \nYou can use it to transfer files from your pc to GenomeDK and viceversa, but also between GenomeDK and another computing cluster (for example, downloading data from a collaborator, which resides on a different remote computing system)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#rsync-transfer",
+    "href": "resources/Slides/Introduction/slides.html#rsync-transfer",
+    "title": "Introduction to GenomeDK",
+    "section": "Rsync transfer",
+    "text": "Rsync transfer\nDifferently from scp, you can use rsync to syncronize files and folders between two locations. It copies only the changes in the data and not all of it every time.\n \nCopying a file or a folder between your computer and GenomeDK works exactly as in scp. For example\nrsync --progress -r \\\n      username@login.genome.au.dk:/home/username/my_project/folder \\\n      /home/my_laptop/Documents/\nwhere we add an option to show a progress bar"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#interactive-transfer",
+    "href": "resources/Slides/Introduction/slides.html#interactive-transfer",
+    "title": "Introduction to GenomeDK",
+    "section": "Interactive transfer",
+    "text": "Interactive transfer\nYou can also do transfering with an interactive software, such as Filezilla, which has an easy interface. Download Filezilla.\n \nWhen done, open Filezilla and use the following information on the login bar:\n\nHost: login.genome.au.dk\nUsername, Password: your GenomeDK username and password\nPort: 22"
+  },
+  {
     "objectID": "resources/Slides/Introduction/slides.html#virtual-environments",
     "href": "resources/Slides/Introduction/slides.html#virtual-environments",
     "title": "Introduction to GenomeDK",
@@ -130,28 +151,35 @@
     "href": "resources/Slides/Introduction/slides.html#installation",
     "title": "Introduction to GenomeDK",
     "section": "Installation",
-    "text": "Installation\n \nJust download and execute the installer by\nwget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda-installer.sh\nbash ~/miniconda-installer.sh\nAfter a few ENTERs and YES’s you should get the installation done. Run\nsource ~/.bashrc\nand doublecheck that conda works:\nconda info\n&gt; active environment : base\n&gt; active env location : /home/samuele/miniconda3\n&gt; shell level : 1\n&gt; ....."
+    "text": "Installation\n \nJust download and execute the installer by\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n./miniforge3/bin/conda init bash\nAfter a few ENTERs and YES’s you should get the installation done. Run\nsource ~/.bashrc\nand doublecheck that conda works:\nconda info"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#conda-configuration",
+    "href": "resources/Slides/Introduction/slides.html#conda-configuration",
+    "title": "Introduction to GenomeDK",
+    "section": "Conda Configuration",
+    "text": "Conda Configuration\nYou can add some default channels where to find archived packages. Here are some tipycal ones\nconda config --append channels bioconda\nconda config --append channels genomedk\nconda config --append channels r\nconda config --append channels conda-forge\nWe tell conda to look into channels in the order specified above. We also avoid opening the base environment (where conda is installed) at login.\nconda config --set channel_priority strict\nconda config --set auto_activate_base false"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#base-environment",
     "href": "resources/Slides/Introduction/slides.html#base-environment",
     "title": "Introduction to GenomeDK",
     "section": "Base environment",
-    "text": "Base environment\nis the environment containing conda itself. The current environment is in your prompt.\n(base) [samuele@fe-open-02 ~]$\nWe update Conda with Mamba - a lot faster in installing many packages at once.\nconda install -n base conda-forge::mamba\n \n\n\n\n\n\n\n\nDon’t touch the Base\n\n\nThis is the only time you should install in the base environment!"
+    "text": "Base environment\nis the environment containing conda itself. The current environment is in your prompt, but you will not see it again after disabling it at login.\n(base) [samuele@fe-open-02 ~]$\nWe update Conda with libmamba solver - a lot faster in installing many packages at once.\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\n\n\n\n\n\n\n\nDon’t touch the Base\n\n\nThis is the only time you should install in the base environment! You might otherwise ruin the conda installation."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#create-an-environment",
     "href": "resources/Slides/Introduction/slides.html#create-an-environment",
     "title": "Introduction to GenomeDK",
     "section": "Create an environment",
-    "text": "Create an environment\n \nAn empty environment called test_1:\nmamba create -n test_1\n \nYou can find it in your home folder at ~/miniconda3/envs/test_1.\nmamba env list\n&gt; # conda environments:\n&gt; #\n&gt; base      *  /home/samuele/miniconda3\n&gt; test_1       /home/samuele/miniconda3/envs/test_1"
+    "text": "Create an environment\n \nAn empty environment called test_1:\nconda create -n test_1\n \nYou can list all the environments available:\nconda env list\n&gt; # conda environments:\n&gt; #\n&gt; base      *  /home/samuele/miniconda3\n&gt; test_1       /home/samuele/miniconda3/envs/test_1"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
     "href": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
     "title": "Introduction to GenomeDK",
     "section": "Activate and deactivate",
-    "text": "Activate and deactivate\n \nTo use an environment\nconda activate test_1\n \nor from a specific folder\nconda activate ./my_project/test_3\n \nDeactivation happens by\nconda deactivate"
+    "text": "Activate and deactivate\n \nTo use an environment\nconda activate test_1\nDeactivation happens by\nconda deactivate"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#manage-an-environment",
@@ -159,6 +187,13 @@
     "title": "Introduction to GenomeDK",
     "section": "Manage an environment",
     "text": "Manage an environment\nPackage installation\nConda puts together the dependency trees of requested packages to find all compatible dependencies versions.\n\nFigure: A package’s dependency tree with required versions on the edges"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#useful-links-for-conda",
+    "href": "resources/Slides/Introduction/slides.html#useful-links-for-conda",
+    "title": "Introduction to GenomeDK",
+    "section": "Useful links for conda:",
+    "text": "Useful links for conda:\n\nConda cheat sheet with all the things you can do to manage environments\nAnaconda where you can search for packages"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#what-is-a-job-on-a-hpc",
