@@ -25,14 +25,14 @@ navigation-mode: vertical
 GenomeDK is a **computing cluster**, i.e. a set of interconnected computers (nodes). GenomeDK has:
 
 - **computing nodes** used for running programs (~15000 cores)
-- **storage nodes** storing data in thousands of hard disks (23 PiB)
+- **storage nodes** storing data in thousands of hard disks (~23 PiB)
 - a **network** making nodes talk to each other
 - a **frontend** node from which you can send your programs to a node to be executed
 - a **queueing system** called *slurm* to prioritize the users' program to be run
 
 ---
 
-![](./img/Main-components-of-a-computer-cluster.png)
+![](./img/Main-components-of-a-computer-cluster.png){fig-align="center"}
 
 ## Access
 
@@ -62,7 +62,7 @@ exit
 Now we generate an RSA key.
 
 ```{.bash}
-ssh-keygen -t rsa
+ssh-keygen -t ed25519
 ```
 
 Always press `Enter` and do not insert any password when asked. 
@@ -84,7 +84,7 @@ this time will be the last where you are asked your password when logging in fro
 
 ## Home on the cluster
 
-Every time you log in, you will find yourself into your private home folder. This is denoted by `~` or `/home/username/`. Your prompt will show something like this:
+Every time you log in, you will find yourself into your private home folder. This is denoted by `~` or equivalently `/home/username/`. Your prompt will show something like this:
 
 &nbsp;
 
@@ -117,75 +117,8 @@ ls -lh
 &nbsp;
 
 :::{.callout-warning}
-do not fill up your home with data. It has a **limited amount of storage**.
+do not fill up your home with data. It has a **limited amount of storage** (a quota of 100GB).
 :::
-
-## Access from VSCode
-
-An **IDE** (Integrated Development Environment) is an interface from which you can edit files, use the terminal, write code. You might now IDEs such as Rstudio (very dedicated to R and python) and jupyterlab (for basically any language).
-
-&nbsp;
-
-A good recommendation to interact with the cluster is the IDE [VSCode](https://code.visualstudio.com/). It has a very practical interface and many plugins that can make your life very easy once you get confident with it.
-
----
-
-[Download VSCode](https://code.visualstudio.com/) and open it. Go to the plugin tab (red circle)
-
-![](img/vscode1.png)
-
----
-
-Search for `remote development`. Open the plugin (red circle) and install
-
-![](img/vscode2.png)
-
----
-
-When done, click on the remote symbol on the bottom-left corner (red circle), 
-
-![](img/vscode3.png)
-
-choose `Connect current window to host` then `Add new SSH host`, and type:
-```{.bash}
-ssh username@login.genome.au.dk
-```
-
-If asked, select the file `.ssh/config`
-
----
-
-After some waiting for the first installation, you are **logged in**, and can do it again whenever you open VScode.
-
-Click on the browser tab (red circle), then `Open Folder` and choose your home by typing `/home/username`. You will see everything in your home in the browser on the left
-
-![](img/vscode4.png)
-
----
-
-It can be useful to have other folders at hand, such as projects.
-
-Go to `File`--> `Add folder to workspace` and type a path of the type
-
-```
-/home/username/project
-```
-
-to see the project folder listed in the browser. You should see something like
-
-![](img/vscode6.png)
-
----
-
-Also, why not having a terminal as well, without jumping beteeen windows all the time? We still need it to run jobs, create environments and so on. 
-
-&nbsp;
-
-On the top menu, go to `Terminal` --> `New Terminal` (it might ask which is the current folder, if you added folders to the workspace).
-
-&nbsp;
-
-Note that the terminal is also logged into GenomeDK
 
 # Project management
 
@@ -282,6 +215,158 @@ chmod +x populate_project.sh
 ./populate_project.sh
 ```
 
+# Downloads and Copies
+
+Downloads should always happens on the `front-end` nodes, and never using a compute node when working on `GenomeDK`
+
+## Download with wget
+
+`wget` is a utility for **command-line-based downloads**. It is already installed on `GenomeDK` and works with `http`, `https`, `ftp` protocols.
+
+&nbsp;
+
+Example:
+
+```{.bash}
+wget -O ./output.png \
+     -c \
+     -b \
+     https://example.com/image.png
+```
+downloads a `png` file and saves it as `output.png` (option `O`), downloads in background (`-b`) and if the download was interrupted earlier, it retrieves it from where it stopped (`-c`).
+
+---
+
+`wget` has many options you can use, but what shown in the example above is what you need most times. You can see them with the command
+
+```{.bash}
+wget --help
+```
+
+&nbsp;
+
+Also, you can find [this cheatsheet](https://opensource.com/sites/default/files/gated-content/osdc_cheatsheet-wget-2021.10.21.pdf) useful for remembering the commands to most of the things you can think about downloading files using wget. [At this page](https://opensource.com/article/21/10/linux-wget-command) there are also some concrete examples for `wget`.
+
+## SCP transfer
+
+`SCP` (Secure Copy Protocol) can transfer files securely
+
+- between a LOCAL and a REMOTE host
+- between TWO REMOTE hosts
+
+&nbsp;
+
+You can use it to transfer files **from your pc to GenomeDK and viceversa**, but also **between GenomeDK and another computing cluster** (for example, downloading data from a collaborator, which resides on a different remote computing system).
+
+---
+
+To copy a file to GenomeDK from your local computer:
+```{.bash}
+scp /home/my_laptop/Documents/file.txt \
+    username@login.genome.au.dk:/home/username/my_project/
+```
+
+&nbsp;
+
+The inverse operation just changes the order of the sender and receiver:
+```{.bash}
+scp username@login.genome.au.dk:/home/username/my_project/file.txt \
+    /home/my_laptop/Documents/
+```
+
+---
+
+If you want to copy an entire folder, use the option -r (recursive copy). The previous examples become
+
+```{.bash}
+scp -r /home/my_laptop/Documents/folder \
+       username@login.genome.au.dk:/home/username/my_project/
+```
+
+&nbsp;
+
+and
+
+```{.bash}
+scp -r username@login.genome.au.dk:/home/username/my_project/folder \
+       /home/my_laptop/Documents/
+```
+
+&nbsp;
+
+A few more options are available and you can see them with the command ``` scp --help ```.
+
+## Rsync transfer
+
+Differently from `scp`, you can use `rsync` to **syncronize files and folders between two locations**. It copies only the changes in the data and not all of it every time.
+
+&nbsp;
+
+Copying a file or a folder between your computer and `GenomeDK` works exactly as in `scp`. For example
+
+```{.bash}
+rsync --progress -r \
+      username@login.genome.au.dk:/home/username/my_project/folder \
+      /home/my_laptop/Documents/
+```
+
+where we add an option to show a progress bar
+
+---
+
+An interrupted syncronization can be retrieved if interrupted. **To allow future retrieval of partial transfer**, the previous command needs the additional option `--partial` (which keeps partial downloads without deleting them):
+
+&nbsp;
+
+```{.bash}
+rsync --partial --progress -r \
+      username@login.genome.au.dk:/home/username/my_project/folder \
+      /home/my_laptop/Documents/
+```
+&nbsp;
+
+After an interruption, just rerun the exact same command to retrieve the syncronization.
+
+If you have **large files**, the option `-z` (compression) reduces the amount of data (and the time) to transfer.
+
+## Interactive transfer
+
+You can also do transfering with an interactive software, such as `Filezilla`, which  has an easy interface. [Download Filezilla](https://filezilla-project.org/download.php?type=client).
+
+&nbsp;
+
+When done, open `Filezilla` and use the following information on the login bar:
+
+- Host: `login.genome.au.dk`
+- Username, Password: your `GenomeDK` username and password
+- Port: `22`
+
+---
+
+Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.\
+
+![](./img/filezilla1.png){fig-align="center"}
+
+---
+
+If you right-click on any local file or folder, you can **upload** it immediately, or **add it to the transfer queue**. The file will end up in the selected folder of the right-side browser.
+
+![](./img/filezilla2.png){fig-align="center"}
+
+---
+
+The **download** process works similarly using the right-side browser and choosing the destination folder on the left-side browser.
+
+![](./img/filezilla3.png){fig-align="center"}
+
+---
+
+If you have created a queue, this will be shown at the bottom of the window as a list. You can inspect destination folders from there and choose other options such as transfer priority.
+
+![](./img/filezilla4.png){fig-align="center"}
+
+To start a queue, use `CTRL + P`, `Transfer --> Process Queue` or press  the button ![](./img/filezilla5.png){width=100} on the toolbar.
+
 # Package/Environment management
 
 ## Virtual environments
@@ -319,8 +404,10 @@ Conda is **both** a virtual environment and a package manager.
 
 Just download and execute the installer by
 ```{.bash}
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda-installer.sh
-bash ~/miniconda-installer.sh
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
+chmod +x miniforge.sh
+bash miniforge.sh -b
+./miniforge3/bin/conda init bash
 ```
 
 After a few `ENTER`s and `YES`'s you should get the installation done. Run
@@ -335,31 +422,52 @@ and doublecheck that `conda` works:
 conda info
 ```
 
+
+---
+
+## Conda Configuration
+
+You can add some default *channels* where to find archived packages. Here are some tipycal ones
+
+```{.bash}
+conda config --append channels bioconda
+conda config --append channels genomedk
+conda config --append channels r
+conda config --append channels conda-forge
 ```
-> active environment : base
-> active env location : /home/samuele/miniconda3
-> shell level : 1
-> .....
+
+We tell `conda` to look into channels in the order specified above. We also avoid opening the `base` environment (where `conda` is installed) at login.
+
+```{.bash}
+conda config --set channel_priority strict
+conda config --set auto_activate_base false
 ```
 
 ## Base environment
-is the environment containing conda itself. The current environment is in your prompt.
 
-```
+is the environment containing conda itself. The current environment is in your prompt, but you will not see it again after disabling it at login.
+
+```{.bash}
 (base) [samuele@fe-open-02 ~]$
 ```
 
-We update Conda with Mamba - a lot faster in installing many packages at once.
+We update Conda with `libmamba solver` - a lot faster in installing many packages at once.
 
 ```{.bash}
-conda install -n base conda-forge::mamba
+conda install -n base --yes conda-libmamba-solver
+conda config --set solver libmamba
 ```
-
-&nbsp;
-
 :::{.callout-warning title="Don't touch the Base"}
-This is **the only time** you should install in the `base` environment!
+This is **the only time** you should install in the `base` environment! You might otherwise ruin the conda installation.
 :::
+
+---
+
+Look at the settings in your conda installation. They are saved in the file `~/.condarc`
+
+```{.bash}
+cat ~/.condarc
+```
 
 ## Create an environment
 
@@ -368,15 +476,15 @@ This is **the only time** you should install in the `base` environment!
 An empty environment called `test_1`:
 
 ```{.bash}
-mamba create -n test_1
+conda create -n test_1
 ```
 
 &nbsp;
 
-You can find it in your home folder at `~/miniconda3/envs/test_1`.
+You can list all the environments available:
 
 ```{.bash}
-mamba env list
+conda env list
 ```
 ```
 > # conda environments:
@@ -384,23 +492,6 @@ mamba env list
 > base      *  /home/samuele/miniconda3
 > test_1       /home/samuele/miniconda3/envs/test_1
 ```
-
----
-
-**Good practice:** create an environment out of your home by choosing the output folder (for example a project folder).
-
-&nbsp;
-
-```{.bash}
-mamba create -p ./my_project/test_3
-```
-
-&nbsp;
-
-Pros:
-
-- available to other members of a project
-- does not fill space in your `home`
 
 ## Activate and deactivate
 
@@ -411,16 +502,6 @@ To use an environment
 ```{.bash}
 conda activate test_1
 ```
-
-&nbsp;
-
-or from a specific folder
-
-```{.bash}
-conda activate ./my_project/test_3
-```
-
-&nbsp;
 
 Deactivation happens by
 
@@ -455,11 +536,11 @@ packages are archived in repositories. Typical ones are `bioconda`, `conda-forge
 
 ---
 
-Install a couple of packages in the activated environment (NOT in `base`) - you can always specify a version restriction to each package:
+Install a couple of packages in the activated environment - you can always specify a version restriction to each package:
 
 ```{.bash}
-conda activate ./my_project/test_3
-mamba install bioconda::bioconductor-deseq2<=1.42.0 conda-forge::r-tidyr=1.3.1
+conda activate test_1
+conda install bioconda::bioconductor-deseq2<=1.42.0 conda-forge::r-tidyr=1.3.1
 ```
 
 :::{.callout-note}
@@ -517,7 +598,7 @@ dependencies:
   - binutils_impl_linux-64=2.40=hf600244_0
 ```
 
-This is guaranteed to work only on the specific system where you created the environment!
+This is guaranteed to work **only on the specific system** where you created the environment!
 
 ---
 
@@ -525,28 +606,40 @@ You can use the `yml` file to create an environment:
 
 &nbsp;
 
-
 ```
-mamba env create -p ./test_1_from_file -f ./environment.yml
+conda env create -p test_1_from_file -f ./environment.yml
 ```
 
 &nbsp;
 
-Environment files are very useful when you want to share environments with others.
+Environment files are very useful when you want to **share environments with others**, especially when the package list is long.
 
 ---
 
 **Good practice:** You want to install a lot of packages in an environment? Clone it first!
-
-&nbsp;
-
 If you break something, you still have the old copy.
 
+```{.bash}
+conda create -p test_1_cloned --clone test_1
+```
+
 &nbsp;
 
+If installations in the cloned environment go fine, then you can remove it 
+
 ```{.bash}
-mamba create -p ./test_1_cloned --clone test_1
+conda env remove -n test_1_cloned
 ```
+
+and repeat the installations on the original one.
+
+---
+
+## Useful links for conda:
+
+- [Conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) with all the things you can do to manage environments
+
+- [Anaconda](http://anaconda.org) where you can search for packages
 
 # Running a Job
 
@@ -554,7 +647,7 @@ mamba create -p ./test_1_cloned --clone test_1
 
 A computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM).
 
-![](img/Job-on-cluster.png)
+![](img/Job-on-cluster.png){fig-align="center"}
 
 ---
 
@@ -706,6 +799,26 @@ If you change your mind and want to cancel a job:
 scancel 33735928
 ```
 
+---
+
+To observe in real time the latest output of the command in the job, you can refresh the last lines of the log file for the specific job:
+
+```{.bash}
+watch tail align.sh-33735928.out
+```
+
+&nbsp;
+
+To look at the whole file, you can run at any time
+
+```{.bash}
+less -S align.sh-33735928.out
+```
+
+This can be useful for debugging, when for example a command gives an error and the job interrupts.
+
+
+
 ## Other ways of running jobs
 
 Beyond `sbatch`, you can use other tools for workflows which are
@@ -729,13 +842,3 @@ Some workflow tools:
 &nbsp;
 
 You need to know some basic `python` to use `Gwf`, but it is worth the effort.
-
-# Useful links
-
-&nbsp;
-
-- [Conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) with all the things you can do to manage environments
-
-- [Anaconda](http://anaconda.org) where you can search for packages
-
-- [Quick guide](https://github.com/jeppebayer/cluster_tutorial/blob/main/docs/cluster_tutorial.md) from Jeppe Bayer at EcoInf
