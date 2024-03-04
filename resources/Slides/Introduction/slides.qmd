@@ -20,9 +20,11 @@ navigation-mode: vertical
 
 # GenomeDK's ABC
 
+Learn your way around the basics of the `GenomeDK` cluster
+
 ## Infrastructure
 
-GenomeDK is a **computing cluster**, i.e. a set of interconnected computers (nodes). GenomeDK has:
+`GenomeDK` is a **computing cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
 
 - **computing nodes** used for running programs (~15000 cores)
 - **storage nodes** storing data in thousands of hard disks (~23 PiB)
@@ -122,6 +124,14 @@ do not fill up your home with data. It has a **limited amount of storage** (a qu
 
 # Project management
 
+&nbsp;
+
+It is easy to start creating files everywhere in your project folders. Data, analysis files, results and the like. 
+
+&nbsp;
+
+**Managing your folders rationally** is the best way of finding your way around. Especially when getting back to your analysis after long time.
+
 ## Creation
 
 You need a project from which you can run your programs. Request a project with the command
@@ -217,7 +227,15 @@ chmod +x populate_project.sh
 
 # Downloads and Copies
 
-Downloads should always happens on the `front-end` nodes, and never using a compute node when working on `GenomeDK`
+&nbsp;
+
+In your daily life on a cluster you are going to need **downloads and exchange of files** with online archives and your local PC.
+
+:::{.callout-warning}
+
+Downloads should **always** happens on the `front-end` nodes, and never using a compute node when working on `GenomeDK`
+
+:::
 
 ## Download with wget
 
@@ -368,6 +386,10 @@ If you have created a queue, this will be shown at the bottom of the window as a
 To start a queue, use `CTRL + P`, `Transfer --> Process Queue` or press  the button ![](./img/filezilla5.png){width=100} on the toolbar.
 
 # Package/Environment management
+
+&nbsp;
+
+Properly managing your **software and its dependencies** is fundamental for reproducibility
 
 ## Virtual environments
 
@@ -643,9 +665,17 @@ and repeat the installations on the original one.
 
 # Running a Job
 
+&nbsp;
+
+Running programs on a computing cluster happens through **jobs**. 
+
+&nbsp;
+
+Learn how to get hold of **computing resources** to run your programs.
+
 ## What is a job on a HPC
 
-A computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM).
+A computational task **executed on requested HPC resources** (computing nodes), which are handled by the **queueing system** (SLURM).
 
 ![](img/Job-on-cluster.png){fig-align="center"}
 
