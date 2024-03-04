@@ -431,11 +431,11 @@ Dan Søndergaard
 <section>
 <section id="genomedks-abc" class="title-slide slide level1 center">
 <h1>GenomeDK’s ABC</h1>
-
+<p>Learn your way around the basics of the <code>GenomeDK</code> cluster</p>
 </section>
 <section id="infrastructure" class="slide level2">
 <h2>Infrastructure</h2>
-<p>GenomeDK is a <strong>computing cluster</strong>, i.e.&nbsp;a set of interconnected computers (nodes). GenomeDK has:</p>
+<p><code>GenomeDK</code> is a <strong>computing cluster</strong>, i.e.&nbsp;a set of interconnected computers (nodes). <code>GenomeDK</code> has:</p>
 <ul>
 <li><strong>computing nodes</strong> used for running programs (~15000 cores)</li>
 <li><strong>storage nodes</strong> storing data in thousands of hard disks (~23 PiB)</li>
@@ -511,7 +511,10 @@ Dan Søndergaard
 <section>
 <section id="project-management" class="title-slide slide level1 center">
 <h1>Project management</h1>
-
+<p>&nbsp;</p>
+<p>It is easy to start creating files everywhere in your project folders. Data, analysis files, results and the like.</p>
+<p>&nbsp;</p>
+<p><strong>Managing your folders rationally</strong> is the best way of finding your way around. Especially when getting back to your analysis after long time.</p>
 </section>
 <section id="creation" class="slide level2">
 <h2>Creation</h2>
@@ -570,7 +573,21 @@ Dan Søndergaard
 <section>
 <section id="downloads-and-copies" class="title-slide slide level1 center">
 <h1>Downloads and Copies</h1>
-<p>Downloads should always happens on the <code>front-end</code> nodes, and never using a compute node when working on <code>GenomeDK</code></p>
+<p>&nbsp;</p>
+<p>In your daily life on a cluster you are going to need <strong>downloads and exchange of files</strong> with online archives and your local PC.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Downloads should <strong>always</strong> happens on the <code>front-end</code> nodes, and never using a compute node when working on <code>GenomeDK</code></p>
+</div>
+</div>
+</div>
 </section>
 <section id="download-with-wget" class="slide level2">
 <h2>Download with wget</h2>
@@ -683,7 +700,8 @@ Dan Søndergaard
 <section>
 <section id="packageenvironment-management" class="title-slide slide level1 center">
 <h1>Package/Environment management</h1>
-
+<p>&nbsp;</p>
+<p>Properly managing your <strong>software and its dependencies</strong> is fundamental for reproducibility</p>
 </section>
 <section id="virtual-environments" class="slide level2">
 <h2>Virtual environments</h2>
@@ -909,11 +927,14 @@ Dan Søndergaard
 <section>
 <section id="running-a-job" class="title-slide slide level1 center">
 <h1>Running a Job</h1>
-
+<p>&nbsp;</p>
+<p>Running programs on a computing cluster happens through <strong>jobs</strong>.</p>
+<p>&nbsp;</p>
+<p>Learn how to get hold of <strong>computing resources</strong> to run your programs.</p>
 </section>
 <section id="what-is-a-job-on-a-hpc" class="slide level2">
 <h2>What is a job on a HPC</h2>
-<p>A computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM).</p>
+<p>A computational task <strong>executed on requested HPC resources</strong> (computing nodes), which are handled by the <strong>queueing system</strong> (SLURM).</p>
 
 <img data-src="img/Job-on-cluster.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section class="slide level2">
