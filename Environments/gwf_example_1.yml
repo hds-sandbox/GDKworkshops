@@ -1,0 +1,15 @@
+channels:
+  - bioconda
+  - conda-forge
+  - gwf-org
+dependencies:
+  - fastqc
+  - multiqc
+  - trimmomatic
+  - bwa
+  - samtools
+  - bcftools
+  - jupyterlab
+  - r-ggplot2
+  - r-read.table
+  - gwf
