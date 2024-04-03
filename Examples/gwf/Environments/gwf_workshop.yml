@@ -9,7 +9,5 @@ dependencies:
   - bwa
   - samtools
   - bcftools
-  - jupyterlab
   - r-ggplot2
-  - r-read.table
   - gwf

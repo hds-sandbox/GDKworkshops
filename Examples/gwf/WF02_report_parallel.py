@@ -2,7 +2,7 @@
 from gwf import Workflow
 import numpy as np
 
-gwf = Workflow()
+gwf = Workflow(defaults={'account': 'HDSSandbox'})
 
 #############################
 ### Process all fastq files 

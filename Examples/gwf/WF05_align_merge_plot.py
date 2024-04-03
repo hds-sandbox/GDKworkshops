@@ -2,7 +2,7 @@
 from gwf import Workflow
 import numpy as np
 
-gwf = Workflow()
+gwf = Workflow(defaults={'account': 'HDSSandbox'})
 
 #############################
 ### Process all fastq files 
@@ -17,11 +17,11 @@ import glob
 
 pattern = os.path.join('data', '*.fastq.gz') #pattern for path
 fastq_files = glob.glob(pattern) #list with names and their path
-print("Fastq files in the data folder")
-print(fastq_files)
+#print("Fastq files in the data folder")
+#print(fastq_files)
 fastq_files = [os.path.basename(file) for file in fastq_files] #remove the path from the file
-print("Fastq files after removing path from the name")
-print(fastq_files) #print names
+#print("Fastq files after removing path from the name")
+#print(fastq_files) #print names
 
 for FASTQ in fastq_files:
     ## A target doing FastQC on a file
@@ -44,8 +44,8 @@ for FASTQ in fastq_files:
 
 
 fastq_basenames = [ FASTQ.split(".")[0] for FASTQ in fastq_files ] #names without extensions
-print("Just the fastq basenames")
-print(fastq_basenames)
+#print("Just the fastq basenames")
+#print(fastq_basenames)
 
 gwf.target( 'MultiQC', #name of the target
            cores=1,
@@ -53,9 +53,10 @@ gwf.target( 'MultiQC', #name of the target
            walltime='00:05:00',	
            inputs= {'ZIP': [f'data/{FASTQ_BASENAME}_fastqc.zip' for FASTQ_BASENAME in fastq_basenames],
                     'REPORTS': [f'data/{FASTQ_BASENAME}_fastqc.html' for FASTQ_BASENAME in fastq_basenames] }, 
-           outputs=['results/multiqc_output/multiqc_report.html']) << """ 
+           outputs=['results/multiqc_output/multiqc_report.html'],
+           protect=['results/multiqc_output/multiqc_report.html']) << """ 
     mkdir -p results/multiqc_output
-    multiqc --outdir results/multiqc_output \
+    multiqc -f --outdir results/multiqc_output \
             data/
     """
 
@@ -67,8 +68,8 @@ gwf.target( 'MultiQC', #name of the target
 
 
 fastq_pairs = np.unique([ FASTQ.split('_')[0] for FASTQ in fastq_basenames ]) #names without pair number and extension
-print("The fastq names without pair number and extension")
-print(fastq_pairs)
+#print("The fastq names without pair number and extension")
+#print(fastq_pairs)
 
 
 for FASTQ_PAIR in fastq_pairs:
@@ -132,3 +133,29 @@ for FASTQ_PAIR in fastq_pairs:
     samtools index results/alignments/{FASTQ_PAIR}.sort.bam
     samtools depth results/alignments/{FASTQ_PAIR}.sort.bam > results/depths/{FASTQ_PAIR}.depth
     """.format(FASTQ_PAIR=FASTQ_PAIR)
+
+
+
+#############################
+### Merge all the bams
+### and plot histograms
+#############################
+
+gwf.target( "BAM_merge", #name of the target
+           cores=1,
+           memory='8gb',
+           walltime='00:10:00',	
+           inputs= [f'results/alignments/{FASTQ_PAIR}.sort.bam' for FASTQ_PAIR in fastq_pairs], 
+           outputs=['results/alignments/merged.bam']) << """
+    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam
+    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam
+    """
+
+gwf.target( "Histogram", #name of the target
+           cores=1,
+           memory='8gb',
+           walltime='00:10:00',	
+           inputs= [f'results/depths/{FASTQ_PAIR}.depth' for FASTQ_PAIR in fastq_pairs], 
+           outputs=[ 'results/depths/histogram.pdf' ]) << """
+    Rscript plotscript.R
+    """
