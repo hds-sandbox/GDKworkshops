@@ -1,6 +1,6 @@
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - gwforg
 dependencies:
   - fastqc
@@ -8,6 +8,6 @@ dependencies:
   - trimmomatic
   - bwa
   - samtools
-  - bcftools
   - r-ggplot2
+  - r-purrr
   - gwf
