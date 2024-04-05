@@ -10,6 +10,8 @@ website:
         text: Introduction
       - href: resources/Slides/Introduction/slides.qmd
         text: GenomeDK Intro
+      - href: resources/Slides/gwf/slides.qmd
+        text: Workflows with gwf
     right: 
       - icon: github
         href: https://github.com/hds-sandbox
