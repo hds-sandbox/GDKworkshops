@@ -52,7 +52,7 @@ Check out [the gwf webpage](https://gwf.app/) for updates, examples and more det
 
 Data and inspiration from [this SW carpentry bioinformatics tutorial](https://datacarpentry.org/wrangling-genomics/index.html), which does not use pipelines.
 
-WHOLE WORKFLOW FIGURE
+![](img/whole_gwf.png)
 
 ## Download examples and data
 
@@ -84,7 +84,7 @@ cd ..
 
 ---
 
-Final file structure (`tree` command)
+Final file structure (run the `tree` command)
 
 ![](img/tree_download.png)
 
@@ -93,29 +93,40 @@ Final file structure (`tree` command)
 Using conda to create a new environment from the `yml` file:
 
 ```{.bash}
-conda create -n gwf_workshop -f Environments/gwf_workshop.yml
+conda env create -n gwf_workshop -f Environments/gwf_workshop.yml
 conda activate gwf_workshop
 ```
 
-You can see the packages installed with
+You can see the package list with
 
 ```{.bash}
 cat Environments/gwf_workshop.yml
 ```
 
+. . .
+
+The whole environment dependencies and versions can be seen with
+
+```{.bash}
+conda list
+```
+
 # A single target Workflow
 
-FIGURE
+![](img/simple_gwf.png){fig-align="center"}
 
-The workflow file can be printed out with 
+The workflow file can be printed out with
 
 ```{.bash}
 less -S WF01_report.py
 ```
+Exit using `q`
+
+
 
 ---
 
-You can easily spot all the elements of the workflow graph:
+You can easily spot all the elements of a workflow graph:
 
 ```{.python code-line-numbers="1-3|6|7-9|10-12|13"}
 from gwf import Workflow
@@ -156,12 +167,24 @@ You can submit the targets with
 gwf -f WF01_report.py run
 ```
 
+which reports you
+
+```{.bash}
+Submitting target FastQC
+```
+
 . . .
 
 Look again at the status. You can follow it up in real-time using `watch` (it will lose the nice colour formatting):
 
 ```{.bash}
 watch gwf -f WF01_report.py status
+```
+
+You might see it going from `submitted` to `running` and `completed`:
+
+```{.bash}
+✓ FastQC        completed
 ```
 
 ---
@@ -180,11 +203,9 @@ and
 gwf -f WF01_report.py logs -e FastQC
 ```
 
-You can still use `watch` to follow in real time an output while a target is running
+# Parallel targets
 
-# Parallel target dependencies
-
-FIGURE
+![Define independent targets which can run **at the same time** in the workflow](img/whole_gwf_1.png)
 
 ---
 
@@ -263,9 +284,7 @@ Targets will run independently and might run at the same time.
 
 # Multiple target dependencies
 
-FIGURE
-
-The MultQC target will have to wait for all the FastQC outputs
+![A single target (MultiQC) is dependent on the execution of multiple targets (FastQC of the data files)](img/whole_gwf_2.png)
 
 ---
 
@@ -292,7 +311,7 @@ gwf.target( 'MultiQC', #name of the target
 The workflow parameter
 
 ```{.python}
-protect=['results/multiqc_output/multiqc_report.html'])
+protect=['results/multiqc_output/multiqc_report.html']
 ```
 
 prevents you from deleting the specified file when using `clean`. The `clean` command removes all **intermediate outputs** of a workflow (not essential for the result report and which **can be replicated** by rerunning the workflow). 
@@ -320,15 +339,16 @@ Now look only at the endpoints to avoid a long list of FastQC targets:
 gwf -f WF03_multi_report.py status --endpoints
 ```
 
-gives
+gives for example
 
 ```{.bash}
-✓ MultiQC       completed
+↻ MultiQC     running
 ```
+unless it is still `submitted` or already `completed`.
 
 . . .
 
-Are you waiting for many endpoints? Look only for the `completed` ones:
+Are you waiting for many endpoints? Look only for the `completed` ones with the status filter:
 
 ```{.bash}
 gwf -f WF03_multi_report.py status --endpoints -s completed
@@ -339,9 +359,8 @@ gwf -f WF03_multi_report.py status --endpoints -s completed
 
 # Exercise 1
 
-FIGURE
+![Parallel targets dependent on  `MultiQC` produce trimmed `fastq` files.](img/whole_gwf_3.png)
 
-You are going to trim the data with parallel targets
 
 ## Tasks-questions
 
@@ -350,10 +369,37 @@ Consider the workflow file `WF04_trimming.py`:
 &nbsp;
 
 1. apply `gwf status` to watch the **endpoints of the workflow**
-2. Which is the file dependency **common to all endpoints**?
+2. Which is the file dependency **common to all trim targets**?
 3. run the workflow and...
 4. ...apply `watch gwf status` and follow only the `running` targets 
 5. Look at the `stderr` printout of one trimming target
+
+## Code
+
+```{.python  code-line-numbers="1|4|8-15|22"}
+fastq_pairs = np.unique([ FASTQ.split('_')[0] for FASTQ in fastq_basenames ]) #names without pair number and extension
+
+for FASTQ_PAIR in fastq_pairs:
+    gwf.target( f"Trimmomatic_{FASTQ_PAIR}", #name of the target
+           cores=8,
+           memory='8gb',
+           walltime='00:10:00',	
+           inputs= {'ADAPTERS': ['fasta/NexteraPE-PE.fa'],
+                    'FASTQS': [f'data/{FASTQ_PAIR}_1.fastq.gz',
+                               f'data/{FASTQ_PAIR}_2.fastq.gz'],
+                    'MULTIQC': ['results/multiqc_output/multiqc_report.html']}, 
+           outputs=[f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',
+                    f'data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz',
+                    f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz',
+                    f'data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz']) << """
+    mkdir -p data_trim
+    trimmomatic PE -threads 8 \
+                data/{FASTQ_PAIR}_1.fastq.gz data/{FASTQ_PAIR}_2.fastq.gz \
+                data_trim/{FASTQ_PAIR}_1.trim.fastq.gz data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz \
+                data_trim/{FASTQ_PAIR}_2.trim.fastq.gz data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz \
+                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:{ADAPTERFILE}:2:40:15
+    """.format(FASTQ_PAIR=FASTQ_PAIR, ADAPTERFILE='fasta/NexteraPE-PE.fa')
+```
 
 ## Answers
 
@@ -375,7 +421,7 @@ gives
 
 ---
 
-**2. Which is the file dependency common to all endpoints?**
+**2. Which is the file dependency common to all trim targets?**
 
 &nbsp;
 
@@ -384,14 +430,6 @@ Each endpoint needs an adapter `fasta` file apart from the raw data files in inp
 ```{.bash}
 gwf -f WF04_trimming.py info Trimmomatic*
 ```
-
-or 
-
-```{.bash}
-gwf -f WF04_trimming.py info Trimmomatic* | less -S
-```
-
-for better formatting.
 
 ---
 
@@ -420,7 +458,7 @@ If the targets are currently `running` and neither `shouldrun`, `completed` nor 
 ↻ Trimmomatic_SRR2589044 running
 ```
 
-after which the targets will be `completed`.
+after which the targets will be `completed` (and disappear from your view with the status filter).
 
 ---
 
@@ -431,16 +469,12 @@ after which the targets will be `completed`.
 You can see the `stderr` f a trimming job, for example, by
 
 ```{.bash}
-gwf -f WF04_trimming.py logs -e Trimmomatic_SRR2589044 | less -S
+gwf -f WF04_trimming.py logs -e Trimmomatic_SRR2589044
 ```
-
-which should also make it easier to scroll and format when it is a long output
 
 # Exercise 2
 
-FIGURE
-
-You will align the trimmed raw files, merge them and plot a histogram of each alignment's depth through an `R` script.
+![Parallel targets (`BWA`), each dependent on a pair of trimming targets, produce alignments of parts of the whole genome using an indexing of the reference (`Index reference`). Those alignment are then merged (`Merge`) and a depth histogram is also produced for each subgenome (`Histogram`).](img/whole_gwf_4.png)
 
 ## Tasks-questions
 
@@ -451,8 +485,9 @@ Consider the workflow file `WF05_align_merge_plot.py`:
 1. use `status` to see which are the endpoint targets, then find their target dependencies
 2. do you need to protect the final merged alignment in the target `BAM_merge`?
 3. can the targets `BAM_merge` and `Histogram` run at the same time?
-4. two raw fastq files are twice as larger than the others. If instead of aligning data in parallel targets you were to **align files one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)
-5. use `gwf clean --all` to remove all files from the old targets. Then run the workflow and `watch` the `status` of the targets. You should see the running targets follow the order of the targets dependencies.
+4. A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to **align pairs one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)
+5. Run the workflow and `watch` the `status` of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the `results` folder.
+
 
 ## Answers
 
@@ -462,7 +497,7 @@ Consider the workflow file `WF05_align_merge_plot.py`:
 
 There are two endpoints: one for merging aligned files and one for plotting a histogram. Use
 
-```{.bash}
+```{.bash} 
 gwf -f WF05_align_merge_plot.py status --endpoints
 ```
 to obtain 
@@ -509,33 +544,23 @@ Yes, as soon as the raw data files have been aligned separately.
 
 ---
 
-**4. two raw fastq files are twice as larger than the others. If instead of aligning data in parallel targets you were to **align files one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)**
+**4. A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to **align pairs one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)**
 
 &nbsp;
 
-If you run a single target with the alignment of all `.fastq` files, it will take twice the time compared to running parallel targets. 
+If you run a single target with the alignment of all pairs, it will take twice the time compared to running parallel targets. 
 
-&nbsp;
-
-. . .
-
-When you run parallel targets, the time needed to finish the alignments is the time needed for the largest file (which is twice the size of the others).
-
-FIGURE
+When you run **parallel targets**, the time needed to finish the alignments is the **time needed for the largest pair** (which is twice the size of the others).
 
 &nbsp;
 
 . . .
 
-When you run sequentially the alignments, it takes the sum of all alignment times to get done.
+When you run **sequentially** the alignments, it takes the **sum of all alignment times** to get done.
 
-FIGURE
+![](img/seq_or_par.png)
 
 # Clean up after yourself
-
-FIGURE
-
----
 
 Use the `tree` command to look at how many files you created!
 
@@ -543,17 +568,29 @@ FIGURE
 
 ---
 
-What is the dize of each folder?
+What is the size of each folder and their total size?
 
 ```{.bash}
-du -h .
+du -h
 ```
 
-should give you this:
+We have 8.3GB of data
 
 ```{.bash}
-aaaa
-aaaa
+17K     ./__pycache__
+961M    ./data_trim
+5.8G    ./results/alignments
+13K     ./results/multiqc_output/multiqc_data
+17K     ./results/multiqc_output
+286M    ./results/depths
+6.1G    ./results
+1.0K    ./Environments
+39K     ./.gwf/logs
+40K     ./.gwf
+1.2G    ./data
+13M     ./fasta
+0       ./.empty
+8.3G    .
 ```
 
 ---
@@ -568,11 +605,13 @@ accept the warning message and note how, already for a small exercise, you are g
 
 ---
 
-Now you have a much more slim folder, which contains workflows, raw data, a merged quality report, aligned data and depth histogram in `.pdf`.
+Now you have a more slim folder, which contains workflows, raw data, a merged quality report, aligned data and depth histogram in `.pdf`.
 
-FIGURE TREE
+&nbsp;
 
 All the other files can be recreated at any moment if necessary.
+
+&nbsp;
 
 :::{.callout-tip}
 Remember: **Computation cost << Storage cost**
