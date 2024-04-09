@@ -23,7 +23,7 @@ navigation-mode: vertical
 
 ## Workflow
 
-![](img/small_pipeline.png)
+![](img/small_pipeline.png){fig-align="center"}
 
 :::{.callout-note title="Workflow and W. Management System"}
 A **workflow** is a series of calculations and data manipulations which have to be performed in a specific sequence. 
@@ -33,13 +33,13 @@ keeps a log of the workflow, interacts with a cluster's queueing system.
 
 ## A few terms
 
-![](img/small_pipeline_terms.png)
+![](img/small_pipeline_terms.png){fig-align="center"}
 
 Each target of the workflow is **submitted** to a queueing manager so that it enters the queue and can be executed when possible.
 
 ## Gwf
 
-A lightweight and easy to adopt workflow manager. it requires knowing or larning Python, but the time invested in it **pays back quickly**. Some useful features:
+A lightweight and easy to adopt workflow manager. it requires knowing or learning `Python`. Some useful features:
 
 - Defines **target dependencies automatically** using the input and output files of targets
 - Only submits targets when their output files are **not up to date**
@@ -52,7 +52,7 @@ Check out [the gwf webpage](https://gwf.app/) for updates, examples and more det
 
 Data and inspiration from [this SW carpentry bioinformatics tutorial](https://datacarpentry.org/wrangling-genomics/index.html), which does not use pipelines.
 
-![](img/whole_gwf.png)
+![](img/whole_gwf.png){fig-align="center"}
 
 ## Download examples and data
 
@@ -235,7 +235,7 @@ for FASTQ in fastq_files:
 ```
 
 
-## Useful gwf checks
+## Useful gwf checks and debug
 
 You can see the status with specific messages about the status of each target and what causes it.
 
@@ -254,13 +254,15 @@ At the end of the debug messages, you will see that one FastQC is already comple
 ⨯ FastQC_SRR2584866_2 shouldrun
 ```
 
-. . .
+---
 
 You can print explicitely some targets of your choice and their dependencies. For example all the targets related to the first element of the fastq pairs:
 
 ```{.bash}
 gwf -f WF02_report_parallel.py info FastQC*_1
 ```
+
+&nbsp;
 
 Giving no names will print all the targets
 
@@ -281,6 +283,20 @@ watch gwf -f WF02_report_parallel.py status
 &nbsp;
 
 Targets will run independently and might run at the same time. 
+
+---
+
+See specifically what gwf states about your targets: why a target should run, why not?
+
+```
+gwf -f WF02_report_parallel.py -v debug status
+```
+
+&nbsp;
+
+:::{.callout-tip}
+When developing a workflow, take your time to use `status` and `info` once you add new targets.
+:::
 
 # Multiple target dependencies
 
@@ -346,15 +362,19 @@ gives for example
 ```
 unless it is still `submitted` or already `completed`.
 
-. . .
+---
 
 Are you waiting for many endpoints? Look only for the `completed` ones with the status filter:
+
+&nbsp;
 
 ```{.bash}
 gwf -f WF03_multi_report.py status --endpoints -s completed
 ```
 
-(You can also use `running`, `shouldrun` or `failed`).
+&nbsp;
+
+(You can also use the status `running`, `shouldrun` or `failed`).
 
 
 # Exercise 1
@@ -488,6 +508,51 @@ Consider the workflow file `WF05_align_merge_plot.py`:
 4. A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to **align pairs one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)
 5. Run the workflow and `watch` the `status` of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the `results` folder.
 
+## Code
+
+```{.python code-line-numbers="1-2|6-10|11-24"}
+for FASTQ_PAIR in fastq_pairs:
+    gwf.target( f"BWA_mem_{FASTQ_PAIR}", #name of the target
+           cores=8,
+           memory='16gb',
+           walltime='00:15:00',	
+           inputs= {'INDEXING': [ 'fasta/ecoli_rel606.fasta.'+ extension for extension in ['amb','ann','bwt','pac','sa'] ],
+                    'FASTQS': [f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',
+                               f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz']}, 
+           outputs=[f'results/alignments/{FASTQ_PAIR}.sort.bam',
+                    f'results/depths/{FASTQ_PAIR}.depth']) << """
+    mkdir -p results/alignments
+    bwa mem -t 8 fasta/ecoli_rel606.fasta \
+            data_trim/{FASTQ_PAIR}_1.trim.fastq.gz \
+            data_trim/{FASTQ_PAIR}_2.trim.fastq.gz > \
+            results/alignments/{FASTQ_PAIR}.sam
+    samtools view -S -b results/alignments/{FASTQ_PAIR}.sam > results/alignments/{FASTQ_PAIR}.bam
+    samtools sort -o results/alignments/{FASTQ_PAIR}.sort.bam results/alignments/{FASTQ_PAIR}.bam
+    ### print depths in text file
+    mkdir -p results/depths
+    samtools index results/alignments/{FASTQ_PAIR}.sort.bam
+    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam > results/depths/{FASTQ_PAIR}.depth
+    """.format(FASTQ_PAIR=FASTQ_PAIR)
+
+gwf.target( "BAM_merge", #name of the target
+           cores=1,
+           memory='8gb',
+           walltime='00:10:00',	
+           inputs= [f'results/alignments/{FASTQ_PAIR}.sort.bam' for FASTQ_PAIR in fastq_pairs], 
+           outputs=['results/alignments/merged.bam']) << """
+    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam
+    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam
+    """
+
+gwf.target( "Histogram", #name of the target
+           cores=1,
+           memory='8gb',
+           walltime='00:10:00',	
+           inputs= [f'results/depths/{FASTQ_PAIR}.depth' for FASTQ_PAIR in fastq_pairs], 
+           outputs=[ 'results/depths/histogram.pdf' ]) << """
+    Rscript plotscript.R
+    """
+```
 
 ## Answers
 
