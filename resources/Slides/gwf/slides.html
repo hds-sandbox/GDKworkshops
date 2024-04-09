@@ -599,14 +599,14 @@ Dan Søndergaard
 <section id="useful-gwf-checks-and-debug" class="slide level2">
 <h2>Useful gwf checks and debug</h2>
 <p>You can see the status with specific messages about the status of each target and what causes it.</p>
-<pre><code>gwf -f WF02_report_parallel.py -v debug status</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py <span class="at">-v</span> debug status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>At the end of the debug messages, you will see that one FastQC is already complete from the first example.</p>
-<pre><code>⨯ FastQC_SRR2584866_1 shouldrun
-⨯ FastQC_SRR2589044_1 shouldrun
-✓ FastQC_SRR2584863_1 completed
-⨯ FastQC_SRR2584863_2 shouldrun
-⨯ FastQC_SRR2589044_2 shouldrun
-⨯ FastQC_SRR2584866_2 shouldrun</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2584866_1 shouldrun</span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2589044_1 shouldrun</span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">✓</span> FastQC_SRR2584863_1 completed</span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2584863_2 shouldrun</span>
+<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2589044_2 shouldrun</span>
+<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2584866_2 shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -618,16 +618,16 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>Try to run the whole workflow and follow its status with <code>watch</code>.</p>
-<pre><code>gwf -f WF02_report_parallel.py run</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and</p>
-<pre><code>watch gwf -f WF02_report_parallel.py status</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf <span class="at">-f</span> WF02_report_parallel.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Targets will run independently and might run at the same time.</p>
 </section>
 <section class="slide level2">
 
 <p>See specifically what gwf states about your targets: why a target should run, why not?</p>
-<pre><code>gwf -f WF02_report_parallel.py -v debug status</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py <span class="at">-v</span> debug status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -898,10 +898,8 @@ Dan Søndergaard
 <section id="clean-up-after-yourself" class="title-slide slide level1 center">
 <h1>Clean up after yourself</h1>
 <p>Use the <code>tree</code> command to look at how many files you created!</p>
-<p>FIGURE</p>
-</section>
-<section class="slide level2">
-
+<div class="fragment">
+<p>&nbsp;</p>
 <p>What is the size of each folder and their total size?</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We have 8.3GB of data</p>
@@ -919,6 +917,7 @@ Dan Søndergaard
 <span id="cb43-12"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13M</span>     ./fasta</span>
 <span id="cb43-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>       ./.empty</span>
 <span id="cb43-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">8.3G</span>    .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level2">
 
