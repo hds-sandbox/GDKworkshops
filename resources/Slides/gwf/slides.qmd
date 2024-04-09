@@ -239,13 +239,13 @@ for FASTQ in fastq_files:
 
 You can see the status with specific messages about the status of each target and what causes it.
 
-```
+```{.bash}
 gwf -f WF02_report_parallel.py -v debug status
 ```
 
 At the end of the debug messages, you will see that one FastQC is already complete from the first example.
 
-```
+```{.bash}
 ⨯ FastQC_SRR2584866_1 shouldrun
 ⨯ FastQC_SRR2589044_1 shouldrun
 ✓ FastQC_SRR2584863_1 completed
@@ -270,13 +270,13 @@ Giving no names will print all the targets
 
 Try to run the whole workflow and follow its status with `watch`.
 
-```
+```{.bash}
 gwf -f WF02_report_parallel.py run
 ```
 
 and
 
-```
+```{.bash}
 watch gwf -f WF02_report_parallel.py status
 ```
 
@@ -288,7 +288,7 @@ Targets will run independently and might run at the same time.
 
 See specifically what gwf states about your targets: why a target should run, why not?
 
-```
+```{.bash}
 gwf -f WF02_report_parallel.py -v debug status
 ```
 
@@ -629,9 +629,10 @@ When you run **sequentially** the alignments, it takes the **sum of all alignmen
 
 Use the `tree` command to look at how many files you created!
 
-FIGURE
 
----
+. . .
+
+&nbsp;
 
 What is the size of each folder and their total size?
 
