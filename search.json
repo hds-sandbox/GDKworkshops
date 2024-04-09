@@ -46,7 +46,7 @@
     "href": "resources/Slides/gwf/slides.html#gwf",
     "title": "Introduction to workflows with gwf",
     "section": "Gwf",
-    "text": "Gwf\nA lightweight and easy to adopt workflow manager. it requires knowing or larning Python, but the time invested in it pays back quickly. Some useful features:\n\nDefines target dependencies automatically using the input and output files of targets\nOnly submits targets when their output files are not up to date\nFire-and-forget: once you submit targets, you need not do more\nHas a few, simple and useful commands for following workflow execution and cleaning up intermediate data files\n\nCheck out the gwf webpage for updates, examples and more detailed documentation."
+    "text": "Gwf\nA lightweight and easy to adopt workflow manager. it requires knowing or learning Python. Some useful features:\n\nDefines target dependencies automatically using the input and output files of targets\nOnly submits targets when their output files are not up to date\nFire-and-forget: once you submit targets, you need not do more\nHas a few, simple and useful commands for following workflow execution and cleaning up intermediate data files\n\nCheck out the gwf webpage for updates, examples and more detailed documentation."
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#download-examples-and-data",
@@ -77,11 +77,11 @@
     "text": "Targets stdout and stderr\nWhat are the commands in a target outputting? You can see stdout and stderr in the log of a target:\ngwf -f WF01_report.py logs FastQC\nand\ngwf -f WF01_report.py logs -e FastQC"
   },
   {
-    "objectID": "resources/Slides/gwf/slides.html#useful-gwf-checks",
-    "href": "resources/Slides/gwf/slides.html#useful-gwf-checks",
+    "objectID": "resources/Slides/gwf/slides.html#useful-gwf-checks-and-debug",
+    "href": "resources/Slides/gwf/slides.html#useful-gwf-checks-and-debug",
     "title": "Introduction to workflows with gwf",
-    "section": "Useful gwf checks",
-    "text": "Useful gwf checks\nYou can see the status with specific messages about the status of each target and what causes it.\ngwf -f WF02_report_parallel.py -v debug status\nAt the end of the debug messages, you will see that one FastQC is already complete from the first example.\n⨯ FastQC_SRR2584866_1 shouldrun\n⨯ FastQC_SRR2589044_1 shouldrun\n✓ FastQC_SRR2584863_1 completed\n⨯ FastQC_SRR2584863_2 shouldrun\n⨯ FastQC_SRR2589044_2 shouldrun\n⨯ FastQC_SRR2584866_2 shouldrun\n\nYou can print explicitely some targets of your choice and their dependencies. For example all the targets related to the first element of the fastq pairs:\ngwf -f WF02_report_parallel.py info FastQC*_1\nGiving no names will print all the targets"
+    "section": "Useful gwf checks and debug",
+    "text": "Useful gwf checks and debug\nYou can see the status with specific messages about the status of each target and what causes it.\ngwf -f WF02_report_parallel.py -v debug status\nAt the end of the debug messages, you will see that one FastQC is already complete from the first example.\n⨯ FastQC_SRR2584866_1 shouldrun\n⨯ FastQC_SRR2589044_1 shouldrun\n✓ FastQC_SRR2584863_1 completed\n⨯ FastQC_SRR2584863_2 shouldrun\n⨯ FastQC_SRR2589044_2 shouldrun\n⨯ FastQC_SRR2584866_2 shouldrun"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#protected-outputs-and-cleaning",
@@ -95,7 +95,7 @@
     "href": "resources/Slides/gwf/slides.html#status-with-filters",
     "title": "Introduction to workflows with gwf",
     "section": "status with filters",
-    "text": "status with filters\nWe know all FastQC targets are completed. Run first the workflow\ngwf -f WF03_multi_report.py run\n\n \nNow look only at the endpoints to avoid a long list of FastQC targets:\ngwf -f WF03_multi_report.py status --endpoints\ngives for example\n↻ MultiQC     running\nunless it is still submitted or already completed.\n\n\nAre you waiting for many endpoints? Look only for the completed ones with the status filter:\ngwf -f WF03_multi_report.py status --endpoints -s completed\n(You can also use running, shouldrun or failed)."
+    "text": "status with filters\nWe know all FastQC targets are completed. Run first the workflow\ngwf -f WF03_multi_report.py run\n\n \nNow look only at the endpoints to avoid a long list of FastQC targets:\ngwf -f WF03_multi_report.py status --endpoints\ngives for example\n↻ MultiQC     running\nunless it is still submitted or already completed."
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#tasks-questions",
@@ -124,6 +124,13 @@
     "title": "Introduction to workflows with gwf",
     "section": "Tasks-questions",
     "text": "Tasks-questions\nConsider the workflow file WF05_align_merge_plot.py:\n \n\nuse status to see which are the endpoint targets, then find their target dependencies\ndo you need to protect the final merged alignment in the target BAM_merge?\ncan the targets BAM_merge and Histogram run at the same time?\nA pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to align pairs one at a time in the same target, how much more time would it take? (assuming parallel targets start running at the same time)\nRun the workflow and watch the status of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the results folder."
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#code-1",
+    "href": "resources/Slides/gwf/slides.html#code-1",
+    "title": "Introduction to workflows with gwf",
+    "section": "Code",
+    "text": "Code\nfor FASTQ_PAIR in fastq_pairs:\n    gwf.target( f\"BWA_mem_{FASTQ_PAIR}\", #name of the target\n           cores=8,\n           memory='16gb',\n           walltime='00:15:00', \n           inputs= {'INDEXING': [ 'fasta/ecoli_rel606.fasta.'+ extension for extension in ['amb','ann','bwt','pac','sa'] ],\n                    'FASTQS': [f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',\n                               f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz']}, \n           outputs=[f'results/alignments/{FASTQ_PAIR}.sort.bam',\n                    f'results/depths/{FASTQ_PAIR}.depth']) &lt;&lt; \"\"\"\n    mkdir -p results/alignments\n    bwa mem -t 8 fasta/ecoli_rel606.fasta \\\n            data_trim/{FASTQ_PAIR}_1.trim.fastq.gz \\\n            data_trim/{FASTQ_PAIR}_2.trim.fastq.gz &gt; \\\n            results/alignments/{FASTQ_PAIR}.sam\n    samtools view -S -b results/alignments/{FASTQ_PAIR}.sam &gt; results/alignments/{FASTQ_PAIR}.bam\n    samtools sort -o results/alignments/{FASTQ_PAIR}.sort.bam results/alignments/{FASTQ_PAIR}.bam\n    ### print depths in text file\n    mkdir -p results/depths\n    samtools index results/alignments/{FASTQ_PAIR}.sort.bam\n    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam &gt; results/depths/{FASTQ_PAIR}.depth\n    \"\"\".format(FASTQ_PAIR=FASTQ_PAIR)\n\ngwf.target( \"BAM_merge\", #name of the target\n           cores=1,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= [f'results/alignments/{FASTQ_PAIR}.sort.bam' for FASTQ_PAIR in fastq_pairs], \n           outputs=['results/alignments/merged.bam']) &lt;&lt; \"\"\"\n    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam\n    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam\n    \"\"\"\n\ngwf.target( \"Histogram\", #name of the target\n           cores=1,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= [f'results/depths/{FASTQ_PAIR}.depth' for FASTQ_PAIR in fastq_pairs], \n           outputs=[ 'results/depths/histogram.pdf' ]) &lt;&lt; \"\"\"\n    Rscript plotscript.R\n    \"\"\""
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#answers-1",

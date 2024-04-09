@@ -440,7 +440,7 @@ Dan Søndergaard
 <section id="workflow" class="slide level2">
 <h2>Workflow</h2>
 
-<img data-src="img/small_pipeline.png" class="r-stretch"><div title="Workflow and W. Management System">
+<img data-src="img/small_pipeline.png" class="quarto-figure quarto-figure-center r-stretch"><div title="Workflow and W. Management System">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -459,11 +459,11 @@ Dan Søndergaard
 <section id="a-few-terms" class="slide level2">
 <h2>A few terms</h2>
 
-<img data-src="img/small_pipeline_terms.png" class="r-stretch"><p>Each target of the workflow is <strong>submitted</strong> to a queueing manager so that it enters the queue and can be executed when possible.</p>
+<img data-src="img/small_pipeline_terms.png" class="quarto-figure quarto-figure-center r-stretch"><p>Each target of the workflow is <strong>submitted</strong> to a queueing manager so that it enters the queue and can be executed when possible.</p>
 </section>
 <section id="gwf" class="slide level2">
 <h2>Gwf</h2>
-<p>A lightweight and easy to adopt workflow manager. it requires knowing or larning Python, but the time invested in it <strong>pays back quickly</strong>. Some useful features:</p>
+<p>A lightweight and easy to adopt workflow manager. it requires knowing or learning <code>Python</code>. Some useful features:</p>
 <ul>
 <li>Defines <strong>target dependencies automatically</strong> using the input and output files of targets</li>
 <li>Only submits targets when their output files are <strong>not up to date</strong></li>
@@ -477,7 +477,7 @@ Dan Søndergaard
 <h1>Exercise setup</h1>
 <p>Data and inspiration from <a href="https://datacarpentry.org/wrangling-genomics/index.html">this SW carpentry bioinformatics tutorial</a>, which does not use pipelines.</p>
 
-<img data-src="img/whole_gwf.png" class="r-stretch"></section>
+<img data-src="img/whole_gwf.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="download-examples-and-data" class="slide level2">
 <h2>Download examples and data</h2>
 <p>Examples and reference file</p>
@@ -596,8 +596,8 @@ Dan Søndergaard
 <span id="cb16-19"><a></a><span class="st">    fastqc data/</span><span class="sc">{FASTQ}</span></span>
 <span id="cb16-20"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ<span class="op">=</span>FASTQ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="useful-gwf-checks" class="slide level2">
-<h2>Useful gwf checks</h2>
+<section id="useful-gwf-checks-and-debug" class="slide level2">
+<h2>Useful gwf checks and debug</h2>
 <p>You can see the status with specific messages about the status of each target and what causes it.</p>
 <pre><code>gwf -f WF02_report_parallel.py -v debug status</code></pre>
 <p>At the end of the debug messages, you will see that one FastQC is already complete from the first example.</p>
@@ -607,11 +607,13 @@ Dan Søndergaard
 ⨯ FastQC_SRR2584863_2 shouldrun
 ⨯ FastQC_SRR2589044_2 shouldrun
 ⨯ FastQC_SRR2584866_2 shouldrun</code></pre>
-<div class="fragment">
+</section>
+<section class="slide level2">
+
 <p>You can print explicitely some targets of your choice and their dependencies. For example all the targets related to the first element of the fastq pairs:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py info FastQC<span class="pp">*</span>_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
 <p>Giving no names will print all the targets</p>
-</div>
 </section>
 <section class="slide level2">
 
@@ -621,6 +623,25 @@ Dan Søndergaard
 <pre><code>watch gwf -f WF02_report_parallel.py status</code></pre>
 <p>&nbsp;</p>
 <p>Targets will run independently and might run at the same time.</p>
+</section>
+<section class="slide level2">
+
+<p>See specifically what gwf states about your targets: why a target should run, why not?</p>
+<pre><code>gwf -f WF02_report_parallel.py -v debug status</code></pre>
+<p>&nbsp;</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>When developing a workflow, take your time to use <code>status</code> and <code>info</code> once you add new targets.</p>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="multiple-target-dependencies" class="title-slide slide level1 center">
@@ -629,26 +650,26 @@ Dan Søndergaard
 <img data-src="img/whole_gwf_2.png" class="r-stretch quarto-figure-center"><p class="caption">A single target (MultiQC) is dependent on the execution of multiple targets (FastQC of the data files)</p></section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb22" data-code-line-numbers="1-2|4|8-11|12-14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="co">#names without path and extensions</span></span>
-<span id="cb22-2"><a></a>fastq_basenames <span class="op">=</span> [ FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files ] </span>
-<span id="cb22-3"><a></a></span>
-<span id="cb22-4"><a></a>gwf.target( <span class="st">'MultiQC'</span>, <span class="co">#name of the target</span></span>
-<span id="cb22-5"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb22-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb22-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb22-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ZIP'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames],</span>
-<span id="cb22-9"><a></a>                    <span class="st">'REPORTS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames] }, </span>
-<span id="cb22-10"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>],</span>
-<span id="cb22-11"><a></a>           protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb22-12"><a></a><span class="st">    mkdir -p results/multiqc_output</span></span>
-<span id="cb22-13"><a></a><span class="st">    multiqc --outdir results/multiqc_output </span><span class="ch">\</span></span>
-<span id="cb22-14"><a></a><span class="st">            data/</span></span>
-<span id="cb22-15"><a></a><span class="st">    """</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23" data-code-line-numbers="1-2|4|8-11|12-14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="co">#names without path and extensions</span></span>
+<span id="cb23-2"><a></a>fastq_basenames <span class="op">=</span> [ FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files ] </span>
+<span id="cb23-3"><a></a></span>
+<span id="cb23-4"><a></a>gwf.target( <span class="st">'MultiQC'</span>, <span class="co">#name of the target</span></span>
+<span id="cb23-5"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb23-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb23-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
+<span id="cb23-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ZIP'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames],</span>
+<span id="cb23-9"><a></a>                    <span class="st">'REPORTS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames] }, </span>
+<span id="cb23-10"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>],</span>
+<span id="cb23-11"><a></a>           protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
+<span id="cb23-12"><a></a><span class="st">    mkdir -p results/multiqc_output</span></span>
+<span id="cb23-13"><a></a><span class="st">    multiqc --outdir results/multiqc_output </span><span class="ch">\</span></span>
+<span id="cb23-14"><a></a><span class="st">            data/</span></span>
+<span id="cb23-15"><a></a><span class="st">    """</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="protected-outputs-and-cleaning" class="slide level2">
 <h2>protected outputs and cleaning</h2>
 <p>The workflow parameter</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>prevents you from deleting the specified file when using <code>clean</code>. The <code>clean</code> command removes all <strong>intermediate outputs</strong> of a workflow (not essential for the result report and which <strong>can be replicated</strong> by rerunning the workflow). &nbsp;</p>
 <div title="Endpoints' files are protected">
 <div class="callout callout-note callout-titled callout-style-default">
@@ -669,20 +690,23 @@ Dan Søndergaard
 <section id="status-with-filters" class="slide level2">
 <h2>status with filters</h2>
 <p>We know all FastQC targets are completed. Run first the workflow</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p>&nbsp;</p>
 <p>Now look only at the endpoints to avoid a long list of FastQC targets:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>gives for example</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> MultiQC     running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> MultiQC     running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>unless it is still <code>submitted</code> or already <code>completed</code>.</p>
 </div>
-<div class="fragment">
+</section>
+<section class="slide level2">
+
 <p>Are you waiting for many endpoints? Look only for the <code>completed</code> ones with the status filter:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py status <span class="at">--endpoints</span> <span class="at">-s</span> completed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>(You can also use <code>running</code>, <code>shouldrun</code> or <code>failed</code>).</p>
-</div>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py status <span class="at">--endpoints</span> <span class="at">-s</span> completed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>(You can also use the status <code>running</code>, <code>shouldrun</code> or <code>failed</code>).</p>
 </section></section>
 <section>
 <section id="exercise-1" class="title-slide slide level1 center">
@@ -703,58 +727,58 @@ Dan Søndergaard
 </section>
 <section id="code" class="slide level2">
 <h2>Code</h2>
-<div class="sourceCode" id="cb28" data-code-line-numbers="1|4|8-15|22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>fastq_pairs <span class="op">=</span> np.unique([ FASTQ.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_basenames ]) <span class="co">#names without pair number and extension</span></span>
-<span id="cb28-2"><a></a></span>
-<span id="cb28-3"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
-<span id="cb28-4"><a></a>    gwf.target( <span class="ss">f"Trimmomatic_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
-<span id="cb28-5"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb28-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb28-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb28-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ADAPTERS'</span>: [<span class="st">'fasta/NexteraPE-PE.fa'</span>],</span>
-<span id="cb28-9"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.fastq.gz'</span>,</span>
-<span id="cb28-10"><a></a>                               <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.fastq.gz'</span>],</span>
-<span id="cb28-11"><a></a>                    <span class="st">'MULTIQC'</span>: [<span class="st">'results/multiqc_output/multiqc_report.html'</span>]}, </span>
-<span id="cb28-12"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
-<span id="cb28-13"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1un.trim.fastq.gz'</span>,</span>
-<span id="cb28-14"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>,</span>
-<span id="cb28-15"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2un.trim.fastq.gz'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb28-16"><a></a><span class="st">    mkdir -p data_trim</span></span>
-<span id="cb28-17"><a></a><span class="st">    trimmomatic PE -threads 8 </span><span class="ch">\</span></span>
-<span id="cb28-18"><a></a><span class="st">                data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.fastq.gz data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.fastq.gz </span><span class="ch">\</span></span>
-<span id="cb28-19"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1un.trim.fastq.gz </span><span class="ch">\</span></span>
-<span id="cb28-20"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2un.trim.fastq.gz </span><span class="ch">\</span></span>
-<span id="cb28-21"><a></a><span class="st">                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:</span><span class="sc">{ADAPTERFILE}</span><span class="st">:2:40:15</span></span>
-<span id="cb28-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR, ADAPTERFILE<span class="op">=</span><span class="st">'fasta/NexteraPE-PE.fa'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29" data-code-line-numbers="1|4|8-15|22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>fastq_pairs <span class="op">=</span> np.unique([ FASTQ.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_basenames ]) <span class="co">#names without pair number and extension</span></span>
+<span id="cb29-2"><a></a></span>
+<span id="cb29-3"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
+<span id="cb29-4"><a></a>    gwf.target( <span class="ss">f"Trimmomatic_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
+<span id="cb29-5"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb29-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb29-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
+<span id="cb29-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ADAPTERS'</span>: [<span class="st">'fasta/NexteraPE-PE.fa'</span>],</span>
+<span id="cb29-9"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.fastq.gz'</span>,</span>
+<span id="cb29-10"><a></a>                               <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.fastq.gz'</span>],</span>
+<span id="cb29-11"><a></a>                    <span class="st">'MULTIQC'</span>: [<span class="st">'results/multiqc_output/multiqc_report.html'</span>]}, </span>
+<span id="cb29-12"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
+<span id="cb29-13"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1un.trim.fastq.gz'</span>,</span>
+<span id="cb29-14"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>,</span>
+<span id="cb29-15"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2un.trim.fastq.gz'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb29-16"><a></a><span class="st">    mkdir -p data_trim</span></span>
+<span id="cb29-17"><a></a><span class="st">    trimmomatic PE -threads 8 </span><span class="ch">\</span></span>
+<span id="cb29-18"><a></a><span class="st">                data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.fastq.gz data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.fastq.gz </span><span class="ch">\</span></span>
+<span id="cb29-19"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1un.trim.fastq.gz </span><span class="ch">\</span></span>
+<span id="cb29-20"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2un.trim.fastq.gz </span><span class="ch">\</span></span>
+<span id="cb29-21"><a></a><span class="st">                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:</span><span class="sc">{ADAPTERFILE}</span><span class="st">:2:40:15</span></span>
+<span id="cb29-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR, ADAPTERFILE<span class="op">=</span><span class="st">'fasta/NexteraPE-PE.fa'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="answers" class="slide level2">
 <h2>Answers</h2>
 <p><strong>1. apply <code>gwf status</code> to watch the endpoints of the workflow</strong></p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>gives</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2584863 shouldrun</span>
-<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2584866 shouldrun</span>
-<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2589044 shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2584863 shouldrun</span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2584866 shouldrun</span>
+<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2589044 shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p><strong>2. Which is the file dependency common to all trim targets?</strong></p>
 <p>&nbsp;</p>
 <p>Each endpoint needs an adapter <code>fasta</code> file apart from the raw data files in input. You can look at the file dependencies using</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py info Trimmomatic<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py info Trimmomatic<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p><strong>3. run the workflow</strong> <strong>4. use <code>watch gwf status</code> and follow only the <code>running</code> targets</strong></p>
 <p>&nbsp;</p>
 <p>After running the targets, for example with</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py run Trimmomatic<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py run Trimmomatic<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>you can follow the running targets with</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf <span class="at">-f</span> WF04_trimming.py status <span class="at">-s</span> running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf <span class="at">-f</span> WF04_trimming.py status <span class="at">-s</span> running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If the targets are currently <code>running</code> and neither <code>shouldrun</code>, <code>completed</code> nor <code>failed</code>, you should see something like this,</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2584863 running</span>
-<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2584866 running</span>
-<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2589044 running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2584863 running</span>
+<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2584866 running</span>
+<span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2589044 running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>after which the targets will be <code>completed</code> (and disappear from your view with the status filter).</p>
 </section>
 <section class="slide level2">
@@ -762,7 +786,7 @@ Dan Søndergaard
 <p><strong>5. Look at the stderr printout of one trimming target</strong></p>
 <p>&nbsp;</p>
 <p>You can see the <code>stderr</code> f a trimming job, for example, by</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py logs <span class="at">-e</span> Trimmomatic_SRR2589044</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py logs <span class="at">-e</span> Trimmomatic_SRR2589044</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="exercise-2" class="title-slide slide level1 center">
@@ -781,22 +805,66 @@ Dan Søndergaard
 <li>Run the workflow and <code>watch</code> the <code>status</code> of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the <code>results</code> folder.</li>
 </ol>
 </section>
+<section id="code-1" class="slide level2">
+<h2>Code</h2>
+<div class="sourceCode" id="cb37" data-code-line-numbers="1-2|6-10|11-24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
+<span id="cb37-2"><a></a>    gwf.target( <span class="ss">f"BWA_mem_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
+<span id="cb37-3"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb37-4"><a></a>           memory<span class="op">=</span><span class="st">'16gb'</span>,</span>
+<span id="cb37-5"><a></a>           walltime<span class="op">=</span><span class="st">'00:15:00'</span>, </span>
+<span id="cb37-6"><a></a>           inputs<span class="op">=</span> {<span class="st">'INDEXING'</span>: [ <span class="st">'fasta/ecoli_rel606.fasta.'</span><span class="op">+</span> extension <span class="cf">for</span> extension <span class="kw">in</span> [<span class="st">'amb'</span>,<span class="st">'ann'</span>,<span class="st">'bwt'</span>,<span class="st">'pac'</span>,<span class="st">'sa'</span>] ],</span>
+<span id="cb37-7"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
+<span id="cb37-8"><a></a>                               <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>]}, </span>
+<span id="cb37-9"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span>,</span>
+<span id="cb37-10"><a></a>                    <span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-11"><a></a><span class="st">    mkdir -p results/alignments</span></span>
+<span id="cb37-12"><a></a><span class="st">    bwa mem -t 8 fasta/ecoli_rel606.fasta </span><span class="ch">\</span></span>
+<span id="cb37-13"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz </span><span class="ch">\</span></span>
+<span id="cb37-14"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz &gt; </span><span class="ch">\</span></span>
+<span id="cb37-15"><a></a><span class="st">            results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam</span></span>
+<span id="cb37-16"><a></a><span class="st">    samtools view -S -b results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam &gt; results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
+<span id="cb37-17"><a></a><span class="st">    samtools sort -o results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
+<span id="cb37-18"><a></a><span class="st">    ### print depths in text file</span></span>
+<span id="cb37-19"><a></a><span class="st">    mkdir -p results/depths</span></span>
+<span id="cb37-20"><a></a><span class="st">    samtools index results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam</span></span>
+<span id="cb37-21"><a></a><span class="st">    samtools depth results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam &gt; results/depths/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.depth</span></span>
+<span id="cb37-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR)</span>
+<span id="cb37-23"><a></a></span>
+<span id="cb37-24"><a></a>gwf.target( <span class="st">"BAM_merge"</span>, <span class="co">#name of the target</span></span>
+<span id="cb37-25"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb37-26"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb37-27"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
+<span id="cb37-28"><a></a>           inputs<span class="op">=</span> [<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
+<span id="cb37-29"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/alignments/merged.bam'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-30"><a></a><span class="st">    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam</span></span>
+<span id="cb37-31"><a></a><span class="st">    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam</span></span>
+<span id="cb37-32"><a></a><span class="st">    """</span></span>
+<span id="cb37-33"><a></a></span>
+<span id="cb37-34"><a></a>gwf.target( <span class="st">"Histogram"</span>, <span class="co">#name of the target</span></span>
+<span id="cb37-35"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb37-36"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb37-37"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
+<span id="cb37-38"><a></a>           inputs<span class="op">=</span> [<span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
+<span id="cb37-39"><a></a>           outputs<span class="op">=</span>[ <span class="st">'results/depths/histogram.pdf'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-40"><a></a><span class="st">    Rscript plotscript.R</span></span>
+<span id="cb37-41"><a></a><span class="st">    """</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="answers-1" class="slide level2">
 <h2>Answers</h2>
 <p><strong>1. use <code>status</code> to see which are the endpoint targets, then find their target dependencies</strong></p>
 <p>&nbsp;</p>
 <p>There are two endpoints: one for merging aligned files and one for plotting a histogram. Use</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>to obtain</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> BAM_merge     shouldrun</span>
-<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Histogram     shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> BAM_merge     shouldrun</span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Histogram     shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p>Use the <code>info</code> command to see their file dependencies:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py info Histogram BAM_merge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py info Histogram BAM_merge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Look at the output to find out that <code>Histogram</code> and <code>BAM_merge</code> depend both on the following targets</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2589044"</span><span class="ex">,</span></span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2584866"</span><span class="ex">,</span></span>
-<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2584863"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2589044"</span><span class="ex">,</span></span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2584866"</span><span class="ex">,</span></span>
+<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2584863"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p>Note though that they depend on different files from those targets!</p>
@@ -835,27 +903,27 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>What is the size of each folder and their total size?</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We have 8.3GB of data</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">17K</span>     ./__pycache__</span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">961M</span>    ./data_trim</span>
-<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">5.8G</span>    ./results/alignments</span>
-<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13K</span>     ./results/multiqc_output/multiqc_data</span>
-<span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">17K</span>     ./results/multiqc_output</span>
-<span id="cb41-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">286M</span>    ./results/depths</span>
-<span id="cb41-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">6.1G</span>    ./results</span>
-<span id="cb41-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">1.0K</span>    ./Environments</span>
-<span id="cb41-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">39K</span>     ./.gwf/logs</span>
-<span id="cb41-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">40K</span>     ./.gwf</span>
-<span id="cb41-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">1.2G</span>    ./data</span>
-<span id="cb41-12"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13M</span>     ./fasta</span>
-<span id="cb41-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>       ./.empty</span>
-<span id="cb41-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">8.3G</span>    .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">17K</span>     ./__pycache__</span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">961M</span>    ./data_trim</span>
+<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">5.8G</span>    ./results/alignments</span>
+<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13K</span>     ./results/multiqc_output/multiqc_data</span>
+<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">17K</span>     ./results/multiqc_output</span>
+<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">286M</span>    ./results/depths</span>
+<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">6.1G</span>    ./results</span>
+<span id="cb43-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">1.0K</span>    ./Environments</span>
+<span id="cb43-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">39K</span>     ./.gwf/logs</span>
+<span id="cb43-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">40K</span>     ./.gwf</span>
+<span id="cb43-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">1.2G</span>    ./data</span>
+<span id="cb43-12"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13M</span>     ./fasta</span>
+<span id="cb43-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>       ./.empty</span>
+<span id="cb43-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">8.3G</span>    .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Try to use</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>accept the warning message and note how, already for a small exercise, you are going to cleanup a lot.</p>
 </section>
 <section class="slide level2">
