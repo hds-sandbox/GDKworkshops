@@ -520,7 +520,7 @@ for FASTQ_PAIR in fastq_pairs:
                     'FASTQS': [f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',
                                f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz']}, 
            outputs=[f'results/alignments/{FASTQ_PAIR}.sort.bam',
-                    f'results/depths/{FASTQ_PAIR}.depth']) << """
+                    f'results/depths/{FASTQ_PAIR}.depth','results/depths/hellosamtools.txt' ]) << """
     mkdir -p results/alignments
     bwa mem -t 8 fasta/ecoli_rel606.fasta \
             data_trim/{FASTQ_PAIR}_1.trim.fastq.gz \
@@ -531,7 +531,7 @@ for FASTQ_PAIR in fastq_pairs:
     ### print depths in text file
     mkdir -p results/depths
     samtools index results/alignments/{FASTQ_PAIR}.sort.bam
-    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam > results/depths/{FASTQ_PAIR}.depth
+    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam > results/depths/{FASTQ_PAIR}.depth && touch hellosamtools.txt
     """.format(FASTQ_PAIR=FASTQ_PAIR)
 
 gwf.target( "BAM_merge", #name of the target
@@ -682,3 +682,91 @@ All the other files can be recreated at any moment if necessary.
 :::{.callout-tip}
 Remember: **Computation cost << Storage cost**
 :::
+
+
+# Last tips
+
+## Using a separate conda environment in a target
+
+You might have a conda environment with a specific version of the package `gwf`, and then another environment with relevant packages, called for example `tools_environment`.
+
+. . .
+
+To activate that environment, add two lines into your `bash` code executed by the target:
+
+```{.bash}
+    eval "$(conda shell.bash hook)" 
+    conda activate tools_environment
+```
+
+---
+
+For example:
+
+```{.python code-line-numbers="1-3|6|7-9|10-12|13"}
+from gwf import Workflow
+
+gwf = Workflow(defaults={'account': 'your_project'})
+
+## A target doing FastQC on a file
+gwf.target('FastQC', 
+           cores=1,
+           memory='8gb',
+           walltime='00:05:00',	
+           inputs=['data/SRR2584863_1.fastq.gz'], 
+           outputs=['data/SRR2584863_1_fastqc.html', 
+                    'data/SRR2584863_1_fastqc.zip']) << """ 
+eval "$(conda shell.bash hook)" 
+conda activate tools_environment
+fastqc data/SRR2584863_1.fastq.gz
+"""
+```
+
+## Use templates
+
+You can define templates in your workflow, or in a separate file called for example `templates.py`. A template for the `FastQC` target could be
+
+```{.python}
+def fastqc(input="", cores=1, memory='8gb', walltime='00:05:00'):
+    """A template for fastqc"""
+    inputs = [f'{input}.fastq.gz']
+    outputs = [f'{input}_fastqc.zip',f'{input}_fastqc.html']
+    options = {
+        'cores': cores,
+        'memory': memory,
+        'walltime': walltime
+    }
+
+    spec = '''
+    fastqc {input}
+    '''.format(input=inputs[0])
+
+    return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec)
+```
+
+---
+
+the workflow file contains now `import` to import the template, and uses it afterwards to define a target:
+
+```{.python}
+from gwf import Workflow
+import template
+
+gwf = Workflow(defaults={'account': 'your_project'})
+
+## A target doing FastQC on a file
+
+gwf.target_from_template(
+    name='fastqc_from_template',
+    template=fastqc(input='data/SRR2584863_1'))
+```
+
+## Add new files after running a workflow
+
+If you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.
+
+. . . 
+
+&nbsp;
+
+**Example:** adding new `fastq.gz` files in the `data` folder of this workshop will update the workflow adding new steps and rendering others from `completed` to `shouldrun`.
