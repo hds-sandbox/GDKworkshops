@@ -429,6 +429,7 @@ Dan Søndergaard
 <li><a href="#/exercise-1" id="/toc-exercise-1">Exercise 1</a></li>
 <li><a href="#/exercise-2" id="/toc-exercise-2">Exercise 2</a></li>
 <li><a href="#/clean-up-after-yourself" id="/toc-clean-up-after-yourself">Clean up after yourself</a></li>
+<li><a href="#/last-tips" id="/toc-last-tips">Last tips</a></li>
 </ul>
 </nav>
 </section>
@@ -816,7 +817,7 @@ Dan Søndergaard
 <span id="cb37-7"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
 <span id="cb37-8"><a></a>                               <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>]}, </span>
 <span id="cb37-9"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span>,</span>
-<span id="cb37-10"><a></a>                    <span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-10"><a></a>                    <span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span>,<span class="st">'results/depths/hellosamtools.txt'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
 <span id="cb37-11"><a></a><span class="st">    mkdir -p results/alignments</span></span>
 <span id="cb37-12"><a></a><span class="st">    bwa mem -t 8 fasta/ecoli_rel606.fasta </span><span class="ch">\</span></span>
 <span id="cb37-13"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz </span><span class="ch">\</span></span>
@@ -827,7 +828,7 @@ Dan Søndergaard
 <span id="cb37-18"><a></a><span class="st">    ### print depths in text file</span></span>
 <span id="cb37-19"><a></a><span class="st">    mkdir -p results/depths</span></span>
 <span id="cb37-20"><a></a><span class="st">    samtools index results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam</span></span>
-<span id="cb37-21"><a></a><span class="st">    samtools depth results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam &gt; results/depths/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.depth</span></span>
+<span id="cb37-21"><a></a><span class="st">    samtools depth results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam &gt; results/depths/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.depth &amp;&amp; touch hellosamtools.txt</span></span>
 <span id="cb37-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR)</span>
 <span id="cb37-23"><a></a></span>
 <span id="cb37-24"><a></a>gwf.target( <span class="st">"BAM_merge"</span>, <span class="co">#name of the target</span></span>
@@ -944,11 +945,86 @@ Dan Søndergaard
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="last-tips" class="title-slide slide level1 center">
+<h1>Last tips</h1>
+
+</section>
+<section id="using-a-separate-conda-environment-in-a-target" class="slide level2">
+<h2>Using a separate conda environment in a target</h2>
+<p>You might have a conda environment with a specific version of the package <code>gwf</code>, and then another environment with relevant packages, called for example <code>tools_environment</code>.</p>
+<div class="fragment">
+<p>To activate that environment, add two lines into your <code>bash</code> code executed by the target:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span> </span>
+<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">conda</span> activate tools_environment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>For example:</p>
+<div class="sourceCode" id="cb46" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
+<span id="cb46-2"><a></a></span>
+<span id="cb46-3"><a></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
+<span id="cb46-4"><a></a></span>
+<span id="cb46-5"><a></a><span class="co">## A target doing FastQC on a file</span></span>
+<span id="cb46-6"><a></a>gwf.target(<span class="st">'FastQC'</span>, </span>
+<span id="cb46-7"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb46-8"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb46-9"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
+<span id="cb46-10"><a></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
+<span id="cb46-11"><a></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
+<span id="cb46-12"><a></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
+<span id="cb46-13"><a></a><span class="st">eval "$(conda shell.bash hook)" </span></span>
+<span id="cb46-14"><a></a><span class="st">conda activate tools_environment</span></span>
+<span id="cb46-15"><a></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
+<span id="cb46-16"><a></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="use-templates" class="slide level2">
+<h2>Use templates</h2>
+<p>You can define templates in your workflow, or in a separate file called for example <code>templates.py</code>. A template for the <code>FastQC</code> target could be</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fastqc(<span class="bu">input</span><span class="op">=</span><span class="st">""</span>, cores<span class="op">=</span><span class="dv">1</span>, memory<span class="op">=</span><span class="st">'8gb'</span>, walltime<span class="op">=</span><span class="st">'00:05:00'</span>):</span>
+<span id="cb47-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A template for fastqc"""</span></span>
+<span id="cb47-3"><a aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> [<span class="ss">f'</span><span class="sc">{</span><span class="bu">input</span><span class="sc">}</span><span class="ss">.fastq.gz'</span>]</span>
+<span id="cb47-4"><a aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [<span class="ss">f'</span><span class="sc">{</span><span class="bu">input</span><span class="sc">}</span><span class="ss">_fastqc.zip'</span>,<span class="ss">f'</span><span class="sc">{</span><span class="bu">input</span><span class="sc">}</span><span class="ss">_fastqc.html'</span>]</span>
+<span id="cb47-5"><a aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {</span>
+<span id="cb47-6"><a aria-hidden="true" tabindex="-1"></a>        <span class="st">'cores'</span>: cores,</span>
+<span id="cb47-7"><a aria-hidden="true" tabindex="-1"></a>        <span class="st">'memory'</span>: memory,</span>
+<span id="cb47-8"><a aria-hidden="true" tabindex="-1"></a>        <span class="st">'walltime'</span>: walltime</span>
+<span id="cb47-9"><a aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb47-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="st">'''</span></span>
+<span id="cb47-12"><a aria-hidden="true" tabindex="-1"></a><span class="st">    fastqc </span><span class="sc">{input}</span></span>
+<span id="cb47-13"><a aria-hidden="true" tabindex="-1"></a><span class="st">    '''</span>.<span class="bu">format</span>(<span class="bu">input</span><span class="op">=</span>inputs[<span class="dv">0</span>])</span>
+<span id="cb47-14"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>the workflow file contains now <code>import</code> to import the template, and uses it afterwards to define a target:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
+<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> template</span>
+<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
+<span id="cb48-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">## A target doing FastQC on a file</span></span>
+<span id="cb48-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a aria-hidden="true" tabindex="-1"></a>gwf.target_from_template(</span>
+<span id="cb48-9"><a aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'fastqc_from_template'</span>,</span>
+<span id="cb48-10"><a aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span>fastqc(<span class="bu">input</span><span class="op">=</span><span class="st">'data/SRR2584863_1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="add-new-files-after-running-a-workflow" class="slide level2">
+<h2>Add new files after running a workflow</h2>
+<p>If you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.</p>
+<div class="fragment">
+<p>&nbsp;</p>
+<p><strong>Example:</strong> adding new <code>fastq.gz</code> files in the <code>data</code> folder of this workshop will update the workflow adding new steps and rendering others from <code>completed</code> to <code>shouldrun</code>.</p>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logos.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
+</div>
 </div>
 </div>
 </section></section>
