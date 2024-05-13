@@ -1,0 +1,70 @@
+---
+title: "Introduction to `bash` command line for Bioinformatics"
+subtitle: https://hds-sandbox.github.io/GDKworkshops
+author: 
+    - "Samuele Soraggi"
+    - "Dan Søndergaard"
+institute:
+    - Health Data Science sandbox, BiRC
+    - GenomeDK, Health
+date: 13.may 2024
+format: revealjs
+scrollable: true
+small: true
+toc: true
+toc-depth: 1
+slide-number: h.v
+code-line-numbers: false
+logo: img/logos.png
+navigation-mode: vertical
+
+---
+
+# Bash command line introduction
+
+:::{.callout-caution icon="false" appearance=simple}
+
+"What is a shell, a terminal, a command-line, and what is bash?"
+
+&nbsp;
+
+"How do these concepts connect to my computer and a computing cluster?"
+:::
+
+## Interaction with hardware
+
+Computer hardware can act on files and softwares through:
+
+![](img/GUIandCLI.png){height="7cm"}
+
+- a **Graphical User Interface (GUI)**, such as your point-and-click operating system
+- a **Command Line Interface (CLI) or terminal**, where commands are interpreted and translated into actions
+
+---
+
+- Linux and Mac already have a terminal application 
+
+&nbsp; 
+
+- For Windows, you can use 
+    - WSL (windows Subsystem for Linux), which integrates a Linux virtual machine in Windows
+    - One of many terminal softwares such as
+        - gitbash
+        - MobaXterm 
+
+## Bash CLI on GenomeDK 
+
+When logging in on GenomeDK from the terminal, you are presented with the cluster's CLI.
+
+
+
+From this, you can access files and software using the bash language.
+
+
+
+Computer hardware can act on files and softwares through:
+
+![](img/GUIandCLI.png){height="7cm"}
+
+- a **Graphical User Interface (GUI)**, such as your point-and-click operating system
+- a **Command Line Interface (CLI) or terminal**, where commands are interpreted and translated into actions
