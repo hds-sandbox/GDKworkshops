@@ -190,7 +190,7 @@ display_quiz(git_url, 1, shuffle_answers=True, question_alignment="left")
 
 &nbsp;
 
-Log into the cluster
+First of all, log into the cluster
 
 ```{.bash}
 [local] ssh username@login.genome.au.dk
@@ -199,31 +199,32 @@ Log into the cluster
 &nbsp;
 
 :::{.callout-tip}
-Use the <kbd>up</kbd> key on the terminal to find the commands you used previously, and press enter when you find the login command
+Use the **arrow up key** on the terminal to find the commands you used previously, and press enter when you find the login command
 :::
 
 ---
 
-When you log in, you are in your private **home folder**. This is denoted by `~` or equivalently `/home/username/`. Your prompt will show something like this:
+After log in, you will find yourself into your private **home folder**, denoted by `~` or equivalently `/home/username/`. Your prompt will look like this:
 
 &nbsp;
 
 ```{.bash}
-[samuele@fe-open-02 ~]
+[username@node ~] 
 ```
 which follows the format `[username@node current_folder]`.
 
 &nbsp;
 
 :::{.callout-warning}
-do not fill up your home with data. It has a **limited amount of storage** (a quota of 100GB).
+do not fill up your home folder with data. It has a **limited amount of storage** (a quota of 100GB).
 :::
 
 ---
 
-The folder in which *you are located* is called **working directory (WD)**. Use the following command to see its path starting from the root:
+### Working directory
 
-&nbsp;
+The folder in which *you are located* is called **working directory (WD)**. Use the following command to see the WD path starting from the root:
+
 
 ```{.bash}
 pwd
@@ -231,9 +232,8 @@ pwd
 
 &nbsp;
 
-Every command you execute refers to your WD. Execute
+Every command you execute **refers to your WD**. Execute
 
-&nbsp;
 
 ```{.bash}
 ls
@@ -241,13 +241,14 @@ ls
 
 &nbsp;
 
-and you will see the list of files in your WD.
+and you will see the **list of files and folders** in your WD.
 
 ---
 
+### Populating with files and folders
+
 Try to create an empty file now with
 
-&nbsp;
 
 ```{.bash}
 touch emptyFile.txt
@@ -255,9 +256,8 @@ touch emptyFile.txt
 
 &nbsp;
 
-and create a folder, which will be inside our cwd:
+and **create a folder**, which will be inside our WD:
 
-&nbsp;
 
 ```{.bash}
 mkdir myFolder
@@ -265,17 +265,15 @@ mkdir myFolder
 
 &nbsp;
 
-If you use again the `ls` command, the new file and folder will show in the cwd.
+If you use again the `ls` command, the new file and folder will show in the WD.
 
 ---
 
-How do you see the directory tree of the WD? Try
+How do you see the directory tree of the WD? Try `tree` with only 2 sublevels of depth:
 
 ```{.bash}
 tree -L 2 .
 ```
-
-which shows you the tree with only 2 sublevels of depth.
 
 &nbsp;
 
@@ -296,7 +294,7 @@ wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TEST
 
 &nbsp;
 
-:::{.callout-note}
+:::{.callout-note title="options and manuals"}
 `-O` is the option to give a path and name for the downloaded file.
 
 Most commands have a help function to know the *syntax* and *options*. For example you can use `wget --help` and `man wget`.
@@ -316,21 +314,25 @@ The path to a file/folder can be:
 
 To look inside `myFolder`, we can both write
 
+:::: {.columns}
+
+::: {.column width="50%" }
 ```{.bash}
 
 ls myFolder/
 
 ```
+:::
+::: {.column width="50%" }
 
-and 
 
 ```{.bash}
 
 ls ~/myFolder/
 
 ```
-
-&nbsp;
+:::
+::::
 
 
 :::{.callout-note}
