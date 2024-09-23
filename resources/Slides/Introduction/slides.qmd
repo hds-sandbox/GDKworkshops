@@ -204,23 +204,20 @@ Use the <kbd>up</kbd> key on the terminal to find the commands you used previous
 
 ---
 
-Every time you log in, you will find yourself into your private **home folder**. This is denoted by `~` or equivalently `/home/username/`. Your prompt will show something like this:
+When you log in, you are in your private **home folder**. This is denoted by `~` or equivalently `/home/username/`. Your prompt will show something like this:
 
 &nbsp;
 
 ```{.bash}
 [samuele@fe-open-02 ~]
 ```
+which follows the format `[username@node current_folder]`.
 
 &nbsp;
 
-which follows the format 
-
-&nbsp;
-
-```{.bash}
-[username@node current_folder]
-```
+:::{.callout-warning}
+do not fill up your home with data. It has a **limited amount of storage** (a quota of 100GB).
+:::
 
 ---
 
@@ -358,7 +355,7 @@ and verify with `pwd` the new working directory path.
 
 # Working with Files
 
-Moving, Downloading, Manipulating files on GenomeDK
+Moving, Downloading, Manipulating and exploring files on GenomeDK
 
 ## Home on the cluster
 
