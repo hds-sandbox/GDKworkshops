@@ -559,10 +559,10 @@ Dan Søndergaard
 </figure>
 </div>
 </div><div class="column" style="width:70%;">
-<div id="965dc7fa" class="cell" data-execution_count="1">
+<div id="6d2c4b46" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="IRQwJcQlRrSz" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#IRQwJcQlRrSz {
+<div id="DHOWsoEGmcXj" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
+#DHOWsoEGmcXj {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -736,7 +736,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsIRQwJcQlRrSz=[
+var questionsDHOWsoEGmcXj=[
     {
         "question": "Which paths are correct in the file system above?",
         "type": "many_choice",
@@ -1512,8 +1512,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("IRQwJcQlRrSz")) {
-            show_questions(questionsIRQwJcQlRrSz,  IRQwJcQlRrSz); 
+          if(document.getElementById("DHOWsoEGmcXj")) {
+            show_questions(questionsDHOWsoEGmcXj,  DHOWsoEGmcXj); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -1528,10 +1528,10 @@ if (typeof version == 'undefined') {
 
         fetch("https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/paths.json", {signal})
         .then(response => response.json())
-        .then(json => show_questions(json, IRQwJcQlRrSz))
+        .then(json => show_questions(json, DHOWsoEGmcXj))
         .catch(err => {
         console.log("Fetch error or timeout");
-        show_questions(questionsIRQwJcQlRrSz, IRQwJcQlRrSz);
+        show_questions(questionsDHOWsoEGmcXj, DHOWsoEGmcXj);
         });
         }
         
@@ -1566,6 +1566,7 @@ if (typeof version == 'undefined') {
 <p>After log in, you will find yourself into your private <strong>home folder</strong>, denoted by <code>~</code> or equivalently <code>/home/username/</code>. Your prompt will look like this:</p>
 <p>&nbsp;</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[username@node</span> ~] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which follows the format <code>[username@node current_folder]</code>.</p>
 <p>&nbsp;</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -1692,7 +1693,7 @@ if (typeof version == 'undefined') {
 <section>
 <section id="working-with-files" class="title-slide slide level1 center">
 <h1>Working with Files</h1>
-<p>Moving, Downloading, Manipulating files on GenomeDK</p>
+<p>Moving, Downloading, Manipulating and exploring files on GenomeDK</p>
 </section>
 <section id="home-on-the-cluster" class="slide level2">
 <h2>Home on the cluster</h2>
