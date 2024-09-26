@@ -88,42 +88,77 @@
     "href": "resources/Slides/Introduction/slides.html#access-without-password",
     "title": "Use GenomeDK",
     "section": "Access without password",
-    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\nexit\n \nNow we generate an RSA key.\nssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
+    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\n[gdk]$  exit\n \nNow we generate an RSA key.\n[local]$  ssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#how-is-the-fs-organized",
     "href": "resources/Slides/Introduction/slides.html#how-is-the-fs-organized",
     "title": "Use GenomeDK",
     "section": "How is the FS organized",
-    "text": "How is the FS organized\n\n\nFolders and files follow a tree-like structure\n\n/ is the root of the filesystem - nothing is above that\nhome and faststorage are two root folders\nprojects are in faststorage and linked to your home\nyou can reach files and folders with a path"
+    "text": "How is the FS organized\n\n\nFolders and files follow a tree-like structure\n\n/ is the root of the filesystem - nothing is above that\nhome and faststorage are two root folders\nprojects and data are in faststorage and linked to your home"
   },
   {
-    "objectID": "resources/Slides/Introduction/slides.html#home-on-the-cluster",
-    "href": "resources/Slides/Introduction/slides.html#home-on-the-cluster",
+    "objectID": "resources/Slides/Introduction/slides.html#file-formats",
+    "href": "resources/Slides/Introduction/slides.html#file-formats",
     "title": "Use GenomeDK",
-    "section": "Home on the cluster",
-    "text": "Home on the cluster\nSee the content of the current folder with\nls\nor to see more details\nls -lh\n \n\n\n\n\n\n\nWarning\n\n\ndo not fill up your home with data. It has a limited amount of storage (a quota of 100GB)."
+    "section": "File formats",
+    "text": "File formats\nMany files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the file formats you encounter when doing bioinformatics.\n \n\n\n\n\n\n\nNote\n\n\nSome file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#less-for-reading-files",
+    "href": "resources/Slides/Introduction/slides.html#less-for-reading-files",
+    "title": "Use GenomeDK",
+    "section": "Less for reading files",
+    "text": "Less for reading files\nless is perfect for reading text files: you can scroll with the arrows, and quit pressing q. Try\n\nless data.fastq\n  The very first sequence you see should be\n@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG\nTCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA\nATCTGAGATTCCTGACCAAATGT\n+\nCCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH\nFFFFFFFEDDEEEEDDDDDDDDD\nThe first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in this table)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#counting",
+    "href": "resources/Slides/Introduction/slides.html#counting",
+    "title": "Use GenomeDK",
+    "section": "Counting",
+    "text": "Counting\nHow many lines are there in your file? The command wc can show that to you:\nwc -l data.fastq\n \nThe file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines).\n \n\n\n\n\n\n\nTip\n\n\nwc has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#copy-and-move",
+    "href": "resources/Slides/Introduction/slides.html#copy-and-move",
+    "title": "Use GenomeDK",
+    "section": "Copy and Move",
+    "text": "Copy and Move\ncp can copy one or more files - we use it on our data:\ncp data.fastq dataCopy.fastq\n \nmv moves a file into another folder - here we move it into our WD, which simply changes its filename:\nmv data.fastq ./dataOriginal.fastq"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#writing-on-a-file",
+    "href": "resources/Slides/Introduction/slides.html#writing-on-a-file",
+    "title": "Use GenomeDK",
+    "section": "Writing on a file",
+    "text": "Writing on a file\nWrite something on a file using &gt;:\nhead -4 dataOriginal.fastq &gt; smallFile.fastq\n \nprints out the first four lines of the data into smallFile.fastq.\n \n\n\n\n\n\n\nWarning\n\n\nUsing again &gt; will overwrite the file!"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#piping",
+    "href": "resources/Slides/Introduction/slides.html#piping",
+    "title": "Use GenomeDK",
+    "section": "Piping",
+    "text": "Piping\nYou can create small pipelines directly on the shell with the symbol |. The output of a command and send it to the next command when you have | ion between. For example,\ngrep NNNNN dataOriginal.fastq\nfind the pattern NNNNN in the data.\nHow to find it in the first hundred sequences? Easy! we **pipe* head into grep:\nhead -400 dataOriginal.fastq | grep NNNNN"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#gdk-projects",
+    "href": "resources/Slides/Introduction/slides.html#gdk-projects",
+    "title": "Use GenomeDK",
+    "section": "GDK projects",
+    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can control accounting of the above"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#creation",
     "href": "resources/Slides/Introduction/slides.html#creation",
     "title": "Use GenomeDK",
     "section": "Creation",
-    "text": "Creation\nYou need a project from which you can run your programs. Request a project with the command\ngdk-project-request -g &lt;project_name&gt;\nThis creates a folder with the desired name. You should be able to go into that folder:\ncd &lt;project_name&gt;\n \nYou can see how many resources your projects are using with\ngdk-project-usage"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#users-management",
-    "href": "resources/Slides/Introduction/slides.html#users-management",
-    "title": "Use GenomeDK",
-    "section": "Users management",
-    "text": "Users management\nOnly the creator (owner) can see the project folder. You can add an user\ngdk-project-add-user -g &lt;project name&gt; -u &lt;username&gt;\nor remove it\ngdk-project-remove-user -g &lt;project name&gt; -u &lt;username&gt;\n \nMore about user’s management in the documentation"
+    "text": "Creation\nRequest a project (after login on GDK) with the command\ngdk-project-request -g &lt;project_name&gt;\n \nAfter GDK approval, a project folder with the desired name appears in ~ and /faststorage/project. You should be able to set the WD into that folder:\ncd &lt;project_name&gt;\nor\ncd ~/&lt;project_name&gt;"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#folders-management",
     "href": "resources/Slides/Introduction/slides.html#folders-management",
     "title": "Use GenomeDK",
     "section": "Folders management",
-    "text": "Folders management\nIt is important to\n\nhave a coherent folder structure\nbackup only important things (raw data, analysis scripts)\n\n \nRemember: Storage cost &gt;&gt; Computation cost"
+    "text": "Folders management\nHave a coherent folder structure - your future self will thanks.\n\nExample of structure, which backs up raw data and analysisYou can do it with a script which downloads and execute with the command below:\ncurl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#download-with-wget",
@@ -137,14 +172,14 @@
     "href": "resources/Slides/Introduction/slides.html#scp-transfer",
     "title": "Use GenomeDK",
     "section": "SCP transfer",
-    "text": "SCP transfer\nSCP (Secure Copy Protocol) can transfer files securely\n\nbetween a LOCAL and a REMOTE host\nbetween TWO REMOTE hosts\n\n \nYou can use it to transfer files from your pc to GenomeDK and viceversa, but also between GenomeDK and another computing cluster (for example, downloading data from a collaborator, which resides on a different remote computing system)."
+    "text": "SCP transfer\nSCP (Secure Copy Protocol) can transfer files securely\n\nbetween a LOCAL and a REMOTE host (your PC and GDK)\nbetween TWO REMOTE hosts (GDK and another cluster)\n\n \nYou can use it to transfer files from your pc to GenomeDK and viceversa, but also between GenomeDK and another computing cluster (for example, downloading data from a collaborator, which resides on a different remote computing system)."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#rsync-transfer",
     "href": "resources/Slides/Introduction/slides.html#rsync-transfer",
     "title": "Use GenomeDK",
     "section": "Rsync transfer",
-    "text": "Rsync transfer\nDifferently from scp, you can use rsync to syncronize files and folders between two locations. It copies only the changes in the data and not all of it every time.\n \nCopying a file or a folder between your computer and GenomeDK works exactly as in scp. For example\nrsync --progress -r \\\n      username@login.genome.au.dk:/home/username/my_project/folder \\\n      /home/my_laptop/Documents/\nwhere we add an option to show a progress bar"
+    "text": "Rsync transfer\nDifferently from scp, you can use rsync to syncronize files and folders between two locations. It copies only the changes in the data and not all of it every time.\n \nCopying a file or a folder between your computer and GenomeDK works exactly as in scp. For example\nrsync --partial --progress -r \\\n      username@login.genome.au.dk:/home/username/my_project/folder \\\n      /home/my_laptop/Documents/\nwhere we add -progress to show a progress bar and --partial to retrieve interrupted downloads"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#interactive-transfer",
@@ -172,7 +207,7 @@
     "href": "resources/Slides/Introduction/slides.html#installation",
     "title": "Use GenomeDK",
     "section": "Installation",
-    "text": "Installation\n \nJust download and execute the installer by\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n./miniforge3/bin/conda init bash\nAfter a few ENTERs and YES’s you should get the installation done. Run\nsource ~/.bashrc\nand doublecheck that conda works:\nconda info"
+    "text": "Installation\nJust download and execute the installer by\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n./miniforge3/bin/conda init bash\n \nAfter a few ENTERs and YES’s you should get the installation done. Run\nsource ~/.bashrc\nand doublecheck that conda works:\nconda info"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#conda-configuration",
@@ -186,21 +221,21 @@
     "href": "resources/Slides/Introduction/slides.html#base-environment",
     "title": "Use GenomeDK",
     "section": "Base environment",
-    "text": "Base environment\nis the environment containing conda itself. The current environment is in your prompt, but you will not see it again after disabling it at login.\n(base) [samuele@fe-open-02 ~]$\nWe update Conda with libmamba solver - a lot faster in installing many packages at once.\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\n\n\n\n\n\n\n\nDon’t touch the Base\n\n\nThis is the only time you should install in the base environment! You might otherwise ruin the conda installation."
+    "text": "Base environment\nbase is the environment containing conda itself. The current environment is in your prompt in round brackets.\n(environment) [samuele@fe-open-02 ~]$\nWe update Conda with libmamba solver - a lot faster in installing many packages at once.\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\n\n\n\n\n\n\n\nDon’t touch the Base\n\n\nThis is the only time you should install in the base environment! You might otherwise ruin the conda installation."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#create-an-environment",
     "href": "resources/Slides/Introduction/slides.html#create-an-environment",
     "title": "Use GenomeDK",
     "section": "Create an environment",
-    "text": "Create an environment\n \nAn empty environment called test_1:\nconda create -n test_1\n \nYou can list all the environments available:\nconda env list\n&gt; # conda environments:\n&gt; #\n&gt; base      *  /home/samuele/miniconda3\n&gt; test_1       /home/samuele/miniconda3/envs/test_1"
+    "text": "Create an environment\nAn empty environment called test_1:\nconda create -n test_1\n \nYou can list all the environments available:\nconda env list\n&gt; # conda environments:\n&gt; #\n&gt; base      *  /home/samuele/miniconda3\n&gt; test_1       /home/samuele/miniconda3/envs/test_1\n\n\n\n\n\n\nNote\n\n\nAn environment is in reality a folder, which contains all installed packages and other configurations and utilities"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
     "href": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
     "title": "Use GenomeDK",
     "section": "Activate and deactivate",
-    "text": "Activate and deactivate\n \nTo use an environment\nconda activate test_1\nDeactivation happens by\nconda deactivate"
+    "text": "Activate and deactivate\nTo use an environment we activate it:\nconda activate test_1\nFrom now on, all installed softwares and packages will be available. (test_1) is now shown in your prompt.\n \nDeactivation happens by\nconda deactivate"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#manage-an-environment",
@@ -235,7 +270,7 @@
     "href": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
     "title": "Use GenomeDK",
     "section": "Batch script (sbatch)",
-    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time than a short interaction. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)\nstarts with #!/bin/bash to know in which language (‘bash’) the commands are written into"
+    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time than a short interaction. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#other-ways-of-running-jobs",
