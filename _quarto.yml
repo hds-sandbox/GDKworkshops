@@ -9,7 +9,7 @@ website:
       - href: index.qmd
         text: Introduction
       - href: resources/Slides/Introduction/slides.qmd
-        text: GenomeDK Intro
+        text: Use GenomeDK
       - href: resources/Slides/gwf/slides.qmd
         text: Workflows with gwf
     right: 
