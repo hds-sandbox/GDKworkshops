@@ -8,7 +8,9 @@ institute:
     - Health Data Science sandbox, BiRC
     - GenomeDK, Health
 date: last-modified
-format: revealjs
+format: 
+  revealjs:
+    chalkboard: true
 toc: true
 toc-depth: 1
 slide-number: h.v
@@ -53,7 +55,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
     - showing a QR-code with the command
 
         ```{.bash}
-        [fe-open-01]$  gdk-auth-show-qr
+        [gdk]$  gdk-auth-show-qr
         ```
     - scanning it with your phone's Authenticator app ^[e.g. Microsoft Authenticator, Google Authenticator, ...].
 
@@ -63,7 +65,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
 It is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer
 
 ```{.bash}
-exit
+[gdk]$  exit
 ```
 
 &nbsp;
@@ -71,7 +73,7 @@ exit
 Now we generate an RSA key.
 
 ```{.bash}
-ssh-keygen -t ed25519
+[local]$  ssh-keygen -t ed25519
 ```
 
 Always press <kbd>Enter</kbd> and do not insert any password when asked. 
@@ -84,11 +86,11 @@ Always press <kbd>Enter</kbd> and do not insert any password when asked.
 
 Wait a second! What is an RSA key?
 
-1. it's a pair of long codes, called *public* and *private*
-2. the two keys are *mathematically related*
-3. the user has  *only private key*
-4. the cluster has *only public key*
-5. the user asks to be authenticated to GenomeDK (AuthReq)
+1. it's a pair of long codes, named *public* and *private*
+2. the codes are *related*
+3. the user has *only private key*
+4. GDK has *only public key*
+5. the user asks to be authenticated to GDK (*AuthReq*)
 :::
 
 ::: {.column width="50%"}
@@ -108,9 +110,9 @@ Wait a second! What is an RSA key?
 
 ```
 
-6. the user *signs the request* with private key (SignReq)
-7. GenomeDK *verifies* the request through match with the public key (VerifyReq)
-8. If verification succeeds, access is granted
+6. the user *encripts the request* with private key (SignReq)
+7. GDK *verifies* request with public key (VerifyReq)
+8. If *verification* succeeds, access is granted
 
 :::
 
@@ -121,14 +123,14 @@ Wait a second! What is an RSA key?
 We create a folder on the cluster called `.ssh` to contain the RSA key we created
 
 ```{.bash}
-ssh <USERNAME>@login.genome.au.dk mkdir -p .ssh
+[local]$  ssh <USERNAME>@login.genome.au.dk mkdir -p .ssh
 ```
 &nbsp;
 
 and finally send the RSA public key to the cluster, into the file `authorized_keys`
 
 ```{.bash}
-cat ~/.ssh/id_rsa.pub | ssh username@login.genome.au.dk 'cat >> .ssh/authorized_keys'
+[local]$  cat ~/.ssh/id_rsa.pub | ssh username@login.genome.au.dk 'cat >> .ssh/authorized_keys'
 ```
 &nbsp;
 
@@ -142,20 +144,19 @@ Directory structure and how to navigate it
 
 :::: {.columns}
 
-::: {.column width="50%" }
+::: {.column width="60%" }
 
 Folders and files follow a tree-like structure
 
 - `/` is the root of the filesystem - nothing is above that
 - `home` and `faststorage` are two **root folders**
-- projects are in `faststorage` and **linked** to your home
-- you can reach files and folders with a **path**
+- projects and data are in `faststorage` and **linked** to your home
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
-![](img/complexTree.png){fig-align="center"}
+![](img/complexTree.png){fig-align="center" width=350px}
 
 :::
 
@@ -172,21 +173,44 @@ Folders and files follow a tree-like structure
 :::
 ::: {.column width="70%" }
 
-```{python}
-#| echo: false
-from jupyterquiz import display_quiz
-git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/paths.json'
-display_quiz(git_url, 1, shuffle_answers=True, question_alignment="left")
-```
+- you can reach files and folders with a **path**
+
+- Examples:
+  ```
+  /home/username/coolProject/code/analysis.R
+
+  /faststorage/project
+  ```
+
+- Paths starting from the root are called **absolute**
 
 :::
 
 
 ::::
 
+
+
 ---
 
-### Home directory ~
+Look at the File system tree and answer to the following questions:
+
+:::: {.columns}
+::: {.column width="40%" }
+![](img/complexTree.png){}
+:::
+::: {.column width="60%" }
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/paths.json'
+display_quiz("./questions/paths.json", shuffle_answers=True, question_alignment="left")
+```
+:::
+::::
+---
+
+### Home directory ~ and relative paths
 
 &nbsp;
 
@@ -211,20 +235,20 @@ After log in, you will find yourself into your private **home folder**, denoted 
 ```{.bash}
 [username@node ~] 
 ```
-which follows the format `[username@node current_folder]`.
+which follows the format **[username@node current_folder]**.
 
 &nbsp;
 
 :::{.callout-warning}
-do not fill up your home folder with data. It has a **limited amount of storage** (a quota of 100GB).
+- Do not fill up your home folder with data. It has a **limited amount of storage** (a quota of 100GB).
+- Your home folder is only private to you
 :::
 
 ---
 
 ### Working directory
 
-The folder in which *you are located* is called **working directory (WD)**. Use the following command to see the WD path starting from the root:
-
+The folder in which *you are located* is called **working directory (WD)**. The WD is usually shown in your prompt. Use the following command to see the WD path starting from the root:
 
 ```{.bash}
 pwd
@@ -232,7 +256,7 @@ pwd
 
 &nbsp;
 
-Every command you execute **refers to your WD**. Execute
+Every command you run **refers to your WD**. Execute
 
 
 ```{.bash}
@@ -256,7 +280,7 @@ touch emptyFile.txt
 
 &nbsp;
 
-and **create a folder**, which will be inside our WD:
+and **create a folder**, which will be inside the WD:
 
 
 ```{.bash}
@@ -302,13 +326,14 @@ Most commands have a help function to know the *syntax* and *options*. For examp
 
 ---
 
+### A bit more on absolute and relative path
 
-### Absolute and relative path
-
+:::{.callout-note title="Reminder about the path types"}
 The path to a file/folder can be:
 
 - **absolute**: start from the root
-- **relative**: starts from your WD
+- **relative**: starts from the WD (the WD is the new root)
+:::
 
 &nbsp;
 
@@ -334,22 +359,33 @@ ls ~/myFolder/
 :::
 ::::
 
+---
 
-:::{.callout-note}
-We have used `~` which is the shortform for /home/username.
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/paths.json'
+display_quiz("./questions/whyWD.json", shuffle_answers=True, question_alignment="left")
+```
+
+:::{.callout-tip title="The WD is everywhere"}
+The working directory is a very useful concept, not limited to Linux/GenomeDK, but used very widely in computer applications.
+
+For example, when you work in `R` or `Python`, there is a default WD which you can change.
 :::
 
 ---
 
-Changing WD can be useful, for example to avoid writing long relative paths. 
+### Changing WD
 
-To set the WD inside `myFolder` use
+Changing WD can be useful. To set the WD inside `myFolder` use
 
 ```{.bash}
 
 cd myFolder
 
 ```
+&nbsp;
 
 and verify with `pwd` the new working directory path. 
 
@@ -357,71 +393,287 @@ and verify with `pwd` the new working directory path.
 
 # Working with Files
 
-Moving, Downloading, Manipulating and exploring files on GenomeDK
+Moving, Downloading, Manipulating and other basic operation on files.
 
-## Home on the cluster
+## File formats
+
+Many files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the **file formats** you encounter when doing bioinformatics. 
+
+&nbsp;
+
+:::{.callout-note}
+Some file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor.
+:::
+
+---
+
+:::: {.columns}
+::: {.column width="50%" }
+![A text file is human-readable with any text reader or editor, and is composed of only ASCII characters, such as in the `fastq` file format](img/textfile.png)
+:::
+::: {.column width="50%" }
+![A binary file containes other than ASCII characters. For example, the `bam` file format is binary and can be read with the `samtools` software.](img/binaryFile.png)
+:::
+::::
+
+---
 
 
 
-See the content of the current folder with 
-
+Let's get ready. Be sure you are in `myFolder` (use `pwd`) - Otherwise use 
 ```{.bash}
-ls
+cd ~/myFolder
 ```
 
-or to see more details
+&nbsp;
+
+Now, you can decompress the file `data.fastq.gz`, which is in `gz` compressed format:
 
 ```{.bash}
-ls -lh
+gunzip data.fastq.gz
 ```
+
+:::{.callout-tip}
+For compressing a file into `gz` format, you can use `gzip`. For compressing and decompressing in `zip` format, you have also the commands `zip` and `unzip`.
+:::
+
+---
+
+## Less for reading files
+
+`less` is perfect for reading text files: you can scroll with the arrows, and quit pressing `q`. Try
+
+```{.bash}
+
+less data.fastq
+
+```
+
+&nbsp;
+The very first sequence you see should be
+
+```
+@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
+TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
+ATCTGAGATTCCTGACCAAATGT
++
+CCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH
+FFFFFFFEDDEEEEDDDDDDDDD
+```
+
+The first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in [this table](https://learn.gencore.bio.nyu.edu/ngs-file-formats/quality-scores/)).
+
+---
+
+
+:::{.callout-tip title="Exercise" icon=false}
+Search online (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
+
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/less.json'
+display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="center")
+```
+:::
+
+---
+
+## Counting
+
+How many lines are there in your file? The command `wc` can show that to you:
+
+```{.bash}
+wc -l data.fastq
+```
+
+&nbsp;
+
+
+The file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines). 
+
+&nbsp;
+
+:::{.callout-tip}
+`wc` has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways.
+:::
+
+---
+
+## Copy and Move
+
+`cp` can copy one or more files - we use it on our data:
+
+```{.bash}
+cp data.fastq dataCopy.fastq
+```
+
+&nbsp;
+
+`mv` moves a file into another folder - here we move it into our WD, which simply changes its filename:
+
+```{.bash}
+mv data.fastq ./dataOriginal.fastq
+```
+
+---
+
+Use now `ls -lah` and you will see  two files of identical size and different creation dates. 
+
+&nbsp;
+
+But... are those files identical? `diff` can tell you by printing differences (or nothing if files are identical)
+
+```{.bash}
+diff dataOriginal.fastq dataCopy.fastq
+```
+
+---
+
+## Writing on a file
+
+Write something on a file using `>`:
+
+```{.bash}
+head -4 dataOriginal.fastq > smallFile.fastq
+```
+
+&nbsp;
+
+prints out the first four lines of the data into `smallFile.fastq`.
 
 &nbsp;
 
 :::{.callout-warning}
-do not fill up your home with data. It has a **limited amount of storage** (a quota of 100GB).
+
+Using again `>` will **overwrite** the file!
+
 :::
+
+
+---
+
+Print out on the screen:
+
+```{.bash}
+cat smallFile.fastq
+```
+
+&nbsp;
+
+Avoid overwriting by appending with `>>`:
+
+```{.bash}
+tail -4 dataOriginal.fastq >> smallFile.fastq
+```
+
+appends the last 4 lines of the data to `smallFile.fastq`. Check again using `cat` or `wc -l`.  
+
+---
+
+## Piping
+
+
+You can create **small pipelines** directly on the shell with the symbol `|`. The output of a command and send it to the next command when you have `|` ion between. For example, 
+
+```{.bash}
+grep NNNNN dataOriginal.fastq
+```
+
+find the pattern `NNNNN` in the data.
+
+How to find it in the first hundred sequences? Easy! we **pipe* `head` into *grep*:
+
+```{.bash}
+head -400 dataOriginal.fastq | grep NNNNN
+```
+
+---
+
+
+The output of that pipe was a small output on screen - but **outputs can be huge**! We could count the number of sequences by piping again into `wc`!
+
+```{.bash}
+head -400 dataOriginal.fastq | grep NNNNN | wc -l
+```
+
+&nbsp;
+
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/less.json'
+display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="center")
+```
 
 # Project management
 
-&nbsp;
+- What are **GDK projects** 
+- how to **manage the resource usage**, and 
+- how to **organize a project**
 
-It is easy to start creating files everywhere in your project folders. Data, analysis files, results and the like. 
+---
 
-&nbsp;
+## GDK projects
 
-**Managing your folders rationally** is the best way of finding your way around. Especially when getting back to your analysis after long time.
+:::{.callout-note title="what is a project"}
+Projects are contained in `/faststorage/project/`, and are simple folders with some perks:
+
+- you have to **request their creation** to GDK administrators
+- **access is limited** to you, and users you invite
+- CPU, GPU, storage and backup usage are **registered** under the project for each user
+- you can **control accounting** of the above 
+:::
+
+---
+
+![Example of a project managed by `you` with two invited users. `you` has requested the creation of `coolProject` and manages the project. 'you' invited two users to the project.](img/projectScheme.png)
+
+---
+
+:::{.callout-warning title="Common-sense in project creation"}
+- Do not request a lot of different small project, but make larger/comprehensive ones
+    - **No-go example**: 3 projects `bulkRNA_mouse`, `bulkRNA_human`, `bulkRNA_apes` with the same invited users
+    - **Good example**: one project `bulkRNA_studies` with subfolders `bulkRNA_mouse`, `bulkRNA_human`, `bulkRNA_apes`.
+
+- Why? **Projects cannot be deleted**, so they keep cumulating
+:::
+
+---
 
 ## Creation
 
-You need a project from which you can run your programs. Request a project with the command
+Request a project (after login on GDK) with the command
 
 ```{.bash}
 gdk-project-request -g <project_name>
 ```
 
-This creates a folder with the desired name. You should be able to go into that folder:
+&nbsp;
+
+After GDK approval, a project folder with the desired name appears in `~` and `/faststorage/project`. You should be able to set the WD into that folder:
 
 ```{.bash}
 cd <project_name>
 ```
 
-&nbsp;
-
-You can see how many resources your projects are using with 
+or
 
 ```{.bash}
-gdk-project-usage
+cd ~/<project_name>
 ```
 
 ---
 
-## Users management
+### Users management
 
-**Only the creator** (owner) can see the project folder. You can add an user
+**Only the creator** (owner) can see the project folder. You (and only you) can add an user
 
 ```{.bash}
 gdk-project-add-user -g <project name> -u <username>
 ```
+
+&nbsp;
 
 or remove it
 
@@ -429,71 +681,169 @@ or remove it
 gdk-project-remove-user -g <project name> -u <username>
 ```
 
+---
+
+Users can also be promoted to have administrative rights in the project
+
+```{.bash}
+gdk-project-promote-user -g <project name> -u <username>
+```
+
 &nbsp;
 
-More about user's management [in the documentation](https://genome.au.dk/docs/projects-and-accounting/#managing-a-project)
- 
+or demoted from those rights
+
+```{.bash}
+gdk-project-demoted-user -g <project name> -u <username>
+```
+
 ---
+
+### Accounting
+
+You can see **globally**  monthly used resources of your projects with
+
+```{.bash}
+gdk-project-usage
+```
+
+&nbsp;
+
+Example output:
+
+```{.bash .code-overflow-scroll}
+project               period  billing hours  storage (TB)  backup (TB)  storage files  backup files
+HDSSandbox            2024-8          44.58          0.09         0.00           6024             0
+HDSSandbox            2024-9          25.38          0.09         0.00           6025             0
+ngssummer2024         2024-6           6.73          0.00         0.00              0             0
+ngssummer2024         2024-7        7547.48          0.72         0.00          27479             0
+```
+
+---
+
+More detailed usage: by users on a selected project
+&nbsp;
+
+You can see how many resources your projects are using with 
+
+```{.bash}
+gdk-project-usage -u -p <project-name>
+```
+
+&nbsp;
+
+Example output:
+
+```{.bash .code-overflow-scroll}
+project               period  billing hours  storage (TB)  backup (TB)  storage files  backup files
+ngssummer2024  sarasj             2024-7          77.98          0.02         0.00            528             0
+ngssummer2024  sarasj             2024-8           0.00          0.02         0.00            528             0
+ngssummer2024  savvasc            2024-7         223.21          0.02         0.00            564             0
+ngssummer2024  savvasc            2024-8           0.00          0.02         0.00            564             0
+ngssummer2024  simonnn            2024-7         173.29          0.01         0.00            579             0
+ngssummer2024  simonnn            2024-8           0.00          0.01         0.00            579             0
+```
+
+---
+
+:::{.callout-tip title="Accounting Tips"}
+- You can pipe the accounting output into `grep` to isolate specific users and/or months:
+
+```{.bash}
+gdk-project-usage -u -p <project-name> | grep <username> | grep <period>
+```
+
+&nbsp;
+
+- all the accounting outputs can be saved into a file, which you can later open for example as Excel sheet.
+
+Example:
+```{.bash}
+gdk-project-usage > accountingGDK.csv
+```
+:::
+
+---
+
+:::{.callout-tip title="Private files or folders"}
+You have a folder or a file into the project which you do not want to share: Use 
+
+```{.bash}
+chmod -R go-rwx <file or folder>
+```
+
+&nbsp;
+
+which you can revert using
+
+```{.bash}
+chmod -R go+rwx <file or folder>
+```
+:::
 
 ## Folders management
 
-It is important to
+Have a coherent folder structure - your future self will thanks.
 
-- have a coherent folder structure
-- backup only important things (raw data, analysis scripts)
+![Example of structure, which backs up raw data and analysis](img/structure.png){width=400px fig-align="center"}
 
-&nbsp;
-
-Remember: Storage cost >> Computation cost
-
----
-
-Example of structure, which backs up raw data and analysis
-
-![](img/structure.png)
-
-You can do it with a script:
+You can do it with a script which downloads and execute with the command below:
 ```{.bash}
-wget https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/5bbfc11e3796d5f4f1af39aecd6858721aca1612/Scripts/populate_project.sh
-bash populate_project.sh
+curl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash
 ```
 
 ---
 
 If your project has many users, a good structure can be
 
-![](img/multistructure.png)
+![](img/multistructure.png){width=400px fig-align="center"}
+
+
 
 &nbsp; 
+
+Do that with these commands
 
 ```{.bash}
 mkdir -p Backup/Data Workspaces/username1 Workspaces/username2
 ln -s Backup/Data/ Data
 ```
-
----
-
-Each user can go in its folder inside the project and run the script to populate the folders
-
-&nbsp;
+and making each user to run the script in its folder
 
 ```{.bash}
 cd Workspaces/username1
-wget https://github.com/hds-sandbox/GDKworkshops/blob/be7315365c152ecd75e94c1f56e1578062c2c096/Scripts/populate_project.sh
-chmod +x populate_project.sh
-./populate_project.sh
+curl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash
 ```
 
-# Downloads and Copies
+---
+
+:::{.callout-warning title="MUST-KNOWs for a GDK project" layout-align="center"}
+- remove **unused intermediate files**
+    - unused and forgotten object filling up storage
+- backup **only the established truth** of your analysis
+    - in other words the very initial data of your analysis, and the scripts
+- **outputs of many files** should be removed or zipped together into one 
+    - otherwise GDK indexes all of them: slow!!!
 
 &nbsp;
 
-In your daily life on a cluster you are going to need **downloads and exchange of files** with online archives and your local PC.
+**Backup cost >>> Storage cost >> Computation cost**
+:::
+
+# Downloads and Copies
+
+- Downloads from Internet to GDK
+- Uploads from a local PC to GDK
+- Downloads from GDK to a local PC
+- Transfer data between GDK and another cluster
+- Graphical interface for download/upload with GDK
+
+---
+
+Data transfer amongst the web, GDK and your PC is an everyday action which you can easily perform.
 
 :::{.callout-warning}
-
 Downloads should **always** happens on the `front-end` nodes, and never using a compute node when working on `GenomeDK`
-
 :::
 
 ## Download with wget
@@ -528,8 +878,8 @@ Also, you can find [this cheatsheet](https://opensource.com/sites/default/files/
 
 `SCP` (Secure Copy Protocol) can transfer files securely
 
-- between a LOCAL and a REMOTE host
-- between TWO REMOTE hosts
+- between a LOCAL and a REMOTE host (your PC and GDK)
+- between TWO REMOTE hosts (GDK and another cluster)
 
 &nbsp;
 
@@ -537,7 +887,7 @@ You can use it to transfer files **from your pc to GenomeDK and viceversa**, but
 
 ---
 
-To copy a file to GenomeDK from your local computer:
+To copy a file **to GenomeDK** from your local computer:
 ```{.bash}
 scp /home/my_laptop/Documents/file.txt \
     username@login.genome.au.dk:/home/username/my_project/
@@ -545,7 +895,7 @@ scp /home/my_laptop/Documents/file.txt \
 
 &nbsp;
 
-The inverse operation just changes the order of the sender and receiver:
+The **inverse operation** just changes the order of the sender and receiver:
 ```{.bash}
 scp username@login.genome.au.dk:/home/username/my_project/file.txt \
     /home/my_laptop/Documents/
@@ -553,7 +903,7 @@ scp username@login.genome.au.dk:/home/username/my_project/file.txt \
 
 ---
 
-If you want to copy an entire folder, use the option -r (recursive copy). The previous examples become
+If you want to copy an entire folder, use the option `-r` (recursive copy). The previous examples become
 
 ```{.bash}
 scp -r /home/my_laptop/Documents/folder \
@@ -582,29 +932,12 @@ Differently from `scp`, you can use `rsync` to **syncronize files and folders be
 Copying a file or a folder between your computer and `GenomeDK` works exactly as in `scp`. For example
 
 ```{.bash}
-rsync --progress -r \
-      username@login.genome.au.dk:/home/username/my_project/folder \
-      /home/my_laptop/Documents/
-```
-
-where we add an option to show a progress bar
-
----
-
-An interrupted syncronization can be retrieved if interrupted. **To allow future retrieval of partial transfer**, the previous command needs the additional option `--partial` (which keeps partial downloads without deleting them):
-
-&nbsp;
-
-```{.bash}
 rsync --partial --progress -r \
       username@login.genome.au.dk:/home/username/my_project/folder \
       /home/my_laptop/Documents/
 ```
-&nbsp;
 
-After an interruption, just rerun the exact same command to retrieve the syncronization.
-
-If you have **large files**, the option `-z` (compression) reduces the amount of data (and the time) to transfer.
+where we add `-progress` to show a progress bar and `--partial` to retrieve interrupted downloads
 
 ## Interactive transfer
 
@@ -681,8 +1014,6 @@ Conda is **both** a virtual environment and a package manager.
 
 ## Installation
 
-&nbsp;
-
 Just download and execute the installer by
 ```{.bash}
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
@@ -690,6 +1021,8 @@ chmod +x miniforge.sh
 bash miniforge.sh -b
 ./miniforge3/bin/conda init bash
 ```
+
+&nbsp;
 
 After a few `ENTER`s and `YES`'s you should get the installation done. Run
 
@@ -702,7 +1035,6 @@ and doublecheck that `conda` works:
 ```{.bash}
 conda info
 ```
-
 
 ---
 
@@ -726,10 +1058,10 @@ conda config --set auto_activate_base false
 
 ## Base environment
 
-is the environment containing conda itself. The current environment is in your prompt, but you will not see it again after disabling it at login.
+`base` is the environment containing conda itself. The current environment is in your prompt in round brackets.
 
 ```{.bash}
-(base) [samuele@fe-open-02 ~]$
+(environment) [samuele@fe-open-02 ~]$
 ```
 
 We update Conda with `libmamba solver` - a lot faster in installing many packages at once.
@@ -738,21 +1070,12 @@ We update Conda with `libmamba solver` - a lot faster in installing many package
 conda install -n base --yes conda-libmamba-solver
 conda config --set solver libmamba
 ```
+
 :::{.callout-warning title="Don't touch the Base"}
 This is **the only time** you should install in the `base` environment! You might otherwise ruin the conda installation.
 :::
 
----
-
-Look at the settings in your conda installation. They are saved in the file `~/.condarc`
-
-```{.bash}
-cat ~/.condarc
-```
-
 ## Create an environment
-
-&nbsp;
 
 An empty environment called `test_1`:
 
@@ -774,15 +1097,20 @@ conda env list
 > test_1       /home/samuele/miniconda3/envs/test_1
 ```
 
+:::{.callout-note}
+An environment is in reality a folder, which contains all installed packages and other configurations and utilities
+:::
+
 ## Activate and deactivate
 
-&nbsp;
-
-To use an environment
+To use an environment we activate it:
 
 ```{.bash}
 conda activate test_1
 ```
+From now on, all installed softwares and packages will be available. `(test_1)` is now shown in your prompt.
+
+&nbsp;
 
 Deactivation happens by
 
@@ -1005,7 +1333,6 @@ Useful to **run a program non-interactively**, usually for longer time than a sh
 and
 
 - has a filename **without spaces** (forget spaces from now on)
-- starts with `#!/bin/bash` to know in which language ('bash') the commands are written into
 ---
 
 ### Example 
@@ -1021,7 +1348,7 @@ A file called `align.sh` such that:
 
 #activate environment
 eval "$(conda shell.bash hook)"
-conda activate ./bam_tools 
+conda activate bam_tools
 #index the reference file
 bwa-mem2 index reference/chr2.fa
 #align data
@@ -1090,23 +1417,22 @@ scancel 33735928
 
 ---
 
-To observe in real time the latest output of the command in the job, you can refresh the last lines of the log file for the specific job:
+:::{.callout-tip}
+To observe in real time the output of  the job, refresh the last lines of the log file for that job:
 
 ```{.bash}
 watch tail align.sh-33735928.out
 ```
-
 &nbsp;
 
-To look at the whole file, you can run at any time
+To look at the whole log (not in real time), run at any time
 
 ```{.bash}
 less -S align.sh-33735928.out
 ```
 
-This can be useful for debugging, when for example a command gives an error and the job interrupts.
-
-
+Checking the log files can be useful for debugging, when for example a command gives an error and the job interrupts before its end.
+:::
 
 ## Other ways of running jobs
 
@@ -1130,4 +1456,4 @@ Some workflow tools:
 
 &nbsp;
 
-You need to know some basic `python` to use `Gwf`, but it is worth the effort.
+Learning a workflow language takes some time commitment, but it is worth the effort.
