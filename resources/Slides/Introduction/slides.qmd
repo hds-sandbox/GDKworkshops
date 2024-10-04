@@ -70,7 +70,7 @@ It is nice to avoid writing the password at every access. If you are on the clus
 
 &nbsp;
 
-Now we generate an RSA key.
+Now we set up a public-key authentication. We generate a key pair (public and private):
 
 ```{.bash}
 [local]$  ssh-keygen -t ed25519
@@ -80,67 +80,30 @@ Always press <kbd>Enter</kbd> and do not insert any password when asked.
 
 ---
 
-:::: {.columns}
-
-::: {.column width="50%" }
-
-Wait a second! What is an RSA key?
-
-1. it's a pair of long codes, named *public* and *private*
-2. the codes are *related*
-3. the user has *only private key*
-4. GDK has *only public key*
-5. the user asks to be authenticated to GDK (*AuthReq*)
-:::
-
-::: {.column width="50%"}
-```
-+--------+         +--------+
-|  User  |         |GenomeDK|
-|        |         |        |
-| PrivKey| ------> | PubKey |
-|(id_rsa)| AuthReq |(auth)  |
-+--------+         +--------+
-     |                   ^
-     v                   |
-  SignReq             VerifyReq
-     |                   |
-     v                   v
-  Access Granted if Verified
-
-```
-
-6. the user *encripts the request* with private key (SignReq)
-7. GDK *verifies* request with public key (VerifyReq)
-8. If *verification* succeeds, access is granted
-
-:::
-
-::::
-
----
-
-We create a folder on the cluster called `.ssh` to contain the RSA key we created
+and create a folder on the cluster called `.ssh` to contain the public key
 
 ```{.bash}
 [local]$  ssh <USERNAME>@login.genome.au.dk mkdir -p .ssh
 ```
 &nbsp;
 
-and finally send the RSA public key to the cluster, into the file `authorized_keys`
+and finally send the public key to the cluster, into the file `authorized_keys`
 
 ```{.bash}
 [local]$  cat ~/.ssh/id_rsa.pub | ssh username@login.genome.au.dk 'cat >> .ssh/authorized_keys'
 ```
 &nbsp;
 
-this time will be the last where you are asked your password when logging in from your computer.
+After this, your local private key will be tested against GenomeDK's public key every time you log in, without you needing to write a password.
 
 # File System (FS) on GenomeDK
 
-Directory structure and how to navigate it
+- Directory structure
+- Absolute and Relative Paths
+- important folders
+- navigate the FS on the command line
 
-## How is the FS organized
+## How the FS is organized
 
 :::: {.columns}
 
@@ -148,9 +111,10 @@ Directory structure and how to navigate it
 
 Folders and files follow a tree-like structure
 
-- `/` is the root of the filesystem - nothing is above that
-- `home` and `faststorage` are two **root folders**
-- projects and data are in `faststorage` and **linked** to your home
+- `/` is the root folder of the filesystem - nothing is above that
+- the FS is shared across all machines and available to all users 
+- `home` and `faststorage` are two of the folders in the root
+- projects are in `faststorage` and **linked** to your home
 
 :::
 
@@ -622,7 +586,7 @@ Projects are contained in `/faststorage/project/`, and are simple folders with s
 - you have to **request their creation** to GDK administrators
 - **access is limited** to you, and users you invite
 - CPU, GPU, storage and backup usage are **registered** under the project for each user
-- you can **control accounting** of the above 
+- you can **keep track** of per-project and -user resource usage 
 :::
 
 ---
@@ -694,7 +658,7 @@ gdk-project-promote-user -g <project name> -u <username>
 or demoted from those rights
 
 ```{.bash}
-gdk-project-demoted-user -g <project name> -u <username>
+gdk-project-demote-user -g <project name> -u <username>
 ```
 
 ---
@@ -1204,10 +1168,10 @@ dependencies:
   - _openmp_mutex=4.5=2_gnu
   - _r-mutex=1.0.1=anacondar_1
   - argcomplete=3.2.2=pyhd8ed1ab_0
-  - binutils_impl_linux-64=2.40=hf600244_0
+  ...
 ```
 
-This is guaranteed to work **only on the specific system** where you created the environment!
+This is guaranteed to work **only on a system with same OS and architecture** as GenomeDK (Linux and x86)!
 
 ---
 
