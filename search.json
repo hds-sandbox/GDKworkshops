@@ -88,14 +88,14 @@
     "href": "resources/Slides/Introduction/slides.html#access-without-password",
     "title": "Use GenomeDK",
     "section": "Access without password",
-    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\n[gdk]$  exit\n \nNow we generate an RSA key.\n[local]$  ssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
+    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\n[gdk]$  exit\n \nNow we set up a public-key authentication. We generate a key pair (public and private):\n[local]$  ssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
   },
   {
-    "objectID": "resources/Slides/Introduction/slides.html#how-is-the-fs-organized",
-    "href": "resources/Slides/Introduction/slides.html#how-is-the-fs-organized",
+    "objectID": "resources/Slides/Introduction/slides.html#how-the-fs-is-organized",
+    "href": "resources/Slides/Introduction/slides.html#how-the-fs-is-organized",
     "title": "Use GenomeDK",
-    "section": "How is the FS organized",
-    "text": "How is the FS organized\n\n\nFolders and files follow a tree-like structure\n\n/ is the root of the filesystem - nothing is above that\nhome and faststorage are two root folders\nprojects and data are in faststorage and linked to your home"
+    "section": "How the FS is organized",
+    "text": "How the FS is organized\n\n\nFolders and files follow a tree-like structure\n\n/ is the root folder of the filesystem - nothing is above that\nthe FS is shared across all machines and available to all users\nhome and faststorage are two of the folders in the root\nprojects are in faststorage and linked to your home"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#file-formats",
@@ -144,7 +144,7 @@
     "href": "resources/Slides/Introduction/slides.html#gdk-projects",
     "title": "Use GenomeDK",
     "section": "GDK projects",
-    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can control accounting of the above"
+    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can keep track of per-project and -user resource usage"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#creation",
