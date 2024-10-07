@@ -64,8 +64,6 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 
 ![](./img/slideGuide2.png){fig-align="center"}
 
----
-
 
 # GenomeDK's ABC
 
@@ -200,8 +198,6 @@ Folders and files follow a tree-like structure
 
 
 ::::
-
-
 
 ---
 
@@ -586,7 +582,7 @@ appends the last 4 lines of the data to `smallFile.fastq`. Check again using `ca
 ## Piping
 
 
-You can create **small pipelines** directly on the shell with the symbol `|`. The output of a command and send it to the next command when you have `|` ion between. For example, 
+You can create **small pipelines** directly on the shell with the symbol `|`. The output of a command and send it to the next command when you have `|` in between. For example, 
 
 ```{.bash}
 grep NNNNN dataOriginal.fastq
@@ -1624,3 +1620,31 @@ Some workflow tools:
 &nbsp;
 
 Learning a workflow language takes some time commitment, but it is worth the effort.
+
+# Closing the workshop
+
+- More in this slides than what we went through
+  - useful commands
+  - external material (tutorials)
+
+- Updated over time, use as a reference
+
+- Impossible to cover everything at once. We will also advanced/pipeline workshop
+
+- Come to our Cafe and/or ask
+
+- Documentation on [genome.au.dk](https://genome.au.dk)
+
+
+---
+
+## A taste of the advanced workshops
+
+- virtual terminals with `tmux`
+- advanced functionalities
+  - `awk` for advanced text file manipulation
+  - `rsync` for synchronization of data
+- browser-based applications
+- launch containers
+- gwf pipelines 
+
