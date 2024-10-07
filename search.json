@@ -165,7 +165,7 @@
     "href": "resources/Slides/Introduction/slides.html#piping",
     "title": "Use GenomeDK",
     "section": "Piping",
-    "text": "Piping\nYou can create small pipelines directly on the shell with the symbol |. The output of a command and send it to the next command when you have | ion between. For example,\ngrep NNNNN dataOriginal.fastq\nfind the pattern NNNNN in the data.\nHow to find it in the first hundred sequences? Easy! we **pipe* head into grep:\nhead -400 dataOriginal.fastq | grep NNNNN"
+    "text": "Piping\nYou can create small pipelines directly on the shell with the symbol |. The output of a command and send it to the next command when you have | in between. For example,\ngrep NNNNN dataOriginal.fastq\nfind the pattern NNNNN in the data.\nHow to find it in the first hundred sequences? Easy! we **pipe* head into grep:\nhead -400 dataOriginal.fastq | grep NNNNN"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
@@ -320,6 +320,13 @@
     "title": "Use GenomeDK",
     "section": "Other ways of running jobs",
     "text": "Other ways of running jobs\nBeyond sbatch, you can use other tools for workflows which are\n\nmodular and composable: sequences of commands can be applied in various contexts, composed together in the desired ordering\nscalable and parallel handling many sequences of operations parallelly or interdependently\nflexible where repetitive operations can be automatized over multiple applications"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#a-taste-of-the-advanced-workshops",
+    "href": "resources/Slides/Introduction/slides.html#a-taste-of-the-advanced-workshops",
+    "title": "Use GenomeDK",
+    "section": "A taste of the advanced workshops",
+    "text": "A taste of the advanced workshops\n\nvirtual terminals with tmux\nadvanced functionalities\n\nawk for advanced text file manipulation\nrsync for synchronization of data\n\nbrowser-based applications\nlaunch containers\ngwf pipelines"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#workflow",
