@@ -70,6 +70,34 @@
     "text": "Jakob is a Sandbox data scientist based at the university of Aalborg. His work is mainly focused on applications related to synthetic data, both for reserch and teaching purposes."
   },
   {
+    "objectID": "resources/Slides/Introduction/slides.html#who-we-are",
+    "href": "resources/Slides/Introduction/slides.html#who-we-are",
+    "title": "Use GenomeDK",
+    "section": "Who we are",
+    "text": "Who we are\n\n \n\nSandbox: Samuele (BiRC, MBG) - samuele@birc.au.dk\nCore facility: Per&Co (Biomed) - per.q@biomed.au.dk\nBioinformatics Cafe: https://abc.au.dk, abc@au.dk"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#program",
+    "href": "resources/Slides/Introduction/slides.html#program",
+    "title": "Use GenomeDK",
+    "section": "Program",
+    "text": "Program\n\n11:00-12:00: Genome DK’s basics, File System, File manipulation\n13:00-13:30: Exercise with command line bash\n13:30-14:30: Projects, data transfer, virtual environments with conda\n14:30-15:00: Introduction to jobs with slurm commands"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#get-the-slides",
+    "href": "resources/Slides/Introduction/slides.html#get-the-slides",
+    "title": "Use GenomeDK",
+    "section": "Get the slides",
+    "text": "Get the slides\nWebpage: https://hds-sandbox.github.io/GDKworkshops/\n\nYou can also open today’s slides at this short URL https://tinyurl.com/useGDK"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#navigate-the-slides",
+    "href": "resources/Slides/Introduction/slides.html#navigate-the-slides",
+    "title": "Use GenomeDK",
+    "section": "Navigate the slides",
+    "text": "Navigate the slides"
+  },
+  {
     "objectID": "resources/Slides/Introduction/slides.html#infrastructure",
     "href": "resources/Slides/Introduction/slides.html#infrastructure",
     "title": "Use GenomeDK",
@@ -138,6 +166,20 @@
     "title": "Use GenomeDK",
     "section": "Piping",
     "text": "Piping\nYou can create small pipelines directly on the shell with the symbol |. The output of a command and send it to the next command when you have | ion between. For example,\ngrep NNNNN dataOriginal.fastq\nfind the pattern NNNNN in the data.\nHow to find it in the first hundred sequences? Easy! we **pipe* head into grep:\nhead -400 dataOriginal.fastq | grep NNNNN"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
+    "href": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
+    "title": "Use GenomeDK",
+    "section": "Compendium for file manipulation",
+    "text": "Compendium for file manipulation\n\n\nList Files and Directories\n\nls: List files and directories in the current directory.\nls -l: List in long format (detailed information).\nls -a: List all files, including hidden ones (starting with .).\nls -lh: List with human-readable file sizes (e.g., KB, MB).\nls -R: Recursively list files in directories and subdirectories.\n\nCopy Files and Directories\n\ncp source_file destination: Copy a file to a destination.\ncp file1 file2 dir/: Copy multiple files to a directory.\ncp -r dir1 dir2: Recursively copy a directory and its contents.\n\nMove (or Rename) Files and Directories\n\nmv source_file destination: Move a file to a new location or rename it.\nmv file1 file2 dir/: Move multiple files to a directory.\nmv oldname newname: Rename a file or directory.\n\nRemove Files and Directories\n\nrm file: Remove a file.\nrm -f file: Force remove a file (suppress confirmation).\nrm -r dir: Recursively remove a directory and its contents.\nrm -rf dir: Forcefully and recursively remove a directory and its contents (use with caution).\n\nCreate Directories\n\nmkdir dir_name: Create a new directory.\nmkdir -p parent_dir/child_dir: Create a directory with parent directories as needed.\n\n\nChange File Permissions\n\nchmod 644 file: Set read/write for owner, and read-only for group and others.\nchmod 755 file: Set read/write/execute for owner, and read/execute for group and others.\nchmod +x file: Add execute permission to a file.\nchmod -R 755 dir: Recursively change permissions for a directory and its contents.\n\nChange File Ownership\n\nchown user file: Change the ownership of a file.\nchown user:group file: Change the owner and group of a file.\nchown -R user:group dir: Recursively change ownership of a directory and its contents.\n\nFile Information\n\nfile filename: Display the type of a file.\nstat filename: Show detailed information about a file (size, permissions, timestamps).\ndu -sh file/dir: Display the disk usage of a file or directory (in human-readable format).\n\nCreate and View Files\n\ntouch filename: Create an empty file or update the timestamp of an existing file.\ncat filename: View the contents of a file.\nless filename: View the contents of a file, with navigation.\nhead -n 10 filename: View the first 10 lines of a file.\ntail -n 10 filename: View the last 10 lines of a file.\n\nLinks\n\nln file link_name: Create a hard link.\nln -s target link_name: Create a symbolic (soft) link."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#compendium-for-less",
+    "href": "resources/Slides/Introduction/slides.html#compendium-for-less",
+    "title": "Use GenomeDK",
+    "section": "Compendium for less",
+    "text": "Compendium for less\n\n\nBasic Navigation\n\nMove Forward:\n\nSpace or f: Scroll forward by one page.\nDown Arrow or j: Scroll down by one line.\nd: Scroll down by half a page.\n\nMove Backward:\n\nb: Scroll backward by one page.\nUp Arrow or k: Scroll up by one line.\nu: Scroll up by half a page.\n\nGo to Specific Line or Position:\n\nG: Go to the end of the file.\ng: Go to the beginning of the file.\nnumberG or number%: Go to a specific line or percentage in the file.\n\n\nSearching\n\nSearch Forward:\n\n/pattern: Search forward for a pattern (use n to move to the next match).\n\nSearch Backward:\n\n?pattern: Search backward for a pattern (use N to move to the previous match).\n\nRepeat Last Search:\n\nn: Repeat the last search in the same direction.\nN: Repeat the last search in the opposite direction.\n\n\nDisplay Line Numbers\n\nShow Line Numbers:\n\n-N or --LINE-NUMBERS: Show line numbers (must start less with this option).\n\n\nMarking Positions\n\nSet a Mark:\n\nm&lt;letter&gt;: Mark the current position with a letter.\n\nJump to a Mark:\n\n'&lt;letter&gt;: Return to the marked position.\n\n\nExiting\n\nQuit less:\n\nq: Exit less.\n\n\nScrolling Long Lines\n\nMove Left and Right (For Long Lines):\n\nRight Arrow or →: Scroll right.\nLeft Arrow or ←: Scroll left.\n\n\n\nFile Manipulation\n\nOpen Another File:\n\n:e filename: Open another file while inside less.\n\nView Multiple Files:\n\n:n: Go to the next file (if multiple files were opened).\n:p: Go to the previous file.\n\n\nMiscellaneous\n\nFollow File in Real Time:\n\nF: Continuously view a file as it grows (like tail -f).\n\nShow Current Filename:\n\n=: Show the current file name, line number, and percentage through the file.\n\nHelp Menu:\n\nh: Display help with all available commands.\n\n\nView Line Numbers Temporarily (without restarting less)\n\nToggle Line Numbers:\n\n-N: While in a session, use this to toggle line number display."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#gdk-projects",
