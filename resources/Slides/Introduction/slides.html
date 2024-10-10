@@ -12,7 +12,8 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2024-10-07">
+  <meta name="author" content="Per, Dimi, Jacob, Manuel, Marie">
+  <meta name="dcterms.date" content="2024-10-10">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -418,14 +419,22 @@ Dan Søndergaard
             GenomeDK, Health
           </p>
     </div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Per, Dimi, Jacob, Manuel, Marie 
+</div>
+        <p class="quarto-title-affiliation">
+            Core Binf facility, Biomed
+          </p>
+    </div>
 </div>
 
-  <p class="date">2024-10-07</p>
+  <p class="date">2024-10-10</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#/about-this-presentaion" id="/toc-about-this-presentaion">About this presentaion</a></li>
+<li><a href="#/some-background" id="/toc-some-background">Some background</a></li>
 <li><a href="#/genomedks-abc" id="/toc-genomedks-abc">GenomeDK’s ABC</a></li>
 <li><a href="#/file-system-fs-on-genomedk" id="/toc-file-system-fs-on-genomedk">File System (FS) on GenomeDK</a></li>
 <li><a href="#/working-with-files" id="/toc-working-with-files">Working with Files</a></li>
@@ -438,10 +447,15 @@ Dan Søndergaard
 </nav>
 </section>
 <section>
-<section id="about-this-presentaion" class="title-slide slide level1 center">
-<h1>About this presentaion</h1>
+<section id="some-background" class="title-slide slide level1 center">
+<h1>Some background</h1>
 <ul>
-<li>These slides are both a presentation and a reference manual with commands</li>
+<li><p>These slides are both a presentation and a small reference manual</p></li>
+<li><p>We will try out the commands during the workshop</p>
+<ul>
+<li>keep both <strong>slides and terminal</strong> open</li>
+</ul></li>
+<li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 </ul>
 </section>
 <section id="who-we-are" class="slide level2">
@@ -449,17 +463,16 @@ Dan Søndergaard
 
 <img data-src="./img/jointLogos.png" class="quarto-figure quarto-figure-center r-stretch"><p>&nbsp;</p>
 <ul>
-<li><p>Sandbox: Samuele (BiRC, MBG) - samuele@birc.au.dk</p></li>
-<li><p>Core facility: Per&amp;Co (Biomed) - per.q@biomed.au.dk</p></li>
-<li><p>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abc@au.dk</p></li>
+<li><p>Sandbox: Samuele (BiRC, MBG) - samuele at birc.au.dk</p></li>
+<li><p>Core facility: Per&amp;Co (Biomed) - per.q at biomed.au.dk</p></li>
+<li><p>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abc at au.dk</p></li>
 </ul>
 </section>
 <section id="program" class="slide level2">
 <h2>Program</h2>
 <ul>
 <li><p><strong>11:00-12:00</strong>: Genome DK’s basics, File System, File manipulation</p></li>
-<li><p><strong>13:00-13:30</strong>: Exercise with command line bash</p></li>
-<li><p><strong>13:30-14:30</strong>: Projects, data transfer, virtual environments with conda</p></li>
+<li><p><strong>13:00-14:30</strong>: Projects, data transfer, virtual environments with conda</p></li>
 <li><p><strong>14:30-15:00</strong>: Introduction to jobs with <code>slurm</code> commands</p></li>
 </ul>
 </section>
@@ -479,7 +492,40 @@ Dan Søndergaard
 <li><p>The quizzes can be answered</p></li>
 </ul>
 
-<img data-src="./img/slideGuide2.png" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<img data-src="./img/slideGuide2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="software-for-command-line" class="slide level2 smaller">
+<h2>Software for command line</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The basic softwares</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/powershell.png" width="250"></p>
+<figcaption>Powershell for windows</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/terminal.png" width="250"></p>
+<figcaption>Terminal for MacOS and Linux</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Customizable</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/terminator.png" width="250"></p>
+<figcaption>Terminator for Linux - iTerm2 for MacOS</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/tabby.png" width="250"></p>
+<figcaption>Tabby for Linux, MacOS, Windows</figcaption>
+</figure>
+</div>
+</div></div>
+</section></section>
 <section>
 <section id="genomedks-abc" class="title-slide slide level1 center">
 <h1>GenomeDK’s ABC</h1>
@@ -593,12 +639,12 @@ Dan Søndergaard
 <p>Look at the File system tree and answer to the following questions:</p>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p><img data-src="img/complexTree.png"></p>
+<p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="5947b5cd" class="cell" data-execution_count="1">
+<div id="40efc3f5" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="alPmgQZpmjoq" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#alPmgQZpmjoq {
+<div id="tokaPxAnHakU" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
+#tokaPxAnHakU {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -772,7 +818,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsalPmgQZpmjoq=[
+var questionstokaPxAnHakU=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1574,8 +1620,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("alPmgQZpmjoq")) {
-            show_questions(questionsalPmgQZpmjoq,  alPmgQZpmjoq); 
+          if(document.getElementById("tokaPxAnHakU")) {
+            show_questions(questionstokaPxAnHakU,  tokaPxAnHakU); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -1584,8 +1630,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("alPmgQZpmjoq");
-        // console.log(document.getElementById("alPmgQZpmjoq"));
+        //console.log("tokaPxAnHakU");
+        // console.log(document.getElementById("tokaPxAnHakU"));
 
         try_show();
         }
@@ -1740,10 +1786,10 @@ if (typeof version == 'undefined') {
 </section>
 <section class="slide level2">
 
-<div id="22388ad8" class="cell" data-execution_count="2">
+<div id="4c4276b4" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="NEifvfTAbIzf" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#NEifvfTAbIzf {
+<div id="AnkLCaUrcTDC" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
+#AnkLCaUrcTDC {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1917,7 +1963,7 @@ if (typeof version == 'undefined') {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsNEifvfTAbIzf=[
+var questionsAnkLCaUrcTDC=[
     {
         "question": "In which cases is it a good idea to use the working directory?",
         "type": "many_choice",
@@ -2693,8 +2739,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("NEifvfTAbIzf")) {
-            show_questions(questionsNEifvfTAbIzf,  NEifvfTAbIzf); 
+          if(document.getElementById("AnkLCaUrcTDC")) {
+            show_questions(questionsAnkLCaUrcTDC,  AnkLCaUrcTDC); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -2703,8 +2749,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("NEifvfTAbIzf");
-        // console.log(document.getElementById("NEifvfTAbIzf"));
+        //console.log("AnkLCaUrcTDC");
+        // console.log(document.getElementById("AnkLCaUrcTDC"));
 
         try_show();
         }
@@ -2737,9 +2783,6 @@ if (typeof version == 'undefined') {
 <span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> myFolder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>and verify with <code>pwd</code> the new working directory path.</p>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="working-with-files" class="title-slide slide level1 center">
@@ -2828,10 +2871,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="07b2791f" class="cell" data-execution_count="3">
+<div id="e738f9a9" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div id="uPXOTtvyXcDL" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
-#uPXOTtvyXcDL {
+<div id="tEDPyffHDdIq" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#tEDPyffHDdIq {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3005,7 +3048,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsuPXOTtvyXcDL=[
+var questionstEDPyffHDdIq=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3021,7 +3064,7 @@ var questionsuPXOTtvyXcDL=[
                 "feedback": ":((((("
             },
             {
-                "answer": "19",
+                "answer": "18",
                 "correct": true,
                 "feedback": "yes!!!"
             },
@@ -3781,8 +3824,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("uPXOTtvyXcDL")) {
-            show_questions(questionsuPXOTtvyXcDL,  uPXOTtvyXcDL); 
+          if(document.getElementById("tEDPyffHDdIq")) {
+            show_questions(questionstEDPyffHDdIq,  tEDPyffHDdIq); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -3791,8 +3834,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("uPXOTtvyXcDL");
-        // console.log(document.getElementById("uPXOTtvyXcDL"));
+        //console.log("tEDPyffHDdIq");
+        // console.log(document.getElementById("tEDPyffHDdIq"));
 
         try_show();
         }
@@ -3838,8 +3881,23 @@ if (typeof version == 'undefined') {
 
 <p>Use now <code>ls -lah</code> and you will see two files of identical size and different creation dates.</p>
 <p>&nbsp;</p>
-<p>But… are those files identical? <code>diff</code> can tell you by printing differences (or nothing if files are identical)</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> dataOriginal.fastq dataCopy.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Well, we changed our mind and do not want a copy of our data. Remove it with</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> dataCopy.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div title="Forever away">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Forever away</strong></p>
+</div>
+<div class="callout-content">
+<p>There is no trash bin - <strong>removed files are lost forever</strong> - with no exception</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="writing-on-a-file" class="slide level2">
 <h2>Writing on a file</h2>
@@ -3875,8 +3933,8 @@ if (typeof version == 'undefined') {
 <h2>Piping</h2>
 <p>You can create <strong>small pipelines</strong> directly on the shell with the symbol <code>|</code>. The output of a command and send it to the next command when you have <code>|</code> in between. For example,</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> NNNNN dataOriginal.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>find the pattern <code>NNNNN</code> in the data.</p>
-<p>How to find it in the first hundred sequences? Easy! we **pipe* <code>head</code> into <em>grep</em>:</p>
+<p>finds the pattern <code>NNNNN</code> in the data.</p>
+<p>How to find it in the first hundred sequences? Easy! we <em>pipe</em> <code>head</code> into <em>grep</em>:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
@@ -3884,10 +3942,10 @@ if (typeof version == 'undefined') {
 <p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<div id="afdcb530" class="cell" data-execution_count="4">
+<div id="9915f0c7" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div id="gODqQwoTEdqr" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
-#gODqQwoTEdqr {
+<div id="wABfSkOjRasu" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#wABfSkOjRasu {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -4061,30 +4119,30 @@ if (typeof version == 'undefined') {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsgODqQwoTEdqr=[
+var questionswABfSkOjRasu=[
     {
-        "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
+        "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
         "type": "many_choice",
         "answers": [
             {
-                "answer": "30",
+                "answer": "head -400 dataOriginal.fastq | grep NNNNN | sequence.fastq",
                 "correct": false,
-                "feedback": "Wroooooong"
+                "feedback": "Sorry, try again, you are not writing into a file."
             },
             {
-                "answer": "25",
+                "answer": "head -400 dataOriginal.fastq | grep NNNNN < sequence.fastq",
                 "correct": false,
-                "feedback": ":((((("
+                "feedback": "Sorry, try again, you are not writing into a file."
             },
             {
-                "answer": "19",
+                "answer": "sequence.fastq < head -400 dataOriginal.fastq | grep NNNNN  ",
+                "correct": false,
+                "feedback": "Sorry, try again, you are not writing into a file."
+            },
+            {
+                "answer": "head -400 dataOriginal.fastq | grep NNNNN > sequence.fastq",
                 "correct": true,
-                "feedback": "yes!!!"
-            },
-            {
-                "answer": "8",
-                "correct": false,
-                "feedback": "Mmmmmh..... no!"
+                "feedback": "You are piping and writing like a pro!"
             }
         ]
     }
@@ -4837,8 +4895,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("gODqQwoTEdqr")) {
-            show_questions(questionsgODqQwoTEdqr,  gODqQwoTEdqr); 
+          if(document.getElementById("wABfSkOjRasu")) {
+            show_questions(questionswABfSkOjRasu,  wABfSkOjRasu); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -4847,8 +4905,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("gODqQwoTEdqr");
-        // console.log(document.getElementById("gODqQwoTEdqr"));
+        //console.log("wABfSkOjRasu");
+        // console.log(document.getElementById("wABfSkOjRasu"));
 
         try_show();
         }
@@ -5038,13 +5096,24 @@ if (typeof version == 'undefined') {
 </ul></li>
 </ul>
 </div></div>
-</section></section>
+</section>
+<section id="last-thing-before-lunch" class="slide level2">
+<h2>Last thing before lunch:</h2>
+<p><strong>We meet at 13:00 in 1533-103</strong></p>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfIN99btbNVGd-2s8dzl7dnUL_OyJskalTrTjhJyvZqIZIl6w/viewform?embedded=true" width="640" height="532" frameborder="0" marginheight="0" marginwidth="0">
+Indlæser…
+</iframe>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/wayToAuditorium.png" class="r-stretch quarto-figure-center"><p class="caption">1533-103E</p></section></section>
 <section>
 <section id="project-management" class="title-slide slide level1 center">
 <h1>Project management</h1>
 <ul>
 <li>What are <strong>GDK projects</strong></li>
-<li>how to <strong>manage the resource usage</strong>, and</li>
+<li>how to <strong>track the resource usage</strong>, and</li>
 <li>how to <strong>organize a project</strong></li>
 </ul>
 </section>
@@ -5075,7 +5144,7 @@ if (typeof version == 'undefined') {
 <section class="slide level2">
 
 
-<img data-src="img/projectScheme.png" class="r-stretch quarto-figure-center"><p class="caption">Example of a project managed by <code>you</code> with two invited users. <code>you</code> has requested the creation of <code>coolProject</code> and manages the project. ‘you’ invited two users to the project.</p></section>
+<img data-src="img/projectScheme.png" class="r-stretch quarto-figure-center"><p class="caption">Example of a project managed by <code>you</code> with two invited users. <code>you</code> has requested the creation of <code>coolProject</code> and manages the project. <code>you</code> invited two users to the project.</p></section>
 <section class="slide level2">
 
 <div title="Common-sense in project creation">
@@ -5335,16 +5404,7 @@ if (typeof version == 'undefined') {
 <p>&nbsp;</p>
 <p>A few more options are available and you can see them with the command <code>scp --help</code>.</p>
 </section>
-<section id="rsync-transfer" class="slide level2">
-<h2>Rsync transfer</h2>
-<p>Differently from <code>scp</code>, you can use <code>rsync</code> to <strong>syncronize files and folders between two locations</strong>. It copies only the changes in the data and not all of it every time.</p>
-<p>&nbsp;</p>
-<p>Copying a file or a folder between your computer and <code>GenomeDK</code> works exactly as in <code>scp</code>. For example</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--partial</span> <span class="at">--progress</span> <span class="at">-r</span> <span class="dt">\</span></span>
-<span id="cb57-2"><a aria-hidden="true" tabindex="-1"></a>      username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
-<span id="cb57-3"><a aria-hidden="true" tabindex="-1"></a>      /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where we add <code>-progress</code> to show a progress bar and <code>--partial</code> to retrieve interrupted downloads</p>
-</section>
+
 <section id="interactive-transfer" class="slide level2">
 <h2>Interactive transfer</h2>
 <p>You can also do transfering with an interactive software, such as <code>Filezilla</code>, which has an easy interface. <a href="https://filezilla-project.org/download.php?type=client">Download Filezilla</a>.</p>
@@ -5643,8 +5703,9 @@ if (typeof version == 'undefined') {
 <li><p>starting a new project</p></li>
 <li><p>small folders and files management</p></li>
 <li><p>small software installations</p></li>
+<li><p>data transfer</p></li>
 </ul>
-<p>and in general you <strong>should not</strong> use them to run computations. This might slow down other users.</p>
+<p>and in general you <strong>should not</strong> use them to run computations. This might slow down all other users on the front-end.</p>
 </section>
 <section id="interactive-jobs" class="slide level2">
 <h2>Interactive jobs</h2>
@@ -5668,7 +5729,7 @@ if (typeof version == 'undefined') {
 </section>
 <section id="batch-script-sbatch" class="slide level2">
 <h2>Batch script (sbatch)</h2>
-<p>Useful to <strong>run a program non-interactively</strong>, usually for longer time than a short interaction. A batch script contains</p>
+<p>Useful to <strong>run a program non-interactively</strong>, usually for longer time and without interaction from the user. A batch script contains</p>
 <ul>
 <li>the desired <strong>resources</strong></li>
 <li>the sequence of <strong>commands</strong> to be executed</li>
@@ -5725,12 +5786,23 @@ if (typeof version == 'undefined') {
 <section class="slide level2">
 
 <p>or about all the queued jobs</p>
+<div class="columns">
+<div class="column" style="width:45%;">
 <div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:10%;">
+
+<center>
+or
+</center>
+
+</div><div class="column" style="width:45%;">
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
 <pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 &gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
 <p>&nbsp;</p>
 <p>If you change your mind and want to cancel a job:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -5744,16 +5816,36 @@ if (typeof version == 'undefined') {
 </div>
 <div class="callout-content">
 <p>To observe in real time the output of the job, refresh the last lines of the log file for that job:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb90-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>To look at the whole log (not in real time), run at any time</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb90-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Checking the log files can be useful for debugging, when for example a command gives an error and the job interrupts before its end.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="other-ways-of-running-jobs" class="slide level2">
+<section id="choosing-the-right-cpu-ram" class="slide level2 hidden">
+<h2>Choosing the right CPU-RAM</h2>
+<p>Try to run a job with a smaller dataset as a test. While it is running</p>
+<ul>
+<li><p>use <code>squeue-me</code> and look at the node id</p></li>
+<li><p>log into that node from the front-end:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb92-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>use <code>htop -u &lt;username&gt;</code> to see what is running and how much memory and CPU it uses <img data-src="img/htop.png"></p></li>
+</ul>
+<pre><code> PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND          
+ 8249 newhall   20   0  153m 4488  472 R   47  0.0   0:02.78 6 gol              
+ 8250 newhall   20   0  153m 4488  472 R   47  0.0   0:02.76 2 gol              
+ 8236 newhall   20   0  153m 4488  472 R   46  0.0   0:02.77 6 gol              
+ 8237 newhall   20   0  153m 4488  472 S   46  0.0   0:02.77 4 gol              
+ 8243 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 1 gol              
+ 8239 newhall   20   0  153m 4488  472 S   46  0.0   0:02.76 7 gol              
+ 8240 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 5 gol              
+ 8244 newhall   20   0  153m 4488  472 R   46  0.0   0:02.72 2 gol              
+ 8251 newhall   20   0  153m 4488  472 R   46  0.0   0:02.78 4 gol     </code></pre>
+</section>
+<section id="other-ways-of-running-jobs" class="slide level2 hidden">
 <h2>Other ways of running jobs</h2>
 <p>Beyond <code>sbatch</code>, you can use other tools for workflows which are</p>
 <ul>
@@ -5761,9 +5853,6 @@ if (typeof version == 'undefined') {
 <li><strong>scalable and parallel</strong> handling many sequences of operations parallelly or interdependently</li>
 <li><strong>flexible</strong> where repetitive operations can be automatized over multiple applications</li>
 </ul>
-</section>
-<section class="slide level2">
-
 <p>Some workflow tools:</p>
 <ul>
 <li><a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a></li>
@@ -5782,18 +5871,19 @@ if (typeof version == 'undefined') {
 <li><p>More in this slides than what we went through</p>
 <ul>
 <li>useful commands</li>
-<li>external material (tutorials)</li>
+<li>external material (tutorials at <a href="https://abc.au.dk/Documentation">Cafe</a> or <a href="https://genome.au.dk">genome.au.dk</a>)</li>
 </ul></li>
 <li><p>Updated over time, use as a reference</p></li>
 <li><p>Impossible to cover everything at once. We will also advanced/pipeline workshop</p></li>
-<li><p>Come to our Cafe and/or ask</p></li>
+<li><p>Come to our <a href="https://abc.au.dk">Cafe</a> and/or ask</p></li>
 <li><p>Documentation on <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 </ul>
 </section>
-<section id="a-taste-of-the-advanced-workshops" class="slide level2">
-<h2>A taste of the advanced workshops</h2>
+<section id="a-taste-of-the-next-workshops" class="slide level2">
+<h2>A taste of the next workshops</h2>
 <ul>
 <li>virtual terminals with <code>tmux</code></li>
+<li>git setup</li>
 <li>advanced functionalities
 <ul>
 <li><code>awk</code> for advanced text file manipulation</li>
@@ -5803,6 +5893,12 @@ if (typeof version == 'undefined') {
 <li>launch containers</li>
 <li>gwf pipelines</li>
 </ul>
+</section>
+<section id="your-input-for-topics-and-evaluation" class="slide level2">
+<h2>Your input for topics and evaluation</h2>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevPQOj2FBtmhKp_kcJrWIv3jZQ-8ymvw67B_M_L-5dytiPEw/viewform?embedded=true" width="640" height="1218" frameborder="0" marginheight="0" marginwidth="0">
+Indlæser…
+</iframe>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logos.png" class="slide-logo"></p>

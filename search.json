@@ -7,6 +7,27 @@
     "text": "Alba Refoyo Martinez\n\n\n\n\n\nData Scientist, Copenhagen University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJacob Fredegaard Hansen\n\n\n\n\n\nData Scientist, Southern Denmark University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJakob Skelmose\n\n\n\n\n\nData Scientist, Aalborg University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJennifer Bartell\n\n\n\n\n\nData Scientist and Project coordinator, Copenhagen University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSamuele Soraggi\n\n\n\n\n\nData Scientist, Aarhus University\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "cards/JenniferBartell.html",
+    "href": "cards/JenniferBartell.html",
+    "title": "Jennifer Bartell",
+    "section": "",
+    "text": "Jenifer is the Sandbox project coordinator, beyond being also a data scientist. She is based at the university of Copenhagen. Jennifer has a long experience in bacterial genomics and metabolomics, transcriptomics and pathway analysis."
+  },
+  {
+    "objectID": "cards/JacobHansen.html",
+    "href": "cards/JacobHansen.html",
+    "title": "Jacob Fredegaard Hansen",
+    "section": "",
+    "text": "Jacob is a Sandbox data scientist based at the university of Southern Danmark in Odense, and he is specialized in the proteomics applications."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GenomeDK workshops",
+    "section": "",
+    "text": "_____                                ______ _   __\n |  __ \\                               |  _  \\ | / /\n | |  \\/ ___ _ __   ___  _ __ ___   ___| | | | |/ /\n | | __ / _ \\ '_ \\ / _ \\| '_ ` _ \\ / _ \\ | | |    \\\n | |_\\ \\  __/ | | | (_) | | | | | |  __/ |/ /| |\\  \\\n  \\____/\\___|_| |_|\\___/|_| |_| |_|\\___|___/ \\_| \\_/\nHere you can find the material of the workshops for GenomeDK (slides, scripts, etc).\nRemember always that GenomeDK has a documentation page.\n\nAcknowledgements\n\nDan and Anders at GenomeDK\nHealth data science sandbox for setting up and running the workshops"
+  },
+  {
     "objectID": "resources/Slides/linuxbasic/slides.html#interaction-with-hardware",
     "href": "resources/Slides/linuxbasic/slides.html#interaction-with-hardware",
     "title": "Introduction to bash command line for Bioinformatics",
@@ -19,314 +40,6 @@
     "title": "Introduction to bash command line for Bioinformatics",
     "section": "Bash CLI on GenomeDK",
     "text": "Bash CLI on GenomeDK\nWhen logging in on GenomeDK from the terminal, you are presented with the cluster’s CLI.\nFrom this, you can access files and software using the bash language.\nComputer hardware can act on files and softwares through:\n\n\na Graphical User Interface (GUI), such as your point-and-click operating system\na Command Line Interface (CLI) or terminal, where commands are interpreted and translated into actions"
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "GenomeDK workshops",
-    "section": "",
-    "text": "Attribution-ShareAlike 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More_considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nAdditional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material,\nincluding for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
-  },
-  {
-    "objectID": "cards/SamueleSoraggi.html",
-    "href": "cards/SamueleSoraggi.html",
-    "title": "Samuele Soraggi",
-    "section": "",
-    "text": "Samuele is a Sandbox data scientist based at the university of Aarhus. During his academic activity he has gained experience in population genomics, transcriptomics, single cell multiomics and spans his knowledge across various themes of advanced computational statistics."
-  },
-  {
-    "objectID": "cards/AlbaMartinez.html",
-    "href": "cards/AlbaMartinez.html",
-    "title": "Alba Refoyo Martinez",
-    "section": "",
-    "text": "Alba is a Sandbox data scientist based at the university of Copenhagen. During her academic background as a PhD and Postdoc she has developed a solid expertise in large-scale genomics and pipelines development on computing clusters."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "GenomeDK workshops",
-    "section": "",
-    "text": "_____                                ______ _   __\n |  __ \\                               |  _  \\ | / /\n | |  \\/ ___ _ __   ___  _ __ ___   ___| | | | |/ /\n | | __ / _ \\ '_ \\ / _ \\| '_ ` _ \\ / _ \\ | | |    \\\n | |_\\ \\  __/ | | | (_) | | | | | |  __/ |/ /| |\\  \\\n  \\____/\\___|_| |_|\\___/|_| |_| |_|\\___|___/ \\_| \\_/\nHere you can find the material of the workshops for GenomeDK (slides, scripts, etc).\nRemember always that GenomeDK has a documentation page.\n\nAcknowledgements\n\nDan and Anders at GenomeDK\nHealth data science sandbox for setting up and running the workshops"
-  },
-  {
-    "objectID": "cards/JacobHansen.html",
-    "href": "cards/JacobHansen.html",
-    "title": "Jacob Fredegaard Hansen",
-    "section": "",
-    "text": "Jacob is a Sandbox data scientist based at the university of Southern Danmark in Odense, and he is specialized in the proteomics applications."
-  },
-  {
-    "objectID": "cards/JenniferBartell.html",
-    "href": "cards/JenniferBartell.html",
-    "title": "Jennifer Bartell",
-    "section": "",
-    "text": "Jenifer is the Sandbox project coordinator, beyond being also a data scientist. She is based at the university of Copenhagen. Jennifer has a long experience in bacterial genomics and metabolomics, transcriptomics and pathway analysis."
-  },
-  {
-    "objectID": "cards/JakobSkelmose.html",
-    "href": "cards/JakobSkelmose.html",
-    "title": "Jakob Skelmose",
-    "section": "",
-    "text": "Jakob is a Sandbox data scientist based at the university of Aalborg. His work is mainly focused on applications related to synthetic data, both for reserch and teaching purposes."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#who-we-are",
-    "href": "resources/Slides/Introduction/slides.html#who-we-are",
-    "title": "Use GenomeDK",
-    "section": "Who we are",
-    "text": "Who we are\n\n \n\nSandbox: Samuele (BiRC, MBG) - samuele@birc.au.dk\nCore facility: Per&Co (Biomed) - per.q@biomed.au.dk\nBioinformatics Cafe: https://abc.au.dk, abc@au.dk"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#program",
-    "href": "resources/Slides/Introduction/slides.html#program",
-    "title": "Use GenomeDK",
-    "section": "Program",
-    "text": "Program\n\n11:00-12:00: Genome DK’s basics, File System, File manipulation\n13:00-13:30: Exercise with command line bash\n13:30-14:30: Projects, data transfer, virtual environments with conda\n14:30-15:00: Introduction to jobs with slurm commands"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#get-the-slides",
-    "href": "resources/Slides/Introduction/slides.html#get-the-slides",
-    "title": "Use GenomeDK",
-    "section": "Get the slides",
-    "text": "Get the slides\nWebpage: https://hds-sandbox.github.io/GDKworkshops/\n\nYou can also open today’s slides at this short URL https://tinyurl.com/useGDK"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#navigate-the-slides",
-    "href": "resources/Slides/Introduction/slides.html#navigate-the-slides",
-    "title": "Use GenomeDK",
-    "section": "Navigate the slides",
-    "text": "Navigate the slides"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#infrastructure",
-    "href": "resources/Slides/Introduction/slides.html#infrastructure",
-    "title": "Use GenomeDK",
-    "section": "Infrastructure",
-    "text": "Infrastructure\nGenomeDK is a computing cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores)\nstorage nodes storing data in many hard drives (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#access",
-    "href": "resources/Slides/Introduction/slides.html#access",
-    "title": "Use GenomeDK",
-    "section": "Access",
-    "text": "Access\n\nCreating an account happens through this form at genome.au.dk"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#access-without-password",
-    "href": "resources/Slides/Introduction/slides.html#access-without-password",
-    "title": "Use GenomeDK",
-    "section": "Access without password",
-    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\n[gdk]$  exit\n \nNow we set up a public-key authentication. We generate a key pair (public and private):\n[local]$  ssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#how-the-fs-is-organized",
-    "href": "resources/Slides/Introduction/slides.html#how-the-fs-is-organized",
-    "title": "Use GenomeDK",
-    "section": "How the FS is organized",
-    "text": "How the FS is organized\n\n\nFolders and files follow a tree-like structure\n\n/ is the root folder of the filesystem - nothing is above that\nthe FS is shared across all machines and available to all users\nhome and faststorage are two of the folders in the root\nprojects are in faststorage and linked to your home"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#file-formats",
-    "href": "resources/Slides/Introduction/slides.html#file-formats",
-    "title": "Use GenomeDK",
-    "section": "File formats",
-    "text": "File formats\nMany files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the file formats you encounter when doing bioinformatics.\n \n\n\n\n\n\n\nNote\n\n\nSome file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#less-for-reading-files",
-    "href": "resources/Slides/Introduction/slides.html#less-for-reading-files",
-    "title": "Use GenomeDK",
-    "section": "Less for reading files",
-    "text": "Less for reading files\nless is perfect for reading text files: you can scroll with the arrows, and quit pressing q. Try\n\nless data.fastq\n  The very first sequence you see should be\n@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG\nTCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA\nATCTGAGATTCCTGACCAAATGT\n+\nCCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH\nFFFFFFFEDDEEEEDDDDDDDDD\nThe first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in this table)."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#counting",
-    "href": "resources/Slides/Introduction/slides.html#counting",
-    "title": "Use GenomeDK",
-    "section": "Counting",
-    "text": "Counting\nHow many lines are there in your file? The command wc can show that to you:\nwc -l data.fastq\n \nThe file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines).\n \n\n\n\n\n\n\nTip\n\n\nwc has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#copy-and-move",
-    "href": "resources/Slides/Introduction/slides.html#copy-and-move",
-    "title": "Use GenomeDK",
-    "section": "Copy and Move",
-    "text": "Copy and Move\ncp can copy one or more files - we use it on our data:\ncp data.fastq dataCopy.fastq\n \nmv moves a file into another folder - here we move it into our WD, which simply changes its filename:\nmv data.fastq ./dataOriginal.fastq"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#writing-on-a-file",
-    "href": "resources/Slides/Introduction/slides.html#writing-on-a-file",
-    "title": "Use GenomeDK",
-    "section": "Writing on a file",
-    "text": "Writing on a file\nWrite something on a file using &gt;:\nhead -4 dataOriginal.fastq &gt; smallFile.fastq\n \nprints out the first four lines of the data into smallFile.fastq.\n \n\n\n\n\n\n\nWarning\n\n\nUsing again &gt; will overwrite the file!"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#piping",
-    "href": "resources/Slides/Introduction/slides.html#piping",
-    "title": "Use GenomeDK",
-    "section": "Piping",
-    "text": "Piping\nYou can create small pipelines directly on the shell with the symbol |. The output of a command and send it to the next command when you have | in between. For example,\ngrep NNNNN dataOriginal.fastq\nfind the pattern NNNNN in the data.\nHow to find it in the first hundred sequences? Easy! we **pipe* head into grep:\nhead -400 dataOriginal.fastq | grep NNNNN"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
-    "href": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
-    "title": "Use GenomeDK",
-    "section": "Compendium for file manipulation",
-    "text": "Compendium for file manipulation\n\n\nList Files and Directories\n\nls: List files and directories in the current directory.\nls -l: List in long format (detailed information).\nls -a: List all files, including hidden ones (starting with .).\nls -lh: List with human-readable file sizes (e.g., KB, MB).\nls -R: Recursively list files in directories and subdirectories.\n\nCopy Files and Directories\n\ncp source_file destination: Copy a file to a destination.\ncp file1 file2 dir/: Copy multiple files to a directory.\ncp -r dir1 dir2: Recursively copy a directory and its contents.\n\nMove (or Rename) Files and Directories\n\nmv source_file destination: Move a file to a new location or rename it.\nmv file1 file2 dir/: Move multiple files to a directory.\nmv oldname newname: Rename a file or directory.\n\nRemove Files and Directories\n\nrm file: Remove a file.\nrm -f file: Force remove a file (suppress confirmation).\nrm -r dir: Recursively remove a directory and its contents.\nrm -rf dir: Forcefully and recursively remove a directory and its contents (use with caution).\n\nCreate Directories\n\nmkdir dir_name: Create a new directory.\nmkdir -p parent_dir/child_dir: Create a directory with parent directories as needed.\n\n\nChange File Permissions\n\nchmod 644 file: Set read/write for owner, and read-only for group and others.\nchmod 755 file: Set read/write/execute for owner, and read/execute for group and others.\nchmod +x file: Add execute permission to a file.\nchmod -R 755 dir: Recursively change permissions for a directory and its contents.\n\nChange File Ownership\n\nchown user file: Change the ownership of a file.\nchown user:group file: Change the owner and group of a file.\nchown -R user:group dir: Recursively change ownership of a directory and its contents.\n\nFile Information\n\nfile filename: Display the type of a file.\nstat filename: Show detailed information about a file (size, permissions, timestamps).\ndu -sh file/dir: Display the disk usage of a file or directory (in human-readable format).\n\nCreate and View Files\n\ntouch filename: Create an empty file or update the timestamp of an existing file.\ncat filename: View the contents of a file.\nless filename: View the contents of a file, with navigation.\nhead -n 10 filename: View the first 10 lines of a file.\ntail -n 10 filename: View the last 10 lines of a file.\n\nLinks\n\nln file link_name: Create a hard link.\nln -s target link_name: Create a symbolic (soft) link."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#compendium-for-less",
-    "href": "resources/Slides/Introduction/slides.html#compendium-for-less",
-    "title": "Use GenomeDK",
-    "section": "Compendium for less",
-    "text": "Compendium for less\n\n\nBasic Navigation\n\nMove Forward:\n\nSpace or f: Scroll forward by one page.\nDown Arrow or j: Scroll down by one line.\nd: Scroll down by half a page.\n\nMove Backward:\n\nb: Scroll backward by one page.\nUp Arrow or k: Scroll up by one line.\nu: Scroll up by half a page.\n\nGo to Specific Line or Position:\n\nG: Go to the end of the file.\ng: Go to the beginning of the file.\nnumberG or number%: Go to a specific line or percentage in the file.\n\n\nSearching\n\nSearch Forward:\n\n/pattern: Search forward for a pattern (use n to move to the next match).\n\nSearch Backward:\n\n?pattern: Search backward for a pattern (use N to move to the previous match).\n\nRepeat Last Search:\n\nn: Repeat the last search in the same direction.\nN: Repeat the last search in the opposite direction.\n\n\nDisplay Line Numbers\n\nShow Line Numbers:\n\n-N or --LINE-NUMBERS: Show line numbers (must start less with this option).\n\n\nMarking Positions\n\nSet a Mark:\n\nm&lt;letter&gt;: Mark the current position with a letter.\n\nJump to a Mark:\n\n'&lt;letter&gt;: Return to the marked position.\n\n\nExiting\n\nQuit less:\n\nq: Exit less.\n\n\nScrolling Long Lines\n\nMove Left and Right (For Long Lines):\n\nRight Arrow or →: Scroll right.\nLeft Arrow or ←: Scroll left.\n\n\n\nFile Manipulation\n\nOpen Another File:\n\n:e filename: Open another file while inside less.\n\nView Multiple Files:\n\n:n: Go to the next file (if multiple files were opened).\n:p: Go to the previous file.\n\n\nMiscellaneous\n\nFollow File in Real Time:\n\nF: Continuously view a file as it grows (like tail -f).\n\nShow Current Filename:\n\n=: Show the current file name, line number, and percentage through the file.\n\nHelp Menu:\n\nh: Display help with all available commands.\n\n\nView Line Numbers Temporarily (without restarting less)\n\nToggle Line Numbers:\n\n-N: While in a session, use this to toggle line number display."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#gdk-projects",
-    "href": "resources/Slides/Introduction/slides.html#gdk-projects",
-    "title": "Use GenomeDK",
-    "section": "GDK projects",
-    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can keep track of per-project and -user resource usage"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#creation",
-    "href": "resources/Slides/Introduction/slides.html#creation",
-    "title": "Use GenomeDK",
-    "section": "Creation",
-    "text": "Creation\nRequest a project (after login on GDK) with the command\ngdk-project-request -g &lt;project_name&gt;\n \nAfter GDK approval, a project folder with the desired name appears in ~ and /faststorage/project. You should be able to set the WD into that folder:\ncd &lt;project_name&gt;\nor\ncd ~/&lt;project_name&gt;"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#folders-management",
-    "href": "resources/Slides/Introduction/slides.html#folders-management",
-    "title": "Use GenomeDK",
-    "section": "Folders management",
-    "text": "Folders management\nHave a coherent folder structure - your future self will thanks.\n\nExample of structure, which backs up raw data and analysisYou can do it with a script which downloads and execute with the command below:\ncurl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#download-with-wget",
-    "href": "resources/Slides/Introduction/slides.html#download-with-wget",
-    "title": "Use GenomeDK",
-    "section": "Download with wget",
-    "text": "Download with wget\nwget is a utility for command-line-based downloads. It is already installed on GenomeDK and works with http, https, ftp protocols.\n \nExample:\nwget -O ./output.png \\\n     -c \\\n     -b \\\n     https://example.com/image.png\ndownloads a png file and saves it as output.png (option O), downloads in background (-b) and if the download was interrupted earlier, it retrieves it from where it stopped (-c)."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#scp-transfer",
-    "href": "resources/Slides/Introduction/slides.html#scp-transfer",
-    "title": "Use GenomeDK",
-    "section": "SCP transfer",
-    "text": "SCP transfer\nSCP (Secure Copy Protocol) can transfer files securely\n\nbetween a LOCAL and a REMOTE host (your PC and GDK)\nbetween TWO REMOTE hosts (GDK and another cluster)\n\n \nYou can use it to transfer files from your pc to GenomeDK and viceversa, but also between GenomeDK and another computing cluster (for example, downloading data from a collaborator, which resides on a different remote computing system)."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#rsync-transfer",
-    "href": "resources/Slides/Introduction/slides.html#rsync-transfer",
-    "title": "Use GenomeDK",
-    "section": "Rsync transfer",
-    "text": "Rsync transfer\nDifferently from scp, you can use rsync to syncronize files and folders between two locations. It copies only the changes in the data and not all of it every time.\n \nCopying a file or a folder between your computer and GenomeDK works exactly as in scp. For example\nrsync --partial --progress -r \\\n      username@login.genome.au.dk:/home/username/my_project/folder \\\n      /home/my_laptop/Documents/\nwhere we add -progress to show a progress bar and --partial to retrieve interrupted downloads"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#interactive-transfer",
-    "href": "resources/Slides/Introduction/slides.html#interactive-transfer",
-    "title": "Use GenomeDK",
-    "section": "Interactive transfer",
-    "text": "Interactive transfer\nYou can also do transfering with an interactive software, such as Filezilla, which has an easy interface. Download Filezilla.\n \nWhen done, open Filezilla and use the following information on the login bar:\n\nHost: login.genome.au.dk\nUsername, Password: your GenomeDK username and password\nPort: 22"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#virtual-environments",
-    "href": "resources/Slides/Introduction/slides.html#virtual-environments",
-    "title": "Use GenomeDK",
-    "section": "Virtual environments",
-    "text": "Virtual environments\nEach project needs specific software versions dependent on each other for reproducibility - without interferring with other projects.\n \n\n\n\n\n\n\n\nDefinition\n\n\nA virtual environment keeps project-specific softwares and their dependencies separated\n \nA package manager is a software that can retrieve, download, install, upgrade packages easily and reliably"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#conda",
-    "href": "resources/Slides/Introduction/slides.html#conda",
-    "title": "Use GenomeDK",
-    "section": "Conda",
-    "text": "Conda\n \nConda is both a virtual environment and a package manager.\n\neasy to use and understand\ncan handle quite big environments\nenvironments are easily shareable\na large archive (Anaconda) of packages\nactive community of people archiving their packages on Anaconda"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#installation",
-    "href": "resources/Slides/Introduction/slides.html#installation",
-    "title": "Use GenomeDK",
-    "section": "Installation",
-    "text": "Installation\nJust download and execute the installer by\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n./miniforge3/bin/conda init bash\n \nAfter a few ENTERs and YES’s you should get the installation done. Run\nsource ~/.bashrc\nand doublecheck that conda works:\nconda info"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#conda-configuration",
-    "href": "resources/Slides/Introduction/slides.html#conda-configuration",
-    "title": "Use GenomeDK",
-    "section": "Conda Configuration",
-    "text": "Conda Configuration\nYou can add some default channels where to find archived packages. Here are some tipycal ones\nconda config --append channels bioconda\nconda config --append channels genomedk\nconda config --append channels r\nconda config --append channels conda-forge\nWe tell conda to look into channels in the order specified above. We also avoid opening the base environment (where conda is installed) at login.\nconda config --set channel_priority strict\nconda config --set auto_activate_base false"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#base-environment",
-    "href": "resources/Slides/Introduction/slides.html#base-environment",
-    "title": "Use GenomeDK",
-    "section": "Base environment",
-    "text": "Base environment\nbase is the environment containing conda itself. The current environment is in your prompt in round brackets.\n(environment) [samuele@fe-open-02 ~]$\nWe update Conda with libmamba solver - a lot faster in installing many packages at once.\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\n\n\n\n\n\n\n\nDon’t touch the Base\n\n\nThis is the only time you should install in the base environment! You might otherwise ruin the conda installation."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#create-an-environment",
-    "href": "resources/Slides/Introduction/slides.html#create-an-environment",
-    "title": "Use GenomeDK",
-    "section": "Create an environment",
-    "text": "Create an environment\nAn empty environment called test_1:\nconda create -n test_1\n \nYou can list all the environments available:\nconda env list\n&gt; # conda environments:\n&gt; #\n&gt; base      *  /home/samuele/miniconda3\n&gt; test_1       /home/samuele/miniconda3/envs/test_1\n\n\n\n\n\n\nNote\n\n\nAn environment is in reality a folder, which contains all installed packages and other configurations and utilities"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
-    "href": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
-    "title": "Use GenomeDK",
-    "section": "Activate and deactivate",
-    "text": "Activate and deactivate\nTo use an environment we activate it:\nconda activate test_1\nFrom now on, all installed softwares and packages will be available. (test_1) is now shown in your prompt.\n \nDeactivation happens by\nconda deactivate"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#manage-an-environment",
-    "href": "resources/Slides/Introduction/slides.html#manage-an-environment",
-    "title": "Use GenomeDK",
-    "section": "Manage an environment",
-    "text": "Manage an environment\nPackage installation\nConda puts together the dependency trees of requested packages to find all compatible dependencies versions.\n\nFigure: A package’s dependency tree with required versions on the edges"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#useful-links-for-conda",
-    "href": "resources/Slides/Introduction/slides.html#useful-links-for-conda",
-    "title": "Use GenomeDK",
-    "section": "Useful links for conda:",
-    "text": "Useful links for conda:\n\nConda cheat sheet with all the things you can do to manage environments\nAnaconda where you can search for packages"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#what-is-a-job-on-a-hpc",
-    "href": "resources/Slides/Introduction/slides.html#what-is-a-job-on-a-hpc",
-    "title": "Use GenomeDK",
-    "section": "What is a job on a HPC",
-    "text": "What is a job on a HPC\nA computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM)."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#interactive-jobs",
-    "href": "resources/Slides/Introduction/slides.html#interactive-jobs",
-    "title": "Use GenomeDK",
-    "section": "Interactive jobs",
-    "text": "Interactive jobs\nUseful to run a non-repetitive task interactively\nExamples:\n\nsplitting by chromosome that one bam file you just got\nopen python/R and do some statistics\ncompress/decompress multiple files, maybe in parallel\n\nOnce you exit from the job, anything running into it will stop."
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
-    "href": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
-    "title": "Use GenomeDK",
-    "section": "Batch script (sbatch)",
-    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time than a short interaction. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#other-ways-of-running-jobs",
-    "href": "resources/Slides/Introduction/slides.html#other-ways-of-running-jobs",
-    "title": "Use GenomeDK",
-    "section": "Other ways of running jobs",
-    "text": "Other ways of running jobs\nBeyond sbatch, you can use other tools for workflows which are\n\nmodular and composable: sequences of commands can be applied in various contexts, composed together in the desired ordering\nscalable and parallel handling many sequences of operations parallelly or interdependently\nflexible where repetitive operations can be automatized over multiple applications"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#a-taste-of-the-advanced-workshops",
-    "href": "resources/Slides/Introduction/slides.html#a-taste-of-the-advanced-workshops",
-    "title": "Use GenomeDK",
-    "section": "A taste of the advanced workshops",
-    "text": "A taste of the advanced workshops\n\nvirtual terminals with tmux\nadvanced functionalities\n\nawk for advanced text file manipulation\nrsync for synchronization of data\n\nbrowser-based applications\nlaunch containers\ngwf pipelines"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#workflow",
@@ -460,5 +173,313 @@
     "title": "Introduction to workflows with gwf",
     "section": "Add new files after running a workflow",
     "text": "Add new files after running a workflow\nIf you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.\n\n \nExample: adding new fastq.gz files in the data folder of this workshop will update the workflow adding new steps and rendering others from completed to shouldrun."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#who-we-are",
+    "href": "resources/Slides/Introduction/slides.html#who-we-are",
+    "title": "Use GenomeDK",
+    "section": "Who we are",
+    "text": "Who we are\n\n \n\nSandbox: Samuele (BiRC, MBG) - samuele at birc.au.dk\nCore facility: Per&Co (Biomed) - per.q at biomed.au.dk\nBioinformatics Cafe: https://abc.au.dk, abc at au.dk"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#program",
+    "href": "resources/Slides/Introduction/slides.html#program",
+    "title": "Use GenomeDK",
+    "section": "Program",
+    "text": "Program\n\n11:00-12:00: Genome DK’s basics, File System, File manipulation\n13:00-14:30: Projects, data transfer, virtual environments with conda\n14:30-15:00: Introduction to jobs with slurm commands"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#get-the-slides",
+    "href": "resources/Slides/Introduction/slides.html#get-the-slides",
+    "title": "Use GenomeDK",
+    "section": "Get the slides",
+    "text": "Get the slides\nWebpage: https://hds-sandbox.github.io/GDKworkshops/\n\nYou can also open today’s slides at this short URL https://tinyurl.com/useGDK"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#navigate-the-slides",
+    "href": "resources/Slides/Introduction/slides.html#navigate-the-slides",
+    "title": "Use GenomeDK",
+    "section": "Navigate the slides",
+    "text": "Navigate the slides"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#software-for-command-line",
+    "href": "resources/Slides/Introduction/slides.html#software-for-command-line",
+    "title": "Use GenomeDK",
+    "section": "Software for command line",
+    "text": "Software for command line\n\n\nThe basic softwares\n\n\n\nPowershell for windows\n\n\n\n\n\nTerminal for MacOS and Linux\n\n\n\nCustomizable\n\n\n\nTerminator for Linux - iTerm2 for MacOS\n\n\n\n\n\nTabby for Linux, MacOS, Windows"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#infrastructure",
+    "href": "resources/Slides/Introduction/slides.html#infrastructure",
+    "title": "Use GenomeDK",
+    "section": "Infrastructure",
+    "text": "Infrastructure\nGenomeDK is a computing cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores)\nstorage nodes storing data in many hard drives (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#access",
+    "href": "resources/Slides/Introduction/slides.html#access",
+    "title": "Use GenomeDK",
+    "section": "Access",
+    "text": "Access\n\nCreating an account happens through this form at genome.au.dk"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#access-without-password",
+    "href": "resources/Slides/Introduction/slides.html#access-without-password",
+    "title": "Use GenomeDK",
+    "section": "Access without password",
+    "text": "Access without password\nIt is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer\n[gdk]$  exit\n \nNow we set up a public-key authentication. We generate a key pair (public and private):\n[local]$  ssh-keygen -t ed25519\nAlways press Enter and do not insert any password when asked."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#how-the-fs-is-organized",
+    "href": "resources/Slides/Introduction/slides.html#how-the-fs-is-organized",
+    "title": "Use GenomeDK",
+    "section": "How the FS is organized",
+    "text": "How the FS is organized\n\n\nFolders and files follow a tree-like structure\n\n/ is the root folder of the filesystem - nothing is above that\nthe FS is shared across all machines and available to all users\nhome and faststorage are two of the folders in the root\nprojects are in faststorage and linked to your home"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#file-formats",
+    "href": "resources/Slides/Introduction/slides.html#file-formats",
+    "title": "Use GenomeDK",
+    "section": "File formats",
+    "text": "File formats\nMany files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the file formats you encounter when doing bioinformatics.\n \n\n\n\n\n\n\nNote\n\n\nSome file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#less-for-reading-files",
+    "href": "resources/Slides/Introduction/slides.html#less-for-reading-files",
+    "title": "Use GenomeDK",
+    "section": "Less for reading files",
+    "text": "Less for reading files\nless is perfect for reading text files: you can scroll with the arrows, and quit pressing q. Try\n\nless data.fastq\n  The very first sequence you see should be\n@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG\nTCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA\nATCTGAGATTCCTGACCAAATGT\n+\nCCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH\nFFFFFFFEDDEEEEDDDDDDDDD\nThe first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in this table)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#counting",
+    "href": "resources/Slides/Introduction/slides.html#counting",
+    "title": "Use GenomeDK",
+    "section": "Counting",
+    "text": "Counting\nHow many lines are there in your file? The command wc can show that to you:\nwc -l data.fastq\n \nThe file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines).\n \n\n\n\n\n\n\nTip\n\n\nwc has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#copy-and-move",
+    "href": "resources/Slides/Introduction/slides.html#copy-and-move",
+    "title": "Use GenomeDK",
+    "section": "Copy and Move",
+    "text": "Copy and Move\ncp can copy one or more files - we use it on our data:\ncp data.fastq dataCopy.fastq\n \nmv moves a file into another folder - here we move it into our WD, which simply changes its filename:\nmv data.fastq ./dataOriginal.fastq"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#writing-on-a-file",
+    "href": "resources/Slides/Introduction/slides.html#writing-on-a-file",
+    "title": "Use GenomeDK",
+    "section": "Writing on a file",
+    "text": "Writing on a file\nWrite something on a file using &gt;:\nhead -4 dataOriginal.fastq &gt; smallFile.fastq\n \nprints out the first four lines of the data into smallFile.fastq.\n \n\n\n\n\n\n\nWarning\n\n\nUsing again &gt; will overwrite the file!"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#piping",
+    "href": "resources/Slides/Introduction/slides.html#piping",
+    "title": "Use GenomeDK",
+    "section": "Piping",
+    "text": "Piping\nYou can create small pipelines directly on the shell with the symbol |. The output of a command and send it to the next command when you have | in between. For example,\ngrep NNNNN dataOriginal.fastq\nfinds the pattern NNNNN in the data.\nHow to find it in the first hundred sequences? Easy! we pipe head into grep:\nhead -400 dataOriginal.fastq | grep NNNNN"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
+    "href": "resources/Slides/Introduction/slides.html#compendium-for-file-manipulation",
+    "title": "Use GenomeDK",
+    "section": "Compendium for file manipulation",
+    "text": "Compendium for file manipulation\n\n\nList Files and Directories\n\nls: List files and directories in the current directory.\nls -l: List in long format (detailed information).\nls -a: List all files, including hidden ones (starting with .).\nls -lh: List with human-readable file sizes (e.g., KB, MB).\nls -R: Recursively list files in directories and subdirectories.\n\nCopy Files and Directories\n\ncp source_file destination: Copy a file to a destination.\ncp file1 file2 dir/: Copy multiple files to a directory.\ncp -r dir1 dir2: Recursively copy a directory and its contents.\n\nMove (or Rename) Files and Directories\n\nmv source_file destination: Move a file to a new location or rename it.\nmv file1 file2 dir/: Move multiple files to a directory.\nmv oldname newname: Rename a file or directory.\n\nRemove Files and Directories\n\nrm file: Remove a file.\nrm -f file: Force remove a file (suppress confirmation).\nrm -r dir: Recursively remove a directory and its contents.\nrm -rf dir: Forcefully and recursively remove a directory and its contents (use with caution).\n\nCreate Directories\n\nmkdir dir_name: Create a new directory.\nmkdir -p parent_dir/child_dir: Create a directory with parent directories as needed.\n\n\nChange File Permissions\n\nchmod 644 file: Set read/write for owner, and read-only for group and others.\nchmod 755 file: Set read/write/execute for owner, and read/execute for group and others.\nchmod +x file: Add execute permission to a file.\nchmod -R 755 dir: Recursively change permissions for a directory and its contents.\n\nChange File Ownership\n\nchown user file: Change the ownership of a file.\nchown user:group file: Change the owner and group of a file.\nchown -R user:group dir: Recursively change ownership of a directory and its contents.\n\nFile Information\n\nfile filename: Display the type of a file.\nstat filename: Show detailed information about a file (size, permissions, timestamps).\ndu -sh file/dir: Display the disk usage of a file or directory (in human-readable format).\n\nCreate and View Files\n\ntouch filename: Create an empty file or update the timestamp of an existing file.\ncat filename: View the contents of a file.\nless filename: View the contents of a file, with navigation.\nhead -n 10 filename: View the first 10 lines of a file.\ntail -n 10 filename: View the last 10 lines of a file.\n\nLinks\n\nln file link_name: Create a hard link.\nln -s target link_name: Create a symbolic (soft) link."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#compendium-for-less",
+    "href": "resources/Slides/Introduction/slides.html#compendium-for-less",
+    "title": "Use GenomeDK",
+    "section": "Compendium for less",
+    "text": "Compendium for less\n\n\nBasic Navigation\n\nMove Forward:\n\nSpace or f: Scroll forward by one page.\nDown Arrow or j: Scroll down by one line.\nd: Scroll down by half a page.\n\nMove Backward:\n\nb: Scroll backward by one page.\nUp Arrow or k: Scroll up by one line.\nu: Scroll up by half a page.\n\nGo to Specific Line or Position:\n\nG: Go to the end of the file.\ng: Go to the beginning of the file.\nnumberG or number%: Go to a specific line or percentage in the file.\n\n\nSearching\n\nSearch Forward:\n\n/pattern: Search forward for a pattern (use n to move to the next match).\n\nSearch Backward:\n\n?pattern: Search backward for a pattern (use N to move to the previous match).\n\nRepeat Last Search:\n\nn: Repeat the last search in the same direction.\nN: Repeat the last search in the opposite direction.\n\n\nDisplay Line Numbers\n\nShow Line Numbers:\n\n-N or --LINE-NUMBERS: Show line numbers (must start less with this option).\n\n\nMarking Positions\n\nSet a Mark:\n\nm&lt;letter&gt;: Mark the current position with a letter.\n\nJump to a Mark:\n\n'&lt;letter&gt;: Return to the marked position.\n\n\nExiting\n\nQuit less:\n\nq: Exit less.\n\n\nScrolling Long Lines\n\nMove Left and Right (For Long Lines):\n\nRight Arrow or →: Scroll right.\nLeft Arrow or ←: Scroll left.\n\n\n\nFile Manipulation\n\nOpen Another File:\n\n:e filename: Open another file while inside less.\n\nView Multiple Files:\n\n:n: Go to the next file (if multiple files were opened).\n:p: Go to the previous file.\n\n\nMiscellaneous\n\nFollow File in Real Time:\n\nF: Continuously view a file as it grows (like tail -f).\n\nShow Current Filename:\n\n=: Show the current file name, line number, and percentage through the file.\n\nHelp Menu:\n\nh: Display help with all available commands.\n\n\nView Line Numbers Temporarily (without restarting less)\n\nToggle Line Numbers:\n\n-N: While in a session, use this to toggle line number display."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#last-thing-before-lunch",
+    "href": "resources/Slides/Introduction/slides.html#last-thing-before-lunch",
+    "title": "Use GenomeDK",
+    "section": "Last thing before lunch:",
+    "text": "Last thing before lunch:\nWe meet at 13:00 in 1533-103\n\nIndlæser…"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#gdk-projects",
+    "href": "resources/Slides/Introduction/slides.html#gdk-projects",
+    "title": "Use GenomeDK",
+    "section": "GDK projects",
+    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can keep track of per-project and -user resource usage"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#creation",
+    "href": "resources/Slides/Introduction/slides.html#creation",
+    "title": "Use GenomeDK",
+    "section": "Creation",
+    "text": "Creation\nRequest a project (after login on GDK) with the command\ngdk-project-request -g &lt;project_name&gt;\n \nAfter GDK approval, a project folder with the desired name appears in ~ and /faststorage/project. You should be able to set the WD into that folder:\ncd &lt;project_name&gt;\nor\ncd ~/&lt;project_name&gt;"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#folders-management",
+    "href": "resources/Slides/Introduction/slides.html#folders-management",
+    "title": "Use GenomeDK",
+    "section": "Folders management",
+    "text": "Folders management\nHave a coherent folder structure - your future self will thanks.\n\nExample of structure, which backs up raw data and analysisYou can do it with a script which downloads and execute with the command below:\ncurl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#download-with-wget",
+    "href": "resources/Slides/Introduction/slides.html#download-with-wget",
+    "title": "Use GenomeDK",
+    "section": "Download with wget",
+    "text": "Download with wget\nwget is a utility for command-line-based downloads. It is already installed on GenomeDK and works with http, https, ftp protocols.\n \nExample:\nwget -O ./output.png \\\n     -c \\\n     -b \\\n     https://example.com/image.png\ndownloads a png file and saves it as output.png (option O), downloads in background (-b) and if the download was interrupted earlier, it retrieves it from where it stopped (-c)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#scp-transfer",
+    "href": "resources/Slides/Introduction/slides.html#scp-transfer",
+    "title": "Use GenomeDK",
+    "section": "SCP transfer",
+    "text": "SCP transfer\nSCP (Secure Copy Protocol) can transfer files securely\n\nbetween a LOCAL and a REMOTE host (your PC and GDK)\nbetween TWO REMOTE hosts (GDK and another cluster)\n\n \nYou can use it to transfer files from your pc to GenomeDK and viceversa, but also between GenomeDK and another computing cluster (for example, downloading data from a collaborator, which resides on a different remote computing system)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#interactive-transfer",
+    "href": "resources/Slides/Introduction/slides.html#interactive-transfer",
+    "title": "Use GenomeDK",
+    "section": "Interactive transfer",
+    "text": "Interactive transfer\nYou can also do transfering with an interactive software, such as Filezilla, which has an easy interface. Download Filezilla.\n \nWhen done, open Filezilla and use the following information on the login bar:\n\nHost: login.genome.au.dk\nUsername, Password: your GenomeDK username and password\nPort: 22"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#virtual-environments",
+    "href": "resources/Slides/Introduction/slides.html#virtual-environments",
+    "title": "Use GenomeDK",
+    "section": "Virtual environments",
+    "text": "Virtual environments\nEach project needs specific software versions dependent on each other for reproducibility - without interferring with other projects.\n \n\n\n\n\n\n\n\nDefinition\n\n\nA virtual environment keeps project-specific softwares and their dependencies separated\n \nA package manager is a software that can retrieve, download, install, upgrade packages easily and reliably"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#conda",
+    "href": "resources/Slides/Introduction/slides.html#conda",
+    "title": "Use GenomeDK",
+    "section": "Conda",
+    "text": "Conda\n \nConda is both a virtual environment and a package manager.\n\neasy to use and understand\ncan handle quite big environments\nenvironments are easily shareable\na large archive (Anaconda) of packages\nactive community of people archiving their packages on Anaconda"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#installation",
+    "href": "resources/Slides/Introduction/slides.html#installation",
+    "title": "Use GenomeDK",
+    "section": "Installation",
+    "text": "Installation\nJust download and execute the installer by\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n./miniforge3/bin/conda init bash\n \nAfter a few ENTERs and YES’s you should get the installation done. Run\nsource ~/.bashrc\nand doublecheck that conda works:\nconda info"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#conda-configuration",
+    "href": "resources/Slides/Introduction/slides.html#conda-configuration",
+    "title": "Use GenomeDK",
+    "section": "Conda Configuration",
+    "text": "Conda Configuration\nYou can add some default channels where to find archived packages. Here are some tipycal ones\nconda config --append channels bioconda\nconda config --append channels genomedk\nconda config --append channels r\nconda config --append channels conda-forge\nWe tell conda to look into channels in the order specified above. We also avoid opening the base environment (where conda is installed) at login.\nconda config --set channel_priority strict\nconda config --set auto_activate_base false"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#base-environment",
+    "href": "resources/Slides/Introduction/slides.html#base-environment",
+    "title": "Use GenomeDK",
+    "section": "Base environment",
+    "text": "Base environment\nbase is the environment containing conda itself. The current environment is in your prompt in round brackets.\n(environment) [samuele@fe-open-02 ~]$\nWe update Conda with libmamba solver - a lot faster in installing many packages at once.\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\n\n\n\n\n\n\n\nDon’t touch the Base\n\n\nThis is the only time you should install in the base environment! You might otherwise ruin the conda installation."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#create-an-environment",
+    "href": "resources/Slides/Introduction/slides.html#create-an-environment",
+    "title": "Use GenomeDK",
+    "section": "Create an environment",
+    "text": "Create an environment\nAn empty environment called test_1:\nconda create -n test_1\n \nYou can list all the environments available:\nconda env list\n&gt; # conda environments:\n&gt; #\n&gt; base      *  /home/samuele/miniconda3\n&gt; test_1       /home/samuele/miniconda3/envs/test_1\n\n\n\n\n\n\nNote\n\n\nAn environment is in reality a folder, which contains all installed packages and other configurations and utilities"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
+    "href": "resources/Slides/Introduction/slides.html#activate-and-deactivate",
+    "title": "Use GenomeDK",
+    "section": "Activate and deactivate",
+    "text": "Activate and deactivate\nTo use an environment we activate it:\nconda activate test_1\nFrom now on, all installed softwares and packages will be available. (test_1) is now shown in your prompt.\n \nDeactivation happens by\nconda deactivate"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#manage-an-environment",
+    "href": "resources/Slides/Introduction/slides.html#manage-an-environment",
+    "title": "Use GenomeDK",
+    "section": "Manage an environment",
+    "text": "Manage an environment\nPackage installation\nConda puts together the dependency trees of requested packages to find all compatible dependencies versions.\n\nFigure: A package’s dependency tree with required versions on the edges"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#useful-links-for-conda",
+    "href": "resources/Slides/Introduction/slides.html#useful-links-for-conda",
+    "title": "Use GenomeDK",
+    "section": "Useful links for conda:",
+    "text": "Useful links for conda:\n\nConda cheat sheet with all the things you can do to manage environments\nAnaconda where you can search for packages"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#what-is-a-job-on-a-hpc",
+    "href": "resources/Slides/Introduction/slides.html#what-is-a-job-on-a-hpc",
+    "title": "Use GenomeDK",
+    "section": "What is a job on a HPC",
+    "text": "What is a job on a HPC\nA computational task executed on requested HPC resources (computing nodes), which are handled by the queueing system (SLURM)."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#interactive-jobs",
+    "href": "resources/Slides/Introduction/slides.html#interactive-jobs",
+    "title": "Use GenomeDK",
+    "section": "Interactive jobs",
+    "text": "Interactive jobs\nUseful to run a non-repetitive task interactively\nExamples:\n\nsplitting by chromosome that one bam file you just got\nopen python/R and do some statistics\ncompress/decompress multiple files, maybe in parallel\n\nOnce you exit from the job, anything running into it will stop."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
+    "href": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
+    "title": "Use GenomeDK",
+    "section": "Batch script (sbatch)",
+    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time and without interaction from the user. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#choosing-the-right-cpu-ram",
+    "href": "resources/Slides/Introduction/slides.html#choosing-the-right-cpu-ram",
+    "title": "Use GenomeDK",
+    "section": "Choosing the right CPU-RAM",
+    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. While it is running\n\nuse squeue-me and look at the node id\nlog into that node from the front-end:\nssh &lt;NODEID&gt;\nuse htop -u &lt;username&gt; to see what is running and how much memory and CPU it uses \n\n PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND          \n 8249 newhall   20   0  153m 4488  472 R   47  0.0   0:02.78 6 gol              \n 8250 newhall   20   0  153m 4488  472 R   47  0.0   0:02.76 2 gol              \n 8236 newhall   20   0  153m 4488  472 R   46  0.0   0:02.77 6 gol              \n 8237 newhall   20   0  153m 4488  472 S   46  0.0   0:02.77 4 gol              \n 8243 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 1 gol              \n 8239 newhall   20   0  153m 4488  472 S   46  0.0   0:02.76 7 gol              \n 8240 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 5 gol              \n 8244 newhall   20   0  153m 4488  472 R   46  0.0   0:02.72 2 gol              \n 8251 newhall   20   0  153m 4488  472 R   46  0.0   0:02.78 4 gol"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#other-ways-of-running-jobs",
+    "href": "resources/Slides/Introduction/slides.html#other-ways-of-running-jobs",
+    "title": "Use GenomeDK",
+    "section": "Other ways of running jobs",
+    "text": "Other ways of running jobs\nBeyond sbatch, you can use other tools for workflows which are\n\nmodular and composable: sequences of commands can be applied in various contexts, composed together in the desired ordering\nscalable and parallel handling many sequences of operations parallelly or interdependently\nflexible where repetitive operations can be automatized over multiple applications\n\nSome workflow tools:\n\nSnakemake\nNextFlow\nGwf\n\n \nGwf has an easy python syntax instead of its own language to write workflows.\n \nLearning a workflow language takes some time commitment, but it is worth the effort."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#a-taste-of-the-next-workshops",
+    "href": "resources/Slides/Introduction/slides.html#a-taste-of-the-next-workshops",
+    "title": "Use GenomeDK",
+    "section": "A taste of the next workshops",
+    "text": "A taste of the next workshops\n\nvirtual terminals with tmux\ngit setup\nadvanced functionalities\n\nawk for advanced text file manipulation\nrsync for synchronization of data\n\nbrowser-based applications\nlaunch containers\ngwf pipelines"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#your-input-for-topics-and-evaluation",
+    "href": "resources/Slides/Introduction/slides.html#your-input-for-topics-and-evaluation",
+    "title": "Use GenomeDK",
+    "section": "Your input for topics and evaluation",
+    "text": "Your input for topics and evaluation\n\nIndlæser…"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "GenomeDK workshops",
+    "section": "",
+    "text": "Attribution-ShareAlike 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More_considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nAdditional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material,\nincluding for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "cards/AlbaMartinez.html",
+    "href": "cards/AlbaMartinez.html",
+    "title": "Alba Refoyo Martinez",
+    "section": "",
+    "text": "Alba is a Sandbox data scientist based at the university of Copenhagen. During her academic background as a PhD and Postdoc she has developed a solid expertise in large-scale genomics and pipelines development on computing clusters."
+  },
+  {
+    "objectID": "cards/JakobSkelmose.html",
+    "href": "cards/JakobSkelmose.html",
+    "title": "Jakob Skelmose",
+    "section": "",
+    "text": "Jakob is a Sandbox data scientist based at the university of Aalborg. His work is mainly focused on applications related to synthetic data, both for reserch and teaching purposes."
+  },
+  {
+    "objectID": "cards/SamueleSoraggi.html",
+    "href": "cards/SamueleSoraggi.html",
+    "title": "Samuele Soraggi",
+    "section": "",
+    "text": "Samuele is a Sandbox data scientist based at the university of Aarhus. During his academic activity he has gained experience in population genomics, transcriptomics, single cell multiomics and spans his knowledge across various themes of advanced computational statistics."
   }
 ]
