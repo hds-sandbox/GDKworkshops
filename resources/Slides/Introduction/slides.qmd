@@ -4,9 +4,11 @@ subtitle: "An introduction to the GDK system and basic commands https://hds-sand
 author: 
     - "Samuele Soraggi"
     - "Dan Søndergaard"
+    - "Per, Dimi, Jacob, Manuel, Marie"
 institute:
     - Health Data Science sandbox, BiRC
     - GenomeDK, Health
+    - Core Binf facility, Biomed
 date: last-modified
 format: 
   revealjs:
@@ -19,9 +21,14 @@ logo: img/logos.png
 navigation-mode: vertical
 ---
 
-# About this presentaion
+# Some background
 
-- These slides are both a presentation and a reference manual with commands
+- These slides are both a presentation and a small reference manual
+
+- We will try out the commands during the workshop
+  - keep both **slides and terminal** open
+
+- Official reference documentation: [genome.au.dk](https://genome.au.dk)
 
 ## Who we are
 
@@ -29,19 +36,17 @@ navigation-mode: vertical
 
 &nbsp;
 
-- Sandbox: Samuele (BiRC, MBG) - samuele@birc.au.dk 
+- Sandbox: Samuele (BiRC, MBG) - samuele at birc.au.dk 
 
-- Core facility: Per&Co (Biomed) - per.q@biomed.au.dk 
+- Core facility: Per&Co (Biomed) - per.q at biomed.au.dk 
 
-- Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc@au.dk
+- Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc at au.dk
 
 ## Program
 
 - **11:00-12:00**: Genome DK's basics, File System, File manipulation
 
-- **13:00-13:30**: Exercise with command line bash
-
-- **13:30-14:30**: Projects, data transfer, virtual environments with conda
+- **13:00-14:30**: Projects, data transfer, virtual environments with conda
 
 - **14:30-15:00**: Introduction to jobs with `slurm` commands
 
@@ -64,6 +69,28 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 
 ![](./img/slideGuide2.png){fig-align="center"}
 
+---
+
+## Software for command line{.smaller} 
+:::: {.columns}
+::: {.column width="50%" }
+The basic softwares
+
+![Powershell for windows](img/powershell.png){width=250px fig-align="center"}
+
+![Terminal for MacOS and Linux](img/terminal.png){width=250px fig-align="center"}
+
+:::
+::: {.column width="50%" }
+
+Customizable 
+
+![Terminator for Linux - iTerm2 for MacOS](img/terminator.png){width=250px fig-align="center" } 
+
+![Tabby for Linux, MacOS, Windows](img/tabby.png){width=250px fig-align="center"}
+
+:::
+::::
 
 # GenomeDK's ABC
 
@@ -205,7 +232,7 @@ Look at the File system tree and answer to the following questions:
 
 :::: {.columns}
 ::: {.column width="40%" }
-![](img/complexTree.png){}
+![](img/complexTree.png){width=300px}
 :::
 ::: {.column width="60%" }
 ```{python}
@@ -397,7 +424,6 @@ cd myFolder
 
 and verify with `pwd` the new working directory path. 
 
----
 
 # Working with Files
 
@@ -530,12 +556,15 @@ Use now `ls -lah` and you will see  two files of identical size and different cr
 
 &nbsp;
 
-But... are those files identical? `diff` can tell you by printing differences (or nothing if files are identical)
+Well, we changed our mind and do not want a copy of our data. Remove it with
 
 ```{.bash}
-diff dataOriginal.fastq dataCopy.fastq
+rm dataCopy.fastq
 ```
 
+:::{.callout-warning title="Forever away"}
+There is no trash bin - **removed files are lost forever** - with no exception
+:::
 ---
 
 ## Writing on a file
@@ -588,9 +617,9 @@ You can create **small pipelines** directly on the shell with the symbol `|`. Th
 grep NNNNN dataOriginal.fastq
 ```
 
-find the pattern `NNNNN` in the data.
+finds the pattern `NNNNN` in the data.
 
-How to find it in the first hundred sequences? Easy! we **pipe* `head` into *grep*:
+How to find it in the first hundred sequences? Easy! we *pipe* `head` into *grep*:
 
 ```{.bash}
 head -400 dataOriginal.fastq | grep NNNNN
@@ -610,8 +639,8 @@ head -400 dataOriginal.fastq | grep NNNNN | wc -l
 ```{python}
 #| echo: false
 from jupyterquiz import display_quiz
-#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/less.json'
-display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="center")
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/pless.json'
+display_quiz("./questions/piping.json", shuffle_answers=True, question_alignment="center")
 ```
 
 ---
@@ -769,13 +798,22 @@ display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="
 
 ::::
 
+
+## Last thing before lunch:
+**We meet at 13:00 in 1533-103**
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfIN99btbNVGd-2s8dzl7dnUL_OyJskalTrTjhJyvZqIZIl6w/viewform?embedded=true" width="640" height="532" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+
+---
+
+![1533-103E](img/wayToAuditorium.png){fig-align="center"}
+
+
 # Project management
 
 - What are **GDK projects** 
-- how to **manage the resource usage**, and 
+- how to **track the resource usage**, and 
 - how to **organize a project**
-
----
 
 ## GDK projects
 
@@ -790,7 +828,7 @@ Projects are contained in `/faststorage/project/`, and are simple folders with s
 
 ---
 
-![Example of a project managed by `you` with two invited users. `you` has requested the creation of `coolProject` and manages the project. 'you' invited two users to the project.](img/projectScheme.png)
+![Example of a project managed by `you` with two invited users. `you` has requested the creation of `coolProject` and manages the project. `you` invited two users to the project.](img/projectScheme.png)
 
 ---
 
@@ -801,8 +839,6 @@ Projects are contained in `/faststorage/project/`, and are simple folders with s
 
 - Why? **Projects cannot be deleted**, so they keep cumulating
 :::
-
----
 
 ## Creation
 
@@ -1086,7 +1122,7 @@ scp -r username@login.genome.au.dk:/home/username/my_project/folder \
 
 A few more options are available and you can see them with the command ``` scp --help ```.
 
-## Rsync transfer
+## Rsync transfer {visibility="hidden"}
 
 Differently from `scp`, you can use `rsync` to **syncronize files and folders between two locations**. It copies only the changes in the data and not all of it every time.
 
@@ -1448,7 +1484,9 @@ Front-end nodes are limited in memory and power, and **should only be for basic 
 
 - small software installations
 
-and in general you **should not** use them to run computations. This might slow down other users.
+- data transfer
+
+and in general you **should not** use them to run computations. This might slow down all other users on the front-end.
 
 ---
 
@@ -1488,7 +1526,7 @@ The **queueing system** makes you wait based on the resources you ask and how bu
 
 ## Batch script (sbatch)
 
-Useful to **run a program non-interactively**, usually for longer time than a short interaction. A batch script contains 
+Useful to **run a program non-interactively**, usually for longer time and without interaction from the user. A batch script contains 
 
 - the desired **resources**
 - the sequence of **commands** to be executed
@@ -1561,9 +1599,23 @@ jobinfo 33735298
 
 or about all the queued jobs
 
+:::: {.columns}
+
+::: {.column width="45%" }
 ```{.bash}
 squeue -u <username>
 ```
+:::
+::: {.column width="10%" }
+<html><center> or </center></html>
+:::
+::: {.column width="45%" }
+```{.bash}
+squeue -u me
+```
+:::
+::::
+
 
 ```
 >JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
@@ -1597,15 +1649,42 @@ less -S align.sh-33735928.out
 Checking the log files can be useful for debugging, when for example a command gives an error and the job interrupts before its end.
 :::
 
-## Other ways of running jobs
+
+## Choosing the right CPU-RAM {.hidden}
+
+Try to run a job with a smaller dataset as a test. While it is running
+
+- use `squeue-me` and look at the node id
+
+- log into that node from the front-end:
+  
+  ```{.bash}
+  ssh <NODEID>
+  ```
+
+- use `htop -u <username>` to see what is running and how much memory and CPU it uses
+  ![](img/htop.png)
+
+```
+ PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND          
+ 8249 newhall   20   0  153m 4488  472 R   47  0.0   0:02.78 6 gol              
+ 8250 newhall   20   0  153m 4488  472 R   47  0.0   0:02.76 2 gol              
+ 8236 newhall   20   0  153m 4488  472 R   46  0.0   0:02.77 6 gol              
+ 8237 newhall   20   0  153m 4488  472 S   46  0.0   0:02.77 4 gol              
+ 8243 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 1 gol              
+ 8239 newhall   20   0  153m 4488  472 S   46  0.0   0:02.76 7 gol              
+ 8240 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 5 gol              
+ 8244 newhall   20   0  153m 4488  472 R   46  0.0   0:02.72 2 gol              
+ 8251 newhall   20   0  153m 4488  472 R   46  0.0   0:02.78 4 gol     
+```
+
+## Other ways of running jobs {.hidden}
 
 Beyond `sbatch`, you can use other tools for workflows which are
 
 - **modular and composable**: sequences of commands can be applied in various contexts, composed together in the desired ordering
 - **scalable and parallel** handling many sequences of operations parallelly or interdependently
 - **flexible** where repetitive operations can be automatized over multiple applications
-
----
 
 Some workflow tools:
 
@@ -1625,22 +1704,22 @@ Learning a workflow language takes some time commitment, but it is worth the eff
 
 - More in this slides than what we went through
   - useful commands
-  - external material (tutorials)
+  - external material (tutorials at [Cafe](https://abc.au.dk/Documentation) or [genome.au.dk](https://genome.au.dk))
 
 - Updated over time, use as a reference
 
 - Impossible to cover everything at once. We will also advanced/pipeline workshop
 
-- Come to our Cafe and/or ask
+- Come to our [Cafe](https://abc.au.dk) and/or ask
 
 - Documentation on [genome.au.dk](https://genome.au.dk)
 
-
 ---
 
-## A taste of the advanced workshops
+## A taste of the next workshops
 
 - virtual terminals with `tmux`
+- git setup
 - advanced functionalities
   - `awk` for advanced text file manipulation
   - `rsync` for synchronization of data
@@ -1648,3 +1727,6 @@ Learning a workflow language takes some time commitment, but it is worth the eff
 - launch containers
 - gwf pipelines 
 
+## Your input for topics and evaluation
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevPQOj2FBtmhKp_kcJrWIv3jZQ-8ymvw67B_M_L-5dytiPEw/viewform?embedded=true" width="640" height="1218" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
