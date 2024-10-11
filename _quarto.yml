@@ -3,6 +3,8 @@ project:
 
 website:
   title: "GenomeDK workshops"
+  google-analytics: 
+    tracking-id: "G-QZP3HK6BQT"
   navbar:
     logo: /img/logo.png
     left:
