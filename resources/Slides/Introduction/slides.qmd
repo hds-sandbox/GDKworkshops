@@ -4,16 +4,14 @@ subtitle: "An introduction to the GDK system and basic commands https://hds-sand
 author: 
     - "Samuele Soraggi"
     - "Dan Søndergaard"
-    - "Per, Dimi, Jacob, Manuel, Marie"
 institute:
     - Health Data Science sandbox, BiRC
     - GenomeDK, Health
-    - Core Binf facility, Biomed
 date: last-modified
 format: 
   revealjs:
     chalkboard: true
-toc: true
+toc: false
 toc-depth: 1
 slide-number: h.v
 code-line-numbers: false
@@ -25,30 +23,34 @@ navigation-mode: vertical
 
 - These slides are both a presentation and a small reference manual
 
-- We will try out the commands during the workshop
+- We will try out some commands during the workshop
   - keep both **slides and terminal** open
 
 - Official reference documentation: [genome.au.dk](https://genome.au.dk)
 
-## Who we are
+## When you need to ask for help
 
-![](./img/jointLogos.png){fig-align="center"}
+- Practical help: 
+  
+  Samuele (BiRC, MBG) - samuele@birc.au.dk 
 
-&nbsp;
+- Drop in hours:
 
-- Sandbox: Samuele (BiRC, MBG) - samuele at birc.au.dk 
+  Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc@au.dk
 
-- Core facility: Per&Co (Biomed) - per.q at biomed.au.dk 
+- General mail for assistance
 
-- Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc at au.dk
+  support@genome.au.dk
 
 ## Program
 
-- **11:00-12:00**: Genome DK's basics, File System, File manipulation
+- **10:00-11:00**: What is GenomeDK, File System, Some basic commands
 
-- **13:00-14:30**: Projects, data transfer, virtual environments with conda
+- **11:00-12:00**: Projects, data transfer, virtual environments
 
-- **14:30-15:00**: Introduction to jobs with `slurm` commands
+- **12:45-13:15**: Create your environment
+
+- **13:15-14:00**: Send out your first job with `slurm`, estimate resource usage
 
 ## Get the slides
 
@@ -61,17 +63,7 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 ![](./img/slideGuide.png){fig-align="center"}
 
 
----
-
-- Copy code from the button on the rightmost edge of the code box
-
-- The quizzes can be answered
-
-![](./img/slideGuide2.png){fig-align="center"}
-
----
-
-## Software for command line{.smaller} 
+## Software for command line{.smaller .hidden} 
 :::: {.columns}
 ::: {.column width="50%" }
 The basic softwares
@@ -187,7 +179,7 @@ Folders and files follow a tree-like structure
 - `/` is the root folder of the filesystem - nothing is above that
 - the FS is shared across all machines and available to all users 
 - `home` and `faststorage` are two of the folders in the root
-- projects are in `faststorage` and **linked** to your home
+- projects are in `/faststorage/project` and **linked** to your home
 
 :::
 
@@ -798,17 +790,6 @@ display_quiz("./questions/piping.json", shuffle_answers=True, question_alignment
 
 ::::
 
-
-## Last thing before lunch:
-**We meet at 13:00 in 1533-103**
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfIN99btbNVGd-2s8dzl7dnUL_OyJskalTrTjhJyvZqIZIl6w/viewform?embedded=true" width="640" height="532" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
-
----
-
-![1533-103E](img/wayToAuditorium.png){fig-align="center"}
-
-
 # Project management
 
 - What are **GDK projects** 
@@ -982,37 +963,15 @@ chmod -R go+rwx <file or folder>
 
 ## Folders management
 
-Have a coherent folder structure - your future self will thanks.
+Have a coherent folder structure - your future self will thank.
 
 ![Example of structure, which backs up raw data and analysis](img/structure.png){width=400px fig-align="center"}
-
-You can do it with a script which downloads and execute with the command below:
-```{.bash}
-curl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash
-```
 
 ---
 
 If your project has many users, a good structure can be
 
 ![](img/multistructure.png){width=400px fig-align="center"}
-
-
-
-&nbsp; 
-
-Do that with these commands
-
-```{.bash}
-mkdir -p Backup/Data Workspaces/username1 Workspaces/username2
-ln -s Backup/Data/ Data
-```
-and making each user to run the script in its folder
-
-```{.bash}
-cd Workspaces/username1
-curl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh | bash
-```
 
 ---
 
@@ -1042,7 +1001,7 @@ curl https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/pop
 Data transfer amongst the web, GDK and your PC is an everyday action which you can easily perform.
 
 :::{.callout-warning}
-Downloads should **always** happens on the `front-end` nodes, and never using a compute node when working on `GenomeDK`
+Downloads should **always** happens on the `front-end` nodes, and **never** using a compute node when working on `GenomeDK`
 :::
 
 ## Download with wget
@@ -1242,10 +1201,8 @@ conda info
 You can add some default *channels* where to find archived packages. Here are some tipycal ones
 
 ```{.bash}
-conda config --append channels bioconda
-conda config --append channels genomedk
-conda config --append channels r
 conda config --append channels conda-forge
+conda config --append channels bioconda
 ```
 
 We tell `conda` to look into channels in the order specified above. We also avoid opening the `base` environment (where `conda` is installed) at login.
@@ -1335,11 +1292,11 @@ To install a specific package in your environment, search it on [anaconda.org](h
 
 ![Figure: suggested commands to install the package](img/anaconda2.png){width=10cm}
 
-:::{.callout-note title="Repositories"}
+:::{.callout-note title="Channels"}
 
-packages are archived in repositories. Typical ones are `bioconda`, `conda-forge`, `r`, `anaconda`.
+packages are archived in channels. Typical ones are  `conda-forge` and `bioconda`.
 
-`conda-forge` packges are often more up-to-date, but a few times show compatibility problems with other packages.
+`conda-forge` packages are often more up-to-date, but a few times show compatibility problems with other packages.
 :::
 
 ---
@@ -1357,11 +1314,7 @@ To install two packages, you need more than a hundred installations! Those are a
 
 &nbsp;
 
-Look for the package `tidyr` in your active environment:
-
-```{.bash}
-conda list | grep tidyr
-```
+Exercise: add two installed packages, `rstudio-desktop` and `jupyterlab`
 
 ---
 
@@ -1385,6 +1338,7 @@ channels:
 dependencies:
  - bioconda::bioconductor-deseq2
  - conda-forge::r-tidyr
+ ...
 ```
 
 ---
@@ -1611,7 +1565,7 @@ squeue -u <username>
 :::
 ::: {.column width="45%" }
 ```{.bash}
-squeue -u me
+squeue --me
 ```
 :::
 ::::
@@ -1650,11 +1604,11 @@ Checking the log files can be useful for debugging, when for example a command g
 :::
 
 
-## Choosing the right CPU-RAM {.hidden}
+## Choosing the right CPU-RAM
 
 Try to run a job with a smaller dataset as a test. While it is running
 
-- use `squeue-me` and look at the node id
+- use `squeue --me` and look at the node id
 
 - log into that node from the front-end:
   
@@ -1662,21 +1616,75 @@ Try to run a job with a smaller dataset as a test. While it is running
   ssh <NODEID>
   ```
 
+---
+
 - use `htop -u <username>` to see what is running and how much memory and CPU it uses
   ![](img/htop.png)
 
+---
+
+:::{.callout-note icon="false" title="exercise (1/4)"}
+
+You have a script which contains two programs: a genome simulator called `genomeSim` 
+and a program to infer similarity between the simulated
+genomes, called `inferSim`.
+
+You run the script simulating a dataset 100 times smaller than what you would need. Below is what you see using 
+`htop -u <username>` (next slide)
+:::
+
+---
+
+:::{.callout-note icon="false" title="exercise (2/4)"}
+
+While the simulation is running
 ```
  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND          
- 8249 newhall   20   0  153m 4488  472 R   47  0.0   0:02.78 6 gol              
- 8250 newhall   20   0  153m 4488  472 R   47  0.0   0:02.76 2 gol              
- 8236 newhall   20   0  153m 4488  472 R   46  0.0   0:02.77 6 gol              
- 8237 newhall   20   0  153m 4488  472 S   46  0.0   0:02.77 4 gol              
- 8243 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 1 gol              
- 8239 newhall   20   0  153m 4488  472 S   46  0.0   0:02.76 7 gol              
- 8240 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 5 gol              
- 8244 newhall   20   0  153m 4488  472 R   46  0.0   0:02.72 2 gol              
- 8251 newhall   20   0  153m 4488  472 R   46  0.0   0:02.78 4 gol     
+ 8249 newhall   20   0  153m 4488  472 R   147.1  28.0   0:02.78 6 genomeSim              
+ 8250 newhall   20   0  153m 4488  472 R   147.2  30.9   0:02.76 2 genomeSim                        
+ 8243 newhall   20   0  153m 4488  472 R   146.1  45.4   0:02.76 1 genomeSim              
+ 8239 newhall   20   0  153m 4488  472 S   146.5  37.1   0:02.76 7 genomeSim                   
 ```
+
+and while the similarity inference is running
+
+```
+ PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND                      
+ 8236 newhall   20   0  153m 4488  472 R   7.3  0.0   0:12.11 6 inferSimilarity              
+ 8237 newhall   20   0  153m 4488  472 S   8.1  0.0   0:14.33 4 inferSimilarity             
+```
+
+The script is finished in around 60 minutes, where the simulation itself took 50 minutes. 
+You asked for 16 cores and 128GB of memory when you sent the script to the `slurm` queueing manager.
+
+:::
+
+---
+
+:::{.callout-note icon="false" title="exercise (3/4)"}
+
+Q1 split
+
+:::
+
+---
+
+:::{.callout-note icon="false" title="exercise (3/4)"}
+
+Q2 Memory for the two jobs
+
+:::
+
+---
+
+
+:::{.callout-note icon="false" title="exercise (3/4)"}
+
+Q1 split
+
+:::
+
+---
 
 ## Other ways of running jobs {.hidden}
 
@@ -1716,7 +1724,7 @@ Learning a workflow language takes some time commitment, but it is worth the eff
 
 ---
 
-## A taste of the next workshops
+## A taste of the next workshops {.hidden}
 
 - virtual terminals with `tmux`
 - git setup
@@ -1727,6 +1735,6 @@ Learning a workflow language takes some time commitment, but it is worth the eff
 - launch containers
 - gwf pipelines 
 
-## Your input for topics and evaluation
+## Your input for topics and evaluation {.hidden}
 
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevPQOj2FBtmhKp_kcJrWIv3jZQ-8ymvw67B_M_L-5dytiPEw/viewform?embedded=true" width="640" height="1218" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
