@@ -6,14 +6,12 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="author" content="Per, Dimi, Jacob, Manuel, Marie">
-  <meta name="dcterms.date" content="2024-10-11">
+  <meta name="dcterms.date" content="2025-02-11">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -98,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-bbe7401fe57d4b791b917637bb662036.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QZP3HK6BQT"></script>
 
   <script type="text/javascript">
@@ -114,204 +112,6 @@
   <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -428,61 +228,40 @@ Dan Søndergaard
             GenomeDK, Health
           </p>
     </div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Per, Dimi, Jacob, Manuel, Marie 
-</div>
-        <p class="quarto-title-affiliation">
-            Core Binf facility, Biomed
-          </p>
-    </div>
 </div>
 
-  <p class="date">2024-10-11</p>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#/some-background" id="/toc-some-background">Some background</a></li>
-<li><a href="#/genomedks-abc" id="/toc-genomedks-abc">GenomeDK’s ABC</a></li>
-<li><a href="#/file-system-fs-on-genomedk" id="/toc-file-system-fs-on-genomedk">File System (FS) on GenomeDK</a></li>
-<li><a href="#/working-with-files" id="/toc-working-with-files">Working with Files</a></li>
-<li><a href="#/project-management" id="/toc-project-management">Project management</a></li>
-<li><a href="#/downloads-and-copies" id="/toc-downloads-and-copies">Downloads and Copies</a></li>
-<li><a href="#/packageenvironment-management" id="/toc-packageenvironment-management">Package/Environment management</a></li>
-<li><a href="#/running-a-job" id="/toc-running-a-job">Running a Job</a></li>
-<li><a href="#/closing-the-workshop" id="/toc-closing-the-workshop">Closing the workshop</a></li>
-</ul>
-</nav>
+  <p class="date">2025-02-11</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
 <h1>Some background</h1>
 <ul>
 <li><p>These slides are both a presentation and a small reference manual</p></li>
-<li><p>We will try out the commands during the workshop</p>
+<li><p>We will try out some commands during the workshop</p>
 <ul>
 <li>keep both <strong>slides and terminal</strong> open</li>
 </ul></li>
 <li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 </ul>
 </section>
-<section id="who-we-are" class="slide level2">
-<h2>Who we are</h2>
-
-<img data-src="./img/jointLogos.png" class="quarto-figure quarto-figure-center r-stretch"><p>&nbsp;</p>
+<section id="when-you-need-to-ask-for-help" class="slide level2">
+<h2>When you need to ask for help</h2>
 <ul>
-<li><p>Sandbox: Samuele (BiRC, MBG) - samuele at birc.au.dk</p></li>
-<li><p>Core facility: Per&amp;Co (Biomed) - per.q at biomed.au.dk</p></li>
-<li><p>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abc at au.dk</p></li>
+<li><p>Practical help:</p>
+<p>Samuele (BiRC, MBG) - samuele@birc.au.dk</p></li>
+<li><p>Drop in hours:</p>
+<p>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abc@au.dk</p></li>
+<li><p>General mail for assistance</p>
+<p>support@genome.au.dk</p></li>
 </ul>
 </section>
 <section id="program" class="slide level2">
 <h2>Program</h2>
 <ul>
-<li><p><strong>11:00-12:00</strong>: Genome DK’s basics, File System, File manipulation</p></li>
-<li><p><strong>13:00-14:30</strong>: Projects, data transfer, virtual environments with conda</p></li>
-<li><p><strong>14:30-15:00</strong>: Introduction to jobs with <code>slurm</code> commands</p></li>
+<li><p><strong>10:00-11:00</strong>: What is GenomeDK, File System, Some basic commands</p></li>
+<li><p><strong>11:00-12:00</strong>: Projects, data transfer, virtual environments</p></li>
+<li><p><strong>12:45-13:15</strong>: Create your environment</p></li>
+<li><p><strong>13:15-14:00</strong>: Send out your first job with <code>slurm</code>, estimate resource usage</p></li>
 </ul>
 </section>
 <section id="get-the-slides" class="slide level2">
@@ -494,15 +273,7 @@ Per, Dimi, Jacob, Manuel, Marie
 <h2>Navigate the slides</h2>
 
 <img data-src="./img/slideGuide.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section class="slide level2">
-
-<ul>
-<li><p>Copy code from the button on the rightmost edge of the code box</p></li>
-<li><p>The quizzes can be answered</p></li>
-</ul>
-
-<img data-src="./img/slideGuide2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="software-for-command-line" class="slide level2 smaller">
+<section id="software-for-command-line" class="slide level2 smaller hidden">
 <h2>Software for command line</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -613,7 +384,7 @@ Per, Dimi, Jacob, Manuel, Marie
 <li><code>/</code> is the root folder of the filesystem - nothing is above that</li>
 <li>the FS is shared across all machines and available to all users</li>
 <li><code>home</code> and <code>faststorage</code> are two of the folders in the root</li>
-<li>projects are in <code>faststorage</code> and <strong>linked</strong> to your home</li>
+<li>projects are in <code>/faststorage/project</code> and <strong>linked</strong> to your home</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -650,10 +421,10 @@ Per, Dimi, Jacob, Manuel, Marie
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="53cab921" class="cell" data-execution_count="1">
+<div id="678b2c9e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="CxEIVRPHTbNO" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#CxEIVRPHTbNO {
+<div id="qurqJyXhBoYY" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
+#qurqJyXhBoYY {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -673,8 +444,8 @@ Per, Dimi, Jacob, Manuel, Marie
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px;
-    padding-bottom: 4px;
+/*    margin-bottom: 15px;*/
+/*    padding-bottom: 4px;*/
     padding-top: 4px;
     line-height: 1.1;
     font-size: 16pt;
@@ -692,18 +463,48 @@ Per, Dimi, Jacob, Manuel, Marie
     padding: 4px;
 }
 
+.Quiz code {
+    background-color: lightgray;
+    color: black;
+}
+
+.Quiz .QuizCode code {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+.Quiz .MCButton code {
+    background-color: inherit;
+    color: inherit;
+}
+
+.MCButton .QuizCode {
+    text-align: left;
+}
+
+
+
+
 .Answer {
-    margin: 10px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
     border-radius: inherit;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0;
+}
+
+@media only screen and (max-width:480px) {
+    .Answer {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 .Feedback {
     font-size: 16pt;
     text-align: center;
-    min-height: 2em;
+/*    min-height: 2em;*/
 }
 
 .Input {
@@ -730,7 +531,7 @@ Per, Dimi, Jacob, Manuel, Marie
 }
 
 .Input-text:focus {
-    outline: none;
+    /*outline: none;*/
     background-color: var(--jq-numeric-input-bg);
     box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
 }
@@ -739,6 +540,7 @@ Per, Dimi, Jacob, Manuel, Marie
     background: var(--jq-mc-button-bg);
     border: 1px solid var(--jq-mc-button-border);
     border-radius: inherit;
+    color: #333333;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -767,10 +569,10 @@ Per, Dimi, Jacob, Manuel, Marie
 }
 
 .NumericQn {
-    padding: 10px;
     background: var(--jq-numeric-bg);
-    color: var(--jq-text-color);
     border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
 }
 
 .NumericQn p {
@@ -778,11 +580,11 @@ Per, Dimi, Jacob, Manuel, Marie
 }
 
 .InpLabel {
-    line-height: 34px;
-    float: left;
-    margin-right: 10px;
     color: var(--jq-numeric-input-label);
+    float: left;
     font-size: 15pt;
+    line-height: 34px;
+    margin-right: 10px;
 }
 
 .incorrect {
@@ -799,17 +601,17 @@ Per, Dimi, Jacob, Manuel, Marie
    */
     animation: correct-anim 0.6s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 .incorrectButton {
     animation: incorrect-anim 0.8s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 @keyframes incorrect-anim {
@@ -827,7 +629,7 @@ Per, Dimi, Jacob, Manuel, Marie
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsCxEIVRPHTbNO=[
+var questionsqurqJyXhBoYY=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -916,6 +718,9 @@ function printResponses(responsesContainer) {
     });
     responsesContainer.innerHTML=stringResponses;
 }
+/* Callback function to determine whether a selected multiple-choice
+   button corresponded to a correct answer and to provide feedback
+   based on the answer */
 function check_mc() {
     var id = this.id.split('-')[0];
     //var response = this.id.split('-')[1];
@@ -937,17 +742,16 @@ function check_mc() {
 
 
     var answers = label.parentElement.children;
-
     //console.log(answers);
-
 
     // Split behavior based on multiple choice vs many choice:
     var fb = document.getElementById("fb" + id);
 
 
 
-
-    if (fb.dataset.numcorrect == 1) {
+    /* Multiple choice (1 answer). Allow for 0 correct
+       answers as an edge case */
+    if (fb.dataset.numcorrect <= 1) {
         // What follows is for the saved responses stuff
         var outerContainer = fb.parentElement.parentElement;
         var responsesContainer = document.getElementById("responses" + outerContainer.id);
@@ -969,7 +773,7 @@ function check_mc() {
             printResponses(responsesContainer);
         }
         // End code to preserve responses
-        
+
         for (var i = 0; i < answers.length; i++) {
             var child = answers[i];
             //console.log(child);
@@ -981,9 +785,9 @@ function check_mc() {
         if (label.dataset.correct == "true") {
             // console.log("Correct action");
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Correct!";
+                fb.innerHTML = "Correct!";
             }
             label.classList.add("correctButton");
 
@@ -992,9 +796,9 @@ function check_mc() {
 
         } else {
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Incorrect -- try again.";
+                fb.innerHTML = "Incorrect -- try again.";
             }
             //console.log("Error action");
             label.classList.add("incorrectButton");
@@ -1002,7 +806,7 @@ function check_mc() {
             fb.classList.add("incorrect");
         }
     }
-    else {
+    else { /* Many choice (more than 1 correct answer) */
         var reset = false;
         var feedback;
          if (label.dataset.correct == "true") {
@@ -1091,9 +895,9 @@ function check_mc() {
         var numcorrect = fb.dataset.numcorrect;
         var answeredcorrect = fb.dataset.answeredcorrect;
         if (answeredcorrect >= 0) {
-            fb.textContent = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
         } else {
-            fb.textContent = feedback + " [" + 0 + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
         }
 
 
@@ -1113,7 +917,12 @@ function check_mc() {
 
 }
 
+
+/* Function to produce the HTML buttons for a multiple choice/
+   many choice question  and to update the CSS tags based on
+   the question type */
 function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
+
     var shuffled;
     if (shuffle_answers == "True") {
         //console.log(shuffle_answers+" read as true");
@@ -1125,8 +934,6 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
 
 
     var num_correct = 0;
-
-
 
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
@@ -1209,9 +1016,7 @@ function check_numeric(ths, event) {
 
         if ("precision" in ths.dataset) {
             var precision = ths.dataset.precision;
-            // console.log("1:", submission)
-            submission = Math.round((1 * submission + Number.EPSILON) * 10 ** precision) / 10 ** precision;
-            // console.log("Rounded to ", submission, " precision=", precision  );
+            submission = Number(Number(submission).toPrecision(precision));
         }
 
 
@@ -1221,12 +1026,12 @@ function check_numeric(ths, event) {
 
         var fb = document.getElementById("fb" + id);
         fb.style.display = "none";
-        fb.textContent = "Incorrect -- try again.";
+        fb.innerHTML = "Incorrect -- try again.";
 
         var answers = JSON.parse(ths.dataset.answers);
         //console.log(answers);
 
-        var defaultFB = "";
+        var defaultFB = "Incorrect. Try again.";
         var correct;
         var done = false;
         answers.every(answer => {
@@ -1237,9 +1042,9 @@ function check_numeric(ths, event) {
             if ('value' in answer) {
                 if (submission == answer.value) {
                     if ("feedback" in answer) {
-                        fb.textContent = jaxify(answer.feedback);
+                        fb.innerHTML = jaxify(answer.feedback);
                     } else {
-                        fb.textContent = jaxify("Correct");
+                        fb.innerHTML = jaxify("Correct");
                     }
                     correct = answer.correct;
                     //console.log(answer.correct);
@@ -1247,15 +1052,18 @@ function check_numeric(ths, event) {
                 }
                 // } else if (answer.type=="range") {
             } else if ('range' in answer) {
-                //console.log(answer.range);
+                console.log(answer.range);
+                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
                 if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
-                    fb.textContent = jaxify(answer.feedback);
+                    fb.innerHTML = jaxify(answer.feedback);
                     correct = answer.correct;
-                    //console.log(answer.correct);
+                    console.log(answer.correct);
                     done = true;
                 }
             } else if (answer.type == "default") {
-                defaultFB = answer.feedback;
+                if ("feedback" in answer) {
+                    defaultFB = answer.feedback;
+                } 
             }
             if (done) {
                 return false; // Break out of loop if this has been marked correct
@@ -1263,6 +1071,7 @@ function check_numeric(ths, event) {
                 return true; // Keep looking for case that includes this as a correct answer
             }
         });
+        console.log("done:", done);
 
         if ((!done) && (defaultFB != "")) {
             fb.innerHTML = jaxify(defaultFB);
@@ -1401,7 +1210,7 @@ function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
 
     var lab = document.createElement("label");
     lab.className = "InpLabel";
-    lab.textContent = "Type numeric answer here:";
+    lab.innerHTML = "Type numeric answer here:";
     aDiv.append(lab);
 
     var inp = document.createElement("input");
@@ -1469,6 +1278,10 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
         //console.log(mystring,", loc:",loc,", loc2:",loc2);
     }
+
+    // repace markdown style links with actual links
+    mystring = mystring.replace(/<(.*?)>/, '<a href="$1" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/, '<a href="$2" target="_blank" class="Link">$1</a>');
 
     //console.log(mystring);
     return mystring;
@@ -1604,7 +1417,26 @@ function show_questions(json, mydiv) {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             }
         }, 500);
 if (typeof version == 'undefined') {
@@ -1613,12 +1445,40 @@ if (typeof version == 'undefined') {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             } else {
                 console.log("MathJax not found");
             }
         }
     }
+
+    // stop event propagation for the .Link class
+    var links = document.getElementsByClassName('Link')
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e){
+            e.stopPropagation();
+        });
+    }
+
     return false;
 }
 /* This is to handle asynchrony issues in loading Jupyter notebooks
@@ -1629,8 +1489,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("CxEIVRPHTbNO")) {
-            show_questions(questionsCxEIVRPHTbNO,  CxEIVRPHTbNO); 
+          if(document.getElementById("qurqJyXhBoYY")) {
+            show_questions(questionsqurqJyXhBoYY,  qurqJyXhBoYY); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -1639,8 +1499,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("CxEIVRPHTbNO");
-        // console.log(document.getElementById("CxEIVRPHTbNO"));
+        //console.log("qurqJyXhBoYY");
+        // console.log(document.getElementById("qurqJyXhBoYY"));
 
         try_show();
         }
@@ -1795,10 +1655,10 @@ if (typeof version == 'undefined') {
 </section>
 <section class="slide level2">
 
-<div id="1b694beb" class="cell" data-execution_count="2">
+<div id="88839332" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="LkWbCcZDuxZk" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#LkWbCcZDuxZk {
+<div id="PSmqUqafEVgx" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
+#PSmqUqafEVgx {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1818,8 +1678,8 @@ if (typeof version == 'undefined') {
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px;
-    padding-bottom: 4px;
+/*    margin-bottom: 15px;*/
+/*    padding-bottom: 4px;*/
     padding-top: 4px;
     line-height: 1.1;
     font-size: 16pt;
@@ -1837,18 +1697,48 @@ if (typeof version == 'undefined') {
     padding: 4px;
 }
 
+.Quiz code {
+    background-color: lightgray;
+    color: black;
+}
+
+.Quiz .QuizCode code {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+.Quiz .MCButton code {
+    background-color: inherit;
+    color: inherit;
+}
+
+.MCButton .QuizCode {
+    text-align: left;
+}
+
+
+
+
 .Answer {
-    margin: 10px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
     border-radius: inherit;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0;
+}
+
+@media only screen and (max-width:480px) {
+    .Answer {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 .Feedback {
     font-size: 16pt;
     text-align: center;
-    min-height: 2em;
+/*    min-height: 2em;*/
 }
 
 .Input {
@@ -1875,7 +1765,7 @@ if (typeof version == 'undefined') {
 }
 
 .Input-text:focus {
-    outline: none;
+    /*outline: none;*/
     background-color: var(--jq-numeric-input-bg);
     box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
 }
@@ -1884,6 +1774,7 @@ if (typeof version == 'undefined') {
     background: var(--jq-mc-button-bg);
     border: 1px solid var(--jq-mc-button-border);
     border-radius: inherit;
+    color: #333333;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -1912,10 +1803,10 @@ if (typeof version == 'undefined') {
 }
 
 .NumericQn {
-    padding: 10px;
     background: var(--jq-numeric-bg);
-    color: var(--jq-text-color);
     border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
 }
 
 .NumericQn p {
@@ -1923,11 +1814,11 @@ if (typeof version == 'undefined') {
 }
 
 .InpLabel {
-    line-height: 34px;
-    float: left;
-    margin-right: 10px;
     color: var(--jq-numeric-input-label);
+    float: left;
     font-size: 15pt;
+    line-height: 34px;
+    margin-right: 10px;
 }
 
 .incorrect {
@@ -1944,17 +1835,17 @@ if (typeof version == 'undefined') {
    */
     animation: correct-anim 0.6s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 .incorrectButton {
     animation: incorrect-anim 0.8s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 @keyframes incorrect-anim {
@@ -1972,7 +1863,7 @@ if (typeof version == 'undefined') {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsLkWbCcZDuxZk=[
+var questionsPSmqUqafEVgx=[
     {
         "question": "In which cases is it a good idea to use the working directory?",
         "type": "many_choice",
@@ -2035,6 +1926,9 @@ function printResponses(responsesContainer) {
     });
     responsesContainer.innerHTML=stringResponses;
 }
+/* Callback function to determine whether a selected multiple-choice
+   button corresponded to a correct answer and to provide feedback
+   based on the answer */
 function check_mc() {
     var id = this.id.split('-')[0];
     //var response = this.id.split('-')[1];
@@ -2056,17 +1950,16 @@ function check_mc() {
 
 
     var answers = label.parentElement.children;
-
     //console.log(answers);
-
 
     // Split behavior based on multiple choice vs many choice:
     var fb = document.getElementById("fb" + id);
 
 
 
-
-    if (fb.dataset.numcorrect == 1) {
+    /* Multiple choice (1 answer). Allow for 0 correct
+       answers as an edge case */
+    if (fb.dataset.numcorrect <= 1) {
         // What follows is for the saved responses stuff
         var outerContainer = fb.parentElement.parentElement;
         var responsesContainer = document.getElementById("responses" + outerContainer.id);
@@ -2088,7 +1981,7 @@ function check_mc() {
             printResponses(responsesContainer);
         }
         // End code to preserve responses
-        
+
         for (var i = 0; i < answers.length; i++) {
             var child = answers[i];
             //console.log(child);
@@ -2100,9 +1993,9 @@ function check_mc() {
         if (label.dataset.correct == "true") {
             // console.log("Correct action");
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Correct!";
+                fb.innerHTML = "Correct!";
             }
             label.classList.add("correctButton");
 
@@ -2111,9 +2004,9 @@ function check_mc() {
 
         } else {
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Incorrect -- try again.";
+                fb.innerHTML = "Incorrect -- try again.";
             }
             //console.log("Error action");
             label.classList.add("incorrectButton");
@@ -2121,7 +2014,7 @@ function check_mc() {
             fb.classList.add("incorrect");
         }
     }
-    else {
+    else { /* Many choice (more than 1 correct answer) */
         var reset = false;
         var feedback;
          if (label.dataset.correct == "true") {
@@ -2210,9 +2103,9 @@ function check_mc() {
         var numcorrect = fb.dataset.numcorrect;
         var answeredcorrect = fb.dataset.answeredcorrect;
         if (answeredcorrect >= 0) {
-            fb.textContent = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
         } else {
-            fb.textContent = feedback + " [" + 0 + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
         }
 
 
@@ -2232,7 +2125,12 @@ function check_mc() {
 
 }
 
+
+/* Function to produce the HTML buttons for a multiple choice/
+   many choice question  and to update the CSS tags based on
+   the question type */
 function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
+
     var shuffled;
     if (shuffle_answers == "True") {
         //console.log(shuffle_answers+" read as true");
@@ -2244,8 +2142,6 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
 
 
     var num_correct = 0;
-
-
 
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
@@ -2328,9 +2224,7 @@ function check_numeric(ths, event) {
 
         if ("precision" in ths.dataset) {
             var precision = ths.dataset.precision;
-            // console.log("1:", submission)
-            submission = Math.round((1 * submission + Number.EPSILON) * 10 ** precision) / 10 ** precision;
-            // console.log("Rounded to ", submission, " precision=", precision  );
+            submission = Number(Number(submission).toPrecision(precision));
         }
 
 
@@ -2340,12 +2234,12 @@ function check_numeric(ths, event) {
 
         var fb = document.getElementById("fb" + id);
         fb.style.display = "none";
-        fb.textContent = "Incorrect -- try again.";
+        fb.innerHTML = "Incorrect -- try again.";
 
         var answers = JSON.parse(ths.dataset.answers);
         //console.log(answers);
 
-        var defaultFB = "";
+        var defaultFB = "Incorrect. Try again.";
         var correct;
         var done = false;
         answers.every(answer => {
@@ -2356,9 +2250,9 @@ function check_numeric(ths, event) {
             if ('value' in answer) {
                 if (submission == answer.value) {
                     if ("feedback" in answer) {
-                        fb.textContent = jaxify(answer.feedback);
+                        fb.innerHTML = jaxify(answer.feedback);
                     } else {
-                        fb.textContent = jaxify("Correct");
+                        fb.innerHTML = jaxify("Correct");
                     }
                     correct = answer.correct;
                     //console.log(answer.correct);
@@ -2366,15 +2260,18 @@ function check_numeric(ths, event) {
                 }
                 // } else if (answer.type=="range") {
             } else if ('range' in answer) {
-                //console.log(answer.range);
+                console.log(answer.range);
+                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
                 if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
-                    fb.textContent = jaxify(answer.feedback);
+                    fb.innerHTML = jaxify(answer.feedback);
                     correct = answer.correct;
-                    //console.log(answer.correct);
+                    console.log(answer.correct);
                     done = true;
                 }
             } else if (answer.type == "default") {
-                defaultFB = answer.feedback;
+                if ("feedback" in answer) {
+                    defaultFB = answer.feedback;
+                } 
             }
             if (done) {
                 return false; // Break out of loop if this has been marked correct
@@ -2382,6 +2279,7 @@ function check_numeric(ths, event) {
                 return true; // Keep looking for case that includes this as a correct answer
             }
         });
+        console.log("done:", done);
 
         if ((!done) && (defaultFB != "")) {
             fb.innerHTML = jaxify(defaultFB);
@@ -2520,7 +2418,7 @@ function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
 
     var lab = document.createElement("label");
     lab.className = "InpLabel";
-    lab.textContent = "Type numeric answer here:";
+    lab.innerHTML = "Type numeric answer here:";
     aDiv.append(lab);
 
     var inp = document.createElement("input");
@@ -2588,6 +2486,10 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
         //console.log(mystring,", loc:",loc,", loc2:",loc2);
     }
+
+    // repace markdown style links with actual links
+    mystring = mystring.replace(/<(.*?)>/, '<a href="$1" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/, '<a href="$2" target="_blank" class="Link">$1</a>');
 
     //console.log(mystring);
     return mystring;
@@ -2723,7 +2625,26 @@ function show_questions(json, mydiv) {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             }
         }, 500);
 if (typeof version == 'undefined') {
@@ -2732,12 +2653,40 @@ if (typeof version == 'undefined') {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             } else {
                 console.log("MathJax not found");
             }
         }
     }
+
+    // stop event propagation for the .Link class
+    var links = document.getElementsByClassName('Link')
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e){
+            e.stopPropagation();
+        });
+    }
+
     return false;
 }
 /* This is to handle asynchrony issues in loading Jupyter notebooks
@@ -2748,8 +2697,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("LkWbCcZDuxZk")) {
-            show_questions(questionsLkWbCcZDuxZk,  LkWbCcZDuxZk); 
+          if(document.getElementById("PSmqUqafEVgx")) {
+            show_questions(questionsPSmqUqafEVgx,  PSmqUqafEVgx); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -2758,8 +2707,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("LkWbCcZDuxZk");
-        // console.log(document.getElementById("LkWbCcZDuxZk"));
+        //console.log("PSmqUqafEVgx");
+        // console.log(document.getElementById("PSmqUqafEVgx"));
 
         try_show();
         }
@@ -2880,10 +2829,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="ef49050e" class="cell" data-execution_count="3">
+<div id="ee4121af" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div id="UOglGqLohRBI" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
-#UOglGqLohRBI {
+<div id="OaYanGuYLPjB" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#OaYanGuYLPjB {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2903,8 +2852,8 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px;
-    padding-bottom: 4px;
+/*    margin-bottom: 15px;*/
+/*    padding-bottom: 4px;*/
     padding-top: 4px;
     line-height: 1.1;
     font-size: 16pt;
@@ -2922,18 +2871,48 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
     padding: 4px;
 }
 
+.Quiz code {
+    background-color: lightgray;
+    color: black;
+}
+
+.Quiz .QuizCode code {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+.Quiz .MCButton code {
+    background-color: inherit;
+    color: inherit;
+}
+
+.MCButton .QuizCode {
+    text-align: left;
+}
+
+
+
+
 .Answer {
-    margin: 10px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
     border-radius: inherit;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0;
+}
+
+@media only screen and (max-width:480px) {
+    .Answer {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 .Feedback {
     font-size: 16pt;
     text-align: center;
-    min-height: 2em;
+/*    min-height: 2em;*/
 }
 
 .Input {
@@ -2960,7 +2939,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 }
 
 .Input-text:focus {
-    outline: none;
+    /*outline: none;*/
     background-color: var(--jq-numeric-input-bg);
     box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
 }
@@ -2969,6 +2948,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
     background: var(--jq-mc-button-bg);
     border: 1px solid var(--jq-mc-button-border);
     border-radius: inherit;
+    color: #333333;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -2997,10 +2977,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 }
 
 .NumericQn {
-    padding: 10px;
     background: var(--jq-numeric-bg);
-    color: var(--jq-text-color);
     border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
 }
 
 .NumericQn p {
@@ -3008,11 +2988,11 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 }
 
 .InpLabel {
-    line-height: 34px;
-    float: left;
-    margin-right: 10px;
     color: var(--jq-numeric-input-label);
+    float: left;
     font-size: 15pt;
+    line-height: 34px;
+    margin-right: 10px;
 }
 
 .incorrect {
@@ -3029,17 +3009,17 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
    */
     animation: correct-anim 0.6s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 .incorrectButton {
     animation: incorrect-anim 0.8s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 @keyframes incorrect-anim {
@@ -3057,7 +3037,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsUOglGqLohRBI=[
+var questionsOaYanGuYLPjB=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3120,6 +3100,9 @@ function printResponses(responsesContainer) {
     });
     responsesContainer.innerHTML=stringResponses;
 }
+/* Callback function to determine whether a selected multiple-choice
+   button corresponded to a correct answer and to provide feedback
+   based on the answer */
 function check_mc() {
     var id = this.id.split('-')[0];
     //var response = this.id.split('-')[1];
@@ -3141,17 +3124,16 @@ function check_mc() {
 
 
     var answers = label.parentElement.children;
-
     //console.log(answers);
-
 
     // Split behavior based on multiple choice vs many choice:
     var fb = document.getElementById("fb" + id);
 
 
 
-
-    if (fb.dataset.numcorrect == 1) {
+    /* Multiple choice (1 answer). Allow for 0 correct
+       answers as an edge case */
+    if (fb.dataset.numcorrect <= 1) {
         // What follows is for the saved responses stuff
         var outerContainer = fb.parentElement.parentElement;
         var responsesContainer = document.getElementById("responses" + outerContainer.id);
@@ -3173,7 +3155,7 @@ function check_mc() {
             printResponses(responsesContainer);
         }
         // End code to preserve responses
-        
+
         for (var i = 0; i < answers.length; i++) {
             var child = answers[i];
             //console.log(child);
@@ -3185,9 +3167,9 @@ function check_mc() {
         if (label.dataset.correct == "true") {
             // console.log("Correct action");
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Correct!";
+                fb.innerHTML = "Correct!";
             }
             label.classList.add("correctButton");
 
@@ -3196,9 +3178,9 @@ function check_mc() {
 
         } else {
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Incorrect -- try again.";
+                fb.innerHTML = "Incorrect -- try again.";
             }
             //console.log("Error action");
             label.classList.add("incorrectButton");
@@ -3206,7 +3188,7 @@ function check_mc() {
             fb.classList.add("incorrect");
         }
     }
-    else {
+    else { /* Many choice (more than 1 correct answer) */
         var reset = false;
         var feedback;
          if (label.dataset.correct == "true") {
@@ -3295,9 +3277,9 @@ function check_mc() {
         var numcorrect = fb.dataset.numcorrect;
         var answeredcorrect = fb.dataset.answeredcorrect;
         if (answeredcorrect >= 0) {
-            fb.textContent = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
         } else {
-            fb.textContent = feedback + " [" + 0 + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
         }
 
 
@@ -3317,7 +3299,12 @@ function check_mc() {
 
 }
 
+
+/* Function to produce the HTML buttons for a multiple choice/
+   many choice question  and to update the CSS tags based on
+   the question type */
 function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
+
     var shuffled;
     if (shuffle_answers == "True") {
         //console.log(shuffle_answers+" read as true");
@@ -3329,8 +3316,6 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
 
 
     var num_correct = 0;
-
-
 
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
@@ -3413,9 +3398,7 @@ function check_numeric(ths, event) {
 
         if ("precision" in ths.dataset) {
             var precision = ths.dataset.precision;
-            // console.log("1:", submission)
-            submission = Math.round((1 * submission + Number.EPSILON) * 10 ** precision) / 10 ** precision;
-            // console.log("Rounded to ", submission, " precision=", precision  );
+            submission = Number(Number(submission).toPrecision(precision));
         }
 
 
@@ -3425,12 +3408,12 @@ function check_numeric(ths, event) {
 
         var fb = document.getElementById("fb" + id);
         fb.style.display = "none";
-        fb.textContent = "Incorrect -- try again.";
+        fb.innerHTML = "Incorrect -- try again.";
 
         var answers = JSON.parse(ths.dataset.answers);
         //console.log(answers);
 
-        var defaultFB = "";
+        var defaultFB = "Incorrect. Try again.";
         var correct;
         var done = false;
         answers.every(answer => {
@@ -3441,9 +3424,9 @@ function check_numeric(ths, event) {
             if ('value' in answer) {
                 if (submission == answer.value) {
                     if ("feedback" in answer) {
-                        fb.textContent = jaxify(answer.feedback);
+                        fb.innerHTML = jaxify(answer.feedback);
                     } else {
-                        fb.textContent = jaxify("Correct");
+                        fb.innerHTML = jaxify("Correct");
                     }
                     correct = answer.correct;
                     //console.log(answer.correct);
@@ -3451,15 +3434,18 @@ function check_numeric(ths, event) {
                 }
                 // } else if (answer.type=="range") {
             } else if ('range' in answer) {
-                //console.log(answer.range);
+                console.log(answer.range);
+                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
                 if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
-                    fb.textContent = jaxify(answer.feedback);
+                    fb.innerHTML = jaxify(answer.feedback);
                     correct = answer.correct;
-                    //console.log(answer.correct);
+                    console.log(answer.correct);
                     done = true;
                 }
             } else if (answer.type == "default") {
-                defaultFB = answer.feedback;
+                if ("feedback" in answer) {
+                    defaultFB = answer.feedback;
+                } 
             }
             if (done) {
                 return false; // Break out of loop if this has been marked correct
@@ -3467,6 +3453,7 @@ function check_numeric(ths, event) {
                 return true; // Keep looking for case that includes this as a correct answer
             }
         });
+        console.log("done:", done);
 
         if ((!done) && (defaultFB != "")) {
             fb.innerHTML = jaxify(defaultFB);
@@ -3605,7 +3592,7 @@ function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
 
     var lab = document.createElement("label");
     lab.className = "InpLabel";
-    lab.textContent = "Type numeric answer here:";
+    lab.innerHTML = "Type numeric answer here:";
     aDiv.append(lab);
 
     var inp = document.createElement("input");
@@ -3673,6 +3660,10 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
         //console.log(mystring,", loc:",loc,", loc2:",loc2);
     }
+
+    // repace markdown style links with actual links
+    mystring = mystring.replace(/<(.*?)>/, '<a href="$1" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/, '<a href="$2" target="_blank" class="Link">$1</a>');
 
     //console.log(mystring);
     return mystring;
@@ -3808,7 +3799,26 @@ function show_questions(json, mydiv) {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             }
         }, 500);
 if (typeof version == 'undefined') {
@@ -3817,12 +3827,40 @@ if (typeof version == 'undefined') {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             } else {
                 console.log("MathJax not found");
             }
         }
     }
+
+    // stop event propagation for the .Link class
+    var links = document.getElementsByClassName('Link')
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e){
+            e.stopPropagation();
+        });
+    }
+
     return false;
 }
 /* This is to handle asynchrony issues in loading Jupyter notebooks
@@ -3833,8 +3871,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("UOglGqLohRBI")) {
-            show_questions(questionsUOglGqLohRBI,  UOglGqLohRBI); 
+          if(document.getElementById("OaYanGuYLPjB")) {
+            show_questions(questionsOaYanGuYLPjB,  OaYanGuYLPjB); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -3843,8 +3881,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("UOglGqLohRBI");
-        // console.log(document.getElementById("UOglGqLohRBI"));
+        //console.log("OaYanGuYLPjB");
+        // console.log(document.getElementById("OaYanGuYLPjB"));
 
         try_show();
         }
@@ -3951,10 +3989,10 @@ if (typeof version == 'undefined') {
 <p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<div id="99d50e1b" class="cell" data-execution_count="4">
+<div id="8df57a8d" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div id="NjfbbjGvsbwq" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
-#NjfbbjGvsbwq {
+<div id="IIeJHepJPusl" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#IIeJHepJPusl {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3974,8 +4012,8 @@ if (typeof version == 'undefined') {
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 15px;
-    padding-bottom: 4px;
+/*    margin-bottom: 15px;*/
+/*    padding-bottom: 4px;*/
     padding-top: 4px;
     line-height: 1.1;
     font-size: 16pt;
@@ -3993,18 +4031,48 @@ if (typeof version == 'undefined') {
     padding: 4px;
 }
 
+.Quiz code {
+    background-color: lightgray;
+    color: black;
+}
+
+.Quiz .QuizCode code {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+.Quiz .MCButton code {
+    background-color: inherit;
+    color: inherit;
+}
+
+.MCButton .QuizCode {
+    text-align: left;
+}
+
+
+
+
 .Answer {
-    margin: 10px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
     border-radius: inherit;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0;
+}
+
+@media only screen and (max-width:480px) {
+    .Answer {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 .Feedback {
     font-size: 16pt;
     text-align: center;
-    min-height: 2em;
+/*    min-height: 2em;*/
 }
 
 .Input {
@@ -4031,7 +4099,7 @@ if (typeof version == 'undefined') {
 }
 
 .Input-text:focus {
-    outline: none;
+    /*outline: none;*/
     background-color: var(--jq-numeric-input-bg);
     box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
 }
@@ -4040,6 +4108,7 @@ if (typeof version == 'undefined') {
     background: var(--jq-mc-button-bg);
     border: 1px solid var(--jq-mc-button-border);
     border-radius: inherit;
+    color: #333333;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -4068,10 +4137,10 @@ if (typeof version == 'undefined') {
 }
 
 .NumericQn {
-    padding: 10px;
     background: var(--jq-numeric-bg);
-    color: var(--jq-text-color);
     border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
 }
 
 .NumericQn p {
@@ -4079,11 +4148,11 @@ if (typeof version == 'undefined') {
 }
 
 .InpLabel {
-    line-height: 34px;
-    float: left;
-    margin-right: 10px;
     color: var(--jq-numeric-input-label);
+    float: left;
     font-size: 15pt;
+    line-height: 34px;
+    margin-right: 10px;
 }
 
 .incorrect {
@@ -4100,17 +4169,17 @@ if (typeof version == 'undefined') {
    */
     animation: correct-anim 0.6s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 .incorrectButton {
     animation: incorrect-anim 0.8s ease;
     animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
     color: var(--jq-text-color);
-    box-shadow: inset 0px 0px 5px var(--jq-mc-button-inset-shadow);
-    outline: none;
+    /*outline: none;*/
 }
 
 @keyframes incorrect-anim {
@@ -4128,7 +4197,7 @@ if (typeof version == 'undefined') {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsNjfbbjGvsbwq=[
+var questionsIIeJHepJPusl=[
     {
         "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
         "type": "many_choice",
@@ -4191,6 +4260,9 @@ function printResponses(responsesContainer) {
     });
     responsesContainer.innerHTML=stringResponses;
 }
+/* Callback function to determine whether a selected multiple-choice
+   button corresponded to a correct answer and to provide feedback
+   based on the answer */
 function check_mc() {
     var id = this.id.split('-')[0];
     //var response = this.id.split('-')[1];
@@ -4212,17 +4284,16 @@ function check_mc() {
 
 
     var answers = label.parentElement.children;
-
     //console.log(answers);
-
 
     // Split behavior based on multiple choice vs many choice:
     var fb = document.getElementById("fb" + id);
 
 
 
-
-    if (fb.dataset.numcorrect == 1) {
+    /* Multiple choice (1 answer). Allow for 0 correct
+       answers as an edge case */
+    if (fb.dataset.numcorrect <= 1) {
         // What follows is for the saved responses stuff
         var outerContainer = fb.parentElement.parentElement;
         var responsesContainer = document.getElementById("responses" + outerContainer.id);
@@ -4244,7 +4315,7 @@ function check_mc() {
             printResponses(responsesContainer);
         }
         // End code to preserve responses
-        
+
         for (var i = 0; i < answers.length; i++) {
             var child = answers[i];
             //console.log(child);
@@ -4256,9 +4327,9 @@ function check_mc() {
         if (label.dataset.correct == "true") {
             // console.log("Correct action");
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Correct!";
+                fb.innerHTML = "Correct!";
             }
             label.classList.add("correctButton");
 
@@ -4267,9 +4338,9 @@ function check_mc() {
 
         } else {
             if ("feedback" in label.dataset) {
-                fb.textContent = jaxify(label.dataset.feedback);
+                fb.innerHTML = jaxify(label.dataset.feedback);
             } else {
-                fb.textContent = "Incorrect -- try again.";
+                fb.innerHTML = "Incorrect -- try again.";
             }
             //console.log("Error action");
             label.classList.add("incorrectButton");
@@ -4277,7 +4348,7 @@ function check_mc() {
             fb.classList.add("incorrect");
         }
     }
-    else {
+    else { /* Many choice (more than 1 correct answer) */
         var reset = false;
         var feedback;
          if (label.dataset.correct == "true") {
@@ -4366,9 +4437,9 @@ function check_mc() {
         var numcorrect = fb.dataset.numcorrect;
         var answeredcorrect = fb.dataset.answeredcorrect;
         if (answeredcorrect >= 0) {
-            fb.textContent = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
         } else {
-            fb.textContent = feedback + " [" + 0 + "/" + numcorrect + "]";
+            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
         }
 
 
@@ -4388,7 +4459,12 @@ function check_mc() {
 
 }
 
+
+/* Function to produce the HTML buttons for a multiple choice/
+   many choice question  and to update the CSS tags based on
+   the question type */
 function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
+
     var shuffled;
     if (shuffle_answers == "True") {
         //console.log(shuffle_answers+" read as true");
@@ -4400,8 +4476,6 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
 
 
     var num_correct = 0;
-
-
 
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
@@ -4484,9 +4558,7 @@ function check_numeric(ths, event) {
 
         if ("precision" in ths.dataset) {
             var precision = ths.dataset.precision;
-            // console.log("1:", submission)
-            submission = Math.round((1 * submission + Number.EPSILON) * 10 ** precision) / 10 ** precision;
-            // console.log("Rounded to ", submission, " precision=", precision  );
+            submission = Number(Number(submission).toPrecision(precision));
         }
 
 
@@ -4496,12 +4568,12 @@ function check_numeric(ths, event) {
 
         var fb = document.getElementById("fb" + id);
         fb.style.display = "none";
-        fb.textContent = "Incorrect -- try again.";
+        fb.innerHTML = "Incorrect -- try again.";
 
         var answers = JSON.parse(ths.dataset.answers);
         //console.log(answers);
 
-        var defaultFB = "";
+        var defaultFB = "Incorrect. Try again.";
         var correct;
         var done = false;
         answers.every(answer => {
@@ -4512,9 +4584,9 @@ function check_numeric(ths, event) {
             if ('value' in answer) {
                 if (submission == answer.value) {
                     if ("feedback" in answer) {
-                        fb.textContent = jaxify(answer.feedback);
+                        fb.innerHTML = jaxify(answer.feedback);
                     } else {
-                        fb.textContent = jaxify("Correct");
+                        fb.innerHTML = jaxify("Correct");
                     }
                     correct = answer.correct;
                     //console.log(answer.correct);
@@ -4522,15 +4594,18 @@ function check_numeric(ths, event) {
                 }
                 // } else if (answer.type=="range") {
             } else if ('range' in answer) {
-                //console.log(answer.range);
+                console.log(answer.range);
+                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
                 if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
-                    fb.textContent = jaxify(answer.feedback);
+                    fb.innerHTML = jaxify(answer.feedback);
                     correct = answer.correct;
-                    //console.log(answer.correct);
+                    console.log(answer.correct);
                     done = true;
                 }
             } else if (answer.type == "default") {
-                defaultFB = answer.feedback;
+                if ("feedback" in answer) {
+                    defaultFB = answer.feedback;
+                } 
             }
             if (done) {
                 return false; // Break out of loop if this has been marked correct
@@ -4538,6 +4613,7 @@ function check_numeric(ths, event) {
                 return true; // Keep looking for case that includes this as a correct answer
             }
         });
+        console.log("done:", done);
 
         if ((!done) && (defaultFB != "")) {
             fb.innerHTML = jaxify(defaultFB);
@@ -4676,7 +4752,7 @@ function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
 
     var lab = document.createElement("label");
     lab.className = "InpLabel";
-    lab.textContent = "Type numeric answer here:";
+    lab.innerHTML = "Type numeric answer here:";
     aDiv.append(lab);
 
     var inp = document.createElement("input");
@@ -4744,6 +4820,10 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
         //console.log(mystring,", loc:",loc,", loc2:",loc2);
     }
+
+    // repace markdown style links with actual links
+    mystring = mystring.replace(/<(.*?)>/, '<a href="$1" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/, '<a href="$2" target="_blank" class="Link">$1</a>');
 
     //console.log(mystring);
     return mystring;
@@ -4879,7 +4959,26 @@ function show_questions(json, mydiv) {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             }
         }, 500);
 if (typeof version == 'undefined') {
@@ -4888,12 +4987,40 @@ if (typeof version == 'undefined') {
             if (version[0] == "2") {
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             } else if (version[0] == "3") {
-                MathJax.typeset([mydiv]);
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
             } else {
                 console.log("MathJax not found");
             }
         }
     }
+
+    // stop event propagation for the .Link class
+    var links = document.getElementsByClassName('Link')
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e){
+            e.stopPropagation();
+        });
+    }
+
     return false;
 }
 /* This is to handle asynchrony issues in loading Jupyter notebooks
@@ -4904,8 +5031,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("NjfbbjGvsbwq")) {
-            show_questions(questionsNjfbbjGvsbwq,  NjfbbjGvsbwq); 
+          if(document.getElementById("IIeJHepJPusl")) {
+            show_questions(questionsIIeJHepJPusl,  IIeJHepJPusl); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -4914,8 +5041,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("NjfbbjGvsbwq");
-        // console.log(document.getElementById("NjfbbjGvsbwq"));
+        //console.log("IIeJHepJPusl");
+        // console.log(document.getElementById("IIeJHepJPusl"));
 
         try_show();
         }
@@ -5105,18 +5232,7 @@ if (typeof version == 'undefined') {
 </ul></li>
 </ul>
 </div></div>
-</section>
-<section id="last-thing-before-lunch" class="slide level2">
-<h2>Last thing before lunch:</h2>
-<p><strong>We meet at 13:00 in 1533-103</strong></p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfIN99btbNVGd-2s8dzl7dnUL_OyJskalTrTjhJyvZqIZIl6w/viewform?embedded=true" width="640" height="532" frameborder="0" marginheight="0" marginwidth="0">
-Indlæser…
-</iframe>
-</section>
-<section class="slide level2">
-
-
-<img data-src="img/wayToAuditorium.png" class="r-stretch quarto-figure-center"><p class="caption">1533-103E</p></section></section>
+</section></section>
 <section>
 <section id="project-management" class="title-slide slide level1 center">
 <h1>Project management</h1>
@@ -5285,23 +5401,14 @@ Indlæser…
 </section>
 <section id="folders-management" class="slide level2">
 <h2>Folders management</h2>
-<p>Have a coherent folder structure - your future self will thanks.</p>
+<p>Have a coherent folder structure - your future self will thank.</p>
 
-<img data-src="img/structure.png" width="400" class="r-stretch quarto-figure-center"><p class="caption">Example of structure, which backs up raw data and analysis</p><p>You can do it with a script which downloads and execute with the command below:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<img data-src="img/structure.png" width="400" class="r-stretch quarto-figure-center"><p class="caption">Example of structure, which backs up raw data and analysis</p></section>
 <section class="slide level2">
 
 <p>If your project has many users, a good structure can be</p>
 
-<img data-src="img/multistructure.png" class="quarto-figure quarto-figure-center r-stretch" width="400"><p>&nbsp;</p>
-<p>Do that with these commands</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Backup/Data Workspaces/username1 Workspaces/username2</span>
-<span id="cb49-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> Backup/Data/ Data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and making each user to run the script in its folder</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Workspaces/username1</span>
-<span id="cb50-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/main/Scripts/populate_project.sh <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<img data-src="img/multistructure.png" class="quarto-figure quarto-figure-center r-stretch" width="400"></section>
 <section class="slide level2">
 
 <div title="MUST-KNOWs for a GDK project" data-layout-align="center">
@@ -5358,7 +5465,7 @@ Indlæser…
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>Downloads should <strong>always</strong> happens on the <code>front-end</code> nodes, and never using a compute node when working on <code>GenomeDK</code></p>
+<p>Downloads should <strong>always</strong> happens on the <code>front-end</code> nodes, and <strong>never</strong> using a compute node when working on <code>GenomeDK</code></p>
 </div>
 </div>
 </div>
@@ -5368,16 +5475,16 @@ Indlæser…
 <p><code>wget</code> is a utility for <strong>command-line-based downloads</strong>. It is already installed on <code>GenomeDK</code> and works with <code>http</code>, <code>https</code>, <code>ftp</code> protocols.</p>
 <p>&nbsp;</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./output.png <span class="dt">\</span></span>
-<span id="cb51-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-c</span> <span class="dt">\</span></span>
-<span id="cb51-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-b</span> <span class="dt">\</span></span>
-<span id="cb51-4"><a aria-hidden="true" tabindex="-1"></a>     https://example.com/image.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./output.png <span class="dt">\</span></span>
+<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-c</span> <span class="dt">\</span></span>
+<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-b</span> <span class="dt">\</span></span>
+<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a>     https://example.com/image.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>downloads a <code>png</code> file and saves it as <code>output.png</code> (option <code>O</code>), downloads in background (<code>-b</code>) and if the download was interrupted earlier, it retrieves it from where it stopped (<code>-c</code>).</p>
 </section>
 <section class="slide level2">
 
 <p><code>wget</code> has many options you can use, but what shown in the example above is what you need most times. You can see them with the command</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Also, you can find <a href="https://opensource.com/sites/default/files/gated-content/osdc_cheatsheet-wget-2021.10.21.pdf">this cheatsheet</a> useful for remembering the commands to most of the things you can think about downloading files using wget. <a href="https://opensource.com/article/21/10/linux-wget-command">At this page</a> there are also some concrete examples for <code>wget</code>.</p>
 </section>
@@ -5394,22 +5501,22 @@ Indlæser…
 <section class="slide level2">
 
 <p>To copy a file <strong>to GenomeDK</strong> from your local computer:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> /home/my_laptop/Documents/file.txt <span class="dt">\</span></span>
-<span id="cb53-2"><a aria-hidden="true" tabindex="-1"></a>    username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> /home/my_laptop/Documents/file.txt <span class="dt">\</span></span>
+<span id="cb50-2"><a aria-hidden="true" tabindex="-1"></a>    username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>The <strong>inverse operation</strong> just changes the order of the sender and receiver:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@login.genome.au.dk:/home/username/my_project/file.txt <span class="dt">\</span></span>
-<span id="cb54-2"><a aria-hidden="true" tabindex="-1"></a>    /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@login.genome.au.dk:/home/username/my_project/file.txt <span class="dt">\</span></span>
+<span id="cb51-2"><a aria-hidden="true" tabindex="-1"></a>    /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>If you want to copy an entire folder, use the option <code>-r</code> (recursive copy). The previous examples become</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> /home/my_laptop/Documents/folder <span class="dt">\</span></span>
-<span id="cb55-2"><a aria-hidden="true" tabindex="-1"></a>       username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> /home/my_laptop/Documents/folder <span class="dt">\</span></span>
+<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a>       username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>and</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
-<span id="cb56-2"><a aria-hidden="true" tabindex="-1"></a>       /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
+<span id="cb53-2"><a aria-hidden="true" tabindex="-1"></a>       /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>A few more options are available and you can see them with the command <code>scp --help</code>.</p>
 </section>
@@ -5498,34 +5605,32 @@ Indlæser…
 <section id="installation" class="slide level2">
 <h2>Installation</h2>
 <p>Just download and execute the installer by</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
-<span id="cb58-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
-<span id="cb58-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
-<span id="cb58-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./miniforge3/bin/conda</span> init bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
+<span id="cb55-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
+<span id="cb55-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
+<span id="cb55-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./miniforge3/bin/conda</span> init bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>After a few <code>ENTER</code>s and <code>YES</code>’s you should get the installation done. Run</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and doublecheck that <code>conda</code> works:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="conda-configuration" class="slide level2">
 <h2>Conda Configuration</h2>
 <p>You can add some default <em>channels</em> where to find archived packages. Here are some tipycal ones</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span>
-<span id="cb61-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels genomedk</span>
-<span id="cb61-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels r</span>
-<span id="cb61-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span>
+<span id="cb58-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We tell <code>conda</code> to look into channels in the order specified above. We also avoid opening the <code>base</code> environment (where <code>conda</code> is installed) at login.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
-<span id="cb62-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
+<span id="cb59-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="base-environment" class="slide level2">
 <h2>Base environment</h2>
 <p><code>base</code> is the environment containing conda itself. The current environment is in your prompt in round brackets.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">environment</span><span class="kw">)</span> <span class="ex">[samuele@fe-open-02</span> ~]$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">environment</span><span class="kw">)</span> <span class="ex">[samuele@fe-open-02</span> ~]$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We update Conda with <code>libmamba solver</code> - a lot faster in installing many packages at once.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
-<span id="cb64-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
+<span id="cb61-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div title="Don't touch the Base">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -5545,10 +5650,10 @@ Indlæser…
 <section id="create-an-environment" class="slide level2">
 <h2>Create an environment</h2>
 <p>An empty environment called <code>test_1</code>:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>You can list all the environments available:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>&gt; # conda environments:
 &gt; #
 &gt; base      *  /home/samuele/miniconda3
@@ -5570,11 +5675,11 @@ Indlæser…
 <section id="activate-and-deactivate" class="slide level2">
 <h2>Activate and deactivate</h2>
 <p>To use an environment we activate it:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb68-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>From now on, all installed softwares and packages will be available. <code>(test_1)</code> is now shown in your prompt.</p>
 <p>&nbsp;</p>
 <p>Deactivation happens by</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="manage-an-environment" class="slide level2">
 <h2>Manage an environment</h2>
@@ -5590,18 +5695,18 @@ Indlæser…
 <section class="slide level2">
 
 
-<img data-src="img/anaconda2.png" style="width:10cm" class="r-stretch quarto-figure-center"><p class="caption">Figure: suggested commands to install the package</p><div title="Repositories">
+<img data-src="img/anaconda2.png" style="width:10cm" class="r-stretch quarto-figure-center"><p class="caption">Figure: suggested commands to install the package</p><div title="Channels">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Repositories</strong></p>
+<p><strong>Channels</strong></p>
 </div>
 <div class="callout-content">
-<p>packages are archived in repositories. Typical ones are <code>bioconda</code>, <code>conda-forge</code>, <code>r</code>, <code>anaconda</code>.</p>
-<p><code>conda-forge</code> packges are often more up-to-date, but a few times show compatibility problems with other packages.</p>
+<p>packages are archived in channels. Typical ones are <code>conda-forge</code> and <code>bioconda</code>.</p>
+<p><code>conda-forge</code> packages are often more up-to-date, but a few times show compatibility problems with other packages.</p>
 </div>
 </div>
 </div>
@@ -5610,8 +5715,8 @@ Indlæser…
 <section class="slide level2">
 
 <p>Install a couple of packages in the activated environment - you can always specify a version restriction to each package:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb70-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span>
-<span id="cb70-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install bioconda::bioconductor-deseq2<span class="op">&lt;</span>=1.42.0 conda-forge::r-tidyr=1.3.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span>
+<span id="cb67-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install bioconda::bioconductor-deseq2<span class="op">&lt;</span>=1.42.0 conda-forge::r-tidyr=1.3.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -5626,40 +5731,40 @@ Indlæser…
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Look for the package <code>tidyr</code> in your active environment:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="kw">|</span> <span class="fu">grep</span> tidyr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Exercise: add two installed packages, <code>rstudio-desktop</code> and <code>jupyterlab</code></p>
 </section>
 <section class="slide level2">
 
 <h3 id="installation-from-a-list-of-packages">Installation from a list of packages</h3>
 <p>You can export all the packages you have installed over time in your environment:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb68-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which looks like</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb73-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
-<span id="cb73-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb73-3"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda</span></span>
-<span id="cb73-4"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb73-5"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb73-6"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> r</span></span>
-<span id="cb73-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb73-8"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda::bioconductor-deseq2</span></span>
-<span id="cb73-9"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge::r-tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb69-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
+<span id="cb69-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb69-3"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb69-4"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb69-5"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb69-6"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> r</span></span>
+<span id="cb69-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb69-8"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda::bioconductor-deseq2</span></span>
+<span id="cb69-9"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge::r-tidyr</span></span>
+<span id="cb69-10"><a aria-hidden="true" tabindex="-1"></a><span class="at"> ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>The same command without <code>--from-history</code> will create a very long file with ALL dependencies:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb74-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
-<span id="cb74-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb74-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> bioconda</span></span>
-<span id="cb74-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb74-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb74-6"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> r</span></span>
-<span id="cb74-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb74-8"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _libgcc_mutex=0.1=conda_forge</span></span>
-<span id="cb74-9"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _openmp_mutex=4.5=2_gnu</span></span>
-<span id="cb74-10"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _r-mutex=1.0.1=anacondar_1</span></span>
-<span id="cb74-11"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> argcomplete=3.2.2=pyhd8ed1ab_0</span></span>
-<span id="cb74-12"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb70-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
+<span id="cb70-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb70-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb70-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb70-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb70-6"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> r</span></span>
+<span id="cb70-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb70-8"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _libgcc_mutex=0.1=conda_forge</span></span>
+<span id="cb70-9"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _openmp_mutex=4.5=2_gnu</span></span>
+<span id="cb70-10"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _r-mutex=1.0.1=anacondar_1</span></span>
+<span id="cb70-11"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> argcomplete=3.2.2=pyhd8ed1ab_0</span></span>
+<span id="cb70-12"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is guaranteed to work <strong>only on a system with same OS and architecture</strong> as GenomeDK (Linux and x86)!</p>
 </section>
 <section class="slide level2">
@@ -5673,10 +5778,10 @@ Indlæser…
 <section class="slide level2">
 
 <p><strong>Good practice:</strong> You want to install a lot of packages in an environment? Clone it first! If you break something, you still have the old copy.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb76-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-p</span> test_1_cloned <span class="at">--clone</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-p</span> test_1_cloned <span class="at">--clone</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>If installations in the cloned environment go fine, then you can remove it</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> test_1_cloned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> test_1_cloned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and repeat the installations on the original one.</p>
 </section>
 <section id="useful-links-for-conda" class="slide level2">
@@ -5752,36 +5857,36 @@ Indlæser…
 
 <h3 id="example">Example</h3>
 <p>A file called <code>align.sh</code> such that:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb81-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account my_project</span></span>
-<span id="cb81-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task= 8</span></span>
-<span id="cb81-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
-<span id="cb81-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
-<span id="cb81-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate environment</span></span>
-<span id="cb81-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
-<span id="cb81-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bam_tools</span>
-<span id="cb81-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index the reference file</span></span>
-<span id="cb81-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index reference/chr2.fa</span>
-<span id="cb81-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
-<span id="cb81-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> <span class="at">-t</span> 8 reference/chr2.fa <span class="dt">\</span></span>
-<span id="cb81-14"><a aria-hidden="true" tabindex="-1"></a>             genomes/S_Korean-2.region.fq.gz <span class="dt">\</span></span>
-<span id="cb81-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
-<span id="cb81-16"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
-<span id="cb81-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
-<span id="cb81-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
-<span id="cb81-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> alignment/S_Korean-2.sorted.bam</span>
-<span id="cb81-20"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb77-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account my_project</span></span>
+<span id="cb77-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task= 8</span></span>
+<span id="cb77-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
+<span id="cb77-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
+<span id="cb77-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate environment</span></span>
+<span id="cb77-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
+<span id="cb77-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bam_tools</span>
+<span id="cb77-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index the reference file</span></span>
+<span id="cb77-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index reference/chr2.fa</span>
+<span id="cb77-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
+<span id="cb77-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> <span class="at">-t</span> 8 reference/chr2.fa <span class="dt">\</span></span>
+<span id="cb77-14"><a aria-hidden="true" tabindex="-1"></a>             genomes/S_Korean-2.region.fq.gz <span class="dt">\</span></span>
+<span id="cb77-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
+<span id="cb77-16"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
+<span id="cb77-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb77-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb77-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> alignment/S_Korean-2.sorted.bam</span>
+<span id="cb77-20"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Send the script to the queueing system:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Submitted batch job 33735298</code></pre>
 <p>&nbsp;</p>
 <p>Interrogate SLURM about the specific job</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb84-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb80-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>&gt;Name                : align.sh
 &gt;User                : samuele
 &gt;Account             : my_project
@@ -5797,7 +5902,7 @@ Indlæser…
 <p>or about all the queued jobs</p>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:10%;">
 
 <center>
@@ -5805,13 +5910,13 @@ or
 </center>
 
 </div><div class="column" style="width:45%;">
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> me</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 &gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
 <p>&nbsp;</p>
 <p>If you change your mind and want to cancel a job:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -5825,34 +5930,115 @@ or
 </div>
 <div class="callout-content">
 <p>To observe in real time the output of the job, refresh the last lines of the log file for that job:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb90-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>To look at the whole log (not in real time), run at any time</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Checking the log files can be useful for debugging, when for example a command gives an error and the job interrupts before its end.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="choosing-the-right-cpu-ram" class="slide level2 hidden">
+<section id="choosing-the-right-cpu-ram" class="slide level2">
 <h2>Choosing the right CPU-RAM</h2>
 <p>Try to run a job with a smaller dataset as a test. While it is running</p>
 <ul>
-<li><p>use <code>squeue-me</code> and look at the node id</p></li>
+<li><p>use <code>squeue --me</code> and look at the node id</p></li>
 <li><p>log into that node from the front-end:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb92-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>use <code>htop -u &lt;username&gt;</code> to see what is running and how much memory and CPU it uses <img data-src="img/htop.png"></p></li>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>use <code>htop -u &lt;username&gt;</code> to see what is running and how much memory and CPU it uses <img data-src="img/htop.png"></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div title="exercise (1/4)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>exercise (1/4)</strong></p>
+</div>
+<div class="callout-content">
+<p>You have a script which contains two programs: a genome simulator called <code>genomeSim</code> and a program to infer similarity between the simulated genomes, called <code>inferSim</code>.</p>
+<p>You run the script simulating a dataset 100 times smaller than what you would need. Below is what you see using <code>htop -u &lt;username&gt;</code> (next slide)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div title="exercise (2/4)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>exercise (2/4)</strong></p>
+</div>
+<div class="callout-content">
+<p>While the simulation is running</p>
 <pre><code> PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND          
- 8249 newhall   20   0  153m 4488  472 R   47  0.0   0:02.78 6 gol              
- 8250 newhall   20   0  153m 4488  472 R   47  0.0   0:02.76 2 gol              
- 8236 newhall   20   0  153m 4488  472 R   46  0.0   0:02.77 6 gol              
- 8237 newhall   20   0  153m 4488  472 S   46  0.0   0:02.77 4 gol              
- 8243 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 1 gol              
- 8239 newhall   20   0  153m 4488  472 S   46  0.0   0:02.76 7 gol              
- 8240 newhall   20   0  153m 4488  472 R   46  0.0   0:02.76 5 gol              
- 8244 newhall   20   0  153m 4488  472 R   46  0.0   0:02.72 2 gol              
- 8251 newhall   20   0  153m 4488  472 R   46  0.0   0:02.78 4 gol     </code></pre>
+ 8249 newhall   20   0  153m 4488  472 R   147.1  28.0   0:02.78 6 genomeSim              
+ 8250 newhall   20   0  153m 4488  472 R   147.2  30.9   0:02.76 2 genomeSim                        
+ 8243 newhall   20   0  153m 4488  472 R   146.1  45.4   0:02.76 1 genomeSim              
+ 8239 newhall   20   0  153m 4488  472 S   146.5  37.1   0:02.76 7 genomeSim                   </code></pre>
+<p>and while the similarity inference is running</p>
+<pre><code> PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND                      
+ 8236 newhall   20   0  153m 4488  472 R   7.3  0.0   0:12.11 6 inferSimilarity              
+ 8237 newhall   20   0  153m 4488  472 S   8.1  0.0   0:14.33 4 inferSimilarity             </code></pre>
+<p>The script is finished in around 60 minutes, where the simulation itself took 50 minutes. You asked for 16 cores and 128GB of memory when you sent the script to the <code>slurm</code> queueing manager.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div title="exercise (3/4)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>exercise (3/4)</strong></p>
+</div>
+<div class="callout-content">
+<p>Q1 split</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div title="exercise (3/4)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>exercise (3/4)</strong></p>
+</div>
+<div class="callout-content">
+<p>Q2 Memory for the two jobs</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div title="exercise (3/4)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>exercise (3/4)</strong></p>
+</div>
+<div class="callout-content">
+<p>Q1 split</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="other-ways-of-running-jobs" class="slide level2 hidden">
 <h2>Other ways of running jobs</h2>
@@ -5888,7 +6074,7 @@ or
 <li><p>Documentation on <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 </ul>
 </section>
-<section id="a-taste-of-the-next-workshops" class="slide level2">
+<section id="a-taste-of-the-next-workshops" class="slide level2 hidden">
 <h2>A taste of the next workshops</h2>
 <ul>
 <li>virtual terminals with <code>tmux</code></li>
@@ -5903,22 +6089,22 @@ or
 <li>gwf pipelines</li>
 </ul>
 </section>
-<section id="your-input-for-topics-and-evaluation" class="slide level2">
+<section id="your-input-for-topics-and-evaluation" class="slide level2 hidden">
 <h2>Your input for topics and evaluation</h2>
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevPQOj2FBtmhKp_kcJrWIv3jZQ-8ymvw67B_M_L-5dytiPEw/viewform?embedded=true" width="640" height="1218" frameborder="0" marginheight="0" marginwidth="0">
 Indlæser…
 </iframe>
 
-<div class="quarto-auto-generated-content">
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="img/logos.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
-</div>
-</section></section>
-
-    </div>
-  </div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
@@ -5948,7 +6134,8 @@ Indlæser…
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -6103,7 +6290,7 @@ Indlæser…
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -6208,8 +6395,6 @@ Indlæser…
       });
       clipboard.on('success', onCopySuccess);
       if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
         const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
           text: getTextToCopy,
           container: window.document.getElementById('quarto-embedded-source-code-modal')
