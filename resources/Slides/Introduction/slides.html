@@ -11,7 +11,7 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-02-11">
+  <meta name="dcterms.date" content="2025-02-12">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -230,37 +230,37 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-02-11</p>
+  <p class="date">2025-02-12</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
 <h1>Some background</h1>
 <ul>
 <li><p>These slides are both a presentation and a small reference manual</p></li>
-<li><p>We will try out some commands during the workshop</p>
-<ul>
-<li>keep both <strong>slides and terminal</strong> open</li>
-</ul></li>
+<li><p>We will try out some commands during the workshop</p></li>
 <li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 </ul>
 </section>
 <section id="when-you-need-to-ask-for-help" class="slide level2">
 <h2>When you need to ask for help</h2>
 <ul>
-<li><p>Practical help:</p>
+<li><p><strong>Practical help:</strong></p>
 <p>Samuele (BiRC, MBG) - samuele@birc.au.dk</p></li>
-<li><p>Drop in hours:</p>
-<p>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abc@au.dk</p></li>
-<li><p>General mail for assistance</p>
+<li><p><strong>Drop in hours:</strong></p>
+<ul>
+<li>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abc@au.dk</li>
+<li>Samuele (BiRC, MBG) - samuele@birc.au.dk</li>
+</ul></li>
+<li><p><strong>General mail for assistance</strong></p>
 <p>support@genome.au.dk</p></li>
 </ul>
 </section>
 <section id="program" class="slide level2">
 <h2>Program</h2>
 <ul>
-<li><p><strong>10:00-11:00</strong>: What is GenomeDK, File System, Some basic commands</p></li>
-<li><p><strong>11:00-12:00</strong>: Projects, data transfer, virtual environments</p></li>
-<li><p><strong>12:45-13:15</strong>: Create your environment</p></li>
+<li><p><strong>10:00-11:00</strong>: What is GenomeDK, File System, virtual environments</p></li>
+<li><p><strong>11:00-12:00</strong>: Exercise: access interface, new environment, transfer data, interactive job</p></li>
+<li><p><strong>12:45-13:15</strong>: queueing system and jobs, estimate resource usage</p></li>
 <li><p><strong>13:15-14:00</strong>: Send out your first job with <code>slurm</code>, estimate resource usage</p></li>
 </ul>
 </section>
@@ -268,12 +268,12 @@ Dan Søndergaard
 <h2>Get the slides</h2>
 <p>Webpage: <a href="https://hds-sandbox.github.io/GDKworkshops/">https://hds-sandbox.github.io/GDKworkshops/</a></p>
 
-<img data-src="./img/webpageGDK.png" class="r-stretch quarto-figure-center"><p class="caption">You can also open today’s slides at this short URL <a href="https://tinyurl.com/useGDK">https://tinyurl.com/useGDK</a></p></section>
+<img data-src="./img/webpageGDK.png" class="r-stretch quarto-figure-center"><p class="caption">Slides will always be up to date in this webpage</p></section>
 <section id="navigate-the-slides" class="slide level2">
 <h2>Navigate the slides</h2>
 
 <img data-src="./img/slideGuide.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="software-for-command-line" class="slide level2 smaller hidden">
+<section id="software-for-command-line" class="slide level2 smaller">
 <h2>Software for command line</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -358,10 +358,10 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>and create a folder on the cluster called <code>.ssh</code> to contain the public key</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  ssh <span class="op">&lt;</span>USERNAME<span class="op">&gt;</span>@login.genome.au.dk mkdir <span class="at">-p</span> .ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  ssh USERNAME@login.genome.au.dk mkdir <span class="at">-p</span> .ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>and finally send the public key to the cluster, into the file <code>authorized_keys</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  cat ~/.ssh/id_rsa.pub <span class="kw">|</span> <span class="fu">ssh</span> username@login.genome.au.dk <span class="st">'cat &gt;&gt; .ssh/authorized_keys'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  cat ~/.ssh/id_rsa.pub <span class="kw">|</span> <span class="fu">ssh</span> USERNAME@login.genome.au.dk <span class="st">'cat &gt;&gt; .ssh/authorized_keys'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>After this, your local private key will be tested against GenomeDK’s public key every time you log in, without you needing to write a password.</p>
 </section></section>
@@ -394,25 +394,55 @@ Dan Søndergaard
 </div>
 </div></div>
 </section>
+<section id="exercise" class="slide level2">
+<h2>Exercise:</h2>
+<p>Log in: <code>ssh USERNAME@login.genome.au.dk</code></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Run a command = Type a command + Enter</p>
+</div>
+</div>
+</div>
+<ul>
+<li>Run <code>pwd</code>, You should see your home folder: <code>/home/USERNAME</code>
+<ul>
+<li><code>/home/USERNAME</code> is an example of <strong>path</strong>.</li>
+<li><code>pwd</code> shows your current folder (WD, Working Directory)</li>
+<li>you can write paths starting FROM the WD!</li>
+</ul></li>
+</ul>
+</section>
 <section class="slide level2">
 
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/complexTree.png" class="quarto-figure quarto-figure-center"></p>
-</figure>
-</div>
-</div><div class="column" style="width:70%;">
 <ul>
-<li><p>you can reach files and folders with a <strong>path</strong></p></li>
-<li><p>Examples:</p>
-<pre><code>/home/username/coolProject/code/analysis.R
-
-/faststorage/project</code></pre></li>
-<li><p>Paths starting from the root are called <strong>absolute</strong></p></li>
+<li><p>Run <code>ls .</code> to show the content of your WD (the dot <code>.</code>)</p></li>
+<li><p>Run <code>mkdir -p GDKintro</code> to create a <code>GDKintro</code> folder</p></li>
+<li><p>Run <code>echo "hello" &gt; ./GDKintro/file.txt</code> to write hello in a file</p></li>
+<li><p>Use <code>ls ./GDKintro</code> to see if the text file is there.</p></li>
 </ul>
-</div></div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><code>/home/USERNAME</code> starts from the root <code>/</code>. It is an <strong>absolute path</strong>.</li>
+<li><code>./GDKintro</code> starts from the WD. It is a <strong>relative path</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -421,10 +451,10 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="678b2c9e" class="cell" data-execution_count="1">
+<div id="9fceb1cb" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="qurqJyXhBoYY" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#qurqJyXhBoYY {
+<div id="fLFnFkTgQoOU" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
+#fLFnFkTgQoOU {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -629,7 +659,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsqurqJyXhBoYY=[
+var questionsfLFnFkTgQoOU=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1489,8 +1519,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("qurqJyXhBoYY")) {
-            show_questions(questionsqurqJyXhBoYY,  qurqJyXhBoYY); 
+          if(document.getElementById("fLFnFkTgQoOU")) {
+            show_questions(questionsfLFnFkTgQoOU,  fLFnFkTgQoOU); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -1499,8 +1529,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("qurqJyXhBoYY");
-        // console.log(document.getElementById("qurqJyXhBoYY"));
+        //console.log("fLFnFkTgQoOU");
+        // console.log(document.getElementById("fLFnFkTgQoOU"));
 
         try_show();
         }
@@ -1512,30 +1542,10 @@ if (typeof version == 'undefined') {
 </div></div></section>
 <section class="slide level2">
 
-<h3 id="home-directory-and-relative-paths">Home directory ~ and relative paths</h3>
+<h3 id="something-more-about-your-home">Something more about your home</h3>
+<p>After log in, you will find yourself into your private <strong>home folder</strong>, denoted by <code>~</code> or equivalently <code>/home/username</code>. Your prompt will look like this:</p>
 <p>&nbsp;</p>
-<p>First of all, log into the cluster</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]</span> ssh username@login.genome.au.dk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>Use the <strong>arrow up key</strong> on the terminal to find the commands you used previously, and press enter when you find the login command</p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>After log in, you will find yourself into your private <strong>home folder</strong>, denoted by <code>~</code> or equivalently <code>/home/username/</code>. Your prompt will look like this:</p>
-<p>&nbsp;</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[username@node</span> ~] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[username@node</span> ~] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which follows the format <strong>[username@node current_folder]</strong>.</p>
 <p>&nbsp;</p>
 <div class="callout callout-warning callout-titled callout-style-default">
@@ -1555,1261 +1565,41 @@ if (typeof version == 'undefined') {
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="working-directory">Working directory</h3>
-<p>The folder in which <em>you are located</em> is called <strong>working directory (WD)</strong>. The WD is usually shown in your prompt. Use the following command to see the WD path starting from the root:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="exercise-contd" class="slide level2">
+<h2>Exercise cont’d</h2>
+<p>We now move the WD into GDKintro, remove all text files in it. Then we download a zipped fastq file, unzip it, and print a preview!</p>
 <p>&nbsp;</p>
-<p>Every command you run <strong>refers to your WD</strong>. Execute</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>and you will see the <strong>list of files and folders</strong> in your WD.</p>
-</section>
-<section class="slide level2">
-
-<h3 id="populating-with-files-and-folders">Populating with files and folders</h3>
-<p>Try to create an empty file now with</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> emptyFile.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>and <strong>create a folder</strong>, which will be inside the WD:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> myFolder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>If you use again the <code>ls</code> command, the new file and folder will show in the WD.</p>
-</section>
-<section class="slide level2">
-
-<p>How do you see the directory tree of the WD? Try <code>tree</code> with only 2 sublevels of depth:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-L</span> 2 .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> GDKintro</span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">*</span>.txt</span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz <span class="dt">\</span></span>
+<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data.fastq.gz</span>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data.fastq.gz</span>
+<span id="cb8-9"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data.fastq </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div title="Forever away">
+<div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>Forever away</strong></p>
 </div>
 <div class="callout-content">
-<p><code>.</code> denotes the WD, and is the default when you do not specify it. Retry the command above using <code>..</code> (one directory above in the file system) instead of <code>.</code></p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>We want to get a file from the internet to the folder <code>myFolder</code>. We can use <code>wget</code>:</p>
-<p>&nbsp;</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz<span class="dt">\</span></span>
-<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./myFolder/data.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<div title="options and manuals">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>options and manuals</strong></p>
-</div>
-<div class="callout-content">
-<p><code>-O</code> is the option to give a path and name for the downloaded file.</p>
-<p>Most commands have a help function to know the <em>syntax</em> and <em>options</em>. For example you can use <code>wget --help</code> and <code>man wget</code>.</p>
+<p>There is no trash bin - <strong>removed files are lost forever</strong> - with no exception</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="a-bit-more-on-absolute-and-relative-path">A bit more on absolute and relative path</h3>
-<div title="Reminder about the path types">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Reminder about the path types</strong></p>
-</div>
-<div class="callout-content">
-<p>The path to a file/folder can be:</p>
-<ul>
-<li><strong>absolute</strong>: start from the root</li>
-<li><strong>relative</strong>: starts from the WD (the WD is the new root)</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
-<p>To look inside <code>myFolder</code>, we can both write</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> myFolder/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:50%;">
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> ~/myFolder/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div>
-</section>
-<section class="slide level2">
-
-<div id="88839332" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div id="PSmqUqafEVgx" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"> <style>
-#PSmqUqafEVgx {
-   --jq-multiple-choice-bg: #6f78ffff;
-   --jq-mc-button-bg: #fafafa;
-   --jq-mc-button-border: #e0e0e0e0;
-   --jq-mc-button-inset-shadow: #555555;
-   --jq-many-choice-bg: #f75c03ff;
-   --jq-numeric-bg: #392061ff;
-   --jq-numeric-input-bg: #c0c0c0;
-   --jq-numeric-input-label: #101010;
-   --jq-numeric-input-shadow: #999999;
-   --jq-incorrect-color: #c80202;
-   --jq-correct-color: #009113;
-   --jq-text-color: #fafafa;
-}
-
-.Quiz {
-    max-width: 600px;
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: auto;
-/*    margin-bottom: 15px;*/
-/*    padding-bottom: 4px;*/
-    padding-top: 4px;
-    line-height: 1.1;
-    font-size: 16pt;
-    border-radius: inherit;
-}
-
-.QuizCode {
-    font-size: 14pt;
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.QuizCode>pre {
-    padding: 4px;
-}
-
-.Quiz code {
-    background-color: lightgray;
-    color: black;
-}
-
-.Quiz .QuizCode code {
-    background-color: inherit;
-    color: inherit;
-}
-
-
-.Quiz .MCButton code {
-    background-color: inherit;
-    color: inherit;
-}
-
-.MCButton .QuizCode {
-    text-align: left;
-}
-
-
-
-
-.Answer {
-    border-radius: inherit;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 1fr;
-    margin: 10px 0;
-}
-
-@media only screen and (max-width:480px) {
-    .Answer {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-.Feedback {
-    font-size: 16pt;
-    text-align: center;
-/*    min-height: 2em;*/
-}
-
-.Input {
-    align: left;
-    font-size: 20pt;
-}
-
-.Input-text {
-    display: block;
-    margin: 10px;
-    color: inherit;
-    width: 140px;
-    background-color: var(--jq-numeric-input-bg);
-    color: var(--jq-text-color);
-    padding: 5px;
-    padding-left: 10px;
-    font-family: inherit;
-    font-size: 20px;
-    font-weight: inherit;
-    line-height: 20pt;
-    border: none;
-    border-radius: 0.2rem;
-    transition: box-shadow 0.1s);
-}
-
-.Input-text:focus {
-    /*outline: none;*/
-    background-color: var(--jq-numeric-input-bg);
-    box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
-}
-
-.MCButton {
-    background: var(--jq-mc-button-bg);
-    border: 1px solid var(--jq-mc-button-border);
-    border-radius: inherit;
-    color: #333333;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.MCButton p {
-    color: inherit;
-}
-
-.MultipleChoiceQn {
-    padding: 10px;
-    background: var(--jq-multiple-choice-bg);
-    color: var(--jq-text-color);
-    border-radius: inherit;
-}
-
-.ManyChoiceQn {
-    padding: 10px;
-    background: var(--jq-many-choice-bg);
-    color: var(--jq-text-color);
-    border-radius: inherit;
-}
-
-.NumericQn {
-    background: var(--jq-numeric-bg);
-    border-radius: inherit;
-    color: var(--jq-text-color);
-    padding: 10px;
-}
-
-.NumericQn p {
-    color: inherit;
-}
-
-.InpLabel {
-    color: var(--jq-numeric-input-label);
-    float: left;
-    font-size: 15pt;
-    line-height: 34px;
-    margin-right: 10px;
-}
-
-.incorrect {
-    color: var(--jq-incorrect-color);
-}
-
-.correct {
-    color: var(--jq-correct-color);
-}
-
-.correctButton {
-    /*
-    background: var(--jq-correct-color);
-   */
-    animation: correct-anim 0.6s ease;
-    animation-fill-mode: forwards;
-    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
-    color: var(--jq-text-color);
-    /*outline: none;*/
-}
-
-.incorrectButton {
-    animation: incorrect-anim 0.8s ease;
-    animation-fill-mode: forwards;
-    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
-    color: var(--jq-text-color);
-    /*outline: none;*/
-}
-
-@keyframes incorrect-anim {
-    100% {
-        background-color: var(--jq-incorrect-color);
-    }
-}
-
-@keyframes correct-anim {
-    100% {
-        background-color: var(--jq-correct-color);
-    }
-}
-</style>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/javascript">
-var questionsPSmqUqafEVgx=[
-    {
-        "question": "In which cases is it a good idea to use the working directory?",
-        "type": "many_choice",
-        "answers": [
-            {
-                "answer": "When you want to access files and folders of the File System which branch below the working directory",
-                "correct": true,
-                "feedback": "Exactly! In this case it is useful to start the path from the WD. We can see the WD as the root of a tree that can reach the files and folders you need. "
-            },
-            {
-                "answer": "When you want to access files and folders of the File System many branches above the working directory",
-                "correct": false,
-                "feedback": "This can be done but it is not practical. If you need very often to access files above the WD, maybe you should consider changing your WD to a higher level of the FS."
-            },
-            {
-                "answer": "When you share a folder containing all the material from a project.",
-                "correct": true,
-                "feedback": "Yes! In this case, a person reproducing your project will set as WD the folder you shared, and all the paths will be relative to that folder."
-            },
-            {
-                "answer": "When you need to access a project folder contained in /faststorage",
-                "correct": false,
-                "feedback": "Not correct. You need an absolute path starting from /faststorage. Unless your WD is the /faststorage, or /faststorage/project/."
-            }
-        ]
-    }
-];
-    // Make a random ID
-function makeid(length) {
-    var result = [];
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
-    }
-    return result.join('');
-}
-
-// Choose a random subset of an array. Can also be used to shuffle the array
-function getRandomSubarray(arr, size) {
-    var shuffled = arr.slice(0), i = arr.length, temp, index;
-    while (i--) {
-        index = Math.floor((i + 1) * Math.random());
-        temp = shuffled[index];
-        shuffled[index] = shuffled[i];
-        shuffled[i] = temp;
-    }
-    return shuffled.slice(0, size);
-}
-
-function printResponses(responsesContainer) {
-    var responses=JSON.parse(responsesContainer.dataset.responses);
-    var stringResponses='<B>IMPORTANT!</B>To preserve this answer sequence for submission, when you have finalized your answers: <ol> <li> Copy the text in this cell below "Answer String"</li> <li> Double click on the cell directly below the Answer String, labeled "Replace Me"</li> <li> Select the whole "Replace Me" text</li> <li> Paste in your answer string and press shift-Enter.</li><li>Save the notebook using the save icon or File->Save Notebook menu item</li></ul><br><br><br><b>Answer String:</b><br> ';
-    console.log(responses);
-    responses.forEach((response, index) => {
-        if (response) {
-            console.log(index + ': ' + response);
-            stringResponses+= index + ': ' + response +"<BR>";
-        }
-    });
-    responsesContainer.innerHTML=stringResponses;
-}
-/* Callback function to determine whether a selected multiple-choice
-   button corresponded to a correct answer and to provide feedback
-   based on the answer */
-function check_mc() {
-    var id = this.id.split('-')[0];
-    //var response = this.id.split('-')[1];
-    //console.log(response);
-    //console.log("In check_mc(), id="+id);
-    //console.log(event.srcElement.id)           
-    //console.log(event.srcElement.dataset.correct)   
-    //console.log(event.srcElement.dataset.feedback)
-
-    var label = event.srcElement;
-    //console.log(label, label.nodeName);
-    var depth = 0;
-    while ((label.nodeName != "LABEL") && (depth < 20)) {
-        label = label.parentElement;
-        console.log(depth, label);
-        depth++;
-    }
-
-
-
-    var answers = label.parentElement.children;
-    //console.log(answers);
-
-    // Split behavior based on multiple choice vs many choice:
-    var fb = document.getElementById("fb" + id);
-
-
-
-    /* Multiple choice (1 answer). Allow for 0 correct
-       answers as an edge case */
-    if (fb.dataset.numcorrect <= 1) {
-        // What follows is for the saved responses stuff
-        var outerContainer = fb.parentElement.parentElement;
-        var responsesContainer = document.getElementById("responses" + outerContainer.id);
-        if (responsesContainer) {
-            //console.log(responsesContainer);
-            var response = label.firstChild.innerText;
-            if (label.querySelector(".QuizCode")){
-                response+= label.querySelector(".QuizCode").firstChild.innerText;
-            }
-            console.log(response);
-            //console.log(document.getElementById("quizWrap"+id));
-            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
-            console.log("Question " + qnum);
-            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
-            var responses=JSON.parse(responsesContainer.dataset.responses);
-            console.log(responses);
-            responses[qnum]= response;
-            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
-            printResponses(responsesContainer);
-        }
-        // End code to preserve responses
-
-        for (var i = 0; i < answers.length; i++) {
-            var child = answers[i];
-            //console.log(child);
-            child.className = "MCButton";
-        }
-
-
-
-        if (label.dataset.correct == "true") {
-            // console.log("Correct action");
-            if ("feedback" in label.dataset) {
-                fb.innerHTML = jaxify(label.dataset.feedback);
-            } else {
-                fb.innerHTML = "Correct!";
-            }
-            label.classList.add("correctButton");
-
-            fb.className = "Feedback";
-            fb.classList.add("correct");
-
-        } else {
-            if ("feedback" in label.dataset) {
-                fb.innerHTML = jaxify(label.dataset.feedback);
-            } else {
-                fb.innerHTML = "Incorrect -- try again.";
-            }
-            //console.log("Error action");
-            label.classList.add("incorrectButton");
-            fb.className = "Feedback";
-            fb.classList.add("incorrect");
-        }
-    }
-    else { /* Many choice (more than 1 correct answer) */
-        var reset = false;
-        var feedback;
-         if (label.dataset.correct == "true") {
-            if ("feedback" in label.dataset) {
-                feedback = jaxify(label.dataset.feedback);
-            } else {
-                feedback = "Correct!";
-            }
-            if (label.dataset.answered <= 0) {
-                if (fb.dataset.answeredcorrect < 0) {
-                    fb.dataset.answeredcorrect = 1;
-                    reset = true;
-                } else {
-                    fb.dataset.answeredcorrect++;
-                }
-                if (reset) {
-                    for (var i = 0; i < answers.length; i++) {
-                        var child = answers[i];
-                        child.className = "MCButton";
-                        child.dataset.answered = 0;
-                    }
-                }
-                label.classList.add("correctButton");
-                label.dataset.answered = 1;
-                fb.className = "Feedback";
-                fb.classList.add("correct");
-
-            }
-        } else {
-            if ("feedback" in label.dataset) {
-                feedback = jaxify(label.dataset.feedback);
-            } else {
-                feedback = "Incorrect -- try again.";
-            }
-            if (fb.dataset.answeredcorrect > 0) {
-                fb.dataset.answeredcorrect = -1;
-                reset = true;
-            } else {
-                fb.dataset.answeredcorrect--;
-            }
-
-            if (reset) {
-                for (var i = 0; i < answers.length; i++) {
-                    var child = answers[i];
-                    child.className = "MCButton";
-                    child.dataset.answered = 0;
-                }
-            }
-            label.classList.add("incorrectButton");
-            fb.className = "Feedback";
-            fb.classList.add("incorrect");
-        }
-        // What follows is for the saved responses stuff
-        var outerContainer = fb.parentElement.parentElement;
-        var responsesContainer = document.getElementById("responses" + outerContainer.id);
-        if (responsesContainer) {
-            //console.log(responsesContainer);
-            var response = label.firstChild.innerText;
-            if (label.querySelector(".QuizCode")){
-                response+= label.querySelector(".QuizCode").firstChild.innerText;
-            }
-            console.log(response);
-            //console.log(document.getElementById("quizWrap"+id));
-            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
-            console.log("Question " + qnum);
-            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
-            var responses=JSON.parse(responsesContainer.dataset.responses);
-            if (label.dataset.correct == "true") {
-                if (typeof(responses[qnum]) == "object"){
-                    if (!responses[qnum].includes(response))
-                        responses[qnum].push(response);
-                } else{
-                    responses[qnum]= [ response ];
-                }
-            } else {
-                responses[qnum]= response;
-            }
-            console.log(responses);
-            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
-            printResponses(responsesContainer);
-        }
-        // End save responses stuff
-
-
-
-        var numcorrect = fb.dataset.numcorrect;
-        var answeredcorrect = fb.dataset.answeredcorrect;
-        if (answeredcorrect >= 0) {
-            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
-        } else {
-            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
-        }
-
-
-    }
-
-    if (typeof MathJax != 'undefined') {
-        var version = MathJax.version;
-        console.log('MathJax version', version);
-        if (version[0] == "2") {
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        } else if (version[0] == "3") {
-            MathJax.typeset([fb]);
-        }
-    } else {
-        console.log('MathJax not detected');
-    }
-
-}
-
-
-/* Function to produce the HTML buttons for a multiple choice/
-   many choice question  and to update the CSS tags based on
-   the question type */
-function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
-
-    var shuffled;
-    if (shuffle_answers == "True") {
-        //console.log(shuffle_answers+" read as true");
-        shuffled = getRandomSubarray(qa.answers, qa.answers.length);
-    } else {
-        //console.log(shuffle_answers+" read as false");
-        shuffled = qa.answers;
-    }
-
-
-    var num_correct = 0;
-
-    shuffled.forEach((item, index, ans_array) => {
-        //console.log(answer);
-
-        // Make input element
-        var inp = document.createElement("input");
-        inp.type = "radio";
-        inp.id = "quizo" + id + index;
-        inp.style = "display:none;";
-        aDiv.append(inp);
-
-        //Make label for input element
-        var lab = document.createElement("label");
-        lab.className = "MCButton";
-        lab.id = id + '-' + index;
-        lab.onclick = check_mc;
-        var aSpan = document.createElement('span');
-        aSpan.classsName = "";
-        //qDiv.id="quizQn"+id+index;
-        if ("answer" in item) {
-            aSpan.innerHTML = jaxify(item.answer);
-            //aSpan.innerHTML=item.answer;
-        }
-        lab.append(aSpan);
-
-        // Create div for code inside question
-        var codeSpan;
-        if ("code" in item) {
-            codeSpan = document.createElement('span');
-            codeSpan.id = "code" + id + index;
-            codeSpan.className = "QuizCode";
-            var codePre = document.createElement('pre');
-            codeSpan.append(codePre);
-            var codeCode = document.createElement('code');
-            codePre.append(codeCode);
-            codeCode.innerHTML = item.code;
-            lab.append(codeSpan);
-            //console.log(codeSpan);
-        }
-
-        //lab.textContent=item.answer;
-
-        // Set the data attributes for the answer
-        lab.setAttribute('data-correct', item.correct);
-        if (item.correct) {
-            num_correct++;
-        }
-        if ("feedback" in item) {
-            lab.setAttribute('data-feedback', item.feedback);
-        }
-        lab.setAttribute('data-answered', 0);
-
-        aDiv.append(lab);
-
-    });
-
-    if (num_correct > 1) {
-        outerqDiv.className = "ManyChoiceQn";
-    } else {
-        outerqDiv.className = "MultipleChoiceQn";
-    }
-
-    return num_correct;
-
-}
-function check_numeric(ths, event) {
-
-    if (event.keyCode === 13) {
-        ths.blur();
-
-        var id = ths.id.split('-')[0];
-
-        var submission = ths.value;
-        if (submission.indexOf('/') != -1) {
-            var sub_parts = submission.split('/');
-            //console.log(sub_parts);
-            submission = sub_parts[0] / sub_parts[1];
-        }
-        //console.log("Reader entered", submission);
-
-        if ("precision" in ths.dataset) {
-            var precision = ths.dataset.precision;
-            submission = Number(Number(submission).toPrecision(precision));
-        }
-
-
-        //console.log("In check_numeric(), id="+id);
-        //console.log(event.srcElement.id)           
-        //console.log(event.srcElement.dataset.feedback)
-
-        var fb = document.getElementById("fb" + id);
-        fb.style.display = "none";
-        fb.innerHTML = "Incorrect -- try again.";
-
-        var answers = JSON.parse(ths.dataset.answers);
-        //console.log(answers);
-
-        var defaultFB = "Incorrect. Try again.";
-        var correct;
-        var done = false;
-        answers.every(answer => {
-            //console.log(answer.type);
-
-            correct = false;
-            // if (answer.type=="value"){
-            if ('value' in answer) {
-                if (submission == answer.value) {
-                    if ("feedback" in answer) {
-                        fb.innerHTML = jaxify(answer.feedback);
-                    } else {
-                        fb.innerHTML = jaxify("Correct");
-                    }
-                    correct = answer.correct;
-                    //console.log(answer.correct);
-                    done = true;
-                }
-                // } else if (answer.type=="range") {
-            } else if ('range' in answer) {
-                console.log(answer.range);
-                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
-                if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
-                    fb.innerHTML = jaxify(answer.feedback);
-                    correct = answer.correct;
-                    console.log(answer.correct);
-                    done = true;
-                }
-            } else if (answer.type == "default") {
-                if ("feedback" in answer) {
-                    defaultFB = answer.feedback;
-                } 
-            }
-            if (done) {
-                return false; // Break out of loop if this has been marked correct
-            } else {
-                return true; // Keep looking for case that includes this as a correct answer
-            }
-        });
-        console.log("done:", done);
-
-        if ((!done) && (defaultFB != "")) {
-            fb.innerHTML = jaxify(defaultFB);
-            //console.log("Default feedback", defaultFB);
-        }
-
-        fb.style.display = "block";
-        if (correct) {
-            ths.className = "Input-text";
-            ths.classList.add("correctButton");
-            fb.className = "Feedback";
-            fb.classList.add("correct");
-        } else {
-            ths.className = "Input-text";
-            ths.classList.add("incorrectButton");
-            fb.className = "Feedback";
-            fb.classList.add("incorrect");
-        }
-
-        // What follows is for the saved responses stuff
-        var outerContainer = fb.parentElement.parentElement;
-        var responsesContainer = document.getElementById("responses" + outerContainer.id);
-        if (responsesContainer) {
-            console.log(submission);
-            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
-            //console.log("Question " + qnum);
-            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
-            var responses=JSON.parse(responsesContainer.dataset.responses);
-            console.log(responses);
-            if (submission == ths.value){
-                responses[qnum]= submission;
-            } else {
-                responses[qnum]= ths.value + "(" + submission +")";
-            }
-            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
-            printResponses(responsesContainer);
-        }
-        // End code to preserve responses
-
-        if (typeof MathJax != 'undefined') {
-            var version = MathJax.version;
-            console.log('MathJax version', version);
-            if (version[0] == "2") {
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            } else if (version[0] == "3") {
-                MathJax.typeset([fb]);
-            }
-        } else {
-            console.log('MathJax not detected');
-        }
-        return false;
-    }
-
-}
-
-function isValid(el, charC) {
-    //console.log("Input char: ", charC);
-    if (charC == 46) {
-        if (el.value.indexOf('.') === -1) {
-            return true;
-        } else if (el.value.indexOf('/') != -1) {
-            var parts = el.value.split('/');
-            if (parts[1].indexOf('.') === -1) {
-                return true;
-            }
-        }
-        else {
-            return false;
-        }
-    } else if (charC == 47) {
-        if (el.value.indexOf('/') === -1) {
-            if ((el.value != "") && (el.value != ".")) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    } else if (charC == 45) {
-        var edex = el.value.indexOf('e');
-        if (edex == -1) {
-            edex = el.value.indexOf('E');
-        }
-
-        if (el.value == "") {
-            return true;
-        } else if (edex == (el.value.length - 1)) { // If just after e or E
-            return true;
-        } else {
-            return false;
-        }
-    } else if (charC == 101) { // "e"
-        if ((el.value.indexOf('e') === -1) && (el.value.indexOf('E') === -1) && (el.value.indexOf('/') == -1)) {
-            // Prev symbol must be digit or decimal point:
-            if (el.value.slice(-1).search(/\d/) >= 0) {
-                return true;
-            } else if (el.value.slice(-1).search(/\./) >= 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    } else {
-        if (charC > 31 && (charC < 48 || charC > 57))
-            return false;
-    }
-    return true;
-}
-
-function numeric_keypress(evnt) {
-    var charC = (evnt.which) ? evnt.which : evnt.keyCode;
-
-    if (charC == 13) {
-        check_numeric(this, evnt);
-    } else {
-        return isValid(this, charC);
-    }
-}
-
-
-
-
-
-function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
-
-
-
-    //console.log(answer);
-
-
-    outerqDiv.className = "NumericQn";
-    aDiv.style.display = 'block';
-
-    var lab = document.createElement("label");
-    lab.className = "InpLabel";
-    lab.innerHTML = "Type numeric answer here:";
-    aDiv.append(lab);
-
-    var inp = document.createElement("input");
-    inp.type = "text";
-    //inp.id="input-"+id;
-    inp.id = id + "-0";
-    inp.className = "Input-text";
-    inp.setAttribute('data-answers', JSON.stringify(qa.answers));
-    if ("precision" in qa) {
-        inp.setAttribute('data-precision', qa.precision);
-    }
-    aDiv.append(inp);
-    //console.log(inp);
-
-    //inp.addEventListener("keypress", check_numeric);
-    //inp.addEventListener("keypress", numeric_keypress);
-    /*
-    inp.addEventListener("keypress", function(event) {
-        return numeric_keypress(this, event);
-    }
-                        );
-                        */
-    //inp.onkeypress="return numeric_keypress(this, event)";
-    inp.onkeypress = numeric_keypress;
-    inp.onpaste = event => false;
-
-    inp.addEventListener("focus", function (event) {
-        this.value = "";
-        return false;
-    }
-    );
-
-
-}
-function jaxify(string) {
-    var mystring = string;
-
-    var count = 0;
-    var loc = mystring.search(/([^\\]|^)(\$)/);
-
-    var count2 = 0;
-    var loc2 = mystring.search(/([^\\]|^)(\$\$)/);
-
-    //console.log(loc);
-
-    while ((loc >= 0) || (loc2 >= 0)) {
-
-        /* Have to replace all the double $$ first with current implementation */
-        if (loc2 >= 0) {
-            if (count2 % 2 == 0) {
-                mystring = mystring.replace(/([^\\]|^)(\$\$)/, "$1\\[");
-            } else {
-                mystring = mystring.replace(/([^\\]|^)(\$\$)/, "$1\\]");
-            }
-            count2++;
-        } else {
-            if (count % 2 == 0) {
-                mystring = mystring.replace(/([^\\]|^)(\$)/, "$1\\(");
-            } else {
-                mystring = mystring.replace(/([^\\]|^)(\$)/, "$1\\)");
-            }
-            count++;
-        }
-        loc = mystring.search(/([^\\]|^)(\$)/);
-        loc2 = mystring.search(/([^\\]|^)(\$\$)/);
-        //console.log(mystring,", loc:",loc,", loc2:",loc2);
-    }
-
-    // repace markdown style links with actual links
-    mystring = mystring.replace(/<(.*?)>/, '<a href="$1" target="_blank" class="Link">$1</a>');
-    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/, '<a href="$2" target="_blank" class="Link">$1</a>');
-
-    //console.log(mystring);
-    return mystring;
-}
-
-
-function show_questions(json, mydiv) {
-    console.log('show_questions');
-    //var mydiv=document.getElementById(myid);
-    var shuffle_questions = mydiv.dataset.shufflequestions;
-    var num_questions = mydiv.dataset.numquestions;
-    var shuffle_answers = mydiv.dataset.shuffleanswers;
-    var max_width = mydiv.dataset.maxwidth;
-
-    if (num_questions > json.length) {
-        num_questions = json.length;
-    }
-
-    var questions;
-    if ((num_questions < json.length) || (shuffle_questions == "True")) {
-        //console.log(num_questions+","+json.length);
-        questions = getRandomSubarray(json, num_questions);
-    } else {
-        questions = json;
-    }
-
-    //console.log("SQ: "+shuffle_questions+", NQ: " + num_questions + ", SA: ", shuffle_answers);
-
-    // Iterate over questions
-    questions.forEach((qa, index, array) => {
-        //console.log(qa.question); 
-
-        var id = makeid(8);
-        //console.log(id);
-
-
-        // Create Div to contain question and answers
-        var iDiv = document.createElement('div');
-        //iDiv.id = 'quizWrap' + id + index;
-        iDiv.id = 'quizWrap' + id;
-        iDiv.className = 'Quiz';
-        iDiv.setAttribute('data-qnum', index);
-        iDiv.style.maxWidth  =max_width+"px";
-        mydiv.appendChild(iDiv);
-        // iDiv.innerHTML=qa.question;
-        
-        var outerqDiv = document.createElement('div');
-        outerqDiv.id = "OuterquizQn" + id + index;
-        // Create div to contain question part
-        var qDiv = document.createElement('div');
-        qDiv.id = "quizQn" + id + index;
-        
-        if (qa.question) {
-            iDiv.append(outerqDiv);
-
-            //qDiv.textContent=qa.question;
-            qDiv.innerHTML = jaxify(qa.question);
-            outerqDiv.append(qDiv);
-        }
-
-        // Create div for code inside question
-        var codeDiv;
-        if ("code" in qa) {
-            codeDiv = document.createElement('div');
-            codeDiv.id = "code" + id + index;
-            codeDiv.className = "QuizCode";
-            var codePre = document.createElement('pre');
-            codeDiv.append(codePre);
-            var codeCode = document.createElement('code');
-            codePre.append(codeCode);
-            codeCode.innerHTML = qa.code;
-            outerqDiv.append(codeDiv);
-            //console.log(codeDiv);
-        }
-
-
-        // Create div to contain answer part
-        var aDiv = document.createElement('div');
-        aDiv.id = "quizAns" + id + index;
-        aDiv.className = 'Answer';
-        iDiv.append(aDiv);
-
-        //console.log(qa.type);
-
-        var num_correct;
-        if ((qa.type == "multiple_choice") || (qa.type == "many_choice") ) {
-            num_correct = make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id);
-            if ("answer_cols" in qa) {
-                //aDiv.style.gridTemplateColumns = 'auto '.repeat(qa.answer_cols);
-                aDiv.style.gridTemplateColumns = 'repeat(' + qa.answer_cols + ', 1fr)';
-            }
-        } else if (qa.type == "numeric") {
-            //console.log("numeric");
-            make_numeric(qa, outerqDiv, qDiv, aDiv, id);
-        }
-
-
-        //Make div for feedback
-        var fb = document.createElement("div");
-        fb.id = "fb" + id;
-        //fb.style="font-size: 20px;text-align:center;";
-        fb.className = "Feedback";
-        fb.setAttribute("data-answeredcorrect", 0);
-        fb.setAttribute("data-numcorrect", num_correct);
-        iDiv.append(fb);
-
-
-    });
-    var preserveResponses = mydiv.dataset.preserveresponses;
-    console.log(preserveResponses);
-    console.log(preserveResponses == "true");
-    if (preserveResponses == "true") {
-        console.log(preserveResponses);
-        // Create Div to contain record of answers
-        var iDiv = document.createElement('div');
-        iDiv.id = 'responses' + mydiv.id;
-        iDiv.className = 'JCResponses';
-        // Create a place to store responses as an empty array
-        iDiv.setAttribute('data-responses', '[]');
-
-        // Dummy Text
-        iDiv.innerHTML="<b>Select your answers and then follow the directions that will appear here.</b>"
-        //iDiv.className = 'Quiz';
-        mydiv.appendChild(iDiv);
-    }
-//console.log("At end of show_questions");
-    if (typeof MathJax != 'undefined') {
-        console.log("MathJax version", MathJax.version);
-        var version = MathJax.version;
-        setTimeout(function(){
-            var version = MathJax.version;
-            console.log('After sleep, MathJax version', version);
-            if (version[0] == "2") {
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            } else if (version[0] == "3") {
-                if (MathJax.hasOwnProperty('typeset') ) {
-                    MathJax.typeset([mydiv]);
-                } else {
-                    console.log('WARNING: Trying to force load MathJax 3');
-                    window.MathJax = {
-                        tex: {
-                            inlineMath: [['$', '$'], ['\\(', '\\)']]
-                        },
-                        svg: {
-                            fontCache: 'global'
-                        }
-                    };
-
-                    (function () {
-                        var script = document.createElement('script');
-                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
-                        script.async = true;
-                        document.head.appendChild(script);
-                    })();
-                }
-            }
-        }, 500);
-if (typeof version == 'undefined') {
-        } else
-        {
-            if (version[0] == "2") {
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            } else if (version[0] == "3") {
-                if (MathJax.hasOwnProperty('typeset') ) {
-                    MathJax.typeset([mydiv]);
-                } else {
-                    console.log('WARNING: Trying to force load MathJax 3');
-                    window.MathJax = {
-                        tex: {
-                            inlineMath: [['$', '$'], ['\\(', '\\)']]
-                        },
-                        svg: {
-                            fontCache: 'global'
-                        }
-                    };
-
-                    (function () {
-                        var script = document.createElement('script');
-                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
-                        script.async = true;
-                        document.head.appendChild(script);
-                    })();
-                }
-            } else {
-                console.log("MathJax not found");
-            }
-        }
-    }
-
-    // stop event propagation for the .Link class
-    var links = document.getElementsByClassName('Link')
-    for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', function(e){
-            e.stopPropagation();
-        });
-    }
-
-    return false;
-}
-/* This is to handle asynchrony issues in loading Jupyter notebooks
-           where the quiz has been previously run. The Javascript was generally
-           being run before the div was added to the DOM. I tried to do this
-           more elegantly using Mutation Observer, but I didn't get it to work.
-
-           Someone more knowledgeable could make this better ;-) */
-
-        function try_show() {
-          if(document.getElementById("PSmqUqafEVgx")) {
-            show_questions(questionsPSmqUqafEVgx,  PSmqUqafEVgx); 
-          } else {
-             setTimeout(try_show, 200);
-          }
-        };
-    
-        {
-        // console.log(element);
-
-        //console.log("PSmqUqafEVgx");
-        // console.log(document.getElementById("PSmqUqafEVgx"));
-
-        try_show();
-        }
-        
-</script>
-</div>
-</div>
-<div title="The WD is everywhere">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>The WD is everywhere</strong></p>
-</div>
-<div class="callout-content">
-<p>The working directory is a very useful concept, not limited to Linux/GenomeDK, but used very widely in computer applications.</p>
-<p>For example, when you work in <code>R</code> or <code>Python</code>, there is a default WD which you can change.</p>
-</div>
-</div>
-</div>
-</div>
-</div></section>
-<section class="slide level2">
-
-<h3 id="changing-wd">Changing WD</h3>
-<p>Changing WD can be useful. To set the WD inside <code>myFolder</code> use</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> myFolder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>and verify with <code>pwd</code> the new working directory path.</p>
-</section></section>
-<section>
-<section id="working-with-files" class="title-slide slide level1 center">
-<h1>Working with Files</h1>
-<p>Moving, Downloading, Manipulating and other basic operation on files.</p>
-</section>
-<section id="file-formats" class="slide level2">
-<h2>File formats</h2>
-<p>Many files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the <strong>file formats</strong> you encounter when doing bioinformatics.</p>
-<p>&nbsp;</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Some file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor.</p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/textfile.png"></p>
-<figcaption>A text file is human-readable with any text reader or editor, and is composed of only ASCII characters, such as in the <code>fastq</code> file format</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/binaryFile.png"></p>
-<figcaption>A binary file containes other than ASCII characters. For example, the <code>bam</code> file format is binary and can be read with the <code>samtools</code> software.</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section class="slide level2">
-
-<p>Let’s get ready. Be sure you are in <code>myFolder</code> (use <code>pwd</code>) - Otherwise use</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/myFolder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>Now, you can decompress the file <code>data.fastq.gz</code>, which is in <code>gz</code> compressed format:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>For compressing a file into <code>gz</code> format, you can use <code>gzip</code>. For compressing and decompressing in <code>zip</code> format, you have also the commands <code>zip</code> and <code>unzip</code>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="less-for-reading-files" class="slide level2">
-<h2>Less for reading files</h2>
-<p><code>less</code> is perfect for reading text files: you can scroll with the arrows, and quit pressing <code>q</code>. Try</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> data.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="exercise-read-files" class="slide level2">
+<h2>Exercise: Read files</h2>
+<p>Useful utility 1: <code>less</code> file reader. <code>less</code> is perfect for exploring (big) text files: you can scroll with the arrows, and quit pressing <code>q</code>. Try</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> data.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp; The very first sequence you see should be</p>
 <pre><code>@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
 TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
@@ -2829,10 +1619,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="ee4121af" class="cell" data-execution_count="3">
+<div id="4716e741" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="OaYanGuYLPjB" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
-#OaYanGuYLPjB {
+<div id="bHJGKatIuToZ" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#bHJGKatIuToZ {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3037,7 +1827,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsOaYanGuYLPjB=[
+var questionsbHJGKatIuToZ=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3871,8 +2661,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("OaYanGuYLPjB")) {
-            show_questions(questionsOaYanGuYLPjB,  OaYanGuYLPjB); 
+          if(document.getElementById("bHJGKatIuToZ")) {
+            show_questions(questionsbHJGKatIuToZ,  bHJGKatIuToZ); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -3881,8 +2671,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("OaYanGuYLPjB");
-        // console.log(document.getElementById("OaYanGuYLPjB"));
+        //console.log("bHJGKatIuToZ");
+        // console.log(document.getElementById("bHJGKatIuToZ"));
 
         try_show();
         }
@@ -3895,13 +2685,314 @@ if (typeof version == 'undefined') {
 </div>
 </div>
 </div></section>
-<section id="counting" class="slide level2">
-<h2>Counting</h2>
-<p>How many lines are there in your file? The command <code>wc</code> can show that to you:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> data.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="exercise-writing-on-files" class="slide level2">
+<h2>Exercise: Writing on files</h2>
+<p>Useful utility 2: <code>nano</code> text editor. It open, edits and saves text files. Very useful for changes on the fly.</p>
+<ul>
+<li><p>Try <code>nano data.fastq</code>. Change a base in the first sequence,</p></li>
+<li><p>then press Ctrl+O to save (give it a new file name <code>newData.fastq</code> and press Enter)</p></li>
+<li><p>press Ctrl+X to exit. If you use <code>ls</code> you can see the new saved file.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="packageenvironment-management" class="title-slide slide level1 center">
+<h1>Package/Environment management</h1>
 <p>&nbsp;</p>
-<p>The file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines).</p>
+<ul>
+<li><p><strong>No preinstalled software</strong> on GenomeDK</p></li>
+<li><p>You install and manage your <strong>software and its dependencies</strong> inside virtual environments</p></li>
+</ul>
+</section>
+<section id="virtual-environments" class="slide level2">
+<h2>Virtual environments</h2>
+<p>Each project needs specific software versions dependent on each other for <strong>reproducibility</strong> - without interferring with other projects.</p>
 <p>&nbsp;</p>
+<div title="Definition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Definition</strong></p>
+</div>
+<div class="callout-content">
+<p>A <strong>virtual environment</strong> keeps project-specific softwares and their dependencies separated</p>
+<p>&nbsp;</p>
+<p>A <strong>package manager</strong> is a software that can retrieve, download, install, upgrade packages <strong>easily and reliably</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+
+<img data-src="./img/virtualenvs.png" class="r-stretch"></section>
+<section id="conda" class="slide level2">
+<h2>Conda</h2>
+<p>&nbsp;</p>
+<p>Conda is <strong>both</strong> a virtual environment and a package manager.</p>
+<ul>
+<li>easy to use and understand</li>
+<li>can handle quite big environments</li>
+<li>environments are easily shareable</li>
+<li>a <a href="https://anaconda.org">large archive</a> (Anaconda) of packages</li>
+<li>active community of people archiving their packages on Anaconda</li>
+</ul>
+</section>
+<section id="pixi" class="slide level2">
+<h2>Pixi</h2>
+<p>A newer virtual env. and package manager</p>
+<p>&nbsp;</p>
+<ul>
+<li>An upgrade of Conda in speed and stability</li>
+<li>Can install the same packages as conda</li>
+</ul>
+</section>
+<section id="exercise-virt.env.-for-rstudio-and-jupyterlab" class="slide level2">
+<h2>Exercise: Virt.Env. for Rstudio and Jupyterlab</h2>
+<p>First of all, we open the desktop interface to GenomeDK at <a href="https://desktop.genome.au.dk">desktop.genome.au.dk</a>. Choose the Front end for the login.</p>
+<p>The desktop session will be operative even if you close and reopen your browser afterwards!</p>
+
+<img data-src="img/desktop.png" class="r-stretch quarto-figure-center"><p class="caption">The terminal will work as if you logged into the frontend (The desktop is logged into the front-end node already). You can also use the browser!</p></section>
+<section class="slide level2">
+
+<p>Open the terminal and install conda with the following commands.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
+<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
+<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
+<span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./miniforge3/bin/conda</span> init bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>After a few <code>ENTER</code>s and <code>YES</code>’s you should get the installation done. Run</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and doublecheck that <code>conda</code> works:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p><strong>Configuration</strong></p>
+<p>You can add some default <em>channels</em> where to find archived packages. Here are some tipycal ones</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We tell <code>conda</code> to consider channels in the order specified above. We also avoid opening the <code>base</code> environment (where <code>conda</code> is installed) at login.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
+<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Base environment</strong></p>
+<p><code>base</code> is the environment containing conda itself. The current environment is in your prompt in round brackets.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">environment</span><span class="kw">)</span> <span class="ex">[samuele@fe-open-02</span> ~]$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We update Conda with <code>libmamba solver</code> - a lot faster in installing many packages at once.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div title="Don't touch the Base">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Don’t touch the Base</strong></p>
+</div>
+<div class="callout-content">
+<p>This is <strong>the only time</strong> you should install in the <code>base</code> environment! You might otherwise ruin the conda installation.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Create an environment</strong></p>
+<p>An empty environment called <code>test_1</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>You can list all the environments available:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&gt; # conda environments:
+&gt; #
+&gt; base      *  /home/samuele/miniconda3
+&gt; test_1       /home/samuele/miniconda3/envs/test_1</code></pre>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>An environment is in reality a folder, which contains all installed packages and other configurations and utilities</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Activate and deactivate</strong></p>
+<p>To use an environment we activate it:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>From now on, all installed softwares and packages will be available. <code>(test_1)</code> is now shown in your prompt.</p>
+<p>&nbsp;</p>
+<p>Deactivation happens by</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p><strong>Package installation</strong></p>
+<p>Conda puts together the dependency trees of requested packages to find all compatible dependencies versions.</p>
+
+<img data-src="img/condatree.png" class="r-stretch quarto-figure-center"><p class="caption">Figure: A package’s dependency tree with required versions on the edges</p></section>
+<section class="slide level2">
+
+<p>To install a specific package in your environment, search it on <a href="https://anaconda.org">anaconda.org</a>:</p>
+
+<img data-src="img/anaconda1.png" class="r-stretch quarto-figure-center"><p class="caption">Figure: search DeSeq2 for R</p></section>
+<section class="slide level2">
+
+
+<img data-src="img/anaconda2.png" style="width:10cm" class="r-stretch quarto-figure-center"><p class="caption">Figure: suggested commands to install the package</p><div title="Channels">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Channels</strong></p>
+</div>
+<div class="callout-content">
+<p>packages are archived in channels. Typical ones are <code>conda-forge</code> and <code>bioconda</code>.</p>
+<p><code>conda-forge</code> packages are often more up-to-date, but a few times show compatibility problems with other packages.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Install a few packages in the activated environment - you can always specify a version restriction to each package:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install bioconductor-deseq2 r-tidyr rstudio-desktop jupyterlab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>To install few packages, you need more than a hundred installations! Those are all dependencies arising from the <strong>comparison of dependency trees</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="installation-from-a-list-of-packages">Installation from a list of packages</h3>
+<p>You can export all the packages you have installed over time in your environment:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which looks like</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb25-6"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> r</span></span>
+<span id="cb25-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb25-8"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda::bioconductor-deseq2</span></span>
+<span id="cb25-9"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge::r-tidyr</span></span>
+<span id="cb25-10"><a aria-hidden="true" tabindex="-1"></a><span class="at"> ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>The same command without <code>--from-history</code> will create a very long file with ALL dependencies:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb26-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb26-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb26-6"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> r</span></span>
+<span id="cb26-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb26-8"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _libgcc_mutex=0.1=conda_forge</span></span>
+<span id="cb26-9"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _openmp_mutex=4.5=2_gnu</span></span>
+<span id="cb26-10"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _r-mutex=1.0.1=anacondar_1</span></span>
+<span id="cb26-11"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> argcomplete=3.2.2=pyhd8ed1ab_0</span></span>
+<span id="cb26-12"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is guaranteed to work <strong>only on a system with same OS and architecture</strong> as GenomeDK (Linux and x86)!</p>
+</section>
+<section class="slide level2">
+
+<p>You can use the <code>yml</code> file to create an environment:</p>
+<p>&nbsp;</p>
+<pre><code>conda env create -p test_1_from_file -f ./environment.yml</code></pre>
+<p>&nbsp;</p>
+<p>Environment files are very useful when you want to <strong>share environments with others</strong>, especially when the package list is long.</p>
+</section>
+<section class="slide level2">
+
+<p><strong>Good practice:</strong> You want to install a lot of packages in an environment? Clone it first! If you break something, you still have the old copy.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-p</span> test_1_cloned <span class="at">--clone</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>If installations in the cloned environment go fine, then you can remove it</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> test_1_cloned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and repeat the installations on the original one.</p>
+</section>
+<section id="useful-links-for-conda" class="slide level2">
+<h2>Useful links for conda:</h2>
+<ul>
+<li><p><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Conda cheat sheet</a> with all the things you can do to manage environments</p></li>
+<li><p><a href="http://anaconda.org">Anaconda</a> where you can search for packages</p></li>
+</ul>
+</section></section>
+<section>
+<section id="working-with-files" class="title-slide slide level1 hidden center">
+<h1>Working with Files</h1>
+<p>Moving, Downloading, Manipulating and other basic operation on files.</p>
+</section>
+<section id="file-formats" class="slide level2">
+<h2>File formats</h2>
+<p>Many files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the <strong>file formats</strong> you encounter when doing bioinformatics.</p>
+<p>&nbsp;</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Some file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/textfile.png"></p>
+<figcaption>A text file is human-readable with any text reader or editor, and is composed of only ASCII characters, such as in the <code>fastq</code> file format</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/binaryFile.png"></p>
+<figcaption>A binary file containes other than ASCII characters. For example, the <code>bam</code> file format is binary and can be read with the <code>samtools</code> software.</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p>Let’s get ready. Be sure you are in <code>myFolder</code> (use <code>pwd</code>) - Otherwise use</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/myFolder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Now, you can decompress the file <code>data.fastq.gz</code>, which is in <code>gz</code> compressed format:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -3911,88 +3002,39 @@ if (typeof version == 'undefined') {
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p><code>wc</code> has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways.</p>
+<p>For compressing a file into <code>gz</code> format, you can use <code>gzip</code>. For compressing and decompressing in <code>zip</code> format, you have also the commands <code>zip</code> and <code>unzip</code>.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="copy-and-move" class="slide level2">
-<h2>Copy and Move</h2>
-<p><code>cp</code> can copy one or more files - we use it on our data:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> data.fastq dataCopy.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p><code>mv</code> moves a file into another folder - here we move it into our WD, which simply changes its filename:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data.fastq ./dataOriginal.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="less-for-reading-files" class="slide level2">
+<h2>Less for reading files</h2>
+<p><code>less</code> is perfect for reading text files: you can scroll with the arrows, and quit pressing <code>q</code>. Try</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> data.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp; The very first sequence you see should be</p>
+<pre><code>@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
+TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
+ATCTGAGATTCCTGACCAAATGT
++
+CCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH
+FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
+<p>The first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in <a href="https://learn.gencore.bio.nyu.edu/ngs-file-formats/quality-scores/">this table</a>).</p>
 </section>
 <section class="slide level2">
 
-<p>Use now <code>ls -lah</code> and you will see two files of identical size and different creation dates.</p>
-<p>&nbsp;</p>
-<p>Well, we changed our mind and do not want a copy of our data. Remove it with</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> dataCopy.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div title="Forever away">
-<div class="callout callout-warning callout-titled callout-style-default">
+<div title="Exercise">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Forever away</strong></p>
+<p><strong>Exercise</strong></p>
 </div>
 <div class="callout-content">
-<p>There is no trash bin - <strong>removed files are lost forever</strong> - with no exception</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="writing-on-a-file" class="slide level2">
-<h2>Writing on a file</h2>
-<p>Write something on a file using <code>&gt;</code>:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-4</span> dataOriginal.fastq <span class="op">&gt;</span> smallFile.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>prints out the first four lines of the data into <code>smallFile.fastq</code>.</p>
-<p>&nbsp;</p>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>Using again <code>&gt;</code> will <strong>overwrite</strong> the file!</p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>Print out on the screen:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> smallFile.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>Avoid overwriting by appending with <code>&gt;&gt;</code>:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-4</span> dataOriginal.fastq <span class="op">&gt;&gt;</span> smallFile.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>appends the last 4 lines of the data to <code>smallFile.fastq</code>. Check again using <code>cat</code> or <code>wc -l</code>.</p>
-</section>
-<section id="piping" class="slide level2">
-<h2>Piping</h2>
-<p>You can create <strong>small pipelines</strong> directly on the shell with the symbol <code>|</code>. The output of a command and send it to the next command when you have <code>|</code> in between. For example,</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> NNNNN dataOriginal.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>finds the pattern <code>NNNNN</code> in the data.</p>
-<p>How to find it in the first hundred sequences? Easy! we <em>pipe</em> <code>head</code> into <em>grep</em>:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<div id="8df57a8d" class="cell" data-execution_count="4">
+<p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
+<div id="50f7b22f" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div id="IIeJHepJPusl" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
-#IIeJHepJPusl {
+<div id="ojgJIAlNhnDk" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#ojgJIAlNhnDk {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -4197,7 +3239,1167 @@ if (typeof version == 'undefined') {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsIIeJHepJPusl=[
+var questionsojgJIAlNhnDk=[
+    {
+        "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "30",
+                "correct": false,
+                "feedback": "Wroooooong"
+            },
+            {
+                "answer": "25",
+                "correct": false,
+                "feedback": ":((((("
+            },
+            {
+                "answer": "18",
+                "correct": true,
+                "feedback": "yes!!!"
+            },
+            {
+                "answer": "8",
+                "correct": false,
+                "feedback": "Mmmmmh..... no!"
+            }
+        ]
+    }
+];
+    // Make a random ID
+function makeid(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    return result.join('');
+}
+
+// Choose a random subset of an array. Can also be used to shuffle the array
+function getRandomSubarray(arr, size) {
+    var shuffled = arr.slice(0), i = arr.length, temp, index;
+    while (i--) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(0, size);
+}
+
+function printResponses(responsesContainer) {
+    var responses=JSON.parse(responsesContainer.dataset.responses);
+    var stringResponses='<B>IMPORTANT!</B>To preserve this answer sequence for submission, when you have finalized your answers: <ol> <li> Copy the text in this cell below "Answer String"</li> <li> Double click on the cell directly below the Answer String, labeled "Replace Me"</li> <li> Select the whole "Replace Me" text</li> <li> Paste in your answer string and press shift-Enter.</li><li>Save the notebook using the save icon or File->Save Notebook menu item</li></ul><br><br><br><b>Answer String:</b><br> ';
+    console.log(responses);
+    responses.forEach((response, index) => {
+        if (response) {
+            console.log(index + ': ' + response);
+            stringResponses+= index + ': ' + response +"<BR>";
+        }
+    });
+    responsesContainer.innerHTML=stringResponses;
+}
+/* Callback function to determine whether a selected multiple-choice
+   button corresponded to a correct answer and to provide feedback
+   based on the answer */
+function check_mc() {
+    var id = this.id.split('-')[0];
+    //var response = this.id.split('-')[1];
+    //console.log(response);
+    //console.log("In check_mc(), id="+id);
+    //console.log(event.srcElement.id)           
+    //console.log(event.srcElement.dataset.correct)   
+    //console.log(event.srcElement.dataset.feedback)
+
+    var label = event.srcElement;
+    //console.log(label, label.nodeName);
+    var depth = 0;
+    while ((label.nodeName != "LABEL") && (depth < 20)) {
+        label = label.parentElement;
+        console.log(depth, label);
+        depth++;
+    }
+
+
+
+    var answers = label.parentElement.children;
+    //console.log(answers);
+
+    // Split behavior based on multiple choice vs many choice:
+    var fb = document.getElementById("fb" + id);
+
+
+
+    /* Multiple choice (1 answer). Allow for 0 correct
+       answers as an edge case */
+    if (fb.dataset.numcorrect <= 1) {
+        // What follows is for the saved responses stuff
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            //console.log(responsesContainer);
+            var response = label.firstChild.innerText;
+            if (label.querySelector(".QuizCode")){
+                response+= label.querySelector(".QuizCode").firstChild.innerText;
+            }
+            console.log(response);
+            //console.log(document.getElementById("quizWrap"+id));
+            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
+            console.log("Question " + qnum);
+            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
+            var responses=JSON.parse(responsesContainer.dataset.responses);
+            console.log(responses);
+            responses[qnum]= response;
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+        // End code to preserve responses
+
+        for (var i = 0; i < answers.length; i++) {
+            var child = answers[i];
+            //console.log(child);
+            child.className = "MCButton";
+        }
+
+
+
+        if (label.dataset.correct == "true") {
+            // console.log("Correct action");
+            if ("feedback" in label.dataset) {
+                fb.innerHTML = jaxify(label.dataset.feedback);
+            } else {
+                fb.innerHTML = "Correct!";
+            }
+            label.classList.add("correctButton");
+
+            fb.className = "Feedback";
+            fb.classList.add("correct");
+
+        } else {
+            if ("feedback" in label.dataset) {
+                fb.innerHTML = jaxify(label.dataset.feedback);
+            } else {
+                fb.innerHTML = "Incorrect -- try again.";
+            }
+            //console.log("Error action");
+            label.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+    }
+    else { /* Many choice (more than 1 correct answer) */
+        var reset = false;
+        var feedback;
+         if (label.dataset.correct == "true") {
+            if ("feedback" in label.dataset) {
+                feedback = jaxify(label.dataset.feedback);
+            } else {
+                feedback = "Correct!";
+            }
+            if (label.dataset.answered <= 0) {
+                if (fb.dataset.answeredcorrect < 0) {
+                    fb.dataset.answeredcorrect = 1;
+                    reset = true;
+                } else {
+                    fb.dataset.answeredcorrect++;
+                }
+                if (reset) {
+                    for (var i = 0; i < answers.length; i++) {
+                        var child = answers[i];
+                        child.className = "MCButton";
+                        child.dataset.answered = 0;
+                    }
+                }
+                label.classList.add("correctButton");
+                label.dataset.answered = 1;
+                fb.className = "Feedback";
+                fb.classList.add("correct");
+
+            }
+        } else {
+            if ("feedback" in label.dataset) {
+                feedback = jaxify(label.dataset.feedback);
+            } else {
+                feedback = "Incorrect -- try again.";
+            }
+            if (fb.dataset.answeredcorrect > 0) {
+                fb.dataset.answeredcorrect = -1;
+                reset = true;
+            } else {
+                fb.dataset.answeredcorrect--;
+            }
+
+            if (reset) {
+                for (var i = 0; i < answers.length; i++) {
+                    var child = answers[i];
+                    child.className = "MCButton";
+                    child.dataset.answered = 0;
+                }
+            }
+            label.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+        // What follows is for the saved responses stuff
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            //console.log(responsesContainer);
+            var response = label.firstChild.innerText;
+            if (label.querySelector(".QuizCode")){
+                response+= label.querySelector(".QuizCode").firstChild.innerText;
+            }
+            console.log(response);
+            //console.log(document.getElementById("quizWrap"+id));
+            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
+            console.log("Question " + qnum);
+            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
+            var responses=JSON.parse(responsesContainer.dataset.responses);
+            if (label.dataset.correct == "true") {
+                if (typeof(responses[qnum]) == "object"){
+                    if (!responses[qnum].includes(response))
+                        responses[qnum].push(response);
+                } else{
+                    responses[qnum]= [ response ];
+                }
+            } else {
+                responses[qnum]= response;
+            }
+            console.log(responses);
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+        // End save responses stuff
+
+
+
+        var numcorrect = fb.dataset.numcorrect;
+        var answeredcorrect = fb.dataset.answeredcorrect;
+        if (answeredcorrect >= 0) {
+            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
+        } else {
+            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
+        }
+
+
+    }
+
+    if (typeof MathJax != 'undefined') {
+        var version = MathJax.version;
+        console.log('MathJax version', version);
+        if (version[0] == "2") {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        } else if (version[0] == "3") {
+            MathJax.typeset([fb]);
+        }
+    } else {
+        console.log('MathJax not detected');
+    }
+
+}
+
+
+/* Function to produce the HTML buttons for a multiple choice/
+   many choice question  and to update the CSS tags based on
+   the question type */
+function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
+
+    var shuffled;
+    if (shuffle_answers == "True") {
+        //console.log(shuffle_answers+" read as true");
+        shuffled = getRandomSubarray(qa.answers, qa.answers.length);
+    } else {
+        //console.log(shuffle_answers+" read as false");
+        shuffled = qa.answers;
+    }
+
+
+    var num_correct = 0;
+
+    shuffled.forEach((item, index, ans_array) => {
+        //console.log(answer);
+
+        // Make input element
+        var inp = document.createElement("input");
+        inp.type = "radio";
+        inp.id = "quizo" + id + index;
+        inp.style = "display:none;";
+        aDiv.append(inp);
+
+        //Make label for input element
+        var lab = document.createElement("label");
+        lab.className = "MCButton";
+        lab.id = id + '-' + index;
+        lab.onclick = check_mc;
+        var aSpan = document.createElement('span');
+        aSpan.classsName = "";
+        //qDiv.id="quizQn"+id+index;
+        if ("answer" in item) {
+            aSpan.innerHTML = jaxify(item.answer);
+            //aSpan.innerHTML=item.answer;
+        }
+        lab.append(aSpan);
+
+        // Create div for code inside question
+        var codeSpan;
+        if ("code" in item) {
+            codeSpan = document.createElement('span');
+            codeSpan.id = "code" + id + index;
+            codeSpan.className = "QuizCode";
+            var codePre = document.createElement('pre');
+            codeSpan.append(codePre);
+            var codeCode = document.createElement('code');
+            codePre.append(codeCode);
+            codeCode.innerHTML = item.code;
+            lab.append(codeSpan);
+            //console.log(codeSpan);
+        }
+
+        //lab.textContent=item.answer;
+
+        // Set the data attributes for the answer
+        lab.setAttribute('data-correct', item.correct);
+        if (item.correct) {
+            num_correct++;
+        }
+        if ("feedback" in item) {
+            lab.setAttribute('data-feedback', item.feedback);
+        }
+        lab.setAttribute('data-answered', 0);
+
+        aDiv.append(lab);
+
+    });
+
+    if (num_correct > 1) {
+        outerqDiv.className = "ManyChoiceQn";
+    } else {
+        outerqDiv.className = "MultipleChoiceQn";
+    }
+
+    return num_correct;
+
+}
+function check_numeric(ths, event) {
+
+    if (event.keyCode === 13) {
+        ths.blur();
+
+        var id = ths.id.split('-')[0];
+
+        var submission = ths.value;
+        if (submission.indexOf('/') != -1) {
+            var sub_parts = submission.split('/');
+            //console.log(sub_parts);
+            submission = sub_parts[0] / sub_parts[1];
+        }
+        //console.log("Reader entered", submission);
+
+        if ("precision" in ths.dataset) {
+            var precision = ths.dataset.precision;
+            submission = Number(Number(submission).toPrecision(precision));
+        }
+
+
+        //console.log("In check_numeric(), id="+id);
+        //console.log(event.srcElement.id)           
+        //console.log(event.srcElement.dataset.feedback)
+
+        var fb = document.getElementById("fb" + id);
+        fb.style.display = "none";
+        fb.innerHTML = "Incorrect -- try again.";
+
+        var answers = JSON.parse(ths.dataset.answers);
+        //console.log(answers);
+
+        var defaultFB = "Incorrect. Try again.";
+        var correct;
+        var done = false;
+        answers.every(answer => {
+            //console.log(answer.type);
+
+            correct = false;
+            // if (answer.type=="value"){
+            if ('value' in answer) {
+                if (submission == answer.value) {
+                    if ("feedback" in answer) {
+                        fb.innerHTML = jaxify(answer.feedback);
+                    } else {
+                        fb.innerHTML = jaxify("Correct");
+                    }
+                    correct = answer.correct;
+                    //console.log(answer.correct);
+                    done = true;
+                }
+                // } else if (answer.type=="range") {
+            } else if ('range' in answer) {
+                console.log(answer.range);
+                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
+                if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
+                    fb.innerHTML = jaxify(answer.feedback);
+                    correct = answer.correct;
+                    console.log(answer.correct);
+                    done = true;
+                }
+            } else if (answer.type == "default") {
+                if ("feedback" in answer) {
+                    defaultFB = answer.feedback;
+                } 
+            }
+            if (done) {
+                return false; // Break out of loop if this has been marked correct
+            } else {
+                return true; // Keep looking for case that includes this as a correct answer
+            }
+        });
+        console.log("done:", done);
+
+        if ((!done) && (defaultFB != "")) {
+            fb.innerHTML = jaxify(defaultFB);
+            //console.log("Default feedback", defaultFB);
+        }
+
+        fb.style.display = "block";
+        if (correct) {
+            ths.className = "Input-text";
+            ths.classList.add("correctButton");
+            fb.className = "Feedback";
+            fb.classList.add("correct");
+        } else {
+            ths.className = "Input-text";
+            ths.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+
+        // What follows is for the saved responses stuff
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            console.log(submission);
+            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
+            //console.log("Question " + qnum);
+            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
+            var responses=JSON.parse(responsesContainer.dataset.responses);
+            console.log(responses);
+            if (submission == ths.value){
+                responses[qnum]= submission;
+            } else {
+                responses[qnum]= ths.value + "(" + submission +")";
+            }
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+        // End code to preserve responses
+
+        if (typeof MathJax != 'undefined') {
+            var version = MathJax.version;
+            console.log('MathJax version', version);
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                MathJax.typeset([fb]);
+            }
+        } else {
+            console.log('MathJax not detected');
+        }
+        return false;
+    }
+
+}
+
+function isValid(el, charC) {
+    //console.log("Input char: ", charC);
+    if (charC == 46) {
+        if (el.value.indexOf('.') === -1) {
+            return true;
+        } else if (el.value.indexOf('/') != -1) {
+            var parts = el.value.split('/');
+            if (parts[1].indexOf('.') === -1) {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    } else if (charC == 47) {
+        if (el.value.indexOf('/') === -1) {
+            if ((el.value != "") && (el.value != ".")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (charC == 45) {
+        var edex = el.value.indexOf('e');
+        if (edex == -1) {
+            edex = el.value.indexOf('E');
+        }
+
+        if (el.value == "") {
+            return true;
+        } else if (edex == (el.value.length - 1)) { // If just after e or E
+            return true;
+        } else {
+            return false;
+        }
+    } else if (charC == 101) { // "e"
+        if ((el.value.indexOf('e') === -1) && (el.value.indexOf('E') === -1) && (el.value.indexOf('/') == -1)) {
+            // Prev symbol must be digit or decimal point:
+            if (el.value.slice(-1).search(/\d/) >= 0) {
+                return true;
+            } else if (el.value.slice(-1).search(/\./) >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        if (charC > 31 && (charC < 48 || charC > 57))
+            return false;
+    }
+    return true;
+}
+
+function numeric_keypress(evnt) {
+    var charC = (evnt.which) ? evnt.which : evnt.keyCode;
+
+    if (charC == 13) {
+        check_numeric(this, evnt);
+    } else {
+        return isValid(this, charC);
+    }
+}
+
+
+
+
+
+function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
+
+
+
+    //console.log(answer);
+
+
+    outerqDiv.className = "NumericQn";
+    aDiv.style.display = 'block';
+
+    var lab = document.createElement("label");
+    lab.className = "InpLabel";
+    lab.innerHTML = "Type numeric answer here:";
+    aDiv.append(lab);
+
+    var inp = document.createElement("input");
+    inp.type = "text";
+    //inp.id="input-"+id;
+    inp.id = id + "-0";
+    inp.className = "Input-text";
+    inp.setAttribute('data-answers', JSON.stringify(qa.answers));
+    if ("precision" in qa) {
+        inp.setAttribute('data-precision', qa.precision);
+    }
+    aDiv.append(inp);
+    //console.log(inp);
+
+    //inp.addEventListener("keypress", check_numeric);
+    //inp.addEventListener("keypress", numeric_keypress);
+    /*
+    inp.addEventListener("keypress", function(event) {
+        return numeric_keypress(this, event);
+    }
+                        );
+                        */
+    //inp.onkeypress="return numeric_keypress(this, event)";
+    inp.onkeypress = numeric_keypress;
+    inp.onpaste = event => false;
+
+    inp.addEventListener("focus", function (event) {
+        this.value = "";
+        return false;
+    }
+    );
+
+
+}
+function jaxify(string) {
+    var mystring = string;
+
+    var count = 0;
+    var loc = mystring.search(/([^\\]|^)(\$)/);
+
+    var count2 = 0;
+    var loc2 = mystring.search(/([^\\]|^)(\$\$)/);
+
+    //console.log(loc);
+
+    while ((loc >= 0) || (loc2 >= 0)) {
+
+        /* Have to replace all the double $$ first with current implementation */
+        if (loc2 >= 0) {
+            if (count2 % 2 == 0) {
+                mystring = mystring.replace(/([^\\]|^)(\$\$)/, "$1\\[");
+            } else {
+                mystring = mystring.replace(/([^\\]|^)(\$\$)/, "$1\\]");
+            }
+            count2++;
+        } else {
+            if (count % 2 == 0) {
+                mystring = mystring.replace(/([^\\]|^)(\$)/, "$1\\(");
+            } else {
+                mystring = mystring.replace(/([^\\]|^)(\$)/, "$1\\)");
+            }
+            count++;
+        }
+        loc = mystring.search(/([^\\]|^)(\$)/);
+        loc2 = mystring.search(/([^\\]|^)(\$\$)/);
+        //console.log(mystring,", loc:",loc,", loc2:",loc2);
+    }
+
+    // repace markdown style links with actual links
+    mystring = mystring.replace(/<(.*?)>/, '<a href="$1" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/, '<a href="$2" target="_blank" class="Link">$1</a>');
+
+    //console.log(mystring);
+    return mystring;
+}
+
+
+function show_questions(json, mydiv) {
+    console.log('show_questions');
+    //var mydiv=document.getElementById(myid);
+    var shuffle_questions = mydiv.dataset.shufflequestions;
+    var num_questions = mydiv.dataset.numquestions;
+    var shuffle_answers = mydiv.dataset.shuffleanswers;
+    var max_width = mydiv.dataset.maxwidth;
+
+    if (num_questions > json.length) {
+        num_questions = json.length;
+    }
+
+    var questions;
+    if ((num_questions < json.length) || (shuffle_questions == "True")) {
+        //console.log(num_questions+","+json.length);
+        questions = getRandomSubarray(json, num_questions);
+    } else {
+        questions = json;
+    }
+
+    //console.log("SQ: "+shuffle_questions+", NQ: " + num_questions + ", SA: ", shuffle_answers);
+
+    // Iterate over questions
+    questions.forEach((qa, index, array) => {
+        //console.log(qa.question); 
+
+        var id = makeid(8);
+        //console.log(id);
+
+
+        // Create Div to contain question and answers
+        var iDiv = document.createElement('div');
+        //iDiv.id = 'quizWrap' + id + index;
+        iDiv.id = 'quizWrap' + id;
+        iDiv.className = 'Quiz';
+        iDiv.setAttribute('data-qnum', index);
+        iDiv.style.maxWidth  =max_width+"px";
+        mydiv.appendChild(iDiv);
+        // iDiv.innerHTML=qa.question;
+        
+        var outerqDiv = document.createElement('div');
+        outerqDiv.id = "OuterquizQn" + id + index;
+        // Create div to contain question part
+        var qDiv = document.createElement('div');
+        qDiv.id = "quizQn" + id + index;
+        
+        if (qa.question) {
+            iDiv.append(outerqDiv);
+
+            //qDiv.textContent=qa.question;
+            qDiv.innerHTML = jaxify(qa.question);
+            outerqDiv.append(qDiv);
+        }
+
+        // Create div for code inside question
+        var codeDiv;
+        if ("code" in qa) {
+            codeDiv = document.createElement('div');
+            codeDiv.id = "code" + id + index;
+            codeDiv.className = "QuizCode";
+            var codePre = document.createElement('pre');
+            codeDiv.append(codePre);
+            var codeCode = document.createElement('code');
+            codePre.append(codeCode);
+            codeCode.innerHTML = qa.code;
+            outerqDiv.append(codeDiv);
+            //console.log(codeDiv);
+        }
+
+
+        // Create div to contain answer part
+        var aDiv = document.createElement('div');
+        aDiv.id = "quizAns" + id + index;
+        aDiv.className = 'Answer';
+        iDiv.append(aDiv);
+
+        //console.log(qa.type);
+
+        var num_correct;
+        if ((qa.type == "multiple_choice") || (qa.type == "many_choice") ) {
+            num_correct = make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id);
+            if ("answer_cols" in qa) {
+                //aDiv.style.gridTemplateColumns = 'auto '.repeat(qa.answer_cols);
+                aDiv.style.gridTemplateColumns = 'repeat(' + qa.answer_cols + ', 1fr)';
+            }
+        } else if (qa.type == "numeric") {
+            //console.log("numeric");
+            make_numeric(qa, outerqDiv, qDiv, aDiv, id);
+        }
+
+
+        //Make div for feedback
+        var fb = document.createElement("div");
+        fb.id = "fb" + id;
+        //fb.style="font-size: 20px;text-align:center;";
+        fb.className = "Feedback";
+        fb.setAttribute("data-answeredcorrect", 0);
+        fb.setAttribute("data-numcorrect", num_correct);
+        iDiv.append(fb);
+
+
+    });
+    var preserveResponses = mydiv.dataset.preserveresponses;
+    console.log(preserveResponses);
+    console.log(preserveResponses == "true");
+    if (preserveResponses == "true") {
+        console.log(preserveResponses);
+        // Create Div to contain record of answers
+        var iDiv = document.createElement('div');
+        iDiv.id = 'responses' + mydiv.id;
+        iDiv.className = 'JCResponses';
+        // Create a place to store responses as an empty array
+        iDiv.setAttribute('data-responses', '[]');
+
+        // Dummy Text
+        iDiv.innerHTML="<b>Select your answers and then follow the directions that will appear here.</b>"
+        //iDiv.className = 'Quiz';
+        mydiv.appendChild(iDiv);
+    }
+//console.log("At end of show_questions");
+    if (typeof MathJax != 'undefined') {
+        console.log("MathJax version", MathJax.version);
+        var version = MathJax.version;
+        setTimeout(function(){
+            var version = MathJax.version;
+            console.log('After sleep, MathJax version', version);
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
+            }
+        }, 500);
+if (typeof version == 'undefined') {
+        } else
+        {
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([mydiv]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
+            } else {
+                console.log("MathJax not found");
+            }
+        }
+    }
+
+    // stop event propagation for the .Link class
+    var links = document.getElementsByClassName('Link')
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e){
+            e.stopPropagation();
+        });
+    }
+
+    return false;
+}
+/* This is to handle asynchrony issues in loading Jupyter notebooks
+           where the quiz has been previously run. The Javascript was generally
+           being run before the div was added to the DOM. I tried to do this
+           more elegantly using Mutation Observer, but I didn't get it to work.
+
+           Someone more knowledgeable could make this better ;-) */
+
+        function try_show() {
+          if(document.getElementById("ojgJIAlNhnDk")) {
+            show_questions(questionsojgJIAlNhnDk,  ojgJIAlNhnDk); 
+          } else {
+             setTimeout(try_show, 200);
+          }
+        };
+    
+        {
+        // console.log(element);
+
+        //console.log("ojgJIAlNhnDk");
+        // console.log(document.getElementById("ojgJIAlNhnDk"));
+
+        try_show();
+        }
+        
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+<section id="counting" class="slide level2">
+<h2>Counting</h2>
+<p>How many lines are there in your file? The command <code>wc</code> can show that to you:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> data.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>The file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines).</p>
+<p>&nbsp;</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><code>wc</code> has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="copy-and-move" class="slide level2">
+<h2>Copy and Move</h2>
+<p><code>cp</code> can copy one or more files - we use it on our data:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> data.fastq dataCopy.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p><code>mv</code> moves a file into another folder - here we move it into our WD, which simply changes its filename:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data.fastq ./dataOriginal.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Use now <code>ls -lah</code> and you will see two files of identical size and different creation dates.</p>
+<p>&nbsp;</p>
+<p>Well, we changed our mind and do not want a copy of our data. Remove it with</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> dataCopy.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div title="Forever away">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Forever away</strong></p>
+</div>
+<div class="callout-content">
+<p>There is no trash bin - <strong>removed files are lost forever</strong> - with no exception</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="writing-on-a-file" class="slide level2">
+<h2>Writing on a file</h2>
+<p>Write something on a file using <code>&gt;</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-4</span> dataOriginal.fastq <span class="op">&gt;</span> smallFile.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>prints out the first four lines of the data into <code>smallFile.fastq</code>.</p>
+<p>&nbsp;</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Using again <code>&gt;</code> will <strong>overwrite</strong> the file!</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Print out on the screen:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> smallFile.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Avoid overwriting by appending with <code>&gt;&gt;</code>:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-4</span> dataOriginal.fastq <span class="op">&gt;&gt;</span> smallFile.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>appends the last 4 lines of the data to <code>smallFile.fastq</code>. Check again using <code>cat</code> or <code>wc -l</code>.</p>
+</section>
+<section id="piping" class="slide level2">
+<h2>Piping</h2>
+<p>You can create <strong>small pipelines</strong> directly on the shell with the symbol <code>|</code>. The output of a command and send it to the next command when you have <code>|</code> in between. For example,</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> NNNNN dataOriginal.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>finds the pattern <code>NNNNN</code> in the data.</p>
+<p>How to find it in the first hundred sequences? Easy! we <em>pipe</em> <code>head</code> into <em>grep</em>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<div id="af90694e" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="yGbNPODoWKbo" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"> <style>
+#yGbNPODoWKbo {
+   --jq-multiple-choice-bg: #6f78ffff;
+   --jq-mc-button-bg: #fafafa;
+   --jq-mc-button-border: #e0e0e0e0;
+   --jq-mc-button-inset-shadow: #555555;
+   --jq-many-choice-bg: #f75c03ff;
+   --jq-numeric-bg: #392061ff;
+   --jq-numeric-input-bg: #c0c0c0;
+   --jq-numeric-input-label: #101010;
+   --jq-numeric-input-shadow: #999999;
+   --jq-incorrect-color: #c80202;
+   --jq-correct-color: #009113;
+   --jq-text-color: #fafafa;
+}
+
+.Quiz {
+    max-width: 600px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+/*    margin-bottom: 15px;*/
+/*    padding-bottom: 4px;*/
+    padding-top: 4px;
+    line-height: 1.1;
+    font-size: 16pt;
+    border-radius: inherit;
+}
+
+.QuizCode {
+    font-size: 14pt;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.QuizCode>pre {
+    padding: 4px;
+}
+
+.Quiz code {
+    background-color: lightgray;
+    color: black;
+}
+
+.Quiz .QuizCode code {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+.Quiz .MCButton code {
+    background-color: inherit;
+    color: inherit;
+}
+
+.MCButton .QuizCode {
+    text-align: left;
+}
+
+
+
+
+.Answer {
+    border-radius: inherit;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0;
+}
+
+@media only screen and (max-width:480px) {
+    .Answer {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.Feedback {
+    font-size: 16pt;
+    text-align: center;
+/*    min-height: 2em;*/
+}
+
+.Input {
+    align: left;
+    font-size: 20pt;
+}
+
+.Input-text {
+    display: block;
+    margin: 10px;
+    color: inherit;
+    width: 140px;
+    background-color: var(--jq-numeric-input-bg);
+    color: var(--jq-text-color);
+    padding: 5px;
+    padding-left: 10px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: inherit;
+    line-height: 20pt;
+    border: none;
+    border-radius: 0.2rem;
+    transition: box-shadow 0.1s);
+}
+
+.Input-text:focus {
+    /*outline: none;*/
+    background-color: var(--jq-numeric-input-bg);
+    box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
+}
+
+.MCButton {
+    background: var(--jq-mc-button-bg);
+    border: 1px solid var(--jq-mc-button-border);
+    border-radius: inherit;
+    color: #333333;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MCButton p {
+    color: inherit;
+}
+
+.MultipleChoiceQn {
+    padding: 10px;
+    background: var(--jq-multiple-choice-bg);
+    color: var(--jq-text-color);
+    border-radius: inherit;
+}
+
+.ManyChoiceQn {
+    padding: 10px;
+    background: var(--jq-many-choice-bg);
+    color: var(--jq-text-color);
+    border-radius: inherit;
+}
+
+.NumericQn {
+    background: var(--jq-numeric-bg);
+    border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
+}
+
+.NumericQn p {
+    color: inherit;
+}
+
+.InpLabel {
+    color: var(--jq-numeric-input-label);
+    float: left;
+    font-size: 15pt;
+    line-height: 34px;
+    margin-right: 10px;
+}
+
+.incorrect {
+    color: var(--jq-incorrect-color);
+}
+
+.correct {
+    color: var(--jq-correct-color);
+}
+
+.correctButton {
+    /*
+    background: var(--jq-correct-color);
+   */
+    animation: correct-anim 0.6s ease;
+    animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
+    color: var(--jq-text-color);
+    /*outline: none;*/
+}
+
+.incorrectButton {
+    animation: incorrect-anim 0.8s ease;
+    animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
+    color: var(--jq-text-color);
+    /*outline: none;*/
+}
+
+@keyframes incorrect-anim {
+    100% {
+        background-color: var(--jq-incorrect-color);
+    }
+}
+
+@keyframes correct-anim {
+    100% {
+        background-color: var(--jq-correct-color);
+    }
+}
+</style>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+var questionsyGbNPODoWKbo=[
     {
         "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
         "type": "many_choice",
@@ -5031,8 +5233,8 @@ if (typeof version == 'undefined') {
            Someone more knowledgeable could make this better ;-) */
 
         function try_show() {
-          if(document.getElementById("IIeJHepJPusl")) {
-            show_questions(questionsIIeJHepJPusl,  IIeJHepJPusl); 
+          if(document.getElementById("yGbNPODoWKbo")) {
+            show_questions(questionsyGbNPODoWKbo,  yGbNPODoWKbo); 
           } else {
              setTimeout(try_show, 200);
           }
@@ -5041,8 +5243,8 @@ if (typeof version == 'undefined') {
         {
         // console.log(element);
 
-        //console.log("IIeJHepJPusl");
-        // console.log(document.getElementById("IIeJHepJPusl"));
+        //console.log("yGbNPODoWKbo");
+        // console.log(document.getElementById("yGbNPODoWKbo"));
 
         try_show();
         }
@@ -5298,57 +5500,57 @@ if (typeof version == 'undefined') {
 <section id="creation" class="slide level2">
 <h2>Creation</h2>
 <p>Request a project (after login on GDK) with the command</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-request</span> <span class="at">-g</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-request</span> <span class="at">-g</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>After GDK approval, a project folder with the desired name appears in <code>~</code> and <code>/faststorage/project</code>. You should be able to set the WD into that folder:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/<span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/<span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="users-management">Users management</h3>
 <p><strong>Only the creator</strong> (owner) can see the project folder. You (and only you) can add an user</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-add-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-add-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>or remove it</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-remove-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-remove-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Users can also be promoted to have administrative rights in the project</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-promote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-promote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>or demoted from those rights</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-demote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-demote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="accounting">Accounting</h3>
 <p>You can see <strong>globally</strong> monthly used resources of your projects with</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Example output:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-8          44.58          0.09         0.00           6024             0</span>
-<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-9          25.38          0.09         0.00           6025             0</span>
-<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-6           6.73          0.00         0.00              0             0</span>
-<span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-7        7547.48          0.72         0.00          27479             0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
+<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-8          44.58          0.09         0.00           6024             0</span>
+<span id="cb52-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-9          25.38          0.09         0.00           6025             0</span>
+<span id="cb52-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-6           6.73          0.00         0.00              0             0</span>
+<span id="cb52-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-7        7547.48          0.72         0.00          27479             0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>More detailed usage: by users on a selected project &nbsp;</p>
 <p>You can see how many resources your projects are using with</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Example output:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
-<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-7          77.98          0.02         0.00            528             0</span>
-<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-8           0.00          0.02         0.00            528             0</span>
-<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-7         223.21          0.02         0.00            564             0</span>
-<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-8           0.00          0.02         0.00            564             0</span>
-<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-7         173.29          0.01         0.00            579             0</span>
-<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-8           0.00          0.01         0.00            579             0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
+<span id="cb54-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-7          77.98          0.02         0.00            528             0</span>
+<span id="cb54-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-8           0.00          0.02         0.00            528             0</span>
+<span id="cb54-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-7         223.21          0.02         0.00            564             0</span>
+<span id="cb54-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-8           0.00          0.02         0.00            564             0</span>
+<span id="cb54-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-7         173.29          0.01         0.00            579             0</span>
+<span id="cb54-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-8           0.00          0.01         0.00            579             0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -5365,13 +5567,13 @@ if (typeof version == 'undefined') {
 <ul>
 <li>You can pipe the accounting output into <code>grep</code> to isolate specific users and/or months:</li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>period<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>period<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <ul>
 <li>all the accounting outputs can be saved into a file, which you can later open for example as Excel sheet.</li>
 </ul>
 <p>Example:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="op">&gt;</span> accountingGDK.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="op">&gt;</span> accountingGDK.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -5390,10 +5592,10 @@ if (typeof version == 'undefined') {
 </div>
 <div class="callout-content">
 <p>You have a folder or a file into the project which you do not want to share: Use</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go-rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go-rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>which you can revert using</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go+rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go+rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -5475,16 +5677,16 @@ if (typeof version == 'undefined') {
 <p><code>wget</code> is a utility for <strong>command-line-based downloads</strong>. It is already installed on <code>GenomeDK</code> and works with <code>http</code>, <code>https</code>, <code>ftp</code> protocols.</p>
 <p>&nbsp;</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./output.png <span class="dt">\</span></span>
-<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-c</span> <span class="dt">\</span></span>
-<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-b</span> <span class="dt">\</span></span>
-<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a>     https://example.com/image.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./output.png <span class="dt">\</span></span>
+<span id="cb59-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-c</span> <span class="dt">\</span></span>
+<span id="cb59-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-b</span> <span class="dt">\</span></span>
+<span id="cb59-4"><a aria-hidden="true" tabindex="-1"></a>     https://example.com/image.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>downloads a <code>png</code> file and saves it as <code>output.png</code> (option <code>O</code>), downloads in background (<code>-b</code>) and if the download was interrupted earlier, it retrieves it from where it stopped (<code>-c</code>).</p>
 </section>
 <section class="slide level2">
 
 <p><code>wget</code> has many options you can use, but what shown in the example above is what you need most times. You can see them with the command</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Also, you can find <a href="https://opensource.com/sites/default/files/gated-content/osdc_cheatsheet-wget-2021.10.21.pdf">this cheatsheet</a> useful for remembering the commands to most of the things you can think about downloading files using wget. <a href="https://opensource.com/article/21/10/linux-wget-command">At this page</a> there are also some concrete examples for <code>wget</code>.</p>
 </section>
@@ -5501,22 +5703,22 @@ if (typeof version == 'undefined') {
 <section class="slide level2">
 
 <p>To copy a file <strong>to GenomeDK</strong> from your local computer:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> /home/my_laptop/Documents/file.txt <span class="dt">\</span></span>
-<span id="cb50-2"><a aria-hidden="true" tabindex="-1"></a>    username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> /home/my_laptop/Documents/file.txt <span class="dt">\</span></span>
+<span id="cb61-2"><a aria-hidden="true" tabindex="-1"></a>    username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>The <strong>inverse operation</strong> just changes the order of the sender and receiver:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@login.genome.au.dk:/home/username/my_project/file.txt <span class="dt">\</span></span>
-<span id="cb51-2"><a aria-hidden="true" tabindex="-1"></a>    /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@login.genome.au.dk:/home/username/my_project/file.txt <span class="dt">\</span></span>
+<span id="cb62-2"><a aria-hidden="true" tabindex="-1"></a>    /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>If you want to copy an entire folder, use the option <code>-r</code> (recursive copy). The previous examples become</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> /home/my_laptop/Documents/folder <span class="dt">\</span></span>
-<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a>       username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> /home/my_laptop/Documents/folder <span class="dt">\</span></span>
+<span id="cb63-2"><a aria-hidden="true" tabindex="-1"></a>       username@login.genome.au.dk:/home/username/my_project/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>and</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
-<span id="cb53-2"><a aria-hidden="true" tabindex="-1"></a>       /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> username@login.genome.au.dk:/home/username/my_project/folder <span class="dt">\</span></span>
+<span id="cb64-2"><a aria-hidden="true" tabindex="-1"></a>       /home/my_laptop/Documents/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>A few more options are available and you can see them with the command <code>scp --help</code>.</p>
 </section>
@@ -5557,239 +5759,6 @@ if (typeof version == 'undefined') {
 </figure>
 </div>
 <p>To start a queue, use <code>CTRL + P</code>, <code>Transfer --&gt; Process Queue</code> or press the button <img data-src="./img/filezilla5.png" width="100"> on the toolbar.</p>
-</section></section>
-<section>
-<section id="packageenvironment-management" class="title-slide slide level1 center">
-<h1>Package/Environment management</h1>
-<p>&nbsp;</p>
-<p>Properly managing your <strong>software and its dependencies</strong> is fundamental for reproducibility</p>
-</section>
-<section id="virtual-environments" class="slide level2">
-<h2>Virtual environments</h2>
-<p>Each project needs specific software versions dependent on each other for <strong>reproducibility</strong> - without interferring with other projects.</p>
-<p>&nbsp;</p>
-<div title="Definition">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Definition</strong></p>
-</div>
-<div class="callout-content">
-<p>A <strong>virtual environment</strong> keeps project-specific softwares and their dependencies separated</p>
-<p>&nbsp;</p>
-<p>A <strong>package manager</strong> is a software that can retrieve, download, install, upgrade packages <strong>easily and reliably</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-
-<img data-src="./img/virtualenvs.png" class="r-stretch"></section>
-<section id="conda" class="slide level2">
-<h2>Conda</h2>
-<p>&nbsp;</p>
-<p>Conda is <strong>both</strong> a virtual environment and a package manager.</p>
-<ul>
-<li>easy to use and understand</li>
-<li>can handle quite big environments</li>
-<li>environments are easily shareable</li>
-<li>a <a href="https://anaconda.org">large archive</a> (Anaconda) of packages</li>
-<li>active community of people archiving their packages on Anaconda</li>
-</ul>
-</section>
-<section id="installation" class="slide level2">
-<h2>Installation</h2>
-<p>Just download and execute the installer by</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
-<span id="cb55-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
-<span id="cb55-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
-<span id="cb55-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">./miniforge3/bin/conda</span> init bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>After a few <code>ENTER</code>s and <code>YES</code>’s you should get the installation done. Run</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and doublecheck that <code>conda</code> works:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="conda-configuration" class="slide level2">
-<h2>Conda Configuration</h2>
-<p>You can add some default <em>channels</em> where to find archived packages. Here are some tipycal ones</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span>
-<span id="cb58-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We tell <code>conda</code> to look into channels in the order specified above. We also avoid opening the <code>base</code> environment (where <code>conda</code> is installed) at login.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
-<span id="cb59-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="base-environment" class="slide level2">
-<h2>Base environment</h2>
-<p><code>base</code> is the environment containing conda itself. The current environment is in your prompt in round brackets.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">environment</span><span class="kw">)</span> <span class="ex">[samuele@fe-open-02</span> ~]$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We update Conda with <code>libmamba solver</code> - a lot faster in installing many packages at once.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
-<span id="cb61-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div title="Don't touch the Base">
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Don’t touch the Base</strong></p>
-</div>
-<div class="callout-content">
-<p>This is <strong>the only time</strong> you should install in the <code>base</code> environment! You might otherwise ruin the conda installation.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="create-an-environment" class="slide level2">
-<h2>Create an environment</h2>
-<p>An empty environment called <code>test_1</code>:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>You can list all the environments available:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>&gt; # conda environments:
-&gt; #
-&gt; base      *  /home/samuele/miniconda3
-&gt; test_1       /home/samuele/miniconda3/envs/test_1</code></pre>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>An environment is in reality a folder, which contains all installed packages and other configurations and utilities</p>
-</div>
-</div>
-</div>
-</section>
-<section id="activate-and-deactivate" class="slide level2">
-<h2>Activate and deactivate</h2>
-<p>To use an environment we activate it:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>From now on, all installed softwares and packages will be available. <code>(test_1)</code> is now shown in your prompt.</p>
-<p>&nbsp;</p>
-<p>Deactivation happens by</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="manage-an-environment" class="slide level2">
-<h2>Manage an environment</h2>
-<h3 id="package-installation">Package installation</h3>
-<p>Conda puts together the dependency trees of requested packages to find all compatible dependencies versions.</p>
-
-<img data-src="img/condatree.png" class="r-stretch quarto-figure-center"><p class="caption">Figure: A package’s dependency tree with required versions on the edges</p></section>
-<section class="slide level2">
-
-<p>To install a specific package in your environment, search it on <a href="https://anaconda.org">anaconda.org</a>:</p>
-
-<img data-src="img/anaconda1.png" class="r-stretch quarto-figure-center"><p class="caption">Figure: search DeSeq2 for R</p></section>
-<section class="slide level2">
-
-
-<img data-src="img/anaconda2.png" style="width:10cm" class="r-stretch quarto-figure-center"><p class="caption">Figure: suggested commands to install the package</p><div title="Channels">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Channels</strong></p>
-</div>
-<div class="callout-content">
-<p>packages are archived in channels. Typical ones are <code>conda-forge</code> and <code>bioconda</code>.</p>
-<p><code>conda-forge</code> packages are often more up-to-date, but a few times show compatibility problems with other packages.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>Install a couple of packages in the activated environment - you can always specify a version restriction to each package:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate test_1</span>
-<span id="cb67-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install bioconda::bioconductor-deseq2<span class="op">&lt;</span>=1.42.0 conda-forge::r-tidyr=1.3.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>To install two packages, you need more than a hundred installations! Those are all dependencies arising from the <strong>comparison of dependency trees</strong>.</p>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
-<p>Exercise: add two installed packages, <code>rstudio-desktop</code> and <code>jupyterlab</code></p>
-</section>
-<section class="slide level2">
-
-<h3 id="installation-from-a-list-of-packages">Installation from a list of packages</h3>
-<p>You can export all the packages you have installed over time in your environment:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb68-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>which looks like</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb69-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
-<span id="cb69-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb69-3"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda</span></span>
-<span id="cb69-4"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb69-5"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb69-6"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> r</span></span>
-<span id="cb69-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb69-8"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> bioconda::bioconductor-deseq2</span></span>
-<span id="cb69-9"><a aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="kw">-</span><span class="at"> conda-forge::r-tidyr</span></span>
-<span id="cb69-10"><a aria-hidden="true" tabindex="-1"></a><span class="at"> ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<p>The same command without <code>--from-history</code> will create a very long file with ALL dependencies:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb70-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> test_1</span></span>
-<span id="cb70-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb70-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> bioconda</span></span>
-<span id="cb70-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb70-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb70-6"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> r</span></span>
-<span id="cb70-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb70-8"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _libgcc_mutex=0.1=conda_forge</span></span>
-<span id="cb70-9"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _openmp_mutex=4.5=2_gnu</span></span>
-<span id="cb70-10"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> _r-mutex=1.0.1=anacondar_1</span></span>
-<span id="cb70-11"><a aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> argcomplete=3.2.2=pyhd8ed1ab_0</span></span>
-<span id="cb70-12"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is guaranteed to work <strong>only on a system with same OS and architecture</strong> as GenomeDK (Linux and x86)!</p>
-</section>
-<section class="slide level2">
-
-<p>You can use the <code>yml</code> file to create an environment:</p>
-<p>&nbsp;</p>
-<pre><code>conda env create -p test_1_from_file -f ./environment.yml</code></pre>
-<p>&nbsp;</p>
-<p>Environment files are very useful when you want to <strong>share environments with others</strong>, especially when the package list is long.</p>
-</section>
-<section class="slide level2">
-
-<p><strong>Good practice:</strong> You want to install a lot of packages in an environment? Clone it first! If you break something, you still have the old copy.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-p</span> test_1_cloned <span class="at">--clone</span> test_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>If installations in the cloned environment go fine, then you can remove it</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> test_1_cloned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and repeat the installations on the original one.</p>
-</section>
-<section id="useful-links-for-conda" class="slide level2">
-<h2>Useful links for conda:</h2>
-<ul>
-<li><p><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Conda cheat sheet</a> with all the things you can do to manage environments</p></li>
-<li><p><a href="http://anaconda.org">Anaconda</a> where you can search for packages</p></li>
-</ul>
 </section></section>
 <section>
 <section id="running-a-job" class="title-slide slide level1 center">
@@ -5857,36 +5826,36 @@ if (typeof version == 'undefined') {
 
 <h3 id="example">Example</h3>
 <p>A file called <code>align.sh</code> such that:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb77-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account my_project</span></span>
-<span id="cb77-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task= 8</span></span>
-<span id="cb77-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
-<span id="cb77-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
-<span id="cb77-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate environment</span></span>
-<span id="cb77-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
-<span id="cb77-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bam_tools</span>
-<span id="cb77-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index the reference file</span></span>
-<span id="cb77-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index reference/chr2.fa</span>
-<span id="cb77-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
-<span id="cb77-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> <span class="at">-t</span> 8 reference/chr2.fa <span class="dt">\</span></span>
-<span id="cb77-14"><a aria-hidden="true" tabindex="-1"></a>             genomes/S_Korean-2.region.fq.gz <span class="dt">\</span></span>
-<span id="cb77-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
-<span id="cb77-16"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
-<span id="cb77-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
-<span id="cb77-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
-<span id="cb77-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> alignment/S_Korean-2.sorted.bam</span>
-<span id="cb77-20"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb69-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account my_project</span></span>
+<span id="cb69-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task= 8</span></span>
+<span id="cb69-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
+<span id="cb69-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
+<span id="cb69-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate environment</span></span>
+<span id="cb69-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
+<span id="cb69-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bam_tools</span>
+<span id="cb69-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index the reference file</span></span>
+<span id="cb69-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index reference/chr2.fa</span>
+<span id="cb69-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
+<span id="cb69-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> <span class="at">-t</span> 8 reference/chr2.fa <span class="dt">\</span></span>
+<span id="cb69-14"><a aria-hidden="true" tabindex="-1"></a>             genomes/S_Korean-2.region.fq.gz <span class="dt">\</span></span>
+<span id="cb69-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
+<span id="cb69-16"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
+<span id="cb69-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb69-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb69-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> alignment/S_Korean-2.sorted.bam</span>
+<span id="cb69-20"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <p>Send the script to the queueing system:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb70-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Submitted batch job 33735298</code></pre>
 <p>&nbsp;</p>
 <p>Interrogate SLURM about the specific job</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb80-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>&gt;Name                : align.sh
 &gt;User                : samuele
 &gt;Account             : my_project
@@ -5902,7 +5871,7 @@ if (typeof version == 'undefined') {
 <p>or about all the queued jobs</p>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="sourceCode" id="cb82"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb82-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb74-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:10%;">
 
 <center>
@@ -5910,13 +5879,13 @@ or
 </center>
 
 </div><div class="column" style="width:45%;">
-<div class="sourceCode" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 &gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
 <p>&nbsp;</p>
 <p>If you change your mind and want to cancel a job:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -5930,10 +5899,10 @@ or
 </div>
 <div class="callout-content">
 <p>To observe in real time the output of the job, refresh the last lines of the log file for that job:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> tail align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>To look at the whole log (not in real time), run at any time</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> align.sh-33735928.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Checking the log files can be useful for debugging, when for example a command gives an error and the job interrupts before its end.</p>
 </div>
 </div>
@@ -5945,7 +5914,7 @@ or
 <ul>
 <li><p>use <code>squeue --me</code> and look at the node id</p></li>
 <li><p>log into that node from the front-end:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb80"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb80-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section class="slide level2">
