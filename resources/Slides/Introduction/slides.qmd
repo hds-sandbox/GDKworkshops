@@ -24,31 +24,31 @@ navigation-mode: vertical
 - These slides are both a presentation and a small reference manual
 
 - We will try out some commands during the workshop
-  - keep both **slides and terminal** open
 
 - Official reference documentation: [genome.au.dk](https://genome.au.dk)
 
 ## When you need to ask for help
 
-- Practical help: 
+- **Practical help:** 
   
   Samuele (BiRC, MBG) - samuele@birc.au.dk 
 
-- Drop in hours:
+- **Drop in hours:**
 
-  Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc@au.dk
+  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc@au.dk
+  - Samuele (BiRC, MBG) - samuele@birc.au.dk
 
-- General mail for assistance
+- **General mail for assistance**
 
   support@genome.au.dk
 
 ## Program
 
-- **10:00-11:00**: What is GenomeDK, File System, Some basic commands
+- **10:00-11:00**: What is GenomeDK, File System, virtual environments
 
-- **11:00-12:00**: Projects, data transfer, virtual environments
+- **11:00-12:00**: Exercise: access interface, new environment, transfer data, interactive job
 
-- **12:45-13:15**: Create your environment
+- **12:45-13:15**: queueing system and jobs, estimate resource usage
 
 - **13:15-14:00**: Send out your first job with `slurm`, estimate resource usage
 
@@ -56,14 +56,14 @@ navigation-mode: vertical
 
 Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.github.io/GDKworkshops/)
 
-![You can also open today's slides at this short URL [https://tinyurl.com/useGDK](https://tinyurl.com/useGDK)](./img/webpageGDK.png)
+![Slides will always be up to date in this webpage](./img/webpageGDK.png)
 
 ## Navigate the slides
 
 ![](./img/slideGuide.png){fig-align="center"}
 
 
-## Software for command line{.smaller .hidden} 
+## Software for command line{.smaller} 
 :::: {.columns}
 ::: {.column width="50%" }
 The basic softwares
@@ -102,7 +102,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
 
 ![](./img/Main-components-of-a-computer-cluster.png){fig-align="center"}
 
-## Access
+## Access 
 
 - **Creating an account** happens through [this form](https://console.genome.au.dk/user-requests/create/) at genome.au.dk
 
@@ -148,14 +148,14 @@ Always press <kbd>Enter</kbd> and do not insert any password when asked.
 and create a folder on the cluster called `.ssh` to contain the public key
 
 ```{.bash}
-[local]$  ssh <USERNAME>@login.genome.au.dk mkdir -p .ssh
+[local]$  ssh USERNAME@login.genome.au.dk mkdir -p .ssh
 ```
 &nbsp;
 
 and finally send the public key to the cluster, into the file `authorized_keys`
 
 ```{.bash}
-[local]$  cat ~/.ssh/id_rsa.pub | ssh username@login.genome.au.dk 'cat >> .ssh/authorized_keys'
+[local]$  cat ~/.ssh/id_rsa.pub | ssh USERNAME@login.genome.au.dk 'cat >> .ssh/authorized_keys'
 ```
 &nbsp;
 
@@ -193,30 +193,35 @@ Folders and files follow a tree-like structure
 
 ---
 
-:::: {.columns}
 
-::: {.column width="30%"}
+## Exercise: 
 
-![](img/complexTree.png){fig-align="center"}
+Log in: `ssh USERNAME@login.genome.au.dk`
 
-:::
-::: {.column width="70%" }
-
-- you can reach files and folders with a **path**
-
-- Examples:
-  ```
-  /home/username/coolProject/code/analysis.R
-
-  /faststorage/project
-  ```
-
-- Paths starting from the root are called **absolute**
-
+:::{.callout-note}
+Run a command = Type a command + Enter
 :::
 
+- Run `pwd`, You should see your home folder: `/home/USERNAME`
+    - `/home/USERNAME` is an example of **path**.
+    - `pwd` shows your current folder (WD, Working Directory)
+    - you can write paths starting FROM the WD!
 
-::::
+---
+
+- Run `ls .` to show the content of your WD (the dot `.`)
+
+- Run `mkdir -p GDKintro` to create a `GDKintro` folder
+
+- Run `echo "hello" > ./GDKintro/file.txt` to write hello in a file
+
+- Use `ls ./GDKintro` to see if the text file is there.
+
+:::{.callout-tip}
+- `/home/USERNAME` starts from the root `/`. It is an **absolute path**.
+- `./GDKintro` starts from the WD. It is a **relative path**.
+:::
+
 
 ---
 
@@ -237,25 +242,9 @@ display_quiz("./questions/paths.json", shuffle_answers=True, question_alignment=
 ::::
 ---
 
-### Home directory ~ and relative paths
+### Something more about your home
 
-&nbsp;
-
-First of all, log into the cluster
-
-```{.bash}
-[local] ssh username@login.genome.au.dk
-```
-
-&nbsp;
-
-:::{.callout-tip}
-Use the **arrow up key** on the terminal to find the commands you used previously, and press enter when you find the login command
-:::
-
----
-
-After log in, you will find yourself into your private **home folder**, denoted by `~` or equivalently `/home/username/`. Your prompt will look like this:
+After log in, you will find yourself into your private **home folder**, denoted by `~` or equivalently `/home/username`. Your prompt will look like this:
 
 &nbsp;
 
@@ -273,151 +262,376 @@ which follows the format **[username@node current_folder]**.
 
 ---
 
-### Working directory
+## Exercise cont'd
 
-The folder in which *you are located* is called **working directory (WD)**. The WD is usually shown in your prompt. Use the following command to see the WD path starting from the root:
-
-```{.bash}
-pwd
-```
+We now move the WD into GDKintro, remove all text files in it. Then we download a zipped fastq file, unzip it, and print a preview!
 
 &nbsp;
 
-Every command you run **refers to your WD**. Execute
+```{.bash}
+cd GDKintro
 
+rm *.txt
+
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \
+     -O ./data.fastq.gz
+
+gunzip data.fastq.gz
+
+head data.fastq 
+```
+
+:::{.callout-warning title="Forever away"}
+There is no trash bin - **removed files are lost forever** - with no exception
+:::
+
+## Exercise: Read files
+
+Useful utility 1: `less` file reader. `less` is perfect for exploring (big) text files: you can scroll with the arrows, and quit pressing `q`. Try
 
 ```{.bash}
-ls
+
+less data.fastq
+
 ```
 
 &nbsp;
+The very first sequence you see should be
 
-and you will see the **list of files and folders** in your WD.
+```
+@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
+TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
+ATCTGAGATTCCTGACCAAATGT
++
+CCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH
+FFFFFFFEDDEEEEDDDDDDDDD
+```
+
+The first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in [this table](https://learn.gencore.bio.nyu.edu/ngs-file-formats/quality-scores/)).
 
 ---
 
-### Populating with files and folders
 
-Try to create an empty file now with
-
-
-```{.bash}
-touch emptyFile.txt
-```
-
-&nbsp;
-
-and **create a folder**, which will be inside the WD:
-
-
-```{.bash}
-mkdir myFolder
-```
-
-&nbsp;
-
-If you use again the `ls` command, the new file and folder will show in the WD.
-
----
-
-How do you see the directory tree of the WD? Try `tree` with only 2 sublevels of depth:
-
-```{.bash}
-tree -L 2 .
-```
-
-&nbsp;
-
-:::{.callout-note}
-`.` denotes the WD, and is the default when you do not specify it. Retry the command above using `..` (one directory above in the file system) instead of `.`
-:::
-
----
-
-We want to get a file from the internet to the folder `myFolder`. We can use `wget`:
-
-&nbsp;
-
-```{.bash}
-wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz\
-     -O ./myFolder/data.fastq.gz
-```
-
-&nbsp;
-
-:::{.callout-note title="options and manuals"}
-`-O` is the option to give a path and name for the downloaded file.
-
-Most commands have a help function to know the *syntax* and *options*. For example you can use `wget --help` and `man wget`.
-:::
-
----
-
-### A bit more on absolute and relative path
-
-:::{.callout-note title="Reminder about the path types"}
-The path to a file/folder can be:
-
-- **absolute**: start from the root
-- **relative**: starts from the WD (the WD is the new root)
-:::
-
-&nbsp;
-
-To look inside `myFolder`, we can both write
-
-:::: {.columns}
-
-::: {.column width="50%" }
-```{.bash}
-
-ls myFolder/
-
-```
-:::
-::: {.column width="50%" }
-
-
-```{.bash}
-
-ls ~/myFolder/
-
-```
-:::
-::::
-
----
+:::{.callout-tip title="Exercise" icon=false}
+Search online (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
 
 ```{python}
 #| echo: false
 from jupyterquiz import display_quiz
-#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/paths.json'
-display_quiz("./questions/whyWD.json", shuffle_answers=True, question_alignment="left")
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/less.json'
+display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="center")
+```
+:::
+
+## Exercise: Writing on files
+
+Useful utility 2: `nano` text editor. It open, edits and saves text files. Very useful for changes on the fly.
+
+- Try `nano data.fastq`. Change a base in the first sequence, 
+
+- then press Ctrl+O to save (give it a new file name `newData.fastq` and press Enter)
+
+- press Ctrl+X to exit. If you use `ls` you can see the new saved file.
+
+
+# Package/Environment management
+
+&nbsp;
+
+- **No preinstalled software** on GenomeDK
+
+- You install and manage your **software and its dependencies** inside virtual environments
+
+## Virtual environments
+
+Each project needs specific software versions dependent on each other for **reproducibility** - without interferring with other projects.
+
+&nbsp;
+
+:::{.callout-note title="Definition"}
+A **virtual environment** keeps project-specific softwares and their dependencies separated 
+
+&nbsp;
+
+A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
+:::
+---
+
+![](./img/virtualenvs.png)
+
+## Conda
+
+&nbsp;
+
+Conda is **both** a virtual environment and a package manager.
+
+- easy to use and understand
+- can handle quite big environments
+- environments are easily shareable
+- a [large archive](https://anaconda.org) (Anaconda) of packages
+- active community of people archiving their packages on Anaconda
+
+## Pixi
+
+A newer virtual env. and package manager
+
+&nbsp;
+
+- An upgrade of Conda in speed and stability
+- Can install the same packages as conda
+
+## Exercise: Virt.Env. for Rstudio and Jupyterlab
+
+First of all, we open the desktop interface to GenomeDK at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the Front end for the login.
+
+The desktop session will be operative even if you close and reopen your browser afterwards!
+
+![The terminal will work as if you logged into the frontend (The desktop is logged into the front-end node already). You can also use the browser!](img/desktop.png)
+
+---
+
+Open the terminal and install conda with the following commands.
+
+```{.bash}
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
+chmod +x miniforge.sh
+bash miniforge.sh -b
+./miniforge3/bin/conda init bash
 ```
 
-:::{.callout-tip title="The WD is everywhere"}
-The working directory is a very useful concept, not limited to Linux/GenomeDK, but used very widely in computer applications.
+&nbsp;
 
-For example, when you work in `R` or `Python`, there is a default WD which you can change.
+After a few `ENTER`s and `YES`'s you should get the installation done. Run
+
+```{.bash}
+source ~/.bashrc
+```
+
+and doublecheck that `conda` works:
+
+```{.bash}
+conda info
+```
+
+---
+
+**Configuration**
+
+You can add some default *channels* where to find archived packages. Here are some tipycal ones
+
+```{.bash}
+conda config --append channels conda-forge
+conda config --append channels bioconda
+```
+
+We tell `conda` to consider channels in the order specified above. We also avoid opening the `base` environment (where `conda` is installed) at login.
+
+```{.bash}
+conda config --set channel_priority strict
+conda config --set auto_activate_base false
+```
+
+**Base environment**
+
+`base` is the environment containing conda itself. The current environment is in your prompt in round brackets.
+
+```{.bash}
+(environment) [samuele@fe-open-02 ~]$
+```
+
+We update Conda with `libmamba solver` - a lot faster in installing many packages at once.
+
+```{.bash}
+conda install -n base --yes conda-libmamba-solver
+conda config --set solver libmamba
+```
+
+:::{.callout-warning title="Don't touch the Base"}
+This is **the only time** you should install in the `base` environment! You might otherwise ruin the conda installation.
 :::
 
 ---
 
-### Changing WD
+**Create an environment**
 
-Changing WD can be useful. To set the WD inside `myFolder` use
+An empty environment called `test_1`:
 
 ```{.bash}
-
-cd myFolder
-
+conda create -n test_1
 ```
+
 &nbsp;
 
-and verify with `pwd` the new working directory path. 
+You can list all the environments available:
+
+```{.bash}
+conda env list
+```
+```
+> # conda environments:
+> #
+> base      *  /home/samuele/miniconda3
+> test_1       /home/samuele/miniconda3/envs/test_1
+```
+
+:::{.callout-note}
+An environment is in reality a folder, which contains all installed packages and other configurations and utilities
+:::
+
+---
 
 
-# Working with Files
+**Activate and deactivate**
+
+To use an environment we activate it:
+
+```{.bash}
+conda activate test_1
+```
+From now on, all installed softwares and packages will be available. `(test_1)` is now shown in your prompt.
+
+&nbsp;
+
+Deactivation happens by
+
+```{.bash}
+conda deactivate
+```
+
+---
+
+**Package installation**
+
+Conda puts together the dependency trees of requested packages to find all compatible dependencies versions.
+
+![Figure: A package's dependency tree with required versions on the edges](img/condatree.png)
+
+---
+
+To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
+
+![Figure: search DeSeq2 for R](img/anaconda1.png)
+
+---
+
+![Figure: suggested commands to install the package](img/anaconda2.png){width=10cm}
+
+:::{.callout-note title="Channels"}
+
+packages are archived in channels. Typical ones are  `conda-forge` and `bioconda`.
+
+`conda-forge` packages are often more up-to-date, but a few times show compatibility problems with other packages.
+:::
+
+---
+
+Install a few packages in the activated environment - you can always specify a version restriction to each package:
+
+```{.bash}
+conda activate test_1
+conda install bioconductor-deseq2 r-tidyr rstudio-desktop jupyterlab
+```
+
+:::{.callout-note}
+To install few packages, you need more than a hundred installations! Those are all dependencies arising from the **comparison of dependency trees**.
+:::
+
+
+---
+
+### Installation from a list of packages
+
+You can export all the packages you have installed over time in your environment:
+
+```{.bash}
+conda env export --from-history > environment.yml
+```
+
+which looks like 
+
+```{.yaml}
+name: test_1
+channels:
+ - bioconda
+ - conda-forge
+ - defaults
+ - r
+dependencies:
+ - bioconda::bioconductor-deseq2
+ - conda-forge::r-tidyr
+ ...
+```
+
+---
+
+The same command without `--from-history` will create a very long file with ALL dependencies:
+
+```{.yaml}
+name: test_1
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - r
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - _r-mutex=1.0.1=anacondar_1
+  - argcomplete=3.2.2=pyhd8ed1ab_0
+  ...
+```
+
+This is guaranteed to work **only on a system with same OS and architecture** as GenomeDK (Linux and x86)!
+
+---
+
+You can use the `yml` file to create an environment:
+
+&nbsp;
+
+```
+conda env create -p test_1_from_file -f ./environment.yml
+```
+
+&nbsp;
+
+Environment files are very useful when you want to **share environments with others**, especially when the package list is long.
+
+---
+
+**Good practice:** You want to install a lot of packages in an environment? Clone it first!
+If you break something, you still have the old copy.
+
+```{.bash}
+conda create -p test_1_cloned --clone test_1
+```
+
+&nbsp;
+
+If installations in the cloned environment go fine, then you can remove it 
+
+```{.bash}
+conda env remove -n test_1_cloned
+```
+
+and repeat the installations on the original one.
+
+---
+
+## Useful links for conda:
+
+- [Conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) with all the things you can do to manage environments
+
+- [Anaconda](http://anaconda.org) where you can search for packages
+
+
+
+
+
+
+
+
+# Working with Files {.hidden}
 
 Moving, Downloading, Manipulating and other basic operation on files.
 
@@ -1135,273 +1349,6 @@ If you have created a queue, this will be shown at the bottom of the window as a
 
 To start a queue, use `CTRL + P`, `Transfer --> Process Queue` or press  the button ![](./img/filezilla5.png){width=100} on the toolbar.
 
-# Package/Environment management
-
-&nbsp;
-
-Properly managing your **software and its dependencies** is fundamental for reproducibility
-
-## Virtual environments
-
-Each project needs specific software versions dependent on each other for **reproducibility** - without interferring with other projects.
-
-&nbsp;
-
-:::{.callout-note title="Definition"}
-A **virtual environment** keeps project-specific softwares and their dependencies separated 
-
-&nbsp;
-
-A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
-:::
----
-
-![](./img/virtualenvs.png)
-
-## Conda
-
-&nbsp;
-
-Conda is **both** a virtual environment and a package manager.
-
-- easy to use and understand
-- can handle quite big environments
-- environments are easily shareable
-- a [large archive](https://anaconda.org) (Anaconda) of packages
-- active community of people archiving their packages on Anaconda
-
-## Installation
-
-Just download and execute the installer by
-```{.bash}
-wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
-chmod +x miniforge.sh
-bash miniforge.sh -b
-./miniforge3/bin/conda init bash
-```
-
-&nbsp;
-
-After a few `ENTER`s and `YES`'s you should get the installation done. Run
-
-```{.bash}
-source ~/.bashrc
-```
-
-and doublecheck that `conda` works:
-
-```{.bash}
-conda info
-```
-
----
-
-## Conda Configuration
-
-You can add some default *channels* where to find archived packages. Here are some tipycal ones
-
-```{.bash}
-conda config --append channels conda-forge
-conda config --append channels bioconda
-```
-
-We tell `conda` to look into channels in the order specified above. We also avoid opening the `base` environment (where `conda` is installed) at login.
-
-```{.bash}
-conda config --set channel_priority strict
-conda config --set auto_activate_base false
-```
-
-## Base environment
-
-`base` is the environment containing conda itself. The current environment is in your prompt in round brackets.
-
-```{.bash}
-(environment) [samuele@fe-open-02 ~]$
-```
-
-We update Conda with `libmamba solver` - a lot faster in installing many packages at once.
-
-```{.bash}
-conda install -n base --yes conda-libmamba-solver
-conda config --set solver libmamba
-```
-
-:::{.callout-warning title="Don't touch the Base"}
-This is **the only time** you should install in the `base` environment! You might otherwise ruin the conda installation.
-:::
-
-## Create an environment
-
-An empty environment called `test_1`:
-
-```{.bash}
-conda create -n test_1
-```
-
-&nbsp;
-
-You can list all the environments available:
-
-```{.bash}
-conda env list
-```
-```
-> # conda environments:
-> #
-> base      *  /home/samuele/miniconda3
-> test_1       /home/samuele/miniconda3/envs/test_1
-```
-
-:::{.callout-note}
-An environment is in reality a folder, which contains all installed packages and other configurations and utilities
-:::
-
-## Activate and deactivate
-
-To use an environment we activate it:
-
-```{.bash}
-conda activate test_1
-```
-From now on, all installed softwares and packages will be available. `(test_1)` is now shown in your prompt.
-
-&nbsp;
-
-Deactivation happens by
-
-```{.bash}
-conda deactivate
-```
-
-## Manage an environment
-
-### Package installation
-
-Conda puts together the dependency trees of requested packages to find all compatible dependencies versions.
-
-![Figure: A package's dependency tree with required versions on the edges](img/condatree.png)
-
----
-
-To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
-
-![Figure: search DeSeq2 for R](img/anaconda1.png)
-
----
-
-![Figure: suggested commands to install the package](img/anaconda2.png){width=10cm}
-
-:::{.callout-note title="Channels"}
-
-packages are archived in channels. Typical ones are  `conda-forge` and `bioconda`.
-
-`conda-forge` packages are often more up-to-date, but a few times show compatibility problems with other packages.
-:::
-
----
-
-Install a couple of packages in the activated environment - you can always specify a version restriction to each package:
-
-```{.bash}
-conda activate test_1
-conda install bioconda::bioconductor-deseq2<=1.42.0 conda-forge::r-tidyr=1.3.1
-```
-
-:::{.callout-note}
-To install two packages, you need more than a hundred installations! Those are all dependencies arising from the **comparison of dependency trees**.
-:::
-
-&nbsp;
-
-Exercise: add two installed packages, `rstudio-desktop` and `jupyterlab`
-
----
-
-### Installation from a list of packages
-
-You can export all the packages you have installed over time in your environment:
-
-```{.bash}
-conda env export --from-history > environment.yml
-```
-
-which looks like 
-
-```{.yaml}
-name: test_1
-channels:
- - bioconda
- - conda-forge
- - defaults
- - r
-dependencies:
- - bioconda::bioconductor-deseq2
- - conda-forge::r-tidyr
- ...
-```
-
----
-
-The same command without `--from-history` will create a very long file with ALL dependencies:
-
-```{.yaml}
-name: test_1
-channels:
-  - bioconda
-  - conda-forge
-  - defaults
-  - r
-dependencies:
-  - _libgcc_mutex=0.1=conda_forge
-  - _openmp_mutex=4.5=2_gnu
-  - _r-mutex=1.0.1=anacondar_1
-  - argcomplete=3.2.2=pyhd8ed1ab_0
-  ...
-```
-
-This is guaranteed to work **only on a system with same OS and architecture** as GenomeDK (Linux and x86)!
-
----
-
-You can use the `yml` file to create an environment:
-
-&nbsp;
-
-```
-conda env create -p test_1_from_file -f ./environment.yml
-```
-
-&nbsp;
-
-Environment files are very useful when you want to **share environments with others**, especially when the package list is long.
-
----
-
-**Good practice:** You want to install a lot of packages in an environment? Clone it first!
-If you break something, you still have the old copy.
-
-```{.bash}
-conda create -p test_1_cloned --clone test_1
-```
-
-&nbsp;
-
-If installations in the cloned environment go fine, then you can remove it 
-
-```{.bash}
-conda env remove -n test_1_cloned
-```
-
-and repeat the installations on the original one.
-
----
-
-## Useful links for conda:
-
-- [Conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) with all the things you can do to manage environments
-
-- [Anaconda](http://anaconda.org) where you can search for packages
 
 # Running a Job
 
