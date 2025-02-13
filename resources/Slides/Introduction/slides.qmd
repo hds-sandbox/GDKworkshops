@@ -217,7 +217,7 @@ Run a command = Type a command + Enter
 
 - Use `ls ./GDKintro` to see if the text file is there.
 
-:::{.callout-tip}
+:::{.callout-tip title="Relative and absolute paths"}
 - `/home/USERNAME` starts from the root `/`. It is an **absolute path**.
 - `./GDKintro` starts from the WD. It is a **relative path**.
 :::
@@ -257,16 +257,15 @@ which follows the format **[username@node current_folder]**.
 
 :::{.callout-warning}
 - Do not fill up your home folder with data. It has a **limited amount of storage** (a quota of 100GB).
-- Your home folder is only private to you
+- Your home folder is only **private to you**
 :::
 
 ---
 
 ## Exercise cont'd
 
-We now move the WD into GDKintro, remove all text files in it. Then we download a zipped fastq file, unzip it, and print a preview!
+We now set the WD into `GDKintro` and remove all text files in it. Then we download a zipped `fastq` file, unzip it, and print a preview!
 
-&nbsp;
 
 ```{.bash}
 cd GDKintro
@@ -281,9 +280,17 @@ gunzip data.fastq.gz
 head data.fastq 
 ```
 
-:::{.callout-warning title="Forever away"}
-There is no trash bin - **removed files are lost forever** - with no exception
-:::
+---
+
+### Some notes about the commands
+
+- `rm *.txt` removes all files ending with `.txt`. The symbol `*` is a wildcard for the file name
+
+  :::{.callout-warning title="Forever away"}
+  There is no trash bin - **removed files are lost forever** - with no exception
+  :::
+
+- `head` prints the first lines of a text file
 
 ## Exercise: Read files
 
@@ -307,12 +314,9 @@ CCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH
 FFFFFFFEDDEEEEDDDDDDDDD
 ```
 
-The first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in [this table](https://learn.gencore.bio.nyu.edu/ngs-file-formats/quality-scores/)).
-
 ---
 
-
-:::{.callout-tip title="Exercise" icon=false}
+:::{.callout-tip title="Challenge yourself" icon=false}
 Search online (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
 
 ```{python}
@@ -323,7 +327,7 @@ display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="
 ```
 :::
 
-## Exercise: Writing on files
+## Exercise: Write files
 
 Useful utility 2: `nano` text editor. It open, edits and saves text files. Very useful for changes on the fly.
 
@@ -334,7 +338,7 @@ Useful utility 2: `nano` text editor. It open, edits and saves text files. Very 
 - press Ctrl+X to exit. If you use `ls` you can see the new saved file.
 
 
-# Package/Environment management
+# Software management
 
 &nbsp;
 
@@ -355,9 +359,10 @@ A **virtual environment** keeps project-specific softwares and their dependencie
 
 A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
 :::
+
 ---
 
-![](./img/virtualenvs.png)
+![How virtual envs work: packages at different versions are kept separated into folders, together with all system files needed to make them work.](./img/virtualenvs.png)
 
 ## Conda
 
@@ -380,9 +385,30 @@ A newer virtual env. and package manager
 - An upgrade of Conda in speed and stability
 - Can install the same packages as conda
 
-## Exercise: Virt.Env. for Rstudio and Jupyterlab
+---
 
-First of all, we open the desktop interface to GenomeDK at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the Front end for the login.
+A package manager puts together the dependency trees of requested packages to find all compatible dependencies versions.
+
+![Figure: A package's dependency tree with required versions on the edges](img/condatree.png){fig-align="center" width="800px"}
+
+---
+
+To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
+
+![Figure: search DeSeq2 for R](img/anaconda1.png){fig-align="center" width="800px"}
+
+:::{.callout-note title="Channels"}
+
+packages are archived in channels. `conda-forge` and `bioconda` include most of the packages for bioinformatics and data science.
+
+`conda-forge` packages are often the most up-to-date.
+:::
+
+---
+
+### Exercise - Pixi
+
+First of all, we open the **desktop interface to GenomeDK** at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the Front end for the login.
 
 The desktop session will be operative even if you close and reopen your browser afterwards!
 
@@ -390,619 +416,154 @@ The desktop session will be operative even if you close and reopen your browser 
 
 ---
 
-Open the terminal and install conda with the following commands.
+:::{.callout-tip title="clipboard into the browser"}
+If you copy a text locally and want to paste in the GDK desktop, you need to transfer it to the clipboard.
+
+Click on `SHOW CLIPBOARD` and paste your text. Now it is available in the desktop interface!
+
+![](img/clipboard.png){fig-align="center" width="600px"}
+:::
+
+---
+
+Open the terminal and run the command below to install `pixi`:
 
 ```{.bash}
-wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
-chmod +x miniforge.sh
-bash miniforge.sh -b
-./miniforge3/bin/conda init bash
+curl -fsSL https://pixi.sh/install.sh | bash
 ```
 
-&nbsp;
-
-After a few `ENTER`s and `YES`'s you should get the installation done. Run
+After that, make the system recognize `pixi`
 
 ```{.bash}
+echo PATH="$PATH:$HOME/.pixi/bin" >> ~/.bashrc
+echo 'eval "$(pixi completion --shell bash)"'  >> ~/.bashrc
 source ~/.bashrc
 ```
 
-and doublecheck that `conda` works:
+---
+
+Change your WD with the one we created earlier, where we have the file `data.fastq`
 
 ```{.bash}
-conda info
+cd ~/GDKintro
+```
+
+Initiate a new pixi environment into the folder:
+
+```{.bash}
+pixi init
 ```
 
 ---
 
-**Configuration**
+Use the file browser and open the `GDKintro` folder
 
-You can add some default *channels* where to find archived packages. Here are some tipycal ones
+![](img/gdkintroFolder.png){fig-align="center" width="800px"}
 
-```{.bash}
-conda config --append channels conda-forge
-conda config --append channels bioconda
-```
-
-We tell `conda` to consider channels in the order specified above. We also avoid opening the `base` environment (where `conda` is installed) at login.
-
-```{.bash}
-conda config --set channel_priority strict
-conda config --set auto_activate_base false
-```
-
-**Base environment**
-
-`base` is the environment containing conda itself. The current environment is in your prompt in round brackets.
-
-```{.bash}
-(environment) [samuele@fe-open-02 ~]$
-```
-
-We update Conda with `libmamba solver` - a lot faster in installing many packages at once.
-
-```{.bash}
-conda install -n base --yes conda-libmamba-solver
-conda config --set solver libmamba
-```
-
-:::{.callout-warning title="Don't touch the Base"}
-This is **the only time** you should install in the `base` environment! You might otherwise ruin the conda installation.
-:::
+You can see some new files. `pixi.toml` contains info `pixi` will use to create your environment.
 
 ---
 
-**Create an environment**
+Open `pixi.toml` with the text editor, and make sure you have the two channels `conda-forge` and `bioconda`. If not, modify the file so the channel list is like below.
 
-An empty environment called `test_1`:
+![](img/pixitoml.png){fig-align="center" width="800px"}
+
+---
+
+Now get back to the terminal and install some packages. This is done easily.
 
 ```{.bash}
-conda create -n test_1
+pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
 ```
 
-&nbsp;
+The terminal will look like this at the end
 
-You can list all the environments available:
-
-```{.bash}
-conda env list
-```
-```
-> # conda environments:
-> #
-> base      *  /home/samuele/miniconda3
-> test_1       /home/samuele/miniconda3/envs/test_1
-```
-
-:::{.callout-note}
-An environment is in reality a folder, which contains all installed packages and other configurations and utilities
-:::
+![](img/pixiInstalled.png){fig-align="center" width="800px"}
 
 ---
 
-
-**Activate and deactivate**
-
-To use an environment we activate it:
-
-```{.bash}
-conda activate test_1
-```
-From now on, all installed softwares and packages will be available. `(test_1)` is now shown in your prompt.
-
-&nbsp;
-
-Deactivation happens by
-
-```{.bash}
-conda deactivate
-```
-
----
-
-**Package installation**
-
-Conda puts together the dependency trees of requested packages to find all compatible dependencies versions.
-
-![Figure: A package's dependency tree with required versions on the edges](img/condatree.png)
-
----
-
-To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
-
-![Figure: search DeSeq2 for R](img/anaconda1.png)
-
----
-
-![Figure: suggested commands to install the package](img/anaconda2.png){width=10cm}
-
-:::{.callout-note title="Channels"}
-
-packages are archived in channels. Typical ones are  `conda-forge` and `bioconda`.
-
-`conda-forge` packages are often more up-to-date, but a few times show compatibility problems with other packages.
-:::
-
----
-
-Install a few packages in the activated environment - you can always specify a version restriction to each package:
-
-```{.bash}
-conda activate test_1
-conda install bioconductor-deseq2 r-tidyr rstudio-desktop jupyterlab
-```
-
-:::{.callout-note}
-To install few packages, you need more than a hundred installations! Those are all dependencies arising from the **comparison of dependency trees**.
-:::
-
-
----
-
-### Installation from a list of packages
-
-You can export all the packages you have installed over time in your environment:
-
-```{.bash}
-conda env export --from-history > environment.yml
-```
-
-which looks like 
-
-```{.yaml}
-name: test_1
-channels:
- - bioconda
- - conda-forge
- - defaults
- - r
-dependencies:
- - bioconda::bioconductor-deseq2
- - conda-forge::r-tidyr
- ...
-```
-
----
-
-The same command without `--from-history` will create a very long file with ALL dependencies:
-
-```{.yaml}
-name: test_1
-channels:
-  - bioconda
-  - conda-forge
-  - defaults
-  - r
-dependencies:
-  - _libgcc_mutex=0.1=conda_forge
-  - _openmp_mutex=4.5=2_gnu
-  - _r-mutex=1.0.1=anacondar_1
-  - argcomplete=3.2.2=pyhd8ed1ab_0
-  ...
-```
-
-This is guaranteed to work **only on a system with same OS and architecture** as GenomeDK (Linux and x86)!
-
----
-
-You can use the `yml` file to create an environment:
-
-&nbsp;
-
-```
-conda env create -p test_1_from_file -f ./environment.yml
-```
-
-&nbsp;
-
-Environment files are very useful when you want to **share environments with others**, especially when the package list is long.
-
----
-
-**Good practice:** You want to install a lot of packages in an environment? Clone it first!
-If you break something, you still have the old copy.
-
-```{.bash}
-conda create -p test_1_cloned --clone test_1
-```
-
-&nbsp;
-
-If installations in the cloned environment go fine, then you can remove it 
-
-```{.bash}
-conda env remove -n test_1_cloned
-```
-
-and repeat the installations on the original one.
-
----
-
-## Useful links for conda:
-
-- [Conda cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) with all the things you can do to manage environments
-
-- [Anaconda](http://anaconda.org) where you can search for packages
-
-
-
-
-
-
-
-
-# Working with Files {.hidden}
-
-Moving, Downloading, Manipulating and other basic operation on files.
-
-## File formats
-
-Many files you use in bioinformatics are nothing else than text files which are written in a specific matter. This specific way of arranging the text in the files gives you many of the **file formats** you encounter when doing bioinformatics. 
-
-&nbsp;
-
-:::{.callout-note}
-Some file formats are encoded differently than with plain ASCII text, and cannot usually be seen with a text editor.
-:::
-
----
-
-:::: {.columns}
-::: {.column width="50%" }
-![A text file is human-readable with any text reader or editor, and is composed of only ASCII characters, such as in the `fastq` file format](img/textfile.png)
-:::
-::: {.column width="50%" }
-![A binary file containes other than ASCII characters. For example, the `bam` file format is binary and can be read with the `samtools` software.](img/binaryFile.png)
-:::
-::::
-
----
-
-
-
-Let's get ready. Be sure you are in `myFolder` (use `pwd`) - Otherwise use 
-```{.bash}
-cd ~/myFolder
-```
-
-&nbsp;
-
-Now, you can decompress the file `data.fastq.gz`, which is in `gz` compressed format:
-
-```{.bash}
-gunzip data.fastq.gz
-```
+Now open the `pixi.toml` file. You should see all the installed packages with related information.
 
 :::{.callout-tip}
-For compressing a file into `gz` format, you can use `gzip`. For compressing and decompressing in `zip` format, you have also the commands `zip` and `unzip`.
-:::
+You can share `pixi.toml` with a collaborator. This will need to run `pixi install` and will recreate the same environment!
 
----
-
-## Less for reading files
-
-`less` is perfect for reading text files: you can scroll with the arrows, and quit pressing `q`. Try
-
+Does your collaborator need a file `environment.yml` to recreate the environment? Run
 ```{.bash}
-
-less data.fastq
-
-```
-
-&nbsp;
-The very first sequence you see should be
-
-```
-@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
-TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
-ATCTGAGATTCCTGACCAAATGT
-+
-CCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH
-FFFFFFFEDDEEEEDDDDDDDDD
-```
-
-The first line is metadata, the second is the sequence, then you have an empty line (symbol +), and the quality scores (encoded by letters as in [this table](https://learn.gencore.bio.nyu.edu/ngs-file-formats/quality-scores/)).
-
----
-
-
-:::{.callout-tip title="Exercise" icon=false}
-Search online (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
-
-```{python}
-#| echo: false
-from jupyterquiz import display_quiz
-#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/less.json'
-display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="center")
+pixi project export conda-environment environment.yml
 ```
 :::
 
 ---
 
-## Counting
+**Exercise Cont'd**
 
-How many lines are there in your file? The command `wc` can show that to you:
+Be sure your WD is in the folder `GDKintro`. Then run
 
 ```{.bash}
-wc -l data.fastq
+pixi project export conda-environment environment.yml
 ```
 
-&nbsp;
+Open the file `environment.yml`. It looks very similar to `pixi.toml` and is compatible with conda to recreate your environment. 
+
+Let's zip those files into one:
+
+```{.bash}
+zip environment.zip pixi.toml environment.yml
+```
+
+# Data transfer
+
+Data can be downloaded/uploaded in two ways:
+
+- from the command line of a local computer
+
+- using an interactive interface (Filezilla)
 
 
-The file has 100000 lines, or 25000 sequences (each sequence is defined by 4 lines). 
+## Exercise cont'd - Download on shell
 
-&nbsp;
+How to download the environment files to our computer? Open a terminal **on your computer** and run this command:
+
+```{.bash}
+scp USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .
+```
+
+`scp` needs your login and the **absolute path** to the file. We give also the download destination as the WD on the local computer (`.`)
 
 :::{.callout-tip}
-`wc` has many functionalities. As always, look for the manual or examples to see how you can use it in other many ways.
+You can also upload a file switching the order of origin and destination in `scp`. E.g. 
+```{.bash}
+scp ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt 
+```
 :::
 
 ---
 
-## Copy and Move
+### Exercise - Download interactively
 
-`cp` can copy one or more files - we use it on our data:
-
-```{.bash}
-cp data.fastq dataCopy.fastq
-```
+You can transfer data with an interactive software, such as `Filezilla`, which  has an easy interface. [Download Filezilla](https://filezilla-project.org/download.php?type=client).
 
 &nbsp;
 
-`mv` moves a file into another folder - here we move it into our WD, which simply changes its filename:
+When done, open `Filezilla` and use the following information on the login bar:
 
-```{.bash}
-mv data.fastq ./dataOriginal.fastq
-```
-
----
-
-Use now `ls -lah` and you will see  two files of identical size and different creation dates. 
-
-&nbsp;
-
-Well, we changed our mind and do not want a copy of our data. Remove it with
-
-```{.bash}
-rm dataCopy.fastq
-```
-
-:::{.callout-warning title="Forever away"}
-There is no trash bin - **removed files are lost forever** - with no exception
-:::
----
-
-## Writing on a file
-
-Write something on a file using `>`:
-
-```{.bash}
-head -4 dataOriginal.fastq > smallFile.fastq
-```
-
-&nbsp;
-
-prints out the first four lines of the data into `smallFile.fastq`.
-
-&nbsp;
-
-:::{.callout-warning}
-
-Using again `>` will **overwrite** the file!
-
-:::
-
+- Host: `login.genome.au.dk`
+- Username, Password: your `GenomeDK` username and password
+- Port: `22`
 
 ---
 
-Print out on the screen:
+Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.
 
-```{.bash}
-cat smallFile.fastq
-```
-
-&nbsp;
-
-Avoid overwriting by appending with `>>`:
-
-```{.bash}
-tail -4 dataOriginal.fastq >> smallFile.fastq
-```
-
-appends the last 4 lines of the data to `smallFile.fastq`. Check again using `cat` or `wc -l`.  
+![](./img/filezilla1.png){fig-align="center"}
 
 ---
 
-## Piping
+**Download** the `environment.zip` file. You need to right-click on it and choose `Download`
 
+![](./img/filezilla3.png){fig-align="center"}
 
-You can create **small pipelines** directly on the shell with the symbol `|`. The output of a command and send it to the next command when you have `|` in between. For example, 
-
-```{.bash}
-grep NNNNN dataOriginal.fastq
-```
-
-finds the pattern `NNNNN` in the data.
-
-How to find it in the first hundred sequences? Easy! we *pipe* `head` into *grep*:
-
-```{.bash}
-head -400 dataOriginal.fastq | grep NNNNN
-```
-
----
-
-
-The output of that pipe was a small output on screen - but **outputs can be huge**! We could count the number of sequences by piping again into `wc`!
-
-```{.bash}
-head -400 dataOriginal.fastq | grep NNNNN | wc -l
-```
-
-&nbsp;
-
-```{python}
-#| echo: false
-from jupyterquiz import display_quiz
-#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/pless.json'
-display_quiz("./questions/piping.json", shuffle_answers=True, question_alignment="center")
-```
-
----
-
-## Compendium for file manipulation  {.smaller .scrollable}
-
-:::: {.columns}
-
-::: {.column width="50%" }
-
-### List Files and Directories
-- `ls`: List files and directories in the current directory.
-- `ls -l`: List in long format (detailed information).
-- `ls -a`: List all files, including hidden ones (starting with `.`).
-- `ls -lh`: List with human-readable file sizes (e.g., KB, MB).
-- `ls -R`: Recursively list files in directories and subdirectories.
-
-### Copy Files and Directories
-- `cp source_file destination`: Copy a file to a destination.
-- `cp file1 file2 dir/`: Copy multiple files to a directory.
-- `cp -r dir1 dir2`: Recursively copy a directory and its contents.
-
-### Move (or Rename) Files and Directories
-- `mv source_file destination`: Move a file to a new location or rename it.
-- `mv file1 file2 dir/`: Move multiple files to a directory.
-- `mv oldname newname`: Rename a file or directory.
-
-### Remove Files and Directories
-- `rm file`: Remove a file.
-- `rm -f file`: Force remove a file (suppress confirmation).
-- `rm -r dir`: Recursively remove a directory and its contents.
-- `rm -rf dir`: Forcefully and recursively remove a directory and its contents (use with caution).
-
-### Create Directories
-- `mkdir dir_name`: Create a new directory.
-- `mkdir -p parent_dir/child_dir`: Create a directory with parent directories as needed.
-
-:::
-
-::: {.column width="50%" }
-
-### Change File Permissions
-- `chmod 644 file`: Set read/write for owner, and read-only for group and others.
-- `chmod 755 file`: Set read/write/execute for owner, and read/execute for group and others.
-- `chmod +x file`: Add execute permission to a file.
-- `chmod -R 755 dir`: Recursively change permissions for a directory and its contents.
-
-### Change File Ownership
-- `chown user file`: Change the ownership of a file.
-- `chown user:group file`: Change the owner and group of a file.
-- `chown -R user:group dir`: Recursively change ownership of a directory and its contents.
-
-### File Information
-- `file filename`: Display the type of a file.
-- `stat filename`: Show detailed information about a file (size, permissions, timestamps).
-- `du -sh file/dir`: Display the disk usage of a file or directory (in human-readable format).
-
-### Create and View Files
-- `touch filename`: Create an empty file or update the timestamp of an existing file.
-- `cat filename`: View the contents of a file.
-- `less filename`: View the contents of a file, with navigation.
-- `head -n 10 filename`: View the first 10 lines of a file.
-- `tail -n 10 filename`: View the last 10 lines of a file.
-
-### Links
-- `ln file link_name`: Create a hard link.
-- `ln -s target link_name`: Create a symbolic (soft) link.
-
-:::
-
-::::
-
----
-
-## Compendium for `less`  {.smaller .scrollable}
-
-:::: {.columns}
-
-::: {.column width="50%" }
-
-### Basic Navigation
-- **Move Forward:**
-  - `Space` or `f`: Scroll forward by one page.
-  - `Down Arrow` or `j`: Scroll down by one line.
-  - `d`: Scroll down by half a page.
-
-- **Move Backward:**
-  - `b`: Scroll backward by one page.
-  - `Up Arrow` or `k`: Scroll up by one line.
-  - `u`: Scroll up by half a page.
-
-- **Go to Specific Line or Position:**
-  - `G`: Go to the end of the file.
-  - `g`: Go to the beginning of the file.
-  - `numberG` or `number%`: Go to a specific line or percentage in the file.
-
-### Searching
-- **Search Forward:**
-  - `/pattern`: Search forward for a pattern (use `n` to move to the next match).
-  
-- **Search Backward:**
-  - `?pattern`: Search backward for a pattern (use `N` to move to the previous match).
-
-- **Repeat Last Search:**
-  - `n`: Repeat the last search in the same direction.
-  - `N`: Repeat the last search in the opposite direction.
-
-### Display Line Numbers
-- **Show Line Numbers:**
-  - `-N` or `--LINE-NUMBERS`: Show line numbers (must start `less` with this option).
-
-### Marking Positions
-- **Set a Mark:**
-  - `m<letter>`: Mark the current position with a letter.
-
-- **Jump to a Mark:**
-  - `'<letter>`: Return to the marked position.
-
-### Exiting
-- **Quit `less`:**
-  - `q`: Exit `less`.
-
-### Scrolling Long Lines
-- **Move Left and Right (For Long Lines):**
-  - `Right Arrow` or `→`: Scroll right.
-  - `Left Arrow` or `←`: Scroll left.
-
-:::
-
-::: {.column width="50%" }
-
-### File Manipulation
-- **Open Another File:**
-  - `:e filename`: Open another file while inside `less`.
-
-- **View Multiple Files:**
-  - `:n`: Go to the next file (if multiple files were opened).
-  - `:p`: Go to the previous file.
-
-### Miscellaneous
-- **Follow File in Real Time:**
-  - `F`: Continuously view a file as it grows (like `tail -f`).
-  
-- **Show Current Filename:**
-  - `=`: Show the current file name, line number, and percentage through the file.
-
-- **Help Menu:**
-  - `h`: Display help with all available commands.
-
-### View Line Numbers Temporarily (without restarting `less`)
-- **Toggle Line Numbers:**
-  - `-N`: While in a session, use this to toggle line number display.
-
-:::
-
-::::
+You can do exactly the same to upload files from your local computer!
 
 # Project management
 
@@ -1013,17 +574,13 @@ display_quiz("./questions/piping.json", shuffle_answers=True, question_alignment
 ## GDK projects
 
 :::{.callout-note title="what is a project"}
-Projects are contained in `/faststorage/project/`, and are simple folders with some perks:
+Projects are contained in `/faststorage/project/` and linked in your home, and are simple folders with some perks:
 
 - you have to **request their creation** to GDK administrators
 - **access is limited** to you, and users you invite
 - CPU, GPU, storage and backup usage are **registered** under the project for each user
 - you can **keep track** of per-project and -user resource usage 
 :::
-
----
-
-![Example of a project managed by `you` with two invited users. `you` has requested the creation of `coolProject` and manages the project. `you` invited two users to the project.](img/projectScheme.png)
 
 ---
 
@@ -1202,154 +759,6 @@ If your project has many users, a good structure can be
 **Backup cost >>> Storage cost >> Computation cost**
 :::
 
-# Downloads and Copies
-
-- Downloads from Internet to GDK
-- Uploads from a local PC to GDK
-- Downloads from GDK to a local PC
-- Transfer data between GDK and another cluster
-- Graphical interface for download/upload with GDK
-
----
-
-Data transfer amongst the web, GDK and your PC is an everyday action which you can easily perform.
-
-:::{.callout-warning}
-Downloads should **always** happens on the `front-end` nodes, and **never** using a compute node when working on `GenomeDK`
-:::
-
-## Download with wget
-
-`wget` is a utility for **command-line-based downloads**. It is already installed on `GenomeDK` and works with `http`, `https`, `ftp` protocols.
-
-&nbsp;
-
-Example:
-
-```{.bash}
-wget -O ./output.png \
-     -c \
-     -b \
-     https://example.com/image.png
-```
-downloads a `png` file and saves it as `output.png` (option `O`), downloads in background (`-b`) and if the download was interrupted earlier, it retrieves it from where it stopped (`-c`).
-
----
-
-`wget` has many options you can use, but what shown in the example above is what you need most times. You can see them with the command
-
-```{.bash}
-wget --help
-```
-
-&nbsp;
-
-Also, you can find [this cheatsheet](https://opensource.com/sites/default/files/gated-content/osdc_cheatsheet-wget-2021.10.21.pdf) useful for remembering the commands to most of the things you can think about downloading files using wget. [At this page](https://opensource.com/article/21/10/linux-wget-command) there are also some concrete examples for `wget`.
-
-## SCP transfer
-
-`SCP` (Secure Copy Protocol) can transfer files securely
-
-- between a LOCAL and a REMOTE host (your PC and GDK)
-- between TWO REMOTE hosts (GDK and another cluster)
-
-&nbsp;
-
-You can use it to transfer files **from your pc to GenomeDK and viceversa**, but also **between GenomeDK and another computing cluster** (for example, downloading data from a collaborator, which resides on a different remote computing system).
-
----
-
-To copy a file **to GenomeDK** from your local computer:
-```{.bash}
-scp /home/my_laptop/Documents/file.txt \
-    username@login.genome.au.dk:/home/username/my_project/
-```
-
-&nbsp;
-
-The **inverse operation** just changes the order of the sender and receiver:
-```{.bash}
-scp username@login.genome.au.dk:/home/username/my_project/file.txt \
-    /home/my_laptop/Documents/
-```
-
----
-
-If you want to copy an entire folder, use the option `-r` (recursive copy). The previous examples become
-
-```{.bash}
-scp -r /home/my_laptop/Documents/folder \
-       username@login.genome.au.dk:/home/username/my_project/
-```
-
-&nbsp;
-
-and
-
-```{.bash}
-scp -r username@login.genome.au.dk:/home/username/my_project/folder \
-       /home/my_laptop/Documents/
-```
-
-&nbsp;
-
-A few more options are available and you can see them with the command ``` scp --help ```.
-
-## Rsync transfer {visibility="hidden"}
-
-Differently from `scp`, you can use `rsync` to **syncronize files and folders between two locations**. It copies only the changes in the data and not all of it every time.
-
-&nbsp;
-
-Copying a file or a folder between your computer and `GenomeDK` works exactly as in `scp`. For example
-
-```{.bash}
-rsync --partial --progress -r \
-      username@login.genome.au.dk:/home/username/my_project/folder \
-      /home/my_laptop/Documents/
-```
-
-where we add `-progress` to show a progress bar and `--partial` to retrieve interrupted downloads
-
-## Interactive transfer
-
-You can also do transfering with an interactive software, such as `Filezilla`, which  has an easy interface. [Download Filezilla](https://filezilla-project.org/download.php?type=client).
-
-&nbsp;
-
-When done, open `Filezilla` and use the following information on the login bar:
-
-- Host: `login.genome.au.dk`
-- Username, Password: your `GenomeDK` username and password
-- Port: `22`
-
----
-
-Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.\
-
-![](./img/filezilla1.png){fig-align="center"}
-
----
-
-If you right-click on any local file or folder, you can **upload** it immediately, or **add it to the transfer queue**. The file will end up in the selected folder of the right-side browser.
-
-![](./img/filezilla2.png){fig-align="center"}
-
----
-
-The **download** process works similarly using the right-side browser and choosing the destination folder on the left-side browser.
-
-![](./img/filezilla3.png){fig-align="center"}
-
----
-
-If you have created a queue, this will be shown at the bottom of the window as a list. You can inspect destination folders from there and choose other options such as transfer priority.
-
-![](./img/filezilla4.png){fig-align="center"}
-
-To start a queue, use `CTRL + P`, `Transfer --> Process Queue` or press  the button ![](./img/filezilla5.png){width=100} on the toolbar.
-
-
 # Running a Job
 
 &nbsp;
@@ -1399,7 +808,7 @@ Examples:
 
 - splitting by chromosome that one `bam` file you just got 
 
-- open `python`/`R` and do some statistics 
+- open Rstudio and Jupyterlab
 
 - compress/decompress multiple files, maybe in parallel
 
@@ -1407,23 +816,50 @@ Once you exit from the job, anything running into it will stop.
 
 ---
 
-To run an interactive job simply use the command
+### Exercise: Interactive job
 
-```
-[fe-open-01]$ srun --mem=<GB_of_RAM>g -c <nr_cores> --time=<days-hrs:mins:secs>  --account=<project_name> --pty /bin/bash
-```
+You can also run an interactive job on GenomeDK desktop. Go back to it and use the terminal to go into the `GDKintro` folder:
 
-For example
-
-```
-[fe-open-01]$ srun --mem=32g -c 2 --time=6:0:0  --account=<project_name> --pty /bin/bash
+```{.bash}
+cd ~/GDKintro
 ```
 
-The **queueing system** makes you wait based on the resources you ask and how busy the nodes are. When you get **assigned a node**, the resources are available. The node name is **shown in the prompt**.
+Now run an interactive job. Use 8g of RAM, 2 cores, and choose 01:00:00 hours. Choose the `account` using the name of one of your projects.
+
+```{.bash}
+srun --mem=<GB_of_RAM>g -c <nr_cores> --time=<days-hrs:mins:secs>  --account=<project_name> --pty / bin/bash
+```
+
+---
+
+You will have to wait in queue. When you ge the resources, the node in use is **shown in the prompt**. For example
 
 ```
-[<username>@s21n32 ~]$
+[USERNAME@s21n32 ~]$
+``` 
+
+Activate the `pixi` environment
+
+```{.bash}
+pixi shell
 ```
+
+and run jupyterlab or Rstudio (your choice!). 
+
+:::: {.columns}
+::: {.column width="50%" }
+```{.bash}
+rstudio
+```
+:::
+::: {.column width="50%" }
+```{.bash}
+jupyter-lab --port=$UID
+```
+:::
+::::
+
+The packages available in Rstudio and Jupyterlab are the ones installed in your environment
 
 ## Batch script (sbatch)
 
@@ -1437,48 +873,52 @@ and
 - has a filename **without spaces** (forget spaces from now on)
 ---
 
-### Example 
+### Exercise: batch script
 
-A file called `align.sh` such that:
+Create in Rstudio or Jupyterlab a file called `align.sh` (in the folder `GDKintro`) like below:
 
 ```{.bash}
 #!/bin/bash
 #SBATCH --account my_project
-#SBATCH --cpus-per-task= 8
+#SBATCH --cpus-per-task=8
 #SBATCH --mem 16g
 #SBATCH --time 04:00:00
 
-#activate environment
-eval "$(conda shell.bash hook)"
-conda activate bam_tools
-#index the reference file
-bwa-mem2 index reference/chr2.fa
+pixi run bwa-mem2 index ref.fasta.gz
 #align data
-bwa-mem2 -t 8 reference/chr2.fa \
-             genomes/S_Korean-2.region.fq.gz \
-        | samtools sort \
+pixi run bwa-mem2 mem -t 8 ref.fasta.gz \
+             data.fastq \
+            | samtools sort \
             -@ 7 \
             -n \
             -O BAM \
-        > alignment/S_Korean-2.sorted.bam
+        > data.bam
 
 exit 0
 ```
 
 ---
 
-Send the script to the queueing system:
+In the terminal, you need to install two new packages
+
+```{.bash}
+pixi add bwa-mem2 samtools
+```
+
+and download a reference genome
+
+```{.bash}
+wget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz
+```
+
+Send the script to the queueing system using the terminal:
 
 ```{.bash}
 sbatch align.sh
 ```
-```
-Submitted batch job 33735298
-```
+---
 
-&nbsp;
-
-Interrogate SLURM about the specific job
+Interrogate SLURM about the specific job with the provided number. For example
 
 ```{.bash}
 jobinfo 33735298
@@ -1504,7 +944,7 @@ or about all the queued jobs
 
 ::: {.column width="45%" }
 ```{.bash}
-squeue -u <username>
+squeue -u USERNAME
 ```
 :::
 ::: {.column width="10%" }
@@ -1531,33 +971,15 @@ If you change your mind and want to cancel a job:
 scancel 33735928
 ```
 
----
-
-:::{.callout-tip}
-To observe in real time the output of  the job, refresh the last lines of the log file for that job:
-
-```{.bash}
-watch tail align.sh-33735928.out
-```
-&nbsp;
-
-To look at the whole log (not in real time), run at any time
-
-```{.bash}
-less -S align.sh-33735928.out
-```
-
-Checking the log files can be useful for debugging, when for example a command gives an error and the job interrupts before its end.
-:::
-
 
 ## Choosing the right CPU-RAM
 
-Try to run a job with a smaller dataset as a test. While it is running
+Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
+ While the job is running
 
-- use `squeue --me` and look at the node id
+- use `squeue --me` and **look at the node id**
 
-- log into that node from the front-end:
+- **log into that node** from the front-end terminal:
   
   ```{.bash}
   ssh <NODEID>
@@ -1568,120 +990,14 @@ Try to run a job with a smaller dataset as a test. While it is running
 - use `htop -u <username>` to see what is running and how much memory and CPU it uses
   ![](img/htop.png)
 
----
-
-:::{.callout-note icon="false" title="exercise (1/4)"}
-
-You have a script which contains two programs: a genome simulator called `genomeSim` 
-and a program to infer similarity between the simulated
-genomes, called `inferSim`.
-
-You run the script simulating a dataset 100 times smaller than what you would need. Below is what you see using 
-`htop -u <username>` (next slide)
-:::
-
----
-
-:::{.callout-note icon="false" title="exercise (2/4)"}
-
-While the simulation is running
-```
- PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND          
- 8249 newhall   20   0  153m 4488  472 R   147.1  28.0   0:02.78 6 genomeSim              
- 8250 newhall   20   0  153m 4488  472 R   147.2  30.9   0:02.76 2 genomeSim                        
- 8243 newhall   20   0  153m 4488  472 R   146.1  45.4   0:02.76 1 genomeSim              
- 8239 newhall   20   0  153m 4488  472 S   146.5  37.1   0:02.76 7 genomeSim                   
-```
-
-and while the similarity inference is running
-
-```
- PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+   P COMMAND                      
- 8236 newhall   20   0  153m 4488  472 R   7.3  0.0   0:12.11 6 inferSimilarity              
- 8237 newhall   20   0  153m 4488  472 S   8.1  0.0   0:14.33 4 inferSimilarity             
-```
-
-The script is finished in around 60 minutes, where the simulation itself took 50 minutes. 
-You asked for 16 cores and 128GB of memory when you sent the script to the `slurm` queueing manager.
-
-:::
-
----
-
-:::{.callout-note icon="false" title="exercise (3/4)"}
-
-Q1 split
-
-:::
-
----
-
-:::{.callout-note icon="false" title="exercise (3/4)"}
-
-Q2 Memory for the two jobs
-
-:::
-
----
-
-
-:::{.callout-note icon="false" title="exercise (3/4)"}
-
-Q1 split
-
-:::
-
----
-
-## Other ways of running jobs {.hidden}
-
-Beyond `sbatch`, you can use other tools for workflows which are
-
-- **modular and composable**: sequences of commands can be applied in various contexts, composed together in the desired ordering
-- **scalable and parallel** handling many sequences of operations parallelly or interdependently
-- **flexible** where repetitive operations can be automatized over multiple applications
-
-Some workflow tools:
-
-- [Snakemake](https://snakemake.readthedocs.io/en/stable/)
-- [NextFlow](https://www.nextflow.io/)
-- [Gwf](https://gwf.app/)
-
-&nbsp;
-
-`Gwf` has an easy `python` syntax instead of its own language to write workflows.
-
-&nbsp;
-
-Learning a workflow language takes some time commitment, but it is worth the effort.
 
 # Closing the workshop
 
-- More in this slides than what we went through
-  - useful commands
-  - external material (tutorials at [Cafe](https://abc.au.dk/Documentation) or [genome.au.dk](https://genome.au.dk))
+- A lot of things we could not cover
+  - use the official documentation! 
+  - ask for help, use drop in hours
+  - try out stuff and google yourself out of small problems
+  
+- Slides opdated over time, use as a reference
 
-- Updated over time, use as a reference
-
-- Impossible to cover everything at once. We will also advanced/pipeline workshop
-
-- Come to our [Cafe](https://abc.au.dk) and/or ask
-
-- Documentation on [genome.au.dk](https://genome.au.dk)
-
----
-
-## A taste of the next workshops {.hidden}
-
-- virtual terminals with `tmux`
-- git setup
-- advanced functionalities
-  - `awk` for advanced text file manipulation
-  - `rsync` for synchronization of data
-- browser-based applications
-- launch containers
-- gwf pipelines 
-
-## Your input for topics and evaluation {.hidden}
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevPQOj2FBtmhKp_kcJrWIv3jZQ-8ymvw67B_M_L-5dytiPEw/viewform?embedded=true" width="640" height="1218" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+- Future workshops about advanced usage and pipelines
