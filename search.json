@@ -42,11 +42,11 @@
     "text": "Navigate the slides"
   },
   {
-    "objectID": "resources/Slides/Introduction/slides.html#software-for-command-line",
-    "href": "resources/Slides/Introduction/slides.html#software-for-command-line",
+    "objectID": "resources/Slides/Introduction/slides.html#keep-slides-a-terminal-open-for-the-workshop",
+    "href": "resources/Slides/Introduction/slides.html#keep-slides-a-terminal-open-for-the-workshop",
     "title": "Use GenomeDK",
-    "section": "Software for command line",
-    "text": "Software for command line\n\n\nThe basic softwares\n\n\n\nPowershell for windows\n\n\n\n\n\nTerminal for MacOS and Linux\n\n\n\nCustomizable\n\n\n\nTerminator for Linux - iTerm2 for MacOS\n\n\n\n\n\nTabby for Linux, MacOS, Windows"
+    "section": "Keep slides + a terminal open for the workshop",
+    "text": "Keep slides + a terminal open for the workshop\n\n\nThe basic softwares\n\n\n\nPowershell for windows\n\n\n\n\n\nTerminal for MacOS and Linux\n\n\n\nCustomizable\n\n\n\nTerminator for Linux - iTerm2 for MacOS\n\n\n\n\n\nTabby for Linux, MacOS, Windows"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#infrastructure",
