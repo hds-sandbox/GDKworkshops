@@ -63,7 +63,7 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 ![](./img/slideGuide.png){fig-align="center"}
 
 
-## Software for command line{.smaller} 
+## Keep slides + a terminal open for the workshop{.smaller} 
 :::: {.columns}
 ::: {.column width="50%" }
 The basic softwares
@@ -992,6 +992,12 @@ Try to run a job with a smaller dataset as a test. Or run one of many jobs of th
 
 
 # Closing the workshop
+
+Please fill out this form :)
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+
+---
 
 - A lot of things we could not cover
   - use the official documentation! 
