@@ -827,39 +827,35 @@ cd ~/GDKintro
 Now run an interactive job. Use 8g of RAM, 2 cores, and choose 01:00:00 hours. Choose the `account` using the name of one of your projects.
 
 ```{.bash}
-srun --mem=<GB_of_RAM>g -c <nr_cores> --time=<days-hrs:mins:secs>  --account=<project_name> --pty / bin/bash
+srun --mem=8g -c 2 --time=01:00:00  --account=PROJECT_NAME --pty /bin/bash
 ```
 
 ---
 
-You will have to wait in queue. When you ge the resources, the node in use is **shown in the prompt**. For example
+You will have to wait in queue. When you ge the resources, the node in use is **shown in the prompt**. Below, for example, the node is `s21n32`.
 
 ```
 [USERNAME@s21n32 ~]$
 ``` 
 
-Activate the `pixi` environment
-
-```{.bash}
-pixi shell
-```
-
-and run jupyterlab or Rstudio (your choice!). 
+Now, run `rstudio` or `jupyterlab` (your choice!) from the `pixi` environment:
 
 :::: {.columns}
 ::: {.column width="50%" }
 ```{.bash}
-rstudio
+pixi run rstudio
 ```
 :::
 ::: {.column width="50%" }
 ```{.bash}
-jupyter-lab --port=$UID
+pixi run jupyter-lab --port=$UID
 ```
 :::
 ::::
 
-The packages available in Rstudio and Jupyterlab are the ones installed in your environment
+The packages available in Rstudio and Jupyterlab are the ones installed in your environment. More on this will be in our **Advanced GenomeDK workshop**.
+
+---
 
 ## Batch script (sbatch)
 
@@ -879,7 +875,7 @@ Create in Rstudio or Jupyterlab a file called `align.sh` (in the folder `GDKintr
 
 ```{.bash}
 #!/bin/bash
-#SBATCH --account my_project
+#SBATCH --account PROJECT_NAME
 #SBATCH --cpus-per-task=8
 #SBATCH --mem 16g
 #SBATCH --time 04:00:00
@@ -1000,9 +996,12 @@ Please fill out this form :)
 ---
 
 - A lot of things we could not cover
-  - use the official documentation! 
-  - ask for help, use drop in hours
-  - try out stuff and google yourself out of small problems
+
+- use the official documentation! 
+
+- ask for help, use drop in hours
+
+- try out stuff and google yourself out of small problems
   
 - Slides opdated over time, use as a reference
 
