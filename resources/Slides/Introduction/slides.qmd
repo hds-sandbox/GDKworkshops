@@ -730,6 +730,8 @@ which you can revert using
 ```{.bash}
 chmod -R go+rwx <file or folder>
 ```
+
+Note: you cannot authorize only specific users to access data -  **you can only operate on the project members' level**.
 :::
 
 ## Folders management
@@ -1003,6 +1005,6 @@ Please fill out this form :)
 
 - try out stuff and google yourself out of small problems
   
-- Slides opdated over time, use as a reference
+- Slides updated over time, use as a reference
 
 - Future workshops about advanced usage and pipelines

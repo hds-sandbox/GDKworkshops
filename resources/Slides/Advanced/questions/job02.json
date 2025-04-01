@@ -1,0 +1,28 @@
+[
+    {
+        "question": "How many CPUS, memory and time would be necessary for the simulation program on the whole data?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "/home/username/coolProject can be accessed by all users involved in the project coolProject",
+                "correct": false,
+                "feedback": "No, because the path goes through the link inside the home folder, which is private to its owner"
+            },
+            {
+                "answer": "/faststorage/project/coolProject is inside the storage nodes",
+                "correct": true,
+                "feedback": "Yes! The /faststorage folder contains all GDK projects, which are stored in the storage nodes"
+            },
+            {
+                "answer": "once a path goes through /home, it cannot go into /faststorage without going back along the file system tree",
+                "correct": true,
+                "feedback": "the tree structure of the file system does not allow this, because /home and /faststorage are at the same level of the tree. However, the coolProject folder inside the home is a link to /faststorage/project/coolProject, so you can access the same files from both paths"
+            },
+            {
+                "answer": "There are two copies of the file human.bam and analysis.R in the file system",
+                "correct": false,
+                "feedback": "No, the two files exist only once in the file system, inside the linked folder"
+            }
+        ]
+    }
+]

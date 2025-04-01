@@ -1,0 +1,28 @@
+[
+    {
+        "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "head -400 dataOriginal.fastq | grep NNNNN | sequence.fastq",
+                "correct": false,
+                "feedback": "Sorry, try again, you are not writing into a file."
+            },
+            {
+                "answer": "head -400 dataOriginal.fastq | grep NNNNN < sequence.fastq",
+                "correct": false,
+                "feedback": "Sorry, try again, you are not writing into a file."
+            },
+            {
+                "answer": "sequence.fastq < head -400 dataOriginal.fastq | grep NNNNN  ",
+                "correct": false,
+                "feedback": "Sorry, try again, you are not writing into a file."
+            },
+            {
+                "answer": "head -400 dataOriginal.fastq | grep NNNNN > sequence.fastq",
+                "correct": true,
+                "feedback": "You are piping and writing like a pro!"
+            }
+        ]
+    }
+]

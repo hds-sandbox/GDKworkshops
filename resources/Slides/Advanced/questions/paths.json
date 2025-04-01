@@ -1,0 +1,54 @@
+[
+    {
+        "question": "Two of the following are correct:",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "/home/username/coolProject can be accessed by all users involved in the project coolProject",
+                "correct": false,
+                "feedback": "No, because the path goes through the link inside the home folder, which is private to its owner"
+            },
+            {
+                "answer": "/faststorage/project/coolProject is inside the storage nodes",
+                "correct": true,
+                "feedback": "Yes! The /faststorage folder contains all GDK projects, which are stored in the storage nodes"
+            },
+            {
+                "answer": "once a path goes through /home, it cannot go into /faststorage without going back along the file system tree",
+                "correct": true,
+                "feedback": "the tree structure of the file system does not allow this, because /home and /faststorage are at the same level of the tree. However, the coolProject folder inside the home is a link to /faststorage/project/coolProject, so you can access the same files from both paths"
+            },
+            {
+                "answer": "There are two copies of the file human.bam and analysis.R in the file system",
+                "correct": false,
+                "feedback": "No, the two files exist only once in the file system, inside the linked folder"
+            }
+        ]
+    },
+    {
+        "question": "Which paths are correct in the file system above?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "/home/project/",
+                "correct": false,
+                "feedback": "`project` is not in the home directory"
+            },
+            {
+                "answer": "/home/username/coolProject",
+                "correct": true,
+                "feedback": "Yes!"
+            },
+            {
+                "answer": "/",
+                "correct": true,
+                "feedback": "The very root directory!"
+            },
+            {
+                "answer": "/project/coolProject/data/human.bam",
+                "correct": false,
+                "feedback": "No, you do not know from which root directory this path starts"
+            }
+        ]
+    }
+]
