@@ -106,7 +106,7 @@ Lots of options you can find in the manual (would require a workshop only for th
 ## Exercise
 
 Log into GenomeDK. Create anywhere you prefere a folder called `advancedGDK` containing
-`rsync/data` and `rsync/dataBackup`
+`rsync/data`
 
 ```{.bash}
 mkdir -p advancedGDK/rsync/data
@@ -133,10 +133,10 @@ rsync OPTIONS ORIGIN(s) DESTINATION
 
 &nbsp;
 
-A copy can be done with the options `a` (archive). You can add a progress bar with `P`. You can exclude files: here we want only the ones with `fastq` extension. Run the command
+An archive (incremental) copy can be done with the options `a`. You can add a progress bar with `P`. You can exclude files: here we want only the ones with `fastq` extension. Run the command
 
 ```{.bash}
-rsync -aP --exclude="*.log" data backup/
+rsync -aP --exclude="*.log" data backup
 ```
 
 This will copy all the `fastq` files in `backup/data`. You can check with `ls`.
@@ -153,7 +153,7 @@ Change the first ten `fastq` files with some text:
 for i in {1..10}; do echo hello >> data/file$i.fastq; done
 ```
 
-Now, we do not only want to do an incremental copy of only those file with `rsync`, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:
+Now, we do not only want to do an incremental copy of those file with `rsync`, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:
 
 ```{.bash}
 rsync -aP --exclude="*.log" \
@@ -188,13 +188,13 @@ rsync -aP --exclude="*.log" PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/bac
 
 &nbsp;
 
-All `rsync` options will work as usual in these cases.
+All `rsync` options will work as usual in these cases. You need to type your password if you do not make use of `ssh` keys.
 
 # Closing the workshop
 
 Please fill out this form :)
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+<iframe src="AAAhttps://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
 
 ---
 
