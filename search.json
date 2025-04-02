@@ -396,7 +396,7 @@
     "href": "resources/Slides/Advanced/slides.html#exercise",
     "title": "Use GenomeDK",
     "section": "Exercise",
-    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data and rsync/dataBackup\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",

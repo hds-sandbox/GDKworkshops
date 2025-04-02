@@ -325,7 +325,7 @@ Dan Søndergaard
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
-<p>Log into GenomeDK. Create anywhere you prefere a folder called <code>advancedGDK</code> containing <code>rsync/data</code> and <code>rsync/dataBackup</code></p>
+<p>Log into GenomeDK. Create anywhere you prefere a folder called <code>advancedGDK</code> containing <code>rsync/data</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/rsync/data</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/rsync</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create 100 files with extensions <code>fastq</code> and <code>log</code> in the data folder</p>
@@ -349,8 +349,8 @@ Dan Søndergaard
 </div>
 </div>
 <p>&nbsp;</p>
-<p>A copy can be done with the options <code>a</code> (archive). You can add a progress bar with <code>P</code>. You can exclude files: here we want only the ones with <code>fastq</code> extension. Run the command</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> data backup/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An archive (incremental) copy can be done with the options <code>a</code>. You can add a progress bar with <code>P</code>. You can exclude files: here we want only the ones with <code>fastq</code> extension. Run the command</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> data backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will copy all the <code>fastq</code> files in <code>backup/data</code>. You can check with <code>ls</code>.</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -370,7 +370,7 @@ Dan Søndergaard
 
 <p>Change the first ten <code>fastq</code> files with some text:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> hello <span class="op">&gt;&gt;</span> data/file<span class="va">$i</span>.fastq<span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now, we do not only want to do an incremental copy of only those file with <code>rsync</code>, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:</p>
+<p>Now, we do not only want to do an incremental copy of those file with <code>rsync</code>, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> <span class="dt">\</span></span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">--backup</span> <span class="dt">\</span></span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">--backup-dir</span><span class="op">=</span>versioning_<span class="va">$(</span><span class="fu">date</span> +%F_%T<span class="va">)</span>/ <span class="dt">\</span></span>
@@ -398,13 +398,13 @@ Dan Søndergaard
 <p>The opposite can be done uploading data from your computer. For example:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>All <code>rsync</code> options will work as usual in these cases.</p>
+<p>All <code>rsync</code> options will work as usual in these cases. You need to type your password if you do not make use of <code>ssh</code> keys.</p>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
 <h1>Closing the workshop</h1>
 <p>Please fill out this form :)</p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">
+<iframe src="AAAhttps://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">
 Indlæser…
 </iframe>
 </section>
