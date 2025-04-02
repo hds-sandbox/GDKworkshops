@@ -85,7 +85,7 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 
 ## transfer and sync with `rsync`
 
-Very versatile tool for
+`tmux` is a very versatile tool for
 
 - transfering **from remote to local** host (and viceversa)
 - copying from **local to local** host (e.g. data backups/sync) 
@@ -121,7 +121,7 @@ touch data/file{1..100}.fastq data/file{1..100}.log
 
 ---
 
-### Local to local copy
+### Local-to-local copy
 
 :::{.callout-note}
 The syntax of `rsync` is pretty simple:
@@ -153,7 +153,7 @@ Change the first ten `fastq` files with some text:
 for i in {1..10}; do echo hello >> data/file$i.fastq; done
 ```
 
-Now, we do not only want to do an incremental copy of those file with `rsync`, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:
+Now, we do not only want to do an incremental copy of those file with `rsync`, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time (you will find it in your `backup` directory):
 
 ```{.bash}
 rsync -aP --exclude="*.log" \
@@ -163,13 +163,15 @@ rsync -aP --exclude="*.log" \
       backup
 ```
 
----
-
 :::{.callout-tip}
 
 If you create a folder called `backup` in your project folder, you can use versioning to store your analysis and results with incremental changes.
 
 :::
+
+**Exercise finished**
+
+---
 
 ### Transfer between local and remote
 
@@ -189,6 +191,93 @@ rsync -aP --exclude="*.log" PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/bac
 &nbsp;
 
 All `rsync` options will work as usual in these cases. You need to type your password if you do not make use of `ssh` keys.
+
+
+## multiple terminals with `tmux`
+
+With `tmux` you can 
+
+- start a server with multiple **sessions**
+- each session containing one or more **windows with multiple terminals (panes)**
+- each terminal run simultaneously and be accessed **(attached)** or exited from **(detached)**
+- the tmux server keeps runninng **without a logged user**
+
+
+![](img/tmux-server.png){fig-align="center" width=400px}
+
+---
+
+## Exercise
+
+`tmux` was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:
+
+```{.bash}
+echo "set -g mouse" >> ~/.tmux.conf
+```
+
+You can start a `tmux` session anywhere. It is easier to navigate sessions giving them a name.
+For example start a session called `example1`:
+
+```{.bash}
+tmux new -s example1
+```
+
+---
+
+The command will set you into the session automatically. The window looks something like below:
+
+---
+
+Now, you are in session `example1` and have one window, which you are using now. You can split the window in multiple terminals. Try both those combinations of buttons:
+
+```
+Ctrl + b + %
+
+Ctrl + b + ""
+```
+
+You will split the window horizontally and vertically, running 3 terminals. You can interact with any of them with the mouse.
+
+Try to select a window and resize it: while keeping `Ctrl + b` pressed, use the arrows to change the size
+
+---
+
+Now, you have your three panes running in a window.
+
+Create a new window with `Ctrl + b + c`
+
+You should see another window added in the bottom window list. Again, switch between windows with your mouse!
+
+In the new window, let's look at which tmux sessions and windows are open. Run
+
+```{.bash}
+tmux ls
+```
+
+The output will tell you that session `example1` is in use (attached) and has 2 windows. Something like this:
+
+```
+example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)
+```
+
+---
+
+Now, imagine this session is the one to do things on the front-end node. You would like one for interactive jobs which will keep being online even if you disconnect.
+
+Detach .....
+Create a new session called `srunJobs`.
+
+```{.bash}
+tmux new -s srunJobs
+```
+
+
+
+
+
+
+
+
 
 # Closing the workshop
 
