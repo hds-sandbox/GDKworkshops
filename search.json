@@ -389,7 +389,7 @@
     "href": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
     "title": "Use GenomeDK",
     "section": "transfer and sync with rsync",
-    "text": "transfer and sync with rsync\nVery versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
+    "text": "transfer and sync with rsync\ntmux is a very versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise",
@@ -397,6 +397,20 @@
     "title": "Use GenomeDK",
     "section": "Exercise",
     "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
+    "href": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
+    "title": "Use GenomeDK",
+    "section": "multiple terminals with tmux",
+    "text": "multiple terminals with tmux\nWith tmux you can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
+    "href": "resources/Slides/Advanced/slides.html#exercise-1",
+    "title": "Use GenomeDK",
+    "section": "Exercise",
+    "text": "Exercise\ntmux was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",

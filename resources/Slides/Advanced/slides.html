@@ -299,7 +299,7 @@ Dan Søndergaard
 </section>
 <section id="transfer-and-sync-with-rsync" class="slide level2">
 <h2>transfer and sync with <code>rsync</code></h2>
-<p>Very versatile tool for</p>
+<p><code>tmux</code> is a very versatile tool for</p>
 <ul>
 <li>transfering <strong>from remote to local</strong> host (and viceversa)</li>
 <li>copying from <strong>local to local</strong> host (e.g.&nbsp;data backups/sync)</li>
@@ -333,7 +333,7 @@ Dan Søndergaard
 </section>
 <section class="slide level2">
 
-<h3 id="local-to-local-copy">Local to local copy</h3>
+<h3 id="local-to-local-copy">Local-to-local copy</h3>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -370,15 +370,12 @@ Dan Søndergaard
 
 <p>Change the first ten <code>fastq</code> files with some text:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> hello <span class="op">&gt;&gt;</span> data/file<span class="va">$i</span>.fastq<span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now, we do not only want to do an incremental copy of those file with <code>rsync</code>, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:</p>
+<p>Now, we do not only want to do an incremental copy of those file with <code>rsync</code>, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time (you will find it in your <code>backup</code> directory):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> <span class="dt">\</span></span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">--backup</span> <span class="dt">\</span></span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">--backup-dir</span><span class="op">=</span>versioning_<span class="va">$(</span><span class="fu">date</span> +%F_%T<span class="va">)</span>/ <span class="dt">\</span></span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>      data <span class="dt">\</span></span>
 <span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>      backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -392,6 +389,10 @@ Dan Søndergaard
 </div>
 </div>
 </div>
+<p><strong>Exercise finished</strong></p>
+</section>
+<section class="slide level2">
+
 <h3 id="transfer-between-local-and-remote">Transfer between local and remote</h3>
 <p>You can in the same way transfer and backup data between your local host (your PC, or GenomeDK) and another remote host (another cluster). You need Linux or Mac on the local host. For example, to get on your computer the same <code>fastq</code> files:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> USERNAME@login.genome.au.dk:PATH_TO/advancedGDK/data PATH_TO/backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -399,6 +400,53 @@ Dan Søndergaard
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>All <code>rsync</code> options will work as usual in these cases. You need to type your password if you do not make use of <code>ssh</code> keys.</p>
+</section>
+<section id="multiple-terminals-with-tmux" class="slide level2">
+<h2>multiple terminals with <code>tmux</code></h2>
+<p>With <code>tmux</code> you can</p>
+<ul>
+<li>start a server with multiple <strong>sessions</strong></li>
+<li>each session containing one or more <strong>windows with multiple terminals (panes)</strong></li>
+<li>each terminal run simultaneously and be accessed <strong>(attached)</strong> or exited from <strong>(detached)</strong></li>
+<li>the tmux server keeps runninng <strong>without a logged user</strong></li>
+</ul>
+
+<img data-src="img/tmux-server.png" class="quarto-figure quarto-figure-center r-stretch" width="400"></section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<p><code>tmux</code> was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"set -g mouse"</span> <span class="op">&gt;&gt;</span> ~/.tmux.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can start a <code>tmux</code> session anywhere. It is easier to navigate sessions giving them a name. For example start a session called <code>example1</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> example1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>The command will set you into the session automatically. The window looks something like below:</p>
+</section>
+<section class="slide level2">
+
+<p>Now, you are in session <code>example1</code> and have one window, which you are using now. You can split the window in multiple terminals. Try both those combinations of buttons:</p>
+<pre><code>Ctrl + b + %
+
+Ctrl + b + ""</code></pre>
+<p>You will split the window horizontally and vertically, running 3 terminals. You can interact with any of them with the mouse.</p>
+<p>Try to select a window and resize it: while keeping <code>Ctrl + b</code> pressed, use the arrows to change the size</p>
+</section>
+<section class="slide level2">
+
+<p>Now, you have your three panes running in a window.</p>
+<p>Create a new window with <code>Ctrl + b + c</code></p>
+<p>You should see another window added in the bottom window list. Again, switch between windows with your mouse!</p>
+<p>In the new window, let’s look at which tmux sessions and windows are open. Run</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output will tell you that session <code>example1</code> is in use (attached) and has 2 windows. Something like this:</p>
+<pre><code>example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Now, imagine this session is the one to do things on the front-end node. You would like one for interactive jobs which will keep being online even if you disconnect.</p>
+<p>Detach ….. Create a new session called <code>srunJobs</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> srunJobs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
