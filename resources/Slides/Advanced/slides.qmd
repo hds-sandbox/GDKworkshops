@@ -76,12 +76,6 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 ** Keep slides + a terminal open for the workshop{.smaller}**
 
 
-
-
-
-
-
-
 # Syncronizations, downloads, multiple terminals
 
 - How to download/update incrementally using `rsync`
@@ -109,46 +103,92 @@ Lots of options you can find in the manual (would require a workshop only for th
   </a>
 </div>
 
+## Exercise
 
+Log into GenomeDK. Create anywhere you prefere a folder called `advancedGDK` containing
+`rsync/data` and `rsync/dataBackup`
 
+```{.bash}
+mkdir -p advancedGDK/rsync/data
+cd advancedGDK/rsync
+```
 
-## Infrastructure
+Create 100 files with extensions `fastq` and `log` in the data folder
 
-`GenomeDK` is a **computing cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
-
-- **computing nodes** used for running programs (~15000 cores)
-- **storage nodes** storing data in many hard drives (~23 PiB)
-- a **network** making nodes talk to each other
-- a **frontend** node from which you can send your programs to a node to be executed
-- a **queueing system** called *slurm* to prioritize the users' program to be run
-
----
-
-![](./img/Main-components-of-a-computer-cluster.png){fig-align="center"}
-
-## Access 
-
-- **Creating an account** happens through [this form](https://console.genome.au.dk/user-requests/create/) at genome.au.dk
-
-    ![](img/account.png){width=600px fig-alig="center"}
+```{.bash}
+touch data/file{1..100}.fastq data/file{1..100}.log
+```
 
 ---
 
-- **Logging into GenomeDK** happens through the command ^[both in Linux/Mac terminal and Windows Powershell. Powershell might require `ssh.exe` instead of `ssh`]
+### Local to local copy
 
-    ```{.bash}
-    [local]$  ssh USERNAME@login.genome.au.dk
-    ```
+:::{.callout-note}
+The syntax of `rsync` is pretty simple:
 
-- When first logged in, **setup the 2-factor authentication** by 
-    - showing a QR-code with the command
+```
+rsync OPTIONS ORIGIN(s) DESTINATION
+```
+:::
 
-        ```{.bash}
-        [gdk]$  gdk-auth-show-qr
-        ```
-    - scanning it with your phone's Authenticator app ^[e.g. Microsoft Authenticator, Google Authenticator, ...].
+&nbsp;
 
+A copy can be done with the options `a` (archive). You can add a progress bar with `P`. You can exclude files: here we want only the ones with `fastq` extension. Run the command
 
+```{.bash}
+rsync -aP --exclude="*.log" data backup/
+```
+
+This will copy all the `fastq` files in `backup/data`. You can check with `ls`.
+
+:::{.callout-warning}
+Using `data` will copy the entire folder, while `data/` will copy only its content! This is common to many other UNIX tools.
+:::
+
+---
+
+Change the first ten `fastq` files with some text:
+
+```{.bash}
+for i in {1..10}; do echo hello >> data/file$i.fastq; done
+```
+
+Now, we do not only want to do an incremental copy of only those file with `rsync`, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:
+
+```{.bash}
+rsync -aP --exclude="*.log" \
+      --backup \
+      --backup-dir=versioning_$(date +%F_%T)/ \
+      data \
+      backup
+```
+
+---
+
+:::{.callout-tip}
+
+If you create a folder called `backup` in your project folder, you can use versioning to store your analysis and results with incremental changes.
+
+:::
+
+### Transfer between local and remote
+
+You can in the same way transfer and backup data between your local host (your PC, or GenomeDK) and another remote host (another cluster). You need Linux or Mac on the local host.
+For example, to get on your computer the same `fastq` files:
+
+```{.bash}
+rsync -aP --exclude="*.log" USERNAME@login.genome.au.dk:PATH_TO/advancedGDK/data PATH_TO/backup
+```
+
+The opposite can be done uploading data from your computer. For example:
+
+```{.bash}
+rsync -aP --exclude="*.log" PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/backup
+```
+
+&nbsp;
+
+All `rsync` options will work as usual in these cases.
 
 # Closing the workshop
 
