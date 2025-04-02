@@ -392,18 +392,11 @@
     "text": "transfer and sync with rsync\nVery versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#infrastructure",
-    "href": "resources/Slides/Advanced/slides.html#infrastructure",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise",
+    "href": "resources/Slides/Advanced/slides.html#exercise",
     "title": "Use GenomeDK",
-    "section": "Infrastructure",
-    "text": "Infrastructure\nGenomeDK is a computing cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores)\nstorage nodes storing data in many hard drives (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#access",
-    "href": "resources/Slides/Advanced/slides.html#access",
-    "title": "Use GenomeDK",
-    "section": "Access",
-    "text": "Access\n\nCreating an account happens through this form at genome.au.dk"
+    "section": "Exercise",
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data and rsync/dataBackup\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",

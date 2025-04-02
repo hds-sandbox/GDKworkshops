@@ -11,7 +11,7 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-04-01">
+  <meta name="dcterms.date" content="2025-04-02">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -227,7 +227,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-04-01</p>
+  <p class="date">2025-04-02</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -323,41 +323,83 @@ Dan Søndergaard
 <p><a href="https://linux.die.net/man/1/rsync" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; border: 2px solid #0056b3; font-weight: bold;"> rsync manual </a></p>
 </div>
 </section>
-<section id="infrastructure" class="slide level2">
-<h2>Infrastructure</h2>
-<p><code>GenomeDK</code> is a <strong>computing cluster</strong>, i.e.&nbsp;a set of interconnected computers (nodes). <code>GenomeDK</code> has:</p>
-<ul>
-<li><strong>computing nodes</strong> used for running programs (~15000 cores)</li>
-<li><strong>storage nodes</strong> storing data in many hard drives (~23 PiB)</li>
-<li>a <strong>network</strong> making nodes talk to each other</li>
-<li>a <strong>frontend</strong> node from which you can send your programs to a node to be executed</li>
-<li>a <strong>queueing system</strong> called <em>slurm</em> to prioritize the users’ program to be run</li>
-</ul>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<p>Log into GenomeDK. Create anywhere you prefere a folder called <code>advancedGDK</code> containing <code>rsync/data</code> and <code>rsync/dataBackup</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/rsync/data</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/rsync</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create 100 files with extensions <code>fastq</code> and <code>log</code> in the data folder</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data/file{1..100}.fastq data/file{1..100}.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-
-<img data-src="./img/Main-components-of-a-computer-cluster.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="access" class="slide level2">
-<h2>Access</h2>
-<ul>
-<li><p><strong>Creating an account</strong> happens through <a href="https://console.genome.au.dk/user-requests/create/">this form</a> at genome.au.dk</p>
-<p><img data-src="img/account.png" data-fig-alig="center" width="600"></p></li>
-</ul>
+<h3 id="local-to-local-copy">Local to local copy</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The syntax of <code>rsync</code> is pretty simple:</p>
+<pre><code>rsync OPTIONS ORIGIN(s) DESTINATION</code></pre>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>A copy can be done with the options <code>a</code> (archive). You can add a progress bar with <code>P</code>. You can exclude files: here we want only the ones with <code>fastq</code> extension. Run the command</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> data backup/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will copy all the <code>fastq</code> files in <code>backup/data</code>. You can check with <code>ls</code>.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Using <code>data</code> will copy the entire folder, while <code>data/</code> will copy only its content! This is common to many other UNIX tools.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<ul>
-<li><p><strong>Logging into GenomeDK</strong> happens through the command <sup>1</sup></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  ssh USERNAME@login.genome.au.dk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>When first logged in, <strong>setup the 2-factor authentication</strong> by</p>
-<ul>
-<li><p>showing a QR-code with the command</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[gdk]$</span>  gdk-auth-show-qr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>scanning it with your phone’s Authenticator app <sup>2</sup>.</p></li>
-</ul></li>
-</ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>both in Linux/Mac terminal and Windows Powershell. Powershell might require <code>ssh.exe</code> instead of <code>ssh</code></p></li><li id="fn2"><p>e.g.&nbsp;Microsoft Authenticator, Google Authenticator, …</p></li></ol></aside></section></section>
+<p>Change the first ten <code>fastq</code> files with some text:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> hello <span class="op">&gt;&gt;</span> data/file<span class="va">$i</span>.fastq<span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, we do not only want to do an incremental copy of only those file with <code>rsync</code>, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> <span class="dt">\</span></span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">--backup</span> <span class="dt">\</span></span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">--backup-dir</span><span class="op">=</span>versioning_<span class="va">$(</span><span class="fu">date</span> +%F_%T<span class="va">)</span>/ <span class="dt">\</span></span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>      data <span class="dt">\</span></span>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>      backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>If you create a folder called <code>backup</code> in your project folder, you can use versioning to store your analysis and results with incremental changes.</p>
+</div>
+</div>
+</div>
+<h3 id="transfer-between-local-and-remote">Transfer between local and remote</h3>
+<p>You can in the same way transfer and backup data between your local host (your PC, or GenomeDK) and another remote host (another cluster). You need Linux or Mac on the local host. For example, to get on your computer the same <code>fastq</code> files:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> USERNAME@login.genome.au.dk:PATH_TO/advancedGDK/data PATH_TO/backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The opposite can be done uploading data from your computer. For example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>All <code>rsync</code> options will work as usual in these cases.</p>
+</section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
 <h1>Closing the workshop</h1>
@@ -379,7 +421,6 @@ Indlæser…
 
 
 </section></section>
-
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="img/logos.png" class="slide-logo"></p>
