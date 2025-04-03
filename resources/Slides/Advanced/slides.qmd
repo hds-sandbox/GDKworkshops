@@ -262,15 +262,21 @@ example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)
 
 ---
 
-Now, imagine this session is the one to do things on the front-end node. You would like one for interactive jobs which will keep being online even if you disconnect.
+Now, imagine this session is the one to do things on the front-end node (managing folders, ...). You would like one more session with its own windows for running containers on interactive jobs.
 
-Detach .....
-Create a new session called `srunJobs`.
+:::{.callout-warning}
+Remember you always need to detach you from a session to create a new one! 
+
+Detach from the current session using `Ctrl + b + d`.
+:::
+
+Create now a new session called `containers`.
 
 ```{.bash}
-tmux new -s srunJobs
+tmux new -s containers
 ```
 
+and verify you have two sessions using `tmux ls`. Try to move between sessions using `Ctrl + b + )` and `Ctrl + b + (`.
 
 
 
@@ -291,10 +297,10 @@ Please fill out this form :)
 
 - use the official documentation! 
 
-- ask for help, use drop in hours
+- ask for help, use drop in hours ([ABC cafe](https://abc.au.dk))
 
 - try out stuff and google yourself out of small problems
   
 - Slides updated over time, use as a reference
 
-- Future workshops about advanced usage and pipelines
+- Next workshop all about pipelines
