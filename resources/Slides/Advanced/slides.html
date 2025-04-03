@@ -11,7 +11,7 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-04-02">
+  <meta name="dcterms.date" content="2025-04-03">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -227,7 +227,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-04-02</p>
+  <p class="date">2025-04-03</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -444,9 +444,24 @@ Ctrl + b + ""</code></pre>
 </section>
 <section class="slide level2">
 
-<p>Now, imagine this session is the one to do things on the front-end node. You would like one for interactive jobs which will keep being online even if you disconnect.</p>
-<p>Detach ….. Create a new session called <code>srunJobs</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> srunJobs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, imagine this session is the one to do things on the front-end node (managing folders, …). You would like one more session with its own windows for running containers on interactive jobs.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Remember you always need to detach you from a session to create a new one!</p>
+<p>Detach from the current session using <code>Ctrl + b + d</code>.</p>
+</div>
+</div>
+</div>
+<p>Create now a new session called <code>containers</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and verify you have two sessions using <code>tmux ls</code>. Try to move between sessions using <code>Ctrl + b + )</code> and <code>Ctrl + b + (</code>.</p>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
@@ -461,10 +476,10 @@ Indlæser…
 <ul>
 <li><p>A lot of things we could not cover</p></li>
 <li><p>use the official documentation!</p></li>
-<li><p>ask for help, use drop in hours</p></li>
+<li><p>ask for help, use drop in hours (<a href="https://abc.au.dk">ABC cafe</a>)</p></li>
 <li><p>try out stuff and google yourself out of small problems</p></li>
 <li><p>Slides updated over time, use as a reference</p></li>
-<li><p>Future workshops about advanced usage and pipelines</p></li>
+<li><p>Next workshop all about pipelines</p></li>
 </ul>
 
 
