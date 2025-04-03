@@ -35,7 +35,7 @@ navigation-mode: vertical
 
 - **Drop in hours:**
 
-  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc@au.dk
+  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abcafe@au.dk
   - Samuele (BiRC, MBG) - samuele@birc.au.dk
 
 - **General mail for assistance**

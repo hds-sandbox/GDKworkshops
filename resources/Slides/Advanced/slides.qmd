@@ -3,10 +3,12 @@ title: "Use GenomeDK"
 subtitle: "An introduction to the GDK system and basic commands https://hds-sandbox.github.io/GDKworkshops"
 author: 
     - "Samuele Soraggi"
+    - "Manuel Vazquez"
     - "Dan Søndergaard"
 institute:
-    - Health Data Science sandbox, BiRC
-    - GenomeDK, Health
+    - Health Data Science sandbox, BiRC, AU
+    - Molecular Biology and Genetics, AU
+    - GenomeDK, Health, AU
 date: last-modified
 format: 
   revealjs:
@@ -24,9 +26,11 @@ smaller: true
 
 - These slides are both a presentation and a small reference manual
 
-- We will try out some commands during the workshop
+- 90% of slides are you doing stuff - so open your terminals
 
 - Official reference documentation: [genome.au.dk](https://genome.au.dk)
+
+- Most important message before starting any workshop: **RTFM - Read The Freaking Manuals! Thank you.**
 
 ## When you need to ask for help
 
@@ -36,8 +40,8 @@ smaller: true
 
 - **Drop in hours:**
 
-  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abc@au.dk
-  - Samuele (BiRC, MBG) - samuele@birc.au.dk
+  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abcafe@au.dk
+  - Samuele (BiRC, MBG) - samuele@birc.au.dk - we just set up a meeting/zoom
 
 - **General mail for assistance**
 
@@ -226,6 +230,8 @@ tmux new -s example1
 
 The command will set you into the session automatically. The window looks something like below:
 
+![](img/tmuxSession.png){fig-align="center" width=600px}
+
 ---
 
 Now, you are in session `example1` and have one window, which you are using now. You can split the window in multiple terminals. Try both those combinations of buttons:
@@ -318,11 +324,6 @@ tmux new -s containers
 ```
 
 and verify you have three sessions using `tmux ls`. Try to move between sessions using `Ctrl + b + )` and `Ctrl + b + (`. Or keep right-clicked on the session name and choose Next/Previous.
-
-
-
-
-
 
 
 
