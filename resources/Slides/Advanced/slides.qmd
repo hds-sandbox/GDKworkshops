@@ -236,7 +236,9 @@ Ctrl + b + %
 Ctrl + b + ""
 ```
 
-You will split the window horizontally and vertically, running 3 terminals. You can interact with any of them with the mouse.
+Or keep right-clicked with the mouse to choose the split.
+
+Do split the window horizontally and vertically, running 3 terminals. You can select any of them with the mouse (left-click).
 
 Try to select a window and resize it: while keeping `Ctrl + b` pressed, use the arrows to change the size
 
@@ -244,9 +246,9 @@ Try to select a window and resize it: while keeping `Ctrl + b` pressed, use the 
 
 Now, you have your three panes running in a window.
 
-Create a new window with `Ctrl + b + c`
+Create a new window with `Ctrl + b + c`. Or keep right-clicked on the window bar and create a new window.
 
-You should see another window added in the bottom window list. Again, switch between windows with your mouse!
+You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!
 
 In the new window, let's look at which tmux sessions and windows are open. Run
 
@@ -262,13 +264,52 @@ example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)
 
 ---
 
-Now, imagine this session is the one to do things on the front-end node (managing folders, ...). You would like one more session with its own windows for running containers on interactive jobs.
+### Launching separate downloads at the same time
+Start a new session without attaching to it (`d` option), and call it `downloads`:
+
+```{.bash}
+tmux new-session -d -s downloads
+```
+
+verify the session is there with `tmux ls`.
 
 :::{.callout-warning}
-Remember you always need to detach you from a session to create a new one! 
-
-Detach from the current session using `Ctrl + b + d`.
+If you want a new session attaching to it, you need to detach from the current session with `Ctrl + b + d`.
 :::
+
+Create a text file with few example files for this workshop to be downloaded.
+
+```{.bash}
+curl -s https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync | jq -r '.[] | .download_url' > downloads.txt
+```
+
+---
+
+Now, the script below launches all the URLs from the list in the download session in a new window. The new window closes after the download. If there are less than K downloads active, a new one starts, until the end! You can use this and close your terminal. The downloads will keep going and the window names will be shown to keep an eye on the current downloads. Try it out and use it whenever you have massive number of file downloads.
+
+```{.bash}
+mkdir -p downloaded
+K=2  # Maximum number of concurrent downloads
+while read -r url; do
+    # Wait until the number of active tmux windows in the "downloads" session is less than K
+    while [ "$(tmux list-windows -t downloads | wc -l)" -ge "$((K+1))" ]; do     
+        sleep 1
+    done
+
+    # Extract the filename from the URL
+    filename=$(basename "$url")
+
+    # Start a new tmux window for the download
+    tmux new-window -t downloads -n "$filename" "wget -c $url -O downloaded/$filename && tmux kill-window"
+    tmux list-windows -t downloads -F "#{window_name}"   
+done < downloads.txt
+```
+
+
+
+---
+
+Now, create one more session with its own windows for running containers on interactive jobs: detach from the current session using `Ctrl + b + d`.
 
 Create now a new session called `containers`.
 
@@ -276,7 +317,7 @@ Create now a new session called `containers`.
 tmux new -s containers
 ```
 
-and verify you have two sessions using `tmux ls`. Try to move between sessions using `Ctrl + b + )` and `Ctrl + b + (`.
+and verify you have three sessions using `tmux ls`. Try to move between sessions using `Ctrl + b + )` and `Ctrl + b + (`. Or keep right-clicked on the session name and choose Next/Previous.
 
 
 
