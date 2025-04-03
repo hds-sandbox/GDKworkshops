@@ -84,8 +84,8 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 
 - How to download/update incrementally using `rsync`
 - Use `rsync` to create backups and versioning
-- Create multiple terminals in the same session with `tmux`
-- Launch parallel downloads with `rsync` + `tmux`
+- Create and navigate multiple sessions with `tmux`
+- Launch parallel background downloads with `tmux`
 
 ## transfer and sync with `rsync`
 
