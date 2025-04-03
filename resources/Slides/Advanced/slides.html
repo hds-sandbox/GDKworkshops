@@ -429,14 +429,15 @@ Dan Søndergaard
 <pre><code>Ctrl + b + %
 
 Ctrl + b + ""</code></pre>
-<p>You will split the window horizontally and vertically, running 3 terminals. You can interact with any of them with the mouse.</p>
+<p>Or keep right-clicked with the mouse to choose the split.</p>
+<p>Do split the window horizontally and vertically, running 3 terminals. You can select any of them with the mouse (left-click).</p>
 <p>Try to select a window and resize it: while keeping <code>Ctrl + b</code> pressed, use the arrows to change the size</p>
 </section>
 <section class="slide level2">
 
 <p>Now, you have your three panes running in a window.</p>
-<p>Create a new window with <code>Ctrl + b + c</code></p>
-<p>You should see another window added in the bottom window list. Again, switch between windows with your mouse!</p>
+<p>Create a new window with <code>Ctrl + b + c</code>. Or keep right-clicked on the window bar and create a new window.</p>
+<p>You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!</p>
 <p>In the new window, let’s look at which tmux sessions and windows are open. Run</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The output will tell you that session <code>example1</code> is in use (attached) and has 2 windows. Something like this:</p>
@@ -444,7 +445,10 @@ Ctrl + b + ""</code></pre>
 </section>
 <section class="slide level2">
 
-<p>Now, imagine this session is the one to do things on the front-end node (managing folders, …). You would like one more session with its own windows for running containers on interactive jobs.</p>
+<h3 id="launching-separate-downloads-at-the-same-time">Launching separate downloads at the same time</h3>
+<p>Start a new session without attaching to it (<code>d</code> option), and call it <code>downloads</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new-session <span class="at">-d</span> <span class="at">-s</span> downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>verify the session is there with <code>tmux ls</code>.</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -454,14 +458,38 @@ Ctrl + b + ""</code></pre>
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>Remember you always need to detach you from a session to create a new one!</p>
-<p>Detach from the current session using <code>Ctrl + b + d</code>.</p>
+<p>If you want a new session attaching to it, you need to detach from the current session with <code>Ctrl + b + d</code>.</p>
 </div>
 </div>
 </div>
+<p>Create a text file with few example files for this workshop to be downloaded.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> <span class="st">'.[] | .download_url'</span> <span class="op">&gt;</span> downloads.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Now, the script below launches all the URLs from the list in the download session in a new window. The new window closes after the download. If there are less than K downloads active, a new one starts, until the end! You can use this and close your terminal. The downloads will keep going and the window names will be shown to keep an eye on the current downloads. Try it out and use it whenever you have massive number of file downloads.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> downloaded</span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="va">K</span><span class="op">=</span>2  <span class="co"># Maximum number of concurrent downloads</span></span>
+<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">url</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wait until the number of active tmux windows in the "downloads" session is less than K</span></span>
+<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$(</span><span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span> <span class="ot">-ge</span> <span class="st">"</span><span class="va">$((K</span><span class="op">+</span><span class="dv">1</span><span class="va">))</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">do</span>     </span>
+<span id="cb16-6"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">sleep</span> 1</span>
+<span id="cb16-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb16-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract the filename from the URL</span></span>
+<span id="cb16-10"><a aria-hidden="true" tabindex="-1"></a>    <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$url</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb16-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start a new tmux window for the download</span></span>
+<span id="cb16-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> new-window <span class="at">-t</span> downloads <span class="at">-n</span> <span class="st">"</span><span class="va">$filename</span><span class="st">"</span> <span class="st">"wget -c </span><span class="va">$url</span><span class="st"> -O downloaded/</span><span class="va">$filename</span><span class="st"> &amp;&amp; tmux kill-window"</span></span>
+<span id="cb16-14"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="at">-F</span> <span class="st">"#{window_name}"</span>   </span>
+<span id="cb16-15"><a aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> downloads.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Now, create one more session with its own windows for running containers on interactive jobs: detach from the current session using <code>Ctrl + b + d</code>.</p>
 <p>Create now a new session called <code>containers</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and verify you have two sessions using <code>tmux ls</code>. Try to move between sessions using <code>Ctrl + b + )</code> and <code>Ctrl + b + (</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and verify you have three sessions using <code>tmux ls</code>. Try to move between sessions using <code>Ctrl + b + )</code> and <code>Ctrl + b + (</code>. Or keep right-clicked on the session name and choose Next/Previous.</p>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
