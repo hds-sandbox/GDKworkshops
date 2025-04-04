@@ -382,14 +382,14 @@
     "href": "resources/Slides/Advanced/slides.html#navigate-the-slides",
     "title": "Advanced GenomeDK",
     "section": "Navigate the slides",
-    "text": "Navigate the slides\n\n** Keep slides + a terminal open for the workshop{.smaller}**"
+    "text": "Navigate the slides"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
     "href": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
     "title": "Advanced GenomeDK",
     "section": "transfer and sync with rsync",
-    "text": "transfer and sync with rsync\ntmux is a very versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
+    "text": "transfer and sync with rsync\nrsync is a very versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\nrsync cannot download from web URLs\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise",

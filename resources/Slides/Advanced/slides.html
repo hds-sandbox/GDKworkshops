@@ -243,7 +243,7 @@ Dan Søndergaard
 <h1>Some background</h1>
 <ul>
 <li><p>These slides are both a presentation and a small reference manual</p></li>
-<li><p>90% of slides are you doing stuff - so open your terminals</p></li>
+<li><p>90% of slides are you doing stuff - <strong>open your terminals and slides</strong></p></li>
 <li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 <li><p>Some advanced things require a bit of practice/frustration, but I hope to reduce it</p></li>
 <li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Freaking Manual!</a>. Though</p>
@@ -306,13 +306,12 @@ Dan Søndergaard
 <section id="navigate-the-slides" class="slide level2">
 <h2>Navigate the slides</h2>
 
-<img data-src="./img/slideGuide.png" class="quarto-figure quarto-figure-center r-stretch"><p>** Keep slides + a terminal open for the workshop{.smaller}**</p>
-</section></section>
+<img data-src="./img/slideGuide.png" class="quarto-figure quarto-figure-center r-stretch"></section></section>
 <section>
 <section id="syncronizations-downloads-multiple-terminals" class="title-slide slide level1 center">
 <h1>Syncronizations, downloads, multiple terminals</h1>
 <ul>
-<li>How to download/update incrementally using <code>rsync</code></li>
+<li>How to copy using <code>rsync</code></li>
 <li>Use <code>rsync</code> to create backups and versioning</li>
 <li>Create and navigate multiple sessions with <code>tmux</code></li>
 <li>Launch parallel background downloads with <code>tmux</code></li>
@@ -320,7 +319,7 @@ Dan Søndergaard
 </section>
 <section id="transfer-and-sync-with-rsync" class="slide level2">
 <h2>transfer and sync with <code>rsync</code></h2>
-<p><code>tmux</code> is a very versatile tool for</p>
+<p><code>rsync</code> is a very versatile tool for</p>
 <ul>
 <li>transfering <strong>from remote to local</strong> host (and viceversa)</li>
 <li>copying from <strong>local to local</strong> host (e.g.&nbsp;data backups/sync)</li>
@@ -336,6 +335,7 @@ Dan Søndergaard
 </div>
 <div class="callout-content">
 <p><code>rsync</code> cannot make a transfer between two remote hosts, e.g.&nbsp;running from your PC to transfer data between GenomeDK and Computerome.</p>
+<p><code>rsync</code> cannot download from web URLs</p>
 </div>
 </div>
 </div>
