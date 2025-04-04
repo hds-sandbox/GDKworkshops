@@ -1,6 +1,6 @@
 ---
-title: "Use GenomeDK"
-subtitle: "An introduction to the GDK system and basic commands https://hds-sandbox.github.io/GDKworkshops"
+title: "Advanced GenomeDK"
+subtitle: "More-than-basic things to do and tips for GDK, tinyurl.com/advGDK"
 author: 
     - "Samuele Soraggi"
     - "Manuel Vazquez"
@@ -30,7 +30,11 @@ smaller: true
 
 - Official reference documentation: [genome.au.dk](https://genome.au.dk)
 
-- Most important message before starting any workshop: **RTFM - Read The Freaking Manuals! Thank you.**
+- Some advanced things require a bit of practice/frustration, but I hope to reduce it
+
+- Most important message before starting any workshop: [RTFM - Read The Freaking Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/). Though
+  - Some manuals are really useless, but the ones for UNIX tools are pretty good
+  - Unusual options might be buried somewhere or badly explained
 
 ## When you need to ask for help
 
@@ -49,22 +53,24 @@ smaller: true
 
 ## Program
 
-- **10:00-10:15**: Workshop Introduction, questions 
+- **10:00-10:20**: 
+  - Workshop Introduction
+  - Some everyday things for your home folder
+    - and your mental sanity
 
-- **10:15-11:00**: 
-  - `rsync` download and synchronization
-  - multiple virtual terminals on `tmux`
+- **10:20-11:00**: 
+  - `rsync` copy and backups, terminals on `tmux`
   - cake break
 
 - **11:10-12:00**: 
-  - Web applications, ports, certificates
+  - Web applications, ports and tunnels
   - Containers (Docker, singularity)
 
 - **12:45-13:15**: 
   - Batch jobs
 
 - **13:15-14:00**: 
-  - A pipeline with `gwf`, `pixi` and `containers`
+  - Your first pipeline with `gwf`, `pixi` and `containers`
 
 ## Get the slides
 
@@ -310,6 +316,259 @@ while read -r url; do
     tmux list-windows -t downloads -F "#{window_name}"   
 done < downloads.txt
 ```
+
+# Web applications, ports, tunneling
+
+## Web applications
+
+Why do we use web applications for graphical interfaces?
+
+- all the graphics heavy-lifting is done by the browser
+- before, the X11 forwarding was the way to do graphics from remote
+- problem: X11 sends the whole graphics over the network, which is slow
+
+[We have written a bit about that on one of our ABC tutorials](https://abc.au.dk/documentation/2024-11-28-ABC9.html)
+
+---
+
+A web application on GenomeDK:
+
+- starts a **server process** on the cluster
+- This server listens for incoming requests on a specific **port**
+- The server sends and receives data over the network via the port.
+
+&nbsp;
+
+
+
+The local user:
+
+- creates a **tunnel**, which is an `ssh` connection mapping to the remote port used by the server process
+
+---
+
+![How the port forwarding looks like from the local user (your pc) to the remote node of the cluster. The purple command has to be launched on the local computer, once the server is running on the remote host. Source: KU Leuven.](img/sshPortForwarding.png){fig-align="center" width=800px}
+
+---
+
+### Which port to use
+
+- Each server process on a machine needs a **unique port** (p2 on previous figure) to avoid conflicts.
+
+- Ports are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with
+  
+  `echo $UID`
+
+- You will see all this in the next exercise
+
+:::{.callout-warning title="better safe than sorry"}
+Launch a web application which has tokens (a random code in the URL for the browser) or a password. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!
+:::
+
+## Exercise: jupyterlab web server{.scrollable}
+
+If you DO NOT have the `conda` package manager, you can quickly install it from the box below, otherwise move to the next slide!
+
+:::{.callout-tip title="Install conda" collapse="true"}
+Run the installation script to install the software. There are some informative messages during the installation. You might need to say `yes` a few times
+
+```{.bash}
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
+chmod +x miniforge.sh
+bash miniforge.sh -b
+~/miniforge3/bin/conda init bash
+source ~/.bashrc
+```
+
+When you are done, you need a little bit of configuration. You can run the following command to configure `conda` (run them only once, they are not needed again):
+
+```{.bash}
+conda config --append channels conda-forge
+conda config --append channels bioconda
+conda config --set channel_priority strict
+conda config --set auto_activate_base false
+source ~/.bashrc
+```
+
+Finally, install a package to accellerate `conda`. This is optional but recommended:
+
+```{.bash}
+conda install -n base --yes conda-libmamba-solver
+conda config --set solver libmamba
+```
+
+Now you are ready to move on!
+
+:::
+
+---
+
+On GenomeDK, create a new `tmux` session:
+
+```{.bash}
+tmux new -s jupyterlab
+```
+
+&nbsp;
+
+and create a new `conda` environment:
+
+```{.bash}
+conda create -y -n GDKjupyter conda-forge::jupyterlab conda-forge::numpy conda-forge::pandas
+```
+
+&nbsp;
+
+Start a job with just a few resources. This will always keep running until the end since it is inside a tmux session!
+
+```{.bash}
+srun --mem=8g --cores=1 --time=4:00:0  --account=YOUR_PROJECT --pty /bin/bash
+```
+
+&nbsp;
+
+Now activate your environment and run jupyterlab. You will need the node name and your user ID. Those can be given as variables to the web server using  `$(hostname)` and $UID:
+
+```{.bash}
+conda activate GDKjupyter
+jupyter-lab --port=$UID \
+  --ip=$(hostname) \
+  --no-browser
+```
+
+---
+
+You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser. It will look like this, but in your case it might have an added token in the URL (mine is instead password protected):
+
+![](img/jupyterUrl.png){fig-align="center" width=400px}
+
+&nbsp;
+
+**We still need a tunnel** from the local host (your PC)! keep note of the port and node, and write in a new terminal **(not logged into GenomeDK)** a command like the one below (matching the example figure above):
+
+```{.bash}
+ssh -L6835:s21n34:6835 USERNAME@login.genome.au.dk
+```
+
+:::{.callout-note}
+In the command above I prefere to map the same ports locally and remotely, but you can use two different port.
+
+If you do not have passwordless login, you have to write the password. 
+:::
+
+Your tunnel will be opened. Now the web application can be accessed from your browser at the address given by the server process on GenomeDK (put your correct port number).
+
+**Exercise finished**
+
+---
+
+:::{.callout-tip}
+The same logic applies to all other web applications. They will have similar options to define the remote node and port. 
+
+Usually the host node option changes name between `ip`, `host`, `address`, or `hostname`.
+:::
+
+
+
+# Containers
+
+:::{.callout-note}
+**Container = ** Standalone and portable software package including 
+
+- code 
+- runtime
+- libraries
+- system tools
+- operating system-level dependencies
+:::
+
+&nbsp;
+
+Deployement of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, ...) depends on the host system and is not fully reproducible.
+
+## Container vs virtual env vs VM
+
+A **virtual environment** isolates dependencies for a specific programming language within the same operating system. It does not include the operating system or system-level dependencies, so it depends on the hosting system.
+
+![](img/containerVSconda.png){fig-align="center" width="600px"}
+
+---
+
+- A **virtual machine (VM)** virtualizes an entire operating system, including the kernel, and runs on a hypervisor (assigns resources to the VM).
+
+![](img/dockerAndVM.gif){fig-align="center" width="600px"}
+
+## Scope of containers
+
+- Containers are usually thought as packing a specific application which can run anywhere (or, which is portable).
+
+- E.g. annoying bioinformatics software requiring specific libraries or long installations.
+
+- Many containers are done with *Docker*, but this is not installed on GenomeDK
+
+- GenomeDK has *Singularity*, which can also run programs installed in Docker containers.
+
+- Very practical to pull and use containers in workflows.
+
+## Where to find containers?
+
+Typical repositories with pre-built containers are:
+
+- **[Biocontainers](https://biocontainers.pro)**: community-driven initiative to containerize bioinf softwares.
+  - >10K tools >100K containers
+  - [bioconda package index](https://bioconda.github.io/conda-package_index.html) lists all software versions
+  - the [Registry page](https://biocontainers.pro/registry) has a searchable interface to find what you need
+
+- **[DockerHub](https://hub.docker.com/)** registry: Public hub for Docker images, often including official containers from software developers
+
+- **[Quay](https://quay.io/)**: Same philosophy of DockerHub.
+
+Once you find a container on the websites, simply use the provided code to pull it locally.
+
+## Exercise I: web applications and tunneling
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We try to run `rocker-RStudio`, which stems from a project trying to containerize Rstudio server. 
+
+&nbsp;
+
+[Look at the webpage](https://hub.docker.com/r/rocker/rstudio) from DockerHub, and note that they provide only the Docker command to pull the container. 
+
+Singularity is slightly different, we will pull the container with it.
+
+---
+
+Start a new session on tmux (remember to detach from a previous session):
+
+```{.bash}
+tmux new -s rstudio
+```
+
+Make `advancedGDK` your current directory, and create one for Rstudio:
+
+```{.bash}
+mkdir rstudio
+cd rstudio
+```
+
+First of all, empty the cache of `singularity`. This can be quickly too large.
+
+
 
 
 
