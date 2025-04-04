@@ -26,7 +26,7 @@ smaller: true
 
 - These slides are both a presentation and a small reference manual
 
-- 90% of slides are you doing stuff - so open your terminals
+- 90% of slides are you doing stuff - **open your terminals and slides**
 
 - Official reference documentation: [genome.au.dk](https://genome.au.dk)
 
@@ -83,19 +83,16 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 ![](./img/slideGuide.png){fig-align="center"}
 
 
-** Keep slides + a terminal open for the workshop{.smaller}**
-
-
 # Syncronizations, downloads, multiple terminals
 
-- How to download/update incrementally using `rsync`
+- How to copy using `rsync`
 - Use `rsync` to create backups and versioning
 - Create and navigate multiple sessions with `tmux`
 - Launch parallel background downloads with `tmux`
 
 ## transfer and sync with `rsync`
 
-`tmux` is a very versatile tool for
+`rsync` is a very versatile tool for
 
 - transfering **from remote to local** host (and viceversa)
 - copying from **local to local** host (e.g. data backups/sync) 
@@ -103,6 +100,8 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 
 :::{.callout-warning}
 `rsync` cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.
+
+`rsync` cannot download from web URLs
 :::
 
 Lots of options you can find in the manual (would require a workshop only for that)
