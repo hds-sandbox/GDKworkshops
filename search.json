@@ -359,58 +359,100 @@
   {
     "objectID": "resources/Slides/Advanced/slides.html#when-you-need-to-ask-for-help",
     "href": "resources/Slides/Advanced/slides.html#when-you-need-to-ask-for-help",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "When you need to ask for help",
     "text": "When you need to ask for help\n\nPractical help:\nSamuele (BiRC, MBG) - samuele@birc.au.dk\nDrop in hours:\n\nBioinformatics Cafe: https://abc.au.dk, abcafe@au.dk\nSamuele (BiRC, MBG) - samuele@birc.au.dk - we just set up a meeting/zoom\n\nGeneral mail for assistance\nsupport@genome.au.dk"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#program",
     "href": "resources/Slides/Advanced/slides.html#program",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:15: Workshop Introduction, questions\n10:15-11:00:\n\nrsync download and synchronization\nmultiple virtual terminals on tmux\ncake break\n\n11:10-12:00:\n\nWeb applications, ports, certificates\nContainers (Docker, singularity)\n\n12:45-13:15:\n\nBatch jobs\n\n13:15-14:00:\n\nA pipeline with gwf, pixi and containers"
+    "text": "Program\n\n10:00-10:20:\n\nWorkshop Introduction\nSome everyday things for your home folder\n\nand your mental sanity\n\n\n10:20-11:00:\n\nrsync copy and backups, terminals on tmux\ncake break\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-13:15:\n\nBatch jobs\n\n13:15-14:00:\n\nYour first pipeline with gwf, pixi and containers"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
     "href": "resources/Slides/Advanced/slides.html#get-the-slides",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "Get the slides",
     "text": "Get the slides\nWebpage: https://hds-sandbox.github.io/GDKworkshops/\n\nSlides will always be up to date in this webpage"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#navigate-the-slides",
     "href": "resources/Slides/Advanced/slides.html#navigate-the-slides",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "Navigate the slides",
     "text": "Navigate the slides\n\n** Keep slides + a terminal open for the workshop{.smaller}**"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
     "href": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "transfer and sync with rsync",
     "text": "transfer and sync with rsync\ntmux is a very versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise",
     "href": "resources/Slides/Advanced/slides.html#exercise",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "Exercise",
     "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
     "href": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "multiple terminals with tmux",
     "text": "multiple terminals with tmux\nWith tmux you can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
     "href": "resources/Slides/Advanced/slides.html#exercise-1",
-    "title": "Use GenomeDK",
+    "title": "Advanced GenomeDK",
     "section": "Exercise",
     "text": "Exercise\ntmux was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#web-applications",
+    "href": "resources/Slides/Advanced/slides.html#web-applications",
+    "title": "Advanced GenomeDK",
+    "section": "Web applications",
+    "text": "Web applications\nWhy do we use web applications for graphical interfaces?\n\nall the graphics heavy-lifting is done by the browser\nbefore, the X11 forwarding was the way to do graphics from remote\nproblem: X11 sends the whole graphics over the network, which is slow\n\nWe have written a bit about that on one of our ABC tutorials"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "href": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise: jupyterlab web server",
+    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nFinally, install a package to accellerate conda. This is optional but recommended:\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\nNow you are ready to move on!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
+    "href": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
+    "title": "Advanced GenomeDK",
+    "section": "Container vs virtual env vs VM",
+    "text": "Container vs virtual env vs VM\nA virtual environment isolates dependencies for a specific programming language within the same operating system. It does not include the operating system or system-level dependencies, so it depends on the hosting system."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#scope-of-containers",
+    "href": "resources/Slides/Advanced/slides.html#scope-of-containers",
+    "title": "Advanced GenomeDK",
+    "section": "Scope of containers",
+    "text": "Scope of containers\n\nContainers are usually thought as packing a specific application which can run anywhere (or, which is portable).\nE.g. annoying bioinformatics software requiring specific libraries or long installations.\nMany containers are done with Docker, but this is not installed on GenomeDK\nGenomeDK has Singularity, which can also run programs installed in Docker containers.\nVery practical to pull and use containers in workflows."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#where-to-find-containers",
+    "href": "resources/Slides/Advanced/slides.html#where-to-find-containers",
+    "title": "Advanced GenomeDK",
+    "section": "Where to find containers?",
+    "text": "Where to find containers?\nTypical repositories with pre-built containers are:\n\nBiocontainers: community-driven initiative to containerize bioinf softwares.\n\n\n10K tools &gt;100K containers\n\nbioconda package index lists all software versions\nthe Registry page has a searchable interface to find what you need\n\nDockerHub registry: Public hub for Docker images, often including official containers from software developers\nQuay: Same philosophy of DockerHub.\n\nOnce you find a container on the websites, simply use the provided code to pull it locally."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-web-applications-and-tunneling",
+    "href": "resources/Slides/Advanced/slides.html#exercise-i-web-applications-and-tunneling",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise I: web applications and tunneling",
+    "text": "Exercise I: web applications and tunneling\nWe try to run rocker-RStudio, which stems from a project trying to containerize Rstudio server.\n \nLook at the webpage from DockerHub, and note that they provide only the Docker command to pull the container.\nSingularity is slightly different, we will pull the container with it."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",

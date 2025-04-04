@@ -12,8 +12,8 @@
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Vazquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-04-03">
-  <title>GenomeDK workshops – Use GenomeDK</title>
+  <meta name="dcterms.date" content="2025-04-04">
+  <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -206,8 +206,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Use GenomeDK</h1>
-  <p class="subtitle">An introduction to the GDK system and basic commands https://hds-sandbox.github.io/GDKworkshops</p>
+  <h1 class="title">Advanced GenomeDK</h1>
+  <p class="subtitle">More-than-basic things to do and tips for GDK, tinyurl.com/advGDK</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -236,7 +236,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-04-03</p>
+  <p class="date">2025-04-04</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -245,7 +245,12 @@ Dan Søndergaard
 <li><p>These slides are both a presentation and a small reference manual</p></li>
 <li><p>90% of slides are you doing stuff - so open your terminals</p></li>
 <li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a></p></li>
-<li><p>Most important message before starting any workshop: <strong>RTFM - Read The Freaking Manuals! Thank you.</strong></p></li>
+<li><p>Some advanced things require a bit of practice/frustration, but I hope to reduce it</p></li>
+<li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Freaking Manual!</a>. Though</p>
+<ul>
+<li>Some manuals are really useless, but the ones for UNIX tools are pretty good</li>
+<li>Unusual options might be buried somewhere or badly explained</li>
+</ul></li>
 </ul>
 </section>
 <section id="when-you-need-to-ask-for-help" class="slide level2">
@@ -265,25 +270,31 @@ Dan Søndergaard
 <section id="program" class="slide level2">
 <h2>Program</h2>
 <ul>
-<li><p><strong>10:00-10:15</strong>: Workshop Introduction, questions</p></li>
-<li><p><strong>10:15-11:00</strong>:</p>
+<li><strong>10:00-10:20</strong>:
 <ul>
-<li><code>rsync</code> download and synchronization</li>
-<li>multiple virtual terminals on <code>tmux</code></li>
+<li>Workshop Introduction</li>
+<li>Some everyday things for your home folder
+<ul>
+<li>and your mental sanity</li>
+</ul></li>
+</ul></li>
+<li><strong>10:20-11:00</strong>:
+<ul>
+<li><code>rsync</code> copy and backups, terminals on <code>tmux</code></li>
 <li>cake break</li>
 </ul></li>
-<li><p><strong>11:10-12:00</strong>:</p>
+<li><strong>11:10-12:00</strong>:
 <ul>
-<li>Web applications, ports, certificates</li>
+<li>Web applications, ports and tunnels</li>
 <li>Containers (Docker, singularity)</li>
 </ul></li>
-<li><p><strong>12:45-13:15</strong>:</p>
+<li><strong>12:45-13:15</strong>:
 <ul>
 <li>Batch jobs</li>
 </ul></li>
-<li><p><strong>13:15-14:00</strong>:</p>
+<li><strong>13:15-14:00</strong>:
 <ul>
-<li>A pipeline with <code>gwf</code>, <code>pixi</code> and <code>containers</code></li>
+<li>Your first pipeline with <code>gwf</code>, <code>pixi</code> and <code>containers</code></li>
 </ul></li>
 </ul>
 </section>
@@ -494,12 +505,243 @@ Ctrl + b + ""</code></pre>
 <span id="cb16-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> new-window <span class="at">-t</span> downloads <span class="at">-n</span> <span class="st">"</span><span class="va">$filename</span><span class="st">"</span> <span class="st">"wget -c </span><span class="va">$url</span><span class="st"> -O downloaded/</span><span class="va">$filename</span><span class="st"> &amp;&amp; tmux kill-window"</span></span>
 <span id="cb16-14"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="at">-F</span> <span class="st">"#{window_name}"</span>   </span>
 <span id="cb16-15"><a aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> downloads.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="web-applications-ports-tunneling" class="title-slide slide level1 center">
+<h1>Web applications, ports, tunneling</h1>
+
+</section>
+<section id="web-applications" class="slide level2">
+<h2>Web applications</h2>
+<p>Why do we use web applications for graphical interfaces?</p>
+<ul>
+<li>all the graphics heavy-lifting is done by the browser</li>
+<li>before, the X11 forwarding was the way to do graphics from remote</li>
+<li>problem: X11 sends the whole graphics over the network, which is slow</li>
+</ul>
+<p><a href="https://abc.au.dk/documentation/2024-11-28-ABC9.html">We have written a bit about that on one of our ABC tutorials</a></p>
+</section>
+<section class="slide level2">
+
+<p>A web application on GenomeDK:</p>
+<ul>
+<li>starts a <strong>server process</strong> on the cluster</li>
+<li>This server listens for incoming requests on a specific <strong>port</strong></li>
+<li>The server sends and receives data over the network via the port.</li>
+</ul>
+<p>&nbsp;</p>
+<p>The local user:</p>
+<ul>
+<li>creates a <strong>tunnel</strong>, which is an <code>ssh</code> connection mapping to the remote port used by the server process</li>
+</ul>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/sshPortForwarding.png" width="800" class="r-stretch quarto-figure-center"><p class="caption">How the port forwarding looks like from the local user (your pc) to the remote node of the cluster. The purple command has to be launched on the local computer, once the server is running on the remote host. Source: KU Leuven.</p></section>
+<section class="slide level2">
+
+<h3 id="which-port-to-use">Which port to use</h3>
+<ul>
+<li><p>Each server process on a machine needs a <strong>unique port</strong> (p2 on previous figure) to avoid conflicts.</p></li>
+<li><p>Ports are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with</p>
+<p><code>echo $UID</code></p></li>
+<li><p>You will see all this in the next exercise</p></li>
+</ul>
+<div title="better safe than sorry">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>better safe than sorry</strong></p>
+</div>
+<div class="callout-content">
+<p>Launch a web application which has tokens (a random code in the URL for the browser) or a password. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-jupyterlab-web-server" class="slide level2 scrollable">
+<h2>Exercise: jupyterlab web server</h2>
+<p>If you DO NOT have the <code>conda</code> package manager, you can quickly install it from the box below, otherwise move to the next slide!</p>
+<div title="Install conda">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Install conda</strong></p>
+</div>
+<div class="callout-content">
+<p>Run the installation script to install the software. There are some informative messages during the installation. You might need to say <code>yes</code> a few times</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
+<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
+<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniforge3/bin/conda</span> init bash</span>
+<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When you are done, you need a little bit of configuration. You can run the following command to configure <code>conda</code> (run them only once, they are not needed again):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span>
+<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, install a package to accellerate <code>conda</code>. This is optional but recommended:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now you are ready to move on!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>On GenomeDK, create a new <code>tmux</code> session:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> jupyterlab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>and create a new <code>conda</code> environment:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> GDKjupyter conda-forge::jupyterlab conda-forge::numpy conda-forge::pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Start a job with just a few resources. This will always keep running until the end since it is inside a tmux session!</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0  <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Now activate your environment and run jupyterlab. You will need the node name and your user ID. Those can be given as variables to the web server using <code>$(hostname)</code> and $UID:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate GDKjupyter</span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="dt">\</span></span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">--no-browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser. It will look like this, but in your case it might have an added token in the URL (mine is instead password protected):</p>
+
+<img data-src="img/jupyterUrl.png" class="quarto-figure quarto-figure-center r-stretch" width="400"><p>&nbsp;</p>
+<p><strong>We still need a tunnel</strong> from the local host (your PC)! keep note of the port and node, and write in a new terminal <strong>(not logged into GenomeDK)</strong> a command like the one below (matching the example figure above):</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L6835:s21n34:6835</span> USERNAME@login.genome.au.dk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>In the command above I prefere to map the same ports locally and remotely, but you can use two different port.</p>
+<p>If you do not have passwordless login, you have to write the password.</p>
+</div>
+</div>
+</div>
+<p>Your tunnel will be opened. Now the web application can be accessed from your browser at the address given by the server process on GenomeDK (put your correct port number).</p>
+<p><strong>Exercise finished</strong></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>The same logic applies to all other web applications. They will have similar options to define the remote node and port.</p>
+<p>Usually the host node option changes name between <code>ip</code>, <code>host</code>, <code>address</code>, or <code>hostname</code>.</p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="containers" class="title-slide slide level1 center">
+<h1>Containers</h1>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Container = </strong> Standalone and portable software package including</p>
+<ul>
+<li>code</li>
+<li>runtime</li>
+<li>libraries</li>
+<li>system tools</li>
+<li>operating system-level dependencies</li>
+</ul>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Deployement of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, …) depends on the host system and is not fully reproducible.</p>
+</section>
+<section id="container-vs-virtual-env-vs-vm" class="slide level2">
+<h2>Container vs virtual env vs VM</h2>
+<p>A <strong>virtual environment</strong> isolates dependencies for a specific programming language within the same operating system. It does not include the operating system or system-level dependencies, so it depends on the hosting system.</p>
+
+<img data-src="img/containerVSconda.png" class="quarto-figure quarto-figure-center r-stretch" width="600"></section>
+<section class="slide level2">
+
+<ul>
+<li>A <strong>virtual machine (VM)</strong> virtualizes an entire operating system, including the kernel, and runs on a hypervisor (assigns resources to the VM).</li>
+</ul>
+
+<img data-src="img/dockerAndVM.gif" class="quarto-figure quarto-figure-center r-stretch" width="600"></section>
+<section id="scope-of-containers" class="slide level2">
+<h2>Scope of containers</h2>
+<ul>
+<li><p>Containers are usually thought as packing a specific application which can run anywhere (or, which is portable).</p></li>
+<li><p>E.g. annoying bioinformatics software requiring specific libraries or long installations.</p></li>
+<li><p>Many containers are done with <em>Docker</em>, but this is not installed on GenomeDK</p></li>
+<li><p>GenomeDK has <em>Singularity</em>, which can also run programs installed in Docker containers.</p></li>
+<li><p>Very practical to pull and use containers in workflows.</p></li>
+</ul>
+</section>
+<section id="where-to-find-containers" class="slide level2">
+<h2>Where to find containers?</h2>
+<p>Typical repositories with pre-built containers are:</p>
+<ul>
+<li><p><strong><a href="https://biocontainers.pro">Biocontainers</a></strong>: community-driven initiative to containerize bioinf softwares.</p>
+<ul>
+<li><blockquote>
+<p>10K tools &gt;100K containers</p>
+</blockquote></li>
+<li><a href="https://bioconda.github.io/conda-package_index.html">bioconda package index</a> lists all software versions</li>
+<li>the <a href="https://biocontainers.pro/registry">Registry page</a> has a searchable interface to find what you need</li>
+</ul></li>
+<li><p><strong><a href="https://hub.docker.com/">DockerHub</a></strong> registry: Public hub for Docker images, often including official containers from software developers</p></li>
+<li><p><strong><a href="https://quay.io/">Quay</a></strong>: Same philosophy of DockerHub.</p></li>
+</ul>
+<p>Once you find a container on the websites, simply use the provided code to pull it locally.</p>
+</section>
+<section id="exercise-i-web-applications-and-tunneling" class="slide level2">
+<h2>Exercise I: web applications and tunneling</h2>
+<p>We try to run <code>rocker-RStudio</code>, which stems from a project trying to containerize Rstudio server.</p>
+<p>&nbsp;</p>
+<p><a href="https://hub.docker.com/r/rocker/rstudio">Look at the webpage</a> from DockerHub, and note that they provide only the Docker command to pull the container.</p>
+<p>Singularity is slightly different, we will pull the container with it.</p>
+</section>
+<section class="slide level2">
+
+<p>Start a new session on tmux (remember to detach from a previous session):</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Make <code>advancedGDK</code> your current directory, and create one for Rstudio:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rstudio</span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First of all, empty the cache of <code>singularity</code>. This can be quickly too large.</p>
 </section>
 <section class="slide level2">
 
 <p>Now, create one more session with its own windows for running containers on interactive jobs: detach from the current session using <code>Ctrl + b + d</code>.</p>
 <p>Create now a new session called <code>containers</code>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and verify you have three sessions using <code>tmux ls</code>. Try to move between sessions using <code>Ctrl + b + )</code> and <code>Ctrl + b + (</code>. Or keep right-clicked on the session name and choose Next/Previous.</p>
 </section></section>
 <section>
