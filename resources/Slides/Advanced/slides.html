@@ -819,9 +819,7 @@ Ctrl + b + ""</code></pre>
 <ul>
 <li><p><strong><a href="https://biocontainers.pro">Biocontainers</a></strong>: community-driven initiative to containerize bioinf softwares.</p>
 <ul>
-<li><blockquote>
-<p>10K tools &gt;100K containers</p>
-</blockquote></li>
+<li>x10K tools x100K+ containers</li>
 <li><a href="https://bioconda.github.io/conda-package_index.html">bioconda package index</a> lists all software versions</li>
 <li>the <a href="https://biocontainers.pro/registry">Registry page</a> has a searchable interface to find what you need</li>
 </ul></li>
@@ -834,30 +832,81 @@ Ctrl + b + ""</code></pre>
 <h2>Exercise I: a simple bioinformatics container</h2>
 <p>We use <em>biocontainers</em> to pull containers and recreate a little bulkRNA alignment. First <strong>create and attach to a new <code>tmux</code> session</strong> called <code>biocontainers</code>.</p>
 <p>&nbsp;</p>
-<p>Then, start a small interactive job (8-16GB of memory and 2 cores is enough).</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>2:00:0  <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create one more session with its own windows for running containers (remember detaching) and make a folder called <code>containers101</code> in the <code>advancedGDK</code> directory.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span>
+<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/containers101</span>
+<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/containers101</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>Look at the <a href="">minimap2 aligner on biocontainers</a>.</p>
-<p>We try to run <code>rocker-RStudio</code>, which stems from a project trying to containerize Rstudio server.</p>
-<p>&nbsp;</p>
-<p><a href="https://hub.docker.com/r/rocker/rstudio">Look at the webpage</a> from DockerHub, and note that they provide only the Docker command to pull the container.</p>
-<p>Singularity is slightly different, we will pull the container with it.</p>
+<p>Find a bash bioinformatics software you know on the <a href="https://biocontainers.pro/registry">Biocontainer Registry</a> and open to see a detailed description. You should see a guide to recreate the software on <code>conda/mamba/pixi</code> or <code>docker/singularity</code>.</p>
 </section>
 <section class="slide level2">
 
-<p>Start a new session on tmux (remember to detach from a previous session):</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Make <code>advancedGDK</code> your current directory, and create one for Rstudio:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rstudio</span>
-<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>First of all, empty the cache of <code>singularity</code>. This can be quickly too large.</p>
+
+<img data-src="img/minimap2Biocontainers.png" width="800" class="r-stretch quarto-figure-center"><p class="caption">Example: Biocontainers page for the <code>minimap2</code> splice-aware aligner.</p></section>
+<section class="slide level2">
+
+<p>The page will suggest to run immediately the container with <code>singularity</code>. I would suggest downloading it first (<code>pull</code> instead of <code>run</code>) and then running it.</p>
+<p>In the case of <code>minimap2</code>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which creates a container file in your current directory.</p>
+<p>&nbsp;</p>
+<p>You can either <code>run</code> the container, which opens a CLI into it, where you can execute the program. A non-interactive way (useful for pipelines) is to write the command directly. For example:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span> minimap2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+</section>
+<section id="exercise-ii-options-for-singularity" class="slide level2">
+<h2>Exercise II: options for singularity</h2>
+<p>Some containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing system variables. A good example is the following…….</p>
+<p>HTTPS (HyperText Transfer Protocol Secure) ensures secure communication over the internet using SSL/TLS protocols. SSL/TLS relies on certificates to verify the identity of the server you’re connecting to and to encrypt the data being transmitted. 2. Certificate Validation When you access an HTTPS URL, your system checks the server’s SSL/TLS certificate to ensure it is issued by a trusted Certificate Authority (CA). This validation prevents “man-in-the-middle” attacks, where an attacker could intercept or alter the data.</p>
+<p>Not working</p>
+<p>singularity run https://depot.galaxyproject.org/singularity/samtools:1.21–h96c455f_1 samtools view -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam -O bam &gt; test01.bam</p>
+<p>Working with certificates</p>
+<p>singularity run –bind /etc/ssl/certs:/etc/ssl/certs –bind /etc/pki/ca-trust:/etc/pki/ca-trust https://depot.galaxyproject.org/singularity/samtools:1.21–h96c455f_1 samtools view -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam -O bam &gt; test01.bam</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>This way of using Rstudio is quite complex and has some difficulties in adding packages. Though it is able to run packages in your current conda/mamba/pixi environment, which you can keep up to date with new packages.</p>
+<p>The suggested procedure is to use the virtual desktop on your browser, install <code>conda-forge::rstudio-desktop</code> in your environment together with the R packages you need, then run the command <code>rstudio</code> in an interactive job (maybe in a <code>tmux</code> session). That needs no tunnelling and works always out of the box.</p>
+<p>See the <a href="https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.html#/software-management">Introductory workshop slides</a> section where we have an exercise to run Rstudio on the virtual desktop.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<p>Now, create one more session with its own windows for running containers on interactive jobs: detach from the current session using <code>Ctrl + b + d</code>.</p>
-<p>Create now a new session called <code>containers</code>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and verify you have three sessions using <code>tmux ls</code>. Try to move between sessions using <code>Ctrl + b + )</code> and <code>Ctrl + b + (</code>. Or keep right-clicked on the session name and choose Next/Previous.</p>
+<p>Remove the previous container, which is no longer needed. We try to setup <code>rocker-RStudio</code>, which stems from a project trying to containerize Rstudio server. Instructions for the setup we are going to do <a href="https://rocker-project.org/use/singularity.html">are at this page</a>, if you are interested.</p>
+<p>&nbsp;</p>
+<p><a href="https://hub.docker.com/r/rocker/rstudio">Look at the webpage</a> from DockerHub, and note that they provide only the Docker command to pull the container. If you go into <code>Tags</code>, you can find all versions. <code>latest</code> always pulls the newest one. just substitute <code>docker pull</code> with <code>singularity pull</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull docker://rocker/rstudio:latest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Call the <code>pull</code> command from the frontend node not inside an interactive job. This is because front-end nodes have faster I/O so that a pull does not stall for long time. Also, downloads are never executed as a job, which is a waste of resources.</p>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Now, we need to create some folder needed by the server instance of Rstudio Server:</p>
+<p>mkdir -p run var-lib-rstudio-server printf ‘provider=sqlite=/var/lib/rstudio-server’ &gt; database.conf</p>
+<p>Then start an interactive job of this type (8-16GB of memory and 2 cores is enough).</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>2:00:0  <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you want, activate a conda/mamba/pixi environment with some R packages, if you have one, once the interactive job has started.</p>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
