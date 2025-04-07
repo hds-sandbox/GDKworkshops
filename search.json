@@ -368,7 +368,7 @@
     "href": "resources/Slides/Advanced/slides.html#program",
     "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:20:\n\nWorkshop Introduction\nSome everyday things for your home folder\n\nand your mental sanity\n\n\n10:20-11:00:\n\nrsync copy and backups, terminals on tmux\ncake break\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-13:15:\n\nBatch jobs\n\n13:15-14:00:\n\nYour first pipeline with gwf, pixi and containers"
+    "text": "Program\n\n10:00-10:20:\n\nWorkshop Introduction\nSome everyday things for easy life\n\nand your mental sanity\n\n\n10:20-11:00:\n\nrsync copy and backups, terminals on tmux\ncake break\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-13:15:\n\nBatch jobs\n\n13:15-14:00:\n\nYour first pipeline with gwf, pixi and containers"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
@@ -383,6 +383,34 @@
     "title": "Advanced GenomeDK",
     "section": "Navigate the slides",
     "text": "Navigate the slides"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#configuration-files",
+    "href": "resources/Slides/Advanced/slides.html#configuration-files",
+    "title": "Advanced GenomeDK",
+    "section": "Configuration files",
+    "text": "Configuration files\nYour ~/.bashrc file contains settings for your user. Those are bash commands which run at every login.\n \nCommon practice for many softwares is to have a configuration file in your home, often starting with ., which makes it a hidden file.\n \nExamples:\n\n.tmux.config for tmux\n.emacs for emacs\n.gitconfig for github\n.condarc for conda\n\nPlus other things like your command history on the terminal."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-singularity-settings",
+    "href": "resources/Slides/Advanced/slides.html#exercise-i-singularity-settings",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise I: singularity settings",
+    "text": "Exercise I: singularity settings\nLet’s make a useful setting to run at each login. We will need a temporary folder for singularity containers which are downloaded. Default is your home, which will be filled up in no time (folder ~/.singularity) with cache material.\n \nEdit the file ~/.bashrc (use nano ~/.bashrc or any editor you want). Add those lines:\nmkdir -p -m 700 /tmp/$USER\nexport SINGULARITY_TMPDIR=/tmp/$USER\nexport SINGULARITY_CACHEDIR=/tmp/$USER\n \nThe -m 700 option for mkdir command ensures also you are the only one which can see the temporary files. Useful is you use a container with password or sensitive info, so no one can access it (/tmp/ is a public folder)!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
+    "href": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise II - aliases",
+    "text": "Exercise II - aliases\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorable commands? Choose the aliases you prefere from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
+    "href": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise III - functions",
+    "text": "Exercise III - functions\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Find all repetitive stupid stuff you use and wrap it up into the .bashrc file!\n\n\n\nYou can also create functions including multiple commands: for example making a directory and then cd into it.\n## make and cd\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\nWhy not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
@@ -445,14 +473,14 @@
     "href": "resources/Slides/Advanced/slides.html#where-to-find-containers",
     "title": "Advanced GenomeDK",
     "section": "Where to find containers?",
-    "text": "Where to find containers?\nTypical repositories with pre-built containers are:\n\nBiocontainers: community-driven initiative to containerize bioinf softwares.\n\n\n10K tools &gt;100K containers\n\nbioconda package index lists all software versions\nthe Registry page has a searchable interface to find what you need\n\nDockerHub registry: Public hub for Docker images, often including official containers from software developers\nQuay: Same philosophy of DockerHub.\n\nOnce you find a container on the websites, simply use the provided code to pull it locally."
+    "text": "Where to find containers?\nTypical repositories with pre-built containers are:\n\nBiocontainers: community-driven initiative to containerize bioinf softwares.\n\n\n10K tools &gt;100K containers\n\nbioconda package index lists all software versions\nthe Registry page has a searchable interface to find what you need\n\nDockerHub registry: Public hub for Docker images, often including official containers from software developers\nQuay: Same philosophy of DockerHub.\n\nOnce you find a container on the websites, simply use (eventually adapt) the provided code to pull it locally."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-web-applications-and-tunneling",
-    "href": "resources/Slides/Advanced/slides.html#exercise-i-web-applications-and-tunneling",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
+    "href": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
     "title": "Advanced GenomeDK",
-    "section": "Exercise I: web applications and tunneling",
-    "text": "Exercise I: web applications and tunneling\nWe try to run rocker-RStudio, which stems from a project trying to containerize Rstudio server.\n \nLook at the webpage from DockerHub, and note that they provide only the Docker command to pull the container.\nSingularity is slightly different, we will pull the container with it."
+    "section": "Exercise I: a simple bioinformatics container",
+    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment. First create and attach to a new tmux session called biocontainers.\n \nThen, start a small interactive job (8-16GB of memory and 2 cores is enough).\nsrun --mem=8g --cores=2 --time=2:00:0  --account=YOUR_PROJECT --pty /bin/bash\n \nLook at the minimap2 aligner on biocontainers.\nWe try to run rocker-RStudio, which stems from a project trying to containerize Rstudio server.\n \nLook at the webpage from DockerHub, and note that they provide only the Docker command to pull the container.\nSingularity is slightly different, we will pull the container with it."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",
