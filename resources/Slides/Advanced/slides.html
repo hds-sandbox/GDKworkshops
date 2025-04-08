@@ -976,15 +976,53 @@ Ctrl + b + ""</code></pre>
 </section>
 <section class="slide level2">
 
+<p>Workflow object</p>
+</section>
+<section class="slide level2">
+
+<p>Templates</p>
+<p>Code with input and output graph</p>
+</section>
+<section id="exercise-i-workflow-with-conda-containers" class="slide level2">
+<h2>Exercise I: workflow with conda containers</h2>
 <p>mkdir -p advancedGDK/pipeline cd advancedGDK/pipeline</p>
 <p>make a tmux sessions</p>
 <p>tmux new -s pipeline</p>
 <p>wget https://zenodo.org/api/files/436d1854-d638-4fdb-8d6b-7c566ed13af8/bioinformatic_tutorial_files.tar.gz -O data.tar.gz tar -xvf data.tar.gz rm data.tar.gz gunzip bioinformatic_tutorial_files/*.gz</p>
-<p>conda config –add channels gwforg conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization #package for resource usage/check conda install -y -c micknudsen gwf-utilization conda create -y -n seqkitExample seqkit #If not finding all packages #conda config –add channels bioconda #conda config –add channels conda-forge</p>
+<p>conda config –add channels gwforg conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization #package for resource usage/check conda install -y -n pipelineExample -c micknudsen gwf-utilization #env for seqkit conda create -y -n seqkitExample seqkit #If not finding all packages #conda config –add channels bioconda #conda config –add channels conda-forge</p>
 <p>singularity pull seqkit_2.10.0 https://depot.galaxyproject.org/singularity/seqkit:2.10.0–h9ee0642_0</p>
+<p>gwf -f workflow.py status</p>
+<p>gwf -f workflow.py info</p>
+<p>gwf -f workflow.py run split</p>
+<p>watch gwf status split</p>
+<p>gwf logs split</p>
+<p>gwf logs -e split</p>
+</section>
+<section id="resize-the-workflow-resources-and-add-a-step" class="slide level2">
+<h2>Resize the workflow resources and add a step</h2>
 </section>
 <section class="slide level2">
 
+<p>Good practices:</p>
+<ul>
+<li>do not make tiny and numerous jobs, try to put together things with similar resource usage</li>
+<li>start testing one of many parallel elements of a worlflow
+<ul>
+<li>determine resource usage (<code>gwf utilization</code>)</li>
+<li>then adjust all elements accordingly</li>
+</ul></li>
+<li>verify often your code is correct
+<ul>
+<li><code>gwf info | less -S</code> to check dependencies (in a following slide later)</li>
+<li>remember you are using python, check some of your code directly in it!</li>
+</ul></li>
+<li>when done, you are reproducible if you share with your datasets:ave
+<ul>
+<li>container pull commands</li>
+<li>conda environment(s) package list</li>
+<li>workflow files</li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
