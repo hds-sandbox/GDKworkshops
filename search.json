@@ -490,6 +490,13 @@
     "text": "Exercise II: options for singularity\nSome containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:\nEnvironment variables\nThe option --env can be used to define environment variables, either needed by your software, or useful to write the code to be executed.\n singularity run --env REF_PATH=$(pwd) \\\n                 --env BAM_PREFIX=test01 \\\n                 https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 \\\n                 samtools view \\\n                 -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \\\n                 -O bam &gt; test01.bam\nUps, it does not work! Can you think of why? Hint: note that the address for the download of data begins with https."
   },
   {
+    "objectID": "resources/Slides/Advanced/slides.html#split-and-merge",
+    "href": "resources/Slides/Advanced/slides.html#split-and-merge",
+    "title": "Advanced GenomeDK",
+    "section": "Split and merge",
+    "text": "Split and merge\nA classical bioinformatics pipeline has splits and merge steps. We will work with this:\n\n\n\n\n\nflowchart LR\n  A0{file.fq} --&gt; A[\"Split(file.fq)\"]\n  A --&gt; B[\"table(part001.fq)\"]\n  A --&gt; C[\"table(part002.fq)\"]\n  A --&gt; D[\"table(part....fq)\"]\n  A --&gt; E[\"table(part010.fq)\"]\n  B --&gt; F[\"merge(table_[001-010].tsv)\"]\n  C --&gt; F\n  D --&gt; F\n  E --&gt; F\n  F --&gt; G{table.tsv}\n\n\n\n\n\n\nwhere split and tables with allele counts and statistics are done through seqkit."
+  },
+  {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",
     "href": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",
     "title": "Use GenomeDK",

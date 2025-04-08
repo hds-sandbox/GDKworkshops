@@ -200,6 +200,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -929,6 +932,56 @@ Ctrl + b + ""</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="your-first-pipeline" class="title-slide slide level1 center">
+<h1>Your first pipeline</h1>
+<ul>
+<li>An example pipeline</li>
+<li>parallelizing</li>
+<li>templates</li>
+<li>environments and containers</li>
+<li>resource usage</li>
+</ul>
+</section>
+<section id="split-and-merge" class="slide level2">
+<h2>Split and merge</h2>
+<p>A classical bioinformatics pipeline has splits and merge steps. We will work with this:</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0{file.fq} --&gt; A["Split(file.fq)"]
+  A --&gt; B["table(part001.fq)"]
+  A --&gt; C["table(part002.fq)"]
+  A --&gt; D["table(part....fq)"]
+  A --&gt; E["table(part010.fq)"]
+  B --&gt; F["merge(table_[001-010].tsv)"]
+  C --&gt; F
+  D --&gt; F
+  E --&gt; F
+  F --&gt; G{table.tsv}
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>where split and tables with allele counts and statistics are done through <code>seqkit</code>.</p>
+</section>
+<section class="slide level2">
+
+<p>mkdir -p advancedGDK/pipeline cd advancedGDK/pipeline</p>
+<p>make a tmux sessions</p>
+<p>tmux new -s pipeline</p>
+<p>wget https://zenodo.org/api/files/436d1854-d638-4fdb-8d6b-7c566ed13af8/bioinformatic_tutorial_files.tar.gz -O data.tar.gz tar -xvf data.tar.gz rm data.tar.gz gunzip bioinformatic_tutorial_files/*.gz</p>
+<p>conda config –add channels gwforg conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization #package for resource usage/check conda install -y -c micknudsen gwf-utilization conda create -y -n seqkitExample seqkit #If not finding all packages #conda config –add channels bioconda #conda config –add channels conda-forge</p>
+<p>singularity pull seqkit_2.10.0 https://depot.galaxyproject.org/singularity/seqkit:2.10.0–h9ee0642_0</p>
 </section>
 <section class="slide level2">
 
