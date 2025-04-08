@@ -12,7 +12,7 @@
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Vazquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-04-07">
+  <meta name="dcterms.date" content="2025-04-08">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -236,7 +236,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-04-07</p>
+  <p class="date">2025-04-08</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -853,19 +853,66 @@ Ctrl + b + ""</code></pre>
 <p>You can either <code>run</code> the container, which opens a CLI into it, where you can execute the program. A non-interactive way (useful for pipelines) is to write the command directly. For example:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span></span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span> minimap2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </section>
 <section id="exercise-ii-options-for-singularity" class="slide level2">
 <h2>Exercise II: options for singularity</h2>
-<p>Some containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing system variables. A good example is the following…….</p>
-<p>HTTPS (HyperText Transfer Protocol Secure) ensures secure communication over the internet using SSL/TLS protocols. SSL/TLS relies on certificates to verify the identity of the server you’re connecting to and to encrypt the data being transmitted. 2. Certificate Validation When you access an HTTPS URL, your system checks the server’s SSL/TLS certificate to ensure it is issued by a trusted Certificate Authority (CA). This validation prevents “man-in-the-middle” attacks, where an attacker could intercept or alter the data.</p>
-<p>Not working</p>
-<p>singularity run https://depot.galaxyproject.org/singularity/samtools:1.21–h96c455f_1 samtools view -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam -O bam &gt; test01.bam</p>
-<p>Working with certificates</p>
-<p>singularity run –bind /etc/ssl/certs:/etc/ssl/certs –bind /etc/pki/ca-trust:/etc/pki/ca-trust https://depot.galaxyproject.org/singularity/samtools:1.21–h96c455f_1 samtools view -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam -O bam &gt; test01.bam</p>
+<p>Some containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:</p>
+<h3 id="environment-variables">Environment variables</h3>
+<p>The option <code>--env</code> can be used to define environment variables, either needed by your software, or useful to write the code to be executed.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">singularity</span> run <span class="at">--env</span> REF_PATH=<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">--env</span> BAM_PREFIX=test01 <span class="dt">\</span></span>
+<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>                 https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 <span class="dt">\</span></span>
+<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a>                 samtools view <span class="dt">\</span></span>
+<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
+<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-O</span> bam <span class="op">&gt;</span> test01.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Ups, it does not work! Can you think of why?</strong> Hint: note that the address for the download of data begins with <code>https</code>.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="certificates-and-binding">Certificates and binding</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>HTTPS</strong> is a protocol for secure communication over the internet. When you access an URL starting with <code>https</code>, your system checks the server’s SSL/TLS certificate to ensure it is issued by a trusted Certificate Authority (CA). Why? To prevent <a href="https://www.ibm.com/think/topics/man-in-the-middle">man-in-the-middle (MITM)</a> attacks, where an attacker eavesdrops in the data transfer.</p>
+</div>
+</div>
+</div>
+<p>The option <code>--bind</code> can be used to make your folders available in a specific path for the container. Here, we bind two folders containing the certificates for GDK. Those paths are quite standard across UNIX systems.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="at">--env</span> REF_PATH=<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--env</span> BAM_PREFIX=test01 <span class="dt">\</span></span>
+<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--bind</span> /etc/ssl/certs:/etc/ssl/certs <span class="dt">\</span></span>
+<span id="cb34-4"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--bind</span> /etc/pki/ca-trust:/etc/pki/ca-trust <span class="dt">\</span></span>
+<span id="cb34-5"><a aria-hidden="true" tabindex="-1"></a>                https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 <span class="dt">\</span></span>
+<span id="cb34-6"><a aria-hidden="true" tabindex="-1"></a>                samtools view <span class="dt">\</span></span>
+<span id="cb34-7"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
+<span id="cb34-8"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-O</span> bam <span class="op">&gt;</span> <span class="va">$BAM_PREFIX</span>.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Exercise finished</strong></p>
+</section>
+<section class="slide level2">
+
+<p>A few other options which can be used in singularity. When you need those really depends on the application:</p>
+<ul>
+<li><p><code>--fakeroot</code>: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.</p></li>
+<li><p><code>--writable</code>: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. <code>--writable-tmpfs</code> to avoid changes to be persistent in a non-writable container.</p></li>
+<li><p><code>--contain</code>: Isolates the container from the host system by limiting access to the host’s filesystem.</p></li>
+<li><p><code>--no-home</code>: Prevents the container from automatically binding the user’s home directory. Useful when you want to avoid exposing your home directory to the container.</p></li>
+<li><p><code>--cleanenv</code>: Clears all environment variables except those explicitly set for the container. This ensures a clean environment for the container to run.</p></li>
+<li><p><code>--nv</code>: Enables NVIDIA GPU support by binding the necessary libraries and drivers into the container. Useful for running GPU-accelerated applications. Equivalent for AMD GPUs is <code>--rocm</code> (not the case on GDK).</p></li>
+<li><p><code>--pwd</code>: Sets the working directory inside the container. Useful for ensuring the container starts in a specific directory.</p></li>
+<li><p><code>--app</code>: Runs a specific application defined in the container’s metadata. Useful for containers with multiple applications.</p></li>
+</ul>
+<div class="hidden">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -881,32 +928,10 @@ Ctrl + b + ""</code></pre>
 </div>
 </div>
 </div>
+</div>
 </section>
 <section class="slide level2">
 
-<p>Remove the previous container, which is no longer needed. We try to setup <code>rocker-RStudio</code>, which stems from a project trying to containerize Rstudio server. Instructions for the setup we are going to do <a href="https://rocker-project.org/use/singularity.html">are at this page</a>, if you are interested.</p>
-<p>&nbsp;</p>
-<p><a href="https://hub.docker.com/r/rocker/rstudio">Look at the webpage</a> from DockerHub, and note that they provide only the Docker command to pull the container. If you go into <code>Tags</code>, you can find all versions. <code>latest</code> always pulls the newest one. just substitute <code>docker pull</code> with <code>singularity pull</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull docker://rocker/rstudio:latest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>Call the <code>pull</code> command from the frontend node not inside an interactive job. This is because front-end nodes have faster I/O so that a pull does not stall for long time. Also, downloads are never executed as a job, which is a waste of resources.</p>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
-<p>Now, we need to create some folder needed by the server instance of Rstudio Server:</p>
-<p>mkdir -p run var-lib-rstudio-server printf ‘provider=sqlite=/var/lib/rstudio-server’ &gt; database.conf</p>
-<p>Then start an interactive job of this type (8-16GB of memory and 2 cores is enough).</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>2:00:0  <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you want, activate a conda/mamba/pixi environment with some R packages, if you have one, once the interactive job has started.</p>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
