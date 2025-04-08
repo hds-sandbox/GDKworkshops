@@ -1,24 +1,10 @@
 [
   {
-    "objectID": "cards/JacobHansen.html",
-    "href": "cards/JacobHansen.html",
-    "title": "Jacob Fredegaard Hansen",
-    "section": "",
-    "text": "Jacob is a Sandbox data scientist based at the university of Southern Danmark in Odense, and he is specialized in the proteomics applications."
-  },
-  {
     "objectID": "cards/SamueleSoraggi.html",
     "href": "cards/SamueleSoraggi.html",
     "title": "Samuele Soraggi",
     "section": "",
     "text": "Samuele is a Sandbox data scientist based at the university of Aarhus. During his academic activity he has gained experience in population genomics, transcriptomics, single cell multiomics and spans his knowledge across various themes of advanced computational statistics."
-  },
-  {
-    "objectID": "cards/JakobSkelmose.html",
-    "href": "cards/JakobSkelmose.html",
-    "title": "Jakob Skelmose",
-    "section": "",
-    "text": "Jakob is a Sandbox data scientist based at the university of Aalborg. His work is mainly focused on applications related to synthetic data, both for reserch and teaching purposes."
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#when-you-need-to-ask-for-help",
@@ -214,7 +200,7 @@
     "href": "people.html",
     "title": "People",
     "section": "",
-    "text": "Alba Refoyo Martinez\n\n\n\n\n\nData Scientist, Copenhagen University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJacob Fredegaard Hansen\n\n\n\n\n\nData Scientist, Southern Denmark University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJakob Skelmose\n\n\n\n\n\nData Scientist, Aalborg University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJennifer Bartell\n\n\n\n\n\nData Scientist and Project coordinator, Copenhagen University\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSamuele Soraggi\n\n\n\n\n\nData Scientist, Aarhus University\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Samuele Soraggi\n\n\n\n\n\nData Scientist, Aarhus University\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -775,19 +761,5 @@
     "title": "Use GenomeDK",
     "section": "Your input for topics and evaluation",
     "text": "Your input for topics and evaluation\n\nIndlæser…"
-  },
-  {
-    "objectID": "cards/JenniferBartell.html",
-    "href": "cards/JenniferBartell.html",
-    "title": "Jennifer Bartell",
-    "section": "",
-    "text": "Jenifer is the Sandbox project coordinator, beyond being also a data scientist. She is based at the university of Copenhagen. Jennifer has a long experience in bacterial genomics and metabolomics, transcriptomics and pathway analysis."
-  },
-  {
-    "objectID": "cards/AlbaMartinez.html",
-    "href": "cards/AlbaMartinez.html",
-    "title": "Alba Refoyo Martinez",
-    "section": "",
-    "text": "Alba is a Sandbox data scientist based at the university of Copenhagen. During her academic background as a PhD and Postdoc she has developed a solid expertise in large-scale genomics and pipelines development on computing clusters."
   }
 ]
