@@ -808,6 +808,17 @@ where split and tables with allele counts and statistics are done through `seqki
 
 ---
 
+Workflow object
+
+---
+
+Templates
+
+Code with input and output graph
+
+---
+
+## Exercise I: workflow with conda containers
 
  mkdir -p advancedGDK/pipeline
  cd advancedGDK/pipeline
@@ -824,7 +835,8 @@ where split and tables with allele counts and statistics are done through `seqki
 conda config --add channels gwforg
 conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization
 #package for resource usage/check
-conda install -y -c micknudsen gwf-utilization
+conda install -y -n pipelineExample -c micknudsen gwf-utilization
+#env for seqkit
 conda create -y -n seqkitExample seqkit
 #If not finding all packages
 #conda config --add channels bioconda
@@ -832,10 +844,37 @@ conda create -y -n seqkitExample seqkit
 
 singularity pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0
 
+gwf -f workflow.py status
+
+gwf -f workflow.py info
+
+gwf -f workflow.py run split
+
+watch gwf status split
+
+gwf logs split
+
+gwf logs -e split
 
 ---
 
+## Resize the workflow resources and add a step
 
+---
+
+Good practices:
+
+ - do not make tiny and numerous jobs, try to put together things with similar resource usage
+ - start testing one of many parallel elements of a worlflow
+    - determine resource usage (`gwf utilization`)
+    - then adjust all elements accordingly
+ - verify often your code is correct
+    - `gwf info | less -S` to check dependencies (in a following slide later)
+    - remember you are using python, check some of your code directly in it!
+  - when done, you are reproducible if you share with your datasets:ave
+    - container pull commands
+    - conda environment(s) package list 
+    - workflow files
 
 
 
