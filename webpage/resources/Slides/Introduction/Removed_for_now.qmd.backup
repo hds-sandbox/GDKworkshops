@@ -1,0 +1,73 @@
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+git_url='https://raw.githubusercontent.com/hds-sandbox/scverse-2024-workshop/main/Questions/quiz00.json'
+display_quiz(git_url, 1, shuffle_answers=True)
+```
+
+## Access from VSCode
+
+An **IDE** (Integrated Development Environment) is an interface from which you can edit files, use the terminal, write code. You might now IDEs such as Rstudio (very dedicated to R and python) and jupyterlab (for basically any language).
+
+&nbsp;
+
+A good recommendation to interact with the cluster is the IDE [VSCode](https://code.visualstudio.com/). It has a very practical interface and many plugins that can make your life very easy once you get confident with it.
+
+---
+
+[Download VSCode](https://code.visualstudio.com/) and open it. Go to the plugin tab (red circle)
+
+![](img/vscode1.png)
+
+---
+
+Search for `remote development`. Open the plugin (red circle) and install
+
+![](img/vscode2.png)
+
+---
+
+When done, click on the remote symbol on the bottom-left corner (red circle), 
+
+![](img/vscode3.png)
+
+choose `Connect current window to host` then `Add new SSH host`, and type:
+```{.bash}
+ssh username@login.genome.au.dk
+```
+
+If asked, select the file `.ssh/config`
+
+---
+
+After some waiting for the first installation, you are **logged in**, and can do it again whenever you open VScode.
+
+Click on the browser tab (red circle), then `Open Folder` and choose your home by typing `/home/username`. You will see everything in your home in the browser on the left
+
+![](img/vscode4.png)
+
+---
+
+It can be useful to have other folders at hand, such as projects.
+
+Go to `File`--> `Add folder to workspace` and type a path of the type
+
+```
+/home/username/project
+```
+
+to see the project folder listed in the browser. You should see something like
+
+![](img/vscode6.png)
+
+---
+
+Also, why not having a terminal as well, without jumping beteeen windows all the time? We still need it to run jobs, create environments and so on. 
+
+&nbsp;
+
+On the top menu, go to `Terminal` --> `New Terminal` (it might ask which is the current folder, if you added folders to the workspace).
+
+&nbsp;
+
+Note that the terminal is also logged into GenomeDK

@@ -1,0 +1,28 @@
+[
+    {
+        "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "30",
+                "correct": false,
+                "feedback": "Wroooooong"
+            },
+            {
+                "answer": "25",
+                "correct": false,
+                "feedback": ":((((("
+            },
+            {
+                "answer": "18",
+                "correct": true,
+                "feedback": "yes!!!"
+            },
+            {
+                "answer": "8",
+                "correct": false,
+                "feedback": "Mmmmmh..... no!"
+            }
+        ]
+    }
+]

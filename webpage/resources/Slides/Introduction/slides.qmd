@@ -1,0 +1,1010 @@
+---
+title: "Use GenomeDK"
+subtitle: "An introduction to the GDK system and basic commands https://hds-sandbox.github.io/GDKworkshops"
+author: 
+    - "Samuele Soraggi"
+    - "Dan Søndergaard"
+institute:
+    - Health Data Science sandbox, BiRC
+    - GenomeDK, Health
+date: last-modified
+format: 
+  revealjs:
+    chalkboard: true
+toc: false
+toc-depth: 1
+slide-number: h.v
+code-line-numbers: false
+logo: img/logos.png
+navigation-mode: vertical
+---
+
+# Some background
+
+- These slides are both a presentation and a small reference manual
+
+- We will try out some commands during the workshop
+
+- Official reference documentation: [genome.au.dk](https://genome.au.dk)
+
+## When you need to ask for help
+
+- **Practical help:** 
+  
+  Samuele (BiRC, MBG) - samuele@birc.au.dk 
+
+- **Drop in hours:**
+
+  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abcafe@au.dk
+  - Samuele (BiRC, MBG) - samuele@birc.au.dk
+
+- **General mail for assistance**
+
+  support@genome.au.dk
+
+## Program
+
+- **10:00-11:00**: What is GenomeDK, File System, virtual environments
+
+- **11:00-12:00**: Exercise: access interface, new environment, transfer data, interactive job
+
+- **12:45-13:15**: queueing system and jobs, estimate resource usage
+
+- **13:15-14:00**: Send out your first job with `slurm`, estimate resource usage
+
+## Get the slides
+
+Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.github.io/GDKworkshops/)
+
+![Slides will always be up to date in this webpage](./img/webpageGDK.png)
+
+## Navigate the slides
+
+![](./img/slideGuide.png){fig-align="center"}
+
+
+## Keep slides + a terminal open for the workshop{.smaller} 
+:::: {.columns}
+::: {.column width="50%" }
+The basic softwares
+
+![Powershell for windows](img/powershell.png){width=250px fig-align="center"}
+
+![Terminal for MacOS and Linux](img/terminal.png){width=250px fig-align="center"}
+
+:::
+::: {.column width="50%" }
+
+Customizable 
+
+![Terminator for Linux - iTerm2 for MacOS](img/terminator.png){width=250px fig-align="center" } 
+
+![Tabby for Linux, MacOS, Windows](img/tabby.png){width=250px fig-align="center"}
+
+:::
+::::
+
+# GenomeDK's ABC
+
+Learn your way around the basics of the `GenomeDK` cluster.
+
+## Infrastructure
+
+`GenomeDK` is a **computing cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
+
+- **computing nodes** used for running programs (~15000 cores)
+- **storage nodes** storing data in many hard drives (~23 PiB)
+- a **network** making nodes talk to each other
+- a **frontend** node from which you can send your programs to a node to be executed
+- a **queueing system** called *slurm* to prioritize the users' program to be run
+
+---
+
+![](./img/Main-components-of-a-computer-cluster.png){fig-align="center"}
+
+## Access 
+
+- **Creating an account** happens through [this form](https://console.genome.au.dk/user-requests/create/) at genome.au.dk
+
+    ![](img/account.png){width=600px fig-alig="center"}
+
+---
+
+- **Logging into GenomeDK** happens through the command ^[both in Linux/Mac terminal and Windows Powershell. Powershell might require `ssh.exe` instead of `ssh`]
+
+    ```{.bash}
+    [local]$  ssh USERNAME@login.genome.au.dk
+    ```
+
+- When first logged in, **setup the 2-factor authentication** by 
+    - showing a QR-code with the command
+
+        ```{.bash}
+        [gdk]$  gdk-auth-show-qr
+        ```
+    - scanning it with your phone's Authenticator app ^[e.g. Microsoft Authenticator, Google Authenticator, ...].
+
+
+## Access without password
+
+It is nice to avoid writing the password at every access. If you are on the cluster, exit from it to go back to your local computer
+
+```{.bash}
+[gdk]$  exit
+```
+
+&nbsp;
+
+Now we set up a public-key authentication. We generate a key pair (public and private):
+
+```{.bash}
+[local]$  ssh-keygen -t ed25519
+```
+
+Always press <kbd>Enter</kbd> and do not insert any password when asked. 
+
+---
+
+and create a folder on the cluster called `.ssh` to contain the public key
+
+```{.bash}
+[local]$  ssh USERNAME@login.genome.au.dk mkdir -p .ssh
+```
+&nbsp;
+
+and finally send the public key to the cluster, into the file `authorized_keys`
+
+```{.bash}
+[local]$  cat ~/.ssh/id_rsa.pub | ssh USERNAME@login.genome.au.dk 'cat >> .ssh/authorized_keys'
+```
+&nbsp;
+
+After this, your local private key will be tested against GenomeDK's public key every time you log in, without you needing to write a password.
+
+# File System (FS) on GenomeDK
+
+- Directory structure
+- Absolute and Relative Paths
+- important folders
+- navigate the FS on the command line
+
+## How the FS is organized
+
+:::: {.columns}
+
+::: {.column width="60%" }
+
+Folders and files follow a tree-like structure
+
+- `/` is the root folder of the filesystem - nothing is above that
+- the FS is shared across all machines and available to all users 
+- `home` and `faststorage` are two of the folders in the root
+- projects are in `/faststorage/project` and **linked** to your home
+
+:::
+
+::: {.column width="40%"}
+
+![](img/complexTree.png){fig-align="center" width=350px}
+
+:::
+
+::::
+
+---
+
+
+## Exercise: 
+
+Log in: `ssh USERNAME@login.genome.au.dk`
+
+:::{.callout-note}
+Run a command = Type a command + Enter
+:::
+
+- Run `pwd`, You should see your home folder: `/home/USERNAME`
+    - `/home/USERNAME` is an example of **path**.
+    - `pwd` shows your current folder (WD, Working Directory)
+    - you can write paths starting FROM the WD!
+
+---
+
+- Run `ls .` to show the content of your WD (the dot `.`)
+
+- Run `mkdir -p GDKintro` to create a `GDKintro` folder
+
+- Run `echo "hello" > ./GDKintro/file.txt` to write hello in a file
+
+- Use `ls ./GDKintro` to see if the text file is there.
+
+:::{.callout-tip title="Relative and absolute paths"}
+- `/home/USERNAME` starts from the root `/`. It is an **absolute path**.
+- `./GDKintro` starts from the WD. It is a **relative path**.
+:::
+
+
+---
+
+Look at the File system tree and answer to the following questions:
+
+:::: {.columns}
+::: {.column width="40%" }
+![](img/complexTree.png){width=300px}
+:::
+::: {.column width="60%" }
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/paths.json'
+display_quiz("./questions/paths.json", shuffle_answers=True, question_alignment="left")
+```
+:::
+::::
+---
+
+### Something more about your home
+
+After log in, you will find yourself into your private **home folder**, denoted by `~` or equivalently `/home/username`. Your prompt will look like this:
+
+&nbsp;
+
+```{.bash}
+[username@node ~] 
+```
+which follows the format **[username@node current_folder]**.
+
+&nbsp;
+
+:::{.callout-warning}
+- Do not fill up your home folder with data. It has a **limited amount of storage** (a quota of 100GB).
+- Your home folder is only **private to you**
+:::
+
+---
+
+## Exercise cont'd
+
+We now set the WD into `GDKintro` and remove all text files in it. Then we download a zipped `fastq` file, unzip it, and print a preview!
+
+
+```{.bash}
+cd GDKintro
+
+rm *.txt
+
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \
+     -O ./data.fastq.gz
+
+gunzip data.fastq.gz
+
+head data.fastq 
+```
+
+---
+
+### Some notes about the commands
+
+- `rm *.txt` removes all files ending with `.txt`. The symbol `*` is a wildcard for the file name
+
+  :::{.callout-warning title="Forever away"}
+  There is no trash bin - **removed files are lost forever** - with no exception
+  :::
+
+- `head` prints the first lines of a text file
+
+## Exercise: Read files
+
+Useful utility 1: `less` file reader. `less` is perfect for exploring (big) text files: you can scroll with the arrows, and quit pressing `q`. Try
+
+```{.bash}
+
+less data.fastq
+
+```
+
+&nbsp;
+The very first sequence you see should be
+
+```
+@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
+TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
+ATCTGAGATTCCTGACCAAATGT
++
+CCCFFFFFHHHHHJJJJJJJJJJJJHIJJJJJJJJJIJJJJJJJJJJJJJJJJJJJHIJGHJIJJIJJJJJHHHHHHH
+FFFFFFFEDDEEEEDDDDDDDDD
+```
+
+---
+
+:::{.callout-tip title="Challenge yourself" icon=false}
+Search online (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
+
+```{python}
+#| echo: false
+from jupyterquiz import display_quiz
+#git_url='https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/webpage-quarto/resources/Slides/Introduction/questions/less.json'
+display_quiz("./questions/less.json", shuffle_answers=True, question_alignment="center")
+```
+:::
+
+## Exercise: Write files
+
+Useful utility 2: `nano` text editor. It open, edits and saves text files. Very useful for changes on the fly.
+
+- Try `nano data.fastq`. Change a base in the first sequence, 
+
+- then press Ctrl+O to save (give it a new file name `newData.fastq` and press Enter)
+
+- press Ctrl+X to exit. If you use `ls` you can see the new saved file.
+
+
+# Software management
+
+&nbsp;
+
+- **No preinstalled software** on GenomeDK
+
+- You install and manage your **software and its dependencies** inside virtual environments
+
+## Virtual environments
+
+Each project needs specific software versions dependent on each other for **reproducibility** - without interferring with other projects.
+
+&nbsp;
+
+:::{.callout-note title="Definition"}
+A **virtual environment** keeps project-specific softwares and their dependencies separated 
+
+&nbsp;
+
+A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
+:::
+
+---
+
+![How virtual envs work: packages at different versions are kept separated into folders, together with all system files needed to make them work.](./img/virtualenvs.png)
+
+## Conda
+
+&nbsp;
+
+Conda is **both** a virtual environment and a package manager.
+
+- easy to use and understand
+- can handle quite big environments
+- environments are easily shareable
+- a [large archive](https://anaconda.org) (Anaconda) of packages
+- active community of people archiving their packages on Anaconda
+
+## Pixi
+
+A newer virtual env. and package manager
+
+&nbsp;
+
+- An upgrade of Conda in speed and stability
+- Can install the same packages as conda
+
+---
+
+A package manager puts together the dependency trees of requested packages to find all compatible dependencies versions.
+
+![Figure: A package's dependency tree with required versions on the edges](img/condatree.png){fig-align="center" width="800px"}
+
+---
+
+To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
+
+![Figure: search DeSeq2 for R](img/anaconda1.png){fig-align="center" width="800px"}
+
+:::{.callout-note title="Channels"}
+
+packages are archived in channels. `conda-forge` and `bioconda` include most of the packages for bioinformatics and data science.
+
+`conda-forge` packages are often the most up-to-date.
+:::
+
+---
+
+### Exercise - Pixi
+
+First of all, we open the **desktop interface to GenomeDK** at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the Front end for the login.
+
+The desktop session will be operative even if you close and reopen your browser afterwards!
+
+![The terminal will work as if you logged into the frontend (The desktop is logged into the front-end node already). You can also use the browser!](img/desktop.png)
+
+---
+
+:::{.callout-tip title="clipboard into the browser"}
+If you copy a text locally and want to paste in the GDK desktop, you need to transfer it to the clipboard.
+
+Click on `SHOW CLIPBOARD` and paste your text. Now it is available in the desktop interface!
+
+![](img/clipboard.png){fig-align="center" width="600px"}
+:::
+
+---
+
+Open the terminal and run the command below to install `pixi`:
+
+```{.bash}
+curl -fsSL https://pixi.sh/install.sh | bash
+```
+
+After that, make the system recognize `pixi`
+
+```{.bash}
+echo PATH="$PATH:$HOME/.pixi/bin" >> ~/.bashrc
+echo 'eval "$(pixi completion --shell bash)"'  >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+Change your WD with the one we created earlier, where we have the file `data.fastq`
+
+```{.bash}
+cd ~/GDKintro
+```
+
+Initiate a new pixi environment into the folder:
+
+```{.bash}
+pixi init
+```
+
+---
+
+Use the file browser and open the `GDKintro` folder
+
+![](img/gdkintroFolder.png){fig-align="center" width="800px"}
+
+You can see some new files. `pixi.toml` contains info `pixi` will use to create your environment.
+
+---
+
+Open `pixi.toml` with the text editor, and make sure you have the two channels `conda-forge` and `bioconda`. If not, modify the file so the channel list is like below.
+
+![](img/pixitoml.png){fig-align="center" width="800px"}
+
+---
+
+Now get back to the terminal and install some packages. This is done easily.
+
+```{.bash}
+pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
+```
+
+The terminal will look like this at the end
+
+![](img/pixiInstalled.png){fig-align="center" width="800px"}
+
+---
+
+Now open the `pixi.toml` file. You should see all the installed packages with related information.
+
+:::{.callout-tip}
+You can share `pixi.toml` with a collaborator. This will need to run `pixi install` and will recreate the same environment!
+
+Does your collaborator need a file `environment.yml` to recreate the environment? Run
+```{.bash}
+pixi project export conda-environment environment.yml
+```
+:::
+
+---
+
+**Exercise Cont'd**
+
+Be sure your WD is in the folder `GDKintro`. Then run
+
+```{.bash}
+pixi project export conda-environment environment.yml
+```
+
+Open the file `environment.yml`. It looks very similar to `pixi.toml` and is compatible with conda to recreate your environment. 
+
+Let's zip those files into one:
+
+```{.bash}
+zip environment.zip pixi.toml environment.yml
+```
+
+# Data transfer
+
+Data can be downloaded/uploaded in two ways:
+
+- from the command line of a local computer
+
+- using an interactive interface (Filezilla)
+
+
+## Exercise cont'd - Download on shell
+
+How to download the environment files to our computer? Open a terminal **on your computer** and run this command:
+
+```{.bash}
+scp USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .
+```
+
+`scp` needs your login and the **absolute path** to the file. We give also the download destination as the WD on the local computer (`.`)
+
+:::{.callout-tip}
+You can also upload a file switching the order of origin and destination in `scp`. E.g. 
+```{.bash}
+scp ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt 
+```
+:::
+
+---
+
+### Exercise - Download interactively
+
+You can transfer data with an interactive software, such as `Filezilla`, which  has an easy interface. [Download Filezilla](https://filezilla-project.org/download.php?type=client).
+
+&nbsp;
+
+When done, open `Filezilla` and use the following information on the login bar:
+
+- Host: `login.genome.au.dk`
+- Username, Password: your `GenomeDK` username and password
+- Port: `22`
+
+---
+
+Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.
+
+![](./img/filezilla1.png){fig-align="center"}
+
+---
+
+**Download** the `environment.zip` file. You need to right-click on it and choose `Download`
+
+![](./img/filezilla3.png){fig-align="center"}
+
+You can do exactly the same to upload files from your local computer!
+
+# Project management
+
+- What are **GDK projects** 
+- how to **track the resource usage**, and 
+- how to **organize a project**
+
+## GDK projects
+
+:::{.callout-note title="what is a project"}
+Projects are contained in `/faststorage/project/` and linked in your home, and are simple folders with some perks:
+
+- you have to **request their creation** to GDK administrators
+- **access is limited** to you, and users you invite
+- CPU, GPU, storage and backup usage are **registered** under the project for each user
+- you can **keep track** of per-project and -user resource usage 
+:::
+
+---
+
+:::{.callout-warning title="Common-sense in project creation"}
+- Do not request a lot of different small project, but make larger/comprehensive ones
+    - **No-go example**: 3 projects `bulkRNA_mouse`, `bulkRNA_human`, `bulkRNA_apes` with the same invited users
+    - **Good example**: one project `bulkRNA_studies` with subfolders `bulkRNA_mouse`, `bulkRNA_human`, `bulkRNA_apes`.
+
+- Why? **Projects cannot be deleted**, so they keep cumulating
+:::
+
+## Creation
+
+Request a project (after login on GDK) with the command
+
+```{.bash}
+gdk-project-request -g <project_name>
+```
+
+&nbsp;
+
+After GDK approval, a project folder with the desired name appears in `~` and `/faststorage/project`. You should be able to set the WD into that folder:
+
+```{.bash}
+cd <project_name>
+```
+
+or
+
+```{.bash}
+cd ~/<project_name>
+```
+
+---
+
+### Users management
+
+**Only the creator** (owner) can see the project folder. You (and only you) can add an user
+
+```{.bash}
+gdk-project-add-user -g <project name> -u <username>
+```
+
+&nbsp;
+
+or remove it
+
+```{.bash}
+gdk-project-remove-user -g <project name> -u <username>
+```
+
+---
+
+Users can also be promoted to have administrative rights in the project
+
+```{.bash}
+gdk-project-promote-user -g <project name> -u <username>
+```
+
+&nbsp;
+
+or demoted from those rights
+
+```{.bash}
+gdk-project-demote-user -g <project name> -u <username>
+```
+
+---
+
+### Accounting
+
+You can see **globally**  monthly used resources of your projects with
+
+```{.bash}
+gdk-project-usage
+```
+
+&nbsp;
+
+Example output:
+
+```{.bash .code-overflow-scroll}
+project               period  billing hours  storage (TB)  backup (TB)  storage files  backup files
+HDSSandbox            2024-8          44.58          0.09         0.00           6024             0
+HDSSandbox            2024-9          25.38          0.09         0.00           6025             0
+ngssummer2024         2024-6           6.73          0.00         0.00              0             0
+ngssummer2024         2024-7        7547.48          0.72         0.00          27479             0
+```
+
+---
+
+More detailed usage: by users on a selected project
+&nbsp;
+
+You can see how many resources your projects are using with 
+
+```{.bash}
+gdk-project-usage -u -p <project-name>
+```
+
+&nbsp;
+
+Example output:
+
+```{.bash .code-overflow-scroll}
+project               period  billing hours  storage (TB)  backup (TB)  storage files  backup files
+ngssummer2024  sarasj             2024-7          77.98          0.02         0.00            528             0
+ngssummer2024  sarasj             2024-8           0.00          0.02         0.00            528             0
+ngssummer2024  savvasc            2024-7         223.21          0.02         0.00            564             0
+ngssummer2024  savvasc            2024-8           0.00          0.02         0.00            564             0
+ngssummer2024  simonnn            2024-7         173.29          0.01         0.00            579             0
+ngssummer2024  simonnn            2024-8           0.00          0.01         0.00            579             0
+```
+
+---
+
+:::{.callout-tip title="Accounting Tips"}
+- You can pipe the accounting output into `grep` to isolate specific users and/or months:
+
+```{.bash}
+gdk-project-usage -u -p <project-name> | grep <username> | grep <period>
+```
+
+&nbsp;
+
+- all the accounting outputs can be saved into a file, which you can later open for example as Excel sheet.
+
+Example:
+```{.bash}
+gdk-project-usage > accountingGDK.csv
+```
+:::
+
+---
+
+:::{.callout-tip title="Private files or folders"}
+You have a folder or a file into the project which you do not want to share: Use 
+
+```{.bash}
+chmod -R go-rwx <file or folder>
+```
+
+&nbsp;
+
+which you can revert using
+
+```{.bash}
+chmod -R go+rwx <file or folder>
+```
+
+Note: you cannot authorize only specific users to access data -  **you can only operate on the project members' level**.
+:::
+
+## Folders management
+
+Have a coherent folder structure - your future self will thank.
+
+![Example of structure, which backs up raw data and analysis](img/structure.png){width=400px fig-align="center"}
+
+---
+
+If your project has many users, a good structure can be
+
+![](img/multistructure.png){width=400px fig-align="center"}
+
+---
+
+:::{.callout-warning title="MUST-KNOWs for a GDK project" layout-align="center"}
+- remove **unused intermediate files**
+    - unused and forgotten object filling up storage
+- backup **only the established truth** of your analysis
+    - in other words the very initial data of your analysis, and the scripts
+- **outputs of many files** should be removed or zipped together into one 
+    - otherwise GDK indexes all of them: slow!!!
+
+&nbsp;
+
+**Backup cost >>> Storage cost >> Computation cost**
+:::
+
+# Running a Job
+
+&nbsp;
+
+Running programs on a computing cluster happens through **jobs**. 
+
+&nbsp;
+
+Learn how to get hold of **computing resources** to run your programs.
+
+## What is a job on a HPC
+
+A computational task **executed on requested HPC resources** (computing nodes), which are handled by the **queueing system** (SLURM).
+
+![](img/Job-on-cluster.png){fig-align="center"}
+
+---
+
+
+The command `gnodes` will tell you if there is heavy usage across the computing nodes
+
+![Usage of computing nodes. Each node has a name (e.g. cn-1001). The symbols for each node mean running a program (`0`), assigned to an user (`_`) and available (`.`)](./img/gnodes.png)
+
+If you want to venture more into checking the queueing status, Moi has done [a great interactive script](https://github.com/MoiColl/cluster_status) in R Shiny for that.
+
+---
+
+Front-end nodes are limited in memory and power, and **should only be for basic operations** such as
+
+- starting a new project
+
+- small folders and files management
+
+- small software installations
+
+- data transfer
+
+and in general you **should not** use them to run computations. This might slow down all other users on the front-end.
+
+---
+
+## Interactive jobs
+
+Useful to run a **non-repetitive task interactively**
+
+Examples: 
+
+- splitting by chromosome that one `bam` file you just got 
+
+- open Rstudio and Jupyterlab
+
+- compress/decompress multiple files, maybe in parallel
+
+Once you exit from the job, anything running into it will stop.
+
+---
+
+### Exercise: Interactive job
+
+You can also run an interactive job on GenomeDK desktop. Go back to it and use the terminal to go into the `GDKintro` folder:
+
+```{.bash}
+cd ~/GDKintro
+```
+
+Now run an interactive job. Use 8g of RAM, 2 cores, and choose 01:00:00 hours. Choose the `account` using the name of one of your projects.
+
+```{.bash}
+srun --mem=8g -c 2 --time=01:00:00  --account=PROJECT_NAME --pty /bin/bash
+```
+
+---
+
+You will have to wait in queue. When you ge the resources, the node in use is **shown in the prompt**. Below, for example, the node is `s21n32`.
+
+```
+[USERNAME@s21n32 ~]$
+``` 
+
+Now, run `rstudio` or `jupyterlab` (your choice!) from the `pixi` environment:
+
+:::: {.columns}
+::: {.column width="50%" }
+```{.bash}
+pixi run rstudio
+```
+:::
+::: {.column width="50%" }
+```{.bash}
+pixi run jupyter-lab --port=$UID
+```
+:::
+::::
+
+The packages available in Rstudio and Jupyterlab are the ones installed in your environment. More on this will be in our **Advanced GenomeDK workshop**.
+
+---
+
+## Batch script (sbatch)
+
+Useful to **run a program non-interactively**, usually for longer time and without interaction from the user. A batch script contains 
+
+- the desired **resources**
+- the sequence of **commands** to be executed
+
+and
+
+- has a filename **without spaces** (forget spaces from now on)
+---
+
+### Exercise: batch script
+
+Create in Rstudio or Jupyterlab a file called `align.sh` (in the folder `GDKintro`) like below:
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=8
+#SBATCH --mem 16g
+#SBATCH --time 04:00:00
+
+pixi run bwa-mem2 index ref.fasta.gz
+#align data
+pixi run bwa-mem2 mem -t 8 ref.fasta.gz \
+             data.fastq \
+            | samtools sort \
+            -@ 7 \
+            -n \
+            -O BAM \
+        > data.bam
+
+exit 0
+```
+
+---
+
+In the terminal, you need to install two new packages
+
+```{.bash}
+pixi add bwa-mem2 samtools
+```
+
+and download a reference genome
+
+```{.bash}
+wget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz
+```
+
+Send the script to the queueing system using the terminal:
+
+```{.bash}
+sbatch align.sh
+```
+---
+
+Interrogate SLURM about the specific job with the provided number. For example
+
+```{.bash}
+jobinfo 33735298
+```
+
+```
+>Name                : align.sh
+>User                : samuele
+>Account             : my_project
+>Partition           : short
+>Nodes               : s21n43
+>Cores               : 8
+>GPUs                : 0
+>State               : RUNNING
+>...
+```
+
+---
+
+or about all the queued jobs
+
+:::: {.columns}
+
+::: {.column width="45%" }
+```{.bash}
+squeue -u USERNAME
+```
+:::
+::: {.column width="10%" }
+<html><center> or </center></html>
+:::
+::: {.column width="45%" }
+```{.bash}
+squeue --me
+```
+:::
+::::
+
+
+```
+>JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+>33735928     short align.sh  samuele  R       1:12      1 s21n43
+```
+
+&nbsp;
+
+If you change your mind and want to cancel a job:
+
+```{.bash}
+scancel 33735928
+```
+
+
+## Choosing the right CPU-RAM
+
+Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
+ While the job is running
+
+- use `squeue --me` and **look at the node id**
+
+- **log into that node** from the front-end terminal:
+  
+  ```{.bash}
+  ssh <NODEID>
+  ```
+
+---
+
+- use `htop -u <username>` to see what is running and how much memory and CPU it uses
+  ![](img/htop.png)
+
+
+# Closing the workshop
+
+Please fill out this form :)
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+
+---
+
+- A lot of things we could not cover
+
+- use the official documentation! 
+
+- ask for help, use drop in hours
+
+- try out stuff and google yourself out of small problems
+  
+- Slides updated over time, use as a reference
+
+- Future workshops about advanced usage and pipelines

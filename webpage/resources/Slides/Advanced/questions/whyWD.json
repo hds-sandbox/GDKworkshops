@@ -1,0 +1,28 @@
+[
+    {
+        "question": "In which cases is it a good idea to use the working directory?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "When you want to access files and folders of the File System which branch below the working directory",
+                "correct": true,
+                "feedback": "Exactly! In this case it is useful to start the path from the WD. We can see the WD as the root of a tree that can reach the files and folders you need. "
+            },
+            {
+                "answer": "When you want to access files and folders of the File System many branches above the working directory",
+                "correct": false,
+                "feedback": "This can be done but it is not practical. If you need very often to access files above the WD, maybe you should consider changing your WD to a higher level of the FS."
+            },
+            {
+                "answer": "When you share a folder containing all the material from a project.",
+                "correct": true,
+                "feedback": "Yes! In this case, a person reproducing your project will set as WD the folder you shared, and all the paths will be relative to that folder."
+            },
+            {
+                "answer": "When you need to access a project folder contained in /faststorage",
+                "correct": false,
+                "feedback": "Not correct. You need an absolute path starting from /faststorage. Unless your WD is the /faststorage, or /faststorage/project/."
+            }
+        ]
+    }
+]

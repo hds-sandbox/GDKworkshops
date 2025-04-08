@@ -1,0 +1,33 @@
+project:
+  type: website
+
+website:
+  title: "GenomeDK workshops"
+  google-analytics: 
+    tracking-id: "G-QZP3HK6BQT"
+  navbar:
+    logo: /img/logo.png
+    left:
+      - href: index.qmd
+        text: Introduction
+      - href: resources/Slides/Introduction/slides.qmd
+        text: Use GenomeDK
+      - href: resources/Slides/gwf/slides.qmd
+        text: Workflows with gwf
+    right: 
+      - icon: github
+        href: https://github.com/hds-sandbox
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/company/genomedk/
+        aria-label: LinkedIn
+      
+
+format:
+  html:
+    theme: 
+      light: [materia, css/materialight.scss]
+      dark: darkly
+    toc: true
+    include-in-header:
+      - file: "resources/bioschema.html"
