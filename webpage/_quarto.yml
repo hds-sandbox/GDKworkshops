@@ -8,8 +8,8 @@ website:
   navbar:
     logo: /img/logo.png
     left:
-      - href: index.qmd
-        text: Introduction
+#      - href: index.qmd
+#        text: Introduction
       - href: resources/Slides/Introduction/slides.qmd
         text: Use GenomeDK
       - href: resources/Slides/Advanced/slides.qmd
