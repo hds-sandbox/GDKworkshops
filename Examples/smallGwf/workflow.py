@@ -56,7 +56,7 @@ def combine(infiles, outfile):
 parts=10 # split input file in 10 parts
 
 # 1. Split specific file
-T1 = gwf.target_from_template("split", split(infile="bioinformatic_tutorial_files/Arabidopsis_sample1.fq", parts=parts))
+T1 = gwf.target_from_template("split", split(infile="data.fq", parts=parts))
 
 # 2. Analyze each chunk
 seqkit_output_files = []

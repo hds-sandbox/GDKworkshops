@@ -6,7 +6,7 @@ from gwf.executors import Singularity
 #You can also give a path to the environment
 
 conda_env = Conda("seqkitEnv")
-sing_cont = Singularity("./seqkit:2.10.0--h9ee0642_0")
+sing_cont = Singularity("./seqkit:2.10.0")
 
 ## Create a workflow object
 # this will contain settings which are global across all blocks
@@ -58,7 +58,7 @@ def combine(infiles, outfile):
 parts=10 # split input file in 10 parts
 
 # 1. Split specific file
-T1 = gwf.target_from_template("split", split(infile="bioinformatic_tutorial_files/Arabidopsis_sample1.fq", parts=parts))
+T1 = gwf.target_from_template("split", split(infile="data.fq", parts=parts))
 
 # 2. Analyze each chunk
 seqkit_output_files = []

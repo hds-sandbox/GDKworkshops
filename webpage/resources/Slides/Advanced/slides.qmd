@@ -3,7 +3,7 @@ title: "Advanced GenomeDK"
 subtitle: "More-than-basic things to do and tips for GDK, tinyurl.com/advGDK"
 author: 
     - "Samuele Soraggi"
-    - "Manuel Vazquez"
+    - "Manuel Peral-Vázquez"
     - "Dan Søndergaard"
 institute:
     - Health Data Science sandbox, BiRC, AU
@@ -32,7 +32,7 @@ smaller: true
 
 - Some advanced things require a bit of practice/frustration, but I hope to reduce it
 
-- Most important message before starting any workshop: [RTFM - Read The Freaking Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/). Though
+- Most important message before starting any workshop: [RTFM - Read The Field Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/). Though
   - Some manuals are really useless, but the ones for UNIX tools are pretty good
   - Unusual options might be buried somewhere or badly explained
 
@@ -748,33 +748,13 @@ A few other options which can be used in singularity. When you need those really
 
 - `--contain`: Isolates the container from the host system by limiting access to the host's filesystem.
 
-- `--no-home`: Prevents the container from automatically binding the user's home directory. Useful when you want to avoid exposing your home directory to the container.
+- `--no-home`: Prevents the container from automatically binding the user's home directory. Avoids exposing your home directory to the container.
 
-- `--cleanenv`: Clears all environment variables except those explicitly set for the container. This ensures a clean environment for the container to run.
+- `--cleanenv`: Clears all environment variables except those explicitly set for the container.
 
-- `--nv`: Enables NVIDIA GPU support by binding the necessary libraries and drivers into the container. Useful for running GPU-accelerated applications. Equivalent for AMD GPUs is `--rocm` (not the case on GDK).
+- `--nv`: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is `--rocm` (not the case on GDK).
 
-- `--pwd`: Sets the working directory inside the container. Useful for ensuring the container starts in a specific directory.
-
-- `--app`: Runs a specific application defined in the container's metadata. Useful for containers with multiple applications.
-
-
-
-
-
-
-
-
-
-:::{.callout-warning .hidden}
-This way of using Rstudio is quite complex and has some difficulties in adding packages. Though it is able to run packages in your current conda/mamba/pixi environment, which you can keep up to date with new packages.
-
-The suggested procedure is to use the virtual desktop on your browser, install `conda-forge::rstudio-desktop` in your environment together with the R packages you need, then run the command `rstudio` in an interactive job (maybe in a `tmux` session). That needs no tunnelling and works always out of the box.
-
-See the [Introductory workshop slides](https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.html#/software-management) section where we have an exercise to run Rstudio on the virtual desktop. 
-:::
-
----
+- `--pwd`: Sets the working directory inside the container. 
 
 # Your first pipeline
 
@@ -820,17 +800,19 @@ Code with input and output graph
 
 ## Exercise I: workflow with conda containers
 
+Prepare everything for the exercise: create a **new folder**, get **data and workflow file**, and make a new `tmux` sessione (remember detaching!).
+
+```{.bash}
  mkdir -p advancedGDK/pipeline
  cd advancedGDK/pipeline
-
- make a tmux sessions
+ 
+ wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq
+ wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py
 
  tmux new -s pipeline
+```
 
- wget https://zenodo.org/api/files/436d1854-d638-4fdb-8d6b-7c566ed13af8/bioinformatic_tutorial_files.tar.gz -O data.tar.gz
- tar -xvf data.tar.gz
- rm data.tar.gz
- gunzip bioinformatic_tutorial_files/*.gz
+ ---
 
 conda config --add channels gwforg
 conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization
