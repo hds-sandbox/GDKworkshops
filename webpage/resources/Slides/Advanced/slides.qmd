@@ -784,11 +784,11 @@ A classical bioinformatics pipeline has splits and merge steps. We will work wit
 ```{mermaid}
 flowchart LR
   A0{data.fq} --> A["Split(data.fq)"]
-  A --> B["table(part001.fq)"]
+  A --> B["table(part000.fq)"]
   A --> C["table(part002.fq)"]
   A --> D["table(part....fq)"]
-  A --> E["table(part010.fq)"]
-  B --> F["merge(table_[001-010].tsv)"]
+  A --> E["table(part009.fq)"]
+  B --> F["merge(table_[000-009].tsv)"]
   C --> F
   D --> F
   E --> F
@@ -1127,7 +1127,30 @@ Because `combine` depends on all `table_` targets, it will submit all those targ
 
 ## Exercise III: Your own target!{.scrollable}
 
-Ok, now we want to extend the workflow and do quality control on the `part_###.fq` files. You need to:
+Ok, now we want to extend the workflow and do quality control on the `part_###.fq` files. 
+
+```{mermaid}
+flowchart LR
+  A0{data.fq} --> A["Split(data.fq)"]
+  A --> B["table(part000.fq)"]
+  A --> C["table(part002.fq)"]
+  A --> D["table(part....fq)"]
+  A --> E["table(part009.fq)"]
+  B --> F["merge(table_[000-009].tsv)"]
+  C --> F
+  D --> F
+  E --> F
+  F --> G{table.tsv}
+  B --> H["qc(part[000-009].fq)"]
+  C --> H
+  D --> H
+  E --> H
+  H --> I{"multiqc_report.html"}
+```
+
+---
+
+You need to:
 
   - create a new environment called `qcEnv` where you install the two packages `fastqc multiqc`.
   - add a new executor called `qc_env` based on `Conda("qcEnv")`.
