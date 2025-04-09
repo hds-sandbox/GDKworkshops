@@ -12,6 +12,8 @@ website:
         text: Introduction
       - href: resources/Slides/Introduction/slides.qmd
         text: Use GenomeDK
+      - href: resources/Slides/Advanced/slides.qmd
+        text: Advanced GenomeDK
       - href: resources/Slides/gwf/slides.qmd
         text: Workflows with gwf
     right: 
