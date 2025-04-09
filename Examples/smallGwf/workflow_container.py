@@ -29,7 +29,7 @@ def split(infile, parts):
     return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec, executor=conda_env)
 
 
-def analyze(infile):
+def table(infile):
     inputs  = [infile]
     outputs = [f"{infile}.fx2tab.tsv"]
     options = {"cores": 1, "memory": "1g", "walltime": "02:00:00"}
@@ -60,10 +60,10 @@ parts=10 # split input file in 10 parts
 # 1. Split specific file
 T1 = gwf.target_from_template("split", split(infile="data.fq", parts=parts))
 
-# 2. Analyze each chunk
+# 2. Tabulate each chunk
 seqkit_output_files = []
 for i, infile in enumerate(T1.outputs):
-   T2 = gwf.target_from_template(f"analyze_{i}", analyze(infile  = infile))
+   T2 = gwf.target_from_template(f"analyze_{i}", table(infile  = infile))
    seqkit_output_files.append(T2.outputs[0])
 
 # 3. Combine results from each chunk.

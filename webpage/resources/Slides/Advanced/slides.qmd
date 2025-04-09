@@ -772,7 +772,7 @@ A classical bioinformatics pipeline has splits and merge steps. We will work wit
 
 ```{mermaid}
 flowchart LR
-  A0{file.fq} --> A["Split(file.fq)"]
+  A0{data.fq} --> A["Split(data.fq)"]
   A --> B["table(part001.fq)"]
   A --> C["table(part002.fq)"]
   A --> D["table(part....fq)"]
@@ -784,19 +784,108 @@ flowchart LR
   F --> G{table.tsv}
 ```
 
-where split and tables with allele counts and statistics are done through `seqkit`.
+&nbsp;
+
+where `split` and `table` (generate allele counts and statistics in a table) are done through `seqkit`.
 
 ---
 
-Workflow object
+## Software: gwf
+
+There are many populare softwares for workflows (`Snakemake`, `Nextflow`), which requires learning their workflow language. We use instead `gwf`:
+
+- Developed at AU (Dan at GenomeDK) and used also at MOMA, AUH, ...
+  - Easy to find support
+- In python, no need for new language
+  - You can use all python functions to build your workflow!
+- Easy to structure a workflow and check resource usage
+  - Reusable templates
+  - Very pedagogical
+- Conda, Pixi, Container usage out-of-the-box
+
+&nbsp;
+
+Once you understand workflows with `gwf`, it is a matter of learning how to use other workflow languages, if you wish.
 
 ---
 
-Templates
+### Workflow objects in gwf
 
-Code with input and output graph
+The whole workflow is contained in a `Workflow` object. This is initiated usually like this:
+
+&nbsp;
+
+
+```{.python}
+#import libraries
+from gwf import *
+
+#initiate a workflow object with account for resources
+gwf = Workflow(
+    defaults={"account": "PROJECT_NAME"}
+)
+```
+
+&nbsp;
+
+Now you have an empty workflow, which will use resources from the project you define as `account`.
 
 ---
+
+### Templates in gwf
+
+Now you can populate your `Workflow` object with `templates`, which are simple python functions. You can create executors for your templates (environments, containers)! 
+
+The **template is a blueprint for a specific block of the workflow**. 
+
+For example, the 10 parallel table blocks can be described by one reusable template:
+
+```{.python}
+#create a software executor from conda environment `seqkitEnv`
+from gwf.executors import Conda
+conda_env = Conda("seqkitEnv")
+
+def table(infile): #Name of the template
+
+  inputs  = [infile] #input file(s)
+  outputs = [f"{infile}.fx2tab.tsv"] #name of the output(s)
+  options = {"cores": 1, "memory": "1g", "walltime": "02:00:00"} #resources to use
+
+  #the bash commands to run when using the template
+  spec = f"""
+  seqkit fx2tab -n -l -C A -C C -C G -C T -C N -g -G -s {infile} > {outputs[0]}
+  """
+
+  #here you provide all specifications defined in the template. 
+  #This is usually always as below, 
+  #apart from the executor, which you decide yourself
+  return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec, executor=conda_env)
+```
+
+---
+
+### Apply the template
+
+The `split` and `table` templates are then applied to the relevant files:
+
+```{.python}
+parts=10 #how many parts to split into
+
+# Apply the split template to data.fq to split in 10 parts. Call this step of the workflow "split"
+# T1 collects info of the workflow step (e.g. output names)
+T1 = gwf.target_from_template("split", split(infile="data.fq", parts=parts))
+
+# Tabulate each part of the splitting and save the name of the tables in
+# seqkit_output_files. We apply the template table to each input file of the
+# for loop. The step of the workflow is called table_1, table_2, ..., table_10
+seqkit_output_files = []
+for i, infile in enumerate(T1.outputs):
+   T2 = gwf.target_from_template(f"table_{i}", table(infile  = infile))
+   seqkit_output_files.append(T2.outputs[0])
+```
+
+We try out exactly those template in the following exercise.
+
 
 ## Exercise I: workflow with conda containers
 
@@ -805,28 +894,66 @@ Prepare everything for the exercise: create a **new folder**, get **data and wor
 ```{.bash}
  mkdir -p advancedGDK/pipeline
  cd advancedGDK/pipeline
- 
+
  wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq
  wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py
 
  tmux new -s pipeline
 ```
 
- ---
+---
 
+Create a conda environment for `seqkit` and one for the `gwf` workflow software. Download the `seqkit` container as well.
+
+&nbsp;
+
+:::{.callout-tip}
+If packages cannot be found, you need to add these default channels as well 
+
+```{.bash}
+conda config --add channels bioconda
+#conda config --add channels conda-forge
+```
+:::
+
+&nbsp;
+
+```{.bash}
 conda config --add channels gwforg
 conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization
 #package for resource usage/check
 conda install -y -n pipelineExample -c micknudsen gwf-utilization
 #env for seqkit
 conda create -y -n seqkitExample seqkit
-#If not finding all packages
-#conda config --add channels bioconda
-#conda config --add channels conda-forge
-
+#Container
 singularity pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0
+```
 
+---
+
+Now look at the `status` of your workflow. You should recognize all the steps (*targets*). Those are marked `shouldrun`, because the outputs and/or inputs are not existent. Remember to activate the environment.
+
+&nbsp;
+
+:::{.callout-tip}
+You do not need `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`
+:::
+
+&nbsp;
+
+```{.bash}
+conda activate pipelineExample
 gwf -f workflow.py status
+```
+
+---
+
+
+
+
+
+
+
 
 gwf -f workflow.py info
 
