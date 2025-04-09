@@ -10,9 +10,9 @@
   <meta name="generator" content="quarto-1.6.43">
 
   <meta name="author" content="Samuele Soraggi">
-  <meta name="author" content="Manuel Vazquez">
+  <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-04-08">
+  <meta name="dcterms.date" content="2025-04-09">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -223,7 +223,7 @@ Samuele Soraggi
     </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Manuel Vazquez 
+Manuel Peral-Vázquez 
 </div>
         <p class="quarto-title-affiliation">
             Molecular Biology and Genetics, AU
@@ -239,7 +239,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-04-08</p>
+  <p class="date">2025-04-09</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -249,7 +249,7 @@ Dan Søndergaard
 <li><p>90% of slides are you doing stuff - <strong>open your terminals and slides</strong></p></li>
 <li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a></p></li>
 <li><p>Some advanced things require a bit of practice/frustration, but I hope to reduce it</p></li>
-<li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Freaking Manual!</a>. Though</p>
+<li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Field Manual!</a>. Though</p>
 <ul>
 <li>Some manuals are really useless, but the ones for UNIX tools are pretty good</li>
 <li>Unusual options might be buried somewhere or badly explained</li>
@@ -909,32 +909,11 @@ Ctrl + b + ""</code></pre>
 <li><p><code>--fakeroot</code>: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.</p></li>
 <li><p><code>--writable</code>: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. <code>--writable-tmpfs</code> to avoid changes to be persistent in a non-writable container.</p></li>
 <li><p><code>--contain</code>: Isolates the container from the host system by limiting access to the host’s filesystem.</p></li>
-<li><p><code>--no-home</code>: Prevents the container from automatically binding the user’s home directory. Useful when you want to avoid exposing your home directory to the container.</p></li>
-<li><p><code>--cleanenv</code>: Clears all environment variables except those explicitly set for the container. This ensures a clean environment for the container to run.</p></li>
-<li><p><code>--nv</code>: Enables NVIDIA GPU support by binding the necessary libraries and drivers into the container. Useful for running GPU-accelerated applications. Equivalent for AMD GPUs is <code>--rocm</code> (not the case on GDK).</p></li>
-<li><p><code>--pwd</code>: Sets the working directory inside the container. Useful for ensuring the container starts in a specific directory.</p></li>
-<li><p><code>--app</code>: Runs a specific application defined in the container’s metadata. Useful for containers with multiple applications.</p></li>
+<li><p><code>--no-home</code>: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.</p></li>
+<li><p><code>--cleanenv</code>: Clears all environment variables except those explicitly set for the container.</p></li>
+<li><p><code>--nv</code>: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is <code>--rocm</code> (not the case on GDK).</p></li>
+<li><p><code>--pwd</code>: Sets the working directory inside the container.</p></li>
 </ul>
-<div class="hidden">
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>This way of using Rstudio is quite complex and has some difficulties in adding packages. Though it is able to run packages in your current conda/mamba/pixi environment, which you can keep up to date with new packages.</p>
-<p>The suggested procedure is to use the virtual desktop on your browser, install <code>conda-forge::rstudio-desktop</code> in your environment together with the R packages you need, then run the command <code>rstudio</code> in an interactive job (maybe in a <code>tmux</code> session). That needs no tunnelling and works always out of the box.</p>
-<p>See the <a href="https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.html#/software-management">Introductory workshop slides</a> section where we have an exercise to run Rstudio on the virtual desktop.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="your-first-pipeline" class="title-slide slide level1 center">
@@ -956,7 +935,7 @@ Ctrl + b + ""</code></pre>
 <p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-  A0{file.fq} --&gt; A["Split(file.fq)"]
+  A0{data.fq} --&gt; A["Split(data.fq)"]
   A --&gt; B["table(part001.fq)"]
   A --&gt; C["table(part002.fq)"]
   A --&gt; D["table(part....fq)"]
@@ -972,26 +951,154 @@ Ctrl + b + ""</code></pre>
 </div>
 </div>
 </div>
-<p>where split and tables with allele counts and statistics are done through <code>seqkit</code>.</p>
+<p>&nbsp;</p>
+<p>where <code>split</code> and <code>table</code> (generate allele counts and statistics in a table) are done through <code>seqkit</code>.</p>
+</section>
+<section id="software-gwf" class="slide level2">
+<h2>Software: gwf</h2>
+<p>There are many populare softwares for workflows (<code>Snakemake</code>, <code>Nextflow</code>), which requires learning their workflow language. We use instead <code>gwf</code>:</p>
+<ul>
+<li>Developed at AU (Dan at GenomeDK) and used also at MOMA, AUH, …
+<ul>
+<li>Easy to find support</li>
+</ul></li>
+<li>In python, no need for new language
+<ul>
+<li>You can use all python functions to build your workflow!</li>
+</ul></li>
+<li>Easy to structure a workflow and check resource usage
+<ul>
+<li>Reusable templates</li>
+<li>Very pedagogical</li>
+</ul></li>
+<li>Conda, Pixi, Container usage out-of-the-box</li>
+</ul>
+<p>&nbsp;</p>
+<p>Once you understand workflows with <code>gwf</code>, it is a matter of learning how to use other workflow languages, if you wish.</p>
 </section>
 <section class="slide level2">
 
-<p>Workflow object</p>
+<h3 id="workflow-objects-in-gwf">Workflow objects in gwf</h3>
+<p>The whole workflow is contained in a <code>Workflow</code> object. This is initiated usually like this:</p>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#import libraries</span></span>
+<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initiate a workflow object with account for resources</span></span>
+<span id="cb35-5"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow(</span>
+<span id="cb35-6"><a aria-hidden="true" tabindex="-1"></a>    defaults<span class="op">=</span>{<span class="st">"account"</span>: <span class="st">"PROJECT_NAME"</span>}</span>
+<span id="cb35-7"><a aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Now you have an empty workflow, which will use resources from the project you define as <code>account</code>.</p>
 </section>
 <section class="slide level2">
 
-<p>Templates</p>
-<p>Code with input and output graph</p>
+<h3 id="templates-in-gwf">Templates in gwf</h3>
+<p>Now you can populate your <code>Workflow</code> object with <code>templates</code>, which are simple python functions. You can create executors for your templates (environments, containers)!</p>
+<p>The <strong>template is a blueprint for a specific block of the workflow</strong>.</p>
+<p>For example, the 10 parallel table blocks can be described by one reusable template:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#create a software executor from conda environment `seqkitEnv`</span></span>
+<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf.executors <span class="im">import</span> Conda</span>
+<span id="cb36-3"><a aria-hidden="true" tabindex="-1"></a>conda_env <span class="op">=</span> Conda(<span class="st">"seqkitEnv"</span>)</span>
+<span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> table(infile): <span class="co">#Name of the template</span></span>
+<span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a>  inputs  <span class="op">=</span> [infile] <span class="co">#input file(s)</span></span>
+<span id="cb36-8"><a aria-hidden="true" tabindex="-1"></a>  outputs <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>infile<span class="sc">}</span><span class="ss">.fx2tab.tsv"</span>] <span class="co">#name of the output(s)</span></span>
+<span id="cb36-9"><a aria-hidden="true" tabindex="-1"></a>  options <span class="op">=</span> {<span class="st">"cores"</span>: <span class="dv">1</span>, <span class="st">"memory"</span>: <span class="st">"1g"</span>, <span class="st">"walltime"</span>: <span class="st">"02:00:00"</span>} <span class="co">#resources to use</span></span>
+<span id="cb36-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="co">#the bash commands to run when using the template</span></span>
+<span id="cb36-12"><a aria-hidden="true" tabindex="-1"></a>  spec <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb36-13"><a aria-hidden="true" tabindex="-1"></a><span class="ss">  seqkit fx2tab -n -l -C A -C C -C G -C T -C N -g -G -s </span><span class="sc">{</span>infile<span class="sc">}</span><span class="ss"> &gt; </span><span class="sc">{</span>outputs[<span class="dv">0</span>]<span class="sc">}</span></span>
+<span id="cb36-14"><a aria-hidden="true" tabindex="-1"></a><span class="ss">  """</span></span>
+<span id="cb36-15"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="co">#here you provide all specifications defined in the template. </span></span>
+<span id="cb36-17"><a aria-hidden="true" tabindex="-1"></a>  <span class="co">#This is usually always as below, </span></span>
+<span id="cb36-18"><a aria-hidden="true" tabindex="-1"></a>  <span class="co">#apart from the executor, which you decide yourself</span></span>
+<span id="cb36-19"><a aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec, executor<span class="op">=</span>conda_env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="apply-the-template">Apply the template</h3>
+<p>The <code>split</code> and <code>table</code> templates are then applied to the relevant files:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a>parts<span class="op">=</span><span class="dv">10</span> <span class="co">#how many parts to split into</span></span>
+<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the split template to data.fq to split in 10 parts. Call this step of the workflow "split"</span></span>
+<span id="cb37-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># T1 collects info of the workflow step (e.g. output names)</span></span>
+<span id="cb37-5"><a aria-hidden="true" tabindex="-1"></a>T1 <span class="op">=</span> gwf.target_from_template(<span class="st">"split"</span>, split(infile<span class="op">=</span><span class="st">"data.fq"</span>, parts<span class="op">=</span>parts))</span>
+<span id="cb37-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate each part of the splitting and save the name of the tables in</span></span>
+<span id="cb37-8"><a aria-hidden="true" tabindex="-1"></a><span class="co"># seqkit_output_files. We apply the template table to each input file of the</span></span>
+<span id="cb37-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># for loop. The step of the workflow is called table_1, table_2, ..., table_10</span></span>
+<span id="cb37-10"><a aria-hidden="true" tabindex="-1"></a>seqkit_output_files <span class="op">=</span> []</span>
+<span id="cb37-11"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, infile <span class="kw">in</span> <span class="bu">enumerate</span>(T1.outputs):</span>
+<span id="cb37-12"><a aria-hidden="true" tabindex="-1"></a>   T2 <span class="op">=</span> gwf.target_from_template(<span class="ss">f"table_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, table(infile  <span class="op">=</span> infile))</span>
+<span id="cb37-13"><a aria-hidden="true" tabindex="-1"></a>   seqkit_output_files.append(T2.outputs[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We try out exactly those template in the following exercise.</p>
 </section>
 <section id="exercise-i-workflow-with-conda-containers" class="slide level2">
 <h2>Exercise I: workflow with conda containers</h2>
-<p>mkdir -p advancedGDK/pipeline cd advancedGDK/pipeline</p>
-<p>make a tmux sessions</p>
-<p>tmux new -s pipeline</p>
-<p>wget https://zenodo.org/api/files/436d1854-d638-4fdb-8d6b-7c566ed13af8/bioinformatic_tutorial_files.tar.gz -O data.tar.gz tar -xvf data.tar.gz rm data.tar.gz gunzip bioinformatic_tutorial_files/*.gz</p>
-<p>conda config –add channels gwforg conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization #package for resource usage/check conda install -y -n pipelineExample -c micknudsen gwf-utilization #env for seqkit conda create -y -n seqkitExample seqkit #If not finding all packages #conda config –add channels bioconda #conda config –add channels conda-forge</p>
-<p>singularity pull seqkit_2.10.0 https://depot.galaxyproject.org/singularity/seqkit:2.10.0–h9ee0642_0</p>
-<p>gwf -f workflow.py status</p>
+<p>Prepare everything for the exercise: create a <strong>new folder</strong>, get <strong>data and workflow file</strong>, and make a new <code>tmux</code> sessione (remember detaching!).</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/pipeline</span>
+<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> advancedGDK/pipeline</span>
+<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq <span class="at">-O</span> data.fq</span>
+<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py <span class="at">-O</span> workflow.py</span>
+<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">tmux</span> new <span class="at">-s</span> pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Create a conda environment for <code>seqkit</code> and one for the <code>gwf</code> workflow software. Download the <code>seqkit</code> container as well.</p>
+<p>&nbsp;</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>If packages cannot be found, you need to add these default channels as well</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#conda config --add channels conda-forge</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels gwforg</span>
+<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineExample gwf=2.1.1 micknudsen gwf-utilization</span>
+<span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#package for resource usage/check</span></span>
+<span id="cb40-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-y</span> <span class="at">-n</span> pipelineExample <span class="at">-c</span> micknudsen gwf-utilization</span>
+<span id="cb40-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#env for seqkit</span></span>
+<span id="cb40-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> seqkitExample seqkit</span>
+<span id="cb40-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Container</span></span>
+<span id="cb40-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Now look at the <code>status</code> of your workflow. You should recognize all the steps (<em>targets</em>). Those are marked <code>shouldrun</code>, because the outputs and/or inputs are not existent. Remember to activate the environment.</p>
+<p>&nbsp;</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>You do not need <code>-f workflow.py</code> if your workflow file has the name <code>workflow.py</code>, which is the default for <code>gwf</code></p>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineExample</span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
 <p>gwf -f workflow.py info</p>
 <p>gwf -f workflow.py run split</p>
 <p>watch gwf status split</p>

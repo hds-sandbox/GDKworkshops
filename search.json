@@ -480,14 +480,21 @@
     "href": "resources/Slides/Advanced/slides.html#split-and-merge",
     "title": "Advanced GenomeDK",
     "section": "Split and merge",
-    "text": "Split and merge\nA classical bioinformatics pipeline has splits and merge steps. We will work with this:\n\n\n\n\n\nflowchart LR\n  A0{file.fq} --&gt; A[\"Split(file.fq)\"]\n  A --&gt; B[\"table(part001.fq)\"]\n  A --&gt; C[\"table(part002.fq)\"]\n  A --&gt; D[\"table(part....fq)\"]\n  A --&gt; E[\"table(part010.fq)\"]\n  B --&gt; F[\"merge(table_[001-010].tsv)\"]\n  C --&gt; F\n  D --&gt; F\n  E --&gt; F\n  F --&gt; G{table.tsv}\n\n\n\n\n\n\nwhere split and tables with allele counts and statistics are done through seqkit."
+    "text": "Split and merge\nA classical bioinformatics pipeline has splits and merge steps. We will work with this:\n\n\n\n\n\nflowchart LR\n  A0{data.fq} --&gt; A[\"Split(data.fq)\"]\n  A --&gt; B[\"table(part001.fq)\"]\n  A --&gt; C[\"table(part002.fq)\"]\n  A --&gt; D[\"table(part....fq)\"]\n  A --&gt; E[\"table(part010.fq)\"]\n  B --&gt; F[\"merge(table_[001-010].tsv)\"]\n  C --&gt; F\n  D --&gt; F\n  E --&gt; F\n  F --&gt; G{table.tsv}\n\n\n\n\n\n\n \nwhere split and table (generate allele counts and statistics in a table) are done through seqkit."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#software-gwf",
+    "href": "resources/Slides/Advanced/slides.html#software-gwf",
+    "title": "Advanced GenomeDK",
+    "section": "Software: gwf",
+    "text": "Software: gwf\nThere are many populare softwares for workflows (Snakemake, Nextflow), which requires learning their workflow language. We use instead gwf:\n\nDeveloped at AU (Dan at GenomeDK) and used also at MOMA, AUH, …\n\nEasy to find support\n\nIn python, no need for new language\n\nYou can use all python functions to build your workflow!\n\nEasy to structure a workflow and check resource usage\n\nReusable templates\nVery pedagogical\n\nConda, Pixi, Container usage out-of-the-box\n\n \nOnce you understand workflows with gwf, it is a matter of learning how to use other workflow languages, if you wish."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-i-workflow-with-conda-containers",
     "href": "resources/Slides/Advanced/slides.html#exercise-i-workflow-with-conda-containers",
     "title": "Advanced GenomeDK",
     "section": "Exercise I: workflow with conda containers",
-    "text": "Exercise I: workflow with conda containers\nmkdir -p advancedGDK/pipeline cd advancedGDK/pipeline\nmake a tmux sessions\ntmux new -s pipeline\nwget https://zenodo.org/api/files/436d1854-d638-4fdb-8d6b-7c566ed13af8/bioinformatic_tutorial_files.tar.gz -O data.tar.gz tar -xvf data.tar.gz rm data.tar.gz gunzip bioinformatic_tutorial_files/*.gz\nconda config –add channels gwforg conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization #package for resource usage/check conda install -y -n pipelineExample -c micknudsen gwf-utilization #env for seqkit conda create -y -n seqkitExample seqkit #If not finding all packages #conda config –add channels bioconda #conda config –add channels conda-forge\nsingularity pull seqkit_2.10.0 https://depot.galaxyproject.org/singularity/seqkit:2.10.0–h9ee0642_0\ngwf -f workflow.py status\ngwf -f workflow.py info\ngwf -f workflow.py run split\nwatch gwf status split\ngwf logs split\ngwf logs -e split"
+    "text": "Exercise I: workflow with conda containers\nPrepare everything for the exercise: create a new folder, get data and workflow file, and make a new tmux sessione (remember detaching!).\n mkdir -p advancedGDK/pipeline\n cd advancedGDK/pipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py\n\n tmux new -s pipeline"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#resize-the-workflow-resources-and-add-a-step",
