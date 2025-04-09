@@ -935,42 +935,209 @@ Now look at the `status` of your workflow. You should recognize all the steps (*
 
 &nbsp;
 
-:::{.callout-tip}
-You do not need `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`
-:::
-
-&nbsp;
-
 ```{.bash}
 conda activate pipelineExample
 gwf -f workflow.py status
 ```
 
+![](img/status0.png){fig-align="center" width=500px}
+
+&nbsp;
+
+:::{.callout-tip}
+You do not need `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`
+:::
+
 ---
 
+Now, you might also want to look at how a specific *target* looks like when the workflow is built
 
+```{.bash}
+gwf info split
+```
 
+You will be able to see the actual inputs, outputs, and other targets it depends from/depending on it:
 
+```{.python .scrollable  code-line-numbers="4-7|10|13-22|24|25|27-36"}
+{
+    "split": {
+        "options": {
+            "account": "HDSSandbox",
+            "cores": 1,
+            "memory": "4g",
+            "walltime": "05:00:00"
+        },
+        "inputs": [
+            "data.fq"
+        ],
+        "outputs": [
+            "gwf_splitted/part001.fq",
+            "gwf_splitted/part002.fq",
+            "gwf_splitted/part003.fq",
+            "gwf_splitted/part004.fq",
+            "gwf_splitted/part005.fq",
+            "gwf_splitted/part006.fq",
+            "gwf_splitted/part007.fq",
+            "gwf_splitted/part008.fq",
+            "gwf_splitted/part009.fq",
+            "gwf_splitted/part010.fq"
+        ],
+        "spec": "\n    seqkit split2 -O gwf_splitted --by-part 10 --by-part-prefix part data.fq\n    ",
+        "dependencies": [],
+        "dependents": [
+            "table_6",
+            "table_8",
+            "table_3",
+            "table_0",
+            "table_1",
+            "table_4",
+            "table_5",
+            "table_9",
+            "table_7",
+            "table_2"
+        ]
+    }
+}
+```
 
+---
 
+:::{.callout-tip}
+Do you want to see the whole workflow in a text editor? Use the `less` viewer, or output into a text file:
 
+```{.bash}
+gwf info | less
+```
 
-gwf -f workflow.py info
+and
 
-gwf -f workflow.py run split
+```{.bash}
+gwf info > workflow_explicit.txt
+```
+:::
 
-watch gwf status split
+&nbsp;
 
-gwf logs split
+Now, you can run specific targets. Let's specify some names to test out our workflow. 
 
+```{.bash}
+gwf run split table_0
+```
+
+:::{.callout-tip}
+You can run the entire workflow with `gwf run` when you are sure of your targets working correctly with the right resources.
+:::
+
+---
+
+Check the status: the two turgets will be `submitted`, then `split` has to run first, and its *dependency* `table_0` will run when the file `part_001.fq` is generated! We use `watch` in front of the command to update its view every two seconds.
+
+```{.bash}
+watch gwf status
+```
+
+&nbsp;
+
+At some point, you will see the `running` status (for a few seconds) and `completed` status.
+
+![](img/gwfCompleted.png){fig-align="center" width=500px}
+
+---
+
+:::{.callout-tip}
+When the status of a target is `failed`, or you want to verify messages on the command line, you can visualize the standard output and standard error messages of your target with the commands below (example with the `split` target):
+
+&nbsp;
+
+```{.bash}
+gwf logs split 
 gwf logs -e split
+```
+:::
 
 ---
 
-## Resize the workflow resources and add a step
+### Resize the workflow resources and add a step
+
+How many resources did `split` and `table_0` use? Run the utilization command:
+
+```{.bash}
+gwf utilization
+```
+
+![](img/gwfUtilization.png){fig-align="center" width=1000px}
+
+&nbsp;
+
+The table shows we underutilized the resources. Now open `workflow.py` and change your resource usage for the `split` and `table_` steps. Then, run the target:
+
+```{.bash}
+gwf run table_1
+```
+&nbsp;
+
+Check again resource usage when the status is `completed`. Did it get better?
 
 ---
 
+## Exercise II: singularity in workflows{.scrollable}
+
+Now, you will change the executor for the template `table`. Your task is to:
+
+  - open the `workflow.py` file
+  - below importing the `Conda` module (line 2), add a new line with 
+
+    `from gwf.executors import Singularity`
+  - Now, define a new executor. Below the line where you define `conda_env = Conda("seqkitEnv")`, use a similar syntax for `Singularity`, where you provide the    container file as argument.
+  - At the end of the `align` template, use the new executor instead of `conda_env`.
+
+&nbsp;
+
+Did you do it right? If yes, then you should be able to run the `combine` target:
+
+```{.bash}
+gwf run combine
+```
+
+and see its status become `completed` after some time, and all output files should be created in your folder! If not, something is wrong. Ask for help, or [look at the solution file, if you prefere](https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_container.py).
+
+:::{.callout-note}
+Because `combine` depends on all `table_` targets, it will submit all those targets as well, which need to run first.
+:::
+
+---
+
+## Exercise III: Your own target!{.scrollable}
+
+Ok, now we want to extend the workflow and do quality control on the `part_###.fq` files. You need to:
+
+  - create a new environment called `qcEnv` where you install the two packages `fastqc multiqc`.
+  - add a new executor called `qc_env` based on `Conda("qcEnv")`.
+  - create a new target which starts with `def qc(data_folder)`
+    - this will need all ten `gwf_splitted/part_###.fq` file as input files (you can copy the output file list of the `split` template, where you use a variable `{data_folder}` instead of the explicit folder name!)
+    - as output you want a file called `[reports/multiqc_report.html]` (default name for the generated report)
+    - as bash commands you need:
+      ```{.bash}
+      mkdir -p reports
+      fastqc -o reports gdk_splitted/*.fq
+      multiqc -o reports reports/
+      ```
+    - remember to set the correct executor at the end of the template
+    - now you need to create one single target from the template, call it `qc`. You only need to give as input the name of the folder with the `fq` files
+
+
+:::{.callout-tip}
+- Before running any targets, always use `gwf info qc` to check dependencies.
+- Copy previous similar templates and modify them where needed, instead of writing each template from scratch
+:::
+
+When you are sure you are done, then use `gwf run qc`. Its `status` should be `comlpeted` if it runs successfully.
+
+Ask for help, or [look at the solution file, if you prefere](https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_qc.py).
+
+---
+
+:::{.callout-note}
 Good practices:
 
  - do not make tiny and numerous jobs, try to put together things with similar resource usage
@@ -978,21 +1145,20 @@ Good practices:
     - determine resource usage (`gwf utilization`)
     - then adjust all elements accordingly
  - verify often your code is correct
-    - `gwf info | less -S` to check dependencies (in a following slide later)
+    - `gwf info | less -S` to check dependencies
     - remember you are using python, check some of your code directly in it!
   - when done, you are reproducible if you share with your datasets:ave
     - container pull commands
     - conda environment(s) package list 
     - workflow files
-
-
+:::
 
 
 # Closing the workshop
 
 Please fill out this form :)
 
-<iframe src="AAAhttps://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
 
 ---
 

@@ -63,7 +63,7 @@ T1 = gwf.target_from_template("split", split(infile="data.fq", parts=parts))
 # 2. Tabulate each chunk
 seqkit_output_files = []
 for i, infile in enumerate(T1.outputs):
-   T2 = gwf.target_from_template(f"analyze_{i}", table(infile  = infile))
+   T2 = gwf.target_from_template(f"table_{i}", table(infile  = infile))
    seqkit_output_files.append(T2.outputs[0])
 
 # 3. Combine results from each chunk.
