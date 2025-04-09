@@ -416,8 +416,8 @@
     "objectID": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
     "href": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
     "title": "Advanced GenomeDK",
-    "section": "multiple terminals with tmux",
-    "text": "multiple terminals with tmux\nWith tmux you can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
+    "section": "Multiple terminals with tmux",
+    "text": "Multiple terminals with tmux\ntmux is a server application managing multiple terminal sessions. It can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
@@ -431,7 +431,7 @@
     "href": "resources/Slides/Advanced/slides.html#web-applications",
     "title": "Advanced GenomeDK",
     "section": "Web applications",
-    "text": "Web applications\nWhy do we use web applications for graphical interfaces?\n\nall the graphics heavy-lifting is done by the browser\nbefore, the X11 forwarding was the way to do graphics from remote\nproblem: X11 sends the whole graphics over the network, which is slow\n\nWe have written a bit about that on one of our ABC tutorials"
+    "text": "Web applications\n  Why do we use web applications for graphical interfaces?\n  - all the graphics heavy-lifting is done by the browser - before, the X11 forwarding was the way to do graphics from remote - problem: X11 sends the whole graphics over the network, which is slow\n  We have written a bit about that on one of our ABC tutorials"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
@@ -497,11 +497,18 @@
     "text": "Exercise I: workflow with conda containers\nPrepare everything for the exercise: create a new folder, get data and workflow file, and make a new tmux sessione (remember detaching!).\n mkdir -p advancedGDK/pipeline\n cd advancedGDK/pipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py\n\n tmux new -s pipeline"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#resize-the-workflow-resources-and-add-a-step",
-    "href": "resources/Slides/Advanced/slides.html#resize-the-workflow-resources-and-add-a-step",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-singularity-in-workflows",
+    "href": "resources/Slides/Advanced/slides.html#exercise-ii-singularity-in-workflows",
     "title": "Advanced GenomeDK",
-    "section": "Resize the workflow resources and add a step",
-    "text": "Resize the workflow resources and add a step"
+    "section": "Exercise II: singularity in workflows",
+    "text": "Exercise II: singularity in workflows\nNow, you will change the executor for the template table. Your task is to:\n\nopen the workflow.py file\nbelow importing the Conda module (line 2), add a new line with\nfrom gwf.executors import Singularity\nNow, define a new executor. Below the line where you define conda_env = Conda(\"seqkitEnv\"), use a similar syntax for Singularity, where you provide the container file as argument.\nAt the end of the align template, use the new executor instead of conda_env.\n\n \nDid you do it right? If yes, then you should be able to run the combine target:\ngwf run combine\nand see its status become completed after some time, and all output files should be created in your folder! If not, something is wrong. Ask for help, or look at the solution file, if you prefere.\n\n\n\n\n\n\nNote\n\n\nBecause combine depends on all table_ targets, it will submit all those targets as well, which need to run first.\n\n\n\nExercise break"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-iii-your-own-target",
+    "href": "resources/Slides/Advanced/slides.html#exercise-iii-your-own-target",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise III: Your own target!",
+    "text": "Exercise III: Your own target!\nOk, now we want to extend the workflow and do quality control on the part_###.fq files. You need to:\n\ncreate a new environment called qcEnv where you install the two packages fastqc multiqc.\nadd a new executor called qc_env based on Conda(\"qcEnv\").\ncreate a new target which starts with def qc(data_folder)\n\nthis will need all ten gwf_splitted/part_###.fq file as input files (you can copy the output file list of the split template, where you use a variable {data_folder} instead of the explicit folder name!)\nas output you want a file called [reports/multiqc_report.html] (default name for the generated report)\nas bash commands you need:\nmkdir -p reports\nfastqc -o reports gdk_splitted/*.fq\nmultiqc -o reports reports/\nremember to set the correct executor at the end of the template\nnow you need to create one single target from the template, call it qc. You only need to give as input the name of the folder with the fq files\n\n\n\n\n\n\n\n\nTip\n\n\n\nBefore running any targets, always use gwf info qc to check dependencies.\nCopy previous similar templates and modify them where needed, instead of writing each template from scratch\n\n\n\n\nWhen you are sure you are done, then use gwf run qc. Its status should be comlpeted if it runs successfully.\nAsk for help, or look at the solution file, if you prefere.\nExercise break"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.backup.html#when-you-need-to-ask-for-help",

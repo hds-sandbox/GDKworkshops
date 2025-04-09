@@ -535,8 +535,8 @@ Dan Søndergaard
 <p>All <code>rsync</code> options will work as usual in these cases. You need to type your password if you do not make use of <code>ssh</code> keys.</p>
 </section>
 <section id="multiple-terminals-with-tmux" class="slide level2">
-<h2>multiple terminals with <code>tmux</code></h2>
-<p>With <code>tmux</code> you can</p>
+<h2>Multiple terminals with <code>tmux</code></h2>
+<p><code>tmux</code> is a server application managing multiple terminal sessions. It can</p>
 <ul>
 <li>start a server with multiple <strong>sessions</strong></li>
 <li>each session containing one or more <strong>windows with multiple terminals (panes)</strong></li>
@@ -560,9 +560,11 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>Now, you are in session <code>example1</code> and have one window, which you are using now. You can split the window in multiple terminals. Try both those combinations of buttons:</p>
-<pre><code>Ctrl + b + %
+<p>&nbsp;</p>
+<pre><code>Ctrl + b    %
 
-Ctrl + b + ""</code></pre>
+Ctrl + b    ""</code></pre>
+<p>&nbsp;</p>
 <p>Or keep right-clicked with the mouse to choose the split.</p>
 <p>Do split the window horizontally and vertically, running 3 terminals. You can select any of them with the mouse (left-click).</p>
 <p>Try to select a window and resize it: while keeping <code>Ctrl + b</code> pressed, use the arrows to change the size</p>
@@ -570,10 +572,12 @@ Ctrl + b + ""</code></pre>
 <section class="slide level2">
 
 <p>Now, you have your three panes running in a window.</p>
-<p>Create a new window with <code>Ctrl + b + c</code>. Or keep right-clicked on the window bar and create a new window.</p>
-<p>You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!</p>
+<p>Create a new window with <code>Ctrl + b   c</code>. Or keep right-clicked on the window bar and create a new window.</p>
+<p>&nbsp;</p>
+<p>You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!)</p>
 <p>In the new window, let’s look at which tmux sessions and windows are open. Run</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
 <p>The output will tell you that session <code>example1</code> is in use (attached) and has 2 windows. Something like this:</p>
 <pre><code>example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)</code></pre>
 </section>
@@ -617,6 +621,7 @@ Ctrl + b + ""</code></pre>
 <span id="cb20-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> new-window <span class="at">-t</span> downloads <span class="at">-n</span> <span class="st">"</span><span class="va">$filename</span><span class="st">"</span> <span class="st">"wget -c </span><span class="va">$url</span><span class="st"> -O downloaded/</span><span class="va">$filename</span><span class="st"> &amp;&amp; tmux kill-window"</span></span>
 <span id="cb20-14"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="at">-F</span> <span class="st">"#{window_name}"</span>   </span>
 <span id="cb20-15"><a aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> downloads.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Exercise finished</strong></p>
 </section></section>
 <section>
 <section id="web-applications-ports-tunneling" class="title-slide slide level1 center">
@@ -625,13 +630,9 @@ Ctrl + b + ""</code></pre>
 </section>
 <section id="web-applications" class="slide level2">
 <h2>Web applications</h2>
-<p>Why do we use web applications for graphical interfaces?</p>
-<ul>
-<li>all the graphics heavy-lifting is done by the browser</li>
-<li>before, the X11 forwarding was the way to do graphics from remote</li>
-<li>problem: X11 sends the whole graphics over the network, which is slow</li>
-</ul>
-<p><a href="https://abc.au.dk/documentation/2024-11-28-ABC9.html">We have written a bit about that on one of our ABC tutorials</a></p>
+<p>&nbsp; Why do we use web applications for graphical interfaces?</p>
+<p>&nbsp; - all the graphics heavy-lifting is done by the browser - before, the X11 forwarding was the way to do graphics from remote - problem: X11 sends the whole graphics over the network, which is slow</p>
+<p>&nbsp; <a href="https://abc.au.dk/documentation/2024-11-28-ABC9.html">We have written a bit about that on one of our ABC tutorials</a></p>
 </section>
 <section class="slide level2">
 
@@ -792,7 +793,7 @@ Ctrl + b + ""</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Deployement of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, …) depends on the host system and is not fully reproducible.</p>
+<p>Deployment of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, …) depends on the host system and is not fully reproducible.</p>
 </section>
 <section id="container-vs-virtual-env-vs-vm" class="slide level2">
 <h2>Container vs virtual env vs VM</h2>
@@ -878,16 +879,18 @@ Ctrl + b + ""</code></pre>
 <section class="slide level2">
 
 <h3 id="certificates-and-binding">Certificates and binding</h3>
+<div title="Why the previous slide didn't work!!!">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Tip</strong></p>
+<p><strong>Why the previous slide didn’t work!!!</strong></p>
 </div>
 <div class="callout-content">
 <p><strong>HTTPS</strong> is a protocol for secure communication over the internet. When you access an URL starting with <code>https</code>, your system checks the server’s SSL/TLS certificate to ensure it is issued by a trusted Certificate Authority (CA). Why? To prevent <a href="https://www.ibm.com/think/topics/man-in-the-middle">man-in-the-middle (MITM)</a> attacks, where an attacker eavesdrops in the data transfer.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1062,7 +1065,7 @@ Ctrl + b + ""</code></pre>
 <div class="callout-content">
 <p>If packages cannot be found, you need to add these default channels as well</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#conda config --add channels conda-forge</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1080,6 +1083,10 @@ Ctrl + b + ""</code></pre>
 
 <p>Now look at the <code>status</code> of your workflow. You should recognize all the steps (<em>targets</em>). Those are marked <code>shouldrun</code>, because the outputs and/or inputs are not existent. Remember to activate the environment.</p>
 <p>&nbsp;</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineExample</span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/status0.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p>&nbsp;</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1093,23 +1100,206 @@ Ctrl + b + ""</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
+<p>Now, you might also want to look at how a specific <em>target</em> looks like when the workflow is built</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will be able to see the actual inputs, outputs, and other targets it depends from/depending on it:</p>
+<div class="sourceCode" id="cb43" data-code-line-numbers="4-7|10|13-22|24|25|27-36"><pre class="sourceCode numberSource python scrollable number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a></a>{</span>
+<span id="cb43-2"><a></a>    <span class="st">"split"</span>: {</span>
+<span id="cb43-3"><a></a>        <span class="st">"options"</span>: {</span>
+<span id="cb43-4"><a></a>            <span class="st">"account"</span>: <span class="st">"HDSSandbox"</span>,</span>
+<span id="cb43-5"><a></a>            <span class="st">"cores"</span>: <span class="dv">1</span>,</span>
+<span id="cb43-6"><a></a>            <span class="st">"memory"</span>: <span class="st">"4g"</span>,</span>
+<span id="cb43-7"><a></a>            <span class="st">"walltime"</span>: <span class="st">"05:00:00"</span></span>
+<span id="cb43-8"><a></a>        },</span>
+<span id="cb43-9"><a></a>        <span class="st">"inputs"</span>: [</span>
+<span id="cb43-10"><a></a>            <span class="st">"data.fq"</span></span>
+<span id="cb43-11"><a></a>        ],</span>
+<span id="cb43-12"><a></a>        <span class="st">"outputs"</span>: [</span>
+<span id="cb43-13"><a></a>            <span class="st">"gwf_splitted/part001.fq"</span>,</span>
+<span id="cb43-14"><a></a>            <span class="st">"gwf_splitted/part002.fq"</span>,</span>
+<span id="cb43-15"><a></a>            <span class="st">"gwf_splitted/part003.fq"</span>,</span>
+<span id="cb43-16"><a></a>            <span class="st">"gwf_splitted/part004.fq"</span>,</span>
+<span id="cb43-17"><a></a>            <span class="st">"gwf_splitted/part005.fq"</span>,</span>
+<span id="cb43-18"><a></a>            <span class="st">"gwf_splitted/part006.fq"</span>,</span>
+<span id="cb43-19"><a></a>            <span class="st">"gwf_splitted/part007.fq"</span>,</span>
+<span id="cb43-20"><a></a>            <span class="st">"gwf_splitted/part008.fq"</span>,</span>
+<span id="cb43-21"><a></a>            <span class="st">"gwf_splitted/part009.fq"</span>,</span>
+<span id="cb43-22"><a></a>            <span class="st">"gwf_splitted/part010.fq"</span></span>
+<span id="cb43-23"><a></a>        ],</span>
+<span id="cb43-24"><a></a>        <span class="st">"spec"</span>: <span class="st">"</span><span class="ch">\n</span><span class="st">    seqkit split2 -O gwf_splitted --by-part 10 --by-part-prefix part data.fq</span><span class="ch">\n</span><span class="st">    "</span>,</span>
+<span id="cb43-25"><a></a>        <span class="st">"dependencies"</span>: [],</span>
+<span id="cb43-26"><a></a>        <span class="st">"dependents"</span>: [</span>
+<span id="cb43-27"><a></a>            <span class="st">"table_6"</span>,</span>
+<span id="cb43-28"><a></a>            <span class="st">"table_8"</span>,</span>
+<span id="cb43-29"><a></a>            <span class="st">"table_3"</span>,</span>
+<span id="cb43-30"><a></a>            <span class="st">"table_0"</span>,</span>
+<span id="cb43-31"><a></a>            <span class="st">"table_1"</span>,</span>
+<span id="cb43-32"><a></a>            <span class="st">"table_4"</span>,</span>
+<span id="cb43-33"><a></a>            <span class="st">"table_5"</span>,</span>
+<span id="cb43-34"><a></a>            <span class="st">"table_9"</span>,</span>
+<span id="cb43-35"><a></a>            <span class="st">"table_7"</span>,</span>
+<span id="cb43-36"><a></a>            <span class="st">"table_2"</span></span>
+<span id="cb43-37"><a></a>        ]</span>
+<span id="cb43-38"><a></a>    }</span>
+<span id="cb43-39"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Do you want to see the whole workflow in a text editor? Use the <code>less</code> viewer, or output into a text file:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="kw">|</span> <span class="fu">less</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="op">&gt;</span> workflow_explicit.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineExample</span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, you can run specific targets. Let’s specify some names to test out our workflow.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run split table_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>You can run the entire workflow with <code>gwf run</code> when you are sure of your targets working correctly with the right resources.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<p>gwf -f workflow.py info</p>
-<p>gwf -f workflow.py run split</p>
-<p>watch gwf status split</p>
-<p>gwf logs split</p>
-<p>gwf logs -e split</p>
-</section>
-<section id="resize-the-workflow-resources-and-add-a-step" class="slide level2">
-<h2>Resize the workflow resources and add a step</h2>
+<p>Check the status: the two turgets will be <code>submitted</code>, then <code>split</code> has to run first, and its <em>dependency</em> <code>table_0</code> will run when the file <code>part_001.fq</code> is generated! We use <code>watch</code> in front of the command to update its view every two seconds.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>At some point, you will see the <code>running</code> status (for a few seconds) and <code>completed</code> status.</p>
+
+<img data-src="img/gwfCompleted.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p><strong>Exercise break</strong></p>
 </section>
 <section class="slide level2">
 
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>When the status of a target is <code>failed</code>, or you want to verify messages on the command line, you can visualize the standard output and standard error messages of your target with the commands below (example with the <code>split</code> target):</p>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs split </span>
+<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs <span class="at">-e</span> split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="resize-the-workflow-resources-and-add-a-step">Resize the workflow resources and add a step</h3>
+<p>How many resources did <code>split</code> and <code>table_0</code> use? Run the utilization command:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> utilization</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/gwfUtilization.png" class="quarto-figure quarto-figure-center r-stretch" width="1000"><p>&nbsp;</p>
+<p>The table shows we underutilized the resources. Now open <code>workflow.py</code> and change your resource usage for the <code>split</code> and <code>table_</code> steps. Then, run the target:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run table_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Check again resource usage when the status is <code>completed</code>. Did it get better?</p>
+<p><strong>Exercise break</strong></p>
+</section>
+<section id="exercise-ii-singularity-in-workflows" class="slide level2 scrollable">
+<h2>Exercise II: singularity in workflows</h2>
+<p>Now, you will change the executor for the template <code>table</code>. Your task is to:</p>
+<ul>
+<li><p>open the <code>workflow.py</code> file</p></li>
+<li><p>below importing the <code>Conda</code> module (line 2), add a new line with</p>
+<p><code>from gwf.executors import Singularity</code></p></li>
+<li><p>Now, define a new executor. Below the line where you define <code>conda_env = Conda("seqkitEnv")</code>, use a similar syntax for <code>Singularity</code>, where you provide the container file as argument.</p></li>
+<li><p>At the end of the <code>align</code> template, use the new executor instead of <code>conda_env</code>.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>Did you do it right? If yes, then you should be able to run the <code>combine</code> target:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run combine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and see its status become <code>completed</code> after some time, and all output files should be created in your folder! If not, something is wrong. Ask for help, or <a href="https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_container.py">look at the solution file, if you prefere</a>.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Because <code>combine</code> depends on all <code>table_</code> targets, it will submit all those targets as well, which need to run first.</p>
+</div>
+</div>
+</div>
+<p><strong>Exercise break</strong></p>
+</section>
+<section id="exercise-iii-your-own-target" class="slide level2 scrollable">
+<h2>Exercise III: Your own target!</h2>
+<p>Ok, now we want to extend the workflow and do quality control on the <code>part_###.fq</code> files. You need to:</p>
+<ul>
+<li>create a new environment called <code>qcEnv</code> where you install the two packages <code>fastqc multiqc</code>.</li>
+<li>add a new executor called <code>qc_env</code> based on <code>Conda("qcEnv")</code>.</li>
+<li>create a new target which starts with <code>def qc(data_folder)</code>
+<ul>
+<li><p>this will need all ten <code>gwf_splitted/part_###.fq</code> file as input files (you can copy the output file list of the <code>split</code> template, where you use a variable <code>{data_folder}</code> instead of the explicit folder name!)</p></li>
+<li><p>as output you want a file called <code>[reports/multiqc_report.html]</code> (default name for the generated report)</p></li>
+<li><p>as bash commands you need:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> reports</span>
+<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-o</span> reports gdk_splitted/<span class="pp">*</span>.fq</span>
+<span id="cb52-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">-o</span> reports reports/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>remember to set the correct executor at the end of the template</p></li>
+<li><p>now you need to create one single target from the template, call it <code>qc</code>. You only need to give as input the name of the folder with the <code>fq</code> files</p></li>
+</ul></li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Before running any targets, always use <code>gwf info qc</code> to check dependencies.</li>
+<li>Copy previous similar templates and modify them where needed, instead of writing each template from scratch</li>
+</ul>
+</div>
+</div>
+</div>
+<p>When you are sure you are done, then use <code>gwf run qc</code>. Its <code>status</code> should be <code>comlpeted</code> if it runs successfully.</p>
+<p>Ask for help, or <a href="https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_qc.py">look at the solution file, if you prefere</a>.</p>
+<p><strong>Exercise break</strong></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
 <p>Good practices:</p>
 <ul>
 <li>do not make tiny and numerous jobs, try to put together things with similar resource usage</li>
@@ -1120,7 +1310,7 @@ Ctrl + b + ""</code></pre>
 </ul></li>
 <li>verify often your code is correct
 <ul>
-<li><code>gwf info | less -S</code> to check dependencies (in a following slide later)</li>
+<li><code>gwf info | less -S</code> to check dependencies</li>
 <li>remember you are using python, check some of your code directly in it!</li>
 </ul></li>
 <li>when done, you are reproducible if you share with your datasets:ave
@@ -1130,12 +1320,15 @@ Ctrl + b + ""</code></pre>
 <li>workflow files</li>
 </ul></li>
 </ul>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="closing-the-workshop" class="title-slide slide level1 center">
 <h1>Closing the workshop</h1>
 <p>Please fill out this form :)</p>
-<iframe src="AAAhttps://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">
 Indlæser…
 </iframe>
 </section>
