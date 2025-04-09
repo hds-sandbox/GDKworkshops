@@ -319,9 +319,9 @@ rsync -aP --exclude="*.log" PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/bac
 All `rsync` options will work as usual in these cases. You need to type your password if you do not make use of `ssh` keys.
 
 
-## multiple terminals with `tmux`
+## Multiple terminals with `tmux`
 
-With `tmux` you can 
+`tmux` is a server application managing multiple terminal sessions. It can 
 
 - start a server with multiple **sessions**
 - each session containing one or more **windows with multiple terminals (panes)**
@@ -358,11 +358,15 @@ The command will set you into the session automatically. The window looks someth
 
 Now, you are in session `example1` and have one window, which you are using now. You can split the window in multiple terminals. Try both those combinations of buttons:
 
-```
-Ctrl + b + %
+&nbsp;
 
-Ctrl + b + ""
 ```
+Ctrl + b    %
+
+Ctrl + b    ""
+```
+
+&nbsp;
 
 Or keep right-clicked with the mouse to choose the split.
 
@@ -374,15 +378,19 @@ Try to select a window and resize it: while keeping `Ctrl + b` pressed, use the 
 
 Now, you have your three panes running in a window.
 
-Create a new window with `Ctrl + b + c`. Or keep right-clicked on the window bar and create a new window.
+Create a new window with `Ctrl + b   c`. Or keep right-clicked on the window bar and create a new window.
 
-You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!
+&nbsp;
+
+You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!)
 
 In the new window, let's look at which tmux sessions and windows are open. Run
 
 ```{.bash}
 tmux ls
 ```
+
+&nbsp;
 
 The output will tell you that session `example1` is in use (attached) and has 2 windows. Something like this:
 
@@ -433,16 +441,21 @@ while read -r url; do
 done < downloads.txt
 ```
 
+**Exercise finished**
+
 # Web applications, ports, tunneling
 
 ## Web applications
 
+&nbsp;
 Why do we use web applications for graphical interfaces?
 
+&nbsp;
 - all the graphics heavy-lifting is done by the browser
 - before, the X11 forwarding was the way to do graphics from remote
 - problem: X11 sends the whole graphics over the network, which is slow
 
+&nbsp;
 [We have written a bit about that on one of our ABC tutorials](https://abc.au.dk/documentation/2024-11-28-ABC9.html)
 
 ---
@@ -454,8 +467,6 @@ A web application on GenomeDK:
 - The server sends and receives data over the network via the port.
 
 &nbsp;
-
-
 
 The local user:
 
@@ -600,7 +611,7 @@ Usually the host node option changes name between `ip`, `host`, `address`, or `h
 
 &nbsp;
 
-Deployement of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, ...) depends on the host system and is not fully reproducible.
+Deployment of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, ...) depends on the host system and is not fully reproducible.
 
 ## Container vs virtual env vs VM
 
@@ -719,7 +730,7 @@ The option `--env` can be used to define environment variables, either needed by
 
 ### Certificates and binding
 
-:::{.callout-tip}
+:::{.callout-tip title="Why the previous slide didn't work!!!"}
 **HTTPS** is a protocol for secure communication over the internet. When you access an URL starting with `https`, your system checks the server's SSL/TLS certificate to ensure it is issued by a trusted Certificate Authority (CA).
 Why? To prevent [man-in-the-middle (MITM)](https://www.ibm.com/think/topics/man-in-the-middle) attacks, where an attacker eavesdrops in the data transfer.
 :::
@@ -912,7 +923,7 @@ If packages cannot be found, you need to add these default channels as well
 
 ```{.bash}
 conda config --add channels bioconda
-#conda config --add channels conda-forge
+conda config --add channels conda-forge
 ```
 :::
 
@@ -1042,6 +1053,9 @@ At some point, you will see the `running` status (for a few seconds) and `comple
 
 ![](img/gwfCompleted.png){fig-align="center" width=500px}
 
+
+**Exercise break**
+
 ---
 
 :::{.callout-tip}
@@ -1078,6 +1092,8 @@ gwf run table_1
 
 Check again resource usage when the status is `completed`. Did it get better?
 
+**Exercise break**
+
 ---
 
 ## Exercise II: singularity in workflows{.scrollable}
@@ -1104,6 +1120,8 @@ and see its status become `completed` after some time, and all output files shou
 :::{.callout-note}
 Because `combine` depends on all `table_` targets, it will submit all those targets as well, which need to run first.
 :::
+
+**Exercise break**
 
 ---
 
@@ -1134,6 +1152,8 @@ Ok, now we want to extend the workflow and do quality control on the `part_###.f
 When you are sure you are done, then use `gwf run qc`. Its `status` should be `comlpeted` if it runs successfully.
 
 Ask for help, or [look at the solution file, if you prefere](https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_qc.py).
+
+**Exercise break**
 
 ---
 
