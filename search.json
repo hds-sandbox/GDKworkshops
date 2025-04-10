@@ -203,11 +203,11 @@
     "text": "Samuele Soraggi\n\n\n\n\n\nData Scientist, Aarhus University\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "index.html#slides-portability",
+    "href": "index.html#slides-portability",
     "title": "GenomeDK workshops",
-    "section": "",
-    "text": "Here you can find the material of the workshops for GenomeDK (slides, scripts, etc).\nRemember always that GenomeDK has a documentation page.\n\nAcknowledgements\n\nThe GenomeDK’s team\nHealth data science sandbox for setting up and running the workshops\nThe Danish Data Science Academy for extra financing of this event with teaching assistance from the Accessible Bioinformatics Cafe"
+    "section": "Slides portability",
+    "text": "Slides portability\nThe slides are intended for GenomeDK, which is based on Linux Ubuntu. Very similarly, you can use these slides as a reference for other computing clusters based on Linux distributions. Please note that some tools might not be installed in your specific system, so some examples will eventually not work - you can always ask your local system administrator for a specific tool installation.\n\n\n\n\n\n\nWarning\n\n\n\nRemember always that GenomeDK has a documentation page."
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#workflow",
