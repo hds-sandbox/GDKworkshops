@@ -207,7 +207,7 @@
     "href": "index.html",
     "title": "GenomeDK workshops",
     "section": "",
-    "text": "_____                                ______ _   __\n |  __ \\                               |  _  \\ | / /\n | |  \\/ ___ _ __   ___  _ __ ___   ___| | | | |/ /\n | | __ / _ \\ '_ \\ / _ \\| '_ ` _ \\ / _ \\ | | |    \\\n | |_\\ \\  __/ | | | (_) | | | | | |  __/ |/ /| |\\  \\\n  \\____/\\___|_| |_|\\___/|_| |_| |_|\\___|___/ \\_| \\_/\nHere you can find the material of the workshops for GenomeDK (slides, scripts, etc).\nRemember always that GenomeDK has a documentation page.\n\nAcknowledgements\n\nDan and Anders at GenomeDK\nHealth data science sandbox for setting up and running the workshops"
+    "text": "Here you can find the material of the workshops for GenomeDK (slides, scripts, etc).\nRemember always that GenomeDK has a documentation page.\n\nAcknowledgements\n\nThe GenomeDK’s team\nHealth data science sandbox for setting up and running the workshops\nThe Danish Data Science Academy for extra financing of this event with teaching assistance from the Accessible Bioinformatics Cafe"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#workflow",
