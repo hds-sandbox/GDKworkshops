@@ -354,7 +354,7 @@
     "href": "resources/Slides/Advanced/slides.html#program",
     "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:20:\n\nWorkshop Introduction\nSome everyday things for easy life\n\nand your mental sanity\n\n\n10:20-11:00:\n\nrsync copy and backups, terminals on tmux\ncake break\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-14:00:\n\nYour first pipeline with gwf, conda and containers\n\nresource management\nadding targets to a pipeline"
+    "text": "Program\n\n10:00-10:20:\n\nWorkshop Introduction\nSome everyday things for easy life\n\nand your mental sanity\n\n\n10:20-11:00:\n\nrsync copy and backups, terminals on tmux\ncake\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-14:00:\n\nYour first pipeline with gwf, conda and containers\n\nmore cake\nresource management\nadding targets to a pipeline"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
