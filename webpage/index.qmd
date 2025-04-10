@@ -10,13 +10,19 @@ date: 2024-03-01
 
 ![](img/gdkLogo.jpg){width=80% fig-align="center"}
 
-Here you can find the material of the workshops for GenomeDK (slides, scripts, etc).
+# Training material
 
+Here you can find the material of the workshops for GenomeDK (slides, scripts, etc). Each workshop relies heavily on the practical side of using GenomeDK. You can try yourself to follow the various slide sets and replicate the exercises.
+
+## Slides portability
+
+The slides are intended for GenomeDK, which is based on Linux Ubuntu. Very similarly, you can use these slides as a reference for other computing clusters based on Linux distributions. Please note that some tools might not be installed in your specific system, so some examples will eventually not work - you can always ask your local system administrator for a specific tool installation.
+
+:::{.callout-warning}
 Remember always that GenomeDK [has a documentation page](https://genome.au.dk/docs/overview/).
+:::
 
- 
-
-### Acknowledgements
+# Acknowledgements
 
 - The [GenomeDK's team](https://genome.au.dk/help/)
 - [Health data science sandbox](https://hds-sandbox.github.io) for setting up and running the workshops
