@@ -696,7 +696,6 @@ You can either `run` the container, which opens a CLI into it, where you can exe
 ::: {.column width="50%" }
 ```{.bash}
 singularity run 'minimap2:2.28--h577a1d6_4'
-minimap2
 ```
 :::
 ::: {.column width="50%" }
