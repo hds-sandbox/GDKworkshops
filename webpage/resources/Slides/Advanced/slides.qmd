@@ -60,7 +60,7 @@ smaller: true
 
 - **10:20-11:00**: 
   - `rsync` copy and backups, terminals on `tmux`
-  - cake break
+  - cake
 
 - **11:10-12:00**: 
   - Web applications, ports and tunnels
@@ -68,6 +68,7 @@ smaller: true
 
 - **12:45-14:00**: 
   - Your first pipeline with `gwf`, `conda` and `containers`
+    - more cake
     - resource management
     - adding targets to a pipeline
 
