@@ -1185,7 +1185,7 @@ Good practices:
 
  - do not make tiny and numerous jobs, try to put together things with similar resource usage
  - start testing one of many parallel elements of a worlflow
-    - determine resource usage (`gwf utilization`)
+    - determine resource usage (`gwf utilization` - needs a plugin, see exercises after)
     - then adjust all elements accordingly
  - verify often your code is correct
     - `gwf info | less -S` to check dependencies

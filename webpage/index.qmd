@@ -8,14 +8,7 @@ date: 2024-03-01
 #https://emojidb.org/quarto-emojis for emojis copypaste
 ---
 
-```
-  _____                                ______ _   __
- |  __ \                               |  _  \ | / /
- | |  \/ ___ _ __   ___  _ __ ___   ___| | | | |/ /
- | | __ / _ \ '_ \ / _ \| '_ ` _ \ / _ \ | | |    \
- | |_\ \  __/ | | | (_) | | | | | |  __/ |/ /| |\  \
-  \____/\___|_| |_|\___/|_| |_| |_|\___|___/ \_| \_/
-```
+![](img/gdkLogo.jpg){width=80% fig-align="center"}
 
 Here you can find the material of the workshops for GenomeDK (slides, scripts, etc).
 
@@ -25,5 +18,6 @@ Remember always that GenomeDK [has a documentation page](https://genome.au.dk/do
 
 ### Acknowledgements
 
-- Dan and Anders at GenomeDK
-- Health data science sandbox for setting up and running the workshops
+- The [GenomeDK's team](https://genome.au.dk/help/)
+- [Health data science sandbox](https://hds-sandbox.github.io) for setting up and running the workshops
+- The [Danish Data Science Academy](https://ddsa.dk/) for extra financing of this event with teaching assistance from the [Accessible Bioinformatics Cafe](https://abc.au.dk)
