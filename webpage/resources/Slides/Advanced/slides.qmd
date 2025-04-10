@@ -66,11 +66,10 @@ smaller: true
   - Web applications, ports and tunnels
   - Containers (Docker, singularity)
 
-- **12:45-13:15**: 
-  - Batch jobs
-
-- **13:15-14:00**: 
-  - Your first pipeline with `gwf`, `pixi` and `containers`
+- **12:45-14:00**: 
+  - Your first pipeline with `gwf`, `conda` and `containers`
+    - resource management
+    - adding targets to a pipeline
 
 ## Get the slides
 
