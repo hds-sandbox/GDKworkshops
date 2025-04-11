@@ -354,7 +354,7 @@
     "href": "resources/Slides/Advanced/slides.html#program",
     "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:20:\n\nWorkshop Introduction\nSome everyday things for easy life\n\nand your mental sanity\n\n\n10:20-11:00:\n\nrsync copy and backups, terminals on tmux\ncake\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-14:00:\n\nYour first pipeline with gwf, conda and containers\n\nmore cake\nresource management\nadding targets to a pipeline"
+    "text": "Program\n\n10:00-10:30:\n\nWorkshop Introduction\nSome everyday things for easier life\n\nand your mental sanity\n\n\n10:30-11:00:\n\nrsync copy and backups\n[Optional] Managing multiple terminals on tmux\ncake\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-14:00:\n\nYour first pipeline with gwf, conda and containers\n\nmore cake\nresource management\nadding targets to a pipeline"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
@@ -413,18 +413,18 @@
     "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
-    "href": "resources/Slides/Advanced/slides.html#multiple-terminals-with-tmux",
+    "objectID": "resources/Slides/Advanced/slides.html#optional-manage-multiple-terminals-with-tmux",
+    "href": "resources/Slides/Advanced/slides.html#optional-manage-multiple-terminals-with-tmux",
     "title": "Advanced GenomeDK",
-    "section": "Multiple terminals with tmux",
-    "text": "Multiple terminals with tmux\ntmux is a server application managing multiple terminal sessions. It can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
+    "section": "[Optional] Manage multiple terminals with tmux",
+    "text": "[Optional] Manage multiple terminals with tmux\ntmux is a server application managing multiple terminal sessions. It can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
     "href": "resources/Slides/Advanced/slides.html#exercise-1",
     "title": "Advanced GenomeDK",
     "section": "Exercise",
-    "text": "Exercise\ntmux was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
+    "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#web-applications",
@@ -466,14 +466,14 @@
     "href": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
     "title": "Advanced GenomeDK",
     "section": "Exercise I: a simple bioinformatics container",
-    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment. First create and attach to a new tmux session called biocontainers.\n \nCreate one more session with its own windows for running containers (remember detaching) and make a folder called containers101 in the advancedGDK directory.\ntmux new -s containers\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open to see a detailed description. You should see a guide to recreate the software on conda/mamba/pixi or docker/singularity."
+    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment. First create and attach to a new tmux session called biocontainers.\n \nMake a folder called containers101 in the advancedGDK directory.\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open it to see a detailed description - if you have no good ideas look for the minimap2 aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-options-for-singularity",
     "href": "resources/Slides/Advanced/slides.html#exercise-ii-options-for-singularity",
     "title": "Advanced GenomeDK",
     "section": "Exercise II: options for singularity",
-    "text": "Exercise II: options for singularity\nSome containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:\nEnvironment variables\nThe option --env can be used to define environment variables, either needed by your software, or useful to write the code to be executed.\n singularity run --env REF_PATH=$(pwd) \\\n                 --env BAM_PREFIX=test01 \\\n                 https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 \\\n                 samtools view \\\n                 -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \\\n                 -O bam &gt; test01.bam\nUps, it does not work! Can you think of why? Hint: note that the address for the download of data begins with https."
+    "text": "Exercise II: options for singularity\nSome containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:\nEnvironment variables\nThe option --env can be used to define environment variables, either needed by your software, or useful to write the code to be executed.\n singularity pull samtools.sif https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1\n\n singularity run --env REF_PATH=$(pwd) \\\n                 --env BAM_PREFIX=test01 \\\n                 samtools.sif \\\n                 samtools view \\\n                 -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \\\n                 -O bam &gt; test01.bam\nUps, it does not work! Can you think of why? Hint: note that the address for the download of data begins with https."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#split-and-merge",
@@ -494,7 +494,7 @@
     "href": "resources/Slides/Advanced/slides.html#exercise-i-workflow-with-conda-containers",
     "title": "Advanced GenomeDK",
     "section": "Exercise I: workflow with conda containers",
-    "text": "Exercise I: workflow with conda containers\nPrepare everything for the exercise: create a new folder, get data and workflow file, and make a new tmux sessione (remember detaching!).\n mkdir -p advancedGDK/pipeline\n cd advancedGDK/pipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py\n\n tmux new -s pipeline"
+    "text": "Exercise I: workflow with conda containers\nPrepare everything for the exercise: create a new folder, get data and workflow file\n mkdir -p advancedGDK/pipeline\n cd advancedGDK/pipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-singularity-in-workflows",

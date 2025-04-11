@@ -6,13 +6,16 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.43">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-04-10">
+  <meta name="dcterms.date" content="2025-04-11">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -239,7 +242,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-04-10</p>
+  <p class="date">2025-04-11</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -270,20 +273,21 @@ Dan Søndergaard
 <p>support@genome.au.dk</p></li>
 </ul>
 </section>
-<section id="program" class="slide level2">
+<section id="program" class="slide level2 scrollable">
 <h2>Program</h2>
 <ul>
-<li><strong>10:00-10:20</strong>:
+<li><strong>10:00-10:30</strong>:
 <ul>
 <li>Workshop Introduction</li>
-<li>Some everyday things for easy life
+<li>Some everyday things for easier life
 <ul>
 <li>and your mental sanity</li>
 </ul></li>
 </ul></li>
-<li><strong>10:20-11:00</strong>:
+<li><strong>10:30-11:00</strong>:
 <ul>
-<li><code>rsync</code> copy and backups, terminals on <code>tmux</code></li>
+<li><code>rsync</code> copy and backups</li>
+<li>[Optional] Managing multiple terminals on <code>tmux</code></li>
 <li>cake</li>
 </ul></li>
 <li><strong>11:10-12:00</strong>:
@@ -533,10 +537,24 @@ Dan Søndergaard
 <p>The opposite can be done uploading data from your computer. For example:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>All <code>rsync</code> options will work as usual in these cases. You need to type your password if you do not make use of <code>ssh</code> keys.</p>
+<div title="Avoid a typical error">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Avoid a typical error</strong></p>
+</div>
+<div class="callout-content">
+<p>To transfer from GenomeDK to your computer, and viceversa, you need to use the commands above <strong>from your local computer</strong>, and NOT when you are logged into GenomeDK!</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="multiple-terminals-with-tmux" class="slide level2">
-<h2>Multiple terminals with <code>tmux</code></h2>
+<section id="optional-manage-multiple-terminals-with-tmux" class="slide level2">
+<h2>[Optional] Manage multiple terminals with <code>tmux</code></h2>
 <p><code>tmux</code> is a server application managing multiple terminal sessions. It can</p>
 <ul>
 <li>start a server with multiple <strong>sessions</strong></li>
@@ -548,8 +566,22 @@ Dan Søndergaard
 <img data-src="img/tmux-server.png" class="quarto-figure quarto-figure-center r-stretch" width="400"></section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
-<p><code>tmux</code> was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:</p>
+<p><code>tmux</code> is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (<strong>only once</strong>) to enable mouse usage:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"set -g mouse"</span> <span class="op">&gt;&gt;</span> ~/.tmux.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Using the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g.&nbsp;on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file <code>~/.tmux.conf</code></p>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
 <p>You can start a <code>tmux</code> session anywhere. It is easier to navigate sessions giving them a name. For example start a session called <code>example1</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> example1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -714,43 +746,26 @@ Ctrl + b    ""</code></pre>
 </section>
 <section class="slide level2">
 
-<p>On GenomeDK, create a new <code>tmux</code> session:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> jupyterlab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>and create a new <code>conda</code> environment:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> GDKjupyter conda-forge::jupyterlab conda-forge::numpy conda-forge::pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create a new <code>conda</code> environment:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> GDKjupyter jupyterlab numpy pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <p>Start a job with just a few resources. This will always keep running until the end since it is inside a tmux session!</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0  <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>Now activate your environment and run jupyterlab. You will need the node name and your user ID. Those can be given as variables to the web server using <code>$(hostname)</code> and $UID:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate GDKjupyter</span>
-<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="dt">\</span></span>
-<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">--no-browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) <strong>are given as variables</strong> to the web server simply using <code>$(hostname)</code> and $UID:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate GDKjupyter</span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<p>You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser. It will look like this, but in your case it might have an added token in the URL (mine is instead password protected):</p>
+<p>You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser, which always starts with <code>127.0.0.1</code>. It will look like this, but in your case it might have a longer URL with a random <em>token</em> (mine is instead password protected):</p>
 
-<img data-src="img/jupyterUrl.png" class="quarto-figure quarto-figure-center r-stretch" width="400"><p>&nbsp;</p>
-<p><strong>We still need a tunnel</strong> from the local host (your PC)! keep note of the port and node, and write in a new terminal <strong>(not logged into GenomeDK)</strong> a command like the one below (matching the example figure above):</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L6835:s21n34:6835</span> USERNAME@login.genome.au.dk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>In the command above I prefere to map the same ports locally and remotely, but you can use two different port.</p>
-<p>If you do not have passwordless login, you have to write the password.</p>
-</div>
-</div>
-</div>
-<p>Your tunnel will be opened. Now the web application can be accessed from your browser at the address given by the server process on GenomeDK (put your correct port number).</p>
+<img data-src="img/jupyterUrl.png" class="quarto-figure quarto-figure-center r-stretch" width="800"><p>&nbsp;</p>
+<p>Write down your node number and user id you got from jupyterlab.</p>
+<p><strong>We now need a tunnel</strong> from the local host (your PC)! Write in a new terminal <strong>(not logged into GenomeDK)</strong> a command like the following (matching the example figure above), substituting the correct values:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L6835:s21n34:6835</span> USERNAME@login.genome.au.dk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Your tunnel is now opened. The web application can be accessed <strong>from your browser</strong> at the address given by the server process on GenomeDK, which is <code>127.0.0.1/PORT_NUMBER</code> (put your correct port number).</p>
 <p><strong>Exercise finished</strong></p>
 </section>
 <section class="slide level2">
@@ -766,6 +781,8 @@ Ctrl + b    ""</code></pre>
 <div class="callout-content">
 <p>The same logic applies to all other web applications. They will have similar options to define the remote node and port.</p>
 <p>Usually the host node option changes name between <code>ip</code>, <code>host</code>, <code>address</code>, or <code>hostname</code>.</p>
+<p>&nbsp;</p>
+<p>Note also that you will always have to use the address <code>127.0.0.1/PORT_NUMBER</code> on your browser. You might as well save it as a favorite address in your browser’s bookmarks.</p>
 </div>
 </div>
 </div>
@@ -773,13 +790,14 @@ Ctrl + b    ""</code></pre>
 <section>
 <section id="containers" class="title-slide slide level1 center">
 <h1>Containers</h1>
+<div title="What is a container">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>What is a container</strong></p>
 </div>
 <div class="callout-content">
 <p><strong>Container = </strong> Standalone and portable software package including</p>
@@ -793,8 +811,9 @@ Ctrl + b    ""</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>&nbsp;</p>
-<p>Deployment of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, …) depends on the host system and is not fully reproducible.</p>
+<p>Deployment of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, …) depends instead on the host system and is not necessarily fully reproducible on two different computer hardwares.</p>
 </section>
 <section id="container-vs-virtual-env-vs-vm" class="slide level2">
 <h2>Container vs virtual env vs VM</h2>
@@ -837,30 +856,40 @@ Ctrl + b    ""</code></pre>
 <h2>Exercise I: a simple bioinformatics container</h2>
 <p>We use <em>biocontainers</em> to pull containers and recreate a little bulkRNA alignment. First <strong>create and attach to a new <code>tmux</code> session</strong> called <code>biocontainers</code>.</p>
 <p>&nbsp;</p>
-<p>Create one more session with its own windows for running containers (remember detaching) and make a folder called <code>containers101</code> in the <code>advancedGDK</code> directory.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> containers</span>
-<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/containers101</span>
-<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/containers101</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Make a folder called <code>containers101</code> in the <code>advancedGDK</code> directory.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/containers101</span>
+<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/containers101</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>Find a bash bioinformatics software you know on the <a href="https://biocontainers.pro/registry">Biocontainer Registry</a> and open to see a detailed description. You should see a guide to recreate the software on <code>conda/mamba/pixi</code> or <code>docker/singularity</code>.</p>
+<p>Find a bash bioinformatics software you know on the <a href="https://biocontainers.pro/registry">Biocontainer Registry</a> and open it to see a detailed description - if you have no good ideas look for the <code>minimap2</code> aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot.</p>
 </section>
 <section class="slide level2">
 
-
-<img data-src="img/minimap2Biocontainers.png" width="800" class="r-stretch quarto-figure-center"><p class="caption">Example: Biocontainers page for the <code>minimap2</code> splice-aware aligner.</p></section>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/minimap2Biocontainers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Example: Biocontainers page for the minimap2 splice-aware aligner. Click on the image to enlarge."><img data-src="img/minimap2Biocontainers.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="Example: Biocontainers page for the minimap2 splice-aware aligner. Click on the image to enlarge."></a></p>
+</figure>
+</div>
+<figcaption>Example: Biocontainers page for the <code>minimap2</code> splice-aware aligner. Click on the image to enlarge.</figcaption>
+</figure>
+</div>
+</section>
 <section class="slide level2">
 
 <p>The page will suggest to run immediately the container with <code>singularity</code>. I would suggest downloading it first (<code>pull</code> instead of <code>run</code>) and then running it.</p>
 <p>In the case of <code>minimap2</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>which creates a container file in your current directory.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull minimap2.sif https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which creates a container file in your current directory, and calls it <code>minimap2.sif</code> (better name than the default <code>minimap2:2.28--h577a1d6_4</code>).</p>
 <p>&nbsp;</p>
 <p>You can either <code>run</code> the container, which opens a CLI into it, where you can execute the program. A non-interactive way (useful for pipelines) is to write the command directly. For example:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will operate the command line inside the container. Here you can then run <code>minimap2</code>.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run minimap2.sif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="st">'minimap2:2.28--h577a1d6_4'</span> minimap2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will immediately run <code>minimap2</code> from the container - useful for a pipeline where you do not need any interaction with the command line.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run minimap2.sif minimap2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </section>
 <section id="exercise-ii-options-for-singularity" class="slide level2">
@@ -868,12 +897,14 @@ Ctrl + b    ""</code></pre>
 <p>Some containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:</p>
 <h3 id="environment-variables">Environment variables</h3>
 <p>The option <code>--env</code> can be used to define environment variables, either needed by your software, or useful to write the code to be executed.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">singularity</span> run <span class="at">--env</span> REF_PATH=<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">--env</span> BAM_PREFIX=test01 <span class="dt">\</span></span>
-<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>                 https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 <span class="dt">\</span></span>
-<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a>                 samtools view <span class="dt">\</span></span>
-<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
-<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-O</span> bam <span class="op">&gt;</span> test01.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">singularity</span> pull samtools.sif https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1</span>
+<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">singularity</span> run <span class="at">--env</span> REF_PATH=<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb32-4"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">--env</span> BAM_PREFIX=test01 <span class="dt">\</span></span>
+<span id="cb32-5"><a aria-hidden="true" tabindex="-1"></a>                 samtools.sif <span class="dt">\</span></span>
+<span id="cb32-6"><a aria-hidden="true" tabindex="-1"></a>                 samtools view <span class="dt">\</span></span>
+<span id="cb32-7"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
+<span id="cb32-8"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-O</span> bam <span class="op">&gt;</span> test01.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Ups, it does not work! Can you think of why?</strong> Hint: note that the address for the download of data begins with <code>https</code>.</p>
 </section>
 <section class="slide level2">
@@ -895,14 +926,14 @@ Ctrl + b    ""</code></pre>
 </div>
 </div>
 <p>The option <code>--bind</code> can be used to make your folders available in a specific path for the container. Here, we bind two folders containing the certificates for GDK. Those paths are quite standard across UNIX systems.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="at">--env</span> REF_PATH=<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--env</span> BAM_PREFIX=test01 <span class="dt">\</span></span>
-<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--bind</span> /etc/ssl/certs:/etc/ssl/certs <span class="dt">\</span></span>
-<span id="cb34-4"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--bind</span> /etc/pki/ca-trust:/etc/pki/ca-trust <span class="dt">\</span></span>
-<span id="cb34-5"><a aria-hidden="true" tabindex="-1"></a>                https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 <span class="dt">\</span></span>
-<span id="cb34-6"><a aria-hidden="true" tabindex="-1"></a>                samtools view <span class="dt">\</span></span>
-<span id="cb34-7"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
-<span id="cb34-8"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-O</span> bam <span class="op">&gt;</span> <span class="va">$BAM_PREFIX</span>.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run <span class="at">--env</span> REF_PATH=<span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--env</span> BAM_PREFIX=test01 <span class="dt">\</span></span>
+<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--bind</span> /etc/ssl/certs:/etc/ssl/certs <span class="dt">\</span></span>
+<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">--bind</span> /etc/pki/ca-trust:/etc/pki/ca-trust <span class="dt">\</span></span>
+<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a>                samtools.sif <span class="dt">\</span></span>
+<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a>                samtools view <span class="dt">\</span></span>
+<span id="cb33-7"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
+<span id="cb33-8"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-O</span> bam <span class="op">&gt;</span> <span class="va">$BAM_PREFIX</span>.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Exercise finished</strong></p>
 </section>
 <section class="slide level2">
@@ -984,20 +1015,33 @@ Ctrl + b    ""</code></pre>
 <h3 id="workflow-objects-in-gwf">Workflow objects in gwf</h3>
 <p>The whole workflow is contained in a <code>Workflow</code> object. This is initiated usually like this:</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#import libraries</span></span>
-<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initiate a workflow object with account for resources</span></span>
-<span id="cb35-5"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow(</span>
-<span id="cb35-6"><a aria-hidden="true" tabindex="-1"></a>    defaults<span class="op">=</span>{<span class="st">"account"</span>: <span class="st">"PROJECT_NAME"</span>}</span>
-<span id="cb35-7"><a aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#import libraries</span></span>
+<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initiate a workflow object</span></span>
+<span id="cb34-5"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
-<p>Now you have an empty workflow, which will use resources from the project you define as <code>account</code>.</p>
+<div title="Using project resources">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Using project resources</strong></p>
+</div>
+<div class="callout-content">
+<p>Now you have an empty workflow, which will use the few free resources each user has available. Resources from a project you are part of can be created using instead</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( defaults<span class="op">=</span>{<span class="st">"account"</span>: <span class="st">"PROJECT_NAME"</span>} )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
 <h3 id="templates-in-gwf">Templates in gwf</h3>
-<p>Now you can populate your <code>Workflow</code> object with <code>templates</code>, which are simple python functions. You can create executors for your templates (environments, containers)!</p>
+<p>Now you can populate your <code>Workflow</code> object with <code>templates</code>, which are simple python functions. You can create <em>executors</em> for your templates (environments and containers, which will run the programs you need)!</p>
 <p>The <strong>template is a blueprint for a specific block of the workflow</strong>.</p>
 <p>For example, the 10 parallel table blocks can be described by one reusable template:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#create a software executor from conda environment `seqkitEnv`</span></span>
@@ -1006,7 +1050,7 @@ Ctrl + b    ""</code></pre>
 <span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> table(infile): <span class="co">#Name of the template</span></span>
 <span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a>  inputs  <span class="op">=</span> [infile] <span class="co">#input file(s)</span></span>
+<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a>  inputs  <span class="op">=</span> [infile]  <span class="co">#input file(s)</span></span>
 <span id="cb36-8"><a aria-hidden="true" tabindex="-1"></a>  outputs <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>infile<span class="sc">}</span><span class="ss">.fx2tab.tsv"</span>] <span class="co">#name of the output(s)</span></span>
 <span id="cb36-9"><a aria-hidden="true" tabindex="-1"></a>  options <span class="op">=</span> {<span class="st">"cores"</span>: <span class="dv">1</span>, <span class="st">"memory"</span>: <span class="st">"1g"</span>, <span class="st">"walltime"</span>: <span class="st">"02:00:00"</span>} <span class="co">#resources to use</span></span>
 <span id="cb36-10"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -1041,14 +1085,12 @@ Ctrl + b    ""</code></pre>
 </section>
 <section id="exercise-i-workflow-with-conda-containers" class="slide level2">
 <h2>Exercise I: workflow with conda containers</h2>
-<p>Prepare everything for the exercise: create a <strong>new folder</strong>, get <strong>data and workflow file</strong>, and make a new <code>tmux</code> sessione (remember detaching!).</p>
+<p>Prepare everything for the exercise: create a <strong>new folder</strong>, get <strong>data and workflow file</strong></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/pipeline</span>
 <span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> advancedGDK/pipeline</span>
 <span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq <span class="at">-O</span> data.fq</span>
-<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py <span class="at">-O</span> workflow.py</span>
-<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">tmux</span> new <span class="at">-s</span> pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py <span class="at">-O</span> workflow.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -1071,20 +1113,21 @@ Ctrl + b    ""</code></pre>
 </div>
 <p>&nbsp;</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels gwforg</span>
-<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineExample gwf=2.1.1 micknudsen gwf-utilization</span>
+<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineEnv gwf=2.1.1</span>
 <span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#package for resource usage/check</span></span>
-<span id="cb40-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-y</span> <span class="at">-n</span> pipelineExample <span class="at">-c</span> micknudsen gwf-utilization</span>
+<span id="cb40-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-y</span> <span class="at">-n</span> pipelineEnv <span class="at">-c</span> micknudsen gwf-utilization</span>
 <span id="cb40-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#env for seqkit</span></span>
-<span id="cb40-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> seqkitExample seqkit</span>
+<span id="cb40-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> seqkitEnv seqkit</span>
 <span id="cb40-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Container</span></span>
 <span id="cb40-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<p>Now look at the <code>status</code> of your workflow. You should recognize all the steps (<em>targets</em>). Those are marked <code>shouldrun</code>, because the outputs and/or inputs are not existent. Remember to activate the environment.</p>
+<p>Now look at the <code>status</code> of your workflow. You should recognize all the steps (<em>targets</em>). Those are marked <code>shouldrun</code>, because the outputs and/or inputs are not existent. Remember to activate the environment for <code>gwf</code>.</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineExample</span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineEnv</span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <img data-src="img/status0.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p>&nbsp;</p>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -1096,7 +1139,7 @@ Ctrl + b    ""</code></pre>
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>You do not need <code>-f workflow.py</code> if your workflow file has the name <code>workflow.py</code>, which is the default for <code>gwf</code></p>
+<p>You do not need <code>-f workflow.py</code> if your workflow file has the name <code>workflow.py</code>, which is the default for <code>gwf</code>.</p>
 </div>
 </div>
 </div>
@@ -1109,42 +1152,41 @@ Ctrl + b    ""</code></pre>
 <div class="sourceCode" id="cb43" data-code-line-numbers="4-7|10|13-22|24|25|27-36"><pre class="sourceCode numberSource python scrollable number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a></a>{</span>
 <span id="cb43-2"><a></a>    <span class="st">"split"</span>: {</span>
 <span id="cb43-3"><a></a>        <span class="st">"options"</span>: {</span>
-<span id="cb43-4"><a></a>            <span class="st">"account"</span>: <span class="st">"HDSSandbox"</span>,</span>
-<span id="cb43-5"><a></a>            <span class="st">"cores"</span>: <span class="dv">1</span>,</span>
-<span id="cb43-6"><a></a>            <span class="st">"memory"</span>: <span class="st">"4g"</span>,</span>
-<span id="cb43-7"><a></a>            <span class="st">"walltime"</span>: <span class="st">"05:00:00"</span></span>
-<span id="cb43-8"><a></a>        },</span>
-<span id="cb43-9"><a></a>        <span class="st">"inputs"</span>: [</span>
-<span id="cb43-10"><a></a>            <span class="st">"data.fq"</span></span>
-<span id="cb43-11"><a></a>        ],</span>
-<span id="cb43-12"><a></a>        <span class="st">"outputs"</span>: [</span>
-<span id="cb43-13"><a></a>            <span class="st">"gwf_splitted/part001.fq"</span>,</span>
-<span id="cb43-14"><a></a>            <span class="st">"gwf_splitted/part002.fq"</span>,</span>
-<span id="cb43-15"><a></a>            <span class="st">"gwf_splitted/part003.fq"</span>,</span>
-<span id="cb43-16"><a></a>            <span class="st">"gwf_splitted/part004.fq"</span>,</span>
-<span id="cb43-17"><a></a>            <span class="st">"gwf_splitted/part005.fq"</span>,</span>
-<span id="cb43-18"><a></a>            <span class="st">"gwf_splitted/part006.fq"</span>,</span>
-<span id="cb43-19"><a></a>            <span class="st">"gwf_splitted/part007.fq"</span>,</span>
-<span id="cb43-20"><a></a>            <span class="st">"gwf_splitted/part008.fq"</span>,</span>
-<span id="cb43-21"><a></a>            <span class="st">"gwf_splitted/part009.fq"</span>,</span>
-<span id="cb43-22"><a></a>            <span class="st">"gwf_splitted/part010.fq"</span></span>
-<span id="cb43-23"><a></a>        ],</span>
-<span id="cb43-24"><a></a>        <span class="st">"spec"</span>: <span class="st">"</span><span class="ch">\n</span><span class="st">    seqkit split2 -O gwf_splitted --by-part 10 --by-part-prefix part data.fq</span><span class="ch">\n</span><span class="st">    "</span>,</span>
-<span id="cb43-25"><a></a>        <span class="st">"dependencies"</span>: [],</span>
-<span id="cb43-26"><a></a>        <span class="st">"dependents"</span>: [</span>
-<span id="cb43-27"><a></a>            <span class="st">"table_6"</span>,</span>
-<span id="cb43-28"><a></a>            <span class="st">"table_8"</span>,</span>
-<span id="cb43-29"><a></a>            <span class="st">"table_3"</span>,</span>
-<span id="cb43-30"><a></a>            <span class="st">"table_0"</span>,</span>
-<span id="cb43-31"><a></a>            <span class="st">"table_1"</span>,</span>
-<span id="cb43-32"><a></a>            <span class="st">"table_4"</span>,</span>
-<span id="cb43-33"><a></a>            <span class="st">"table_5"</span>,</span>
-<span id="cb43-34"><a></a>            <span class="st">"table_9"</span>,</span>
-<span id="cb43-35"><a></a>            <span class="st">"table_7"</span>,</span>
-<span id="cb43-36"><a></a>            <span class="st">"table_2"</span></span>
-<span id="cb43-37"><a></a>        ]</span>
-<span id="cb43-38"><a></a>    }</span>
-<span id="cb43-39"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-4"><a></a>            <span class="st">"cores"</span>: <span class="dv">1</span>,</span>
+<span id="cb43-5"><a></a>            <span class="st">"memory"</span>: <span class="st">"4g"</span>,</span>
+<span id="cb43-6"><a></a>            <span class="st">"walltime"</span>: <span class="st">"05:00:00"</span></span>
+<span id="cb43-7"><a></a>        },</span>
+<span id="cb43-8"><a></a>        <span class="st">"inputs"</span>: [</span>
+<span id="cb43-9"><a></a>            <span class="st">"data.fq"</span></span>
+<span id="cb43-10"><a></a>        ],</span>
+<span id="cb43-11"><a></a>        <span class="st">"outputs"</span>: [</span>
+<span id="cb43-12"><a></a>            <span class="st">"gwf_splitted/part001.fq"</span>,</span>
+<span id="cb43-13"><a></a>            <span class="st">"gwf_splitted/part002.fq"</span>,</span>
+<span id="cb43-14"><a></a>            <span class="st">"gwf_splitted/part003.fq"</span>,</span>
+<span id="cb43-15"><a></a>            <span class="st">"gwf_splitted/part004.fq"</span>,</span>
+<span id="cb43-16"><a></a>            <span class="st">"gwf_splitted/part005.fq"</span>,</span>
+<span id="cb43-17"><a></a>            <span class="st">"gwf_splitted/part006.fq"</span>,</span>
+<span id="cb43-18"><a></a>            <span class="st">"gwf_splitted/part007.fq"</span>,</span>
+<span id="cb43-19"><a></a>            <span class="st">"gwf_splitted/part008.fq"</span>,</span>
+<span id="cb43-20"><a></a>            <span class="st">"gwf_splitted/part009.fq"</span>,</span>
+<span id="cb43-21"><a></a>            <span class="st">"gwf_splitted/part010.fq"</span></span>
+<span id="cb43-22"><a></a>        ],</span>
+<span id="cb43-23"><a></a>        <span class="st">"spec"</span>: <span class="st">"</span><span class="ch">\n</span><span class="st">    seqkit split2 -O gwf_splitted --by-part 10 --by-part-prefix part data.fq</span><span class="ch">\n</span><span class="st">    "</span>,</span>
+<span id="cb43-24"><a></a>        <span class="st">"dependencies"</span>: [],</span>
+<span id="cb43-25"><a></a>        <span class="st">"dependents"</span>: [</span>
+<span id="cb43-26"><a></a>            <span class="st">"table_6"</span>,</span>
+<span id="cb43-27"><a></a>            <span class="st">"table_8"</span>,</span>
+<span id="cb43-28"><a></a>            <span class="st">"table_3"</span>,</span>
+<span id="cb43-29"><a></a>            <span class="st">"table_0"</span>,</span>
+<span id="cb43-30"><a></a>            <span class="st">"table_1"</span>,</span>
+<span id="cb43-31"><a></a>            <span class="st">"table_4"</span>,</span>
+<span id="cb43-32"><a></a>            <span class="st">"table_5"</span>,</span>
+<span id="cb43-33"><a></a>            <span class="st">"table_9"</span>,</span>
+<span id="cb43-34"><a></a>            <span class="st">"table_7"</span>,</span>
+<span id="cb43-35"><a></a>            <span class="st">"table_2"</span></span>
+<span id="cb43-36"><a></a>        ]</span>
+<span id="cb43-37"><a></a>    }</span>
+<span id="cb43-38"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
@@ -1157,9 +1199,9 @@ Ctrl + b    ""</code></pre>
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Do you want to see the whole workflow in a text editor? Use the <code>less</code> viewer, or output into a text file:</p>
+<p>Do you want to see the whole workflow in a text editor? Use the <code>less</code> viewer,</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="kw">|</span> <span class="fu">less</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and</p>
+<p>or output into a text file:</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="op">&gt;</span> workflow_explicit.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -1779,6 +1821,38 @@ Indlæser…
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
