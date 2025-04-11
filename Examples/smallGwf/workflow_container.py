@@ -12,9 +12,7 @@ sing_cont = Singularity("./seqkit:2.10.0")
 # this will contain settings which are global across all blocks
 # of the workflow (templates below), unless for a specific
 # template you specify a setting inside the dictionary "options"
-gwf = Workflow(
-    defaults={"account": "HDSSandbox"}
-)
+gwf = Workflow( )
 
 ## Templates
 # the generic structure of each block of your pipeline

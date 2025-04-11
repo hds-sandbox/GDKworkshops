@@ -51,15 +51,16 @@ smaller: true
 
   support@genome.au.dk
 
-## Program
+## Program {.scrollable}
 
-- **10:00-10:20**: 
+- **10:00-10:30**: 
   - Workshop Introduction
-  - Some everyday things for easy life
+  - Some everyday things for easier life
     - and your mental sanity
 
-- **10:20-11:00**: 
-  - `rsync` copy and backups, terminals on `tmux`
+- **10:30-11:00**: 
+  - `rsync` copy and backups
+  - [Optional] Managing multiple terminals on `tmux` 
   - cake
 
 - **11:10-12:00**: 
@@ -316,10 +317,12 @@ rsync -aP --exclude="*.log" PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/bac
 
 &nbsp;
 
-All `rsync` options will work as usual in these cases. You need to type your password if you do not make use of `ssh` keys.
+:::{.callout-warning title="Avoid a typical error"}
+To transfer from GenomeDK to your computer, and viceversa, you need to use the commands above **from your local computer**, and NOT when you are logged into GenomeDK!
+:::
 
 
-## Multiple terminals with `tmux`
+## [Optional] Manage multiple terminals with `tmux`
 
 `tmux` is a server application managing multiple terminal sessions. It can 
 
@@ -335,11 +338,17 @@ All `rsync` options will work as usual in these cases. You need to type your pas
 
 ## Exercise
 
-`tmux` was a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply write this setting on the configuration file:
+`tmux` is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (**only once**) to enable mouse usage:
 
 ```{.bash}
 echo "set -g mouse" >> ~/.tmux.conf
 ```
+
+:::{.callout-warning}
+Using the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows' Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file `~/.tmux.conf`
+:::
+
+&nbsp;
 
 You can start a `tmux` session anywhere. It is easier to navigate sessions giving them a name.
 For example start a session called `example1`:
@@ -530,18 +539,10 @@ Now you are ready to move on!
 
 ---
 
-On GenomeDK, create a new `tmux` session:
+Create a new `conda` environment:
 
 ```{.bash}
-tmux new -s jupyterlab
-```
-
-&nbsp;
-
-and create a new `conda` environment:
-
-```{.bash}
-conda create -y -n GDKjupyter conda-forge::jupyterlab conda-forge::numpy conda-forge::pandas
+conda create -y -n GDKjupyter jupyterlab numpy pandas
 ```
 
 &nbsp;
@@ -549,41 +550,37 @@ conda create -y -n GDKjupyter conda-forge::jupyterlab conda-forge::numpy conda-f
 Start a job with just a few resources. This will always keep running until the end since it is inside a tmux session!
 
 ```{.bash}
-srun --mem=8g --cores=1 --time=4:00:0  --account=YOUR_PROJECT --pty /bin/bash
+srun --mem=4g --cores=1 --time=4:00:0 --pty /bin/bash
 ```
 
 &nbsp;
 
-Now activate your environment and run jupyterlab. You will need the node name and your user ID. Those can be given as variables to the web server using  `$(hostname)` and $UID:
+Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) **are given as variables** to the web server simply using  `$(hostname)` and $UID:
 
 ```{.bash}
 conda activate GDKjupyter
-jupyter-lab --port=$UID \
-  --ip=$(hostname) \
-  --no-browser
+jupyter-lab --port=$UID --ip=$(hostname)
 ```
 
 ---
 
-You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser. It will look like this, but in your case it might have an added token in the URL (mine is instead password protected):
+You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser, which always starts with `127.0.0.1`. It will look like this, but in your case it might have a longer URL with a random *token* (mine is instead password protected):
 
-![](img/jupyterUrl.png){fig-align="center" width=400px}
+![](img/jupyterUrl.png){fig-align="center" width=800px}
 
 &nbsp;
 
-**We still need a tunnel** from the local host (your PC)! keep note of the port and node, and write in a new terminal **(not logged into GenomeDK)** a command like the one below (matching the example figure above):
+Write down your node number and user id you got from jupyterlab.
+
+**We now need a tunnel** from the local host (your PC)! Write in a new terminal **(not logged into GenomeDK)** a command like the following (matching the example figure above), substituting the correct values:
 
 ```{.bash}
 ssh -L6835:s21n34:6835 USERNAME@login.genome.au.dk
 ```
 
-:::{.callout-note}
-In the command above I prefere to map the same ports locally and remotely, but you can use two different port.
+&nbsp;
 
-If you do not have passwordless login, you have to write the password. 
-:::
-
-Your tunnel will be opened. Now the web application can be accessed from your browser at the address given by the server process on GenomeDK (put your correct port number).
+Your tunnel is now opened. The web application can be accessed **from your browser** at the address given by the server process on GenomeDK, which is `127.0.0.1/PORT_NUMBER` (put your correct port number).
 
 **Exercise finished**
 
@@ -593,13 +590,15 @@ Your tunnel will be opened. Now the web application can be accessed from your br
 The same logic applies to all other web applications. They will have similar options to define the remote node and port. 
 
 Usually the host node option changes name between `ip`, `host`, `address`, or `hostname`.
+
+&nbsp;
+
+Note also that you will always have to use the address `127.0.0.1/PORT_NUMBER` on your browser. You might as well save it as a favorite address in your browser's bookmarks.
 :::
-
-
 
 # Containers
 
-:::{.callout-note}
+:::{.callout-note title="What is a container"}
 **Container = ** Standalone and portable software package including 
 
 - code 
@@ -611,7 +610,7 @@ Usually the host node option changes name between `ip`, `host`, `address`, or `h
 
 &nbsp;
 
-Deployment of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, ...) depends on the host system and is not fully reproducible.
+Deployment of a container on different HPCs and PCs is reproducible. A virtual environment (conda, mamba, pixi, cargo, npm, ...) depends instead on the host system and is not necessarily fully reproducible on two different computer hardwares.
 
 ## Container vs virtual env vs VM
 
@@ -659,21 +658,20 @@ First **create and attach to a new `tmux` session** called `biocontainers`.
 
 &nbsp;
 
-Create one more session with its own windows for running containers (remember detaching) and make a folder called `containers101` in the `advancedGDK` directory.
+Make a folder called `containers101` in the `advancedGDK` directory.
 
 ```{.bash}
-tmux new -s containers
 mkdir -p advancedGDK/containers101
 cd advancedGDK/containers101
 ```
 
 &nbsp;
 
-Find a bash bioinformatics software you know on the [Biocontainer Registry](https://biocontainers.pro/registry) and open to see a detailed description. You should see a guide to recreate the software on `conda/mamba/pixi` or `docker/singularity`.
+Find a bash bioinformatics software you know on the [Biocontainer Registry](https://biocontainers.pro/registry) and open it to see a detailed description - if you have no good ideas look for the `minimap2` aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot.
 
 ---
 
-![Example: Biocontainers page for the `minimap2` splice-aware aligner.](img/minimap2Biocontainers.png){fig-align="center" width=800px}
+![Example: Biocontainers page for the `minimap2` splice-aware aligner. Click on the image to enlarge.](img/minimap2Biocontainers.png){fig-align="center" width=100% .lightbox}
 
 
 ---
@@ -683,10 +681,10 @@ The page will suggest to run immediately the container with `singularity`. I wou
 In the case of `minimap2`:
 
 ```{.bash}
-singularity pull https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4
+singularity pull minimap2.sif https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4
 ```
 
-which creates a container file in your current directory.
+which creates a container file in your current directory, and calls it `minimap2.sif` (better name than the default `minimap2:2.28--h577a1d6_4`).
 
 &nbsp;
 
@@ -694,13 +692,15 @@ You can either `run` the container, which opens a CLI into it, where you can exe
 
 :::: {.columns}
 ::: {.column width="50%" }
+This will operate the command line inside the container. Here you can then run `minimap2`.
 ```{.bash}
-singularity run 'minimap2:2.28--h577a1d6_4'
+singularity run minimap2.sif
 ```
 :::
 ::: {.column width="50%" }
+This will immediately run `minimap2` from the container - useful for a pipeline where you do not need any interaction with the command line.
 ```{.bash}
-singularity run 'minimap2:2.28--h577a1d6_4' minimap2
+singularity run minimap2.sif minimap2
 ```
 :::
 ::::
@@ -715,9 +715,11 @@ Some containers are very easy to run. Some others need a lot of extra options, s
 The option `--env` can be used to define environment variables, either needed by your software, or useful to write the code to be executed.
 
 ```{.bash}
+ singularity pull samtools.sif https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1
+
  singularity run --env REF_PATH=$(pwd) \
                  --env BAM_PREFIX=test01 \
-                 https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 \
+                 samtools.sif \
                  samtools view \
                  -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \
                  -O bam > test01.bam
@@ -742,11 +744,12 @@ singularity run --env REF_PATH=$(pwd) \
                 --env BAM_PREFIX=test01 \
                 --bind /etc/ssl/certs:/etc/ssl/certs \
                 --bind /etc/pki/ca-trust:/etc/pki/ca-trust \
-                https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1 \
+                samtools.sif \
                 samtools view \
                 -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \
                 -O bam > $BAM_PREFIX.bam
 ```
+
 **Exercise finished**
 ---
 
@@ -830,21 +833,25 @@ The whole workflow is contained in a `Workflow` object. This is initiated usuall
 #import libraries
 from gwf import *
 
-#initiate a workflow object with account for resources
-gwf = Workflow(
-    defaults={"account": "PROJECT_NAME"}
-)
+#initiate a workflow object
+gwf = Workflow( )
 ```
 
 &nbsp;
 
-Now you have an empty workflow, which will use resources from the project you define as `account`.
+:::{.callout-note title="Using project resources"}
+Now you have an empty workflow, which will use the few free resources each user has available. Resources from a project you are part of can be created using instead 
+
+```{.python}
+gwf = Workflow( defaults={"account": "PROJECT_NAME"} )
+```
+:::
 
 ---
 
 ### Templates in gwf
 
-Now you can populate your `Workflow` object with `templates`, which are simple python functions. You can create executors for your templates (environments, containers)! 
+Now you can populate your `Workflow` object with `templates`, which are simple python functions. You can create *executors* for your templates (environments and containers, which will run the programs you need)! 
 
 The **template is a blueprint for a specific block of the workflow**. 
 
@@ -857,7 +864,7 @@ conda_env = Conda("seqkitEnv")
 
 def table(infile): #Name of the template
 
-  inputs  = [infile] #input file(s)
+  inputs  = [infile]  #input file(s)
   outputs = [f"{infile}.fx2tab.tsv"] #name of the output(s)
   options = {"cores": 1, "memory": "1g", "walltime": "02:00:00"} #resources to use
 
@@ -896,10 +903,9 @@ for i, infile in enumerate(T1.outputs):
 
 We try out exactly those template in the following exercise.
 
-
 ## Exercise I: workflow with conda containers
 
-Prepare everything for the exercise: create a **new folder**, get **data and workflow file**, and make a new `tmux` sessione (remember detaching!).
+Prepare everything for the exercise: create a **new folder**, get **data and workflow file**
 
 ```{.bash}
  mkdir -p advancedGDK/pipeline
@@ -907,8 +913,6 @@ Prepare everything for the exercise: create a **new folder**, get **data and wor
 
  wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq
  wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py
-
- tmux new -s pipeline
 ```
 
 ---
@@ -930,23 +934,24 @@ conda config --add channels conda-forge
 
 ```{.bash}
 conda config --add channels gwforg
-conda create -y -n pipelineExample gwf=2.1.1 micknudsen gwf-utilization
+conda create -y -n pipelineEnv gwf=2.1.1
 #package for resource usage/check
-conda install -y -n pipelineExample -c micknudsen gwf-utilization
+conda install -y -n pipelineEnv -c micknudsen gwf-utilization
 #env for seqkit
-conda create -y -n seqkitExample seqkit
+conda create -y -n seqkitEnv seqkit
 #Container
 singularity pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0
 ```
 
 ---
 
-Now look at the `status` of your workflow. You should recognize all the steps (*targets*). Those are marked `shouldrun`, because the outputs and/or inputs are not existent. Remember to activate the environment.
+Now look at the `status` of your workflow. You should recognize all the steps (*targets*). Those are marked `shouldrun`, because the outputs and/or inputs are not existent. Remember to activate the environment for `gwf`.
 
 &nbsp;
 
 ```{.bash}
-conda activate pipelineExample
+conda activate pipelineEnv
+
 gwf -f workflow.py status
 ```
 
@@ -955,7 +960,7 @@ gwf -f workflow.py status
 &nbsp;
 
 :::{.callout-tip}
-You do not need `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`
+You do not need `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`.
 :::
 
 ---
@@ -972,7 +977,6 @@ You will be able to see the actual inputs, outputs, and other targets it depends
 {
     "split": {
         "options": {
-            "account": "HDSSandbox",
             "cores": 1,
             "memory": "4g",
             "walltime": "05:00:00"
@@ -1013,13 +1017,13 @@ You will be able to see the actual inputs, outputs, and other targets it depends
 ---
 
 :::{.callout-tip}
-Do you want to see the whole workflow in a text editor? Use the `less` viewer, or output into a text file:
+Do you want to see the whole workflow in a text editor? Use the `less` viewer, 
 
 ```{.bash}
 gwf info | less
 ```
 
-and
+or output into a text file:
 
 ```{.bash}
 gwf info > workflow_explicit.txt
