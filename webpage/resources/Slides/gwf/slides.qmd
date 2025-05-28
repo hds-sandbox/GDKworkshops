@@ -1,772 +1,673 @@
 ---
-title: "Introduction to workflows with gwf"
-subtitle: https://hds-sandbox.github.io/GDKworkshops
+title: "Introduction to workflows on GenomeDK"
+subtitle: "Learn to create smooth pipelines and manage resources tinyurl.com/pipelinesGDK"
 author: 
     - "Samuele Soraggi"
     - "Dan Søndergaard"
 institute:
-    - Health Data Science sandbox, BiRC
-    - GenomeDK, Health
-date: 9.April 2024
-format: revealjs
-scrollable: true
-toc: true
+    - Health Data Science sandbox, BiRC, AU
+    - GenomeDK, Health, AU
+date: last-modified
+format: 
+  revealjs:
+    chalkboard: true
+toc: false
 toc-depth: 1
 slide-number: h.v
 code-line-numbers: false
 logo: img/logos.png
 navigation-mode: vertical
-
+smaller: true
 ---
 
-# Short on Workflows and gwf
+# Some background
 
-## Workflow
+- These slides are both a presentation and a small reference manual
 
-![](img/small_pipeline.png){fig-align="center"}
+- 90% of slides are you doing stuff - **open your terminals and slides**
+
+- Official reference documentation: [genome.au.dk](https://genome.au.dk) and [gwf.app](https://gwf.app/)
+
+- Most important message before starting any workshop: [RTFM - Read The Field Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/).
+
+## When you need to ask for help
+
+- **Practical help:** 
+  
+  Samuele (BiRC, MBG) - samuele@birc.au.dk 
+
+- **Drop in hours:**
+
+  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abcafe@au.dk
+  - Samuele (BiRC, MBG) - samuele@birc.au.dk
+
+- **General mail for assistance**
+
+  support@genome.au.dk
+
+## What you need
+
+- The basics to use the cluster
+
+- Being able to edit documents on the cluster
+
+- Have conda or pixi installed
+
+- If possible a project on the cluster
+
+## Program {.scrollable}
+
+- **10:00-10:45**: 
+  - Workshop Introduction
+  - Background on workflows/pipelines
+  - Workflow file structure and templates
+  - A small example
+  - Cake and Questions
+
+- **11:00-12:00**: 
+  - Workflow for the exercise
+  - Prepare for the workflow: data, software, workflow file
+  - Investigate specific parts of the workflow
+  - Execute one or more targets
+  - Verify what happens with each target
+
+- **12:45-13:45**: 
+  - calibrate your resources
+  - add a template and targets to a pipeline
+
+- **13:45-14:00**: 
+  - Questions
+  - Feedback
+
+# Background on workflows
+
+## Workflow terminology
+
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+  A0(["Start"]) --->|data.txt| A["Rename"]
+  A --->|samples.txt| B(["End"])
+```
+
+&nbsp;
 
 :::{.callout-note title="Workflow and W. Management System"}
 A **workflow** is a series of calculations and data manipulations which have to be performed in a specific sequence. 
+
+&nbsp;
+
 A **workflow management system** organizes the workflow steps through defined dependencies, can assign different computing resources to each step, 
 keeps a log of the workflow, interacts with a cluster's queueing system. 
 :::
 
-## A few terms
-
-![](img/small_pipeline_terms.png){fig-align="center"}
-
-Each target of the workflow is **submitted** to a queueing manager so that it enters the queue and can be executed when possible.
-
-## Gwf
-
-A lightweight and easy to adopt workflow manager. it requires knowing or learning `Python`. Some useful features:
-
-- Defines **target dependencies automatically** using the input and output files of targets
-- Only submits targets when their output files are **not up to date**
-- Fire-and-forget: once you submit targets, you need **not do more**
-- Has a few, simple and useful commands for **following workflow execution** and **cleaning up** intermediate data files
-
-Check out [the gwf webpage](https://gwf.app/) for updates, examples and more detailed documentation.
-
-# Exercise setup
-
-Data and inspiration from [this SW carpentry bioinformatics tutorial](https://datacarpentry.org/wrangling-genomics/index.html), which does not use pipelines.
-
-![](img/whole_gwf.png){fig-align="center"}
-
-## Download examples and data
-
-Examples and reference file
-
-```{.bash}
-curl -L -o gwf_workshop.zip https://github.com/hds-sandbox/GDKworkshops/archive/main.zip \
-    && unzip gwf_workshop.zip \
-    && mv GDKworkshops-main/Examples/gwf gwf_workshop \
-    && rm -rf GDKworkshops-main gwf_workshop.zip
-```
-
-
-Download fastq files
-
-```{.bash}
-mkdir -p gwf_workshop/data
-cd gwf_workshop/data/
-
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz
-curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz
-
-cd ..
-```
-
 ---
 
-Final file structure (run the `tree` command)
-
-![](img/tree_download.png)
-
-## Install gwf
-
-Using conda to create a new environment from the `yml` file:
-
-```{.bash}
-conda env create -n gwf_workshop -f Environments/gwf_workshop.yml
-conda activate gwf_workshop
-```
-
-You can see the package list with
-
-```{.bash}
-cat Environments/gwf_workshop.yml
-```
-
-. . .
-
-The whole environment dependencies and versions can be seen with
-
-```{.bash}
-conda list
-```
-
-# A single target Workflow
-
-![](img/simple_gwf.png){fig-align="center"}
-
-The workflow file can be printed out with
-
-```{.bash}
-less -S WF01_report.py
-```
-Exit using `q`
-
-
-
----
-
-You can easily spot all the elements of a workflow graph:
-
-```{.python code-line-numbers="1-3|6|7-9|10-12|13"}
-from gwf import Workflow
-
-gwf = Workflow(defaults={'account': 'your_project'})
-
-## A target doing FastQC on a file
-gwf.target('FastQC', 
-           cores=1,
-           memory='8gb',
-           walltime='00:05:00',	
-           inputs=['data/SRR2584863_1.fastq.gz'], 
-           outputs=['data/SRR2584863_1_fastqc.html', 
-                    'data/SRR2584863_1_fastqc.zip']) << """ 
-fastqc data/SRR2584863_1.fastq.gz
-"""
-```
-
-## Status and submission
-
-We can see what is the status of each target - if it doesn't see the output files (`shouldrun`), if the output is there (`completed`), if it is executing a target (`running`), or if it failed ('failed').
-
-```{.bash}
-gwf -f WF01_report.py status
-```
-
-will show
-
-```{.bash }
-⨯ FastQC        shouldrun
-```
-
-. . .
-
-You can submit the targets with 
-
-```{.bash}
-gwf -f WF01_report.py run
-```
-
-which reports you
-
-```{.bash}
-Submitting target FastQC
-```
-
-. . .
-
-Look again at the status. You can follow it up in real-time using `watch` (it will lose the nice colour formatting):
-
-```{.bash}
-watch gwf -f WF01_report.py status
-```
-
-You might see it going from `submitted` to `running` and `completed`:
-
-```{.bash}
-✓ FastQC        completed
-```
-
----
-
-## Targets stdout and stderr
-
-What are the commands in a target outputting? You can see `stdout` and `stderr` in the log of a target:
-
-```{.bash}
-gwf -f WF01_report.py logs FastQC
-```
-
-and
-
-```{.bash}
-gwf -f WF01_report.py logs -e FastQC
-```
-
-# Parallel targets
-
-![Define independent targets which can run **at the same time** in the workflow](img/whole_gwf_1.png)
-
----
-
-You can use python to automatically parsing names in a folder and creating targets:
-
-```{.python code-line-numbers="1-5|8|9-10|10-12|16-18|19-20"}
-#find .fastq.gz files in the data folder
-pattern = os.path.join('data', '*.fastq.gz')
-fastq_files = glob.glob(pattern) 
-#keep only the file name without the folder path
-fastq_files = [os.path.basename(file) for file in fastq_files] #remove the path from the file
-
-
-for FASTQ in fastq_files:
-    #name without extensions
-    FASTQ_BASENAME = FASTQ.split(".")[0] 
-    #target with file-dependent name and inputs/outputs
-    gwf.target( f'FastQC_{FASTQ_BASENAME}', 
-           cores=1,
-           memory='8gb',
-           walltime='00:05:00',	
-           inputs=[f'data/{FASTQ}'], 
-           outputs=[f'data/{FASTQ_BASENAME}_fastqc.html', 
-                    f'data/{FASTQ_BASENAME}_fastqc.zip']) << """ 
-    fastqc data/{FASTQ}
-    """.format(FASTQ=FASTQ)
-```
-
-
-## Useful gwf checks and debug
-
-You can see the status with specific messages about the status of each target and what causes it.
-
-```{.bash}
-gwf -f WF02_report_parallel.py -v debug status
-```
-
-At the end of the debug messages, you will see that one FastQC is already complete from the first example.
-
-```{.bash}
-⨯ FastQC_SRR2584866_1 shouldrun
-⨯ FastQC_SRR2589044_1 shouldrun
-✓ FastQC_SRR2584863_1 completed
-⨯ FastQC_SRR2584863_2 shouldrun
-⨯ FastQC_SRR2589044_2 shouldrun
-⨯ FastQC_SRR2584866_2 shouldrun
-```
-
----
-
-You can print explicitely some targets of your choice and their dependencies. For example all the targets related to the first element of the fastq pairs:
-
-```{.bash}
-gwf -f WF02_report_parallel.py info FastQC*_1
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+  A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET]
+  A --->|samples.txt<br>OUTPUT| B(["End"]);
 ```
 
 &nbsp;
 
-Giving no names will print all the targets
+- A **TARGET** is a specific step in a workflow
+
+- Each target has a **SPECIFICATION** which describes what to do with the input files to produce the output files
+
+- The specification is usually a **command line** which can be executed in a terminal
+
+- Each target has **INPUTS** and **OUTPUTS** file(s)
 
 ---
 
-Try to run the whole workflow and follow its status with `watch`.
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+  A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET]
+  A --->|samples.txt<br>OUTPUT-INPUT| B[Zip<br>TARGET]
+  B --->|samples.zip<br>OUTPUT| C(["End"]);
 
-```{.bash}
-gwf -f WF02_report_parallel.py run
-```
-
-and
-
-```{.bash}
-watch gwf -f WF02_report_parallel.py status
 ```
 
 &nbsp;
 
-Targets will run independently and might run at the same time. 
+- A target can be **dependent** on other targets, i.e. it needs their output files as input before it can run
 
 ---
 
-See specifically what gwf states about your targets: why a target should run, why not?
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+  A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET<br>cores=4<br>memory=24g<br>walltime=00:10:00]
+  A --->|samples.txt<br>OUTPUT-INPUT| B[Zip<br>TARGET<br>cores=1<br>memory=8g<br>walltime=00:01:00]
+  B --->|samples.zip<br>OUTPUT| C(["End"]);
 
-```{.bash}
-gwf -f WF02_report_parallel.py -v debug status
 ```
 
 &nbsp;
 
-:::{.callout-tip}
-When developing a workflow, take your time to use `status` and `info` once you add new targets.
-:::
-
-# Multiple target dependencies
-
-![A single target (MultiQC) is dependent on the execution of multiple targets (FastQC of the data files)](img/whole_gwf_2.png)
+- A target has settings for **resources** 
+  - cores
+  - memory
+  - walltime (dd:hr:mn:sc)
+  which are used to run the target on a cluster
 
 ---
 
-```{.python code-line-numbers="1-2|4|8-11|12-14"}
-#names without path and extensions
-fastq_basenames = [ FASTQ.split(".")[0] for FASTQ in fastq_files ] 
+Each target of the workflow 
 
-gwf.target( 'MultiQC', #name of the target
-           cores=1,
-           memory='8gb',
-           walltime='00:05:00',	
-           inputs= {'ZIP': [f'data/{FASTQ_BASENAME}_fastqc.zip' for FASTQ_BASENAME in fastq_basenames],
-                    'REPORTS': [f'data/{FASTQ_BASENAME}_fastqc.html' for FASTQ_BASENAME in fastq_basenames] }, 
-           outputs=['results/multiqc_output/multiqc_report.html'],
-           protect=['results/multiqc_output/multiqc_report.html']) << """ 
-    mkdir -p results/multiqc_output
-    multiqc --outdir results/multiqc_output \
-            data/
-    """
+&nbsp;
+
+ - is **submitted** by the **workflow manager** to the queueing system
+ - can be **monitored** with the workflow manager 
+ - influences the **queueing time** Depending on requested resources
+
+
+```{mermaid}
+%%| fig-width: 10
+gantt
+    dateFormat  HH:mm
+    axisFormat  %H:%M
+    title HPC Queue Durations vs. Resources
+
+    section Small Job (1 core, 4GB, 1h)
+    Queue wait: active, 00:00, 0:10
+    Job start: active, 00:10, 1:00
+
+    section Medium Job (4 cores, 16GB, 2h)
+    Queue wait: active, 00:00, 0:45
+    Job start: active, 00:45, 2:00
+
+    section Large Job (16 cores, 64GB, 4h)
+    Queue wait: active, 00:00, 2:00
+    Job start: active, 02:00, 4:00
 ```
 
-## protected outputs and cleaning
+## Gwf workflow manager
 
-The workflow parameter
+A lightweight and easy to adopt workflow manager. It requires only some basic `Python` - you can learn it along the way starting from examples. Some useful features:
+
+&nbsp;
+
+- Developed at AU (Dan at GenomeDK) and used also at MOMA, AUH, ...
+  - Easy to find support
+- In python, no need for a workflow language
+  - You can use all python functions to build your workflow!
+- Easy to structure a workflow and check resource usage
+  - Reusable templates
+  - Very pedagogical
+- Conda, Pixi, Container usage out-of-the-box
+
+# Setup a small workflow
+
+The whole workflow is written **in a python script**. You first state the `Workflow` object, usually like this:
+
+&nbsp;
+
 
 ```{.python}
-protect=['results/multiqc_output/multiqc_report.html']
-```
+#import libraries
+from gwf import *
 
-prevents you from deleting the specified file when using `clean`. The `clean` command removes all **intermediate outputs** of a workflow (not essential for the result report and which **can be replicated** by rerunning the workflow). 
-&nbsp;
-
-:::{.callout-note title="Endpoints' files are protected"}
-Files generated by `endpoints` (targets which are not dependencies of others, i.e. at the end of the workflow) do not get deleted. `clean --all` removes any file in the workflow.
-:::
-
-## status with filters
-
-We know all FastQC targets are completed. Run first the workflow
-
-```{.bash}
-gwf -f WF03_multi_report.py run
-```
-
-. . .
-
-&nbsp;
-
-Now look only at the endpoints to avoid a long list of FastQC targets:
-
-```{.bash}
-gwf -f WF03_multi_report.py status --endpoints
-```
-
-gives for example
-
-```{.bash}
-↻ MultiQC     running
-```
-unless it is still `submitted` or already `completed`.
-
----
-
-Are you waiting for many endpoints? Look only for the `completed` ones with the status filter:
-
-&nbsp;
-
-```{.bash}
-gwf -f WF03_multi_report.py status --endpoints -s completed
+#initiate a workflow object
+gwf = Workflow( )
 ```
 
 &nbsp;
 
-(You can also use the status `running`, `shouldrun` or `failed`).
-
-
-# Exercise 1
-
-![Parallel targets dependent on  `MultiQC` produce trimmed `fastq` files.](img/whole_gwf_3.png)
-
-
-## Tasks-questions
-
-Consider the workflow file `WF04_trimming.py`:
-
-&nbsp;
-
-1. apply `gwf status` to watch the **endpoints of the workflow**
-2. Which is the file dependency **common to all trim targets**?
-3. run the workflow and...
-4. ...apply `watch gwf status` and follow only the `running` targets 
-5. Look at the `stderr` printout of one trimming target
-
-## Code
-
-```{.python  code-line-numbers="1|4|8-15|22"}
-fastq_pairs = np.unique([ FASTQ.split('_')[0] for FASTQ in fastq_basenames ]) #names without pair number and extension
-
-for FASTQ_PAIR in fastq_pairs:
-    gwf.target( f"Trimmomatic_{FASTQ_PAIR}", #name of the target
-           cores=8,
-           memory='8gb',
-           walltime='00:10:00',	
-           inputs= {'ADAPTERS': ['fasta/NexteraPE-PE.fa'],
-                    'FASTQS': [f'data/{FASTQ_PAIR}_1.fastq.gz',
-                               f'data/{FASTQ_PAIR}_2.fastq.gz'],
-                    'MULTIQC': ['results/multiqc_output/multiqc_report.html']}, 
-           outputs=[f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',
-                    f'data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz',
-                    f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz',
-                    f'data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz']) << """
-    mkdir -p data_trim
-    trimmomatic PE -threads 8 \
-                data/{FASTQ_PAIR}_1.fastq.gz data/{FASTQ_PAIR}_2.fastq.gz \
-                data_trim/{FASTQ_PAIR}_1.trim.fastq.gz data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz \
-                data_trim/{FASTQ_PAIR}_2.trim.fastq.gz data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz \
-                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:{ADAPTERFILE}:2:40:15
-    """.format(FASTQ_PAIR=FASTQ_PAIR, ADAPTERFILE='fasta/NexteraPE-PE.fa')
-```
-
-## Answers
-
-**1. apply `gwf status` to watch the endpoints of the workflow**
-
-&nbsp;
-
-```{.bash}
-gwf -f WF04_trimming.py status --endpoints
-```
-
-gives
-
-```{.bash}
-⨯ Trimmomatic_SRR2584863 shouldrun
-⨯ Trimmomatic_SRR2584866 shouldrun
-⨯ Trimmomatic_SRR2589044 shouldrun
-```
-
----
-
-**2. Which is the file dependency common to all trim targets?**
-
-&nbsp;
-
-Each endpoint needs an adapter `fasta` file apart from the raw data files in input. You can look at the file dependencies using
-
-```{.bash}
-gwf -f WF04_trimming.py info Trimmomatic*
-```
-
----
-
-**3. run the workflow**
-**4. use `watch gwf status` and follow only the `running` targets**
-
-&nbsp;
-
-After running the targets, for example with
-
-```{.bash}
-gwf -f WF04_trimming.py run Trimmomatic*
-```
-
-you can follow the running targets with
-
-```{.bash}
-watch gwf -f WF04_trimming.py status -s running
-```
-
-If the targets are currently `running` and neither `shouldrun`, `completed` nor `failed`, you should see something like this, 
-
-```{.bash}
-↻ Trimmomatic_SRR2584863 running
-↻ Trimmomatic_SRR2584866 running
-↻ Trimmomatic_SRR2589044 running
-```
-
-after which the targets will be `completed` (and disappear from your view with the status filter).
-
----
-
-**5. Look at the stderr printout of one trimming target**
-
-&nbsp;
-
-You can see the `stderr` f a trimming job, for example, by
-
-```{.bash}
-gwf -f WF04_trimming.py logs -e Trimmomatic_SRR2589044
-```
-
-# Exercise 2
-
-![Parallel targets (`BWA`), each dependent on a pair of trimming targets, produce alignments of parts of the whole genome using an indexing of the reference (`Index reference`). Those alignment are then merged (`Merge`) and a depth histogram is also produced for each subgenome (`Histogram`).](img/whole_gwf_4.png)
-
-## Tasks-questions
-
-Consider the workflow file `WF05_align_merge_plot.py`:
-
-&nbsp;
-
-1. use `status` to see which are the endpoint targets, then find their target dependencies
-2. do you need to protect the final merged alignment in the target `BAM_merge`?
-3. can the targets `BAM_merge` and `Histogram` run at the same time?
-4. A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to **align pairs one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)
-5. Run the workflow and `watch` the `status` of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the `results` folder.
-
-## Code
-
-```{.python code-line-numbers="1-2|6-10|11-24"}
-for FASTQ_PAIR in fastq_pairs:
-    gwf.target( f"BWA_mem_{FASTQ_PAIR}", #name of the target
-           cores=8,
-           memory='16gb',
-           walltime='00:15:00',	
-           inputs= {'INDEXING': [ 'fasta/ecoli_rel606.fasta.'+ extension for extension in ['amb','ann','bwt','pac','sa'] ],
-                    'FASTQS': [f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',
-                               f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz']}, 
-           outputs=[f'results/alignments/{FASTQ_PAIR}.sort.bam',
-                    f'results/depths/{FASTQ_PAIR}.depth','results/depths/hellosamtools.txt' ]) << """
-    mkdir -p results/alignments
-    bwa mem -t 8 fasta/ecoli_rel606.fasta \
-            data_trim/{FASTQ_PAIR}_1.trim.fastq.gz \
-            data_trim/{FASTQ_PAIR}_2.trim.fastq.gz > \
-            results/alignments/{FASTQ_PAIR}.sam
-    samtools view -S -b results/alignments/{FASTQ_PAIR}.sam > results/alignments/{FASTQ_PAIR}.bam
-    samtools sort -o results/alignments/{FASTQ_PAIR}.sort.bam results/alignments/{FASTQ_PAIR}.bam
-    ### print depths in text file
-    mkdir -p results/depths
-    samtools index results/alignments/{FASTQ_PAIR}.sort.bam
-    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam > results/depths/{FASTQ_PAIR}.depth && touch hellosamtools.txt
-    """.format(FASTQ_PAIR=FASTQ_PAIR)
-
-gwf.target( "BAM_merge", #name of the target
-           cores=1,
-           memory='8gb',
-           walltime='00:10:00',	
-           inputs= [f'results/alignments/{FASTQ_PAIR}.sort.bam' for FASTQ_PAIR in fastq_pairs], 
-           outputs=['results/alignments/merged.bam']) << """
-    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam
-    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam
-    """
-
-gwf.target( "Histogram", #name of the target
-           cores=1,
-           memory='8gb',
-           walltime='00:10:00',	
-           inputs= [f'results/depths/{FASTQ_PAIR}.depth' for FASTQ_PAIR in fastq_pairs], 
-           outputs=[ 'results/depths/histogram.pdf' ]) << """
-    Rscript plotscript.R
-    """
-```
-
-## Answers
-
-**1. use `status` to see which are the endpoint targets, then find their target dependencies**
-
-&nbsp;
-
-There are two endpoints: one for merging aligned files and one for plotting a histogram. Use
-
-```{.bash} 
-gwf -f WF05_align_merge_plot.py status --endpoints
-```
-to obtain 
-```{.bash}
-⨯ BAM_merge     shouldrun
-⨯ Histogram     shouldrun
-```
-
-. . .
-
-Use the `info` command to see their file dependencies:
-
-```{.bash}
-gwf -f WF05_align_merge_plot.py info Histogram BAM_merge
-```
-
-Look at the output to find out that `Histogram` and `BAM_merge` depend both on the following targets
-
-```{.bash}
-"BWA_mem_SRR2589044",
-"BWA_mem_SRR2584866",
-"BWA_mem_SRR2584863"
-```
-
-. . .
-
-Note though that they depend on different files from those targets!
-
----
-
-**2. do you need to protect the final merged alignment in the target `BAM_merge`?**
-
-&nbsp;
-
-`BAM_merge` is an endpoint target, so its files do not need to be protected in case you want to do a cleanup with `gwf clean`. You can clean all files anyway with `gwf clean --all`. 
-
----
-
-**3. can the targets `BAM_merge` and `Histogram` run at the same time?**
-
-&nbsp;
-
-Yes, as soon as the raw data files have been aligned separately.
-
----
-
-**4. A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to **align pairs one at a time in the same target**, how much more time would it take? (assuming parallel targets start running at the same time)**
-
-&nbsp;
-
-If you run a single target with the alignment of all pairs, it will take twice the time compared to running parallel targets. 
-
-When you run **parallel targets**, the time needed to finish the alignments is the **time needed for the largest pair** (which is twice the size of the others).
-
-&nbsp;
-
-. . .
-
-When you run **sequentially** the alignments, it takes the **sum of all alignment times** to get done.
-
-![](img/seq_or_par.png)
-
-# Clean up after yourself
-
-Use the `tree` command to look at how many files you created!
-
-
-. . .
-
-&nbsp;
-
-What is the size of each folder and their total size?
-
-```{.bash}
-du -h
-```
-
-We have 8.3GB of data
-
-```{.bash}
-17K     ./__pycache__
-961M    ./data_trim
-5.8G    ./results/alignments
-13K     ./results/multiqc_output/multiqc_data
-17K     ./results/multiqc_output
-286M    ./results/depths
-6.1G    ./results
-1.0K    ./Environments
-39K     ./.gwf/logs
-40K     ./.gwf
-1.2G    ./data
-13M     ./fasta
-0       ./.empty
-8.3G    .
-```
-
----
-
-Try to use 
-
-```{.bash}
-gwf -f WF05_align_merge_plot.py clean
-```
-
-accept the warning message and note how, already for a small exercise, you are going to cleanup a lot.
-
----
-
-Now you have a more slim folder, which contains workflows, raw data, a merged quality report, aligned data and depth histogram in `.pdf`.
-
-&nbsp;
-
-All the other files can be recreated at any moment if necessary.
-
-&nbsp;
-
-:::{.callout-tip}
-Remember: **Computation cost << Storage cost**
-:::
-
-
-# Last tips
-
-## Using a separate conda environment in a target
-
-You might have a conda environment with a specific version of the package `gwf`, and then another environment with relevant packages, called for example `tools_environment`.
-
-. . .
-
-To activate that environment, add two lines into your `bash` code executed by the target:
-
-```{.bash}
-    eval "$(conda shell.bash hook)" 
-    conda activate tools_environment
-```
-
----
-
-For example:
-
-```{.python code-line-numbers="1-3|6|7-9|10-12|13"}
-from gwf import Workflow
-
-gwf = Workflow(defaults={'account': 'your_project'})
-
-## A target doing FastQC on a file
-gwf.target('FastQC', 
-           cores=1,
-           memory='8gb',
-           walltime='00:05:00',	
-           inputs=['data/SRR2584863_1.fastq.gz'], 
-           outputs=['data/SRR2584863_1_fastqc.html', 
-                    'data/SRR2584863_1_fastqc.zip']) << """ 
-eval "$(conda shell.bash hook)" 
-conda activate tools_environment
-fastqc data/SRR2584863_1.fastq.gz
-"""
-```
-
-## Use templates
-
-You can define templates in your workflow, or in a separate file called for example `templates.py`. A template for the `FastQC` target could be
+:::{.callout-note title="Using project resources"}
+Now you have an empty workflow, which will use the few free resources each user has available. Resources from a project you are part of can be created using instead 
 
 ```{.python}
-def fastqc(input="", cores=1, memory='8gb', walltime='00:05:00'):
-    """A template for fastqc"""
-    inputs = [f'{input}.fastq.gz']
-    outputs = [f'{input}_fastqc.zip',f'{input}_fastqc.html']
-    options = {
-        'cores': cores,
-        'memory': memory,
-        'walltime': walltime
-    }
+gwf = Workflow( defaults={"account": "PROJECT_NAME"} )
+```
+:::
 
-    spec = '''
-    fastqc {input}
-    '''.format(input=inputs[0])
+---
 
+### Templates
+
+Now we create generic templates which will be applied to the specific targets.
+
+- Which are the inputs and outputs?
+- Which are the resources?
+- Which commands are executed?
+
+:::{.callout-note}
+`return` will provide all info about the template when applying it to a target.
+:::
+
+```{.python}
+def renameFile(inputName, outputName):
+    inputs  = [inputName]
+    outputs = [outputName]
+    options = {"cores": 1, "memory": "1g", "walltime": "00:01:00"}
+    spec = f"""
+        cp {inputName} {outputName}
+    """
     return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec)
 ```
 
 ---
 
-the workflow file contains now `import` to import the template, and uses it afterwards to define a target:
-
 ```{.python}
-from gwf import Workflow
-import template
-
-gwf = Workflow(defaults={'account': 'your_project'})
-
-## A target doing FastQC on a file
-
-gwf.target_from_template(
-    name='fastqc_from_template',
-    template=fastqc(input='data/SRR2584863_1'))
+def zipFile(inputName):
+    inputs  = [inputName]
+    outputs = [f"{inputName}.gz"]
+    options = {"cores": 1, "memory": "4g", "walltime": "00:10:00"}
+    spec = f"""
+        gzip -k {inputName}
+    """
+    return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec)
 ```
 
-## Add new files after running a workflow
-
-If you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.
-
-. . . 
+:::{.callout-note}
+`return` will provide all info about the template when applying it to a target.
+:::
 
 &nbsp;
 
-**Example:** adding new `fastq.gz` files in the `data` folder of this workshop will update the workflow adding new steps and rendering others from `completed` to `shouldrun`.
+Let's look again at the corresponding workflow graph:
+
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+  A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET<br>cores=4<br>memory=24g<br>walltime=00:10:00]
+  A --->|samples.txt<br>OUTPUT-INPUT| B[Zip<br>TARGET<br>cores=1<br>memory=8g<br>walltime=00:01:00]
+  B --->|samples.zip<br>OUTPUT| C(["End"]);
+
+```
+---
+
+### Apply templates to targets
+
+Using templates is easy with `gwf`. You can use the `target_from_template` method to create a target from a template.
+
+```{.python scrollable="true"}
+target_rename = gwf.target_from_template("target_rename", 
+                                         renameFile(inputName="data.txt", 
+                                                    outputName="samples.txt")
+                                        )
+
+target_gzip = gwf.target_from_template("target_gzip", 
+                                         zipFile(inputName="samples.txt")
+                                        )
+```
+
+:::{.callout-note}
+Each target has an unique name so that you will be able to inspect the workflow and its status.
+:::
+
+# Exercise
+
+We will run this workflow and add some new targets to it
+
+```{mermaid}
+flowchart LR
+  A0(["Start"]) -->|data.fq| A["split"]
+  A -->|part001.fq| B["table"]
+  A -->|part002.fq| C["table"]
+  A -->|part....fq| D["table"]
+  A -->|part010.fq| E["table"]
+  B -->|table001.tsv| F["merge"]
+  C -->|table002.tsv| F
+  D -->|table....tsv| F
+  E -->|table010.tsv| F
+  F -->|table.tsv| G(["End"])
+```
+
+## Exercise I: workflow with conda containers
+
+Prepare everything for the exercise: create a **new folder**, then download **data and workflow file**
+
+```{.bash}
+ mkdir -p myPipeline
+ cd myPipeline
+
+ wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq
+ wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py
+```
+
+---
+
+Create a conda environment for `seqkit` and one for the `gwf` workflow software. Download the `seqkit` container as well.
+
+&nbsp;
+
+```{.bash}
+conda config --add channels gwforg
+conda create -y -n pipelineEnv gwf=2.1.1
+#package for resource usage/check
+conda install -y -n pipelineEnv -c micknudsen gwf-utilization
+#env for seqkit
+conda create -y -n seqkitEnv seqkit
+#Container
+singularity pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0
+```
+
+&nbsp;
+
+:::{.callout-tip}
+If packages cannot be found, you need to add these default channels as well 
+
+```{.bash}
+conda config --add channels bioconda
+conda config --add channels conda-forge
+```
+:::
+
+---
+
+Now look at the `status` of your workflow. You should recognize all the steps (*targets*). Those are marked `shouldrun`, because the outputs and/or inputs are not existent. Remember to activate the environment for `gwf`.
+
+&nbsp;
+
+```{.bash}
+conda activate pipelineEnv
+
+gwf -f workflow.py status
+```
+
+![](img/status0.png){fig-align="center" width=500px}
+
+&nbsp;
+
+:::{.callout-tip}
+You do not need the option `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`.
+:::
+
+---
+
+Now, you might also want to look at how a specific *target* looks like when the workflow is built
+
+```{.bash}
+gwf info split
+```
+
+You will be able to see the actual inputs, outputs, and other targets it depends from/depending on it:
+
+```{.python .scrollable  code-line-numbers="4-6|9|12-21|26-35"}
+{
+    "split": {
+        "options": {
+            "cores": 1,
+            "memory": "4g",
+            "walltime": "05:00:00"
+        },
+        "inputs": [
+            "data.fq"
+        ],
+        "outputs": [
+            "gwf_splitted/part001.fq",
+            "gwf_splitted/part002.fq",
+            "gwf_splitted/part003.fq",
+            "gwf_splitted/part004.fq",
+            "gwf_splitted/part005.fq",
+            "gwf_splitted/part006.fq",
+            "gwf_splitted/part007.fq",
+            "gwf_splitted/part008.fq",
+            "gwf_splitted/part009.fq",
+            "gwf_splitted/part010.fq"
+        ],
+        "spec": "\n    seqkit split2 -O gwf_splitted --by-part 10 --by-part-prefix part data.fq\n    ",
+        "dependencies": [],
+        "dependents": [
+            "table_6",
+            "table_8",
+            "table_3",
+            "table_0",
+            "table_1",
+            "table_4",
+            "table_5",
+            "table_9",
+            "table_7",
+            "table_2"
+        ]
+    }
+}
+```
+
+---
+
+:::{.callout-tip}
+Do you want to see the whole workflow in a text editor? Use the `less` viewer, 
+
+```{.bash}
+gwf info | less
+```
+
+or output into a text file:
+
+```{.bash}
+gwf info > workflow_explicit.txt
+```
+:::
+
+&nbsp;
+
+Now, you can run specific targets. Let's specify some names to test out our workflow. 
+
+```{.bash}
+gwf run split table_0
+```
+
+:::{.callout-tip}
+You can run the entire workflow with `gwf run` when you are sure of your targets working correctly with the right resources.
+:::
+
+---
+
+Check the status: the two turgets will be `submitted`, then `split` has to run first, and its *dependency* `table_0` will run when the file `part_001.fq` is generated! We use `watch` in front of the command to update its view every two seconds.
+
+```{.bash}
+watch gwf status
+```
+
+&nbsp;
+
+At some point, you will see the `running` status (for a few seconds) and `completed` status.
+
+![](img/gwfCompleted.png){fig-align="center" width=500px}
+
+
+**Exercise break**
+
+---
+
+:::{.callout-tip}
+When the status of a target is `failed`, or you want to verify messages on the command line, you can visualize the standard output and standard error messages of your target with the commands below (example with the `split` target):
+
+&nbsp;
+
+```{.bash}
+gwf logs split 
+gwf logs -e split
+```
+:::
+
+---
+
+### Resize the workflow resources and add a step
+
+How many resources did `split` and `table_0` use? Run the utilization command:
+
+```{.bash}
+gwf utilization
+```
+
+![](img/gwfUtilization.png){fig-align="center" width=1000px}
+
+&nbsp;
+
+The table shows we underutilized the resources. Now open `workflow.py` and change your resource usage for the `split` and `table_` steps. Then, run the target:
+
+```{.bash}
+gwf run table_1
+```
+&nbsp;
+
+Check again resource usage when the status is `completed`. Did it get better?
+
+**Exercise break**
+
+---
+
+## Exercise II: singularity in workflows{.scrollable}
+
+Now, you will change the executor for the template `table`. Your task is to:
+
+  - open the `workflow.py` file
+  - below importing the `Conda` module (line 2), add a new line with 
+
+    `from gwf.executors import Singularity`
+  - Now, define a new executor. Below the line where you define `conda_env = Conda("seqkitEnv")`, use a similar syntax and write `sing = Singularity("seqkit_2.10.0")`, where you provide the container file as argument.
+  - At the end of the `align` template, use the new executor `sing` instead of `conda_env`.
+
+&nbsp;
+
+Did you do it right? If yes, then you should be able to run the `combine` target:
+
+```{.bash}
+gwf run combine
+```
+
+and see its status become `completed` after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or [look at the solution file, if you prefer](https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_container.py).
+
+:::{.callout-note}
+Because `combine` depends on all `table_` targets, it will submit all those targets as well, which need to run first.
+:::
+
+**Exercise break**
+
+---
+
+## Exercise III: Your own target!{.scrollable}
+
+Ok, now we want to extend the workflow and do quality control on the `part_###.fq` files. 
+
+```{mermaid}
+flowchart LR
+  A0(["Start"]) -->|data.fq| A["split"]
+  A -->|part001.fq| B["table"]
+  A -->|part002.fq| C["table"]
+  A -->|part....fq| D["table"]
+  A -->|part010.fq| E["table"]
+  B -->|table001.tsv| F["merge"]
+  C -->|table002.tsv| F
+  D -->|table....tsv| F
+  E -->|table010.tsv| F
+  F -->|table.tsv| G(["End"])
+  A -->|"part[001-010].fq"| H["qc"]
+  H -->|multiqc_report.html| I(["End"])
+```
+
+---
+
+You need to:
+
+  - create a new conda environment called `qcEnv` where you install the two packages `fastqc multiqc`.
+  - add a new executor called `qc_env` based on `Conda("qcEnv")`.
+  - create a new target which starts with `def qc(data_folder)`
+    - this will need all ten `gwf_splitted/part_###.fq` file as input files (you can copy the output file list of the `split` template, where you use a variable `{data_folder}` instead of the explicit folder name!)
+    - as output you want a file called `[reports/multiqc_report.html]` (default name for the generated report)
+    - as bash commands you need:
+      ```{.bash}
+      mkdir -p reports
+      fastqc -o reports gdk_splitted/*.fq
+      multiqc -o reports reports/
+      ```
+    - remember to set the correct executor at the end of the template inside `return`
+    - now you need to create one single target from the template, call it `qc`. You only need to give as input the name of the folder with the `fq` files
+
+
+:::{.callout-tip}
+Some useful tips when developing a workflow:
+- Before running any targets, use `gwf info qc` to check dependencies.
+- Copy previous similar templates and modify them where needed, instead of writing each template from scratch
+:::
+
+When you are sure you are done, then use `gwf run qc`. Its `status` should be `completed` if it runs successfully.
+
+Ask for help, or [look at the solution file, if you prefere](https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_qc.py).
+
+**Exercise break**
+
+---
+
+:::{.callout-note}
+Good practices:
+
+ - do not make tiny and numerous targets, try to put together things which can run quickly
+ - start testing one of many parallel elements of a workflow before running them all at once
+    - determine resource usage (`gwf utilization` - needs a plugin, see earlier exercises)
+    - then adjust your templates' resources accordingly
+ - verify often your code is correct
+    - `gwf info | less -S` to check dependencies
+    - remember you are using python, check some of your code directly in it!
+  - when done, you are reproducible if you share with your datasets:
+    - container pull commands
+    - conda environment(s) package list 
+    - workflow files
+:::
+
+
+
+# Closing the workshop
+
+Please fill out this form :)
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">Indlæser…</iframe>
+
+---
+
+- A lot of things we could not cover
+
+- use the official documentation! 
+
+- ask for help, use drop in hours ([ABC cafe](https://abc.au.dk)), drop me a mail
+  
+- Slides updated over time, use as a reference
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

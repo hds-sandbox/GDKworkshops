@@ -1188,12 +1188,12 @@ Good practices:
 
  - do not make tiny and numerous jobs, try to put together things with similar resource usage
  - start testing one of many parallel elements of a worlflow
-    - determine resource usage (`gwf utilization` - needs a plugin, see exercises after)
-    - then adjust all elements accordingly
+    - determine resource usage (`gwf utilization` - needs a plugin, see earlier exercises)
+    - adjust your templates' resources accordingly
  - verify often your code is correct
-    - `gwf info | less -S` to check dependencies
+    - `gwf info target_name` to check dependencies
     - remember you are using python, check some of your code directly in it!
-  - when done, you are reproducible if you share with your datasets:ave
+  - when done, you are reproducible if you share with your datasets:
     - container pull commands
     - conda environment(s) package list 
     - workflow files

@@ -50,3 +50,4 @@ _site
 
 slides_files/
 /.quarto/
+site_libs
