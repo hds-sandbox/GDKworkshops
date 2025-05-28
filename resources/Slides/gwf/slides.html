@@ -11,8 +11,8 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2024-04-09">
-  <title>GenomeDK workshops – Introduction to workflows with gwf</title>
+  <meta name="dcterms.date" content="2025-05-28">
+  <title>GenomeDK workshops – Introduction to workflows on GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -110,6 +110,8 @@
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -122,7 +124,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -199,14 +200,17 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction to workflows with gwf</h1>
-  <p class="subtitle">https://hds-sandbox.github.io/GDKworkshops</p>
+  <h1 class="title">Introduction to workflows on GenomeDK</h1>
+  <p class="subtitle">Learn to create smooth pipelines and manage resources tinyurl.com/pipelinesGDK</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,7 +218,7 @@
 Samuele Soraggi 
 </div>
         <p class="quarto-title-affiliation">
-            Health Data Science sandbox, BiRC
+            Health Data Science sandbox, BiRC, AU
           </p>
     </div>
 <div class="quarto-title-author">
@@ -222,37 +226,100 @@ Samuele Soraggi
 Dan Søndergaard 
 </div>
         <p class="quarto-title-affiliation">
-            GenomeDK, Health
+            GenomeDK, Health, AU
           </p>
     </div>
 </div>
 
-  <p class="date">2024-04-09</p>
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#/short-on-workflows-and-gwf" id="/toc-short-on-workflows-and-gwf">Short on Workflows and gwf</a></li>
-<li><a href="#/exercise-setup" id="/toc-exercise-setup">Exercise setup</a></li>
-<li><a href="#/a-single-target-workflow" id="/toc-a-single-target-workflow">A single target Workflow</a></li>
-<li><a href="#/parallel-targets" id="/toc-parallel-targets">Parallel targets</a></li>
-<li><a href="#/multiple-target-dependencies" id="/toc-multiple-target-dependencies">Multiple target dependencies</a></li>
-<li><a href="#/exercise-1" id="/toc-exercise-1">Exercise 1</a></li>
-<li><a href="#/exercise-2" id="/toc-exercise-2">Exercise 2</a></li>
-<li><a href="#/clean-up-after-yourself" id="/toc-clean-up-after-yourself">Clean up after yourself</a></li>
-<li><a href="#/last-tips" id="/toc-last-tips">Last tips</a></li>
-</ul>
-</nav>
+  <p class="date">2025-05-28</p>
 </section>
 <section>
-<section id="short-on-workflows-and-gwf" class="title-slide slide level1 center">
-<h1>Short on Workflows and gwf</h1>
+<section id="some-background" class="title-slide slide level1 center">
+<h1>Some background</h1>
+<ul>
+<li><p>These slides are both a presentation and a small reference manual</p></li>
+<li><p>90% of slides are you doing stuff - <strong>open your terminals and slides</strong></p></li>
+<li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a> and <a href="https://gwf.app/">gwf.app</a></p></li>
+<li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Field Manual!</a>.</p></li>
+</ul>
+</section>
+<section id="when-you-need-to-ask-for-help" class="slide level2">
+<h2>When you need to ask for help</h2>
+<ul>
+<li><p><strong>Practical help:</strong></p>
+<p>Samuele (BiRC, MBG) - samuele@birc.au.dk</p></li>
+<li><p><strong>Drop in hours:</strong></p>
+<ul>
+<li>Bioinformatics Cafe: <a href="abc.au.dk">https://abc.au.dk</a>, abcafe@au.dk</li>
+<li>Samuele (BiRC, MBG) - samuele@birc.au.dk</li>
+</ul></li>
+<li><p><strong>General mail for assistance</strong></p>
+<p>support@genome.au.dk</p></li>
+</ul>
+</section>
+<section id="what-you-need" class="slide level2">
+<h2>What you need</h2>
+<ul>
+<li><p>The basics to use the cluster</p></li>
+<li><p>Being able to edit documents on the cluster</p></li>
+<li><p>Have conda or pixi installed</p></li>
+<li><p>If possible a project on the cluster</p></li>
+</ul>
+</section>
+<section id="program" class="slide level2 scrollable">
+<h2>Program</h2>
+<ul>
+<li><strong>10:00-10:45</strong>:
+<ul>
+<li>Workshop Introduction</li>
+<li>Background on workflows/pipelines</li>
+<li>Workflow file structure and templates</li>
+<li>A small example</li>
+<li>Cake and Questions</li>
+</ul></li>
+<li><strong>11:00-12:00</strong>:
+<ul>
+<li>Workflow for the exercise</li>
+<li>Prepare for the workflow: data, software, workflow file</li>
+<li>Investigate specific parts of the workflow</li>
+<li>Execute one or more targets</li>
+<li>Verify what happens with each target</li>
+</ul></li>
+<li><strong>12:45-13:45</strong>:
+<ul>
+<li>calibrate your resources</li>
+<li>add a template and targets to a pipeline</li>
+</ul></li>
+<li><strong>13:45-14:00</strong>:
+<ul>
+<li>Questions</li>
+<li>Feedback</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="background-on-workflows" class="title-slide slide level1 center">
+<h1>Background on workflows</h1>
 
 </section>
-<section id="workflow" class="slide level2">
-<h2>Workflow</h2>
-
-<img data-src="img/small_pipeline.png" class="quarto-figure quarto-figure-center r-stretch"><div title="Workflow and W. Management System">
+<section id="workflow-terminology" class="slide level2">
+<h2>Workflow terminology</h2>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0(["Start"]) ---&gt;|data.txt| A["Rename"]
+  A ---&gt;|samples.txt| B(["End"])
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<div title="Workflow and W. Management System">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -262,486 +329,311 @@ Dan Søndergaard
 <p><strong>Workflow and W. Management System</strong></p>
 </div>
 <div class="callout-content">
-<p>A <strong>workflow</strong> is a series of calculations and data manipulations which have to be performed in a specific sequence. A <strong>workflow management system</strong> organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system.</p>
+<p>A <strong>workflow</strong> is a series of calculations and data manipulations which have to be performed in a specific sequence.</p>
+<p>&nbsp;</p>
+<p>A <strong>workflow management system</strong> organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="a-few-terms" class="slide level2">
-<h2>A few terms</h2>
+<section class="slide level2">
 
-<img data-src="img/small_pipeline_terms.png" class="quarto-figure quarto-figure-center r-stretch"><p>Each target of the workflow is <strong>submitted</strong> to a queueing manager so that it enters the queue and can be executed when possible.</p>
-</section>
-<section id="gwf" class="slide level2">
-<h2>Gwf</h2>
-<p>A lightweight and easy to adopt workflow manager. it requires knowing or learning <code>Python</code>. Some useful features:</p>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0(["Start"]) ---&gt;|data.txt&lt;br&gt;INPUT| A[Rename&lt;br&gt;TARGET]
+  A ---&gt;|samples.txt&lt;br&gt;OUTPUT| B(["End"]);
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
 <ul>
-<li>Defines <strong>target dependencies automatically</strong> using the input and output files of targets</li>
-<li>Only submits targets when their output files are <strong>not up to date</strong></li>
-<li>Fire-and-forget: once you submit targets, you need <strong>not do more</strong></li>
-<li>Has a few, simple and useful commands for <strong>following workflow execution</strong> and <strong>cleaning up</strong> intermediate data files</li>
+<li><p>A <strong>TARGET</strong> is a specific step in a workflow</p></li>
+<li><p>Each target has a <strong>SPECIFICATION</strong> which describes what to do with the input files to produce the output files</p></li>
+<li><p>The specification is usually a <strong>command line</strong> which can be executed in a terminal</p></li>
+<li><p>Each target has <strong>INPUTS</strong> and <strong>OUTPUTS</strong> file(s)</p></li>
 </ul>
-<p>Check out <a href="https://gwf.app/">the gwf webpage</a> for updates, examples and more detailed documentation.</p>
-</section></section>
-<section>
-<section id="exercise-setup" class="title-slide slide level1 center">
-<h1>Exercise setup</h1>
-<p>Data and inspiration from <a href="https://datacarpentry.org/wrangling-genomics/index.html">this SW carpentry bioinformatics tutorial</a>, which does not use pipelines.</p>
-
-<img data-src="img/whole_gwf.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="download-examples-and-data" class="slide level2">
-<h2>Download examples and data</h2>
-<p>Examples and reference file</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-o</span> gwf_workshop.zip https://github.com/hds-sandbox/GDKworkshops/archive/main.zip <span class="dt">\</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">unzip</span> gwf_workshop.zip <span class="dt">\</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> GDKworkshops-main/Examples/gwf gwf_workshop <span class="dt">\</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> GDKworkshops-main gwf_workshop.zip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Download fastq files</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> gwf_workshop/data</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> gwf_workshop/data/</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz</span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz</span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz</span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz</span>
-<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz</span>
-<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz</span>
-<span id="cb2-10"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<p>Final file structure (run the <code>tree</code> command)</p>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0(["Start"]) ---&gt;|data.txt&lt;br&gt;INPUT| A[Rename&lt;br&gt;TARGET]
+  A ---&gt;|samples.txt&lt;br&gt;OUTPUT-INPUT| B[Zip&lt;br&gt;TARGET]
+  B ---&gt;|samples.zip&lt;br&gt;OUTPUT| C(["End"]);
 
-<img data-src="img/tree_download.png" class="r-stretch"></section>
-<section id="install-gwf" class="slide level2">
-<h2>Install gwf</h2>
-<p>Using conda to create a new environment from the <code>yml</code> file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> gwf_workshop <span class="at">-f</span> Environments/gwf_workshop.yml</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate gwf_workshop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can see the package list with</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Environments/gwf_workshop.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="fragment">
-<p>The whole environment dependencies and versions can be seen with</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</pre>
 </div>
-</section></section>
-<section>
-<section id="a-single-target-workflow" class="title-slide slide level1 center">
-<h1>A single target Workflow</h1>
-
-<img data-src="img/simple_gwf.png" class="quarto-figure quarto-figure-center r-stretch"><p>The workflow file can be printed out with</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> WF01_report.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Exit using <code>q</code></p>
-</section>
-<section class="slide level2">
-
-<p>You can easily spot all the elements of a workflow graph:</p>
-<div class="sourceCode" id="cb7" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
-<span id="cb7-4"><a></a></span>
-<span id="cb7-5"><a></a><span class="co">## A target doing FastQC on a file</span></span>
-<span id="cb7-6"><a></a>gwf.target(<span class="st">'FastQC'</span>, </span>
-<span id="cb7-7"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb7-8"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb7-9"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb7-10"><a></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
-<span id="cb7-11"><a></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
-<span id="cb7-12"><a></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb7-13"><a></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
-<span id="cb7-14"><a></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="status-and-submission" class="slide level2">
-<h2>Status and submission</h2>
-<p>We can see what is the status of each target - if it doesn’t see the output files (<code>shouldrun</code>), if the output is there (<code>completed</code>), if it is executing a target (<code>running</code>), or if it failed (‘failed’).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF01_report.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>will show</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC        shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="fragment">
-<p>You can submit the targets with</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF01_report.py run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>which reports you</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Submitting</span> target FastQC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p></p></figure><p></p>
 </div>
-<div class="fragment">
-<p>Look again at the status. You can follow it up in real-time using <code>watch</code> (it will lose the nice colour formatting):</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf <span class="at">-f</span> WF01_report.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You might see it going from <code>submitted</code> to <code>running</code> and <code>completed</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">✓</span> FastQC        completed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="targets-stdout-and-stderr" class="slide level2">
-<h2>Targets stdout and stderr</h2>
-<p>What are the commands in a target outputting? You can see <code>stdout</code> and <code>stderr</code> in the log of a target:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF01_report.py logs FastQC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF01_report.py logs <span class="at">-e</span> FastQC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="parallel-targets" class="title-slide slide level1 center">
-<h1>Parallel targets</h1>
-
-<img data-src="img/whole_gwf_1.png" class="r-stretch quarto-figure-center"><p class="caption">Define independent targets which can run <strong>at the same time</strong> in the workflow</p></section>
-<section class="slide level2">
-
-<p>You can use python to automatically parsing names in a folder and creating targets:</p>
-<div class="sourceCode" id="cb16" data-code-line-numbers="1-5|8|9-10|10-12|16-18|19-20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co">#find .fastq.gz files in the data folder</span></span>
-<span id="cb16-2"><a></a>pattern <span class="op">=</span> os.path.join(<span class="st">'data'</span>, <span class="st">'*.fastq.gz'</span>)</span>
-<span id="cb16-3"><a></a>fastq_files <span class="op">=</span> glob.glob(pattern) </span>
-<span id="cb16-4"><a></a><span class="co">#keep only the file name without the folder path</span></span>
-<span id="cb16-5"><a></a>fastq_files <span class="op">=</span> [os.path.basename(<span class="bu">file</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> fastq_files] <span class="co">#remove the path from the file</span></span>
-<span id="cb16-6"><a></a></span>
-<span id="cb16-7"><a></a></span>
-<span id="cb16-8"><a></a><span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files:</span>
-<span id="cb16-9"><a></a>    <span class="co">#name without extensions</span></span>
-<span id="cb16-10"><a></a>    FASTQ_BASENAME <span class="op">=</span> FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] </span>
-<span id="cb16-11"><a></a>    <span class="co">#target with file-dependent name and inputs/outputs</span></span>
-<span id="cb16-12"><a></a>    gwf.target( <span class="ss">f'FastQC_</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">'</span>, </span>
-<span id="cb16-13"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb16-14"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb16-15"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb16-16"><a></a>           inputs<span class="op">=</span>[<span class="ss">f'data/</span><span class="sc">{</span>FASTQ<span class="sc">}</span><span class="ss">'</span>], </span>
-<span id="cb16-17"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span>, </span>
-<span id="cb16-18"><a></a>                    <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb16-19"><a></a><span class="st">    fastqc data/</span><span class="sc">{FASTQ}</span></span>
-<span id="cb16-20"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ<span class="op">=</span>FASTQ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="useful-gwf-checks-and-debug" class="slide level2">
-<h2>Useful gwf checks and debug</h2>
-<p>You can see the status with specific messages about the status of each target and what causes it.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py <span class="at">-v</span> debug status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>At the end of the debug messages, you will see that one FastQC is already complete from the first example.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2584866_1 shouldrun</span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2589044_1 shouldrun</span>
-<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">✓</span> FastQC_SRR2584863_1 completed</span>
-<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2584863_2 shouldrun</span>
-<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2589044_2 shouldrun</span>
-<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> FastQC_SRR2584866_2 shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<p>You can print explicitely some targets of your choice and their dependencies. For example all the targets related to the first element of the fastq pairs:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py info FastQC<span class="pp">*</span>_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>&nbsp;</p>
-<p>Giving no names will print all the targets</p>
+<ul>
+<li>A target can be <strong>dependent</strong> on other targets, i.e.&nbsp;it needs their output files as input before it can run</li>
+</ul>
 </section>
 <section class="slide level2">
 
-<p>Try to run the whole workflow and follow its status with <code>watch</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf <span class="at">-f</span> WF02_report_parallel.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0(["Start"]) ---&gt;|data.txt&lt;br&gt;INPUT| A[Rename&lt;br&gt;TARGET&lt;br&gt;cores=4&lt;br&gt;memory=24g&lt;br&gt;walltime=00:10:00]
+  A ---&gt;|samples.txt&lt;br&gt;OUTPUT-INPUT| B[Zip&lt;br&gt;TARGET&lt;br&gt;cores=1&lt;br&gt;memory=8g&lt;br&gt;walltime=00:01:00]
+  B ---&gt;|samples.zip&lt;br&gt;OUTPUT| C(["End"]);
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>&nbsp;</p>
-<p>Targets will run independently and might run at the same time.</p>
+<ul>
+<li>A target has settings for <strong>resources</strong>
+<ul>
+<li>cores</li>
+<li>memory</li>
+<li>walltime (dd:hr:mn:sc) which are used to run the target on a cluster</li>
+</ul></li>
+</ul>
 </section>
 <section class="slide level2">
 
-<p>See specifically what gwf states about your targets: why a target should run, why not?</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF02_report_parallel.py <span class="at">-v</span> debug status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each target of the workflow</p>
 <p>&nbsp;</p>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<ul>
+<li>is <strong>submitted</strong> by the <strong>workflow manager</strong> to the queueing system</li>
+<li>can be <strong>monitored</strong> with the workflow manager</li>
+<li>influences the <strong>queueing time</strong> Depending on requested resources</li>
+</ul>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gantt
+    dateFormat  HH:mm
+    axisFormat  %H:%M
+    title HPC Queue Durations vs. Resources
+
+    section Small Job (1 core, 4GB, 1h)
+    Queue wait: active, 00:00, 0:10
+    Job start: active, 00:10, 1:00
+
+    section Medium Job (4 cores, 16GB, 2h)
+    Queue wait: active, 00:00, 0:45
+    Job start: active, 00:45, 2:00
+
+    section Large Job (16 cores, 64GB, 4h)
+    Queue wait: active, 00:00, 2:00
+    Job start: active, 02:00, 4:00
+</pre>
 </div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>When developing a workflow, take your time to use <code>status</code> and <code>info</code> once you add new targets.</p>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
+</section>
+<section id="gwf-workflow-manager" class="slide level2">
+<h2>Gwf workflow manager</h2>
+<p>A lightweight and easy to adopt workflow manager. It requires only some basic <code>Python</code> - you can learn it along the way starting from examples. Some useful features:</p>
+<p>&nbsp;</p>
+<ul>
+<li>Developed at AU (Dan at GenomeDK) and used also at MOMA, AUH, …
+<ul>
+<li>Easy to find support</li>
+</ul></li>
+<li>In python, no need for a workflow language
+<ul>
+<li>You can use all python functions to build your workflow!</li>
+</ul></li>
+<li>Easy to structure a workflow and check resource usage
+<ul>
+<li>Reusable templates</li>
+<li>Very pedagogical</li>
+</ul></li>
+<li>Conda, Pixi, Container usage out-of-the-box</li>
+</ul>
 </section></section>
 <section>
-<section id="multiple-target-dependencies" class="title-slide slide level1 center">
-<h1>Multiple target dependencies</h1>
-
-<img data-src="img/whole_gwf_2.png" class="r-stretch quarto-figure-center"><p class="caption">A single target (MultiQC) is dependent on the execution of multiple targets (FastQC of the data files)</p></section>
-<section class="slide level2">
-
-<div class="sourceCode" id="cb23" data-code-line-numbers="1-2|4|8-11|12-14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="co">#names without path and extensions</span></span>
-<span id="cb23-2"><a></a>fastq_basenames <span class="op">=</span> [ FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files ] </span>
-<span id="cb23-3"><a></a></span>
-<span id="cb23-4"><a></a>gwf.target( <span class="st">'MultiQC'</span>, <span class="co">#name of the target</span></span>
-<span id="cb23-5"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb23-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb23-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb23-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ZIP'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames],</span>
-<span id="cb23-9"><a></a>                    <span class="st">'REPORTS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames] }, </span>
-<span id="cb23-10"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>],</span>
-<span id="cb23-11"><a></a>           protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb23-12"><a></a><span class="st">    mkdir -p results/multiqc_output</span></span>
-<span id="cb23-13"><a></a><span class="st">    multiqc --outdir results/multiqc_output </span><span class="op">\</span></span>
-<span id="cb23-14"><a></a><span class="st">            data/</span></span>
-<span id="cb23-15"><a></a><span class="st">    """</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="protected-outputs-and-cleaning" class="slide level2">
-<h2>protected outputs and cleaning</h2>
-<p>The workflow parameter</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>prevents you from deleting the specified file when using <code>clean</code>. The <code>clean</code> command removes all <strong>intermediate outputs</strong> of a workflow (not essential for the result report and which <strong>can be replicated</strong> by rerunning the workflow). &nbsp;</p>
-<div title="Endpoints' files are protected">
+<section id="setup-a-small-workflow" class="title-slide slide level1 center">
+<h1>Setup a small workflow</h1>
+<p>The whole workflow is written <strong>in a python script</strong>. You first state the <code>Workflow</code> object, usually like this:</p>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#import libraries</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initiate a workflow object</span></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<div title="Using project resources">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Endpoints’ files are protected</strong></p>
+<p><strong>Using project resources</strong></p>
 </div>
 <div class="callout-content">
-<p>Files generated by <code>endpoints</code> (targets which are not dependencies of others, i.e.&nbsp;at the end of the workflow) do not get deleted. <code>clean --all</code> removes any file in the workflow.</p>
+<p>Now you have an empty workflow, which will use the few free resources each user has available. Resources from a project you are part of can be created using instead</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( defaults<span class="op">=</span>{<span class="st">"account"</span>: <span class="st">"PROJECT_NAME"</span>} )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="status-with-filters" class="slide level2">
-<h2>status with filters</h2>
-<p>We know all FastQC targets are completed. Run first the workflow</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="fragment">
+<section class="slide level2">
+
+<h3 id="templates">Templates</h3>
+<p>Now we create generic templates which will be applied to the specific targets.</p>
+<ul>
+<li>Which are the inputs and outputs?</li>
+<li>Which are the resources?</li>
+<li>Which commands are executed?</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><code>return</code> will provide all info about the template when applying it to a target.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renameFile(inputName, outputName):</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    inputs  <span class="op">=</span> [inputName]</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [outputName]</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {<span class="st">"cores"</span>: <span class="dv">1</span>, <span class="st">"memory"</span>: <span class="st">"1g"</span>, <span class="st">"walltime"</span>: <span class="st">"00:01:00"</span>}</span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a><span class="ss">        cp </span><span class="sc">{</span>inputName<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>outputName<span class="sc">}</span></span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zipFile(inputName):</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    inputs  <span class="op">=</span> [inputName]</span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>inputName<span class="sc">}</span><span class="ss">.gz"</span>]</span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {<span class="st">"cores"</span>: <span class="dv">1</span>, <span class="st">"memory"</span>: <span class="st">"4g"</span>, <span class="st">"walltime"</span>: <span class="st">"00:10:00"</span>}</span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a><span class="ss">        gzip -k </span><span class="sc">{</span>inputName<span class="sc">}</span></span>
+<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
+<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><code>return</code> will provide all info about the template when applying it to a target.</p>
+</div>
+</div>
+</div>
 <p>&nbsp;</p>
-<p>Now look only at the endpoints to avoid a long list of FastQC targets:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>gives for example</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> MultiQC     running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>unless it is still <code>submitted</code> or already <code>completed</code>.</p>
+<p>Let’s look again at the corresponding workflow graph:</p>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0(["Start"]) ---&gt;|data.txt&lt;br&gt;INPUT| A[Rename&lt;br&gt;TARGET&lt;br&gt;cores=4&lt;br&gt;memory=24g&lt;br&gt;walltime=00:10:00]
+  A ---&gt;|samples.txt&lt;br&gt;OUTPUT-INPUT| B[Zip&lt;br&gt;TARGET&lt;br&gt;cores=1&lt;br&gt;memory=8g&lt;br&gt;walltime=00:01:00]
+  B ---&gt;|samples.zip&lt;br&gt;OUTPUT| C(["End"]);
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
 </div>
 </section>
 <section class="slide level2">
 
-<p>Are you waiting for many endpoints? Look only for the <code>completed</code> ones with the status filter:</p>
-<p>&nbsp;</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF03_multi_report.py status <span class="at">--endpoints</span> <span class="at">-s</span> completed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>&nbsp;</p>
-<p>(You can also use the status <code>running</code>, <code>shouldrun</code> or <code>failed</code>).</p>
-</section></section>
-<section>
-<section id="exercise-1" class="title-slide slide level1 center">
-<h1>Exercise 1</h1>
-
-<img data-src="img/whole_gwf_3.png" class="r-stretch quarto-figure-center"><p class="caption">Parallel targets dependent on <code>MultiQC</code> produce trimmed <code>fastq</code> files.</p></section>
-<section id="tasks-questions" class="slide level2 scrollable">
-<h2>Tasks-questions</h2>
-<p>Consider the workflow file <code>WF04_trimming.py</code>:</p>
-<p>&nbsp;</p>
-<ol type="1">
-<li>apply <code>gwf status</code> to watch the <strong>endpoints of the workflow</strong></li>
-<li>Which is the file dependency <strong>common to all trim targets</strong>?</li>
-<li>run the workflow and…</li>
-<li>…apply <code>watch gwf status</code> and follow only the <code>running</code> targets</li>
-<li>Look at the <code>stderr</code> printout of one trimming target</li>
-</ol>
-</section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<div class="sourceCode" id="cb29" data-code-line-numbers="1|4|8-15|22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>fastq_pairs <span class="op">=</span> np.unique([ FASTQ.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_basenames ]) <span class="co">#names without pair number and extension</span></span>
-<span id="cb29-2"><a></a></span>
-<span id="cb29-3"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
-<span id="cb29-4"><a></a>    gwf.target( <span class="ss">f"Trimmomatic_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
-<span id="cb29-5"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb29-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb29-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb29-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ADAPTERS'</span>: [<span class="st">'fasta/NexteraPE-PE.fa'</span>],</span>
-<span id="cb29-9"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.fastq.gz'</span>,</span>
-<span id="cb29-10"><a></a>                               <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.fastq.gz'</span>],</span>
-<span id="cb29-11"><a></a>                    <span class="st">'MULTIQC'</span>: [<span class="st">'results/multiqc_output/multiqc_report.html'</span>]}, </span>
-<span id="cb29-12"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
-<span id="cb29-13"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1un.trim.fastq.gz'</span>,</span>
-<span id="cb29-14"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>,</span>
-<span id="cb29-15"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2un.trim.fastq.gz'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb29-16"><a></a><span class="st">    mkdir -p data_trim</span></span>
-<span id="cb29-17"><a></a><span class="st">    trimmomatic PE -threads 8 </span><span class="op">\</span></span>
-<span id="cb29-18"><a></a><span class="st">                data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.fastq.gz data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.fastq.gz </span><span class="op">\</span></span>
-<span id="cb29-19"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1un.trim.fastq.gz </span><span class="op">\</span></span>
-<span id="cb29-20"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2un.trim.fastq.gz </span><span class="op">\</span></span>
-<span id="cb29-21"><a></a><span class="st">                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:</span><span class="sc">{ADAPTERFILE}</span><span class="st">:2:40:15</span></span>
-<span id="cb29-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR, ADAPTERFILE<span class="op">=</span><span class="st">'fasta/NexteraPE-PE.fa'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="answers" class="slide level2">
-<h2>Answers</h2>
-<p><strong>1. apply <code>gwf status</code> to watch the endpoints of the workflow</strong></p>
-<p>&nbsp;</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>gives</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2584863 shouldrun</span>
-<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2584866 shouldrun</span>
-<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Trimmomatic_SRR2589044 shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<p><strong>2. Which is the file dependency common to all trim targets?</strong></p>
-<p>&nbsp;</p>
-<p>Each endpoint needs an adapter <code>fasta</code> file apart from the raw data files in input. You can look at the file dependencies using</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py info Trimmomatic<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<p><strong>3. run the workflow</strong> <strong>4. use <code>watch gwf status</code> and follow only the <code>running</code> targets</strong></p>
-<p>&nbsp;</p>
-<p>After running the targets, for example with</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py run Trimmomatic<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>you can follow the running targets with</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf <span class="at">-f</span> WF04_trimming.py status <span class="at">-s</span> running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If the targets are currently <code>running</code> and neither <code>shouldrun</code>, <code>completed</code> nor <code>failed</code>, you should see something like this,</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2584863 running</span>
-<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2584866 running</span>
-<span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">↻</span> Trimmomatic_SRR2589044 running</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>after which the targets will be <code>completed</code> (and disappear from your view with the status filter).</p>
-</section>
-<section class="slide level2">
-
-<p><strong>5. Look at the stderr printout of one trimming target</strong></p>
-<p>&nbsp;</p>
-<p>You can see the <code>stderr</code> f a trimming job, for example, by</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF04_trimming.py logs <span class="at">-e</span> Trimmomatic_SRR2589044</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="exercise-2" class="title-slide slide level1 center">
-<h1>Exercise 2</h1>
-
-<img data-src="img/whole_gwf_4.png" class="r-stretch quarto-figure-center"><p class="caption">Parallel targets (<code>BWA</code>), each dependent on a pair of trimming targets, produce alignments of parts of the whole genome using an indexing of the reference (<code>Index reference</code>). Those alignment are then merged (<code>Merge</code>) and a depth histogram is also produced for each subgenome (<code>Histogram</code>).</p></section>
-<section id="tasks-questions-1" class="slide level2 scrollable">
-<h2>Tasks-questions</h2>
-<p>Consider the workflow file <code>WF05_align_merge_plot.py</code>:</p>
-<p>&nbsp;</p>
-<ol type="1">
-<li>use <code>status</code> to see which are the endpoint targets, then find their target dependencies</li>
-<li>do you need to protect the final merged alignment in the target <code>BAM_merge</code>?</li>
-<li>can the targets <code>BAM_merge</code> and <code>Histogram</code> run at the same time?</li>
-<li>A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to <strong>align pairs one at a time in the same target</strong>, how much more time would it take? (assuming parallel targets start running at the same time)</li>
-<li>Run the workflow and <code>watch</code> the <code>status</code> of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the <code>results</code> folder.</li>
-</ol>
-</section>
-<section id="code-1" class="slide level2">
-<h2>Code</h2>
-<div class="sourceCode" id="cb37" data-code-line-numbers="1-2|6-10|11-24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
-<span id="cb37-2"><a></a>    gwf.target( <span class="ss">f"BWA_mem_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
-<span id="cb37-3"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb37-4"><a></a>           memory<span class="op">=</span><span class="st">'16gb'</span>,</span>
-<span id="cb37-5"><a></a>           walltime<span class="op">=</span><span class="st">'00:15:00'</span>, </span>
-<span id="cb37-6"><a></a>           inputs<span class="op">=</span> {<span class="st">'INDEXING'</span>: [ <span class="st">'fasta/ecoli_rel606.fasta.'</span><span class="op">+</span> extension <span class="cf">for</span> extension <span class="kw">in</span> [<span class="st">'amb'</span>,<span class="st">'ann'</span>,<span class="st">'bwt'</span>,<span class="st">'pac'</span>,<span class="st">'sa'</span>] ],</span>
-<span id="cb37-7"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
-<span id="cb37-8"><a></a>                               <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>]}, </span>
-<span id="cb37-9"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span>,</span>
-<span id="cb37-10"><a></a>                    <span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span>,<span class="st">'results/depths/hellosamtools.txt'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb37-11"><a></a><span class="st">    mkdir -p results/alignments</span></span>
-<span id="cb37-12"><a></a><span class="st">    bwa mem -t 8 fasta/ecoli_rel606.fasta </span><span class="op">\</span></span>
-<span id="cb37-13"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz </span><span class="op">\</span></span>
-<span id="cb37-14"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz &gt; </span><span class="op">\</span></span>
-<span id="cb37-15"><a></a><span class="st">            results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam</span></span>
-<span id="cb37-16"><a></a><span class="st">    samtools view -S -b results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam &gt; results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
-<span id="cb37-17"><a></a><span class="st">    samtools sort -o results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
-<span id="cb37-18"><a></a><span class="st">    ### print depths in text file</span></span>
-<span id="cb37-19"><a></a><span class="st">    mkdir -p results/depths</span></span>
-<span id="cb37-20"><a></a><span class="st">    samtools index results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam</span></span>
-<span id="cb37-21"><a></a><span class="st">    samtools depth results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam &gt; results/depths/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.depth &amp;&amp; touch hellosamtools.txt</span></span>
-<span id="cb37-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR)</span>
-<span id="cb37-23"><a></a></span>
-<span id="cb37-24"><a></a>gwf.target( <span class="st">"BAM_merge"</span>, <span class="co">#name of the target</span></span>
-<span id="cb37-25"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb37-26"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb37-27"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb37-28"><a></a>           inputs<span class="op">=</span> [<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
-<span id="cb37-29"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/alignments/merged.bam'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb37-30"><a></a><span class="st">    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam</span></span>
-<span id="cb37-31"><a></a><span class="st">    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam</span></span>
-<span id="cb37-32"><a></a><span class="st">    """</span></span>
-<span id="cb37-33"><a></a></span>
-<span id="cb37-34"><a></a>gwf.target( <span class="st">"Histogram"</span>, <span class="co">#name of the target</span></span>
-<span id="cb37-35"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb37-36"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb37-37"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb37-38"><a></a>           inputs<span class="op">=</span> [<span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
-<span id="cb37-39"><a></a>           outputs<span class="op">=</span>[ <span class="st">'results/depths/histogram.pdf'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb37-40"><a></a><span class="st">    Rscript plotscript.R</span></span>
-<span id="cb37-41"><a></a><span class="st">    """</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="answers-1" class="slide level2">
-<h2>Answers</h2>
-<p><strong>1. use <code>status</code> to see which are the endpoint targets, then find their target dependencies</strong></p>
-<p>&nbsp;</p>
-<p>There are two endpoints: one for merging aligned files and one for plotting a histogram. Use</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py status <span class="at">--endpoints</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>to obtain</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> BAM_merge     shouldrun</span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">⨯</span> Histogram     shouldrun</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="fragment">
-<p>Use the <code>info</code> command to see their file dependencies:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py info Histogram BAM_merge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Look at the output to find out that <code>Histogram</code> and <code>BAM_merge</code> depend both on the following targets</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2589044"</span><span class="ex">,</span></span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2584866"</span><span class="ex">,</span></span>
-<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="st">"BWA_mem_SRR2584863"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h3 id="apply-templates-to-targets">Apply templates to targets</h3>
+<p>Using templates is easy with <code>gwf</code>. You can use the <code>target_from_template</code> method to create a target from a template.</p>
+<div class="sourceCode" id="cb5" data-scrollable="true"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>target_rename <span class="op">=</span> gwf.target_from_template(<span class="st">"target_rename"</span>, </span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>                                         renameFile(inputName<span class="op">=</span><span class="st">"data.txt"</span>, </span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>                                                    outputName<span class="op">=</span><span class="st">"samples.txt"</span>)</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>                                        )</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>target_gzip <span class="op">=</span> gwf.target_from_template(<span class="st">"target_gzip"</span>, </span>
+<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>                                         zipFile(inputName<span class="op">=</span><span class="st">"samples.txt"</span>)</span>
+<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a>                                        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="fragment">
-<p>Note though that they depend on different files from those targets!</p>
+<p><strong>Note</strong></p>
 </div>
-</section>
-<section class="slide level2">
-
-<p><strong>2. do you need to protect the final merged alignment in the target <code>BAM_merge</code>?</strong></p>
-<p>&nbsp;</p>
-<p><code>BAM_merge</code> is an endpoint target, so its files do not need to be protected in case you want to do a cleanup with <code>gwf clean</code>. You can clean all files anyway with <code>gwf clean --all</code>.</p>
-</section>
-<section class="slide level2">
-
-<p><strong>3. can the targets <code>BAM_merge</code> and <code>Histogram</code> run at the same time?</strong></p>
-<p>&nbsp;</p>
-<p>Yes, as soon as the raw data files have been aligned separately.</p>
-</section>
-<section class="slide level2">
-
-<p><strong>4. A pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to </strong>align pairs one at a time in the same target<strong>, how much more time would it take? (assuming parallel targets start running at the same time)</strong></p>
-<p>&nbsp;</p>
-<p>If you run a single target with the alignment of all pairs, it will take twice the time compared to running parallel targets.</p>
-<p>When you run <strong>parallel targets</strong>, the time needed to finish the alignments is the <strong>time needed for the largest pair</strong> (which is twice the size of the others).</p>
-<p>&nbsp;</p>
-<div class="fragment">
-<p>When you run <strong>sequentially</strong> the alignments, it takes the <strong>sum of all alignment times</strong> to get done.</p>
-<p><img data-src="img/seq_or_par.png"></p>
+<div class="callout-content">
+<p>Each target has an unique name so that you will be able to inspect the workflow and its status.</p>
+</div>
+</div>
 </div>
 </section></section>
 <section>
-<section id="clean-up-after-yourself" class="title-slide slide level1 center">
-<h1>Clean up after yourself</h1>
-<p>Use the <code>tree</code> command to look at how many files you created!</p>
-<div class="fragment">
-<p>&nbsp;</p>
-<p>What is the size of each folder and their total size?</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We have 8.3GB of data</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">17K</span>     ./__pycache__</span>
-<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">961M</span>    ./data_trim</span>
-<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">5.8G</span>    ./results/alignments</span>
-<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13K</span>     ./results/multiqc_output/multiqc_data</span>
-<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">17K</span>     ./results/multiqc_output</span>
-<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">286M</span>    ./results/depths</span>
-<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">6.1G</span>    ./results</span>
-<span id="cb43-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">1.0K</span>    ./Environments</span>
-<span id="cb43-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">39K</span>     ./.gwf/logs</span>
-<span id="cb43-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">40K</span>     ./.gwf</span>
-<span id="cb43-11"><a aria-hidden="true" tabindex="-1"></a><span class="ex">1.2G</span>    ./data</span>
-<span id="cb43-12"><a aria-hidden="true" tabindex="-1"></a><span class="ex">13M</span>     ./fasta</span>
-<span id="cb43-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>       ./.empty</span>
-<span id="cb43-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">8.3G</span>    .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="exercise" class="title-slide slide level1 center">
+<h1>Exercise</h1>
+<p>We will run this workflow and add some new targets to it</p>
+<pre class="{mermaid}"><code>flowchart LR
+  A0(["Start"]) --&gt;|data.fq| A["split"]
+  A --&gt;|part001.fq| B["table"]
+  A --&gt;|part002.fq| C["table"]
+  A --&gt;|part....fq| D["table"]
+  A --&gt;|part010.fq| E["table"]
+  B --&gt;|table001.tsv| F["merge"]
+  C --&gt;|table002.tsv| F
+  D --&gt;|table....tsv| F
+  E --&gt;|table010.tsv| F
+  F --&gt;|table.tsv| G(["End"])</code></pre>
+</section>
+<section id="exercise-i-workflow-with-conda-containers" class="slide level2">
+<h2>Exercise I: workflow with conda containers</h2>
+<p>Prepare everything for the exercise: create a <strong>new folder</strong>, then download <strong>data and workflow file</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">mkdir</span> <span class="at">-p</span> myPipeline</span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> myPipeline</span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq <span class="at">-O</span> data.fq</span>
+<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py <span class="at">-O</span> workflow.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<p>Try to use</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> WF05_align_merge_plot.py clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>accept the warning message and note how, already for a small exercise, you are going to cleanup a lot.</p>
-</section>
-<section class="slide level2">
-
-<p>Now you have a more slim folder, which contains workflows, raw data, a merged quality report, aligned data and depth histogram in <code>.pdf</code>.</p>
+<p>Create a conda environment for <code>seqkit</code> and one for the <code>gwf</code> workflow software. Download the <code>seqkit</code> container as well.</p>
 <p>&nbsp;</p>
-<p>All the other files can be recreated at any moment if necessary.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels gwforg</span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineEnv gwf=2.1.1</span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#package for resource usage/check</span></span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-y</span> <span class="at">-n</span> pipelineEnv <span class="at">-c</span> micknudsen gwf-utilization</span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#env for seqkit</span></span>
+<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> seqkitEnv seqkit</span>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Container</span></span>
+<span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>&nbsp;</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -752,87 +644,301 @@ Dan Søndergaard
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Remember: <strong>Computation cost &lt;&lt; Storage cost</strong></p>
+<p>If packages cannot be found, you need to add these default channels as well</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Now look at the <code>status</code> of your workflow. You should recognize all the steps (<em>targets</em>). Those are marked <code>shouldrun</code>, because the outputs and/or inputs are not existent. Remember to activate the environment for <code>gwf</code>.</p>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineEnv</span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/status0.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p>&nbsp;</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>You do not need the option <code>-f workflow.py</code> if your workflow file has the name <code>workflow.py</code>, which is the default for <code>gwf</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Now, you might also want to look at how a specific <em>target</em> looks like when the workflow is built</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will be able to see the actual inputs, outputs, and other targets it depends from/depending on it:</p>
+<div class="sourceCode" id="cb12" data-code-line-numbers="4-6|9|12-21|26-35"><pre class="sourceCode numberSource python scrollable number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>{</span>
+<span id="cb12-2"><a></a>    <span class="st">"split"</span>: {</span>
+<span id="cb12-3"><a></a>        <span class="st">"options"</span>: {</span>
+<span id="cb12-4"><a></a>            <span class="st">"cores"</span>: <span class="dv">1</span>,</span>
+<span id="cb12-5"><a></a>            <span class="st">"memory"</span>: <span class="st">"4g"</span>,</span>
+<span id="cb12-6"><a></a>            <span class="st">"walltime"</span>: <span class="st">"05:00:00"</span></span>
+<span id="cb12-7"><a></a>        },</span>
+<span id="cb12-8"><a></a>        <span class="st">"inputs"</span>: [</span>
+<span id="cb12-9"><a></a>            <span class="st">"data.fq"</span></span>
+<span id="cb12-10"><a></a>        ],</span>
+<span id="cb12-11"><a></a>        <span class="st">"outputs"</span>: [</span>
+<span id="cb12-12"><a></a>            <span class="st">"gwf_splitted/part001.fq"</span>,</span>
+<span id="cb12-13"><a></a>            <span class="st">"gwf_splitted/part002.fq"</span>,</span>
+<span id="cb12-14"><a></a>            <span class="st">"gwf_splitted/part003.fq"</span>,</span>
+<span id="cb12-15"><a></a>            <span class="st">"gwf_splitted/part004.fq"</span>,</span>
+<span id="cb12-16"><a></a>            <span class="st">"gwf_splitted/part005.fq"</span>,</span>
+<span id="cb12-17"><a></a>            <span class="st">"gwf_splitted/part006.fq"</span>,</span>
+<span id="cb12-18"><a></a>            <span class="st">"gwf_splitted/part007.fq"</span>,</span>
+<span id="cb12-19"><a></a>            <span class="st">"gwf_splitted/part008.fq"</span>,</span>
+<span id="cb12-20"><a></a>            <span class="st">"gwf_splitted/part009.fq"</span>,</span>
+<span id="cb12-21"><a></a>            <span class="st">"gwf_splitted/part010.fq"</span></span>
+<span id="cb12-22"><a></a>        ],</span>
+<span id="cb12-23"><a></a>        <span class="st">"spec"</span>: <span class="st">"</span><span class="ch">\n</span><span class="st">    seqkit split2 -O gwf_splitted --by-part 10 --by-part-prefix part data.fq</span><span class="ch">\n</span><span class="st">    "</span>,</span>
+<span id="cb12-24"><a></a>        <span class="st">"dependencies"</span>: [],</span>
+<span id="cb12-25"><a></a>        <span class="st">"dependents"</span>: [</span>
+<span id="cb12-26"><a></a>            <span class="st">"table_6"</span>,</span>
+<span id="cb12-27"><a></a>            <span class="st">"table_8"</span>,</span>
+<span id="cb12-28"><a></a>            <span class="st">"table_3"</span>,</span>
+<span id="cb12-29"><a></a>            <span class="st">"table_0"</span>,</span>
+<span id="cb12-30"><a></a>            <span class="st">"table_1"</span>,</span>
+<span id="cb12-31"><a></a>            <span class="st">"table_4"</span>,</span>
+<span id="cb12-32"><a></a>            <span class="st">"table_5"</span>,</span>
+<span id="cb12-33"><a></a>            <span class="st">"table_9"</span>,</span>
+<span id="cb12-34"><a></a>            <span class="st">"table_7"</span>,</span>
+<span id="cb12-35"><a></a>            <span class="st">"table_2"</span></span>
+<span id="cb12-36"><a></a>        ]</span>
+<span id="cb12-37"><a></a>    }</span>
+<span id="cb12-38"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Do you want to see the whole workflow in a text editor? Use the <code>less</code> viewer,</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="kw">|</span> <span class="fu">less</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or output into a text file:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="op">&gt;</span> workflow_explicit.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Now, you can run specific targets. Let’s specify some names to test out our workflow.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run split table_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>You can run the entire workflow with <code>gwf run</code> when you are sure of your targets working correctly with the right resources.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Check the status: the two turgets will be <code>submitted</code>, then <code>split</code> has to run first, and its <em>dependency</em> <code>table_0</code> will run when the file <code>part_001.fq</code> is generated! We use <code>watch</code> in front of the command to update its view every two seconds.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>At some point, you will see the <code>running</code> status (for a few seconds) and <code>completed</code> status.</p>
+
+<img data-src="img/gwfCompleted.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p><strong>Exercise break</strong></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>When the status of a target is <code>failed</code>, or you want to verify messages on the command line, you can visualize the standard output and standard error messages of your target with the commands below (example with the <code>split</code> target):</p>
+<p>&nbsp;</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs split </span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs <span class="at">-e</span> split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="resize-the-workflow-resources-and-add-a-step">Resize the workflow resources and add a step</h3>
+<p>How many resources did <code>split</code> and <code>table_0</code> use? Run the utilization command:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> utilization</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/gwfUtilization.png" class="quarto-figure quarto-figure-center r-stretch" width="1000"><p>&nbsp;</p>
+<p>The table shows we underutilized the resources. Now open <code>workflow.py</code> and change your resource usage for the <code>split</code> and <code>table_</code> steps. Then, run the target:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run table_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>&nbsp;</p>
+<p>Check again resource usage when the status is <code>completed</code>. Did it get better?</p>
+<p><strong>Exercise break</strong></p>
+</section>
+<section id="exercise-ii-singularity-in-workflows" class="slide level2 scrollable">
+<h2>Exercise II: singularity in workflows</h2>
+<p>Now, you will change the executor for the template <code>table</code>. Your task is to:</p>
+<ul>
+<li><p>open the <code>workflow.py</code> file</p></li>
+<li><p>below importing the <code>Conda</code> module (line 2), add a new line with</p>
+<p><code>from gwf.executors import Singularity</code></p></li>
+<li><p>Now, define a new executor. Below the line where you define <code>conda_env = Conda("seqkitEnv")</code>, use a similar syntax and write <code>sing = Singularity("seqkit_2.10.0")</code>, where you provide the container file as argument.</p></li>
+<li><p>At the end of the <code>align</code> template, use the new executor <code>sing</code> instead of <code>conda_env</code>.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>Did you do it right? If yes, then you should be able to run the <code>combine</code> target:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run combine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and see its status become <code>completed</code> after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or <a href="https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_container.py">look at the solution file, if you prefer</a>.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Because <code>combine</code> depends on all <code>table_</code> targets, it will submit all those targets as well, which need to run first.</p>
+</div>
+</div>
+</div>
+<p><strong>Exercise break</strong></p>
+</section>
+<section id="exercise-iii-your-own-target" class="slide level2 scrollable">
+<h2>Exercise III: Your own target!</h2>
+<p>Ok, now we want to extend the workflow and do quality control on the <code>part_###.fq</code> files.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A0(["Start"]) --&gt;|data.fq| A["split"]
+  A --&gt;|part001.fq| B["table"]
+  A --&gt;|part002.fq| C["table"]
+  A --&gt;|part....fq| D["table"]
+  A --&gt;|part010.fq| E["table"]
+  B --&gt;|table001.tsv| F["merge"]
+  C --&gt;|table002.tsv| F
+  D --&gt;|table....tsv| F
+  E --&gt;|table010.tsv| F
+  F --&gt;|table.tsv| G(["End"])
+  A --&gt;|"part[001-010].fq"| H["qc"]
+  H --&gt;|multiqc_report.html| I(["End"])
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>You need to:</p>
+<ul>
+<li>create a new conda environment called <code>qcEnv</code> where you install the two packages <code>fastqc multiqc</code>.</li>
+<li>add a new executor called <code>qc_env</code> based on <code>Conda("qcEnv")</code>.</li>
+<li>create a new target which starts with <code>def qc(data_folder)</code>
+<ul>
+<li><p>this will need all ten <code>gwf_splitted/part_###.fq</code> file as input files (you can copy the output file list of the <code>split</code> template, where you use a variable <code>{data_folder}</code> instead of the explicit folder name!)</p></li>
+<li><p>as output you want a file called <code>[reports/multiqc_report.html]</code> (default name for the generated report)</p></li>
+<li><p>as bash commands you need:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> reports</span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-o</span> reports gdk_splitted/<span class="pp">*</span>.fq</span>
+<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">-o</span> reports reports/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>remember to set the correct executor at the end of the template inside <code>return</code></p></li>
+<li><p>now you need to create one single target from the template, call it <code>qc</code>. You only need to give as input the name of the folder with the <code>fq</code> files</p></li>
+</ul></li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Some useful tips when developing a workflow: - Before running any targets, use <code>gwf info qc</code> to check dependencies. - Copy previous similar templates and modify them where needed, instead of writing each template from scratch</p>
+</div>
+</div>
+</div>
+<p>When you are sure you are done, then use <code>gwf run qc</code>. Its <code>status</code> should be <code>completed</code> if it runs successfully.</p>
+<p>Ask for help, or <a href="https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_qc.py">look at the solution file, if you prefere</a>.</p>
+<p><strong>Exercise break</strong></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Good practices:</p>
+<ul>
+<li>do not make tiny and numerous targets, try to put together things which can run quickly</li>
+<li>start testing one of many parallel elements of a workflow before running them all at once
+<ul>
+<li>determine resource usage (<code>gwf utilization</code> - needs a plugin, see earlier exercises)</li>
+<li>then adjust your templates’ resources accordingly</li>
+</ul></li>
+<li>verify often your code is correct
+<ul>
+<li><code>gwf info | less -S</code> to check dependencies</li>
+<li>remember you are using python, check some of your code directly in it!</li>
+</ul></li>
+<li>when done, you are reproducible if you share with your datasets:
+<ul>
+<li>container pull commands</li>
+<li>conda environment(s) package list</li>
+<li>workflow files</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
 </section></section>
 <section>
-<section id="last-tips" class="title-slide slide level1 center">
-<h1>Last tips</h1>
-
-</section>
-<section id="using-a-separate-conda-environment-in-a-target" class="slide level2">
-<h2>Using a separate conda environment in a target</h2>
-<p>You might have a conda environment with a specific version of the package <code>gwf</code>, and then another environment with relevant packages, called for example <code>tools_environment</code>.</p>
-<div class="fragment">
-<p>To activate that environment, add two lines into your <code>bash</code> code executed by the target:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span> </span>
-<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">conda</span> activate tools_environment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="closing-the-workshop" class="title-slide slide level1 center">
+<h1>Closing the workshop</h1>
+<p>Please fill out this form :)</p>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfImYVZLrmBG_Z54sy1Au_jRwneg4Pjnenh36J34x9SYttSoQ/viewform?embedded=true" width="640" height="640" frameborder="0" marginheight="0" marginwidth="0">
+Indlæser…
+</iframe>
 </section>
 <section class="slide level2">
 
-<p>For example:</p>
-<div class="sourceCode" id="cb46" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
-<span id="cb46-2"><a></a></span>
-<span id="cb46-3"><a></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
-<span id="cb46-4"><a></a></span>
-<span id="cb46-5"><a></a><span class="co">## A target doing FastQC on a file</span></span>
-<span id="cb46-6"><a></a>gwf.target(<span class="st">'FastQC'</span>, </span>
-<span id="cb46-7"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb46-8"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb46-9"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb46-10"><a></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
-<span id="cb46-11"><a></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
-<span id="cb46-12"><a></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb46-13"><a></a><span class="st">eval "$(conda shell.bash hook)" </span></span>
-<span id="cb46-14"><a></a><span class="st">conda activate tools_environment</span></span>
-<span id="cb46-15"><a></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
-<span id="cb46-16"><a></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="use-templates" class="slide level2">
-<h2>Use templates</h2>
-<p>You can define templates in your workflow, or in a separate file called for example <code>templates.py</code>. A template for the <code>FastQC</code> target could be</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fastqc(<span class="bu">input</span><span class="op">=</span><span class="st">""</span>, cores<span class="op">=</span><span class="dv">1</span>, memory<span class="op">=</span><span class="st">'8gb'</span>, walltime<span class="op">=</span><span class="st">'00:05:00'</span>):</span>
-<span id="cb47-2"><a aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A template for fastqc"""</span></span>
-<span id="cb47-3"><a aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> [<span class="ss">f'</span><span class="sc">{</span><span class="bu">input</span><span class="sc">}</span><span class="ss">.fastq.gz'</span>]</span>
-<span id="cb47-4"><a aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [<span class="ss">f'</span><span class="sc">{</span><span class="bu">input</span><span class="sc">}</span><span class="ss">_fastqc.zip'</span>,<span class="ss">f'</span><span class="sc">{</span><span class="bu">input</span><span class="sc">}</span><span class="ss">_fastqc.html'</span>]</span>
-<span id="cb47-5"><a aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {</span>
-<span id="cb47-6"><a aria-hidden="true" tabindex="-1"></a>        <span class="st">'cores'</span>: cores,</span>
-<span id="cb47-7"><a aria-hidden="true" tabindex="-1"></a>        <span class="st">'memory'</span>: memory,</span>
-<span id="cb47-8"><a aria-hidden="true" tabindex="-1"></a>        <span class="st">'walltime'</span>: walltime</span>
-<span id="cb47-9"><a aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb47-10"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-11"><a aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="st">'''</span></span>
-<span id="cb47-12"><a aria-hidden="true" tabindex="-1"></a><span class="st">    fastqc </span><span class="sc">{input}</span></span>
-<span id="cb47-13"><a aria-hidden="true" tabindex="-1"></a><span class="st">    '''</span>.<span class="bu">format</span>(<span class="bu">input</span><span class="op">=</span>inputs[<span class="dv">0</span>])</span>
-<span id="cb47-14"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-15"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<p>the workflow file contains now <code>import</code> to import the template, and uses it afterwards to define a target:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
-<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">import</span> template</span>
-<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
-<span id="cb48-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">## A target doing FastQC on a file</span></span>
-<span id="cb48-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-8"><a aria-hidden="true" tabindex="-1"></a>gwf.target_from_template(</span>
-<span id="cb48-9"><a aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'fastqc_from_template'</span>,</span>
-<span id="cb48-10"><a aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span>fastqc(<span class="bu">input</span><span class="op">=</span><span class="st">'data/SRR2584863_1'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="add-new-files-after-running-a-workflow" class="slide level2">
-<h2>Add new files after running a workflow</h2>
-<p>If you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.</p>
-<div class="fragment">
-<p>&nbsp;</p>
-<p><strong>Example:</strong> adding new <code>fastq.gz</code> files in the <code>data</code> folder of this workshop will update the workflow adding new steps and rendering others from <code>completed</code> to <code>shouldrun</code>.</p>
+<ul>
+<li><p>A lot of things we could not cover</p></li>
+<li><p>use the official documentation!</p></li>
+<li><p>ask for help, use drop in hours (<a href="https://abc.au.dk">ABC cafe</a>), drop me a mail</p></li>
+<li><p>Slides updated over time, use as a reference</p></li>
+</ul>
 
 
-</div>
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -849,6 +955,7 @@ Dan Søndergaard
   <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -870,8 +977,9 @@ Dan Søndergaard
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,
@@ -1041,7 +1149,7 @@ Dan Søndergaard
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,

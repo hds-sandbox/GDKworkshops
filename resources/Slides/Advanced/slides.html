@@ -1378,15 +1378,15 @@ Ctrl + b    ""</code></pre>
 <li>do not make tiny and numerous jobs, try to put together things with similar resource usage</li>
 <li>start testing one of many parallel elements of a worlflow
 <ul>
-<li>determine resource usage (<code>gwf utilization</code> - needs a plugin, see exercises after)</li>
-<li>then adjust all elements accordingly</li>
+<li>determine resource usage (<code>gwf utilization</code> - needs a plugin, see earlier exercises)</li>
+<li>adjust your templates’ resources accordingly</li>
 </ul></li>
 <li>verify often your code is correct
 <ul>
-<li><code>gwf info | less -S</code> to check dependencies</li>
+<li><code>gwf info target_name</code> to check dependencies</li>
 <li>remember you are using python, check some of your code directly in it!</li>
 </ul></li>
-<li>when done, you are reproducible if you share with your datasets:ave
+<li>when done, you are reproducible if you share with your datasets:
 <ul>
 <li>container pull commands</li>
 <li>conda environment(s) package list</li>
