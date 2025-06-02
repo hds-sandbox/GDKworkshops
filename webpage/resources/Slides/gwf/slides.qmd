@@ -126,8 +126,8 @@ flowchart LR
 %%| fig-width: 10
 flowchart LR
   A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET]
-  A --->|samples.txt<br>OUTPUT-INPUT| B[Zip<br>TARGET]
-  B --->|samples.zip<br>OUTPUT| C(["End"]);
+  A --->|samples.txt<br>OUTPUT-INPUT| B[GZip<br>TARGET]
+  B --->|samples.txt.gz<br>OUTPUT| C(["End"]);
 
 ```
 
@@ -140,9 +140,9 @@ flowchart LR
 ```{mermaid}
 %%| fig-width: 10
 flowchart LR
-  A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET<br>cores=4<br>memory=24g<br>walltime=00:10:00]
-  A --->|samples.txt<br>OUTPUT-INPUT| B[Zip<br>TARGET<br>cores=1<br>memory=8g<br>walltime=00:01:00]
-  B --->|samples.zip<br>OUTPUT| C(["End"]);
+  A0(["Start"]) --->|data.txt<br>INPUT| A[Rename<br>TARGET<br>cores=4<br>memory=24g<br>walltime=00:01:00]
+  A --->|samples.txt<br>OUTPUT-INPUT| B[GZip<br>TARGET<br>cores=1<br>memory=8g<br>walltime=00:10:00]
+  B --->|samples.txt.gz<br>OUTPUT| C(["End"]);
 
 ```
 
@@ -151,7 +151,7 @@ flowchart LR
 - A target has settings for **resources** 
   - cores
   - memory
-  - walltime (dd:hr:mn:sc)
+  - walltime (format `dd-hr:mn:sc`)
   which are used to run the target on a cluster
 
 ---
@@ -170,7 +170,7 @@ Each target of the workflow
 gantt
     dateFormat  HH:mm
     axisFormat  %H:%M
-    title HPC Queue Durations vs. Resources
+    title Examplified HPC Queue Durations vs. Resources
 
     section Small Job (1 core, 4GB, 1h)
     Queue wait: active, 00:00, 0:10
@@ -187,7 +187,7 @@ gantt
 
 ## Gwf workflow manager
 
-A lightweight and easy to adopt workflow manager. It requires only some basic `Python` - you can learn it along the way starting from examples. Some useful features:
+A lightweight and easy to adopt workflow manager. It requires only some basic `Python` - you can learn it along the way starting from examples. Some features:
 
 &nbsp;
 
@@ -302,11 +302,15 @@ Each target has an unique name so that you will be able to inspect the workflow 
 
 # Exercise
 
+A more complex workflow
+
+---
+
 We will run this workflow and add some new targets to it
 
 ```{mermaid}
 flowchart LR
-  A0(["Start"]) -->|data.fq| A["split"]
+  A0(["Start"]) -->|"data.fq"| A["split"]
   A -->|part001.fq| B["table"]
   A -->|part002.fq| C["table"]
   A -->|part....fq| D["table"]
@@ -315,10 +319,11 @@ flowchart LR
   C -->|table002.tsv| F
   D -->|table....tsv| F
   E -->|table010.tsv| F
-  F -->|table.tsv| G(["End"])
+  F -->|table.tsv| G(["End"]);
+
 ```
 
-## Exercise I: workflow with conda containers
+## Exercise I: workflow with conda environments
 
 Prepare everything for the exercise: create a **new folder**, then download **data and workflow file**
 
@@ -338,19 +343,20 @@ Create a conda environment for `seqkit` and one for the `gwf` workflow software.
 
 ```{.bash}
 conda config --add channels gwforg
+#conda env pipelineEnv for gwf
 conda create -y -n pipelineEnv gwf=2.1.1
-#package for resource usage/check
+#add package for resource usage/check
 conda install -y -n pipelineEnv -c micknudsen gwf-utilization
-#env for seqkit
+#conda env seqKitEnv for seqkit
 conda create -y -n seqkitEnv seqkit
-#Container
+#Container download
 singularity pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0
 ```
 
 &nbsp;
 
 :::{.callout-tip}
-If packages cannot be found, you need to add these default channels as well 
+If you get an error because packages cannot be found, you need to add some default channels as well. Run the commands below:
 
 ```{.bash}
 conda config --add channels bioconda
@@ -375,7 +381,7 @@ gwf -f workflow.py status
 &nbsp;
 
 :::{.callout-tip}
-You do not need the option `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default for `gwf`.
+You do not need the option `-f workflow.py` if your workflow file has the name `workflow.py`, which is the default `gwf` looks for.
 :::
 
 ---
@@ -388,7 +394,7 @@ gwf info split
 
 You will be able to see the actual inputs, outputs, and other targets it depends from/depending on it:
 
-```{.python .scrollable  code-line-numbers="4-6|9|12-21|26-35"}
+```{.python .scrollable  code-line-numbers="4-6|8-9|11-21|24|25-35"}
 {
     "split": {
         "options": {
@@ -459,7 +465,7 @@ You can run the entire workflow with `gwf run` when you are sure of your targets
 
 ---
 
-Check the status: the two turgets will be `submitted`, then `split` has to run first, and its *dependency* `table_0` will run when the file `part_001.fq` is generated! We use `watch` in front of the command to update its view every two seconds.
+Check the status: the two turgets will be `submitted`, then `split` has to run first, and its *dependency* `table_0` will run when the file `part_001.fq` is generated! We use `watch` in front of the command to update its view every two seconds (Use `Ctrl+C` to exit from it).
 
 ```{.bash}
 watch gwf status
@@ -567,11 +573,11 @@ flowchart LR
 
 You need to:
 
-  - create a new conda environment called `qcEnv` where you install the two packages `fastqc multiqc`.
+  - create a new conda environment called `qcEnv` where you install the two packages `fastqc multiqc=1.29`.
   - add a new executor called `qc_env` based on `Conda("qcEnv")`.
   - create a new target which starts with `def qc(data_folder)`
     - this will need all ten `gwf_splitted/part_###.fq` file as input files (you can copy the output file list of the `split` template, where you use a variable `{data_folder}` instead of the explicit folder name!)
-    - as output you want a file called `[reports/multiqc_report.html]` (default name for the generated report)
+    - as output you want a file called `["reports/multiqc_report.html"]` (default name for the generated report)
     - as bash commands you need:
       ```{.bash}
       mkdir -p reports
@@ -581,6 +587,7 @@ You need to:
     - remember to set the correct executor at the end of the template inside `return`
     - now you need to create one single target from the template, call it `qc`. You only need to give as input the name of the folder with the `fq` files
 
+---
 
 :::{.callout-tip}
 Some useful tips when developing a workflow:
@@ -588,9 +595,15 @@ Some useful tips when developing a workflow:
 - Copy previous similar templates and modify them where needed, instead of writing each template from scratch
 :::
 
+&nbsp;
+
 When you are sure you are done, then use `gwf run qc`. Its `status` should be `completed` if it runs successfully.
 
+&nbsp;
+
 Ask for help, or [look at the solution file, if you prefere](https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_qc.py).
+
+&nbsp;
 
 **Exercise break**
 

@@ -6,7 +6,7 @@ from gwf.executors import Singularity
 #You can also give a path to the environment
 
 conda_env = Conda("seqkitEnv")
-sing_cont = Singularity("./seqkit:2.10.0")
+sing_cont = Singularity("./seqkit_2.10.0")
 
 ## Create a workflow object
 # this will contain settings which are global across all blocks
