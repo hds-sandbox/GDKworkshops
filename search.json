@@ -830,14 +830,14 @@
     "href": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
     "title": "Introduction to workflows on GenomeDK",
     "section": "Gwf workflow manager",
-    "text": "Gwf workflow manager\nA lightweight and easy to adopt workflow manager. It requires only some basic Python - you can learn it along the way starting from examples. Some useful features:\n \n\nDeveloped at AU (Dan at GenomeDK) and used also at MOMA, AUH, …\n\nEasy to find support\n\nIn python, no need for a workflow language\n\nYou can use all python functions to build your workflow!\n\nEasy to structure a workflow and check resource usage\n\nReusable templates\nVery pedagogical\n\nConda, Pixi, Container usage out-of-the-box"
+    "text": "Gwf workflow manager\nA lightweight and easy to adopt workflow manager. It requires only some basic Python - you can learn it along the way starting from examples. Some features:\n \n\nDeveloped at AU (Dan at GenomeDK) and used also at MOMA, AUH, …\n\nEasy to find support\n\nIn python, no need for a workflow language\n\nYou can use all python functions to build your workflow!\n\nEasy to structure a workflow and check resource usage\n\nReusable templates\nVery pedagogical\n\nConda, Pixi, Container usage out-of-the-box"
   },
   {
-    "objectID": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-containers",
-    "href": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-containers",
+    "objectID": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-environments",
+    "href": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-environments",
     "title": "Introduction to workflows on GenomeDK",
-    "section": "Exercise I: workflow with conda containers",
-    "text": "Exercise I: workflow with conda containers\nPrepare everything for the exercise: create a new folder, then download data and workflow file\n mkdir -p myPipeline\n cd myPipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py"
+    "section": "Exercise I: workflow with conda environments",
+    "text": "Exercise I: workflow with conda environments\nPrepare everything for the exercise: create a new folder, then download data and workflow file\n mkdir -p myPipeline\n cd myPipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#exercise-ii-singularity-in-workflows",
