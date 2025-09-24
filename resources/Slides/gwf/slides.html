@@ -6,12 +6,12 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.31">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-06-02">
+  <meta name="dcterms.date" content="2025-09-24">
   <title>GenomeDK workshops – Introduction to workflows on GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QZP3HK6BQT"></script>
 
   <script type="text/javascript">
@@ -231,7 +231,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-06-02</p>
+  <p class="date">2025-09-24</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -475,11 +475,11 @@ Dan Søndergaard
 <h1>Setup a small workflow</h1>
 <p>The whole workflow is written <strong>in a python script</strong>. You first state the <code>Workflow</code> object, usually like this:</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#import libraries</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#import libraries</span></span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gwf <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initiate a workflow object</span></span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <div title="Using project resources">
 <div class="callout callout-note callout-titled callout-style-default">
@@ -492,7 +492,7 @@ Dan Søndergaard
 </div>
 <div class="callout-content">
 <p>Now you have an empty workflow, which will use the few free resources each user has available. Resources from a project you are part of can be created using instead</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( defaults<span class="op">=</span>{<span class="st">"account"</span>: <span class="st">"PROJECT_NAME"</span>} )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>gwf <span class="op">=</span> Workflow( defaults<span class="op">=</span>{<span class="st">"account"</span>: <span class="st">"PROJECT_NAME"</span>} )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -520,25 +520,25 @@ Dan Søndergaard
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renameFile(inputName, outputName):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renameFile(inputName, outputName):</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>    inputs  <span class="op">=</span> [inputName]</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [outputName]</span>
 <span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {<span class="st">"cores"</span>: <span class="dv">1</span>, <span class="st">"memory"</span>: <span class="st">"1g"</span>, <span class="st">"walltime"</span>: <span class="st">"00:01:00"</span>}</span>
 <span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a><span class="ss">        cp </span><span class="sc">{</span>inputName<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>outputName<span class="sc">}</span></span>
 <span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zipFile(inputName):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zipFile(inputName):</span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>    inputs  <span class="op">=</span> [inputName]</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>inputName<span class="sc">}</span><span class="ss">.gz"</span>]</span>
 <span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>    options <span class="op">=</span> {<span class="st">"cores"</span>: <span class="dv">1</span>, <span class="st">"memory"</span>: <span class="st">"4g"</span>, <span class="st">"walltime"</span>: <span class="st">"00:10:00"</span>}</span>
 <span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="ss">f"""</span></span>
 <span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a><span class="ss">        gzip -k </span><span class="sc">{</span>inputName<span class="sc">}</span></span>
 <span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span></span>
-<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> AnonymousTarget(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs, options<span class="op">=</span>options, spec<span class="op">=</span>spec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -575,14 +575,14 @@ Dan Søndergaard
 
 <h3 id="apply-templates-to-targets">Apply templates to targets</h3>
 <p>Using templates is easy with <code>gwf</code>. You can use the <code>target_from_template</code> method to create a target from a template.</p>
-<div class="sourceCode" id="cb5" data-scrollable="true"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>target_rename <span class="op">=</span> gwf.target_from_template(<span class="st">"target_rename"</span>, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-scrollable="true"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>target_rename <span class="op">=</span> gwf.target_from_template(<span class="st">"target_rename"</span>, </span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>                                         renameFile(inputName<span class="op">=</span><span class="st">"data.txt"</span>, </span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>                                                    outputName<span class="op">=</span><span class="st">"samples.txt"</span>)</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>                                        )</span>
 <span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>target_gzip <span class="op">=</span> gwf.target_from_template(<span class="st">"target_gzip"</span>, </span>
 <span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>                                         zipFile(inputName<span class="op">=</span><span class="st">"samples.txt"</span>)</span>
-<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a>                                        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a>                                        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -632,17 +632,17 @@ Dan Søndergaard
 <section id="exercise-i-workflow-with-conda-environments" class="slide level2">
 <h2>Exercise I: workflow with conda environments</h2>
 <p>Prepare everything for the exercise: create a <strong>new folder</strong>, then download <strong>data and workflow file</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">mkdir</span> <span class="at">-p</span> myPipeline</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">mkdir</span> <span class="at">-p</span> myPipeline</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> myPipeline</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq <span class="at">-O</span> data.fq</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py <span class="at">-O</span> workflow.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a> <span class="fu">wget</span> https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py <span class="at">-O</span> workflow.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>Create a conda environment for <code>seqkit</code> and one for the <code>gwf</code> workflow software. Download the <code>seqkit</code> container as well.</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels gwforg</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels gwforg</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#conda env pipelineEnv for gwf</span></span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineEnv gwf=2.1.1</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#add package for resource usage/check</span></span>
@@ -650,7 +650,7 @@ Dan Søndergaard
 <span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#conda env seqKitEnv for seqkit</span></span>
 <span id="cb7-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> seqkitEnv seqkit</span>
 <span id="cb7-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Container download</span></span>
-<span id="cb7-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull seqkit_2.10.0  https://depot.galaxyproject.org/singularity/seqkit:2.10.0--h9ee0642_0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -662,8 +662,8 @@ Dan Søndergaard
 </div>
 <div class="callout-content">
 <p>If you get an error because packages cannot be found, you need to add some default channels as well. Run the commands below:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -672,9 +672,9 @@ Dan Søndergaard
 
 <p>Now look at the <code>status</code> of your workflow. You should recognize all the steps (<em>targets</em>). Those are marked <code>shouldrun</code>, because the outputs and/or inputs are not existent. Remember to activate the environment for <code>gwf</code>.</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineEnv</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipelineEnv</span>
 <span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> <span class="at">-f</span> workflow.py status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 <img data-src="img/status0.png" class="quarto-figure quarto-figure-center r-stretch" width="500"><p>&nbsp;</p>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -694,9 +694,9 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>Now, you might also want to look at how a specific <em>target</em> looks like when the workflow is built</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info split</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You will be able to see the actual inputs, outputs, and other targets it depends from/depending on it:</p>
-<div class="sourceCode" id="cb11" data-code-line-numbers="4-6|8-9|11-21|24|25-35"><pre class="sourceCode numberSource python scrollable number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>{</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-code-line-numbers="4-6|8-9|11-21|24|25-35"><pre class="sourceCode numberSource python scrollable number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>{</span>
 <span id="cb11-2"><a></a>    <span class="st">"split"</span>: {</span>
 <span id="cb11-3"><a></a>        <span class="st">"options"</span>: {</span>
 <span id="cb11-4"><a></a>            <span class="st">"cores"</span>: <span class="dv">1</span>,</span>
@@ -733,7 +733,7 @@ Dan Søndergaard
 <span id="cb11-35"><a></a>            <span class="st">"table_2"</span></span>
 <span id="cb11-36"><a></a>        ]</span>
 <span id="cb11-37"><a></a>    }</span>
-<span id="cb11-38"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-38"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -747,15 +747,15 @@ Dan Søndergaard
 </div>
 <div class="callout-content">
 <p>Do you want to see the whole workflow in a text editor? Use the <code>less</code> viewer,</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="kw">|</span> <span class="fu">less</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>or output into a text file:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="op">&gt;</span> workflow_explicit.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> info <span class="op">&gt;</span> workflow_explicit.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>Now, you can run specific targets. Let’s specify some names to test out our workflow.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run split table_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run split table_0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -773,7 +773,7 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>Check the status: the two turgets will be <code>submitted</code>, then <code>split</code> has to run first, and its <em>dependency</em> <code>table_0</code> will run when the file <code>part_001.fq</code> is generated! We use <code>watch</code> in front of the command to update its view every two seconds (Use <code>Ctrl+C</code> to exit from it).</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">watch</span> gwf status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>At some point, you will see the <code>running</code> status (for a few seconds) and <code>completed</code> status.</p>
 
@@ -792,8 +792,8 @@ Dan Søndergaard
 <div class="callout-content">
 <p>When the status of a target is <code>failed</code>, or you want to verify messages on the command line, you can visualize the standard output and standard error messages of your target with the commands below (example with the <code>split</code> target):</p>
 <p>&nbsp;</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs split </span>
-<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs <span class="at">-e</span> split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs split </span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> logs <span class="at">-e</span> split</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -802,11 +802,11 @@ Dan Søndergaard
 
 <h3 id="resize-the-workflow-resources-and-add-a-step">Resize the workflow resources and add a step</h3>
 <p>How many resources did <code>split</code> and <code>table_0</code> use? Run the utilization command:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> utilization</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> utilization</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 <img data-src="img/gwfUtilization.png" class="quarto-figure quarto-figure-center r-stretch" width="1000"><p>&nbsp;</p>
 <p>The table shows we underutilized the resources. Now open <code>workflow.py</code> and change your resource usage for the <code>split</code> and <code>table_</code> steps. Then, run the target:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run table_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run table_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Check again resource usage when the status is <code>completed</code>. Did it get better?</p>
 <p><strong>Exercise break</strong></p>
@@ -823,7 +823,7 @@ Dan Søndergaard
 </ul>
 <p>&nbsp;</p>
 <p>Did you do it right? If yes, then you should be able to run the <code>combine</code> target:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run combine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gwf</span> run combine</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and see its status become <code>completed</code> after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or <a href="https://raw.githubusercontent.com/hds-sandbox/GDKworkshops/refs/heads/main/Examples/smallGwf/workflow_container.py">look at the solution file, if you prefer</a>.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -879,9 +879,9 @@ Dan Søndergaard
 <li><p>this will need all ten <code>gwf_splitted/part_###.fq</code> file as input files (you can copy the output file list of the <code>split</code> template, where you use a variable <code>{data_folder}</code> instead of the explicit folder name!)</p></li>
 <li><p>as output you want a file called <code>["reports/multiqc_report.html"]</code> (default name for the generated report)</p></li>
 <li><p>as bash commands you need:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> reports</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> reports</span>
 <span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-o</span> reports gdk_splitted/<span class="pp">*</span>.fq</span>
-<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">-o</span> reports reports/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">-o</span> reports reports/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>remember to set the correct executor at the end of the template inside <code>return</code></p></li>
 <li><p>now you need to create one single target from the template, call it <code>qc</code>. You only need to give as input the name of the folder with the <code>fq</code> files</p></li>
 </ul></li>
@@ -1155,7 +1155,7 @@ Indlæser…
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1229,13 +1229,14 @@ Indlæser…
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
