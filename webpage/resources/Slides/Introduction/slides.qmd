@@ -92,7 +92,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
 
 `GenomeDK` is a **computing cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
 
-- **computing nodes** used for running programs (~15000 cores)
+- **computing nodes** used for running programs (~15000 cores, 16GPUs)
 - **storage nodes** storing data in many hard drives (~23 PiB)
 - a **network** making nodes talk to each other
 - a **frontend** node from which you can send your programs to a node to be executed
@@ -174,7 +174,7 @@ After this, your local private key will be tested against GenomeDK's public key 
 
 ::: {.column width="60%" }
 
-Folders and files follow a tree-like structure
+Folders and files follow a hierarchy
 
 - `/` is the root folder of the filesystem - nothing is above that
 - the FS is shared across all machines and available to all users 
@@ -215,7 +215,7 @@ Run a command = Type a command + Enter
 
 - Run `echo "hello" > ./GDKintro/file.txt` to write hello in a file
 
-- Use `ls ./GDKintro` to see if the text file is there.
+- Use `ls -lh ./GDKintro` to see if the text file is there with some info.
 
 :::{.callout-tip title="Relative and absolute paths"}
 - `/home/USERNAME` starts from the root `/`. It is an **absolute path**.
@@ -257,7 +257,7 @@ which follows the format **[username@node current_folder]**.
 
 :::{.callout-warning}
 - Do not fill up your home folder with data. It has a **limited amount of storage** (a quota of 100GB).
-- Your home folder is only **private to you**
+- Your home folder is **private to you only**
 :::
 
 ---
@@ -317,7 +317,7 @@ FFFFFFFEDDEEEEDDDDDDDDD
 ---
 
 :::{.callout-tip title="Challenge yourself" icon=false}
-Search online (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
+Search online `man less` (or with `less --help)` how to look for a specific word in a file with `less`. Then visualize the data with `less`, and try to find if there is any sequence of ten adjacent `N`s (which is, ten missing nucleotides). Then, answer the question below 
 
 ```{python}
 #| echo: false
@@ -378,7 +378,7 @@ Conda is **both** a virtual environment and a package manager.
 
 ## Pixi
 
-A newer virtual env. and package manager
+A newer virtual env and package manager
 
 &nbsp;
 
@@ -470,15 +470,34 @@ Open `pixi.toml` with the text editor, and make sure you have the two channels `
 
 ---
 
-Now get back to the terminal and install some packages. This is done easily.
+Now get back to the terminal and install some packages. If you have a project on GDK, this is done by 
 
 ```{.bash}
-pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
+srun --mem=8g --cores=2 --time=00:10:0 --account=YOUR_PROJECT --pty \
+     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
 ```
+
+otherwise
+
+```{.bash}
+srun --mem=8g --cores=2 --time=00:10:0 --pty \
+     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
+```
+
+---
 
 The terminal will look like this at the end
 
 ![](img/pixiInstalled.png){fig-align="center" width="800px"}
+
+
+:::{.callout-note title="Why `srun`?"}
+
+We used `srun` to get temporary resources to install the packages. Our front-end node is sometimes not powerful enough to do that.
+
+`srun` is the command used to access a compute node interactively. More on this later.
+
+:::
 
 ---
 
@@ -736,7 +755,7 @@ Note: you cannot authorize only specific users to access data -  **you can only 
 
 ## Folders management
 
-Have a coherent folder structure - your future self will thank.
+Have a coherent folder structure - your future self sends manu thanks.
 
 ![Example of structure, which backs up raw data and analysis](img/structure.png){width=400px fig-align="center"}
 
@@ -826,7 +845,7 @@ You can also run an interactive job on GenomeDK desktop. Go back to it and use t
 cd ~/GDKintro
 ```
 
-Now run an interactive job. Use 8g of RAM, 2 cores, and choose 01:00:00 hours. Choose the `account` using the name of one of your projects.
+Now run an interactive job. Use 8g of RAM, 2 cores, and choose 01:00:00 hours. Choose the `account` using the name of one of your projects, or delete it if you do not have projects.
 
 ```{.bash}
 srun --mem=8g -c 2 --time=01:00:00  --account=PROJECT_NAME --pty /bin/bash
@@ -834,7 +853,7 @@ srun --mem=8g -c 2 --time=01:00:00  --account=PROJECT_NAME --pty /bin/bash
 
 ---
 
-You will have to wait in queue. When you ge the resources, the node in use is **shown in the prompt**. Below, for example, the node is `s21n32`.
+You will have to wait in queue. When you get the resources, the node in use is **shown in the prompt**. Below, for example, the node is `s21n32`.
 
 ```
 [USERNAME@s21n32 ~]$
