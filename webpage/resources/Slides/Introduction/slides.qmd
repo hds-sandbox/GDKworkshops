@@ -154,21 +154,20 @@ and create a folder on the cluster called `.ssh` to contain the public key
 
 and finally send the public key to the cluster, into the file `authorized_keys`
 
-:::: {.tabset}
+::: {.panel-tabset}
+## Linux/Mac
 
-::: {.tab-pane title="Linux / Mac"}
 ```{.bash}
 [local]$  cat ~/.ssh/id_rsa.pub | ssh USERNAME@login.genome.au.dk 'cat >> .ssh/authorized_keys'
 ```
-:::
 
-::: {.tab-pane title="Windows (PowerShell)"}
+## Windows PowerShell
+
 ```{.powershell}
 cat $env:USERPROFILE\.ssh\id_ed25519.pub | ssh USERNAME@login.genome.au.dk 'cat >> .ssh/authorized_keys'
 ```
-:::
 
-::::
+:::
 
 &nbsp;
 
