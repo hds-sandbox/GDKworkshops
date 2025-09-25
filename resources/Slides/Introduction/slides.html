@@ -11,7 +11,7 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-09-24">
+  <meta name="dcterms.date" content="2025-09-25">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -231,7 +231,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-09-24</p>
+  <p class="date">2025-09-25</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -362,7 +362,14 @@ Dan Søndergaard
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  ssh USERNAME@login.genome.au.dk mkdir <span class="at">-p</span> .ssh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>and finally send the public key to the cluster, into the file <code>authorized_keys</code></p>
+<div class="tabset">
+<div class="tab-pane" title="Linux / Mac">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[local]$</span>  cat ~/.ssh/id_rsa.pub <span class="kw">|</span> <span class="fu">ssh</span> USERNAME@login.genome.au.dk <span class="st">'cat &gt;&gt; .ssh/authorized_keys'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tab-pane" title="Windows (PowerShell)">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span><span class="op">:</span><span class="va">USERPROFILE</span>\<span class="op">.</span><span class="fu">ssh</span>\id_ed25519<span class="op">.</span><span class="fu">pub</span> <span class="op">|</span> ssh USERNAME@login<span class="op">.</span><span class="fu">genome</span><span class="op">.</span><span class="fu">au</span><span class="op">.</span><span class="fu">dk</span> <span class="st">'cat &gt;&gt; .ssh/authorized_keys'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <p>&nbsp;</p>
 <p>After this, your local private key will be tested against GenomeDK’s public key every time you log in, without you needing to write a password.</p>
 </section></section>
@@ -454,10 +461,10 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="36bfef5e" class="cell" data-execution_count="1">
+<div id="f6739a90" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="qlABNEfFjKJz" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#qlABNEfFjKJz {
+<div id="FJWItteXXsJF" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#FJWItteXXsJF {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -678,7 +685,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsqlABNEfFjKJz=[
+var questionsFJWItteXXsJF=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1794,8 +1801,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("qlABNEfFjKJz")) {
-    show_questions(questionsqlABNEfFjKJz, qlABNEfFjKJz);
+  if (document.getElementById("FJWItteXXsJF")) {
+    show_questions(questionsFJWItteXXsJF, FJWItteXXsJF);
   } else {
     setTimeout(try_show, 200);
   }
@@ -1816,7 +1823,7 @@ function try_show() {
 <h3 id="something-more-about-your-home">Something more about your home</h3>
 <p>After log in, you will find yourself into your private <strong>home folder</strong>, denoted by <code>~</code> or equivalently <code>/home/username</code>. Your prompt will look like this:</p>
 <p>&nbsp;</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[username@node</span> ~] </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">[username@node</span> ~] </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>which follows the format <strong>[username@node current_folder]</strong>.</p>
 <p>&nbsp;</p>
 <div class="callout callout-warning callout-titled callout-style-default">
@@ -1839,16 +1846,16 @@ function try_show() {
 <section id="exercise-contd" class="slide level2">
 <h2>Exercise cont’d</h2>
 <p>We now set the WD into <code>GDKintro</code> and remove all text files in it. Then we download a zipped <code>fastq</code> file, unzip it, and print a preview!</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> GDKintro</span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">*</span>.txt</span>
-<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz <span class="dt">\</span></span>
-<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data.fastq.gz</span>
-<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data.fastq.gz</span>
-<span id="cb8-9"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data.fastq </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> GDKintro</span>
+<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">*</span>.txt</span>
+<span id="cb9-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz <span class="dt">\</span></span>
+<span id="cb9-6"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data.fastq.gz</span>
+<span id="cb9-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data.fastq.gz</span>
+<span id="cb9-9"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data.fastq </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -1876,8 +1883,8 @@ function try_show() {
 <section id="exercise-read-files" class="slide level2">
 <h2>Exercise: Read files</h2>
 <p>Useful utility 1: <code>less</code> file reader. <code>less</code> is perfect for exploring (big) text files: you can scroll with the arrows, and quit pressing <code>q</code>. Try</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> data.fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> data.fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp; The very first sequence you see should be</p>
 <pre><code>@HISEQ_HU01:89:H7YRLADXX:1:1101:1116:2123 1:N:0:ATCACG
 TCTGTGTAAATTACCCAGCCTCACGTATTCCTTTAGAGCAATGCAAAACAGACTAGACAAAAGGCTTTTAAAAGTCTA
@@ -1896,10 +1903,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online <code>man less</code> (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="03478afa" class="cell" data-execution_count="2">
+<div id="816931a0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="mofPuBtqJlMi" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#mofPuBtqJlMi {
+<div id="uAPVHeQsCOTH" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#uAPVHeQsCOTH {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2120,7 +2127,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsmofPuBtqJlMi=[
+var questionsuAPVHeQsCOTH=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3210,8 +3217,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("mofPuBtqJlMi")) {
-    show_questions(questionsmofPuBtqJlMi, mofPuBtqJlMi);
+  if (document.getElementById("uAPVHeQsCOTH")) {
+    show_questions(questionsuAPVHeQsCOTH, uAPVHeQsCOTH);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3355,18 +3362,18 @@ function try_show() {
 <section class="slide level2">
 
 <p>Open the terminal and run the command below to install <code>pixi</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://pixi.sh/install.sh <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://pixi.sh/install.sh <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>After that, make the system recognize <code>pixi</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> PATH=<span class="st">"</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.pixi/bin"</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
-<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pixi completion --shell bash)"'</span>  <span class="op">&gt;&gt;</span> ~/.bashrc</span>
-<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> PATH=<span class="st">"</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.pixi/bin"</span> <span class="op">&gt;&gt;</span> ~/.bashrc</span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(pixi completion --shell bash)"'</span>  <span class="op">&gt;&gt;</span> ~/.bashrc</span>
+<span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>Change your WD with the one we created earlier, where we have the file <code>data.fastq</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GDKintro</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GDKintro</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Initiate a new pixi environment into the folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -3382,11 +3389,11 @@ function try_show() {
 <section class="slide level2">
 
 <p>Now get back to the terminal and install some packages. If you have a project on GDK, this is done by</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>00:10:0 <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> <span class="dt">\</span></span>
-<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>otherwise</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>00:10:0 <span class="at">--pty</span> <span class="dt">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>00:10:0 <span class="at">--account</span><span class="op">=</span>YOUR_PROJECT <span class="at">--pty</span> <span class="dt">\</span></span>
 <span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>otherwise</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">--cores</span><span class="op">=</span>2 <span class="at">--time</span><span class="op">=</span>00:10:0 <span class="at">--pty</span> <span class="dt">\</span></span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a>     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -3423,7 +3430,7 @@ function try_show() {
 <div class="callout-content">
 <p>You can share <code>pixi.toml</code> with a collaborator. This will need to run <code>pixi install</code> and will recreate the same environment!</p>
 <p>Does your collaborator need a file <code>environment.yml</code> to recreate the environment? Run</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> project export conda-environment environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> project export conda-environment environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -3432,10 +3439,10 @@ function try_show() {
 
 <p><strong>Exercise Cont’d</strong></p>
 <p>Be sure your WD is in the folder <code>GDKintro</code>. Then run</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> project export conda-environment environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> project export conda-environment environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Open the file <code>environment.yml</code>. It looks very similar to <code>pixi.toml</code> and is compatible with conda to recreate your environment.</p>
 <p>Let’s zip those files into one:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> environment.zip pixi.toml environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> environment.zip pixi.toml environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section></section>
 <section>
 <section id="data-transfer" class="title-slide slide level1 center">
@@ -3449,7 +3456,7 @@ function try_show() {
 <section id="exercise-contd---download-on-shell" class="slide level2">
 <h2>Exercise cont’d - Download on shell</h2>
 <p>How to download the environment files to our computer? Open a terminal <strong>on your computer</strong> and run this command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>scp</code> needs your login and the <strong>absolute path</strong> to the file. We give also the download destination as the WD on the local computer (<code>.</code>)</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -3461,7 +3468,7 @@ function try_show() {
 </div>
 <div class="callout-content">
 <p>You can also upload a file switching the order of origin and destination in <code>scp</code>. E.g.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -3550,57 +3557,57 @@ function try_show() {
 <section id="creation" class="slide level2">
 <h2>Creation</h2>
 <p>Request a project (after login on GDK) with the command</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-request</span> <span class="at">-g</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-request</span> <span class="at">-g</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>After GDK approval, a project folder with the desired name appears in <code>~</code> and <code>/faststorage/project</code>. You should be able to set the WD into that folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>or</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/<span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/<span class="op">&lt;</span>project_name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <h3 id="users-management">Users management</h3>
 <p><strong>Only the creator</strong> (owner) can see the project folder. You (and only you) can add an user</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-add-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-add-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>or remove it</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-remove-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-remove-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>Users can also be promoted to have administrative rights in the project</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-promote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-promote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>or demoted from those rights</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-demote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-demote-user</span> <span class="at">-g</span> <span class="op">&lt;</span>project name<span class="op">&gt;</span> -u <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <h3 id="accounting">Accounting</h3>
 <p>You can see <strong>globally</strong> monthly used resources of your projects with</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Example output:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
-<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-8          44.58          0.09         0.00           6024             0</span>
-<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-9          25.38          0.09         0.00           6025             0</span>
-<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-6           6.73          0.00         0.00              0             0</span>
-<span id="cb30-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-7        7547.48          0.72         0.00          27479             0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-8          44.58          0.09         0.00           6024             0</span>
+<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">HDSSandbox</span>            2024-9          25.38          0.09         0.00           6025             0</span>
+<span id="cb31-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-6           6.73          0.00         0.00              0             0</span>
+<span id="cb31-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>         2024-7        7547.48          0.72         0.00          27479             0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>More detailed usage: by users on a selected project &nbsp;</p>
 <p>You can see how many resources your projects are using with</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Example output:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
-<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-7          77.98          0.02         0.00            528             0</span>
-<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-8           0.00          0.02         0.00            528             0</span>
-<span id="cb32-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-7         223.21          0.02         0.00            564             0</span>
-<span id="cb32-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-8           0.00          0.02         0.00            564             0</span>
-<span id="cb32-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-7         173.29          0.01         0.00            579             0</span>
-<span id="cb32-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-8           0.00          0.01         0.00            579             0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-overflow-scroll code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">project</span>               period  billing hours  storage <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">backup</span> <span class="er">(</span><span class="ex">TB</span><span class="kw">)</span>  <span class="ex">storage</span> files  backup files</span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-7          77.98          0.02         0.00            528             0</span>
+<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  sarasj             2024-8           0.00          0.02         0.00            528             0</span>
+<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-7         223.21          0.02         0.00            564             0</span>
+<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  savvasc            2024-8           0.00          0.02         0.00            564             0</span>
+<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-7         173.29          0.01         0.00            579             0</span>
+<span id="cb33-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">ngssummer2024</span>  simonnn            2024-8           0.00          0.01         0.00            579             0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -3617,13 +3624,13 @@ function try_show() {
 <ul>
 <li>You can pipe the accounting output into <code>grep</code> to isolate specific users and/or months:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>period<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="at">-u</span> <span class="at">-p</span> <span class="op">&lt;</span>project-name<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="op">&lt;</span>period<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <ul>
 <li>all the accounting outputs can be saved into a file, which you can later open for example as Excel sheet.</li>
 </ul>
 <p>Example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="op">&gt;</span> accountingGDK.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">gdk-project-usage</span> <span class="op">&gt;</span> accountingGDK.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -3642,10 +3649,10 @@ function try_show() {
 </div>
 <div class="callout-content">
 <p>You have a folder or a file into the project which you do not want to share: Use</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go-rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go-rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>which you can revert using</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go+rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> go+rwx <span class="op">&lt;</span>file or folder<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note: you cannot authorize only specific users to access data - <strong>you can only operate on the project members’ level</strong>.</p>
 </div>
 </div>
@@ -3740,9 +3747,9 @@ function try_show() {
 
 <h3 id="exercise-interactive-job">Exercise: Interactive job</h3>
 <p>You can also run an interactive job on GenomeDK desktop. Go back to it and use the terminal to go into the <code>GDKintro</code> folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GDKintro</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GDKintro</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Now run an interactive job. Use 8g of RAM, 2 cores, and choose 01:00:00 hours. Choose the <code>account</code> using the name of one of your projects, or delete it if you do not have projects.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">-c</span> 2 <span class="at">--time</span><span class="op">=</span>01:00:00  <span class="at">--account</span><span class="op">=</span>PROJECT_NAME <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>8g <span class="at">-c</span> 2 <span class="at">--time</span><span class="op">=</span>01:00:00  <span class="at">--account</span><span class="op">=</span>PROJECT_NAME <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -3751,9 +3758,9 @@ function try_show() {
 <p>Now, run <code>rstudio</code> or <code>jupyterlab</code> (your choice!) from the <code>pixi</code> environment:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run rstudio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run rstudio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run jupyter-lab <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run jupyter-lab <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <p>The packages available in Rstudio and Jupyterlab are the ones installed in your environment. More on this will be in our <strong>Advanced GenomeDK workshop</strong>.</p>
 </section>
@@ -3770,37 +3777,37 @@ function try_show() {
 </ul>
 <h3 id="exercise-batch-script">Exercise: batch script</h3>
 <p>Create in Rstudio or Jupyterlab a file called <code>align.sh</code> (in the folder <code>GDKintro</code>) like below:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
-<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
-<span id="cb42-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
-<span id="cb42-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
-<span id="cb42-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 index ref.fasta.gz</span>
-<span id="cb42-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
-<span id="cb42-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 mem <span class="at">-t</span> 8 ref.fasta.gz <span class="dt">\</span></span>
-<span id="cb42-10"><a aria-hidden="true" tabindex="-1"></a>             data.fastq <span class="dt">\</span></span>
-<span id="cb42-11"><a aria-hidden="true" tabindex="-1"></a>            <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
-<span id="cb42-12"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
-<span id="cb42-13"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
-<span id="cb42-14"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
-<span id="cb42-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> data.bam</span>
-<span id="cb42-16"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-17"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
+<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
+<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
+<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 index ref.fasta.gz</span>
+<span id="cb43-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
+<span id="cb43-9"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 mem <span class="at">-t</span> 8 ref.fasta.gz <span class="dt">\</span></span>
+<span id="cb43-10"><a aria-hidden="true" tabindex="-1"></a>             data.fastq <span class="dt">\</span></span>
+<span id="cb43-11"><a aria-hidden="true" tabindex="-1"></a>            <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
+<span id="cb43-12"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 7 <span class="dt">\</span></span>
+<span id="cb43-13"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb43-14"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb43-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> data.bam</span>
+<span id="cb43-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>In the terminal, you need to install two new packages</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add bwa-mem2 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add bwa-mem2 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and download a reference genome</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa <span class="at">-O</span> ref.fasta.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa <span class="at">-O</span> ref.fasta.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Send the script to the queueing system using the terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>Interrogate SLURM about the specific job with the provided number. For example</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&gt;Name                : align.sh
 &gt;User                : samuele
 &gt;Account             : my_project
@@ -3816,7 +3823,7 @@ function try_show() {
 <p>or about all the queued jobs</p>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> USERNAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> USERNAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:10%;">
 
 <center>
@@ -3824,13 +3831,13 @@ or
 </center>
 
 </div><div class="column" style="width:45%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 &gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
 <p>&nbsp;</p>
 <p>If you change your mind and want to cancel a job:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="choosing-the-right-cpu-ram" class="slide level2">
 <h2>Choosing the right CPU-RAM</h2>
@@ -3838,7 +3845,7 @@ or
 <ul>
 <li><p>use <code>squeue --me</code> and <strong>look at the node id</strong></p></li>
 <li><p><strong>log into that node</strong> from the front-end terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 </section>
 <section class="slide level2">
