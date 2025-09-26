@@ -1016,6 +1016,11 @@ Try to run a job with a smaller dataset as a test. Or run one of many jobs of th
   ssh <NODEID>
   ```
 
+:::{.callout-warning}
+If `ssh <NODEID>` does not work, it means that your job is already terminated (finished or stopped due to an error).
+:::
+
+
 ---
 
 - use `htop -u <username>` to see what is running and how much memory and CPU it uses
