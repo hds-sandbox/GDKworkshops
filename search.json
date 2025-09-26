@@ -354,7 +354,14 @@
     "href": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
     "title": "Use GenomeDK",
     "section": "Batch script (sbatch)",
-    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time and without interaction from the user. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)\n\nExercise: batch script\nCreate in Rstudio or Jupyterlab a file called align.sh (in the folder GDKintro) like below:\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=8\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\npixi run bwa-mem2 index ref.fasta.gz\n#align data\npixi run bwa-mem2 mem -t 8 ref.fasta.gz \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 7 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0"
+    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time and without interaction from the user. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#exercise-batch-script",
+    "href": "resources/Slides/Introduction/slides.html#exercise-batch-script",
+    "title": "Use GenomeDK",
+    "section": "Exercise: batch script",
+    "text": "Exercise: batch script\nCreate in Rstudio or Jupyterlab a file called align.sh (in the folder GDKintro) like below:\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=8\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\npixi run bwa-mem2 index ref.fasta.gz\n#align data\npixi run bwa-mem2 mem -t 8 ref.fasta.gz \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 7 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#choosing-the-right-cpu-ram",
