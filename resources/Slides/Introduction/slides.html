@@ -464,10 +464,10 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="6ed682a3" class="cell" data-execution_count="1">
+<div id="d46def07" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="mLhUjClHlMHl" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#mLhUjClHlMHl {
+<div id="wGYnKJfiPYvX" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#wGYnKJfiPYvX {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -688,7 +688,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsmLhUjClHlMHl=[
+var questionswGYnKJfiPYvX=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1804,8 +1804,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("mLhUjClHlMHl")) {
-    show_questions(questionsmLhUjClHlMHl, mLhUjClHlMHl);
+  if (document.getElementById("wGYnKJfiPYvX")) {
+    show_questions(questionswGYnKJfiPYvX, wGYnKJfiPYvX);
   } else {
     setTimeout(try_show, 200);
   }
@@ -1906,10 +1906,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online <code>man less</code> (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="c0c218aa" class="cell" data-execution_count="2">
+<div id="128944dc" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="UYByXsyaReTf" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#UYByXsyaReTf {
+<div id="JMKzddchGFVM" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#JMKzddchGFVM {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2130,7 +2130,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsUYByXsyaReTf=[
+var questionsJMKzddchGFVM=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3220,8 +3220,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("UYByXsyaReTf")) {
-    show_questions(questionsUYByXsyaReTf, UYByXsyaReTf);
+  if (document.getElementById("JMKzddchGFVM")) {
+    show_questions(questionsJMKzddchGFVM, JMKzddchGFVM);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3853,6 +3853,19 @@ or
 <li><p><strong>log into that node</strong> from the front-end terminal:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>If <code>ssh &lt;NODEID&gt;</code> does not work, it means that your job is already terminated (finished or stopped due to an error).</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 

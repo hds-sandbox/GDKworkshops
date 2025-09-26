@@ -368,7 +368,7 @@
     "href": "resources/Slides/Introduction/slides.html#choosing-the-right-cpu-ram",
     "title": "Use GenomeDK",
     "section": "Choosing the right CPU-RAM",
-    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the node id\nlog into that node from the front-end terminal:\nssh &lt;NODEID&gt;"
+    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the node id\nlog into that node from the front-end terminal:\nssh &lt;NODEID&gt;\n\n\n\n\n\n\n\nWarning\n\n\nIf ssh &lt;NODEID&gt; does not work, it means that your job is already terminated (finished or stopped due to an error)."
   },
   {
     "objectID": "index.html#slides-portability",
