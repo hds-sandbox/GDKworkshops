@@ -900,13 +900,15 @@ Useful to **run a program non-interactively**, usually for longer time and witho
 and
 
 - has a filename **without spaces** (forget spaces from now on)
+
 ---
 
-### Exercise: batch script
+## Exercise: batch script
 
 Create in Rstudio or Jupyterlab a file called `align.sh` (in the folder `GDKintro`) like below:
 
 ```{.bash}
+
 #!/bin/bash
 #SBATCH --account PROJECT_NAME
 #SBATCH --cpus-per-task=8
