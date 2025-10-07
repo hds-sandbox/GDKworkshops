@@ -370,9 +370,11 @@ To transfer from GenomeDK to your computer, and viceversa, you need to use the c
 ## Web applications
 
 &nbsp;
+
 Why do we use web applications for graphical interfaces?
 
 &nbsp;
+
 - all the graphics heavy-lifting is done by the browser
 - before, the X11 forwarding was the way to do graphics from remote
 - problem: X11 sends the whole graphics over the network, which is slow
@@ -458,7 +460,7 @@ srun --mem=4g --cores=1 --time=4:00:0 --pty /bin/bash
 
 &nbsp;
 
-Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) **are given as variables** to the web server simply using `$(hostname)` and $UID:
+Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) **are given as variables** to the web server simply using `$(hostname)` and `$UID`:
 
 ```{.bash}
 conda activate GDKjupyter
@@ -653,7 +655,21 @@ singularity run --env REF_PATH=$(pwd) \
 ```
 
 **Exercise finished**
+
 ---
+
+### Building containers
+
+If you want to build containers with Docker, you need to 
+
+  - build locally, and then upload the container to a repository (DockerHub or Quay). 
+  - pull them on GenomeDK with singularity
+
+&nbsp;
+
+The same holds for singularity, because you need root privileges to build a container on the cluster, which you do not have.
+
+## Other options for singularity {.scrollable}
 
 A few other options which can be used in singularity. When you need those really depends on the application:
 
@@ -850,16 +866,16 @@ scancel 33735928
 Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
  While the job is running
 
-- use `squeue --me` and **look at the node id**
+- use `squeue --me` and **look at the job id**
 
-- **log into that node** from the front-end terminal:
+- **log into the job** from the front-end terminal using an interactive session:
   
   ```{.bash}
-  ssh <NODEID>
+  srun --jobid <job id> --overlap --pty bash
   ```
 
 :::{.callout-warning}
-If `ssh <NODEID>` does not work, it means that your job is already terminated (finished or stopped due to an error).
+The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
 :::
 
 ---
