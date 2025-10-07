@@ -350,27 +350,6 @@
     "text": "Interactive jobs\nUseful to run a non-repetitive task interactively\nExamples:\n\nsplitting by chromosome that one bam file you just got\nopen Rstudio and Jupyterlab\ncompress/decompress multiple files, maybe in parallel\n\nOnce you exit from the job, anything running into it will stop."
   },
   {
-    "objectID": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
-    "href": "resources/Slides/Introduction/slides.html#batch-script-sbatch",
-    "title": "Use GenomeDK",
-    "section": "Batch script (sbatch)",
-    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time and without interaction from the user. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#exercise-batch-script",
-    "href": "resources/Slides/Introduction/slides.html#exercise-batch-script",
-    "title": "Use GenomeDK",
-    "section": "Exercise: batch script",
-    "text": "Exercise: batch script\nCreate in Rstudio or Jupyterlab a file called align.sh (in the folder GDKintro) like below:\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=8\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\npixi run bwa-mem2 index ref.fasta.gz\n#align data\npixi run bwa-mem2 mem -t 8 ref.fasta.gz \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 7 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#choosing-the-right-cpu-ram",
-    "href": "resources/Slides/Introduction/slides.html#choosing-the-right-cpu-ram",
-    "title": "Use GenomeDK",
-    "section": "Choosing the right CPU-RAM",
-    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the node id\nlog into that node from the front-end terminal:\nssh &lt;NODEID&gt;\n\n\n\n\n\n\n\nWarning\n\n\nIf ssh &lt;NODEID&gt; does not work, it means that your job is already terminated (finished or stopped due to an error)."
-  },
-  {
     "objectID": "index.html#slides-portability",
     "href": "index.html#slides-portability",
     "title": "GenomeDK workshops",
@@ -690,7 +669,14 @@
     "href": "resources/Slides/Advanced/slides.html#program",
     "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:30:\n\nWorkshop Introduction\nSome everyday things for easier life\n\nand your mental sanity\n\n\n10:30-11:00:\n\nrsync copy and backups\n[Optional] Managing multiple terminals on tmux\ncake\n\n11:10-12:00:\n\nWeb applications, ports and tunnels\nContainers (Docker, singularity)\n\n12:45-14:00:\n\nYour first pipeline with gwf, conda and containers\n\nmore cake\nresource management\nadding targets to a pipeline"
+    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nFrequently used on UNIX\nGithub configuration\n\n10:45-11:30:\n\nrsync copy and backups\n\n11:30-12:00:\n\nWeb applications, ports and tunnels\n\n12:45-13:30:\n\nContainers (Docker, singularity)\n\n13:30-:\n\nQuestions and discussions"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#extras",
+    "href": "resources/Slides/Advanced/slides.html#extras",
+    "title": "Advanced GenomeDK",
+    "section": "Extras",
+    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nBatch scripts\nManaging multiple terminals on tmux"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
@@ -711,28 +697,35 @@
     "href": "resources/Slides/Advanced/slides.html#configuration-files",
     "title": "Advanced GenomeDK",
     "section": "Configuration files",
-    "text": "Configuration files\nYour ~/.bashrc file contains settings for your user. Those are bash commands which run at every login.\n \nCommon practice for many softwares is to have a configuration file in your home, often starting with ., which makes it a hidden file.\n \nExamples:\n\n.tmux.config for tmux\n.emacs for emacs\n.gitconfig for github\n.condarc for conda\n\nPlus other things like your command history on the terminal."
+    "text": "Configuration files\nYour ~/.bashrc file contains settings for your user. Those are bash commands which run at every login.\n \nCommon practice for many softwares is to have a configuration file in your home, often starting with ., which makes it a hidden file.\n \nExamples:\n\n.emacs for emacs\n.gitconfig for github\n.condarc for conda\n.nanorc for nano editor\n\nPlus other things like your command history on the terminal (~/.bash_history) and your settings (~/.bashrc)."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-i-singularity-settings",
     "href": "resources/Slides/Advanced/slides.html#exercise-i-singularity-settings",
     "title": "Advanced GenomeDK",
     "section": "Exercise I: singularity settings",
-    "text": "Exercise I: singularity settings\nLet’s make a useful setting to run at each login. We will need a temporary folder for singularity containers which are downloaded. Default is your home, which will be filled up in no time (folder ~/.singularity) with cache material.\n \nEdit the file ~/.bashrc (use nano ~/.bashrc or any editor you want). Add those lines:\nmkdir -p -m 700 /tmp/$USER\nexport SINGULARITY_TMPDIR=/tmp/$USER\nexport SINGULARITY_CACHEDIR=/tmp/$USER\n \nThe -m 700 option for mkdir command ensures also you are the only one which can see the temporary files. Useful is you use a container with password or sensitive info, so no one can access it (/tmp/ is a public folder)!"
+    "text": "Exercise I: singularity settings\nLet’s make a useful setting to run at each login. We will need a temporary folder for singularity containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder ~/.singularity) with cache material.\n \nEdit the file ~/.bashrc (use nano ~/.bashrc or any editor you want). Add those lines:\nmkdir -p -m 700 /tmp/$USER\nexport SINGULARITY_TMPDIR=/tmp/$USER\nexport SINGULARITY_CACHEDIR=/tmp/$USER\n \nThe -m 700 option for mkdir command ensures also you are the only one which can access the temporary files. Useful is you use a container with password or sensitive info, so no one can access it (/tmp/ is a public folder)!"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
     "href": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
     "title": "Advanced GenomeDK",
     "section": "Exercise II - aliases",
-    "text": "Exercise II - aliases\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorable commands? Choose the aliases you prefere from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
+    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Choose the aliases you prefere from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
     "href": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
     "title": "Advanced GenomeDK",
     "section": "Exercise III - functions",
-    "text": "Exercise III - functions\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Find all repetitive stupid stuff you use and wrap it up into the .bashrc file!\n\n\n\nYou can also create functions including multiple commands: for example making a directory and then cd into it.\n## make and cd\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\nWhy not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
+    "text": "Exercise III - functions\nYou can also create functions including multiple commands: for example making a directory and then cd into it.\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Find all repetitive commands you use and wrap it up into the ~/.bashrc file!\n\n\n\n## make and cd\n## make a folder and go into it\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\n\n## interactive job using the same resources of\n## an existing job already running\n## useful to debug and check resource usage\nsshell() {\n  srun --jobid $1 --overlap --pty bash\n}\nExercise finished"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#optional-configure-github-on-genomedk",
+    "href": "resources/Slides/Advanced/slides.html#optional-configure-github-on-genomedk",
+    "title": "Advanced GenomeDK",
+    "section": "[Optional] Configure github on GenomeDK",
+    "text": "[Optional] Configure github on GenomeDK\nGithub is a web-based platform for version control and collaboration, built around the Git tool. You can get an account for free at github.com.\nWhen you use Github on GenomeDK, you can configure your ssh keys to avoid writing your name and password every time you push or pull changes.\nCreate ssh key\nOn the cluster run\nssh-keygen -t ed25519 -C \"GithubAccountMail@example.com\"\nWhen asked, you can choose to name the file. Call it ~/.ssh/id_ed25519_github. When asked for password, you can leave it empty (press enter)."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
@@ -746,35 +739,21 @@
     "href": "resources/Slides/Advanced/slides.html#exercise",
     "title": "Advanced GenomeDK",
     "section": "Exercise",
-    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#optional-manage-multiple-terminals-with-tmux",
-    "href": "resources/Slides/Advanced/slides.html#optional-manage-multiple-terminals-with-tmux",
-    "title": "Advanced GenomeDK",
-    "section": "[Optional] Manage multiple terminals with tmux",
-    "text": "[Optional] Manage multiple terminals with tmux\ntmux is a server application managing multiple terminal sessions. It can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
-    "href": "resources/Slides/Advanced/slides.html#exercise-1",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise",
-    "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkcd advancedGDK/rsync/data\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#web-applications",
     "href": "resources/Slides/Advanced/slides.html#web-applications",
     "title": "Advanced GenomeDK",
     "section": "Web applications",
-    "text": "Web applications\n  Why do we use web applications for graphical interfaces?\n  - all the graphics heavy-lifting is done by the browser - before, the X11 forwarding was the way to do graphics from remote - problem: X11 sends the whole graphics over the network, which is slow\n  We have written a bit about that on one of our ABC tutorials"
+    "text": "Web applications\n  Why do we use web applications for graphical interfaces?\n  - all the graphics heavy-lifting is done by the browser - before, the X11 forwarding was the way to do graphics from remote - problem: X11 sends the whole graphics over the network, which is slow - on the interactive desktop, rstudio runs using VNC (better than X11)"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
     "href": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
     "title": "Advanced GenomeDK",
     "section": "Exercise: jupyterlab web server",
-    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nFinally, install a package to accellerate conda. This is optional but recommended:\nconda install -n base --yes conda-libmamba-solver\nconda config --set solver libmamba\nNow you are ready to move on!"
+    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nNow you are ready to move on!"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
@@ -802,7 +781,7 @@
     "href": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
     "title": "Advanced GenomeDK",
     "section": "Exercise I: a simple bioinformatics container",
-    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment. First create and attach to a new tmux session called biocontainers.\n \nMake a folder called containers101 in the advancedGDK directory.\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open it to see a detailed description - if you have no good ideas look for the minimap2 aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot."
+    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment.\n \nMake a folder called containers101 in the advancedGDK directory.\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open it to see a detailed description - if you have no good ideas look for the minimap2 aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-options-for-singularity",
@@ -819,39 +798,46 @@
     "text": "Exercise finished\nA few other options which can be used in singularity. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#split-and-merge",
-    "href": "resources/Slides/Advanced/slides.html#split-and-merge",
+    "objectID": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
+    "href": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
     "title": "Advanced GenomeDK",
-    "section": "Split and merge",
-    "text": "Split and merge\nA classical bioinformatics pipeline has splits and merge steps. We will work with this:\n\n\n\n\n\nflowchart LR\n  A0{data.fq} --&gt; A[\"Split(data.fq)\"]\n  A --&gt; B[\"table(part000.fq)\"]\n  A --&gt; C[\"table(part002.fq)\"]\n  A --&gt; D[\"table(part....fq)\"]\n  A --&gt; E[\"table(part009.fq)\"]\n  B --&gt; F[\"merge(table_[000-009].tsv)\"]\n  C --&gt; F\n  D --&gt; F\n  E --&gt; F\n  F --&gt; G{table.tsv}\n\n\n\n\n\n\n \nwhere split and table (generate allele counts and statistics in a table) are done through seqkit."
+    "section": "A more advanced bash function for github",
+    "text": "A more advanced bash function for github\nHere a more advanced bash function you can paste into your ~/.bashrc file. Why not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: local download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#software-gwf",
-    "href": "resources/Slides/Advanced/slides.html#software-gwf",
+    "objectID": "resources/Slides/Advanced/slides.html#batch-script-sbatch",
+    "href": "resources/Slides/Advanced/slides.html#batch-script-sbatch",
     "title": "Advanced GenomeDK",
-    "section": "Software: gwf",
-    "text": "Software: gwf\nThere are many populare softwares for workflows (Snakemake, Nextflow), which requires learning their workflow language. We use instead gwf:\n\nDeveloped at AU (Dan at GenomeDK) and used also at MOMA, AUH, …\n\nEasy to find support\n\nIn python, no need for new language\n\nYou can use all python functions to build your workflow!\n\nEasy to structure a workflow and check resource usage\n\nReusable templates\nVery pedagogical\n\nConda, Pixi, Container usage out-of-the-box\n\n \nOnce you understand workflows with gwf, it is a matter of learning how to use other workflow languages, if you wish."
+    "section": "Batch script (sbatch)",
+    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time and without interaction from the user. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-workflow-with-conda-containers",
-    "href": "resources/Slides/Advanced/slides.html#exercise-i-workflow-with-conda-containers",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-batch-script",
+    "href": "resources/Slides/Advanced/slides.html#exercise-batch-script",
     "title": "Advanced GenomeDK",
-    "section": "Exercise I: workflow with conda containers",
-    "text": "Exercise I: workflow with conda containers\nPrepare everything for the exercise: create a new folder, get data and workflow file\n mkdir -p advancedGDK/pipeline\n cd advancedGDK/pipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py"
+    "section": "Exercise: batch script",
+    "text": "Exercise: batch script\nCreate in Rstudio or Jupyterlab a file called align.sh (in the folder GDKintro) like below:\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=8\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\npixi run bwa-mem2 index ref.fasta.gz\n#align data\npixi run bwa-mem2 mem -t 8 ref.fasta.gz \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 7 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-singularity-in-workflows",
-    "href": "resources/Slides/Advanced/slides.html#exercise-ii-singularity-in-workflows",
+    "objectID": "resources/Slides/Advanced/slides.html#choosing-the-right-cpu-ram",
+    "href": "resources/Slides/Advanced/slides.html#choosing-the-right-cpu-ram",
     "title": "Advanced GenomeDK",
-    "section": "Exercise II: singularity in workflows",
-    "text": "Exercise II: singularity in workflows\nNow, you will change the executor for the template table. Your task is to:\n\nopen the workflow.py file\nbelow importing the Conda module (line 2), add a new line with\nfrom gwf.executors import Singularity\nNow, define a new executor. Below the line where you define conda_env = Conda(\"seqkitEnv\"), use a similar syntax for Singularity, where you provide the container file as argument.\nAt the end of the align template, use the new executor instead of conda_env.\n\n \nDid you do it right? If yes, then you should be able to run the combine target:\ngwf run combine\nand see its status become completed after some time, and all output files should be created in your folder! If not, something is wrong. Ask for help, or look at the solution file, if you prefere.\n\n\n\n\n\n\nNote\n\n\nBecause combine depends on all table_ targets, it will submit all those targets as well, which need to run first.\n\n\n\nExercise break"
+    "section": "Choosing the right CPU-RAM",
+    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the node id\nlog into that node from the front-end terminal:\nssh &lt;NODEID&gt;\n\n\n\n\n\n\n\nWarning\n\n\nIf ssh &lt;NODEID&gt; does not work, it means that your job is already terminated (finished or stopped due to an error)."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-iii-your-own-target",
-    "href": "resources/Slides/Advanced/slides.html#exercise-iii-your-own-target",
+    "objectID": "resources/Slides/Advanced/slides.html#manage-multiple-terminals-with-tmux",
+    "href": "resources/Slides/Advanced/slides.html#manage-multiple-terminals-with-tmux",
     "title": "Advanced GenomeDK",
-    "section": "Exercise III: Your own target!",
-    "text": "Exercise III: Your own target!\nOk, now we want to extend the workflow and do quality control on the part_###.fq files.\n\n\n\n\n\nflowchart LR\n  A0{data.fq} --&gt; A[\"Split(data.fq)\"]\n  A --&gt; B[\"table(part000.fq)\"]\n  A --&gt; C[\"table(part002.fq)\"]\n  A --&gt; D[\"table(part....fq)\"]\n  A --&gt; E[\"table(part009.fq)\"]\n  B --&gt; F[\"merge(table_[000-009].tsv)\"]\n  C --&gt; F\n  D --&gt; F\n  E --&gt; F\n  F --&gt; G{table.tsv}\n  B --&gt; H[\"qc(part[000-009].fq)\"]\n  C --&gt; H\n  D --&gt; H\n  E --&gt; H\n  H --&gt; I{\"multiqc_report.html\"}"
+    "section": "Manage multiple terminals with tmux",
+    "text": "Manage multiple terminals with tmux\ntmux is a server application managing multiple terminal sessions. It can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
+    "href": "resources/Slides/Advanced/slides.html#exercise-1",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise",
+    "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
   },
   {
     "objectID": "cards/SamueleSoraggi.html",
