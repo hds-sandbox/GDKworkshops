@@ -157,7 +157,7 @@ alias mvi='mv -i'
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
-alias .....='cd ../../../../'
+alias .....='cd ../../../../../'
 
 ## List views
 alias ll='ls -laht' #detailed
@@ -183,10 +183,22 @@ mkcd() {
 ## interactive job using the same resources of
 ## an existing job already running
 ## useful to debug and check resource usage
+## example of usage: sshell 12345678
+## job id can be found with: squeue --me
 sshell() {
   srun --jobid $1 --overlap --pty bash
 }
 ```
+
+---
+
+Now you have done all this changes to your `~/.bashrc` file, you need to apply them. You can either logout and login again, or simply run
+
+```{.bash}  
+source ~/.bashrc
+```
+
+&nbsp;
 
 **Exercise finished** 
 
@@ -194,7 +206,11 @@ sshell() {
 
 Github is a web-based platform for version control and collaboration, built around the Git tool. You can get an account for free at [github.com](https://github.com).
 
+![`Git` is a software for version management of your files. `Github` is a web service based on `git` that allows to manage file versions and collaborate on projects.](img/gitIcons.png){fig-align="center" width=400px}
+
 When you use Github on GenomeDK, you can configure your ssh keys to avoid writing your name and password every time you push or pull changes. 
+
+---
 
 ### Create ssh key
 
@@ -203,6 +219,8 @@ On the cluster run
 ```{.bash}
 ssh-keygen -t ed25519 -C "GithubAccountMail@example.com"
 ```
+
+&nbsp;
 
 When asked, you can choose to name the file. Call it `~/.ssh/id_ed25519_github`. When asked for password, you can leave it empty (press enter).
 
@@ -217,6 +235,8 @@ Add the key to the ssh agent, which manages your keys. Write the following on yo
 eval "$(ssh-agent -s)" > /dev/null
 ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519_github
 ```
+
+&nbsp;
 
 Now print your public key on the terminal. Copy it because you need to paste it on the github website:
 
