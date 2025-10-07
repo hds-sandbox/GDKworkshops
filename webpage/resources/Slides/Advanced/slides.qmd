@@ -712,7 +712,7 @@ Please fill out this form :)
 
 Things that are more advanced or are not treated in the workshop, but you might find useful.
 
-## A more advanced bash function for github
+## A more advanced bash function for github {.scrollable}
 
 Here a more advanced bash function you can paste into your `~/.bashrc` file.
 Why not making one for `git clone` downloading only the latest commit history and choosing specific folders for the repository?
