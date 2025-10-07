@@ -599,8 +599,15 @@ Dan Søndergaard
 </section>
 <section id="web-applications" class="slide level2">
 <h2>Web applications</h2>
-<p>&nbsp; Why do we use web applications for graphical interfaces?</p>
-<p>&nbsp; - all the graphics heavy-lifting is done by the browser - before, the X11 forwarding was the way to do graphics from remote - problem: X11 sends the whole graphics over the network, which is slow - on the interactive desktop, rstudio runs using VNC (better than X11)</p>
+<p>&nbsp;</p>
+<p>Why do we use web applications for graphical interfaces?</p>
+<p>&nbsp;</p>
+<ul>
+<li>all the graphics heavy-lifting is done by the browser</li>
+<li>before, the X11 forwarding was the way to do graphics from remote</li>
+<li>problem: X11 sends the whole graphics over the network, which is slow</li>
+<li>on the interactive desktop, rstudio runs using VNC (better than X11)</li>
+</ul>
 </section>
 <section class="slide level2">
 
@@ -684,7 +691,7 @@ Dan Søndergaard
 <p>Start a job with just a few resources.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
-<p>Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) <strong>are given as variables</strong> to the web server simply using <code>$(hostname)</code> and $UID:</p>
+<p>Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) <strong>are given as variables</strong> to the web server simply using <code>$(hostname)</code> and <code>$UID</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate GDKjupyter</span>
 <span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -866,9 +873,21 @@ Dan Søndergaard
 <span id="cb28-6"><a aria-hidden="true" tabindex="-1"></a>                samtools view <span class="dt">\</span></span>
 <span id="cb28-7"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
 <span id="cb28-8"><a aria-hidden="true" tabindex="-1"></a>                <span class="at">-O</span> bam <span class="op">&gt;</span> <span class="va">$BAM_PREFIX</span>.bam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Exercise finished</strong></p>
 </section>
-<section id="exercise-finished" class="slide level2">
-<h2><strong>Exercise finished</strong></h2>
+<section class="slide level2">
+
+<h3 id="building-containers">Building containers</h3>
+<p>If you want to build containers with Docker, you need to</p>
+<ul>
+<li>build locally, and then upload the container to a repository (DockerHub or Quay).</li>
+<li>pull them on GenomeDK with singularity</li>
+</ul>
+<p>&nbsp;</p>
+<p>The same holds for singularity, because you need root privileges to build a container on the cluster, which you do not have.</p>
+</section>
+<section id="other-options-for-singularity" class="slide level2 scrollable">
+<h2>Other options for singularity</h2>
 <p>A few other options which can be used in singularity. When you need those really depends on the application:</p>
 <ul>
 <li><p><code>--fakeroot</code>: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.</p></li>
@@ -1017,9 +1036,9 @@ or
 <h2>Choosing the right CPU-RAM</h2>
 <p>Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running</p>
 <ul>
-<li><p>use <code>squeue --me</code> and <strong>look at the node id</strong></p></li>
-<li><p><strong>log into that node</strong> from the front-end terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>NODEID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>use <code>squeue --me</code> and <strong>look at the job id</strong></p></li>
+<li><p><strong>log into the job</strong> from the front-end terminal using an interactive session:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="op">&lt;</span>job id<span class="op">&gt;</span> --overlap <span class="at">--pty</span> bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -1030,7 +1049,7 @@ or
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>If <code>ssh &lt;NODEID&gt;</code> does not work, it means that your job is already terminated (finished or stopped due to an error).</p>
+<p>The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.</p>
 </div>
 </div>
 </div>

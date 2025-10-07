@@ -746,7 +746,7 @@
     "href": "resources/Slides/Advanced/slides.html#web-applications",
     "title": "Advanced GenomeDK",
     "section": "Web applications",
-    "text": "Web applications\n  Why do we use web applications for graphical interfaces?\n  - all the graphics heavy-lifting is done by the browser - before, the X11 forwarding was the way to do graphics from remote - problem: X11 sends the whole graphics over the network, which is slow - on the interactive desktop, rstudio runs using VNC (better than X11)"
+    "text": "Web applications\n \nWhy do we use web applications for graphical interfaces?\n \n\nall the graphics heavy-lifting is done by the browser\nbefore, the X11 forwarding was the way to do graphics from remote\nproblem: X11 sends the whole graphics over the network, which is slow\non the interactive desktop, rstudio runs using VNC (better than X11)"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
@@ -791,11 +791,11 @@
     "text": "Exercise II: options for singularity\nSome containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:\nEnvironment variables\nThe option --env can be used to define environment variables, either needed by your software, or useful to write the code to be executed.\n singularity pull samtools.sif https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1\n\n singularity run --env REF_PATH=$(pwd) \\\n                 --env BAM_PREFIX=test01 \\\n                 samtools.sif \\\n                 samtools view \\\n                 -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \\\n                 -O bam &gt; test01.bam\nUps, it does not work! Can you think of why? Hint: note that the address for the download of data begins with https."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-finished",
-    "href": "resources/Slides/Advanced/slides.html#exercise-finished",
+    "objectID": "resources/Slides/Advanced/slides.html#other-options-for-singularity",
+    "href": "resources/Slides/Advanced/slides.html#other-options-for-singularity",
     "title": "Advanced GenomeDK",
-    "section": "Exercise finished",
-    "text": "Exercise finished\nA few other options which can be used in singularity. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container."
+    "section": "Other options for singularity",
+    "text": "Other options for singularity\nA few other options which can be used in singularity. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
@@ -823,7 +823,7 @@
     "href": "resources/Slides/Advanced/slides.html#choosing-the-right-cpu-ram",
     "title": "Advanced GenomeDK",
     "section": "Choosing the right CPU-RAM",
-    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the node id\nlog into that node from the front-end terminal:\nssh &lt;NODEID&gt;\n\n\n\n\n\n\n\nWarning\n\n\nIf ssh &lt;NODEID&gt; does not work, it means that your job is already terminated (finished or stopped due to an error)."
+    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the job id\nlog into the job from the front-end terminal using an interactive session:\nsrun --jobid &lt;job id&gt; --overlap --pty bash\n\n\n\n\n\n\n\nWarning\n\n\nThe command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#manage-multiple-terminals-with-tmux",
