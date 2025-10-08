@@ -15,7 +15,7 @@
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-10-07">
+  <meta name="dcterms.date" content="2025-10-08">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -240,7 +240,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-10-07</p>
+  <p class="date">2025-10-08</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -305,6 +305,7 @@ Dan Søndergaard
 <li><p>An advanced function to download selected folders from github</p></li>
 <li><p>Batch scripts</p></li>
 <li><p>Managing multiple terminals on <code>tmux</code></p></li>
+<li><p>Set up jupyter notebooks on VScode</p></li>
 </ul>
 </section>
 <section id="get-the-slides" class="slide level2">
@@ -436,10 +437,24 @@ Dan Søndergaard
 <section class="slide level2">
 
 <h3 id="create-ssh-key">Create ssh key</h3>
-<p>On the cluster run</p>
+<p>On the cluster run the following command to create a new ssh key. Use your github email address in place of <code>GithubAccountMail@example.com</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"GithubAccountMail@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>When asked, you can choose to name the file. Call it <code>~/.ssh/id_ed25519_github</code>. When asked for password, you can leave it empty (press enter).</p>
+<p>&nbsp;</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Note that the key must be saved in the folder <code>~/.ssh/</code>. This is the usual place where <code>ssh</code> looks for keys on Linux.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -449,8 +464,21 @@ Dan Søndergaard
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span> <span class="op">&gt;</span> /dev/null</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> <span class="at">-l</span> <span class="op">&amp;&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">ssh-add</span> ~/.ssh/id_ed25519_github</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
-<p>Now print your public key on the terminal. Copy it because you need to paste it on the github website:</p>
+<p>Now print your public key on the terminal. Copy the command’s output because you need to paste it on the github website:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519_github.pub</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>The key looks like this <code>ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com</code>. You must copy <strong>all of it</strong> including <code>ssh-ed25519</code> at the beginning and your email address at the end.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -462,7 +490,7 @@ Dan Søndergaard
 <p>Now, test your connection to github. First apply the changes from the <code>~/.bashrc</code> file.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You should see a welcome message.</p>
+<p>You should see a welcome message. From now on pull and push will work without asking for your username and password.</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -472,7 +500,7 @@ Dan Søndergaard
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>If you have already cloned a repository using its URL, you might need this command to swith to ssh, so that you use the ssh key. Adapt the following code with your username and repository name:</p>
+<p>If you have <strong>previously</strong> cloned a repository using its URL (starting with <code>https</code>), you might need this command to switch to <code>ssh</code>, so that you use the ssh key for that repository. Adapt the following code with username and repository name:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote set-url origin git@github.com:username/repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
@@ -516,7 +544,8 @@ Dan Søndergaard
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
 <p>Log into GenomeDK. Create anywhere you prefere a folder called <code>advancedGDK</code> containing <code>rsync/data</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mkcd</span> advancedGDK/rsync/data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/rsync/data</span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/rsync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Create 100 files with extensions <code>fastq</code> and <code>log</code> in the data folder</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data/file{1..100}.fastq data/file{1..100}.log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -538,7 +567,7 @@ Dan Søndergaard
 </div>
 </div>
 <p>&nbsp;</p>
-<p>An archive (incremental) copy can be done with the options <code>a</code>. You can add a progress bar with <code>P</code>. You can exclude files: here we want only the ones with <code>fastq</code> extension. Run the command</p>
+<p>An archive (incremental) copy can be done with the options <code>a</code>. You can add a progress bar with <code>P</code>. You can exclude files: here, for example, we want only the file with <code>fastq</code> extension. Run the command</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> data backup</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This will copy all the <code>fastq</code> files in <code>backup/data</code>. You can check with <code>ls</code>.</p>
 <div title="Syntax perks">
@@ -1175,7 +1204,115 @@ Ctrl + b    ""</code></pre>
 <span id="cb49-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> new-window <span class="at">-t</span> downloads <span class="at">-n</span> <span class="st">"</span><span class="va">$filename</span><span class="st">"</span> <span class="st">"wget -c </span><span class="va">$url</span><span class="st"> -O downloaded/</span><span class="va">$filename</span><span class="st"> &amp;&amp; tmux kill-window"</span></span>
 <span id="cb49-14"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="at">-F</span> <span class="st">"#{window_name}"</span>   </span>
 <span id="cb49-15"><a aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> downloads.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Exercise finished</strong></p>
+</section>
+<section id="run-jupyter-notebooks-on-vscode" class="slide level2">
+<h2>Run jupyter notebooks on VScode</h2>
+<p>Visual Studio Code (VScode) is a popular <strong>IDE</strong> (Integrated Development Environment), an interface from which you can edit files, use the terminal, write code. From VScode you can also control your jupyter notebooks when you run jupyterlab on a computing node on GenomeDK - and even access the available kernels to run code!</p>
+<p>&nbsp;</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>We do not suggest using VScode to log into GenomeDK and run commands. This is because it runs a lot of processes in the background, which can be a problem on the shared front end node. Use it only to connect to jupyterlab.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="configure-access-to-cluster-from-vscode">Configure access to cluster from VSCode</h3>
+<p><a href="https://code.visualstudio.com/">Download VSCode</a> and open it. Go to the plugin tab (red circle)</p>
+
+<img data-src="img/vscode1.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>Search for <code>remote development</code>. Open the plugin (red circle) and install</p>
+
+<img data-src="img/vscode2.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>When done, click on the remote symbol on the bottom-left corner (red circle),</p>
+
+<img data-src="img/vscode3.png" class="r-stretch"><p>choose <code>Connect current window to host</code> then <code>Add new SSH host</code>, and type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@login.genome.au.dk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If asked, select the file <code>.ssh/config</code>.</p>
+</section>
+<section class="slide level2">
+
+<p>After some waiting for the first installation, you are <strong>logged in</strong>. Now the access configuration is done and we need only to configure a tunnel to jupyterlab through one of the computing nodes.</p>
+<p>&nbsp;</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>If the login is stuck, click on <code>details</code> when there is a message on the bottom right corner of VScode. That shows a terminal where you are likely asked the 2-factor authentication code!</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="tunneling-to-a-computing-node">Tunneling to a computing node</h3>
+<p>Now close VScode and reopen it. Open the Remote Explorer (from the toolbar on the left). There you should now see <code>login.genome.au.dk</code> as configured remote. Click on the little option symbol close to the <code>SSH</code> menu. The option symbol is given by the little clogwheel icon (red circle).</p>
+
+<img data-src="img/vscode-remote.png" class="quarto-figure quarto-figure-center r-stretch" width="400"></section>
+<section class="slide level2">
+
+<p>This should open the configuration file for ssh access, in which you already have some settings. Eventually, you are asked to choose which file to open, and it is usually the first one of the list. Now, the file should contain a configuration like the one below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="at">Host login.genome.au.dk</span></span>
+<span id="cb51-2"><a aria-hidden="true" tabindex="-1"></a><span class="at">  HostName login.genome.au.dk</span></span>
+<span id="cb51-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  User YOUR_USERNAME</span></span>
+<span id="cb51-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ControlMaster auto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section class="slide level2">
+
+<p>Now, add an additional configuration in the file which looks like below, where</p>
+<ul>
+<li><code>A_COMPUTING_NODE</code> is the name of the computing node you want to use</li>
+<li>YOUR_USERNAME is your username on GenomeDK</li>
+<li>YOUR_UID is your user id (you can see it with <code>echo $UID</code> on GenomeDK)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="at">Host A_COMPUTING_NODE</span></span>
+<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ProxyJump login.genome.au.dk</span></span>
+<span id="cb52-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  HostName A_COMPUTING_NODE</span></span>
+<span id="cb52-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  User YOUR_USERNAME</span></span>
+<span id="cb52-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  LocalForward YOUR_UID A_COMPUTING_NODE:YOUR_UID</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section class="slide level2">
+
+<p>Save the file and close. Your Remote explorer has now an additional SSH connection with the chosen node name. For example in figure below I have <code>cn-1019</code>.</p>
+
+<img data-src="img/vscode-sshList.png" class="quarto-figure quarto-figure-center r-stretch" width="400"></section>
+<section class="slide level2">
+
+<p>Now, on the cluster you can run a job on that node so that you can run jupyterlab. To chose the node in an interactive job, use the option <code>--nodelist</code>. For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodelist</span><span class="op">=</span>cn-1019 <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Remember to run jupyterlab on the node with your user id as port and the node name as ip/hostname:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You then open VScode, connect on the node, and use the file browser of VScode to open your notebooks. When the notebook is open, you can also choose all the jupyter kernels related to your conda or pixi environment where you have jupyterlab installed!</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Remember to close the job once you are done working on VScode - the job will be kept open on the cluster until you close it!</p>
+</div>
+</div>
+</div>
 
 
 </section></section>

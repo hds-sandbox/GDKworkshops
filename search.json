@@ -676,7 +676,7 @@
     "href": "resources/Slides/Advanced/slides.html#extras",
     "title": "Advanced GenomeDK",
     "section": "Extras",
-    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nBatch scripts\nManaging multiple terminals on tmux"
+    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nBatch scripts\nManaging multiple terminals on tmux\nSet up jupyter notebooks on VScode"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
@@ -739,7 +739,7 @@
     "href": "resources/Slides/Advanced/slides.html#exercise",
     "title": "Advanced GenomeDK",
     "section": "Exercise",
-    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkcd advancedGDK/rsync/data\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#web-applications",
@@ -838,6 +838,13 @@
     "title": "Advanced GenomeDK",
     "section": "Exercise",
     "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#run-jupyter-notebooks-on-vscode",
+    "href": "resources/Slides/Advanced/slides.html#run-jupyter-notebooks-on-vscode",
+    "title": "Advanced GenomeDK",
+    "section": "Run jupyter notebooks on VScode",
+    "text": "Run jupyter notebooks on VScode\nVisual Studio Code (VScode) is a popular IDE (Integrated Development Environment), an interface from which you can edit files, use the terminal, write code. From VScode you can also control your jupyter notebooks when you run jupyterlab on a computing node on GenomeDK - and even access the available kernels to run code!\n \n\n\n\n\n\n\nWarning\n\n\nWe do not suggest using VScode to log into GenomeDK and run commands. This is because it runs a lot of processes in the background, which can be a problem on the shared front end node. Use it only to connect to jupyterlab."
   },
   {
     "objectID": "cards/SamueleSoraggi.html",
