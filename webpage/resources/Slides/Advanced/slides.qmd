@@ -821,7 +821,7 @@ git remote set-url origin git@github.com:username/repo.git
 ```
 :::
 
-# A more advanced bash function for github {.scrollable}
+## A more advanced bash function for github {.scrollable}
 
 Here a more advanced bash function you can paste into your `~/.bashrc` file.
 Why not making one for `git clone` downloading only the latest commit history and choosing specific folders for the repository?
