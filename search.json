@@ -669,14 +669,14 @@
     "href": "resources/Slides/Advanced/slides.html#program",
     "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nFrequently used on UNIX\nGithub configuration\n\n10:45-11:30:\n\nrsync copy and backups\n\n11:30-12:00:\n\nWeb applications, ports and tunnels\n\n12:45-13:30:\n\nContainers (Docker, singularity)\n\n13:30-:\n\nQuestions and discussions"
+    "text": "Program\n\n10:00-11:00:\n\nWorkshop Introduction\nFrequently used on UNIX\nrsync copy and backups\n\n11:00-12:00:\n\nBatch jobs on the cluster\n\n12:45-13:30:\n\nContainers (Docker, singularity)\n\n13:30-14.30:\n\nFeedback\nQuestions and discussions\nLook into one of the Extras you are interested in"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#extras",
     "href": "resources/Slides/Advanced/slides.html#extras",
     "title": "Advanced GenomeDK",
     "section": "Extras",
-    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nBatch scripts\nManaging multiple terminals on tmux\nSet up jupyter notebooks on VScode"
+    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nSetting up ssh keys on github\nWeb applications on GenomeDK\nBatch scripts\nManaging multiple terminals on tmux\nSet up jupyter notebooks on VScode"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
@@ -711,21 +711,14 @@
     "href": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
     "title": "Advanced GenomeDK",
     "section": "Exercise II - aliases",
-    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Choose the aliases you prefere from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
+    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Copy the aliases from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
     "href": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
     "title": "Advanced GenomeDK",
     "section": "Exercise III - functions",
-    "text": "Exercise III - functions\nYou can also create functions including multiple commands: for example making a directory and then cd into it.\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Find all repetitive commands you use and wrap it up into the ~/.bashrc file!\n\n\n\n## make and cd\n## make a folder and go into it\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\n\n## interactive job using the same resources of\n## an existing job already running\n## useful to debug and check resource usage\n## example of usage: sshell 12345678\n## job id can be found with: squeue --me\nsshell() {\n  srun --jobid $1 --overlap --pty bash\n}"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#optional-configure-github-on-genomedk",
-    "href": "resources/Slides/Advanced/slides.html#optional-configure-github-on-genomedk",
-    "title": "Advanced GenomeDK",
-    "section": "[Optional] Configure github on GenomeDK",
-    "text": "[Optional] Configure github on GenomeDK\nGithub is a web-based platform for version control and collaboration, built around the Git tool. You can get an account for free at github.com.\n\nGit is a software for version management of your files. Github is a web service based on git that allows to manage file versions and collaborate on projects.When you use Github on GenomeDK, you can configure your ssh keys to avoid writing your name and password every time you push or pull changes."
+    "text": "Exercise III - functions\nYou can also create functions including multiple commands: for example making a directory and then cd into it, or opening a terminal in an existing job (more about this later on). Add those to your ~/.bashrc file as well.\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Wrap all your useful repetitive commands into the ~/.bashrc file!\n\n\n\n## make and cd\n## make a folder and go into it\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\n\n## interactive job using the same resources of\n## an existing job already running\n## useful to debug and check resource usage\n## example of usage: sshell 12345678\n## job id can be found with: squeue --me\nsshell() {\n  srun --jobid $1 --overlap --pty bash\n}"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
@@ -739,21 +732,28 @@
     "href": "resources/Slides/Advanced/slides.html#exercise",
     "title": "Advanced GenomeDK",
     "section": "Exercise",
-    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\n \nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log\nExercise break"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#web-applications",
-    "href": "resources/Slides/Advanced/slides.html#web-applications",
+    "objectID": "resources/Slides/Advanced/slides.html#open-exercise-only-for-linux-and-mac-users",
+    "href": "resources/Slides/Advanced/slides.html#open-exercise-only-for-linux-and-mac-users",
     "title": "Advanced GenomeDK",
-    "section": "Web applications",
-    "text": "Web applications\n \nWhy do we use web applications for graphical interfaces?\n \n\nall the graphics heavy-lifting is done by the browser\nbefore, the X11 forwarding was the way to do graphics from remote\nproblem: X11 sends the whole graphics over the network, which is slow\non the interactive desktop, rstudio runs using VNC (better than X11)"
+    "section": "Open Exercise (only for Linux and Mac users)",
+    "text": "Open Exercise (only for Linux and Mac users)\nTransfer the whole folder data to your computer from GenomeDK. Open a terminal on your laptop and use the correct command from the previous slide!\n \nExercise continues for all users in the next slide"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
-    "href": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-batch-script",
+    "href": "resources/Slides/Advanced/slides.html#exercise-batch-script",
     "title": "Advanced GenomeDK",
-    "section": "Exercise: jupyterlab web server",
-    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nNow you are ready to move on!"
+    "section": "Exercise: batch script",
+    "text": "Exercise: batch script\nPrepare the data needed for the exercise. Create a subfolder called batchGDK in the advancedGDK folder:\nmkdir -p advancedGDK/batchGDK\ncd advancedGDK/batchGDK\n \nDownload the data needed for the exercise:\nwget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \\\n     -O ./data.fastq.gz\n\nwget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#calibrating-resources",
+    "href": "resources/Slides/Advanced/slides.html#calibrating-resources",
+    "title": "Advanced GenomeDK",
+    "section": "Calibrating resources",
+    "text": "Calibrating resources\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the job id\nlog into the job from the front-end terminal using an interactive session and your job id:\nsshell 33735928\n\n\n\n\n\n\n\nWarning\n\n\nThe command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
@@ -784,53 +784,32 @@
     "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment.\n \nMake a folder called containers101 in the advancedGDK directory.\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open it to see a detailed description - if you have no good ideas look for the minimap2 aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-options-for-singularity",
-    "href": "resources/Slides/Advanced/slides.html#exercise-ii-options-for-singularity",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-docker-alternative",
+    "href": "resources/Slides/Advanced/slides.html#exercise-ii-docker-alternative",
     "title": "Advanced GenomeDK",
-    "section": "Exercise II: options for singularity",
-    "text": "Exercise II: options for singularity\nSome containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:\nEnvironment variables\nThe option --env can be used to define environment variables, either needed by your software, or useful to write the code to be executed.\n singularity pull samtools.sif https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1\n\n singularity run --env REF_PATH=$(pwd) \\\n                 --env BAM_PREFIX=test01 \\\n                 samtools.sif \\\n                 samtools view \\\n                 -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \\\n                 -O bam &gt; test01.bam\nUps, it does not work! Can you think of why? Hint: note that the address for the download of data begins with https."
+    "section": "Exercise II: docker alternative",
+    "text": "Exercise II: docker alternative\nYou can also pull and run a container from DockerHub. For example, for the biocontainers/bwa-mem2 container you will need to adapt the command a bit, because it is not a singularity container.\nsingularity pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1\n \n\n\n\n\n\n\nNote\n\n\nThe correct path docker://biocontainers/samtools:v1.9-4-deb_cv1 can be found on the DockerHub page of the container. Here is the https://hub.docker.com/r/biocontainers/samtools."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#other-options-for-singularity",
     "href": "resources/Slides/Advanced/slides.html#other-options-for-singularity",
     "title": "Advanced GenomeDK",
     "section": "Other options for singularity",
-    "text": "Other options for singularity\nA few other options which can be used in singularity. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container."
+    "text": "Other options for singularity\nA few other options which can be used in singularity. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container.\n--bind: Binds specific directories from the host to the container. Useful to share data between host and container.\n--env: Sets environment variables inside the container. This is useful for configuring the container’s behavior or passing in secrets."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
-    "href": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
+    "objectID": "resources/Slides/Advanced/slides.html#create-ssh-key",
+    "href": "resources/Slides/Advanced/slides.html#create-ssh-key",
     "title": "Advanced GenomeDK",
-    "section": "A more advanced bash function for github",
-    "text": "A more advanced bash function for github\nHere a more advanced bash function you can paste into your ~/.bashrc file. Why not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: local download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
+    "section": "Create ssh key",
+    "text": "Create ssh key\nOn the cluster run the following command to create a new ssh key. Use your github email address in place of GithubAccountMail@example.com.\nssh-keygen -t ed25519 -C \"GithubAccountMail@example.com\"\n \nWhen asked, you can choose to name the file. Call it ~/.ssh/id_ed25519_github. When asked for password, you can leave it empty (press enter).\n \n\n\n\n\n\n\nWarning\n\n\nNote that the key must be saved in the folder ~/.ssh/. This is the usual place where ssh looks for keys on Linux."
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#batch-script-sbatch",
-    "href": "resources/Slides/Advanced/slides.html#batch-script-sbatch",
+    "objectID": "resources/Slides/Advanced/slides.html#add-the-ssh-key-to-your-ssh-agent",
+    "href": "resources/Slides/Advanced/slides.html#add-the-ssh-key-to-your-ssh-agent",
     "title": "Advanced GenomeDK",
-    "section": "Batch script (sbatch)",
-    "text": "Batch script (sbatch)\nUseful to run a program non-interactively, usually for longer time and without interaction from the user. A batch script contains\n\nthe desired resources\nthe sequence of commands to be executed\n\nand\n\nhas a filename without spaces (forget spaces from now on)"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-batch-script",
-    "href": "resources/Slides/Advanced/slides.html#exercise-batch-script",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise: batch script",
-    "text": "Exercise: batch script\nCreate in Rstudio or Jupyterlab a file called align.sh (in the folder GDKintro) like below:\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=8\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\npixi run bwa-mem2 index ref.fasta.gz\n#align data\npixi run bwa-mem2 mem -t 8 ref.fasta.gz \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 7 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#choosing-the-right-cpu-ram",
-    "href": "resources/Slides/Advanced/slides.html#choosing-the-right-cpu-ram",
-    "title": "Advanced GenomeDK",
-    "section": "Choosing the right CPU-RAM",
-    "text": "Choosing the right CPU-RAM\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the job id\nlog into the job from the front-end terminal using an interactive session:\nsrun --jobid &lt;job id&gt; --overlap --pty bash\n\n\n\n\n\n\n\nWarning\n\n\nThe command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#manage-multiple-terminals-with-tmux",
-    "href": "resources/Slides/Advanced/slides.html#manage-multiple-terminals-with-tmux",
-    "title": "Advanced GenomeDK",
-    "section": "Manage multiple terminals with tmux",
-    "text": "Manage multiple terminals with tmux\ntmux is a server application managing multiple terminal sessions. It can\n\nstart a server with multiple sessions\neach session containing one or more windows with multiple terminals (panes)\neach terminal run simultaneously and be accessed (attached) or exited from (detached)\nthe tmux server keeps runninng without a logged user"
+    "section": "Add the ssh key to your ssh agent",
+    "text": "Add the ssh key to your ssh agent\nAdd the key to the ssh agent, which manages your keys. Write the following on your ~/.bashrc file using a text editor:\n# Start ssh-agent for github if not already running\neval \"$(ssh-agent -s)\" &gt; /dev/null\nssh-add -l &&gt;/dev/null || ssh-add ~/.ssh/id_ed25519_github\n \nNow print your public key on the terminal. Copy the command’s output because you need to paste it on the github website:\ncat ~/.ssh/id_ed25519_github.pub\n\n\n\n\n\n\nNote\n\n\nThe key looks like this ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com. You must copy all of it including ssh-ed25519 at the beginning and your email address at the end."
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
@@ -840,11 +819,39 @@
     "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#run-jupyter-notebooks-on-vscode",
-    "href": "resources/Slides/Advanced/slides.html#run-jupyter-notebooks-on-vscode",
+    "objectID": "resources/Slides/Advanced/slides.html#launching-separate-downloads-at-the-same-time",
+    "href": "resources/Slides/Advanced/slides.html#launching-separate-downloads-at-the-same-time",
     "title": "Advanced GenomeDK",
-    "section": "Run jupyter notebooks on VScode",
-    "text": "Run jupyter notebooks on VScode\nVisual Studio Code (VScode) is a popular IDE (Integrated Development Environment), an interface from which you can edit files, use the terminal, write code. From VScode you can also control your jupyter notebooks when you run jupyterlab on a computing node on GenomeDK - and even access the available kernels to run code!\n \n\n\n\n\n\n\nWarning\n\n\nWe do not suggest using VScode to log into GenomeDK and run commands. This is because it runs a lot of processes in the background, which can be a problem on the shared front end node. Use it only to connect to jupyterlab."
+    "section": "Launching separate downloads at the same time",
+    "text": "Launching separate downloads at the same time\nStart a new session without attaching to it (d option), and call it downloads:\ntmux new-session -d -s downloads\nverify the session is there with tmux ls.\n\n\n\n\n\n\nWarning\n\n\nIf you want a new session attaching to it, you need to detach from the current session with Ctrl + b + d.\n\n\n\nCreate a text file with few example files for this workshop to be downloaded.\ncurl -s https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync | jq -r '.[] | .download_url' &gt; downloads.txt"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#which-port-to-use",
+    "href": "resources/Slides/Advanced/slides.html#which-port-to-use",
+    "title": "Advanced GenomeDK",
+    "section": "Which port to use",
+    "text": "Which port to use\n\nEach server process on a machine needs a unique port (p2 on previous figure) to avoid conflicts.\nPorts are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with\necho $UID\nYou will see all this in the next exercise\n\n\n\n\n\n\n\n\nbetter safe than sorry\n\n\nLaunch a web application which has tokens (a random code in the URL for the browser) or a password you can setup. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "href": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise: jupyterlab web server",
+    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nNow you are ready to move on!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#configure-access-to-cluster-from-vscode",
+    "href": "resources/Slides/Advanced/slides.html#configure-access-to-cluster-from-vscode",
+    "title": "Advanced GenomeDK",
+    "section": "Configure access to cluster from VSCode",
+    "text": "Configure access to cluster from VSCode\nDownload VSCode and open it. Go to the plugin tab (red circle)"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#tunneling-to-a-computing-node",
+    "href": "resources/Slides/Advanced/slides.html#tunneling-to-a-computing-node",
+    "title": "Advanced GenomeDK",
+    "section": "Tunneling to a computing node",
+    "text": "Tunneling to a computing node\nNow close VScode and reopen it. Open the Remote Explorer (from the toolbar on the left). There you should now see login.genome.au.dk as configured remote. Click on the little option symbol close to the SSH menu. The option symbol is given by the little clogwheel icon (red circle)."
   },
   {
     "objectID": "cards/SamueleSoraggi.html",
