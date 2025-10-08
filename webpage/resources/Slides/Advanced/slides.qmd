@@ -53,28 +53,31 @@ smaller: true
 
 ## Program {.scrollable}
 
-- **10:00-10:45**: 
+- **10:00-11:00**: 
   - Workshop Introduction
   - Frequently used on UNIX
-  - Github configuration
-
-- **10:45-11:30**: 
   - `rsync` copy and backups
 
-- **11:30-12:00**: 
-  - Web applications, ports and tunnels
+- **11:00-12:00**: 
+  - Batch jobs on the cluster
 
 - **12:45-13:30**: 
   - Containers (Docker, singularity)
 
-- **13:30-**: 
+- **13:30-14.30**: 
+  - Feedback
   - Questions and discussions
+  - Look into one of the Extras you are interested in
 
 ## Extras
 
 Documentation you can explore on your own.
 
 - An advanced function to download selected folders from github
+
+- Setting up ssh keys on github
+
+- Web applications on GenomeDK
 
 - Batch scripts
 
@@ -147,7 +150,7 @@ Now, there are many repetitive things we do every day. For example:
 - remove files and double check we can
 - `cd ../` and `cd ../../` and ... and `cd ../../../../../../../`
 
-and every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Choose the aliases you prefere from the list below and add them in your `.bashrc` file:
+and every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Copy the aliases from the list below and add them in your `.bashrc` file:
 
 ```{.bash}
 ## Safe file handling
@@ -168,10 +171,10 @@ alias l='ls -aC' #compressed
 
 ## Exercise III - functions {.scrollable}
 
-You can also create functions including multiple commands: for example making a directory and then `cd` into it.
+You can also create functions including multiple commands: for example making a directory and then `cd` into it, or opening a terminal in an existing job (more about this later on). Add those to your `~/.bashrc` file as well.
 
 :::{.callout-note}
-These are just inspirations, you can create any alias and function to avoid repetitive/long commands. Find all repetitive commands you use and wrap it up into the `~/.bashrc` file!
+These are just inspirations, you can create any alias and function to avoid repetitive/long commands. Wrap all your useful repetitive commands into the `~/.bashrc` file!
 :::
 
 ```{.bash}
@@ -194,7 +197,7 @@ sshell() {
 
 ---
 
-Now you have done all this changes to your `~/.bashrc` file, you need to apply them. You can either logout and login again, or simply run
+Now you have done all these changes to your `~/.bashrc` file, and you need to apply them. You can either logout and login again, or simply run (just this time)
 
 ```{.bash}  
 source ~/.bashrc
@@ -204,88 +207,11 @@ source ~/.bashrc
 
 **Exercise finished** 
 
-## [Optional] Configure github on GenomeDK
-
-Github is a web-based platform for version control and collaboration, built around the Git tool. You can get an account for free at [github.com](https://github.com).
-
-![`Git` is a software for version management of your files. `Github` is a web service based on `git` that allows to manage file versions and collaborate on projects.](img/gitIcons.png){fig-align="center" width=400px}
-
-When you use Github on GenomeDK, you can configure your ssh keys to avoid writing your name and password every time you push or pull changes. 
-
----
-
-### Create ssh key
-
-On the cluster run the following command to create a new ssh key. Use your github email address in place of `GithubAccountMail@example.com`.
-
-```{.bash}
-ssh-keygen -t ed25519 -C "GithubAccountMail@example.com"
-```
-
-&nbsp;
-
-When asked, you can choose to name the file. Call it `~/.ssh/id_ed25519_github`. When asked for password, you can leave it empty (press enter).
-
-&nbsp;
-
-:::{.callout-warning}
-Note that the key must be saved in the folder `~/.ssh/`. This is the usual place where `ssh` looks for keys on Linux.
-:::
-
----
-
-### Add the ssh key to your ssh agent
-
-Add the key to the ssh agent, which manages your keys. Write the following on your `~/.bashrc` file using a text editor:
-
-```{.bash}
-# Start ssh-agent for github if not already running
-eval "$(ssh-agent -s)" > /dev/null
-ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519_github
-```
-
-&nbsp;
-
-Now print your public key on the terminal. Copy the command's output because you need to paste it on the github website:
-
-```{.bash}
-cat ~/.ssh/id_ed25519_github.pub
-```
-
-:::{.callout-note}
-The key looks like this `ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com`. You must copy **all of it** including `ssh-ed25519` at the beginning and your email address at the end.
-:::
-
----
-
-Go on github.com and login. Go to `Settings`, `SSH and GPG keys`, `New SSH key`. Paste the public key you just copied and give it a name recalling it is for usage with GenomeDK.
-
-![](img/sshKeysGithub.png){fig-align="center" width=800px}
-
----
-
-Now, test your connection to github. First apply the changes from the `~/.bashrc` file.
-
-```{.bash}
-source ~/.bashrc
-ssh -T git@github.com
-```
-
-You should see a welcome message. From now on pull and push will work without asking for your username and password.
-
-:::{.callout-tip}
-If you have **previously** cloned a repository using its URL (starting with `https`), you might need this command to switch to `ssh`, so that you use the ssh key for that repository. Adapt the following code with username and repository name:
-
-```{.bash}
-git remote set-url origin git@github.com:username/repo.git
-```
-:::
-
-
 # Syncronizations of data
 
-- How to copy using `rsync`
-- Use `rsync` to create backups and versioning
+- How to copy using `rsync
+- Local copy and remote copy
+- Incremental copy
 
 ## transfer and sync with `rsync`
 
@@ -309,25 +235,7 @@ Lots of options you can find in the manual (would require a workshop only for th
   </a>
 </div>
 
-## Exercise
-
-Log into GenomeDK. Create anywhere you prefere a folder called `advancedGDK` containing
-`rsync/data`
-
-```{.bash}
-mkdir -p advancedGDK/rsync/data
-cd advancedGDK/rsync
-```
-
-Create 100 files with extensions `fastq` and `log` in the data folder
-
-```{.bash}
-touch data/file{1..100}.fastq data/file{1..100}.log
-```
-
 ---
-
-### Local-to-local copy
 
 :::{.callout-note}
 The syntax of `rsync` is pretty simple:
@@ -339,41 +247,31 @@ rsync OPTIONS ORIGIN(s) DESTINATION
 
 &nbsp;
 
-An archive (incremental) copy can be done with the options `a`. You can add a progress bar with `P`. You can exclude files: here, for example, we want only the file with `fastq` extension. Run the command
+An archive (incremental) copy can be done with the options `a`. 
 
-```{.bash}
-rsync -aP --exclude="*.log" data backup
-```
-
-This will copy all the `fastq` files in `backup/data`. You can check with `ls`.
-
-:::{.callout-warning title="Syntax perks"}
-Using `data` will copy the entire folder, while `data/` will copy only its content! This is common to many other UNIX tools.
-:::
+You can add a progress bar with `P`, and `--exclude` or `--include` files of choice.
 
 ---
 
-Change the first ten `fastq` files with some text:
+## Exercise
+
+Log into GenomeDK. Create anywhere you prefere a folder called `advancedGDK` containing
+`rsync/data`
 
 ```{.bash}
-for i in {1..10}; do echo hello >> data/file$i.fastq; done
+mkdir -p advancedGDK/rsync/data
+cd advancedGDK/rsync
 ```
 
-Now, we do not only want to do an incremental copy of those file with `rsync`, but also keep the previous version of those files. We create a folder to backup those, naming it with date and time (you will find it in your `backup` directory):
+&nbsp;
+
+Create 100 files with extensions `fastq` and `log` in the data folder
 
 ```{.bash}
-rsync -aP --exclude="*.log" \
-      --backup \
-      --backup-dir=versioning_$(date +%F_%T)/ \
-      data \
-      backup
+touch data/file{1..100}.fastq data/file{1..100}.log
 ```
 
-:::{.callout-tip}
-If you create a folder called `backup` in your project folder, you can use versioning to backup your analysis and results incrementally on the cluster's backup system. Keep an eye on the space used!
-:::
-
-**Exercise finished**
+**Exercise break**
 
 ---
 
@@ -398,141 +296,240 @@ rsync -aP --exclude="*.log" PATH_TO/data USERNAME@login.genome.au.dk:PATH_TO/bac
 To transfer from GenomeDK to your computer, and viceversa, you need to use the commands above **from your local computer**, and NOT when you are logged into GenomeDK!
 :::
 
-# Web applications, ports, tunneling
+---
 
-## Web applications
+## Open Exercise (only for Linux and Mac users)
+
+Transfer the whole folder data to your computer from GenomeDK. Open a terminal **on your laptop** and use the correct command from the previous slide!
 
 &nbsp;
 
-Why do we use web applications for graphical interfaces?
+**Exercise continues for all users in the next slide**
+
+---
+
+### Local-to-local copy
+
+We want to make a copy **on the cluster**, only for the file with `fastq` extension. Run the command
+
+```{.bash}
+rsync -aP --exclude="*.log" data data_copy
+```
+
+This will copy all the `fastq` files in `data_copy/data`. You can check with `ls`.
+
+:::{.callout-warning title="Syntax perks"}
+Using `data` will copy the entire folder, while `data/` will copy only its content! This is common to many other UNIX tools.
+:::
+
+
+**Exercise finished**
+
+# Batch jobs on the cluster
+
+:::{.callout-note}
+A batch job is used to **run a program non-interactively**, usually for longer time and so without interaction from the user. A batch job is described in a **batch script** that contains 
+
+- the desired **resources**
+- the sequence of **commands** to be executed
+
+and
+
+- has a filename **without spaces** (forget spaces from now on)
+:::
+
+## Exercise: batch script
+
+Prepare the data needed for the exercise. Create a subfolder called `batchGDK` in the `advancedGDK` folder:
+
+```{.bash}
+mkdir -p advancedGDK/batchGDK
+cd advancedGDK/batchGDK
+```
 
 &nbsp;
 
-- all the graphics heavy-lifting is done by the browser
-- before, the X11 forwarding was the way to do graphics from remote
-- problem: X11 sends the whole graphics over the network, which is slow
-- on the interactive desktop, rstudio runs using VNC (better than X11)
+Download the data needed for the exercise:
+
+```{.bash}
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \
+     -O ./data.fastq.gz
+
+wget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz
+```
 
 ---
 
-A web application on GenomeDK:
-
-- starts a **server process** on the cluster
-- This server listens for incoming requests on a specific **port**
-- The server sends and receives data over the network via the port.
+Create a `conda` or `pixi` environment with `bwa-mem2` and `samtools` installed. For example
 
 &nbsp;
 
-The local user:
+::: {.panel-tabset}
+## Conda
 
-- creates a **tunnel**, which is an `ssh` connection mapping to the remote port used by the server process
+```{.bash}
+conda create -c conda-forge -c bioconda -n batchGDK bwa-mem2 samtools
+```
+
+## Pixi
+
+```{.bash}
+pixi init -c conda-forge -c bioconda
+pixi add bwa-mem2 samtools
+```
+:::
 
 ---
 
-![How the port forwarding looks like from the local user (your pc) to the remote node of the cluster. The purple command has to be launched on the local computer, once the server is running on the remote host. Source: KU Leuven.](img/sshPortForwarding.png){fig-align="center" width=800px}
+
+Create a text file called `align.sh`. This contains a batch script with resources desired and the commands to run on those. The script text depends on you having used `conda` or `pixi` to create the environment.
+
+::: {.panel-tabset}
+## Conda
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=4
+#SBATCH --mem 16g
+#SBATCH --time 04:00:00
+
+#initialize conda
+eval "$(conda shell.bash hook)"
+#activate Environment
+conda activate batchGDK
+
+#index reference
+bwa-mem2 index ref.fasta.gz
+#align data
+bwa-mem2 mem -t 4 ref.fasta.gz \
+             data.fastq \
+            | samtools sort \
+            -@ 3 \
+            -n \
+            -O BAM \
+        > data.bam
+
+exit 0
+```
+
+## Pixi
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=4
+#SBATCH --mem 16g
+#SBATCH --time 04:00:00
+
+#index reference
+pixi run bwa-mem2 index ref.fasta.gz
+#align data
+pixi run bwa-mem2 mem -t 4 ref.fasta.gz \
+             data.fastq \
+            | samtools sort \
+            -@ 3 \
+            -n \
+            -O BAM \
+        > data.bam
+
+exit 0
+```
+:::
 
 ---
 
-### Which port to use
+Send the script to the queueing system using the terminal:
 
-- Each server process on a machine needs a **unique port** (p2 on previous figure) to avoid conflicts.
+```{.bash}
+sbatch align.sh
+```
 
-- Ports are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with
+&nbsp;
+
+It will provide a job id number, e.g. `33735298`, on the terminal. You will need it to check the job status. For example
+
+```{.bash}
+Submitted batch job 33735298
+```
+
+---
+
+Interrogate SLURM about the specific job with the provided number. For example
+
+```{.bash}
+jobinfo 33735298
+```
+
+```
+>Name                : align.sh
+>User                : samuele
+>Account             : my_project
+>Partition           : short
+>Nodes               : s21n43
+>Cores               : 4
+>GPUs                : 0
+>State               : RUNNING
+>...
+```
+---
+
+or about all the queued jobs
+
+```{.bash}
+squeue --me
+```
+
+```
+>JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+>33735928     short align.sh  samuele  R       1:12      1 s21n43
+```
+
+&nbsp;
+
+:::{.callout-note}
+If you change your mind and want to cancel a job:
+
+```{.bash}
+scancel 33735928
+```
+:::
+
+## Calibrating resources
+
+Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
+While the job is running
+
+- use `squeue --me` and **look at the job id**
+
+- **log into the job** from the front-end terminal using an interactive session and your job id:
   
-  `echo $UID`
+  ```{.bash}
+  sshell 33735928
+  ```
 
-- You will see all this in the next exercise
-
-:::{.callout-warning title="better safe than sorry"}
-Launch a web application which has tokens (a random code in the URL for the browser) or a password you can setup. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!
-:::
-
-## Exercise: jupyterlab web server{.scrollable}
-
-If you DO NOT have the `conda` package manager, you can quickly install it from the box below, otherwise move to the next slide!
-
-:::{.callout-tip title="Install conda" collapse="true"}
-Run the installation script to install the software. There are some informative messages during the installation. You might need to say `yes` a few times
-
-```{.bash}
-wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
-chmod +x miniforge.sh
-bash miniforge.sh -b
-~/miniforge3/bin/conda init bash
-source ~/.bashrc
-```
-
-When you are done, you need a little bit of configuration. You can run the following command to configure `conda` (run them only once, they are not needed again):
-
-```{.bash}
-conda config --append channels conda-forge
-conda config --append channels bioconda
-conda config --set channel_priority strict
-conda config --set auto_activate_base false
-source ~/.bashrc
-```
-
-Now you are ready to move on!
+:::{.callout-warning}
+The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
 :::
 
 ---
 
-Create a new `conda` environment:
-
-```{.bash}
-conda create -y -n GDKjupyter jupyterlab numpy pandas
-```
-
-&nbsp;
-
-Start a job with just a few resources.
-
-```{.bash}
-srun --mem=4g --cores=1 --time=4:00:0 --pty /bin/bash
-```
-
-&nbsp;
-
-Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) **are given as variables** to the web server simply using `$(hostname)` and `$UID`:
-
-```{.bash}
-conda activate GDKjupyter
-jupyter-lab --port=$UID --ip=$(hostname)
-```
-
----
-
-You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser, which always starts with the node name. It will look like this, but in your case it might have a longer URL with a random *token* (mine is instead password protected):
-
-![](img/jupyterUrl.png){fig-align="center" width=800px}
-
-&nbsp;
-
-Write down your node number and user id you got from jupyterlab.
-
-**We now need a tunnel** from the local host (your PC)! Write in a new terminal **(not logged into GenomeDK)** a command like the following (matching the example figure above), substituting the correct values:
-
-```{.bash}
-ssh -L6835:s21n34:6835 USERNAME@login.genome.au.dk
-```
-
-&nbsp;
-
-Your tunnel is now opened. The web application can be accessed **from your browser** at the address given by the server process on GenomeDK, which starts with `127.0.0.1/PORT_NUMBER` (put your correct port number). Copy and paste it in your browser.
+- use `htop -u <username>` to see what is running and how much memory and CPU it uses
+  ![](img/htop.png)
 
 **Exercise finished**
 
 ---
 
-:::{.callout-tip}
-The same logic applies to all other web applications. They will have similar options to define the remote node and port. 
-
-Usually the host node option changes name between `ip`, `host`, `address`, or `hostname`.
+- While the job runs, you can evaluate if resources are used properly, and eventually adjust them to a lower/higher value, so that you can stop the job and resubmit it with the right resources.
 
 &nbsp;
 
-Note also that you will always have to use the address `127.0.0.1/PORT_NUMBER` on your browser when you do the tunneling. Instead you will need to use the address with the node name if you are using the virtual desktop on GenomeDK.
-:::
+- When the job is finished, successfully or not, check the output files and the log file `slurm-<jobid>.out` for any error or warning.
+
+&nbsp;
+
+- The log file is really useful to understand why a job fails, or if there have been errors or unusual behaviour even if the job is successfully ended.
 
 # Containers
 
@@ -642,50 +639,33 @@ singularity run minimap2.sif minimap2
 :::
 ::::
 
-## Exercise II: options for singularity
+## Exercise II: docker alternative
 
-Some containers are very easy to run. Some others need a lot of extra options, such as binding specific folders to a path, providing certificates, initializing environmental variables. A small example below:
-
-### Environment variables
-
-
-The option `--env` can be used to define environment variables, either needed by your software, or useful to write the code to be executed.
+You can also pull and run a container from DockerHub. For example, for the `biocontainers/bwa-mem2` container you will need to adapt the command a bit, because it is not a singularity container.
 
 ```{.bash}
- singularity pull samtools.sif https://depot.galaxyproject.org/singularity/samtools:1.21--h96c455f_1
+singularity pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1
+```
 
- singularity run --env REF_PATH=$(pwd) \
-                 --env BAM_PREFIX=test01 \
-                 samtools.sif \
+&nbsp;
+
+:::{.callout-note}
+The correct path `docker://biocontainers/samtools:v1.9-4-deb_cv1` can be found on the DockerHub page of the container. Here is the [https://hub.docker.com/r/biocontainers/samtools](link to samtools).
+:::
+
+---
+
+Doing operations with a container is really easy For example, you can run a command inside the container like the following, which outputs a `.bam` genome file read from a URL:
+
+```{.bash}
+ singularity run samtools_docker.sif \
                  samtools view \
                  -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \
                  -O bam > test01.bam
 ```
 
-**Ups, it does not work! Can you think of why?** Hint: note that the address for the download of data begins with `https`.
+&nbsp;
 
----
-
-### Certificates and binding
-
-:::{.callout-tip title="Why the previous slide didn't work!!!"}
-**HTTPS** is a protocol for secure communication over the internet. When you access an URL starting with `https`, your system checks the server's SSL/TLS certificate to ensure it is issued by a trusted Certificate Authority (CA).
-Why? To prevent [man-in-the-middle (MITM)](https://www.ibm.com/think/topics/man-in-the-middle) attacks, where an attacker eavesdrops in the data transfer.
-:::
-
-The option `--bind` can be used to make your folders available in a specific path for the container. Here, we bind two folders containing the certificates for GDK. Those paths are quite standard across UNIX systems.
-
-
-```{.bash}
-singularity run --env REF_PATH=$(pwd) \
-                --env BAM_PREFIX=test01 \
-                --bind /etc/ssl/certs:/etc/ssl/certs \
-                --bind /etc/pki/ca-trust:/etc/pki/ca-trust \
-                samtools.sif \
-                samtools view \
-                -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \
-                -O bam > $BAM_PREFIX.bam
-```
 
 **Exercise finished**
 
@@ -695,12 +675,12 @@ singularity run --env REF_PATH=$(pwd) \
 
 If you want to build containers with Docker, you need to 
 
-  - build locally, and then upload the container to a repository (DockerHub or Quay). 
+  - build locally with Docker or Singularity, and then upload the container to a repository (e.g. DockerHub or Quay). 
   - pull them on GenomeDK with singularity
 
 &nbsp;
 
-The same holds for singularity, because you need root privileges to build a container on the cluster, which you do not have.
+Singularity is installed on GenomeDK, but because you need root privileges to build a container on the cluster, you cannot do that.
 
 ## Other options for singularity {.scrollable}
 
@@ -719,6 +699,10 @@ A few other options which can be used in singularity. When you need those really
 - `--nv`: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is `--rocm` (not the case on GDK).
 
 - `--pwd`: Sets the working directory inside the container. 
+
+- `--bind`: Binds specific directories from the host to the container. Useful to share data between host and container.
+
+- `--env`: Sets environment variables inside the container. This is useful for configuring the container's behavior or passing in secrets.
 
 
 # Closing the workshop
@@ -745,7 +729,99 @@ Please fill out this form :)
 
 Things that are more advanced or are not treated in the workshop, but you might find useful.
 
-## A more advanced bash function for github {.scrollable}
+&nbsp;
+
+Extras start from the next chapter of the slides.
+
+# Configure github on GenomeDK
+
+Github is a web-based platform for version control and collaboration, built around the Git tool. You can get an account for free at [github.com](https://github.com).
+
+![`Git` is a software for version management of your files. `Github` is a web service based on `git` that allows to manage file versions and collaborate on projects.](img/gitIcons.png){fig-align="center" width=400px}
+
+
+---
+
+When you use Github on GenomeDK, you can configure your ssh keys to avoid writing your name and password every time you push or pull changes. 
+
+&nbsp;
+
+:::{.callout-note}
+1. using ssh keys is useful mainly when you work on your own repositories. For public repositories, it is always possible to pull without the authentication we show in these slides.
+
+2. `git` is already installed on GenomeDK, so you can use it right away.
+:::
+
+---
+
+## Create ssh key
+
+On the cluster run the following command to create a new ssh key. Use your github email address in place of `GithubAccountMail@example.com`.
+
+```{.bash}
+ssh-keygen -t ed25519 -C "GithubAccountMail@example.com"
+```
+
+&nbsp;
+
+When asked, you can choose to name the file. Call it `~/.ssh/id_ed25519_github`. When asked for password, you can leave it empty (press enter).
+
+&nbsp;
+
+:::{.callout-warning}
+Note that the key must be saved in the folder `~/.ssh/`. This is the usual place where `ssh` looks for keys on Linux.
+:::
+
+---
+
+## Add the ssh key to your ssh agent
+
+Add the key to the ssh agent, which manages your keys. Write the following on your `~/.bashrc` file using a text editor:
+
+```{.bash}
+# Start ssh-agent for github if not already running
+eval "$(ssh-agent -s)" > /dev/null
+ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519_github
+```
+
+&nbsp;
+
+Now print your public key on the terminal. Copy the command's output because you need to paste it on the github website:
+
+```{.bash}
+cat ~/.ssh/id_ed25519_github.pub
+```
+
+:::{.callout-note}
+The key looks like this `ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com`. You must copy **all of it** including `ssh-ed25519` at the beginning and your email address at the end.
+:::
+
+---
+
+Go on github.com and login. Go to `Settings`, `SSH and GPG keys`, `New SSH key`. Paste the public key you just copied and give it a name recalling it is for usage with GenomeDK.
+
+![](img/sshKeysGithub.png){fig-align="center" width=800px}
+
+---
+
+Now, test your connection to github. First apply the changes from the `~/.bashrc` file.
+
+```{.bash}
+source ~/.bashrc
+ssh -T git@github.com
+```
+
+You should see a welcome message. From now on pull and push will work without asking for your username and password.
+
+:::{.callout-tip}
+If you have **previously** cloned a repository using its URL (starting with `https`), you might need this command to switch to `ssh`, so that you use the ssh key for that repository. Adapt the following code with username and repository name:
+
+```{.bash}
+git remote set-url origin git@github.com:username/repo.git
+```
+:::
+
+# A more advanced bash function for github {.scrollable}
 
 Here a more advanced bash function you can paste into your `~/.bashrc` file.
 Why not making one for `git clone` downloading only the latest commit history and choosing specific folders for the repository?
@@ -781,143 +857,7 @@ ghdir() {
 ```
 
 
-## Batch script (sbatch)
-
-Useful to **run a program non-interactively**, usually for longer time and without interaction from the user. A batch script contains 
-
-- the desired **resources**
-- the sequence of **commands** to be executed
-
-and
-
-- has a filename **without spaces** (forget spaces from now on)
-
----
-
-## Exercise: batch script
-
-Create in Rstudio or Jupyterlab a file called `align.sh` (in the folder `GDKintro`) like below:
-
-```{.bash}
-
-#!/bin/bash
-#SBATCH --account PROJECT_NAME
-#SBATCH --cpus-per-task=8
-#SBATCH --mem 16g
-#SBATCH --time 04:00:00
-
-pixi run bwa-mem2 index ref.fasta.gz
-#align data
-pixi run bwa-mem2 mem -t 8 ref.fasta.gz \
-             data.fastq \
-            | samtools sort \
-            -@ 7 \
-            -n \
-            -O BAM \
-        > data.bam
-
-exit 0
-```
-
----
-
-In the terminal, you need to install two new packages
-
-```{.bash}
-pixi add bwa-mem2 samtools
-```
-
-and download a reference genome
-
-```{.bash}
-wget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz
-```
-
-Send the script to the queueing system using the terminal:
-
-```{.bash}
-sbatch align.sh
-```
----
-
-Interrogate SLURM about the specific job with the provided number. For example
-
-```{.bash}
-jobinfo 33735298
-```
-
-```
->Name                : align.sh
->User                : samuele
->Account             : my_project
->Partition           : short
->Nodes               : s21n43
->Cores               : 8
->GPUs                : 0
->State               : RUNNING
->...
-```
-
----
-
-or about all the queued jobs
-
-:::: {.columns}
-
-::: {.column width="45%" }
-```{.bash}
-squeue -u USERNAME
-```
-:::
-::: {.column width="10%" }
-<html><center> or </center></html>
-:::
-::: {.column width="45%" }
-```{.bash}
-squeue --me
-```
-:::
-::::
-
-
-```
->JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
->33735928     short align.sh  samuele  R       1:12      1 s21n43
-```
-
-&nbsp;
-
-If you change your mind and want to cancel a job:
-
-```{.bash}
-scancel 33735928
-```
-
-
-## Choosing the right CPU-RAM
-
-Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
- While the job is running
-
-- use `squeue --me` and **look at the job id**
-
-- **log into the job** from the front-end terminal using an interactive session:
-  
-  ```{.bash}
-  srun --jobid <job id> --overlap --pty bash
-  ```
-
-:::{.callout-warning}
-The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
-:::
-
----
-
-- use `htop -u <username>` to see what is running and how much memory and CPU it uses
-  ![](img/htop.png)
-
-
-## Manage multiple terminals with `tmux`
+# Manage multiple terminals with `tmux`
 
 `tmux` is a server application managing multiple terminal sessions. It can 
 
@@ -1004,7 +944,7 @@ example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)
 
 ---
 
-### Launching separate downloads at the same time
+## Launching separate downloads at the same time
 Start a new session without attaching to it (`d` option), and call it `downloads`:
 
 ```{.bash}
@@ -1045,7 +985,143 @@ while read -r url; do
 done < downloads.txt
 ```
 
-## Run jupyter notebooks on VScode
+# Web applications, ports, tunneling
+
+Why do we use web applications for graphical interfaces?
+
+&nbsp;
+
+- all the graphics heavy-lifting is done by the browser
+- before, the X11 forwarding was the way to do graphics from remote
+- problem: X11 sends the whole graphics over the network, which is slow
+- on the interactive desktop, rstudio runs using VNC (better than X11)
+
+---
+
+A web application on GenomeDK:
+
+- starts a **server process** on the cluster
+- This server listens for incoming requests on a specific **port**
+- The server sends and receives data over the network via the port.
+
+&nbsp;
+
+The local user:
+
+- creates a **tunnel**, which is an `ssh` connection mapping to the remote port used by the server process
+
+---
+
+![How the port forwarding looks like from the local user (your pc) to the remote node of the cluster. The purple command has to be launched on the local computer, once the server is running on the remote host. Source: KU Leuven.](img/sshPortForwarding.png){fig-align="center" width=800px}
+
+---
+
+## Which port to use
+
+- Each server process on a machine needs a **unique port** (p2 on previous figure) to avoid conflicts.
+
+- Ports are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with
+  
+  `echo $UID`
+
+- You will see all this in the next exercise
+
+:::{.callout-warning title="better safe than sorry"}
+Launch a web application which has tokens (a random code in the URL for the browser) or a password you can setup. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!
+:::
+
+## Exercise: jupyterlab web server{.scrollable}
+
+If you DO NOT have the `conda` package manager, you can quickly install it from the box below, otherwise move to the next slide!
+
+:::{.callout-tip title="Install conda" collapse="true"}
+Run the installation script to install the software. There are some informative messages during the installation. You might need to say `yes` a few times
+
+```{.bash}
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
+chmod +x miniforge.sh
+bash miniforge.sh -b
+~/miniforge3/bin/conda init bash
+source ~/.bashrc
+```
+
+When you are done, you need a little bit of configuration. You can run the following command to configure `conda` (run them only once, they are not needed again):
+
+```{.bash}
+conda config --append channels conda-forge
+conda config --append channels bioconda
+conda config --set channel_priority strict
+conda config --set auto_activate_base false
+source ~/.bashrc
+```
+
+Now you are ready to move on!
+:::
+
+---
+
+Create a new `conda` environment:
+
+```{.bash}
+conda create -y -n GDKjupyter jupyterlab numpy pandas
+```
+
+&nbsp;
+
+Start a job with just a few resources.
+
+```{.bash}
+srun --mem=4g --cores=1 --time=4:00:0 --pty /bin/bash
+```
+
+&nbsp;
+
+Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) **are given as variables** to the web server simply using `$(hostname)` and `$UID`:
+
+```{.bash}
+conda activate GDKjupyter
+jupyter-lab --port=$UID --ip=$(hostname)
+```
+
+---
+
+You will see some messages and recognize an address with: your node and your user ID. Below it, the URL you can use in your browser, which always starts with the node name. It will look like this, but in your case it might have a longer URL with a random *token* (mine is instead password protected):
+
+![](img/jupyterUrl.png){fig-align="center" width=800px}
+
+&nbsp;
+
+Write down your node number and user id you got from jupyterlab.
+
+**We now need a tunnel** from the local host (your PC)! Write in a new terminal **(not logged into GenomeDK)** a command like the following (matching the example figure above), substituting the correct values:
+
+```{.bash}
+ssh -L6835:s21n34:6835 USERNAME@login.genome.au.dk
+```
+
+&nbsp;
+
+Your tunnel is now opened. The web application can be accessed **from your browser** at the address given by the server process on GenomeDK, which starts with `127.0.0.1/PORT_NUMBER` (put your correct port number). Copy and paste it in your browser.
+
+**Exercise finished**
+
+---
+
+:::{.callout-tip}
+The same logic applies to all other web applications. They will have similar options to define the remote node and port. 
+
+Usually the host node option changes name between `ip`, `host`, `address`, or `hostname`.
+
+&nbsp;
+
+Note also that you will always have to use the address `127.0.0.1/PORT_NUMBER` on your browser when you do the tunneling. Instead you will need to use the address with the node name if you are using the virtual desktop on GenomeDK.
+
+&nbsp;
+
+Our suggestion is to **always use a terminal in the Virtual Desktop to run jupyterlab**. It will not need any tunneling and open the correct address automatically in the browser (inside the Virtual Desktop).
+:::
+
+# Run jupyter notebooks on VScode
 
 Visual Studio Code (VScode) is a popular **IDE** (Integrated Development Environment), an interface from which you can edit files, use the terminal, write code. From VScode you can also control your jupyter notebooks when you run jupyterlab on a computing node on GenomeDK - and even access the available kernels to run code!
 
@@ -1057,7 +1133,7 @@ We do not suggest using VScode to log into GenomeDK and run commands. This is be
 
 ---
 
-### Configure access to cluster from VSCode
+## Configure access to cluster from VSCode
 
 [Download VSCode](https://code.visualstudio.com/) and open it. Go to the plugin tab (red circle)
 
@@ -1094,7 +1170,7 @@ If the login is stuck, click on `details` when there is a message on the bottom 
 
 ---
 
-### Tunneling to a computing node
+## Tunneling to a computing node
 
 Now close VScode and reopen it. Open the Remote Explorer (from the toolbar on the left). There you should now see `login.genome.au.dk` as configured remote. Click on the little option symbol close to the `SSH` menu. The option symbol is given by the little clogwheel icon (red circle).
 
@@ -1147,7 +1223,7 @@ Remember to run jupyterlab on the node with your user id as port and the node na
 jupyter-lab --port=$UID --ip=$(hostname)
 ```
 
-You then open VScode, connect on the node, and use the file browser of VScode to open your notebooks. When the notebook is open, you can also choose all the jupyter kernels related to your conda or pixi environment where you have jupyterlab installed!
+You then open VScode, connect on the node from the remote explorer, and use the file browser of VScode to open your notebooks. When the notebook is open, you can also choose all the jupyter kernels related to your conda or pixi environment where you have jupyterlab installed!
 
 
 :::{.callout-warning}
