@@ -812,6 +812,13 @@
     "text": "Add the ssh key to your ssh agent\nAdd the key to the ssh agent, which manages your keys. Write the following on your ~/.bashrc file using a text editor:\n# Start ssh-agent for github if not already running\neval \"$(ssh-agent -s)\" &gt; /dev/null\nssh-add -l &&gt;/dev/null || ssh-add ~/.ssh/id_ed25519_github\n \nNow print your public key on the terminal. Copy the command’s output because you need to paste it on the github website:\ncat ~/.ssh/id_ed25519_github.pub\n\n\n\n\n\n\nNote\n\n\nThe key looks like this ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com. You must copy all of it including ssh-ed25519 at the beginning and your email address at the end."
   },
   {
+    "objectID": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
+    "href": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
+    "title": "Advanced GenomeDK",
+    "section": "A more advanced bash function for github",
+    "text": "A more advanced bash function for github\nHere a more advanced bash function you can paste into your ~/.bashrc file. Why not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: local download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
+  },
+  {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
     "href": "resources/Slides/Advanced/slides.html#exercise-1",
     "title": "Advanced GenomeDK",
