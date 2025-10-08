@@ -80,6 +80,8 @@ Documentation you can explore on your own.
 
 - Managing multiple terminals on `tmux` 
 
+- Set up jupyter notebooks on VScode
+
 ## Get the slides
 
 Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://tinyurl.com/gdkSlides)
@@ -214,7 +216,7 @@ When you use Github on GenomeDK, you can configure your ssh keys to avoid writin
 
 ### Create ssh key
 
-On the cluster run 
+On the cluster run the following command to create a new ssh key. Use your github email address in place of `GithubAccountMail@example.com`.
 
 ```{.bash}
 ssh-keygen -t ed25519 -C "GithubAccountMail@example.com"
@@ -223,6 +225,12 @@ ssh-keygen -t ed25519 -C "GithubAccountMail@example.com"
 &nbsp;
 
 When asked, you can choose to name the file. Call it `~/.ssh/id_ed25519_github`. When asked for password, you can leave it empty (press enter).
+
+&nbsp;
+
+:::{.callout-warning}
+Note that the key must be saved in the folder `~/.ssh/`. This is the usual place where `ssh` looks for keys on Linux.
+:::
 
 ---
 
@@ -238,11 +246,15 @@ ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519_github
 
 &nbsp;
 
-Now print your public key on the terminal. Copy it because you need to paste it on the github website:
+Now print your public key on the terminal. Copy the command's output because you need to paste it on the github website:
 
 ```{.bash}
 cat ~/.ssh/id_ed25519_github.pub
 ```
+
+:::{.callout-note}
+The key looks like this `ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com`. You must copy **all of it** including `ssh-ed25519` at the beginning and your email address at the end.
+:::
 
 ---
 
@@ -259,10 +271,10 @@ source ~/.bashrc
 ssh -T git@github.com
 ```
 
-You should see a welcome message.
+You should see a welcome message. From now on pull and push will work without asking for your username and password.
 
 :::{.callout-tip}
-If you have already cloned a repository using its URL, you might need this command to swith to ssh, so that you use the ssh key. Adapt the following code with your username and repository name:
+If you have **previously** cloned a repository using its URL (starting with `https`), you might need this command to switch to `ssh`, so that you use the ssh key for that repository. Adapt the following code with username and repository name:
 
 ```{.bash}
 git remote set-url origin git@github.com:username/repo.git
@@ -303,7 +315,8 @@ Log into GenomeDK. Create anywhere you prefere a folder called `advancedGDK` con
 `rsync/data`
 
 ```{.bash}
-mkcd advancedGDK/rsync/data
+mkdir -p advancedGDK/rsync/data
+cd advancedGDK/rsync
 ```
 
 Create 100 files with extensions `fastq` and `log` in the data folder
@@ -326,7 +339,7 @@ rsync OPTIONS ORIGIN(s) DESTINATION
 
 &nbsp;
 
-An archive (incremental) copy can be done with the options `a`. You can add a progress bar with `P`. You can exclude files: here we want only the ones with `fastq` extension. Run the command
+An archive (incremental) copy can be done with the options `a`. You can add a progress bar with `P`. You can exclude files: here, for example, we want only the file with `fastq` extension. Run the command
 
 ```{.bash}
 rsync -aP --exclude="*.log" data backup
@@ -1032,4 +1045,113 @@ while read -r url; do
 done < downloads.txt
 ```
 
-**Exercise finished**
+## Run jupyter notebooks on VScode
+
+Visual Studio Code (VScode) is a popular **IDE** (Integrated Development Environment), an interface from which you can edit files, use the terminal, write code. From VScode you can also control your jupyter notebooks when you run jupyterlab on a computing node on GenomeDK - and even access the available kernels to run code!
+
+&nbsp;
+
+:::{.callout-warning}
+We do not suggest using VScode to log into GenomeDK and run commands. This is because it runs a lot of processes in the background, which can be a problem on the shared front end node. Use it only to connect to jupyterlab.
+:::
+
+---
+
+### Configure access to cluster from VSCode
+
+[Download VSCode](https://code.visualstudio.com/) and open it. Go to the plugin tab (red circle)
+
+![](img/vscode1.png)
+
+---
+
+Search for `remote development`. Open the plugin (red circle) and install
+
+![](img/vscode2.png)
+
+---
+
+When done, click on the remote symbol on the bottom-left corner (red circle), 
+
+![](img/vscode3.png)
+
+choose `Connect current window to host` then `Add new SSH host`, and type:
+```{.bash}
+ssh username@login.genome.au.dk
+```
+
+If asked, select the file `.ssh/config`. 
+
+---
+
+After some waiting for the first installation, you are **logged in**. Now the access configuration is done and we need only to configure a tunnel to jupyterlab through one of the computing nodes.
+
+&nbsp;
+
+:::{.callout-warning}
+If the login is stuck, click on `details` when there is a message on the bottom right corner of VScode. That shows a terminal where you are likely asked the 2-factor authentication code!
+:::
+
+---
+
+### Tunneling to a computing node
+
+Now close VScode and reopen it. Open the Remote Explorer (from the toolbar on the left). There you should now see `login.genome.au.dk` as configured remote. Click on the little option symbol close to the `SSH` menu. The option symbol is given by the little clogwheel icon (red circle).
+
+![](img/vscode-remote.png){fig-align="center" width=400px}
+
+---
+
+This should open the configuration file for ssh access, in which you already have some settings. Eventually, you are asked to choose which file to open, and it is usually the first one of the list. Now, the file should contain a configuration like the one below.
+
+```{.yml}
+Host login.genome.au.dk
+  HostName login.genome.au.dk
+  User YOUR_USERNAME
+  ControlMaster auto
+```
+
+---
+
+Now, add an additional configuration in the file which looks like below, where
+
+- `A_COMPUTING_NODE` is the name of the computing node you want to use
+- YOUR_USERNAME is your username on GenomeDK
+- YOUR_UID is your user id (you can see it with `echo $UID` on GenomeDK)
+
+```{.yml}
+Host A_COMPUTING_NODE
+  ProxyJump login.genome.au.dk
+  HostName A_COMPUTING_NODE
+  User YOUR_USERNAME
+  LocalForward YOUR_UID A_COMPUTING_NODE:YOUR_UID
+```
+
+---
+
+Save the file and close. Your Remote explorer has now an additional SSH connection with the chosen node name. For example in figure below I have `cn-1019`.
+
+![](img/vscode-sshList.png){fig-align="center" width=400px}
+
+---
+
+Now, on the cluster you can run a job on that node so that you can run jupyterlab. To chose the node in an interactive job, use the option `--nodelist`. For example: 
+
+```{.bash}
+srun --nodelist=cn-1019 --mem=4g --cores=1 --time=4:00:0 --pty /bin/bash
+``` 
+
+Remember to run jupyterlab on the node with your user id as port and the node name as ip/hostname:
+
+```{.bash}
+jupyter-lab --port=$UID --ip=$(hostname)
+```
+
+You then open VScode, connect on the node, and use the file browser of VScode to open your notebooks. When the notebook is open, you can also choose all the jupyter kernels related to your conda or pixi environment where you have jupyterlab installed!
+
+
+:::{.callout-warning}
+Remember to close the job once you are done working on VScode - the job will be kept open on the cluster until you close it!
+:::
+
+
