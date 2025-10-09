@@ -669,7 +669,7 @@
     "href": "resources/Slides/Advanced/slides.html#program",
     "title": "Advanced GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-11:00:\n\nWorkshop Introduction\nFrequently used on UNIX\nrsync copy and backups\n\n11:00-12:00:\n\nBatch jobs on the cluster\n\n12:45-13:30:\n\nContainers (Docker, singularity)\n\n13:30-14.30:\n\nFeedback\nQuestions and discussions\nLook into one of the Extras you are interested in"
+    "text": "Program\n\n10:00-11:00:\n\nWorkshop Introduction\nFrequently used on UNIX\nrsync file transfer\n\n11:00-12:00:\n\nBatch jobs on the cluster\n\n12:45-13:30:\n\nContainers (Docker, singularity)\n\n13:30-14.30:\n\nFeedback\nQuestions and discussions\nLook into one of the Extras you are interested in"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#extras",
@@ -711,7 +711,7 @@
     "href": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
     "title": "Advanced GenomeDK",
     "section": "Exercise II - aliases",
-    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Copy the aliases from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
+    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases which you can write in their place? Copy the aliases from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
@@ -732,14 +732,14 @@
     "href": "resources/Slides/Advanced/slides.html#exercise",
     "title": "Advanced GenomeDK",
     "section": "Exercise",
-    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\n \nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log\nExercise break"
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\n \nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
   },
   {
-    "objectID": "resources/Slides/Advanced/slides.html#open-exercise-only-for-linux-and-mac-users",
-    "href": "resources/Slides/Advanced/slides.html#open-exercise-only-for-linux-and-mac-users",
+    "objectID": "resources/Slides/Advanced/slides.html#exercise---continued-only-for-linux-and-mac-users",
+    "href": "resources/Slides/Advanced/slides.html#exercise---continued-only-for-linux-and-mac-users",
     "title": "Advanced GenomeDK",
-    "section": "Open Exercise (only for Linux and Mac users)",
-    "text": "Open Exercise (only for Linux and Mac users)\nTransfer the whole folder data to your computer from GenomeDK. Open a terminal on your laptop and use the correct command from the previous slide!\n \nExercise continues for all users in the next slide"
+    "section": "Exercise - continued (only for Linux and Mac users)",
+    "text": "Exercise - continued (only for Linux and Mac users)\nExercise continues for all users in the next slide\n \nTransfer the whole folder data to your computer from GenomeDK. Open a terminal on your laptop and use the correct command from the previous slide!"
   },
   {
     "objectID": "resources/Slides/Advanced/slides.html#exercise-batch-script",

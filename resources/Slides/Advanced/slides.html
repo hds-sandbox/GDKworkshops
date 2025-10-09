@@ -15,7 +15,7 @@
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-10-08">
+  <meta name="dcterms.date" content="2025-10-09">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -240,7 +240,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-10-08</p>
+  <p class="date">2025-10-09</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -278,7 +278,7 @@ Dan Søndergaard
 <ul>
 <li>Workshop Introduction</li>
 <li>Frequently used on UNIX</li>
-<li><code>rsync</code> copy and backups</li>
+<li><code>rsync</code> file transfer</li>
 </ul></li>
 <li><strong>11:00-12:00</strong>:
 <ul>
@@ -373,7 +373,7 @@ Dan Søndergaard
 <li>remove files and double check we can</li>
 <li><code>cd ../</code> and <code>cd ../../</code> and … and <code>cd ../../../../../../../</code></li>
 </ul>
-<p>and every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Copy the aliases from the list below and add them in your <code>.bashrc</code> file:</p>
+<p>and every time it is just annoying to waste precious time. Why not creating some aliases <strong>which you can write in their place</strong>? Copy the aliases from the list below and add them in your <code>.bashrc</code> file:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">## Safe file handling</span></span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> rmi=<span class="st">'rm -i'</span></span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> cpi=<span class="st">'cp -i'</span></span>
@@ -432,7 +432,7 @@ Dan Søndergaard
 <section id="syncronizations-of-data" class="title-slide slide level1 center">
 <h1>Syncronizations of data</h1>
 <ul>
-<li>How to copy using `rsync</li>
+<li>How to copy using <code>rsync</code></li>
 <li>Local copy and remote copy</li>
 <li>Incremental copy</li>
 </ul>
@@ -492,7 +492,6 @@ Dan Søndergaard
 <p>&nbsp;</p>
 <p>Create 100 files with extensions <code>fastq</code> and <code>log</code> in the data folder</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data/file{1..100}.fastq data/file{1..100}.log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Exercise break</strong></p>
 </section>
 <section class="slide level2">
 
@@ -518,16 +517,16 @@ Dan Søndergaard
 </div>
 </div>
 </section>
-<section id="open-exercise-only-for-linux-and-mac-users" class="slide level2">
-<h2>Open Exercise (only for Linux and Mac users)</h2>
-<p>Transfer the whole folder data to your computer from GenomeDK. Open a terminal <strong>on your laptop</strong> and use the correct command from the previous slide!</p>
-<p>&nbsp;</p>
+<section id="exercise---continued-only-for-linux-and-mac-users" class="slide level2">
+<h2>Exercise - continued (only for Linux and Mac users)</h2>
 <p><strong>Exercise continues for all users in the next slide</strong></p>
+<p>&nbsp;</p>
+<p>Transfer the whole folder data to your computer from GenomeDK. Open a terminal <strong>on your laptop</strong> and use the correct command from the previous slide!</p>
 </section>
 <section class="slide level2">
 
 <h3 id="local-to-local-copy">Local-to-local copy</h3>
-<p>We want to make a copy <strong>on the cluster</strong>, only for the file with <code>fastq</code> extension. Run the command</p>
+<p>We want to make a copy <strong>on the cluster</strong>, only for the files with <code>fastq</code> extension. Run the command</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-aP</span> <span class="at">--exclude</span><span class="op">=</span><span class="st">"*.log"</span> data data_copy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This will copy all the <code>fastq</code> files in <code>data_copy/data</code>. You can check with <code>ls</code>.</p>
 <div title="Syntax perks">
