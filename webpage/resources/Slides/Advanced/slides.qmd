@@ -56,7 +56,7 @@ smaller: true
 - **10:00-11:00**: 
   - Workshop Introduction
   - Frequently used on UNIX
-  - `rsync` copy and backups
+  - `rsync` file transfer
 
 - **11:00-12:00**: 
   - Batch jobs on the cluster
@@ -150,7 +150,7 @@ Now, there are many repetitive things we do every day. For example:
 - remove files and double check we can
 - `cd ../` and `cd ../../` and ... and `cd ../../../../../../../`
 
-and every time it is just annoying to waste precious time. Why not creating some aliases for all those deplorably long commands? Copy the aliases from the list below and add them in your `.bashrc` file:
+and every time it is just annoying to waste precious time. Why not creating some aliases **which you can write in their place**? Copy the aliases from the list below and add them in your `.bashrc` file:
 
 ```{.bash}
 ## Safe file handling
@@ -209,7 +209,7 @@ source ~/.bashrc
 
 # Syncronizations of data
 
-- How to copy using `rsync
+- How to copy using `rsync`
 - Local copy and remote copy
 - Incremental copy
 
@@ -271,8 +271,6 @@ Create 100 files with extensions `fastq` and `log` in the data folder
 touch data/file{1..100}.fastq data/file{1..100}.log
 ```
 
-**Exercise break**
-
 ---
 
 ### Transfer between local and remote
@@ -298,19 +296,19 @@ To transfer from GenomeDK to your computer, and viceversa, you need to use the c
 
 ---
 
-## Open Exercise (only for Linux and Mac users)
+## Exercise - continued (only for Linux and Mac users)
 
-Transfer the whole folder data to your computer from GenomeDK. Open a terminal **on your laptop** and use the correct command from the previous slide!
+**Exercise continues for all users in the next slide**
 
 &nbsp;
 
-**Exercise continues for all users in the next slide**
+Transfer the whole folder data to your computer from GenomeDK. Open a terminal **on your laptop** and use the correct command from the previous slide!
 
 ---
 
 ### Local-to-local copy
 
-We want to make a copy **on the cluster**, only for the file with `fastq` extension. Run the command
+We want to make a copy **on the cluster**, only for the files with `fastq` extension. Run the command
 
 ```{.bash}
 rsync -aP --exclude="*.log" data data_copy
@@ -321,7 +319,6 @@ This will copy all the `fastq` files in `data_copy/data`. You can check with `ls
 :::{.callout-warning title="Syntax perks"}
 Using `data` will copy the entire folder, while `data/` will copy only its content! This is common to many other UNIX tools.
 :::
-
 
 **Exercise finished**
 
