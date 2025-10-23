@@ -3,9 +3,11 @@ title: "Introduction to workflows on GenomeDK"
 subtitle: "Learn to create smooth pipelines and manage resources tinyurl.com/pipelinesGDK"
 author: 
     - "Samuele Soraggi"
+    - "Manuel Peral-Vázquez"
     - "Dan Søndergaard"
 institute:
     - Health Data Science sandbox, BiRC, AU
+    - Molecular Biology and Genetics, AU
     - GenomeDK, Health, AU
 date: last-modified
 format: 
@@ -24,11 +26,13 @@ smaller: true
 
 - These slides are both a presentation and a small reference manual
 
-- 90% of slides are you doing stuff - **open your terminals and slides**
+- We have hands-on as well, **follow the slides** from [tinyurl.com/pipelinesGDK](https://tinyurl.com/pipelinesGDK)
 
 - Official reference documentation: [genome.au.dk](https://genome.au.dk) and [gwf.app](https://gwf.app/)
 
-- Most important message before starting any workshop: [RTFM - Read The Field Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/).
+- Most important message before starting any workshop: [RTFM - Read The Field Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/)
+
+- Please remember **filling up the feedback** at the end of the slides
 
 ## When you need to ask for help
 
@@ -53,7 +57,7 @@ smaller: true
 
 - Have conda or pixi installed
 
-- If possible a project on the cluster
+- If possible have a project on the cluster
 
 ## Program {.scrollable}
 
@@ -62,7 +66,6 @@ smaller: true
   - Background on workflows/pipelines
   - Workflow file structure and templates
   - A small example
-  - Cake and Questions
 
 - **11:00-12:00**: 
   - Workflow for the exercise
@@ -184,6 +187,90 @@ gantt
     Queue wait: active, 00:00, 2:00
     Job start: active, 02:00, 4:00
 ```
+
+## Workflow Management Systems
+
+There are many workflow management systems available, e.g. **`Snakemake`**, **`Nextflow`**, `Cromwell`, **`Gwf`**, `Airflow`, `Luigi`, ...
+
+Most known in bioinformatics and in a production environment are `Snakemake` and `Nextflow`.
+
+&nbsp;
+
+- Nextflow and Snakemake have a **specific workflow language**
+  - easier to learn for non-programmers
+  - more difficult to customize for programmers
+  - Nextflow is used in many production environments (e.g. nf-core pipelines) and in industry
+&nbsp;
+
+- Gwf is written in python
+  - easier to customize
+  - requires some python knowledge but it is easy to pick up what is necessary
+
+---
+
+## Pros and cons {.scrollable}
+
+
+:::: {.columns}
+::: {.column width="33%"}
+### Nextflow
+
+**Pros**
+
+- Popular, mature ecosystem (nf-core) 
+- Many production-ready pipelines
+- Excellent container (Docker/Singularity) and cloud support (AWS, GCP)
+- Strong reproducibility and portability
+- Good for complex dataflow
+
+**Cons**
+
+- Uses a Groovy-based language
+- Strep learning curve
+- Less natural for custom code
+- High runtime footprint
+:::
+
+::: {.column width="33%"}
+### Snakemake
+
+**Pros**
+
+- Pythonic language — easy to learn
+- Tight integration with conda, containers
+- Workflows are concise
+- Strong community and good documentation
+- Good support
+
+**Cons**
+
+- Very large or highly dynamic workflows can become complex
+- Not cloud-native as Nextflow is
+:::
+
+::: {.column width="33%"}
+### Gwf
+
+**Pros**
+
+- Pure Python workflows — full flexibility
+- Lightweight and pedagogical; easy to teach and tweak
+- Fine-grained control of resources
+- Good local/HPC integration 
+- Simple template reuse
+- Strong local support at GenomeDK / AU
+
+**Cons**
+
+- Small community 
+- Less documentation
+- mainly HPC-oriented
+- No ecosystem tools 
+
+:::
+::::
+
+---
 
 ## Gwf workflow manager
 
@@ -529,7 +616,7 @@ Now, you will change the executor for the template `table`. Your task is to:
 
     `from gwf.executors import Singularity`
   - Now, define a new executor. Below the line where you define `conda_env = Conda("seqkitEnv")`, use a similar syntax and write `sing = Singularity("seqkit_2.10.0")`, where you provide the container file as argument.
-  - At the end of the `align` template, use the new executor `sing` instead of `conda_env`.
+  - At the end of the `table` template, use the new executor `sing` instead of `conda_env`.
 
 &nbsp;
 
