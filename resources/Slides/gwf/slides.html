@@ -10,8 +10,9 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Samuele Soraggi">
+  <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2025-10-09">
+  <meta name="dcterms.date" content="2025-10-23">
   <title>GenomeDK workshops – Introduction to workflows on GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -223,6 +224,14 @@ Samuele Soraggi
     </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
+Manuel Peral-Vázquez 
+</div>
+        <p class="quarto-title-affiliation">
+            Molecular Biology and Genetics, AU
+          </p>
+    </div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
 Dan Søndergaard 
 </div>
         <p class="quarto-title-affiliation">
@@ -231,16 +240,17 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2025-10-09</p>
+  <p class="date">2025-10-23</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
 <h1>Some background</h1>
 <ul>
 <li><p>These slides are both a presentation and a small reference manual</p></li>
-<li><p>90% of slides are you doing stuff - <strong>open your terminals and slides</strong></p></li>
+<li><p>We have hands-on as well, <strong>follow the slides</strong> from <a href="https://tinyurl.com/pipelinesGDK">tinyurl.com/pipelinesGDK</a></p></li>
 <li><p>Official reference documentation: <a href="https://genome.au.dk">genome.au.dk</a> and <a href="https://gwf.app/">gwf.app</a></p></li>
-<li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Field Manual!</a>.</p></li>
+<li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Field Manual!</a></p></li>
+<li><p>Please remember <strong>filling up the feedback</strong> at the end of the slides</p></li>
 </ul>
 </section>
 <section id="when-you-need-to-ask-for-help" class="slide level2">
@@ -263,7 +273,7 @@ Dan Søndergaard
 <li><p>The basics to use the cluster</p></li>
 <li><p>Being able to edit documents on the cluster</p></li>
 <li><p>Have conda or pixi installed</p></li>
-<li><p>If possible a project on the cluster</p></li>
+<li><p>If possible have a project on the cluster</p></li>
 </ul>
 </section>
 <section id="program" class="slide level2 scrollable">
@@ -275,7 +285,6 @@ Dan Søndergaard
 <li>Background on workflows/pipelines</li>
 <li>Workflow file structure and templates</li>
 <li>A small example</li>
-<li>Cake and Questions</li>
 </ul></li>
 <li><strong>11:00-12:00</strong>:
 <ul>
@@ -448,6 +457,80 @@ Dan Søndergaard
 </div>
 </div>
 </div>
+</section>
+<section id="workflow-management-systems" class="slide level2">
+<h2>Workflow Management Systems</h2>
+<p>There are many workflow management systems available, e.g.&nbsp;<strong><code>Snakemake</code></strong>, <strong><code>Nextflow</code></strong>, <code>Cromwell</code>, <strong><code>Gwf</code></strong>, <code>Airflow</code>, <code>Luigi</code>, …</p>
+<p>Most known in bioinformatics and in a production environment are <code>Snakemake</code> and <code>Nextflow</code>.</p>
+<p>&nbsp;</p>
+<ul>
+<li>Nextflow and Snakemake have a <strong>specific workflow language</strong>
+<ul>
+<li>easier to learn for non-programmers</li>
+<li>more difficult to customize for programmers</li>
+<li>Nextflow is used in many production environments (e.g.&nbsp;nf-core pipelines) and in industry &nbsp;</li>
+</ul></li>
+<li>Gwf is written in python
+<ul>
+<li>easier to customize</li>
+<li>requires some python knowledge but it is easy to pick up what is necessary</li>
+</ul></li>
+</ul>
+</section>
+<section id="pros-and-cons" class="slide level2 scrollable">
+<h2>Pros and cons</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<h3 id="nextflow">Nextflow</h3>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Popular, mature ecosystem (nf-core)</li>
+<li>Many production-ready pipelines</li>
+<li>Excellent container (Docker/Singularity) and cloud support (AWS, GCP)</li>
+<li>Strong reproducibility and portability</li>
+<li>Good for complex dataflow</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Uses a Groovy-based language</li>
+<li>Strep learning curve</li>
+<li>Less natural for custom code</li>
+<li>High runtime footprint</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<h3 id="snakemake">Snakemake</h3>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Pythonic language — easy to learn</li>
+<li>Tight integration with conda, containers</li>
+<li>Workflows are concise</li>
+<li>Strong community and good documentation</li>
+<li>Good support</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Very large or highly dynamic workflows can become complex</li>
+<li>Not cloud-native as Nextflow is</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<h3 id="gwf">Gwf</h3>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Pure Python workflows — full flexibility</li>
+<li>Lightweight and pedagogical; easy to teach and tweak</li>
+<li>Fine-grained control of resources</li>
+<li>Good local/HPC integration</li>
+<li>Simple template reuse</li>
+<li>Strong local support at GenomeDK / AU</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Small community</li>
+<li>Less documentation</li>
+<li>mainly HPC-oriented</li>
+<li>No ecosystem tools</li>
+</ul>
+</div></div>
 </section>
 <section id="gwf-workflow-manager" class="slide level2">
 <h2>Gwf workflow manager</h2>
@@ -819,7 +902,7 @@ Dan Søndergaard
 <li><p>below importing the <code>Conda</code> module (line 2), add a new line with</p>
 <p><code>from gwf.executors import Singularity</code></p></li>
 <li><p>Now, define a new executor. Below the line where you define <code>conda_env = Conda("seqkitEnv")</code>, use a similar syntax and write <code>sing = Singularity("seqkit_2.10.0")</code>, where you provide the container file as argument.</p></li>
-<li><p>At the end of the <code>align</code> template, use the new executor <code>sing</code> instead of <code>conda_env</code>.</p></li>
+<li><p>At the end of the <code>table</code> template, use the new executor <code>sing</code> instead of <code>conda_env</code>.</p></li>
 </ul>
 <p>&nbsp;</p>
 <p>Did you do it right? If yes, then you should be able to run the <code>combine</code> target:</p>

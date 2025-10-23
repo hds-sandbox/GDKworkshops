@@ -18,14 +18,14 @@
     "href": "resources/Slides/gwf/slides.html#what-you-need",
     "title": "Introduction to workflows on GenomeDK",
     "section": "What you need",
-    "text": "What you need\n\nThe basics to use the cluster\nBeing able to edit documents on the cluster\nHave conda or pixi installed\nIf possible a project on the cluster"
+    "text": "What you need\n\nThe basics to use the cluster\nBeing able to edit documents on the cluster\nHave conda or pixi installed\nIf possible have a project on the cluster"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#program",
     "href": "resources/Slides/gwf/slides.html#program",
     "title": "Introduction to workflows on GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nBackground on workflows/pipelines\nWorkflow file structure and templates\nA small example\nCake and Questions\n\n11:00-12:00:\n\nWorkflow for the exercise\nPrepare for the workflow: data, software, workflow file\nInvestigate specific parts of the workflow\nExecute one or more targets\nVerify what happens with each target\n\n12:45-13:45:\n\ncalibrate your resources\nadd a template and targets to a pipeline\n\n13:45-14:00:\n\nQuestions\nFeedback"
+    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nBackground on workflows/pipelines\nWorkflow file structure and templates\nA small example\n\n11:00-12:00:\n\nWorkflow for the exercise\nPrepare for the workflow: data, software, workflow file\nInvestigate specific parts of the workflow\nExecute one or more targets\nVerify what happens with each target\n\n12:45-13:45:\n\ncalibrate your resources\nadd a template and targets to a pipeline\n\n13:45-14:00:\n\nQuestions\nFeedback"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#workflow-terminology",
@@ -33,6 +33,20 @@
     "title": "Introduction to workflows on GenomeDK",
     "section": "Workflow terminology",
     "text": "Workflow terminology\n\n\n\n\n\nflowchart LR\n  A0([\"Start\"]) ---&gt;|data.txt| A[\"Rename\"]\n  A ---&gt;|samples.txt| B([\"End\"])\n\n\n\n\n\n\n \n\n\n\n\n\n\n\nWorkflow and W. Management System\n\n\nA workflow is a series of calculations and data manipulations which have to be performed in a specific sequence.\n \nA workflow management system organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system."
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#workflow-management-systems",
+    "href": "resources/Slides/gwf/slides.html#workflow-management-systems",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Workflow Management Systems",
+    "text": "Workflow Management Systems\nThere are many workflow management systems available, e.g. Snakemake, Nextflow, Cromwell, Gwf, Airflow, Luigi, …\nMost known in bioinformatics and in a production environment are Snakemake and Nextflow.\n \n\nNextflow and Snakemake have a specific workflow language\n\neasier to learn for non-programmers\nmore difficult to customize for programmers\nNextflow is used in many production environments (e.g. nf-core pipelines) and in industry  \n\nGwf is written in python\n\neasier to customize\nrequires some python knowledge but it is easy to pick up what is necessary"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#pros-and-cons",
+    "href": "resources/Slides/gwf/slides.html#pros-and-cons",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Pros and cons",
+    "text": "Pros and cons\n\n\nNextflow\nPros\n\nPopular, mature ecosystem (nf-core)\nMany production-ready pipelines\nExcellent container (Docker/Singularity) and cloud support (AWS, GCP)\nStrong reproducibility and portability\nGood for complex dataflow\n\nCons\n\nUses a Groovy-based language\nStrep learning curve\nLess natural for custom code\nHigh runtime footprint\n\n\nSnakemake\nPros\n\nPythonic language — easy to learn\nTight integration with conda, containers\nWorkflows are concise\nStrong community and good documentation\nGood support\n\nCons\n\nVery large or highly dynamic workflows can become complex\nNot cloud-native as Nextflow is\n\n\nGwf\nPros\n\nPure Python workflows — full flexibility\nLightweight and pedagogical; easy to teach and tweak\nFine-grained control of resources\nGood local/HPC integration\nSimple template reuse\nStrong local support at GenomeDK / AU\n\nCons\n\nSmall community\nLess documentation\nmainly HPC-oriented\nNo ecosystem tools"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
@@ -53,7 +67,7 @@
     "href": "resources/Slides/gwf/slides.html#exercise-ii-singularity-in-workflows",
     "title": "Introduction to workflows on GenomeDK",
     "section": "Exercise II: singularity in workflows",
-    "text": "Exercise II: singularity in workflows\nNow, you will change the executor for the template table. Your task is to:\n\nopen the workflow.py file\nbelow importing the Conda module (line 2), add a new line with\nfrom gwf.executors import Singularity\nNow, define a new executor. Below the line where you define conda_env = Conda(\"seqkitEnv\"), use a similar syntax and write sing = Singularity(\"seqkit_2.10.0\"), where you provide the container file as argument.\nAt the end of the align template, use the new executor sing instead of conda_env.\n\n \nDid you do it right? If yes, then you should be able to run the combine target:\ngwf run combine\nand see its status become completed after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or look at the solution file, if you prefer.\n\n\n\n\n\n\nNote\n\n\nBecause combine depends on all table_ targets, it will submit all those targets as well, which need to run first.\n\n\n\nExercise break"
+    "text": "Exercise II: singularity in workflows\nNow, you will change the executor for the template table. Your task is to:\n\nopen the workflow.py file\nbelow importing the Conda module (line 2), add a new line with\nfrom gwf.executors import Singularity\nNow, define a new executor. Below the line where you define conda_env = Conda(\"seqkitEnv\"), use a similar syntax and write sing = Singularity(\"seqkit_2.10.0\"), where you provide the container file as argument.\nAt the end of the table template, use the new executor sing instead of conda_env.\n\n \nDid you do it right? If yes, then you should be able to run the combine target:\ngwf run combine\nand see its status become completed after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or look at the solution file, if you prefer.\n\n\n\n\n\n\nNote\n\n\nBecause combine depends on all table_ targets, it will submit all those targets as well, which need to run first.\n\n\n\nExercise break"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#exercise-iii-your-own-target",
