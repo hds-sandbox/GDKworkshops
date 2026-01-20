@@ -221,7 +221,7 @@
     "href": "resources/Slides/Introduction/slides.html#program",
     "title": "Use GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-11:00: What is GenomeDK, File System, virtual environments\n11:00-12:00: Exercise: access interface, new environment, transfer data, interactive job\n12:45-13:15: queueing system and jobs, estimate resource usage\n13:15-14:00: Send out your first job with slurm, estimate resource usage"
+    "text": "Program\n\n10:00-11:00: What is HPC/GenomeDK, How it works, File System, virtual environments\n11:00-12:00: Exercise: access interface, new environment, transfer data, interactive job\n12:45-13:15: queueing system and jobs, estimate resource usage"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#get-the-slides",
@@ -238,25 +238,32 @@
     "text": "Navigate the slides"
   },
   {
-    "objectID": "resources/Slides/Introduction/slides.html#keep-slides-a-terminal-open-for-the-workshop",
-    "href": "resources/Slides/Introduction/slides.html#keep-slides-a-terminal-open-for-the-workshop",
-    "title": "Use GenomeDK",
-    "section": "Keep slides + a terminal open for the workshop",
-    "text": "Keep slides + a terminal open for the workshop\n\n\nThe basic softwares\n\n\n\nPowershell for windows\n\n\n\n\n\nTerminal for MacOS and Linux\n\n\n\nCustomizable\n\n\n\nTerminator for Linux - iTerm2 for MacOS\n\n\n\n\n\nTabby for Linux, MacOS, Windows"
-  },
-  {
     "objectID": "resources/Slides/Introduction/slides.html#infrastructure",
     "href": "resources/Slides/Introduction/slides.html#infrastructure",
     "title": "Use GenomeDK",
     "section": "Infrastructure",
-    "text": "Infrastructure\nGenomeDK is a computing cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores, 16GPUs)\nstorage nodes storing data in many hard drives (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
+    "text": "Infrastructure\nGenomeDK is a High performance computing (HPC) cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores, 16GPUs)\nstorage nodes storing data in many hard drives (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#access",
     "href": "resources/Slides/Introduction/slides.html#access",
     "title": "Use GenomeDK",
     "section": "Access",
-    "text": "Access\n\nCreating an account happens through this form at genome.au.dk"
+    "text": "Access"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#accessing-a-hpc",
+    "href": "resources/Slides/Introduction/slides.html#accessing-a-hpc",
+    "title": "Use GenomeDK",
+    "section": "Accessing a HPC",
+    "text": "Accessing a HPC\nPowershell (Windows) or Terminal (MacOS, Linux) are powerful tools to interact with a HPC cluster.\n \n\nTerminal for MacOS and Linux. This is called powershell in Windows. \n\n\n\n\n\n\n\nInteractive desktop\n\n\nGenomeDK also has an interactive desktop interface at desktop.genome.au.dk which can be used to access the cluster through a web browser. More on that later."
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#getting-access-to-genomedk",
+    "href": "resources/Slides/Introduction/slides.html#getting-access-to-genomedk",
+    "title": "Use GenomeDK",
+    "section": "Getting access to GenomeDK",
+    "text": "Getting access to GenomeDK\n\nCreating an account happens through this form at genome.au.dk"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#access-without-password",
