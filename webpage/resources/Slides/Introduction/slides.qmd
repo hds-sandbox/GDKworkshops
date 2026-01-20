@@ -44,13 +44,13 @@ navigation-mode: vertical
 
 ## Program
 
-- **10:00-11:00**: What is GenomeDK, File System, virtual environments
+- **10:00-11:00**: What is HPC/GenomeDK, How it works, File System, virtual environments
 
 - **11:00-12:00**: Exercise: access interface, new environment, transfer data, interactive job
 
 - **12:45-13:15**: queueing system and jobs, estimate resource usage
 
-- **13:15-14:00**: Send out your first job with `slurm`, estimate resource usage
+
 
 ## Get the slides
 
@@ -62,35 +62,13 @@ Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.githu
 
 ![](./img/slideGuide.png){fig-align="center"}
 
-
-## Keep slides + a terminal open for the workshop{.smaller} 
-:::: {.columns}
-::: {.column width="50%" }
-The basic softwares
-
-![Powershell for windows](img/powershell.png){width=250px fig-align="center"}
-
-![Terminal for MacOS and Linux](img/terminal.png){width=250px fig-align="center"}
-
-:::
-::: {.column width="50%" }
-
-Customizable 
-
-![Terminator for Linux - iTerm2 for MacOS](img/terminator.png){width=250px fig-align="center" } 
-
-![Tabby for Linux, MacOS, Windows](img/tabby.png){width=250px fig-align="center"}
-
-:::
-::::
-
 # GenomeDK's ABC
 
 Learn your way around the basics of the `GenomeDK` cluster.
 
 ## Infrastructure
 
-`GenomeDK` is a **computing cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
+`GenomeDK` is a **High performance computing (HPC) cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
 
 - **computing nodes** used for running programs (~15000 cores, 16GPUs)
 - **storage nodes** storing data in many hard drives (~23 PiB)
@@ -102,7 +80,54 @@ Learn your way around the basics of the `GenomeDK` cluster.
 
 ![](./img/Main-components-of-a-computer-cluster.png){fig-align="center"}
 
+---
+
+![HPC cluster from the backside](./img/lenovoHPC.jpg){fig-align="center"}
+
+---
+
+![One node being mounted](./img/HPCmounting.jpg){fig-align="center"}
+
+---
+
+![A single node with CPU and RAM](./img/nodePhoto.png){fig-align="center"}
+
+---
+
+### CPUs and cores
+
+- A **CPU** (Central Processing Unit) executes instructions from programs.
+
+- A CPU has multiple **cores**, each core can execute instructions independently at the cost of reduced bandwidth
+
+![](./img/cpucores.png){fig-align="center"}
+
 ## Access 
+
+## Accessing a HPC{.smaller} 
+
+Powershell (Windows) or Terminal (MacOS, Linux) are powerful tools to interact with a HPC cluster.
+
+&nbsp;
+
+![Terminal for MacOS and Linux. This is called powershell in Windows.](img/terminal.png){width=400px fig-align="center"}
+
+&nbsp;
+
+:::{.callout-note title="Interactive desktop"}
+GenomeDK also has an interactive desktop interface at [desktop.genome.au.dk](https://desktop.genome.au.dk) which can be used to access the cluster through a web browser. More on that later.
+:::
+
+---
+
+Terminals look old, but it gives you enormous flexibility through efficient commands and scripting possibilities.
+
+
+![An old "Dumb Terminal" from the 1970s](img/DEC.png){width=800px fig-align="center"}
+
+---
+
+## Getting access to GenomeDK
 
 - **Creating an account** happens through [this form](https://console.genome.au.dk/user-requests/create/) at genome.au.dk
 
@@ -420,21 +445,12 @@ packages are archived in channels. `conda-forge` and `bioconda` include most of 
 
 ### Exercise - Pixi
 
-First of all, we open the **desktop interface to GenomeDK** at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the Front end for the login.
+First of all, we open the **desktop interface to GenomeDK** at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the open frontend for the login.
 
 The desktop session will be operative even if you close and reopen your browser afterwards!
 
 ![The terminal will work as if you logged into the frontend (The desktop is logged into the front-end node already). You can also use the browser!](img/desktop.png)
 
----
-
-:::{.callout-tip title="clipboard into the browser"}
-If you copy a text locally and want to paste in the GDK desktop, you need to transfer it to the clipboard.
-
-Click on `SHOW CLIPBOARD` and paste your text. Now it is available in the desktop interface!
-
-![](img/clipboard.png){fig-align="center" width="600px"}
-:::
 
 ---
 
@@ -482,21 +498,12 @@ Open `pixi.toml` with the text editor, and make sure you have the two channels `
 
 ---
 
-Now get back to the terminal and install some packages. If you have a project on GDK, this is done by 
+Now get back to the terminal and install some packages. 
 
 ```{.bash}
-srun --mem=8g --cores=2 --time=00:10:0 --account=YOUR_PROJECT --pty \
-     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
+pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
 ```
 
-otherwise
-
-```{.bash}
-srun --mem=8g --cores=2 --time=00:10:0 --pty \
-     pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
-```
-
----
 
 The terminal will look like this at the end
 
@@ -881,7 +888,7 @@ pixi run rstudio
 :::
 ::: {.column width="50%" }
 ```{.bash}
-pixi run jupyter-lab --port=$UID
+pixi run jupyter-lab --port=$UID --ip=$HOSTNAME
 ```
 :::
 ::::
