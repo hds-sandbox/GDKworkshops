@@ -221,7 +221,7 @@
     "href": "resources/Slides/Introduction/slides.html#program",
     "title": "Use GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-11:00: What is HPC/GenomeDK, How it works, File System, virtual environments\n11:00-12:00: Exercise: access interface, new environment, transfer data, interactive job\n12:45-13:15: queueing system and jobs, estimate resource usage"
+    "text": "Program\n\n10:00-11:00: What is a HPC, GenomeDK, How it works, File System, virtual environments\n11:00-12:00: desktop interface, new environment, transfer data, interactive job\n12:45-14:00: Hands-on"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#get-the-slides",
@@ -308,6 +308,27 @@
     "text": "Exercise: Write files\nUseful utility 2: nano text editor. It open, edits and saves text files. Very useful for changes on the fly.\n\nTry nano data.fastq. Change a base in the first sequence,\nthen press Ctrl+O to save (give it a new file name newData.fastq and press Enter)\npress Ctrl+X to exit. If you use ls you can see the new saved file."
   },
   {
+    "objectID": "resources/Slides/Introduction/slides.html#gdk-projects",
+    "href": "resources/Slides/Introduction/slides.html#gdk-projects",
+    "title": "Use GenomeDK",
+    "section": "GDK projects",
+    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/ and linked in your home, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can keep track of per-project and -user resource usage"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#creation",
+    "href": "resources/Slides/Introduction/slides.html#creation",
+    "title": "Use GenomeDK",
+    "section": "Creation",
+    "text": "Creation\nRequest a project (after login on GDK) with the command\ngdk-project-request -g &lt;project_name&gt;\n \nAfter GDK approval, a project folder with the desired name appears in ~ and /faststorage/project. You should be able to set the WD into that folder:\ncd &lt;project_name&gt;\nor\ncd ~/&lt;project_name&gt;"
+  },
+  {
+    "objectID": "resources/Slides/Introduction/slides.html#folders-management",
+    "href": "resources/Slides/Introduction/slides.html#folders-management",
+    "title": "Use GenomeDK",
+    "section": "Folders management",
+    "text": "Folders management\nHave a coherent folder structure - your future self sends manu thanks.\n\nExample of structure, which backs up raw data and analysis"
+  },
+  {
     "objectID": "resources/Slides/Introduction/slides.html#virtual-environments",
     "href": "resources/Slides/Introduction/slides.html#virtual-environments",
     "title": "Use GenomeDK",
@@ -334,27 +355,6 @@
     "title": "Use GenomeDK",
     "section": "Exercise cont’d - Download on shell",
     "text": "Exercise cont’d - Download on shell\nHow to download the environment files to our computer? Open a terminal on your computer and run this command:\nscp USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .\nscp needs your login and the absolute path to the file. We give also the download destination as the WD on the local computer (.)\n\n\n\n\n\n\nTip\n\n\nYou can also upload a file switching the order of origin and destination in scp. E.g.\nscp ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#gdk-projects",
-    "href": "resources/Slides/Introduction/slides.html#gdk-projects",
-    "title": "Use GenomeDK",
-    "section": "GDK projects",
-    "text": "GDK projects\n\n\n\n\n\n\n\nwhat is a project\n\n\nProjects are contained in /faststorage/project/ and linked in your home, and are simple folders with some perks:\n\nyou have to request their creation to GDK administrators\naccess is limited to you, and users you invite\nCPU, GPU, storage and backup usage are registered under the project for each user\nyou can keep track of per-project and -user resource usage"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#creation",
-    "href": "resources/Slides/Introduction/slides.html#creation",
-    "title": "Use GenomeDK",
-    "section": "Creation",
-    "text": "Creation\nRequest a project (after login on GDK) with the command\ngdk-project-request -g &lt;project_name&gt;\n \nAfter GDK approval, a project folder with the desired name appears in ~ and /faststorage/project. You should be able to set the WD into that folder:\ncd &lt;project_name&gt;\nor\ncd ~/&lt;project_name&gt;"
-  },
-  {
-    "objectID": "resources/Slides/Introduction/slides.html#folders-management",
-    "href": "resources/Slides/Introduction/slides.html#folders-management",
-    "title": "Use GenomeDK",
-    "section": "Folders management",
-    "text": "Folders management\nHave a coherent folder structure - your future self sends manu thanks.\n\nExample of structure, which backs up raw data and analysis"
   },
   {
     "objectID": "resources/Slides/Introduction/slides.html#what-is-a-job-on-a-hpc",
