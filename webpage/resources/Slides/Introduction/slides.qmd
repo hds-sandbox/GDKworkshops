@@ -82,7 +82,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
 
 ---
 
-![HPC cluster from the backside](./img/lenovoHPC.jpg){fig-align="center"}
+![HPC cluster from the backside](./img/lenovohpc.jpg){fig-align="center"}
 
 ---
 
