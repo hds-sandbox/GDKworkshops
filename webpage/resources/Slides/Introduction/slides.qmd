@@ -44,11 +44,11 @@ navigation-mode: vertical
 
 ## Program
 
-- **10:00-11:00**: What is HPC/GenomeDK, How it works, File System, virtual environments
+- **10:00-11:00**: What is a HPC, GenomeDK, How it works, File System, virtual environments
 
-- **11:00-12:00**: Exercise: access interface, new environment, transfer data, interactive job
+- **11:00-12:00**: desktop interface, new environment, transfer data, interactive job
 
-- **12:45-13:15**: queueing system and jobs, estimate resource usage
+- **12:45-14:00**: Hands-on
 
 
 
@@ -375,234 +375,6 @@ Useful utility 2: `nano` text editor. It open, edits and saves text files. Very 
 - press Ctrl+X to exit. If you use `ls` you can see the new saved file.
 
 
-# Software management
-
-&nbsp;
-
-- **No preinstalled software** on GenomeDK
-
-- You install and manage your **software and its dependencies** inside virtual environments
-
-## Virtual environments
-
-Each project needs specific software versions dependent on each other for **reproducibility** - without interferring with other projects.
-
-&nbsp;
-
-:::{.callout-note title="Definition"}
-A **virtual environment** keeps project-specific softwares and their dependencies separated 
-
-&nbsp;
-
-A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
-:::
-
----
-
-![How virtual envs work: packages at different versions are kept separated into folders, together with all system files needed to make them work.](./img/virtualenvs.png)
-
-## Conda
-
-&nbsp;
-
-Conda is **both** a virtual environment and a package manager.
-
-- easy to use and understand
-- can handle quite big environments
-- environments are easily shareable
-- a [large archive](https://anaconda.org) (Anaconda) of packages
-- active community of people archiving their packages on Anaconda
-
-## Pixi
-
-A newer virtual env and package manager
-
-&nbsp;
-
-- An upgrade of Conda in speed and stability
-- Can install the same packages as conda
-
----
-
-A package manager puts together the dependency trees of requested packages to find all compatible dependencies versions.
-
-![Figure: A package's dependency tree with required versions on the edges](img/condatree.png){fig-align="center" width="800px"}
-
----
-
-To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
-
-![Figure: search DeSeq2 for R](img/anaconda1.png){fig-align="center" width="800px"}
-
-:::{.callout-note title="Channels"}
-
-packages are archived in channels. `conda-forge` and `bioconda` include most of the packages for bioinformatics and data science.
-
-`conda-forge` packages are often the most up-to-date.
-:::
-
----
-
-### Exercise - Pixi
-
-First of all, we open the **desktop interface to GenomeDK** at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the open frontend for the login.
-
-The desktop session will be operative even if you close and reopen your browser afterwards!
-
-![The terminal will work as if you logged into the frontend (The desktop is logged into the front-end node already). You can also use the browser!](img/desktop.png)
-
-
----
-
-Open the terminal and run the command below to install `pixi`:
-
-```{.bash}
-curl -fsSL https://pixi.sh/install.sh | bash
-```
-
-After that, make the system recognize `pixi`
-
-```{.bash}
-echo PATH="$PATH:$HOME/.pixi/bin" >> ~/.bashrc
-echo 'eval "$(pixi completion --shell bash)"'  >> ~/.bashrc
-source ~/.bashrc
-```
-
----
-
-Change your WD with the one we created earlier, where we have the file `data.fastq`
-
-```{.bash}
-cd ~/GDKintro
-```
-
-Initiate a new pixi environment into the folder:
-
-```{.bash}
-pixi init
-```
-
----
-
-Use the file browser and open the `GDKintro` folder
-
-![](img/gdkintroFolder.png){fig-align="center" width="800px"}
-
-You can see some new files. `pixi.toml` contains info `pixi` will use to create your environment.
-
----
-
-Open `pixi.toml` with the text editor, and make sure you have the two channels `conda-forge` and `bioconda`. If not, modify the file so the channel list is like below.
-
-![](img/pixitoml.png){fig-align="center" width="800px"}
-
----
-
-Now get back to the terminal and install some packages. 
-
-```{.bash}
-pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
-```
-
-
-The terminal will look like this at the end
-
-![](img/pixiInstalled.png){fig-align="center" width="800px"}
-
-
-:::{.callout-note title="Why `srun`?"}
-
-We used `srun` to get temporary resources to install the packages. Our front-end node is sometimes not powerful enough to do that.
-
-`srun` is the command used to access a compute node interactively. More on this later.
-
-:::
-
----
-
-Now open the `pixi.toml` file. You should see all the installed packages with related information.
-
-:::{.callout-tip}
-You can share `pixi.toml` with a collaborator. This will need to run `pixi install` and will recreate the same environment!
-
-Does your collaborator need a file `environment.yml` to recreate the environment? Run
-```{.bash}
-pixi project export conda-environment environment.yml
-```
-:::
-
----
-
-**Exercise Cont'd**
-
-Be sure your WD is in the folder `GDKintro`. Then run
-
-```{.bash}
-pixi project export conda-environment environment.yml
-```
-
-Open the file `environment.yml`. It looks very similar to `pixi.toml` and is compatible with conda to recreate your environment. 
-
-Let's zip those files into one:
-
-```{.bash}
-zip environment.zip pixi.toml environment.yml
-```
-
-# Data transfer
-
-Data can be downloaded/uploaded in two ways:
-
-- from the command line of a local computer
-
-- using an interactive interface (Filezilla)
-
-
-## Exercise cont'd - Download on shell
-
-How to download the environment files to our computer? Open a terminal **on your computer** and run this command:
-
-```{.bash}
-scp USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .
-```
-
-`scp` needs your login and the **absolute path** to the file. We give also the download destination as the WD on the local computer (`.`)
-
-:::{.callout-tip}
-You can also upload a file switching the order of origin and destination in `scp`. E.g. 
-```{.bash}
-scp ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt 
-```
-:::
-
----
-
-### Exercise - Download interactively
-
-You can transfer data with an interactive software, such as `Filezilla`, which  has an easy interface. [Download Filezilla](https://filezilla-project.org/download.php?type=client).
-
-&nbsp;
-
-When done, open `Filezilla` and use the following information on the login bar:
-
-- Host: `login.genome.au.dk`
-- Username, Password: your `GenomeDK` username and password
-- Port: `22`
-
----
-
-Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.
-
-![](./img/filezilla1.png){fig-align="center"}
-
----
-
-**Download** the `environment.zip` file. You need to right-click on it and choose `Download`
-
-![](./img/filezilla3.png){fig-align="center"}
-
-You can do exactly the same to upload files from your local computer!
-
 # Project management
 
 - What are **GDK projects** 
@@ -798,6 +570,240 @@ If your project has many users, a good structure can be
 
 **Backup cost >>> Storage cost >> Computation cost**
 :::
+
+
+# Software management
+
+&nbsp;
+
+- **No preinstalled software** on GenomeDK
+
+- You install and manage your **software and its dependencies** inside virtual environments
+
+## Virtual environments
+
+Each project needs specific software versions dependent on each other for **reproducibility** - without interferring with other projects.
+
+&nbsp;
+
+:::{.callout-note title="Definition"}
+A **virtual environment** keeps project-specific softwares and their dependencies separated 
+
+&nbsp;
+
+A **package manager** is a software that can retrieve, download, install, upgrade packages **easily and reliably**
+:::
+
+---
+
+![How virtual envs work: packages at different versions are kept separated into folders, together with all system files needed to make them work.](./img/virtualenvs.png)
+
+## Conda
+
+&nbsp;
+
+Conda is **both** a virtual environment and a package manager.
+
+- easy to use and understand
+- can handle quite big environments
+- environments are easily shareable
+- a [large archive](https://anaconda.org) (Anaconda) of packages
+- active community of people archiving their packages on Anaconda
+
+## Pixi
+
+A newer virtual env and package manager
+
+&nbsp;
+
+- An upgrade of Conda in speed and stability
+- Can install the same packages as conda
+
+---
+
+A package manager puts together the dependency trees of requested packages to find all compatible dependencies versions.
+
+![Figure: A package's dependency tree with required versions on the edges](img/condatree.png){fig-align="center" width="800px"}
+
+---
+
+To install a specific package in your environment, search it on [anaconda.org](https://anaconda.org):
+
+![Figure: search DeSeq2 for R](img/anaconda1.png){fig-align="center" width="800px"}
+
+:::{.callout-note title="Channels"}
+
+packages are archived in channels. `conda-forge` and `bioconda` include most of the packages for bioinformatics and data science.
+
+`conda-forge` packages are often the most up-to-date.
+:::
+
+---
+
+### Exercise - Pixi
+
+First of all, we open the **desktop interface to GenomeDK** at [desktop.genome.au.dk](https://desktop.genome.au.dk). Choose the open frontend for the login.
+
+The desktop session will be operative even if you close and reopen your browser afterwards!
+
+![The terminal will work as if you logged into the frontend (The desktop is logged into the front-end node already). You can also use the browser!](img/desktop.png)
+
+
+---
+
+Open the terminal and run the command below to install `pixi`:
+
+```{.bash}
+curl -fsSL https://pixi.sh/install.sh | bash
+```
+
+After that, make the system recognize `pixi`
+
+```{.bash}
+echo PATH="$PATH:$HOME/.pixi/bin" >> ~/.bashrc
+echo 'eval "$(pixi completion --shell bash)"'  >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+Change your WD with the one we created earlier, where we have the file `data.fastq`
+
+```{.bash}
+cd ~/GDKintro
+```
+
+Initiate a new pixi environment into the folder:
+
+```{.bash}
+pixi init --channel conda-forge --channel bioconda
+```
+This will also use conda-forge and bioconda as channels for package installation.
+
+---
+
+:::{.callout-note title="What are channels?"}
+Channels are repositories where packages are stored. 
+
+`conda-forge` and `bioconda` are two of the most used channels for bioinformatics and data science and contain virtually any package you may need.
+
+Note that we specified channels in the order of priority: `conda-forge` has higher priority than `bioconda` when installing packages, so you will always search for a package first in `conda-forge` and then in `bioconda`.
+:::
+
+---
+
+Use the file browser and open the `GDKintro` folder
+
+![](img/gdkintroFolder.png){fig-align="center" width="800px"}
+
+You can see some new files. `pixi.toml` contains info `pixi` will use to create your environment.
+
+---
+
+Open `pixi.toml` with the text editor, and make sure you have the two channels `conda-forge` and `bioconda` as you required with the `pixi init` command. You can always add more channels if you find out later that you need them for specific packages
+
+![](img/pixitoml.png){fig-align="center" width="800px"}
+
+---
+
+Now get back to the terminal and install some packages. Your working directory MUST be the same where `pixi.toml` is located!
+
+```{.bash}
+pixi add rstudio-desktop jupyterlab r-ggplot2 r-dplyr pandas
+```
+
+&nbsp;
+
+The terminal will look like this at the end
+
+![](img/pixiInstalled.png){fig-align="center" width="800px"}
+
+
+---
+
+Now open the `pixi.toml` file. You should see all the installed packages with related information.
+
+:::{.callout-tip}
+You can share `pixi.toml` with a collaborator. This will need to run `pixi install` and will recreate the same environment!
+
+Does your collaborator need a file `environment.yml` to recreate the environment? Run
+```{.bash}
+pixi project export conda-environment environment.yml
+```
+:::
+
+---
+
+**Exercise Cont'd**
+
+Be sure your WD is in the folder `GDKintro`. Then run
+
+```{.bash}
+pixi project export conda-environment environment.yml
+```
+
+Open the file `environment.yml`. It looks very similar to `pixi.toml` and is compatible with conda to recreate your environment. 
+
+Let's zip those files into one:
+
+```{.bash}
+zip environment.zip pixi.toml environment.yml
+```
+
+# Data transfer
+
+Data can be downloaded/uploaded in two ways:
+
+- from the command line of a local computer
+
+- using an interactive interface (Filezilla)
+
+
+## Exercise cont'd - Download on shell
+
+How to download the environment files to our computer? Open a terminal **on your computer** and run this command:
+
+```{.bash}
+scp USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/environment.zip .
+```
+
+`scp` needs your login and the **absolute path** to the file. We give also the download destination as the WD on the local computer (`.`)
+
+:::{.callout-tip}
+You can also upload a file switching the order of origin and destination in `scp`. E.g. 
+```{.bash}
+scp ./myFile.txt USERNAME@login.genome.au.dk:/home/USERNAME/GDKintro/myFile.txt 
+```
+:::
+
+---
+
+### Exercise - Download interactively
+
+You can transfer data with an interactive software, such as `Filezilla`, which  has an easy interface. [Download Filezilla](https://filezilla-project.org/download.php?type=client).
+
+&nbsp;
+
+When done, open `Filezilla` and use the following information on the login bar:
+
+- Host: `login.genome.au.dk`
+- Username, Password: your `GenomeDK` username and password
+- Port: `22`
+
+---
+
+Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.
+
+![](./img/filezilla1.png){fig-align="center"}
+
+---
+
+**Download** the `environment.zip` file. You need to right-click on it and choose `Download`
+
+![](./img/filezilla3.png){fig-align="center"}
+
+You can do exactly the same to upload files from your local computer!
+
 
 # Running a Job
 
