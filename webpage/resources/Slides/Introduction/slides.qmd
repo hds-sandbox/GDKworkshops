@@ -1,12 +1,15 @@
 ---
 title: "Use GenomeDK"
-subtitle: "An introduction to the GDK system and basic commands https://hds-sandbox.github.io/GDKworkshops"
+subtitle: "An introduction to the GDK system and basic commands tinyurl.com/GDKslides"
 author: 
     - "Samuele Soraggi"
     - "Dan Søndergaard"
+    - "Manuel Peral Vazquez"
 institute:
-    - Health Data Science sandbox, BiRC
+    - Bioinformatics Research Centre, Nat
     - GenomeDK, Health
+    - Biomedicine, Health
+    
 date: last-modified
 format: 
   revealjs:
