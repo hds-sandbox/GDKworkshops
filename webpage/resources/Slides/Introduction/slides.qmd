@@ -102,7 +102,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
 
 ![](./img/cpucores.png){fig-align="center"}
 
-## Access 
+---
 
 ## Accessing a HPC{.smaller} 
 
@@ -196,7 +196,7 @@ cat $env:USERPROFILE\.ssh\id_ed25519.pub | ssh USERNAME@login.genome.au.dk 'cat 
 
 &nbsp;
 
-After this, your local private key will be tested against GenomeDK's public key every time you log in, without you needing to write a password.
+After this, your local private key will be tested against GenomeDK's public key every time you log in.
 
 # File System (FS) on GenomeDK
 
