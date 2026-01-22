@@ -245,13 +245,6 @@
     "text": "Infrastructure\nGenomeDK is a High performance computing (HPC) cluster, i.e. a set of interconnected computers (nodes). GenomeDK has:\n\ncomputing nodes used for running programs (~15000 cores, 16GPUs)\nstorage nodes storing data in many hard drives (~23 PiB)\na network making nodes talk to each other\na frontend node from which you can send your programs to a node to be executed\na queueing system called slurm to prioritize the users’ program to be run"
   },
   {
-    "objectID": "resources/Slides/Introduction/slides.html#access",
-    "href": "resources/Slides/Introduction/slides.html#access",
-    "title": "Use GenomeDK",
-    "section": "Access",
-    "text": "Access"
-  },
-  {
     "objectID": "resources/Slides/Introduction/slides.html#accessing-a-hpc",
     "href": "resources/Slides/Introduction/slides.html#accessing-a-hpc",
     "title": "Use GenomeDK",

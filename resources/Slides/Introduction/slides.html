@@ -11,7 +11,7 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-01-21">
+  <meta name="dcterms.date" content="2026-01-22">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -231,7 +231,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-01-21</p>
+  <p class="date">2026-01-22</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -314,9 +314,6 @@ Dan Søndergaard
 </ul>
 
 <img data-src="./img/cpucores.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="access" class="slide level2">
-<h2>Access</h2>
-</section>
 <section id="accessing-a-hpc" class="slide level2 smaller">
 <h2>Accessing a HPC</h2>
 <p>Powershell (Windows) or Terminal (MacOS, Linux) are powerful tools to interact with a HPC cluster.</p>
@@ -391,7 +388,7 @@ Dan Søndergaard
 </div>
 </div>
 <p>&nbsp;</p>
-<p>After this, your local private key will be tested against GenomeDK’s public key every time you log in, without you needing to write a password.</p>
+<p>After this, your local private key will be tested against GenomeDK’s public key every time you log in.</p>
 </section></section>
 <section>
 <section id="file-system-fs-on-genomedk" class="title-slide slide level1 center">
@@ -481,10 +478,10 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="678dfe83" class="cell" data-execution_count="1">
+<div id="26d6ba00" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="VKhQFYIWmITI" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#VKhQFYIWmITI {
+<div id="FqpfSoUCfqoh" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#FqpfSoUCfqoh {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -705,7 +702,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsVKhQFYIWmITI=[
+var questionsFqpfSoUCfqoh=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1821,8 +1818,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("VKhQFYIWmITI")) {
-    show_questions(questionsVKhQFYIWmITI, VKhQFYIWmITI);
+  if (document.getElementById("FqpfSoUCfqoh")) {
+    show_questions(questionsFqpfSoUCfqoh, FqpfSoUCfqoh);
   } else {
     setTimeout(try_show, 200);
   }
@@ -1923,10 +1920,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online <code>man less</code> (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="8207f3e0" class="cell" data-execution_count="2">
+<div id="c4a62845" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="jyXVRYPmHkhG" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#jyXVRYPmHkhG {
+<div id="fNNMZGirAlzN" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#fNNMZGirAlzN {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2147,7 +2144,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsjyXVRYPmHkhG=[
+var questionsfNNMZGirAlzN=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3237,8 +3234,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("jyXVRYPmHkhG")) {
-    show_questions(questionsjyXVRYPmHkhG, jyXVRYPmHkhG);
+  if (document.getElementById("fNNMZGirAlzN")) {
+    show_questions(questionsfNNMZGirAlzN, fNNMZGirAlzN);
   } else {
     setTimeout(try_show, 200);
   }
