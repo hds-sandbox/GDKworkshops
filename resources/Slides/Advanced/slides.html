@@ -886,7 +886,7 @@ Dan Søndergaard
 <span id="cb31-16"><a aria-hidden="true" tabindex="-1"></a><span class="va">fq</span><span class="op">=</span><span class="st">"</span><span class="va">${fastqs</span><span class="op">[</span><span class="va">$((SLURM_ARRAY_TASK_ID</span><span class="op">-</span><span class="dv">1</span><span class="va">))</span><span class="op">]</span><span class="va">}</span><span class="st">"</span></span>
 <span id="cb31-17"><a aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> .fastq<span class="va">)</span></span>
 <span id="cb31-18"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-19"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> mem <span class="at">-t</span> <span class="st">"</span><span class="va">$SLURM_CPUS_PER_TASK</span><span class="st">"</span> ref.fasta.gz <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb31-19"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> mem <span class="at">-t</span> <span class="st">"</span><span class="va">$SLURM_CPUS_PER_TASK</span><span class="st">"</span> ref.fasta <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> <span class="dt">\</span></span>
 <span id="cb31-20"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-@</span> 1 <span class="at">-O</span> BAM <span class="dt">\</span></span>
 <span id="cb31-21"><a aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> <span class="st">"results/</span><span class="va">${sample}</span><span class="st">.bam"</span></span>
 <span id="cb31-22"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -937,7 +937,7 @@ Dan Søndergaard
 <p><strong>What is happening</strong></p>
 </div>
 <div class="callout-content">
-<p>With <code>--array=1-6%3</code>, SLURM creates 6 tasks and runs at most 3 concurrently.</p>
+<p>With <code>--array=1-4%2</code>, SLURM creates 4 tasks and runs at most 2 concurrently.</p>
 <p>Each task gets its own <code>SLURM_ARRAY_TASK_ID</code>, used to pick one input file from <code>fastq_list.txt</code>.</p>
 </div>
 </div>
