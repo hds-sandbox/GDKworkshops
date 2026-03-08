@@ -707,7 +707,7 @@ mapfile -t fastqs < fastq_list.txt
 fq="${fastqs[$((SLURM_ARRAY_TASK_ID-1))]}"
 sample=$(basename "$fq" .fastq)
 
-bwa-mem2 mem -t "$SLURM_CPUS_PER_TASK" ref.fasta.gz "$fq" \
+bwa-mem2 mem -t "$SLURM_CPUS_PER_TASK" ref.fasta "$fq" \
   | samtools sort -@ 1 -O BAM \
   > "results/${sample}.bam"
 
@@ -760,7 +760,7 @@ ls logs/
 ```
 
 :::{.callout-note title="What is happening"}
-With `--array=1-6%3`, SLURM creates 6 tasks and runs at most 3 concurrently.
+With `--array=1-4%2`, SLURM creates 4 tasks and runs at most 2 concurrently.
 
 Each task gets its own `SLURM_ARRAY_TASK_ID`, used to pick one input file from `fastq_list.txt`.
 :::
