@@ -59,10 +59,11 @@ smaller: true
   - `rsync` file transfer
 
 - **11:00-12:00**: 
-  - Batch jobs on the cluster
+  - Containers (Docker, apptainer)
+  
 
 - **12:45-13:30**: 
-  - Containers (Docker, singularity)
+  - Batch jobs on the cluster
 
 - **13:30-14.30**: 
   - Feedback
@@ -121,9 +122,9 @@ Examples:
 
 Plus other things like your command history on the terminal (`~/.bash_history`) and your settings (`~/.bashrc`).
 
-## Exercise I: singularity settings
+## Exercise I: apptainer settings
 
-Let's make a useful setting to run at each login. We will need a temporary folder for `singularity` containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder `~/.singularity`) with cache material.
+Let's make a useful setting to run at each login. We will need a temporary folder for `apptainer` containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder `~/.apptainer`) with cache material.
 
 &nbsp;
 
@@ -131,8 +132,8 @@ Edit the file `~/.bashrc` (use `nano ~/.bashrc` or any editor you want). Add tho
 
 ```{.bash}
 mkdir -p -m 700 /tmp/$USER
-export SINGULARITY_TMPDIR=/tmp/$USER
-export SINGULARITY_CACHEDIR=/tmp/$USER
+export APPTAINER_TMPDIR=/tmp/$USER
+export APPTAINER_CACHEDIR=/tmp/$USER
 ```
 
 &nbsp;
@@ -265,10 +266,10 @@ cd advancedGDK/rsync
 
 &nbsp;
 
-Create 100 files with extensions `fastq` and `log` in the data folder
+Create 10 files with extensions `fastq` and `log` in the data folder
 
 ```{.bash}
-touch data/file{1..100}.fastq data/file{1..100}.log
+touch data/file{1..10}.fastq data/file{1..10}.log
 ```
 
 ---
@@ -322,212 +323,6 @@ Using `data` will copy the entire folder, while `data/` will copy only its conte
 
 **Exercise finished**
 
-# Batch jobs on the cluster
-
-:::{.callout-note}
-A batch job is used to **run a program non-interactively**, usually for longer time and so without interaction from the user. A batch job is described in a **batch script** that contains 
-
-- the desired **resources**
-- the sequence of **commands** to be executed
-
-and
-
-- has a filename **without spaces** (forget spaces from now on)
-:::
-
-## Exercise: batch script
-
-Prepare the data needed for the exercise. Create a subfolder called `batchGDK` in the `advancedGDK` folder:
-
-```{.bash}
-mkdir -p advancedGDK/batchGDK
-cd advancedGDK/batchGDK
-```
-
-&nbsp;
-
-Download the data needed for the exercise:
-
-```{.bash}
-wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \
-     -O ./data.fastq.gz
-
-wget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz
-```
-
----
-
-Create a `conda` or `pixi` environment with `bwa-mem2` and `samtools` installed. For example
-
-&nbsp;
-
-::: {.panel-tabset}
-## Conda
-
-```{.bash}
-conda create -c conda-forge -c bioconda -n batchGDK bwa-mem2 samtools
-```
-
-## Pixi
-
-```{.bash}
-pixi init -c conda-forge -c bioconda
-pixi add bwa-mem2 samtools
-```
-:::
-
----
-
-
-Create a text file called `align.sh`. This contains a batch script with resources desired and the commands to run on those. The script text depends on you having used `conda` or `pixi` to create the environment.
-
-::: {.panel-tabset}
-## Conda
-
-```{.bash}
-#!/bin/bash
-#SBATCH --account PROJECT_NAME
-#SBATCH --cpus-per-task=4
-#SBATCH --mem 16g
-#SBATCH --time 04:00:00
-
-#initialize conda
-eval "$(conda shell.bash hook)"
-#activate Environment
-conda activate batchGDK
-
-#index reference
-bwa-mem2 index ref.fasta.gz
-#align data
-bwa-mem2 mem -t 4 ref.fasta.gz \
-             data.fastq \
-            | samtools sort \
-            -@ 3 \
-            -n \
-            -O BAM \
-        > data.bam
-
-exit 0
-```
-
-## Pixi
-
-```{.bash}
-#!/bin/bash
-#SBATCH --account PROJECT_NAME
-#SBATCH --cpus-per-task=4
-#SBATCH --mem 16g
-#SBATCH --time 04:00:00
-
-#index reference
-pixi run bwa-mem2 index ref.fasta.gz
-#align data
-pixi run bwa-mem2 mem -t 4 ref.fasta.gz \
-             data.fastq \
-            | samtools sort \
-            -@ 3 \
-            -n \
-            -O BAM \
-        > data.bam
-
-exit 0
-```
-:::
-
----
-
-Send the script to the queueing system using the terminal:
-
-```{.bash}
-sbatch align.sh
-```
-
-&nbsp;
-
-It will provide a job id number, e.g. `33735298`, on the terminal. You will need it to check the job status. For example
-
-```{.bash}
-Submitted batch job 33735298
-```
-
----
-
-Interrogate SLURM about the specific job with the provided number. For example
-
-```{.bash}
-jobinfo 33735298
-```
-
-```
->Name                : align.sh
->User                : samuele
->Account             : my_project
->Partition           : short
->Nodes               : s21n43
->Cores               : 4
->GPUs                : 0
->State               : RUNNING
->...
-```
----
-
-or about all the queued jobs
-
-```{.bash}
-squeue --me
-```
-
-```
->JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
->33735928     short align.sh  samuele  R       1:12      1 s21n43
-```
-
-&nbsp;
-
-:::{.callout-note}
-If you change your mind and want to cancel a job:
-
-```{.bash}
-scancel 33735928
-```
-:::
-
-## Calibrating resources
-
-Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
-While the job is running
-
-- use `squeue --me` and **look at the job id**
-
-- **log into the job** from the front-end terminal using an interactive session and your job id:
-  
-  ```{.bash}
-  sshell 33735928
-  ```
-
-:::{.callout-warning}
-The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
-:::
-
----
-
-- use `htop -u <username>` to see what is running and how much memory and CPU it uses
-  ![](img/htop.png)
-
-**Exercise finished**
-
----
-
-- While the job runs, you can evaluate if resources are used properly, and eventually adjust them to a lower/higher value, so that you can stop the job and resubmit it with the right resources.
-
-&nbsp;
-
-- When the job is finished, successfully or not, check the output files and the log file `slurm-<jobid>.out` for any error or warning.
-
-&nbsp;
-
-- The log file is really useful to understand why a job fails, or if there have been errors or unusual behaviour even if the job is successfully ended.
-
 # Containers
 
 :::{.callout-note title="What is a container"}
@@ -564,7 +359,7 @@ A **virtual environment** isolates dependencies for a specific programming langu
 
 - Many containers are done with *Docker*, but this is not installed on GenomeDK
 
-- GenomeDK has *Singularity*, which can also run programs installed in Docker containers.
+- GenomeDK has *Apptainer*, which can also run programs installed in Docker containers.
 
 - Very practical to **pull and use** containers **in workflows**.
 
@@ -607,12 +402,12 @@ Find a bash bioinformatics software you know on the [Biocontainer Registry](http
 
 ---
 
-The page will suggest to run immediately the container with `singularity`. I would suggest downloading it first (`pull` instead of `run`) and then running it.
+The page will suggest to run immediately the container with `apptainer`. I would suggest downloading it first (`pull` instead of `run`) and then running it.
 
 In the case of `minimap2`:
 
 ```{.bash}
-singularity pull minimap2.sif https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4
+apptainer pull minimap2.sif https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4
 ```
 
 which creates a container file in your current directory, and calls it `minimap2.sif` (better name than the default `minimap2:2.28--h577a1d6_4`).
@@ -625,13 +420,13 @@ You can either `run` the container, which opens a CLI into it, where you can exe
 ::: {.column width="50%" }
 This will operate the command line inside the container. Here you can then run `minimap2`.
 ```{.bash}
-singularity run minimap2.sif
+apptainer run minimap2.sif
 ```
 :::
 ::: {.column width="50%" }
 This will immediately run `minimap2` from the container - useful for a pipeline where you do not need any interaction with the command line.
 ```{.bash}
-singularity run minimap2.sif minimap2
+apptainer run minimap2.sif minimap2
 ```
 :::
 ::::
@@ -641,7 +436,7 @@ singularity run minimap2.sif minimap2
 You can also pull and run a container from DockerHub. For example, for the `biocontainers/bwa-mem2` container you will need to adapt the command a bit, because it is not a singularity container.
 
 ```{.bash}
-singularity pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1
+apptainer pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1
 ```
 
 &nbsp;
@@ -655,7 +450,7 @@ The correct path `docker://biocontainers/samtools:v1.9-4-deb_cv1` can be found o
 Doing operations with a container is really easy For example, you can run a command inside the container like the following, which outputs a `.bam` genome file read from a URL:
 
 ```{.bash}
- singularity run samtools_docker.sif \
+apptainer run samtools_docker.sif \
                  samtools view \
                  -h https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam \
                  -O bam > test01.bam
@@ -672,16 +467,13 @@ Doing operations with a container is really easy For example, you can run a comm
 
 If you want to build containers with Docker, you need to 
 
-  - build locally with Docker or Singularity, and then upload the container to a repository (e.g. DockerHub or Quay). 
-  - pull them on GenomeDK with singularity
+  - build locally with Docker or apptainer, and then upload the container to a repository (e.g. DockerHub or Quay). 
+  - pull them on GenomeDK with apptainer
+  - or [build with apptainer directly on genomeDK](https://singularity-tutorial.github.io/03-building/)
 
-&nbsp;
+## Other options for apptainer {.scrollable}
 
-Singularity is installed on GenomeDK, but because you need root privileges to build a container on the cluster, you cannot do that.
-
-## Other options for singularity {.scrollable}
-
-A few other options which can be used in singularity. When you need those really depends on the application:
+A few other options which can be used in apptainer. When you need those really depends on the application:
 
 - `--fakeroot`: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.
 
@@ -700,6 +492,427 @@ A few other options which can be used in singularity. When you need those really
 - `--bind`: Binds specific directories from the host to the container. Useful to share data between host and container.
 
 - `--env`: Sets environment variables inside the container. This is useful for configuring the container's behavior or passing in secrets.
+
+# Batch jobs on the cluster
+
+:::{.callout-note}
+A batch job is used to **run a program non-interactively**, usually for longer time and so without interaction from the user. A batch job is described in a **batch script** that contains 
+
+- the desired **resources**
+- the sequence of **commands** to be executed
+- other advanced settings (e.g. job dependencies, array jobs, ...)
+
+and
+
+- has a filename **without spaces** (forget spaces from now on)
+:::
+
+## Exercise: batch script {.scrollable}
+
+Prepare the data needed for the exercise. Create a subfolder called `batchGDK` in the `advancedGDK` folder:
+
+```{.bash}
+mkdir -p ~/advancedGDK/batchGDK
+cd ~/advancedGDK/batchGDK
+```
+
+&nbsp;
+
+Download the data needed for the exercise:
+
+```{.bash}
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \
+     -O ./data.fastq.gz
+
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R2_001.fastq.gz \
+     -O ./data2.fastq.gz
+
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L002_R1_001.fastq.gz \
+     -O ./data3.fastq.gz
+
+wget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L002_R2_001.fastq.gz \
+     -O ./data4.fastq.gz
+
+gunzip data*.fastq.gz
+
+wget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta
+```
+
+Create a `conda` or `pixi` environment with `bwa-mem2` and `samtools` installed. For example
+
+&nbsp;
+
+::: {.panel-tabset}
+## Conda
+
+```{.bash}
+conda create -c conda-forge -c bioconda -n batchGDK bwa-mem2 samtools
+```
+
+## Pixi
+
+```{.bash}
+pixi init -c conda-forge -c bioconda
+pixi add bwa-mem2 samtools
+```
+:::
+
+
+Create a text file called `align.sh`. This contains a batch script with resources desired and the commands to run on those. The script text depends on you having used `conda` or `pixi` to create the environment.
+
+::: {.panel-tabset}
+## Conda
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=4
+#SBATCH --mem 16g
+#SBATCH --time 04:00:00
+
+#initialize conda
+source ~/miniconda3/etc/profile.d/conda.sh
+#activate Environment
+conda activate batchGDK
+
+#index reference
+bwa-mem2 index ref.fasta
+#align data
+bwa-mem2 mem -t 4 ref.fasta \
+             data.fastq \
+            | samtools sort \
+            -@ 3 \
+            -n \
+            -O BAM \
+        > data.bam
+
+exit 0
+```
+
+## Pixi
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=4
+#SBATCH --mem 16g
+#SBATCH --time 04:00:00
+
+#index reference
+pixi run bwa-mem2 index ref.fasta
+#align data
+pixi run bwa-mem2 mem -t 4 ref.fasta \
+             data.fastq \
+            | samtools sort \
+            -@ 3 \
+            -n \
+            -O BAM \
+        > data.bam
+
+exit 0
+```
+:::
+
+Send the script to the queueing system using the terminal:
+
+```{.bash}
+sbatch align.sh
+```
+
+&nbsp;
+
+It will provide a job id number, e.g. `33735298`, on the terminal. You will need it to check the job status. For example
+
+```{.bash}
+Submitted batch job 33735298
+```
+
+Interrogate SLURM about the specific job with the provided number. For example
+
+```{.bash}
+jobinfo 33735298
+```
+
+```
+>Name                : align.sh
+>User                : samuele
+>Account             : my_project
+>Partition           : short
+>Nodes               : s21n43
+>Cores               : 4
+>GPUs                : 0
+>State               : RUNNING
+>...
+```
+
+or about all the queued jobs
+
+```{.bash}
+squeue --me
+```
+
+```
+>JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+>33735928     short align.sh  samuele  R       1:12      1 s21n43
+```
+
+&nbsp;
+
+:::{.callout-note}
+If you change your mind and want to cancel a job:
+
+```{.bash}
+scancel 33735928
+```
+:::
+
+---
+
+## Exercise: parallel batch with SLURM arrays {.scrollable}
+
+Now run the same type of operation on multiple files in parallel using a **job array**.
+
+Create folders for results and logs. Then generate a list with the FASTQ files:
+
+```{.bash}
+mkdir -p results logs
+
+# create a list with the data files
+ls *.fastq > fastq_list.txt
+```
+
+&nbsp;
+
+Create a script called `align_array.sh`.
+
+::: {.panel-tabset}
+## Conda
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=8g
+#SBATCH --time=01:00:00
+#SBATCH --array=1-4%2
+#SBATCH --job-name=alignArray
+#SBATCH --output=logs/align_%A_%a.out
+#SBATCH --error=logs/align_%A_%a.err
+
+set -euo pipefail
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate batchGDK
+
+mapfile -t fastqs < fastq_list.txt
+fq="${fastqs[$((SLURM_ARRAY_TASK_ID-1))]}"
+sample=$(basename "$fq" .fastq)
+
+bwa-mem2 mem -t "$SLURM_CPUS_PER_TASK" ref.fasta.gz "$fq" \
+  | samtools sort -@ 1 -O BAM \
+  > "results/${sample}.bam"
+
+exit 0
+```
+
+## Pixi
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=8g
+#SBATCH --time=01:00:00
+#SBATCH --array=1-4%2
+#SBATCH --job-name=alignArray
+#SBATCH --output=logs/align_%A_%a.out
+#SBATCH --error=logs/align_%A_%a.err
+
+set -euo pipefail
+
+mapfile -t fastqs < fastq_list.txt
+fq="${fastqs[$((SLURM_ARRAY_TASK_ID-1))]}"
+sample=$(basename "$fq" .fastq)
+
+pixi run bwa-mem2 mem -t "$SLURM_CPUS_PER_TASK" ref.fasta "$fq" \
+  | pixi run samtools sort -@ 1 -O BAM \
+  > "results/${sample}.bam"
+
+exit 0
+```
+:::
+
+---
+
+Submit and monitor the array job:
+
+```{.bash}
+sbatch align_array.sh
+squeue --me -n alignArray
+```
+
+&nbsp;
+
+Check that outputs and logs are separated by array task id (`%a`) and parent job id (`%A`):
+
+```{.bash}
+ls results/
+ls logs/
+```
+
+:::{.callout-note title="What is happening"}
+With `--array=1-6%3`, SLURM creates 6 tasks and runs at most 3 concurrently.
+
+Each task gets its own `SLURM_ARRAY_TASK_ID`, used to pick one input file from `fastq_list.txt`.
+:::
+
+**Exercise finished**
+
+---
+
+## Exercise: chained jobs with dependencies {.scrollable}
+
+Now run a 3-step pipeline where indexing starts only if alignment succeeds.
+
+Create a second script called `index_array.sh`:
+
+::: {.panel-tabset}
+## Conda
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4g
+#SBATCH --time=00:30:00
+#SBATCH --array=1-4
+#SBATCH --job-name=indexArray
+#SBATCH --output=logs/index_%A_%a.out
+#SBATCH --error=logs/index_%A_%a.err
+
+set -euo pipefail
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate batchGDK
+
+mapfile -t bams=(results/*.bam)
+bam="${bams[$((SLURM_ARRAY_TASK_ID-1))]}"
+
+samtools index "$bam"
+
+exit 0
+```
+
+## Pixi
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4g
+#SBATCH --time=00:30:00
+#SBATCH --array=1-4
+#SBATCH --job-name=indexArray
+#SBATCH --output=logs/index_%A_%a.out
+#SBATCH --error=logs/index_%A_%a.err
+
+set -euo pipefail
+
+bams=(results/*.bam)
+bam="${bams[$((SLURM_ARRAY_TASK_ID-1))]}"
+
+pixi run samtools index "$bam"
+
+exit 0
+```
+:::
+
+---
+
+Create a final reporting job called `report_job.sh`:
+
+```{.bash}
+#!/bin/bash
+#SBATCH --account PROJECT_NAME
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1g
+#SBATCH --time=00:10:00
+#SBATCH --job-name=arrayReport
+#SBATCH --output=logs/report_%j.out
+
+set -euo pipefail
+
+echo "BAM files" > results/summary.txt
+ls -1 results/*.bam >> results/summary.txt
+echo "" >> results/summary.txt
+echo "BAI files" >> results/summary.txt
+ls -1 results/*.bam.bai >> results/summary.txt
+
+exit 0
+```
+
+Submit with dependencies:
+
+```{.bash}
+ALIGN_ID=$(sbatch --parsable align_array.sh)
+INDEX_ID=$(sbatch --parsable --dependency=afterok:${ALIGN_ID} index_array.sh)
+REPORT_ID=$(sbatch --parsable --dependency=afterok:${INDEX_ID} report_job.sh)
+
+echo "ALIGN=${ALIGN_ID} INDEX=${INDEX_ID} REPORT=${REPORT_ID}"
+squeue --me -n alignArray,indexArray,arrayReport
+```
+
+&nbsp;
+
+Check the final report:
+
+```{.bash}
+cat results/summary.txt
+```
+
+:::{.callout-note title="What is happening"}
+`--dependency=afterok:<jobid>` means the next job starts only if the previous job exits successfully.
+
+If a parent job fails, dependent jobs stay pending and are marked as unsatisfied dependency.
+:::
+
+**Exercise finished**
+
+## Calibrating resources
+
+Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
+While the job is running
+
+- use `squeue --me` and **look at the job id**
+
+- **log into the job** from the front-end terminal using an interactive session and your job id:
+  
+  ```{.bash}
+  sshell 33735928
+  ```
+
+:::{.callout-warning}
+The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
+:::
+
+---
+
+- use `htop -u <username>` to see what is running and how much memory and CPU it uses
+  ![](img/htop.png)
+
+**Exercise finished**
+
+---
+
+- While the job runs, you can evaluate if resources are used properly, and eventually adjust them to a lower/higher value, so that you can stop the job and resubmit it with the right resources.
+
+&nbsp;
+
+- When the job is finished, successfully or not, check the output files and the log file `slurm-<jobid>.out` for any error or warning.
+
+&nbsp;
+
+- The log file is really useful to understand why a job fails, or if there have been errors or unusual behaviour even if the job is successfully ended.
+
+
 
 
 # Closing the workshop
