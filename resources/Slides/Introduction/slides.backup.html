@@ -11,7 +11,7 @@
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-01-22">
+  <meta name="dcterms.date" content="2026-03-08">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -231,7 +231,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-01-22</p>
+  <p class="date">2026-03-08</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -454,11 +454,11 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="8124318b" class="cell" data-execution_count="1">
+<div id="6c849d3d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="WdUehDtgTUEL" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#WdUehDtgTUEL {
-   --jq-multiple-choice-bg: #6f78ffff;
+<div id="bOduLWVTahfu" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#bOduLWVTahfu {
+   --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
    --jq-mc-button-inset-shadow: #555555;
@@ -471,6 +471,7 @@ Dan Søndergaard
    --jq-incorrect-color: #c80202;
    --jq-correct-color: #009113;
    --jq-text-color: #fafafa;
+   --jq-link-color: #9abafa;
 }
 
 .Quiz {
@@ -517,6 +518,11 @@ Dan Søndergaard
     text-align: left;
 }
 
+
+.Quiz .JQLink {
+    color: var(--jq-link-color) !important;
+    text-decoration: underline;
+}
 
 
 
@@ -678,7 +684,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsWdUehDtgTUEL=[
+var questionsbOduLWVTahfu=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -762,8 +768,8 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
     }
     // Replace markdown links
-    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Link">http$1</a>');
-    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Quiz JQLink">http$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Quiz JQLink">$1</a>');
     return mystring;
 }
 
@@ -1101,31 +1107,31 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
 
-        // Make input element
-        var inp = document.createElement("input");
-        inp.type = "radio";
-        inp.id = "quizo" + id + index;
-        inp.style = "display:none;";
-        aDiv.append(inp);
-
-        //Make label for input element
+        // Make label for input element
         var lab = document.createElement("label");
         lab.className = "MCButton";
         lab.id = id + '-' + index;
         lab.onclick = check_mc;
+
+        // Make input element
+        var inp = document.createElement("input");
+        inp.type = "radio";
+        inp.id = "quizo" + id + index;
+        inp.name = "mcgroup-" + id; // for grouping radios
+        inp.className = "sr-only"; // or "visually-hidden" or whatever you call it
+
+
+        lab.append(inp); // input is now inside the label
+
         var aSpan = document.createElement('span');
-        aSpan.classsName = "";
-        //qDiv.id="quizQn"+id+index;
         if ("answer" in item) {
             aSpan.innerHTML = jaxify(item.answer);
-            //aSpan.innerHTML=item.answer;
         }
         lab.append(aSpan);
 
         // Create div for code inside question
-        var codeSpan;
         if ("code" in item) {
-            codeSpan = document.createElement('span');
+            var codeSpan = document.createElement('span');
             codeSpan.id = "code" + id + index;
             codeSpan.className = "QuizCode";
             var codePre = document.createElement('pre');
@@ -1134,10 +1140,7 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
             codePre.append(codeCode);
             codeCode.innerHTML = item.code;
             lab.append(codeSpan);
-            //console.log(codeSpan);
         }
-
-        //lab.textContent=item.answer;
 
         // Set the data attributes for the answer
         lab.setAttribute('data-correct', item.correct);
@@ -1149,7 +1152,9 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
         }
         lab.setAttribute('data-answered', 0);
 
+        // Only append the label (input is inside)
         aDiv.append(lab);
+
 
     });
 
@@ -1200,7 +1205,7 @@ function check_numeric(ths, event) {
         }
         //console.log("Reader entered", submission);
 
-        if ("precision" in ths.dataset) {
+        if (("precision" in ths.dataset) && (ths.dataset.precision > 0)) {
             var precision = ths.dataset.precision;
             submission = Number(Number(submission).toPrecision(precision));
         }
@@ -1794,8 +1799,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("WdUehDtgTUEL")) {
-    show_questions(questionsWdUehDtgTUEL, WdUehDtgTUEL);
+  if (document.getElementById("bOduLWVTahfu")) {
+    show_questions(questionsbOduLWVTahfu, bOduLWVTahfu);
   } else {
     setTimeout(try_show, 200);
   }
@@ -1897,11 +1902,11 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="008fa236" class="cell" data-execution_count="2">
+<div id="8af96894" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="KwTSGHbUlnfC" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#KwTSGHbUlnfC {
-   --jq-multiple-choice-bg: #6f78ffff;
+<div id="zQgEvFigvUgP" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#zQgEvFigvUgP {
+   --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
    --jq-mc-button-inset-shadow: #555555;
@@ -1914,6 +1919,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
    --jq-incorrect-color: #c80202;
    --jq-correct-color: #009113;
    --jq-text-color: #fafafa;
+   --jq-link-color: #9abafa;
 }
 
 .Quiz {
@@ -1960,6 +1966,11 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
     text-align: left;
 }
 
+
+.Quiz .JQLink {
+    color: var(--jq-link-color) !important;
+    text-decoration: underline;
+}
 
 
 
@@ -2121,7 +2132,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsKwTSGHbUlnfC=[
+var questionszQgEvFigvUgP=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -2179,8 +2190,8 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
     }
     // Replace markdown links
-    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Link">http$1</a>');
-    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Quiz JQLink">http$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Quiz JQLink">$1</a>');
     return mystring;
 }
 
@@ -2518,31 +2529,31 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
 
-        // Make input element
-        var inp = document.createElement("input");
-        inp.type = "radio";
-        inp.id = "quizo" + id + index;
-        inp.style = "display:none;";
-        aDiv.append(inp);
-
-        //Make label for input element
+        // Make label for input element
         var lab = document.createElement("label");
         lab.className = "MCButton";
         lab.id = id + '-' + index;
         lab.onclick = check_mc;
+
+        // Make input element
+        var inp = document.createElement("input");
+        inp.type = "radio";
+        inp.id = "quizo" + id + index;
+        inp.name = "mcgroup-" + id; // for grouping radios
+        inp.className = "sr-only"; // or "visually-hidden" or whatever you call it
+
+
+        lab.append(inp); // input is now inside the label
+
         var aSpan = document.createElement('span');
-        aSpan.classsName = "";
-        //qDiv.id="quizQn"+id+index;
         if ("answer" in item) {
             aSpan.innerHTML = jaxify(item.answer);
-            //aSpan.innerHTML=item.answer;
         }
         lab.append(aSpan);
 
         // Create div for code inside question
-        var codeSpan;
         if ("code" in item) {
-            codeSpan = document.createElement('span');
+            var codeSpan = document.createElement('span');
             codeSpan.id = "code" + id + index;
             codeSpan.className = "QuizCode";
             var codePre = document.createElement('pre');
@@ -2551,10 +2562,7 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
             codePre.append(codeCode);
             codeCode.innerHTML = item.code;
             lab.append(codeSpan);
-            //console.log(codeSpan);
         }
-
-        //lab.textContent=item.answer;
 
         // Set the data attributes for the answer
         lab.setAttribute('data-correct', item.correct);
@@ -2566,7 +2574,9 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
         }
         lab.setAttribute('data-answered', 0);
 
+        // Only append the label (input is inside)
         aDiv.append(lab);
+
 
     });
 
@@ -2617,7 +2627,7 @@ function check_numeric(ths, event) {
         }
         //console.log("Reader entered", submission);
 
-        if ("precision" in ths.dataset) {
+        if (("precision" in ths.dataset) && (ths.dataset.precision > 0)) {
             var precision = ths.dataset.precision;
             submission = Number(Number(submission).toPrecision(precision));
         }
@@ -3211,8 +3221,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("KwTSGHbUlnfC")) {
-    show_questions(questionsKwTSGHbUlnfC, KwTSGHbUlnfC);
+  if (document.getElementById("zQgEvFigvUgP")) {
+    show_questions(questionszQgEvFigvUgP, zQgEvFigvUgP);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3618,11 +3628,11 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="ef649828" class="cell" data-execution_count="3">
+<div id="bae680d6" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div id="QxFwGaeFDimT" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#QxFwGaeFDimT {
-   --jq-multiple-choice-bg: #6f78ffff;
+<div id="UhIimELVUsCK" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#UhIimELVUsCK {
+   --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
    --jq-mc-button-inset-shadow: #555555;
@@ -3635,6 +3645,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
    --jq-incorrect-color: #c80202;
    --jq-correct-color: #009113;
    --jq-text-color: #fafafa;
+   --jq-link-color: #9abafa;
 }
 
 .Quiz {
@@ -3681,6 +3692,11 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
     text-align: left;
 }
 
+
+.Quiz .JQLink {
+    color: var(--jq-link-color) !important;
+    text-decoration: underline;
+}
 
 
 
@@ -3842,7 +3858,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsQxFwGaeFDimT=[
+var questionsUhIimELVUsCK=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3900,8 +3916,8 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
     }
     // Replace markdown links
-    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Link">http$1</a>');
-    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Quiz JQLink">http$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Quiz JQLink">$1</a>');
     return mystring;
 }
 
@@ -4239,31 +4255,31 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
 
-        // Make input element
-        var inp = document.createElement("input");
-        inp.type = "radio";
-        inp.id = "quizo" + id + index;
-        inp.style = "display:none;";
-        aDiv.append(inp);
-
-        //Make label for input element
+        // Make label for input element
         var lab = document.createElement("label");
         lab.className = "MCButton";
         lab.id = id + '-' + index;
         lab.onclick = check_mc;
+
+        // Make input element
+        var inp = document.createElement("input");
+        inp.type = "radio";
+        inp.id = "quizo" + id + index;
+        inp.name = "mcgroup-" + id; // for grouping radios
+        inp.className = "sr-only"; // or "visually-hidden" or whatever you call it
+
+
+        lab.append(inp); // input is now inside the label
+
         var aSpan = document.createElement('span');
-        aSpan.classsName = "";
-        //qDiv.id="quizQn"+id+index;
         if ("answer" in item) {
             aSpan.innerHTML = jaxify(item.answer);
-            //aSpan.innerHTML=item.answer;
         }
         lab.append(aSpan);
 
         // Create div for code inside question
-        var codeSpan;
         if ("code" in item) {
-            codeSpan = document.createElement('span');
+            var codeSpan = document.createElement('span');
             codeSpan.id = "code" + id + index;
             codeSpan.className = "QuizCode";
             var codePre = document.createElement('pre');
@@ -4272,10 +4288,7 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
             codePre.append(codeCode);
             codeCode.innerHTML = item.code;
             lab.append(codeSpan);
-            //console.log(codeSpan);
         }
-
-        //lab.textContent=item.answer;
 
         // Set the data attributes for the answer
         lab.setAttribute('data-correct', item.correct);
@@ -4287,7 +4300,9 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
         }
         lab.setAttribute('data-answered', 0);
 
+        // Only append the label (input is inside)
         aDiv.append(lab);
+
 
     });
 
@@ -4338,7 +4353,7 @@ function check_numeric(ths, event) {
         }
         //console.log("Reader entered", submission);
 
-        if ("precision" in ths.dataset) {
+        if (("precision" in ths.dataset) && (ths.dataset.precision > 0)) {
             var precision = ths.dataset.precision;
             submission = Number(Number(submission).toPrecision(precision));
         }
@@ -4932,8 +4947,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("QxFwGaeFDimT")) {
-    show_questions(questionsQxFwGaeFDimT, QxFwGaeFDimT);
+  if (document.getElementById("UhIimELVUsCK")) {
+    show_questions(questionsUhIimELVUsCK, UhIimELVUsCK);
   } else {
     setTimeout(try_show, 200);
   }
@@ -5046,11 +5061,11 @@ function try_show() {
 <p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
-<div id="ff79fa10" class="cell" data-execution_count="4">
+<div id="421b990c" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div id="BrGsHnMFKeaZ" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#BrGsHnMFKeaZ {
-   --jq-multiple-choice-bg: #6f78ffff;
+<div id="cEmCqmMKyjra" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#cEmCqmMKyjra {
+   --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
    --jq-mc-button-inset-shadow: #555555;
@@ -5063,6 +5078,7 @@ function try_show() {
    --jq-incorrect-color: #c80202;
    --jq-correct-color: #009113;
    --jq-text-color: #fafafa;
+   --jq-link-color: #9abafa;
 }
 
 .Quiz {
@@ -5109,6 +5125,11 @@ function try_show() {
     text-align: left;
 }
 
+
+.Quiz .JQLink {
+    color: var(--jq-link-color) !important;
+    text-decoration: underline;
+}
 
 
 
@@ -5270,7 +5291,7 @@ function try_show() {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsBrGsHnMFKeaZ=[
+var questionscEmCqmMKyjra=[
     {
         "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
         "type": "many_choice",
@@ -5328,8 +5349,8 @@ function jaxify(string) {
         loc2 = mystring.search(/([^\\]|^)(\$\$)/);
     }
     // Replace markdown links
-    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Link">http$1</a>');
-    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Link">$1</a>');
+    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Quiz JQLink">http$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Quiz JQLink">$1</a>');
     return mystring;
 }
 
@@ -5667,31 +5688,31 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
     shuffled.forEach((item, index, ans_array) => {
         //console.log(answer);
 
-        // Make input element
-        var inp = document.createElement("input");
-        inp.type = "radio";
-        inp.id = "quizo" + id + index;
-        inp.style = "display:none;";
-        aDiv.append(inp);
-
-        //Make label for input element
+        // Make label for input element
         var lab = document.createElement("label");
         lab.className = "MCButton";
         lab.id = id + '-' + index;
         lab.onclick = check_mc;
+
+        // Make input element
+        var inp = document.createElement("input");
+        inp.type = "radio";
+        inp.id = "quizo" + id + index;
+        inp.name = "mcgroup-" + id; // for grouping radios
+        inp.className = "sr-only"; // or "visually-hidden" or whatever you call it
+
+
+        lab.append(inp); // input is now inside the label
+
         var aSpan = document.createElement('span');
-        aSpan.classsName = "";
-        //qDiv.id="quizQn"+id+index;
         if ("answer" in item) {
             aSpan.innerHTML = jaxify(item.answer);
-            //aSpan.innerHTML=item.answer;
         }
         lab.append(aSpan);
 
         // Create div for code inside question
-        var codeSpan;
         if ("code" in item) {
-            codeSpan = document.createElement('span');
+            var codeSpan = document.createElement('span');
             codeSpan.id = "code" + id + index;
             codeSpan.className = "QuizCode";
             var codePre = document.createElement('pre');
@@ -5700,10 +5721,7 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
             codePre.append(codeCode);
             codeCode.innerHTML = item.code;
             lab.append(codeSpan);
-            //console.log(codeSpan);
         }
-
-        //lab.textContent=item.answer;
 
         // Set the data attributes for the answer
         lab.setAttribute('data-correct', item.correct);
@@ -5715,7 +5733,9 @@ function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
         }
         lab.setAttribute('data-answered', 0);
 
+        // Only append the label (input is inside)
         aDiv.append(lab);
+
 
     });
 
@@ -5766,7 +5786,7 @@ function check_numeric(ths, event) {
         }
         //console.log("Reader entered", submission);
 
-        if ("precision" in ths.dataset) {
+        if (("precision" in ths.dataset) && (ths.dataset.precision > 0)) {
             var precision = ths.dataset.precision;
             submission = Number(Number(submission).toPrecision(precision));
         }
@@ -6360,8 +6380,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("BrGsHnMFKeaZ")) {
-    show_questions(questionsBrGsHnMFKeaZ, BrGsHnMFKeaZ);
+  if (document.getElementById("cEmCqmMKyjra")) {
+    show_questions(questionscEmCqmMKyjra, cEmCqmMKyjra);
   } else {
     setTimeout(try_show, 200);
   }

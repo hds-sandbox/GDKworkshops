@@ -1,215 +1,5 @@
 [
   {
-    "objectID": "people.html",
-    "href": "people.html",
-    "title": "People",
-    "section": "",
-    "text": "Samuele Soraggi\n\n\nData Scientist, Aarhus University\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#when-you-need-to-ask-for-help",
-    "href": "resources/Slides/gwf/slides.html#when-you-need-to-ask-for-help",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "When you need to ask for help",
-    "text": "When you need to ask for help\n\nPractical help:\nSamuele (BiRC, MBG) - samuele@birc.au.dk\nDrop in hours:\n\nBioinformatics Cafe: https://abc.au.dk, abcafe@au.dk\nSamuele (BiRC, MBG) - samuele@birc.au.dk\n\nGeneral mail for assistance\nsupport@genome.au.dk"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#what-you-need",
-    "href": "resources/Slides/gwf/slides.html#what-you-need",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "What you need",
-    "text": "What you need\n\nThe basics to use the cluster\nBeing able to edit documents on the cluster\nHave conda or pixi installed\nIf possible have a project on the cluster"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#program",
-    "href": "resources/Slides/gwf/slides.html#program",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Program",
-    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nBackground on workflows/pipelines\nWorkflow file structure and templates\nA small example\n\n11:00-12:00:\n\nWorkflow for the exercise\nPrepare for the workflow: data, software, workflow file\nInvestigate specific parts of the workflow\nExecute one or more targets\nVerify what happens with each target\n\n12:45-13:45:\n\ncalibrate your resources\nadd a template and targets to a pipeline\n\n13:45-14:00:\n\nQuestions\nFeedback"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#workflow-terminology",
-    "href": "resources/Slides/gwf/slides.html#workflow-terminology",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Workflow terminology",
-    "text": "Workflow terminology\n\n\n\n\n\nflowchart LR\n  A0([\"Start\"]) ---&gt;|data.txt| A[\"Rename\"]\n  A ---&gt;|samples.txt| B([\"End\"])\n\n\n\n\n\n\n \n\n\n\n\n\n\n\nWorkflow and W. Management System\n\n\nA workflow is a series of calculations and data manipulations which have to be performed in a specific sequence.\n \nA workflow management system organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system."
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#workflow-management-systems",
-    "href": "resources/Slides/gwf/slides.html#workflow-management-systems",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Workflow Management Systems",
-    "text": "Workflow Management Systems\nThere are many workflow management systems available, e.g. Snakemake, Nextflow, Cromwell, Gwf, Airflow, Luigi, …\nMost known in bioinformatics and in a production environment are Snakemake and Nextflow.\n \n\nNextflow and Snakemake have a specific workflow language\n\neasier to learn for non-programmers\nmore difficult to customize for programmers\nNextflow is used in many production environments (e.g. nf-core pipelines) and in industry  \n\nGwf is written in python\n\neasier to customize\nrequires some python knowledge but it is easy to pick up what is necessary"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#pros-and-cons",
-    "href": "resources/Slides/gwf/slides.html#pros-and-cons",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Pros and cons",
-    "text": "Pros and cons\n\n\nNextflow\nPros\n\nPopular, mature ecosystem (nf-core)\nMany production-ready pipelines\nExcellent container (Docker/Singularity) and cloud support (AWS, GCP)\nStrong reproducibility and portability\nGood for complex dataflow\n\nCons\n\nUses a Groovy-based language\nStrep learning curve\nLess natural for custom code\nHigh runtime footprint\n\n\nSnakemake\nPros\n\nPythonic language — easy to learn\nTight integration with conda, containers\nWorkflows are concise\nStrong community and good documentation\nGood support\n\nCons\n\nVery large or highly dynamic workflows can become complex\nNot cloud-native as Nextflow is\n\n\nGwf\nPros\n\nPure Python workflows — full flexibility\nLightweight and pedagogical; easy to teach and tweak\nFine-grained control of resources\nGood local/HPC integration\nSimple template reuse\nStrong local support at GenomeDK / AU\n\nCons\n\nSmall community\nLess documentation\nmainly HPC-oriented\nNo ecosystem tools"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
-    "href": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Gwf workflow manager",
-    "text": "Gwf workflow manager\nA lightweight and easy to adopt workflow manager. It requires only some basic Python - you can learn it along the way starting from examples. Some features:\n \n\nDeveloped at AU (Dan at GenomeDK) and used also at MOMA, AUH, …\n\nEasy to find support\n\nIn python, no need for a workflow language\n\nYou can use all python functions to build your workflow!\n\nEasy to structure a workflow and check resource usage\n\nReusable templates\nVery pedagogical\n\nConda, Pixi, Container usage out-of-the-box"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-environments",
-    "href": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-environments",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Exercise I: workflow with conda environments",
-    "text": "Exercise I: workflow with conda environments\nPrepare everything for the exercise: create a new folder, then download data and workflow file\n mkdir -p myPipeline\n cd myPipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#exercise-ii-singularity-in-workflows",
-    "href": "resources/Slides/gwf/slides.html#exercise-ii-singularity-in-workflows",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Exercise II: singularity in workflows",
-    "text": "Exercise II: singularity in workflows\nNow, you will change the executor for the template table. Your task is to:\n\nopen the workflow.py file\nbelow importing the Conda module (line 2), add a new line with\nfrom gwf.executors import Singularity\nNow, define a new executor. Below the line where you define conda_env = Conda(\"seqkitEnv\"), use a similar syntax and write sing = Singularity(\"seqkit_2.10.0\"), where you provide the container file as argument.\nAt the end of the table template, use the new executor sing instead of conda_env.\n\n \nDid you do it right? If yes, then you should be able to run the combine target:\ngwf run combine\nand see its status become completed after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or look at the solution file, if you prefer.\n\n\n\n\n\n\nNote\n\n\nBecause combine depends on all table_ targets, it will submit all those targets as well, which need to run first.\n\n\n\nExercise break"
-  },
-  {
-    "objectID": "resources/Slides/gwf/slides.html#exercise-iii-your-own-target",
-    "href": "resources/Slides/gwf/slides.html#exercise-iii-your-own-target",
-    "title": "Introduction to workflows on GenomeDK",
-    "section": "Exercise III: Your own target!",
-    "text": "Exercise III: Your own target!\nOk, now we want to extend the workflow and do quality control on the part_###.fq files.\n\n\n\n\n\nflowchart LR\n  A0([\"Start\"]) --&gt;|data.fq| A[\"split\"]\n  A --&gt;|part001.fq| B[\"table\"]\n  A --&gt;|part002.fq| C[\"table\"]\n  A --&gt;|part....fq| D[\"table\"]\n  A --&gt;|part010.fq| E[\"table\"]\n  B --&gt;|table001.tsv| F[\"merge\"]\n  C --&gt;|table002.tsv| F\n  D --&gt;|table....tsv| F\n  E --&gt;|table010.tsv| F\n  F --&gt;|table.tsv| G([\"End\"])\n  A --&gt;|\"part[001-010].fq\"| H[\"qc\"]\n  H --&gt;|multiqc_report.html| I([\"End\"])"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#workflow",
-    "href": "resources/Slides/gwf2024/slides.html#workflow",
-    "title": "Introduction to workflows with gwf",
-    "section": "Workflow",
-    "text": "Workflow\n\n\n\n\n\n\n\n\nWorkflow and W. Management System\n\n\nA workflow is a series of calculations and data manipulations which have to be performed in a specific sequence. A workflow management system organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#a-few-terms",
-    "href": "resources/Slides/gwf2024/slides.html#a-few-terms",
-    "title": "Introduction to workflows with gwf",
-    "section": "A few terms",
-    "text": "A few terms\n\nEach target of the workflow is submitted to a queueing manager so that it enters the queue and can be executed when possible."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#gwf",
-    "href": "resources/Slides/gwf2024/slides.html#gwf",
-    "title": "Introduction to workflows with gwf",
-    "section": "Gwf",
-    "text": "Gwf\nA lightweight and easy to adopt workflow manager. it requires knowing or learning Python. Some useful features:\n\nDefines target dependencies automatically using the input and output files of targets\nOnly submits targets when their output files are not up to date\nFire-and-forget: once you submit targets, you need not do more\nHas a few, simple and useful commands for following workflow execution and cleaning up intermediate data files\n\nCheck out the gwf webpage for updates, examples and more detailed documentation."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#download-examples-and-data",
-    "href": "resources/Slides/gwf2024/slides.html#download-examples-and-data",
-    "title": "Introduction to workflows with gwf",
-    "section": "Download examples and data",
-    "text": "Download examples and data\nExamples and reference file\ncurl -L -o gwf_workshop.zip https://github.com/hds-sandbox/GDKworkshops/archive/main.zip \\\n    && unzip gwf_workshop.zip \\\n    && mv GDKworkshops-main/Examples/gwf gwf_workshop \\\n    && rm -rf GDKworkshops-main gwf_workshop.zip\nDownload fastq files\nmkdir -p gwf_workshop/data\ncd gwf_workshop/data/\n\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz\n\ncd .."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#install-gwf",
-    "href": "resources/Slides/gwf2024/slides.html#install-gwf",
-    "title": "Introduction to workflows with gwf",
-    "section": "Install gwf",
-    "text": "Install gwf\nUsing conda to create a new environment from the yml file:\nconda env create -n gwf_workshop -f Environments/gwf_workshop.yml\nconda activate gwf_workshop\nYou can see the package list with\ncat Environments/gwf_workshop.yml\n\nThe whole environment dependencies and versions can be seen with\nconda list"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#status-and-submission",
-    "href": "resources/Slides/gwf2024/slides.html#status-and-submission",
-    "title": "Introduction to workflows with gwf",
-    "section": "Status and submission",
-    "text": "Status and submission\nWe can see what is the status of each target - if it doesn’t see the output files (shouldrun), if the output is there (completed), if it is executing a target (running), or if it failed (‘failed’).\ngwf -f WF01_report.py status\nwill show\n⨯ FastQC        shouldrun\n\nYou can submit the targets with\ngwf -f WF01_report.py run\nwhich reports you\nSubmitting target FastQC\n\n\nLook again at the status. You can follow it up in real-time using watch (it will lose the nice colour formatting):\nwatch gwf -f WF01_report.py status\nYou might see it going from submitted to running and completed:\n✓ FastQC        completed"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#targets-stdout-and-stderr",
-    "href": "resources/Slides/gwf2024/slides.html#targets-stdout-and-stderr",
-    "title": "Introduction to workflows with gwf",
-    "section": "Targets stdout and stderr",
-    "text": "Targets stdout and stderr\nWhat are the commands in a target outputting? You can see stdout and stderr in the log of a target:\ngwf -f WF01_report.py logs FastQC\nand\ngwf -f WF01_report.py logs -e FastQC"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#useful-gwf-checks-and-debug",
-    "href": "resources/Slides/gwf2024/slides.html#useful-gwf-checks-and-debug",
-    "title": "Introduction to workflows with gwf",
-    "section": "Useful gwf checks and debug",
-    "text": "Useful gwf checks and debug\nYou can see the status with specific messages about the status of each target and what causes it.\ngwf -f WF02_report_parallel.py -v debug status\nAt the end of the debug messages, you will see that one FastQC is already complete from the first example.\n⨯ FastQC_SRR2584866_1 shouldrun\n⨯ FastQC_SRR2589044_1 shouldrun\n✓ FastQC_SRR2584863_1 completed\n⨯ FastQC_SRR2584863_2 shouldrun\n⨯ FastQC_SRR2589044_2 shouldrun\n⨯ FastQC_SRR2584866_2 shouldrun"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#protected-outputs-and-cleaning",
-    "href": "resources/Slides/gwf2024/slides.html#protected-outputs-and-cleaning",
-    "title": "Introduction to workflows with gwf",
-    "section": "protected outputs and cleaning",
-    "text": "protected outputs and cleaning\nThe workflow parameter\nprotect=['results/multiqc_output/multiqc_report.html']\nprevents you from deleting the specified file when using clean. The clean command removes all intermediate outputs of a workflow (not essential for the result report and which can be replicated by rerunning the workflow).  \n\n\n\n\n\n\n\nEndpoints’ files are protected\n\n\nFiles generated by endpoints (targets which are not dependencies of others, i.e. at the end of the workflow) do not get deleted. clean --all removes any file in the workflow."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#status-with-filters",
-    "href": "resources/Slides/gwf2024/slides.html#status-with-filters",
-    "title": "Introduction to workflows with gwf",
-    "section": "status with filters",
-    "text": "status with filters\nWe know all FastQC targets are completed. Run first the workflow\ngwf -f WF03_multi_report.py run\n\n \nNow look only at the endpoints to avoid a long list of FastQC targets:\ngwf -f WF03_multi_report.py status --endpoints\ngives for example\n↻ MultiQC     running\nunless it is still submitted or already completed."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#tasks-questions",
-    "href": "resources/Slides/gwf2024/slides.html#tasks-questions",
-    "title": "Introduction to workflows with gwf",
-    "section": "Tasks-questions",
-    "text": "Tasks-questions\nConsider the workflow file WF04_trimming.py:\n \n\napply gwf status to watch the endpoints of the workflow\nWhich is the file dependency common to all trim targets?\nrun the workflow and…\n…apply watch gwf status and follow only the running targets\nLook at the stderr printout of one trimming target"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#code",
-    "href": "resources/Slides/gwf2024/slides.html#code",
-    "title": "Introduction to workflows with gwf",
-    "section": "Code",
-    "text": "Code\nfastq_pairs = np.unique([ FASTQ.split('_')[0] for FASTQ in fastq_basenames ]) #names without pair number and extension\n\nfor FASTQ_PAIR in fastq_pairs:\n    gwf.target( f\"Trimmomatic_{FASTQ_PAIR}\", #name of the target\n           cores=8,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= {'ADAPTERS': ['fasta/NexteraPE-PE.fa'],\n                    'FASTQS': [f'data/{FASTQ_PAIR}_1.fastq.gz',\n                               f'data/{FASTQ_PAIR}_2.fastq.gz'],\n                    'MULTIQC': ['results/multiqc_output/multiqc_report.html']}, \n           outputs=[f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',\n                    f'data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz',\n                    f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz',\n                    f'data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz']) &lt;&lt; \"\"\"\n    mkdir -p data_trim\n    trimmomatic PE -threads 8 \\\n                data/{FASTQ_PAIR}_1.fastq.gz data/{FASTQ_PAIR}_2.fastq.gz \\\n                data_trim/{FASTQ_PAIR}_1.trim.fastq.gz data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz \\\n                data_trim/{FASTQ_PAIR}_2.trim.fastq.gz data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz \\\n                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:{ADAPTERFILE}:2:40:15\n    \"\"\".format(FASTQ_PAIR=FASTQ_PAIR, ADAPTERFILE='fasta/NexteraPE-PE.fa')"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#answers",
-    "href": "resources/Slides/gwf2024/slides.html#answers",
-    "title": "Introduction to workflows with gwf",
-    "section": "Answers",
-    "text": "Answers\n1. apply gwf status to watch the endpoints of the workflow\n \ngwf -f WF04_trimming.py status --endpoints\ngives\n⨯ Trimmomatic_SRR2584863 shouldrun\n⨯ Trimmomatic_SRR2584866 shouldrun\n⨯ Trimmomatic_SRR2589044 shouldrun"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#tasks-questions-1",
-    "href": "resources/Slides/gwf2024/slides.html#tasks-questions-1",
-    "title": "Introduction to workflows with gwf",
-    "section": "Tasks-questions",
-    "text": "Tasks-questions\nConsider the workflow file WF05_align_merge_plot.py:\n \n\nuse status to see which are the endpoint targets, then find their target dependencies\ndo you need to protect the final merged alignment in the target BAM_merge?\ncan the targets BAM_merge and Histogram run at the same time?\nA pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to align pairs one at a time in the same target, how much more time would it take? (assuming parallel targets start running at the same time)\nRun the workflow and watch the status of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the results folder."
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#code-1",
-    "href": "resources/Slides/gwf2024/slides.html#code-1",
-    "title": "Introduction to workflows with gwf",
-    "section": "Code",
-    "text": "Code\nfor FASTQ_PAIR in fastq_pairs:\n    gwf.target( f\"BWA_mem_{FASTQ_PAIR}\", #name of the target\n           cores=8,\n           memory='16gb',\n           walltime='00:15:00', \n           inputs= {'INDEXING': [ 'fasta/ecoli_rel606.fasta.'+ extension for extension in ['amb','ann','bwt','pac','sa'] ],\n                    'FASTQS': [f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',\n                               f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz']}, \n           outputs=[f'results/alignments/{FASTQ_PAIR}.sort.bam',\n                    f'results/depths/{FASTQ_PAIR}.depth','results/depths/hellosamtools.txt' ]) &lt;&lt; \"\"\"\n    mkdir -p results/alignments\n    bwa mem -t 8 fasta/ecoli_rel606.fasta \\\n            data_trim/{FASTQ_PAIR}_1.trim.fastq.gz \\\n            data_trim/{FASTQ_PAIR}_2.trim.fastq.gz &gt; \\\n            results/alignments/{FASTQ_PAIR}.sam\n    samtools view -S -b results/alignments/{FASTQ_PAIR}.sam &gt; results/alignments/{FASTQ_PAIR}.bam\n    samtools sort -o results/alignments/{FASTQ_PAIR}.sort.bam results/alignments/{FASTQ_PAIR}.bam\n    ### print depths in text file\n    mkdir -p results/depths\n    samtools index results/alignments/{FASTQ_PAIR}.sort.bam\n    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam &gt; results/depths/{FASTQ_PAIR}.depth && touch hellosamtools.txt\n    \"\"\".format(FASTQ_PAIR=FASTQ_PAIR)\n\ngwf.target( \"BAM_merge\", #name of the target\n           cores=1,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= [f'results/alignments/{FASTQ_PAIR}.sort.bam' for FASTQ_PAIR in fastq_pairs], \n           outputs=['results/alignments/merged.bam']) &lt;&lt; \"\"\"\n    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam\n    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam\n    \"\"\"\n\ngwf.target( \"Histogram\", #name of the target\n           cores=1,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= [f'results/depths/{FASTQ_PAIR}.depth' for FASTQ_PAIR in fastq_pairs], \n           outputs=[ 'results/depths/histogram.pdf' ]) &lt;&lt; \"\"\"\n    Rscript plotscript.R\n    \"\"\""
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#answers-1",
-    "href": "resources/Slides/gwf2024/slides.html#answers-1",
-    "title": "Introduction to workflows with gwf",
-    "section": "Answers",
-    "text": "Answers\n1. use status to see which are the endpoint targets, then find their target dependencies\n \nThere are two endpoints: one for merging aligned files and one for plotting a histogram. Use\ngwf -f WF05_align_merge_plot.py status --endpoints\nto obtain\n⨯ BAM_merge     shouldrun\n⨯ Histogram     shouldrun\n\nUse the info command to see their file dependencies:\ngwf -f WF05_align_merge_plot.py info Histogram BAM_merge\nLook at the output to find out that Histogram and BAM_merge depend both on the following targets\n\"BWA_mem_SRR2589044\",\n\"BWA_mem_SRR2584866\",\n\"BWA_mem_SRR2584863\"\n\n\nNote though that they depend on different files from those targets!"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#using-a-separate-conda-environment-in-a-target",
-    "href": "resources/Slides/gwf2024/slides.html#using-a-separate-conda-environment-in-a-target",
-    "title": "Introduction to workflows with gwf",
-    "section": "Using a separate conda environment in a target",
-    "text": "Using a separate conda environment in a target\nYou might have a conda environment with a specific version of the package gwf, and then another environment with relevant packages, called for example tools_environment.\n\nTo activate that environment, add two lines into your bash code executed by the target:\n    eval \"$(conda shell.bash hook)\" \n    conda activate tools_environment"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#use-templates",
-    "href": "resources/Slides/gwf2024/slides.html#use-templates",
-    "title": "Introduction to workflows with gwf",
-    "section": "Use templates",
-    "text": "Use templates\nYou can define templates in your workflow, or in a separate file called for example templates.py. A template for the FastQC target could be\ndef fastqc(input=\"\", cores=1, memory='8gb', walltime='00:05:00'):\n    \"\"\"A template for fastqc\"\"\"\n    inputs = [f'{input}.fastq.gz']\n    outputs = [f'{input}_fastqc.zip',f'{input}_fastqc.html']\n    options = {\n        'cores': cores,\n        'memory': memory,\n        'walltime': walltime\n    }\n\n    spec = '''\n    fastqc {input}\n    '''.format(input=inputs[0])\n\n    return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec)"
-  },
-  {
-    "objectID": "resources/Slides/gwf2024/slides.html#add-new-files-after-running-a-workflow",
-    "href": "resources/Slides/gwf2024/slides.html#add-new-files-after-running-a-workflow",
-    "title": "Introduction to workflows with gwf",
-    "section": "Add new files after running a workflow",
-    "text": "Add new files after running a workflow\nIf you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.\n\n \nExample: adding new fastq.gz files in the data folder of this workshop will update the workflow adding new steps and rendering others from completed to shouldrun."
-  },
-  {
     "objectID": "resources/Slides/Introduction/slides.html#when-you-need-to-ask-for-help",
     "href": "resources/Slides/Introduction/slides.html#when-you-need-to-ask-for-help",
     "title": "Use GenomeDK",
@@ -364,11 +154,361 @@
     "text": "Interactive jobs\nUseful to run a non-repetitive task interactively\nExamples:\n\nsplitting by chromosome that one bam file you just got\nopen Rstudio and Jupyterlab\ncompress/decompress multiple files, maybe in parallel\n\nOnce you exit from the job, anything running into it will stop."
   },
   {
-    "objectID": "index.html#slides-portability",
-    "href": "index.html#slides-portability",
-    "title": "GenomeDK workshops",
-    "section": "Slides portability",
-    "text": "Slides portability\nThe slides are intended for GenomeDK, which is based on Linux Ubuntu. Very similarly, you can use these slides as a reference for other computing clusters based on Linux distributions. Please note that some tools might not be installed in your specific system, so some examples will eventually not work - you can always ask your local system administrator for a specific tool installation.\n\n\n\n\n\n\nWarning\n\n\n\nRemember always that GenomeDK has a documentation page."
+    "objectID": "resources/Slides/gwf2024/slides.html#workflow",
+    "href": "resources/Slides/gwf2024/slides.html#workflow",
+    "title": "Introduction to workflows with gwf",
+    "section": "Workflow",
+    "text": "Workflow\n\n\n\n\n\n\n\n\nWorkflow and W. Management System\n\n\nA workflow is a series of calculations and data manipulations which have to be performed in a specific sequence. A workflow management system organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#a-few-terms",
+    "href": "resources/Slides/gwf2024/slides.html#a-few-terms",
+    "title": "Introduction to workflows with gwf",
+    "section": "A few terms",
+    "text": "A few terms\n\nEach target of the workflow is submitted to a queueing manager so that it enters the queue and can be executed when possible."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#gwf",
+    "href": "resources/Slides/gwf2024/slides.html#gwf",
+    "title": "Introduction to workflows with gwf",
+    "section": "Gwf",
+    "text": "Gwf\nA lightweight and easy to adopt workflow manager. it requires knowing or learning Python. Some useful features:\n\nDefines target dependencies automatically using the input and output files of targets\nOnly submits targets when their output files are not up to date\nFire-and-forget: once you submit targets, you need not do more\nHas a few, simple and useful commands for following workflow execution and cleaning up intermediate data files\n\nCheck out the gwf webpage for updates, examples and more detailed documentation."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#download-examples-and-data",
+    "href": "resources/Slides/gwf2024/slides.html#download-examples-and-data",
+    "title": "Introduction to workflows with gwf",
+    "section": "Download examples and data",
+    "text": "Download examples and data\nExamples and reference file\ncurl -L -o gwf_workshop.zip https://github.com/hds-sandbox/GDKworkshops/archive/main.zip \\\n    && unzip gwf_workshop.zip \\\n    && mv GDKworkshops-main/Examples/gwf gwf_workshop \\\n    && rm -rf GDKworkshops-main gwf_workshop.zip\nDownload fastq files\nmkdir -p gwf_workshop/data\ncd gwf_workshop/data/\n\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz\ncurl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz\n\ncd .."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#install-gwf",
+    "href": "resources/Slides/gwf2024/slides.html#install-gwf",
+    "title": "Introduction to workflows with gwf",
+    "section": "Install gwf",
+    "text": "Install gwf\nUsing conda to create a new environment from the yml file:\nconda env create -n gwf_workshop -f Environments/gwf_workshop.yml\nconda activate gwf_workshop\nYou can see the package list with\ncat Environments/gwf_workshop.yml\n\nThe whole environment dependencies and versions can be seen with\nconda list"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#status-and-submission",
+    "href": "resources/Slides/gwf2024/slides.html#status-and-submission",
+    "title": "Introduction to workflows with gwf",
+    "section": "Status and submission",
+    "text": "Status and submission\nWe can see what is the status of each target - if it doesn’t see the output files (shouldrun), if the output is there (completed), if it is executing a target (running), or if it failed (‘failed’).\ngwf -f WF01_report.py status\nwill show\n⨯ FastQC        shouldrun\n\nYou can submit the targets with\ngwf -f WF01_report.py run\nwhich reports you\nSubmitting target FastQC\n\n\nLook again at the status. You can follow it up in real-time using watch (it will lose the nice colour formatting):\nwatch gwf -f WF01_report.py status\nYou might see it going from submitted to running and completed:\n✓ FastQC        completed"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#targets-stdout-and-stderr",
+    "href": "resources/Slides/gwf2024/slides.html#targets-stdout-and-stderr",
+    "title": "Introduction to workflows with gwf",
+    "section": "Targets stdout and stderr",
+    "text": "Targets stdout and stderr\nWhat are the commands in a target outputting? You can see stdout and stderr in the log of a target:\ngwf -f WF01_report.py logs FastQC\nand\ngwf -f WF01_report.py logs -e FastQC"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#useful-gwf-checks-and-debug",
+    "href": "resources/Slides/gwf2024/slides.html#useful-gwf-checks-and-debug",
+    "title": "Introduction to workflows with gwf",
+    "section": "Useful gwf checks and debug",
+    "text": "Useful gwf checks and debug\nYou can see the status with specific messages about the status of each target and what causes it.\ngwf -f WF02_report_parallel.py -v debug status\nAt the end of the debug messages, you will see that one FastQC is already complete from the first example.\n⨯ FastQC_SRR2584866_1 shouldrun\n⨯ FastQC_SRR2589044_1 shouldrun\n✓ FastQC_SRR2584863_1 completed\n⨯ FastQC_SRR2584863_2 shouldrun\n⨯ FastQC_SRR2589044_2 shouldrun\n⨯ FastQC_SRR2584866_2 shouldrun"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#protected-outputs-and-cleaning",
+    "href": "resources/Slides/gwf2024/slides.html#protected-outputs-and-cleaning",
+    "title": "Introduction to workflows with gwf",
+    "section": "protected outputs and cleaning",
+    "text": "protected outputs and cleaning\nThe workflow parameter\nprotect=['results/multiqc_output/multiqc_report.html']\nprevents you from deleting the specified file when using clean. The clean command removes all intermediate outputs of a workflow (not essential for the result report and which can be replicated by rerunning the workflow).  \n\n\n\n\n\n\n\nEndpoints’ files are protected\n\n\nFiles generated by endpoints (targets which are not dependencies of others, i.e. at the end of the workflow) do not get deleted. clean --all removes any file in the workflow."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#status-with-filters",
+    "href": "resources/Slides/gwf2024/slides.html#status-with-filters",
+    "title": "Introduction to workflows with gwf",
+    "section": "status with filters",
+    "text": "status with filters\nWe know all FastQC targets are completed. Run first the workflow\ngwf -f WF03_multi_report.py run\n\n \nNow look only at the endpoints to avoid a long list of FastQC targets:\ngwf -f WF03_multi_report.py status --endpoints\ngives for example\n↻ MultiQC     running\nunless it is still submitted or already completed."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#tasks-questions",
+    "href": "resources/Slides/gwf2024/slides.html#tasks-questions",
+    "title": "Introduction to workflows with gwf",
+    "section": "Tasks-questions",
+    "text": "Tasks-questions\nConsider the workflow file WF04_trimming.py:\n \n\napply gwf status to watch the endpoints of the workflow\nWhich is the file dependency common to all trim targets?\nrun the workflow and…\n…apply watch gwf status and follow only the running targets\nLook at the stderr printout of one trimming target"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#code",
+    "href": "resources/Slides/gwf2024/slides.html#code",
+    "title": "Introduction to workflows with gwf",
+    "section": "Code",
+    "text": "Code\nfastq_pairs = np.unique([ FASTQ.split('_')[0] for FASTQ in fastq_basenames ]) #names without pair number and extension\n\nfor FASTQ_PAIR in fastq_pairs:\n    gwf.target( f\"Trimmomatic_{FASTQ_PAIR}\", #name of the target\n           cores=8,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= {'ADAPTERS': ['fasta/NexteraPE-PE.fa'],\n                    'FASTQS': [f'data/{FASTQ_PAIR}_1.fastq.gz',\n                               f'data/{FASTQ_PAIR}_2.fastq.gz'],\n                    'MULTIQC': ['results/multiqc_output/multiqc_report.html']}, \n           outputs=[f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',\n                    f'data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz',\n                    f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz',\n                    f'data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz']) &lt;&lt; \"\"\"\n    mkdir -p data_trim\n    trimmomatic PE -threads 8 \\\n                data/{FASTQ_PAIR}_1.fastq.gz data/{FASTQ_PAIR}_2.fastq.gz \\\n                data_trim/{FASTQ_PAIR}_1.trim.fastq.gz data_trim/{FASTQ_PAIR}_1un.trim.fastq.gz \\\n                data_trim/{FASTQ_PAIR}_2.trim.fastq.gz data_trim/{FASTQ_PAIR}_2un.trim.fastq.gz \\\n                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:{ADAPTERFILE}:2:40:15\n    \"\"\".format(FASTQ_PAIR=FASTQ_PAIR, ADAPTERFILE='fasta/NexteraPE-PE.fa')"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#answers",
+    "href": "resources/Slides/gwf2024/slides.html#answers",
+    "title": "Introduction to workflows with gwf",
+    "section": "Answers",
+    "text": "Answers\n1. apply gwf status to watch the endpoints of the workflow\n \ngwf -f WF04_trimming.py status --endpoints\ngives\n⨯ Trimmomatic_SRR2584863 shouldrun\n⨯ Trimmomatic_SRR2584866 shouldrun\n⨯ Trimmomatic_SRR2589044 shouldrun"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#tasks-questions-1",
+    "href": "resources/Slides/gwf2024/slides.html#tasks-questions-1",
+    "title": "Introduction to workflows with gwf",
+    "section": "Tasks-questions",
+    "text": "Tasks-questions\nConsider the workflow file WF05_align_merge_plot.py:\n \n\nuse status to see which are the endpoint targets, then find their target dependencies\ndo you need to protect the final merged alignment in the target BAM_merge?\ncan the targets BAM_merge and Histogram run at the same time?\nA pair of fastq files is twice as large than the other two. If instead of aligning data in parallel targets you were to align pairs one at a time in the same target, how much more time would it take? (assuming parallel targets start running at the same time)\nRun the workflow and watch the status of the targets. You should see the running targets following the order of the dependencies. You should also find the pdf plot in the results folder."
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#code-1",
+    "href": "resources/Slides/gwf2024/slides.html#code-1",
+    "title": "Introduction to workflows with gwf",
+    "section": "Code",
+    "text": "Code\nfor FASTQ_PAIR in fastq_pairs:\n    gwf.target( f\"BWA_mem_{FASTQ_PAIR}\", #name of the target\n           cores=8,\n           memory='16gb',\n           walltime='00:15:00', \n           inputs= {'INDEXING': [ 'fasta/ecoli_rel606.fasta.'+ extension for extension in ['amb','ann','bwt','pac','sa'] ],\n                    'FASTQS': [f'data_trim/{FASTQ_PAIR}_1.trim.fastq.gz',\n                               f'data_trim/{FASTQ_PAIR}_2.trim.fastq.gz']}, \n           outputs=[f'results/alignments/{FASTQ_PAIR}.sort.bam',\n                    f'results/depths/{FASTQ_PAIR}.depth','results/depths/hellosamtools.txt' ]) &lt;&lt; \"\"\"\n    mkdir -p results/alignments\n    bwa mem -t 8 fasta/ecoli_rel606.fasta \\\n            data_trim/{FASTQ_PAIR}_1.trim.fastq.gz \\\n            data_trim/{FASTQ_PAIR}_2.trim.fastq.gz &gt; \\\n            results/alignments/{FASTQ_PAIR}.sam\n    samtools view -S -b results/alignments/{FASTQ_PAIR}.sam &gt; results/alignments/{FASTQ_PAIR}.bam\n    samtools sort -o results/alignments/{FASTQ_PAIR}.sort.bam results/alignments/{FASTQ_PAIR}.bam\n    ### print depths in text file\n    mkdir -p results/depths\n    samtools index results/alignments/{FASTQ_PAIR}.sort.bam\n    samtools depth results/alignments/{FASTQ_PAIR}.sort.bam &gt; results/depths/{FASTQ_PAIR}.depth && touch hellosamtools.txt\n    \"\"\".format(FASTQ_PAIR=FASTQ_PAIR)\n\ngwf.target( \"BAM_merge\", #name of the target\n           cores=1,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= [f'results/alignments/{FASTQ_PAIR}.sort.bam' for FASTQ_PAIR in fastq_pairs], \n           outputs=['results/alignments/merged.bam']) &lt;&lt; \"\"\"\n    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam\n    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam\n    \"\"\"\n\ngwf.target( \"Histogram\", #name of the target\n           cores=1,\n           memory='8gb',\n           walltime='00:10:00', \n           inputs= [f'results/depths/{FASTQ_PAIR}.depth' for FASTQ_PAIR in fastq_pairs], \n           outputs=[ 'results/depths/histogram.pdf' ]) &lt;&lt; \"\"\"\n    Rscript plotscript.R\n    \"\"\""
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#answers-1",
+    "href": "resources/Slides/gwf2024/slides.html#answers-1",
+    "title": "Introduction to workflows with gwf",
+    "section": "Answers",
+    "text": "Answers\n1. use status to see which are the endpoint targets, then find their target dependencies\n \nThere are two endpoints: one for merging aligned files and one for plotting a histogram. Use\ngwf -f WF05_align_merge_plot.py status --endpoints\nto obtain\n⨯ BAM_merge     shouldrun\n⨯ Histogram     shouldrun\n\nUse the info command to see their file dependencies:\ngwf -f WF05_align_merge_plot.py info Histogram BAM_merge\nLook at the output to find out that Histogram and BAM_merge depend both on the following targets\n\"BWA_mem_SRR2589044\",\n\"BWA_mem_SRR2584866\",\n\"BWA_mem_SRR2584863\"\n\n\nNote though that they depend on different files from those targets!"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#using-a-separate-conda-environment-in-a-target",
+    "href": "resources/Slides/gwf2024/slides.html#using-a-separate-conda-environment-in-a-target",
+    "title": "Introduction to workflows with gwf",
+    "section": "Using a separate conda environment in a target",
+    "text": "Using a separate conda environment in a target\nYou might have a conda environment with a specific version of the package gwf, and then another environment with relevant packages, called for example tools_environment.\n\nTo activate that environment, add two lines into your bash code executed by the target:\n    eval \"$(conda shell.bash hook)\" \n    conda activate tools_environment"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#use-templates",
+    "href": "resources/Slides/gwf2024/slides.html#use-templates",
+    "title": "Introduction to workflows with gwf",
+    "section": "Use templates",
+    "text": "Use templates\nYou can define templates in your workflow, or in a separate file called for example templates.py. A template for the FastQC target could be\ndef fastqc(input=\"\", cores=1, memory='8gb', walltime='00:05:00'):\n    \"\"\"A template for fastqc\"\"\"\n    inputs = [f'{input}.fastq.gz']\n    outputs = [f'{input}_fastqc.zip',f'{input}_fastqc.html']\n    options = {\n        'cores': cores,\n        'memory': memory,\n        'walltime': walltime\n    }\n\n    spec = '''\n    fastqc {input}\n    '''.format(input=inputs[0])\n\n    return AnonymousTarget(inputs=inputs, outputs=outputs, options=options, spec=spec)"
+  },
+  {
+    "objectID": "resources/Slides/gwf2024/slides.html#add-new-files-after-running-a-workflow",
+    "href": "resources/Slides/gwf2024/slides.html#add-new-files-after-running-a-workflow",
+    "title": "Introduction to workflows with gwf",
+    "section": "Add new files after running a workflow",
+    "text": "Add new files after running a workflow\nIf you add new data files and your workflow reads which files there are automatically, creating corresponding targets, then adding new files will update your workflow with new targets to be executed.\n\n \nExample: adding new fastq.gz files in the data folder of this workshop will update the workflow adding new steps and rendering others from completed to shouldrun."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#when-you-need-to-ask-for-help",
+    "href": "resources/Slides/Advanced/slides.html#when-you-need-to-ask-for-help",
+    "title": "Advanced GenomeDK",
+    "section": "When you need to ask for help",
+    "text": "When you need to ask for help\n\nPractical help:\nSamuele (BiRC, MBG) - samuele@birc.au.dk\nDrop in hours:\n\nBioinformatics Cafe: https://abc.au.dk, abcafe@au.dk\nSamuele (BiRC, MBG) - samuele@birc.au.dk - we just set up a meeting/zoom\n\nGeneral mail for assistance\nsupport@genome.au.dk"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#program",
+    "href": "resources/Slides/Advanced/slides.html#program",
+    "title": "Advanced GenomeDK",
+    "section": "Program",
+    "text": "Program\n\n10:00-11:00:\n\nWorkshop Introduction\nFrequently used on UNIX\nrsync file transfer\n\n11:00-12:00:\n\nContainers (Docker, apptainer)\n\n12:45-13:30:\n\nBatch jobs on the cluster\n\n13:30-14.30:\n\nFeedback\nQuestions and discussions\nLook into one of the Extras you are interested in"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#extras",
+    "href": "resources/Slides/Advanced/slides.html#extras",
+    "title": "Advanced GenomeDK",
+    "section": "Extras",
+    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nSetting up ssh keys on github\nWeb applications on GenomeDK\nBatch scripts\nManaging multiple terminals on tmux\nSet up jupyter notebooks on VScode"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
+    "href": "resources/Slides/Advanced/slides.html#get-the-slides",
+    "title": "Advanced GenomeDK",
+    "section": "Get the slides",
+    "text": "Get the slides\nWebpage: https://hds-sandbox.github.io/GDKworkshops/\n\nSlides will always be up to date in this webpage"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#navigate-the-slides",
+    "href": "resources/Slides/Advanced/slides.html#navigate-the-slides",
+    "title": "Advanced GenomeDK",
+    "section": "Navigate the slides",
+    "text": "Navigate the slides"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#configuration-files",
+    "href": "resources/Slides/Advanced/slides.html#configuration-files",
+    "title": "Advanced GenomeDK",
+    "section": "Configuration files",
+    "text": "Configuration files\nYour ~/.bashrc file contains settings for your user. Those are bash commands which run at every login.\n \nCommon practice for many softwares is to have a configuration file in your home, often starting with ., which makes it a hidden file.\n \nExamples:\n\n.emacs for emacs\n.gitconfig for github\n.condarc for conda\n.nanorc for nano editor\n\nPlus other things like your command history on the terminal (~/.bash_history) and your settings (~/.bashrc)."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-apptainer-settings",
+    "href": "resources/Slides/Advanced/slides.html#exercise-i-apptainer-settings",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise I: apptainer settings",
+    "text": "Exercise I: apptainer settings\nLet’s make a useful setting to run at each login. We will need a temporary folder for apptainer containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder ~/.apptainer) with cache material.\n \nEdit the file ~/.bashrc (use nano ~/.bashrc or any editor you want). Add those lines:\nmkdir -p -m 700 /tmp/$USER\nexport APPTAINER_TMPDIR=/tmp/$USER\nexport APPTAINER_CACHEDIR=/tmp/$USER\n \nThe -m 700 option for mkdir command ensures also you are the only one which can access the temporary files. Useful is you use a container with password or sensitive info, so no one can access it (/tmp/ is a public folder)!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
+    "href": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise II - aliases",
+    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases which you can write in their place? Copy the aliases from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
+    "href": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise III - functions",
+    "text": "Exercise III - functions\nYou can also create functions including multiple commands: for example making a directory and then cd into it, or opening a terminal in an existing job (more about this later on). Add those to your ~/.bashrc file as well.\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Wrap all your useful repetitive commands into the ~/.bashrc file!\n\n\n\n## make and cd\n## make a folder and go into it\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\n\n## interactive job using the same resources of\n## an existing job already running\n## useful to debug and check resource usage\n## example of usage: sshell 12345678\n## job id can be found with: squeue --me\nsshell() {\n  srun --jobid $1 --overlap --pty bash\n}"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
+    "href": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
+    "title": "Advanced GenomeDK",
+    "section": "transfer and sync with rsync",
+    "text": "transfer and sync with rsync\nrsync is a very versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\nrsync cannot download from web URLs\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise",
+    "href": "resources/Slides/Advanced/slides.html#exercise",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise",
+    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\n \nCreate 10 files with extensions fastq and log in the data folder\ntouch data/file{1..10}.fastq data/file{1..10}.log"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise---continued-only-for-linux-and-mac-users",
+    "href": "resources/Slides/Advanced/slides.html#exercise---continued-only-for-linux-and-mac-users",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise - continued (only for Linux and Mac users)",
+    "text": "Exercise - continued (only for Linux and Mac users)\nExercise continues for all users in the next slide\n \nTransfer the whole folder data to your computer from GenomeDK. Open a terminal on your laptop and use the correct command from the previous slide!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
+    "href": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
+    "title": "Advanced GenomeDK",
+    "section": "Container vs virtual env vs VM",
+    "text": "Container vs virtual env vs VM\nA virtual environment isolates dependencies for a specific programming language within the same operating system. It does not include the operating system or system-level dependencies, so it depends on the hosting system."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#scope-of-containers",
+    "href": "resources/Slides/Advanced/slides.html#scope-of-containers",
+    "title": "Advanced GenomeDK",
+    "section": "Scope of containers",
+    "text": "Scope of containers\n\nContainers are usually thought as packing a specific application which can run anywhere (or, which is portable).\nE.g. annoying bioinformatics software requiring specific libraries or long installations.\nMany containers are done with Docker, but this is not installed on GenomeDK\nGenomeDK has Apptainer, which can also run programs installed in Docker containers.\nVery practical to pull and use containers in workflows."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#where-to-find-containers",
+    "href": "resources/Slides/Advanced/slides.html#where-to-find-containers",
+    "title": "Advanced GenomeDK",
+    "section": "Where to find containers?",
+    "text": "Where to find containers?\nTypical repositories with pre-built containers are:\n\nBiocontainers: community-driven initiative to containerize bioinf softwares.\n\nx10K tools x100K+ containers\nbioconda package index lists all software versions\nthe Registry page has a searchable interface to find what you need\n\nDockerHub registry: Public hub for Docker images, often including official containers from software developers\nQuay: Same philosophy of DockerHub.\n\nOnce you find a container on the websites, simply use (eventually adapt) the provided code to pull it locally."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
+    "href": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise I: a simple bioinformatics container",
+    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment.\n \nMake a folder called containers101 in the advancedGDK directory.\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open it to see a detailed description - if you have no good ideas look for the minimap2 aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-docker-alternative",
+    "href": "resources/Slides/Advanced/slides.html#exercise-ii-docker-alternative",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise II: docker alternative",
+    "text": "Exercise II: docker alternative\nYou can also pull and run a container from DockerHub. For example, for the biocontainers/bwa-mem2 container you will need to adapt the command a bit, because it is not a singularity container.\napptainer pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1\n \n\n\n\n\n\n\nNote\n\n\nThe correct path docker://biocontainers/samtools:v1.9-4-deb_cv1 can be found on the DockerHub page of the container. Here is the https://hub.docker.com/r/biocontainers/samtools."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#other-options-for-apptainer",
+    "href": "resources/Slides/Advanced/slides.html#other-options-for-apptainer",
+    "title": "Advanced GenomeDK",
+    "section": "Other options for apptainer",
+    "text": "Other options for apptainer\nA few other options which can be used in apptainer. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container.\n--bind: Binds specific directories from the host to the container. Useful to share data between host and container.\n--env: Sets environment variables inside the container. This is useful for configuring the container’s behavior or passing in secrets."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-batch-script",
+    "href": "resources/Slides/Advanced/slides.html#exercise-batch-script",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise: batch script",
+    "text": "Exercise: batch script\nPrepare the data needed for the exercise. Create a subfolder called batchGDK in the advancedGDK folder:\nmkdir -p ~/advancedGDK/batchGDK\ncd ~/advancedGDK/batchGDK\n \nDownload the data needed for the exercise:\nwget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \\\n     -O ./data.fastq.gz\n\nwget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R2_001.fastq.gz \\\n     -O ./data2.fastq.gz\n\nwget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L002_R1_001.fastq.gz \\\n     -O ./data3.fastq.gz\n\nwget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L002_R2_001.fastq.gz \\\n     -O ./data4.fastq.gz\n\ngunzip data*.fastq.gz\n\nwget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta\nCreate a conda or pixi environment with bwa-mem2 and samtools installed. For example\n \n\nCondaPixi\n\n\nconda create -c conda-forge -c bioconda -n batchGDK bwa-mem2 samtools\n\n\npixi init -c conda-forge -c bioconda\npixi add bwa-mem2 samtools\n\n\n\nCreate a text file called align.sh. This contains a batch script with resources desired and the commands to run on those. The script text depends on you having used conda or pixi to create the environment.\n\nCondaPixi\n\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=4\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\n#initialize conda\nsource ~/miniconda3/etc/profile.d/conda.sh\n#activate Environment\nconda activate batchGDK\n\n#index reference\nbwa-mem2 index ref.fasta\n#align data\nbwa-mem2 mem -t 4 ref.fasta \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 3 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0\n\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=4\n#SBATCH --mem 16g\n#SBATCH --time 04:00:00\n\n#index reference\npixi run bwa-mem2 index ref.fasta\n#align data\npixi run bwa-mem2 mem -t 4 ref.fasta \\\n             data.fastq \\\n            | samtools sort \\\n            -@ 3 \\\n            -n \\\n            -O BAM \\\n        &gt; data.bam\n\nexit 0\n\n\n\nSend the script to the queueing system using the terminal:\nsbatch align.sh\n \nIt will provide a job id number, e.g. 33735298, on the terminal. You will need it to check the job status. For example\nSubmitted batch job 33735298\nInterrogate SLURM about the specific job with the provided number. For example\njobinfo 33735298\n&gt;Name                : align.sh\n&gt;User                : samuele\n&gt;Account             : my_project\n&gt;Partition           : short\n&gt;Nodes               : s21n43\n&gt;Cores               : 4\n&gt;GPUs                : 0\n&gt;State               : RUNNING\n&gt;...\nor about all the queued jobs\nsqueue --me\n&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)\n&gt;33735928     short align.sh  samuele  R       1:12      1 s21n43\n \n\n\n\n\n\n\nNote\n\n\nIf you change your mind and want to cancel a job:\nscancel 33735928"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-parallel-batch-with-slurm-arrays",
+    "href": "resources/Slides/Advanced/slides.html#exercise-parallel-batch-with-slurm-arrays",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise: parallel batch with SLURM arrays",
+    "text": "Exercise: parallel batch with SLURM arrays\nNow run the same type of operation on multiple files in parallel using a job array.\nCreate folders for results and logs. Then generate a list with the FASTQ files:\nmkdir -p results logs\n\n# create a list with the data files\nls *.fastq &gt; fastq_list.txt\n \nCreate a script called align_array.sh.\n\nCondaPixi\n\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=2\n#SBATCH --mem=8g\n#SBATCH --time=01:00:00\n#SBATCH --array=1-4%2\n#SBATCH --job-name=alignArray\n#SBATCH --output=logs/align_%A_%a.out\n#SBATCH --error=logs/align_%A_%a.err\n\nset -euo pipefail\nsource ~/miniconda3/etc/profile.d/conda.sh\nconda activate batchGDK\n\nmapfile -t fastqs &lt; fastq_list.txt\nfq=\"${fastqs[$((SLURM_ARRAY_TASK_ID-1))]}\"\nsample=$(basename \"$fq\" .fastq)\n\nbwa-mem2 mem -t \"$SLURM_CPUS_PER_TASK\" ref.fasta.gz \"$fq\" \\\n  | samtools sort -@ 1 -O BAM \\\n  &gt; \"results/${sample}.bam\"\n\nexit 0\n\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=2\n#SBATCH --mem=8g\n#SBATCH --time=01:00:00\n#SBATCH --array=1-4%2\n#SBATCH --job-name=alignArray\n#SBATCH --output=logs/align_%A_%a.out\n#SBATCH --error=logs/align_%A_%a.err\n\nset -euo pipefail\n\nmapfile -t fastqs &lt; fastq_list.txt\nfq=\"${fastqs[$((SLURM_ARRAY_TASK_ID-1))]}\"\nsample=$(basename \"$fq\" .fastq)\n\npixi run bwa-mem2 mem -t \"$SLURM_CPUS_PER_TASK\" ref.fasta \"$fq\" \\\n  | pixi run samtools sort -@ 1 -O BAM \\\n  &gt; \"results/${sample}.bam\"\n\nexit 0"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-chained-jobs-with-dependencies",
+    "href": "resources/Slides/Advanced/slides.html#exercise-chained-jobs-with-dependencies",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise: chained jobs with dependencies",
+    "text": "Exercise: chained jobs with dependencies\nNow run a 3-step pipeline where indexing starts only if alignment succeeds.\nCreate a second script called index_array.sh:\n\nCondaPixi\n\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=1\n#SBATCH --mem=4g\n#SBATCH --time=00:30:00\n#SBATCH --array=1-4\n#SBATCH --job-name=indexArray\n#SBATCH --output=logs/index_%A_%a.out\n#SBATCH --error=logs/index_%A_%a.err\n\nset -euo pipefail\nsource ~/miniconda3/etc/profile.d/conda.sh\nconda activate batchGDK\n\nmapfile -t bams=(results/*.bam)\nbam=\"${bams[$((SLURM_ARRAY_TASK_ID-1))]}\"\n\nsamtools index \"$bam\"\n\nexit 0\n\n\n#!/bin/bash\n#SBATCH --account PROJECT_NAME\n#SBATCH --cpus-per-task=1\n#SBATCH --mem=4g\n#SBATCH --time=00:30:00\n#SBATCH --array=1-4\n#SBATCH --job-name=indexArray\n#SBATCH --output=logs/index_%A_%a.out\n#SBATCH --error=logs/index_%A_%a.err\n\nset -euo pipefail\n\nbams=(results/*.bam)\nbam=\"${bams[$((SLURM_ARRAY_TASK_ID-1))]}\"\n\npixi run samtools index \"$bam\"\n\nexit 0"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#calibrating-resources",
+    "href": "resources/Slides/Advanced/slides.html#calibrating-resources",
+    "title": "Advanced GenomeDK",
+    "section": "Calibrating resources",
+    "text": "Calibrating resources\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the job id\nlog into the job from the front-end terminal using an interactive session and your job id:\nsshell 33735928\n\n\n\n\n\n\n\nWarning\n\n\nThe command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#create-ssh-key",
+    "href": "resources/Slides/Advanced/slides.html#create-ssh-key",
+    "title": "Advanced GenomeDK",
+    "section": "Create ssh key",
+    "text": "Create ssh key\nOn the cluster run the following command to create a new ssh key. Use your github email address in place of GithubAccountMail@example.com.\nssh-keygen -t ed25519 -C \"GithubAccountMail@example.com\"\n \nWhen asked, you can choose to name the file. Call it ~/.ssh/id_ed25519_github. When asked for password, you can leave it empty (press enter).\n \n\n\n\n\n\n\nWarning\n\n\nNote that the key must be saved in the folder ~/.ssh/. This is the usual place where ssh looks for keys on Linux."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#add-the-ssh-key-to-your-ssh-agent",
+    "href": "resources/Slides/Advanced/slides.html#add-the-ssh-key-to-your-ssh-agent",
+    "title": "Advanced GenomeDK",
+    "section": "Add the ssh key to your ssh agent",
+    "text": "Add the ssh key to your ssh agent\nAdd the key to the ssh agent, which manages your keys. Write the following on your ~/.bashrc file using a text editor:\n# Start ssh-agent for github if not already running\neval \"$(ssh-agent -s)\" &gt; /dev/null\nssh-add -l &&gt;/dev/null || ssh-add ~/.ssh/id_ed25519_github\n \nNow print your public key on the terminal. Copy the command’s output because you need to paste it on the github website:\ncat ~/.ssh/id_ed25519_github.pub\n\n\n\n\n\n\nNote\n\n\nThe key looks like this ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com. You must copy all of it including ssh-ed25519 at the beginning and your email address at the end."
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
+    "href": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
+    "title": "Advanced GenomeDK",
+    "section": "A more advanced bash function for github",
+    "text": "A more advanced bash function for github\nHere a more advanced bash function you can paste into your ~/.bashrc file. Why not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: local download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
+    "href": "resources/Slides/Advanced/slides.html#exercise-1",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise",
+    "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#launching-separate-downloads-at-the-same-time",
+    "href": "resources/Slides/Advanced/slides.html#launching-separate-downloads-at-the-same-time",
+    "title": "Advanced GenomeDK",
+    "section": "Launching separate downloads at the same time",
+    "text": "Launching separate downloads at the same time\nStart a new session without attaching to it (d option), and call it downloads:\ntmux new-session -d -s downloads\nverify the session is there with tmux ls.\n\n\n\n\n\n\nWarning\n\n\nIf you want a new session attaching to it, you need to detach from the current session with Ctrl + b + d.\n\n\n\nCreate a text file with few example files for this workshop to be downloaded.\ncurl -s https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync | jq -r '.[] | .download_url' &gt; downloads.txt"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#which-port-to-use",
+    "href": "resources/Slides/Advanced/slides.html#which-port-to-use",
+    "title": "Advanced GenomeDK",
+    "section": "Which port to use",
+    "text": "Which port to use\n\nEach server process on a machine needs a unique port (p2 on previous figure) to avoid conflicts.\nPorts are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with\necho $UID\nYou will see all this in the next exercise\n\n\n\n\n\n\n\n\nbetter safe than sorry\n\n\nLaunch a web application which has tokens (a random code in the URL for the browser) or a password you can setup. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "href": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
+    "title": "Advanced GenomeDK",
+    "section": "Exercise: jupyterlab web server",
+    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nNow you are ready to move on!"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#configure-access-to-cluster-from-vscode",
+    "href": "resources/Slides/Advanced/slides.html#configure-access-to-cluster-from-vscode",
+    "title": "Advanced GenomeDK",
+    "section": "Configure access to cluster from VSCode",
+    "text": "Configure access to cluster from VSCode\nDownload VSCode and open it. Go to the plugin tab (red circle)"
+  },
+  {
+    "objectID": "resources/Slides/Advanced/slides.html#tunneling-to-a-computing-node",
+    "href": "resources/Slides/Advanced/slides.html#tunneling-to-a-computing-node",
+    "title": "Advanced GenomeDK",
+    "section": "Tunneling to a computing node",
+    "text": "Tunneling to a computing node\nNow close VScode and reopen it. Open the Remote Explorer (from the toolbar on the left). There you should now see login.genome.au.dk as configured remote. Click on the little option symbol close to the SSH menu. The option symbol is given by the little clogwheel icon (red circle)."
+  },
+  {
+    "objectID": "people.html",
+    "href": "people.html",
+    "title": "People",
+    "section": "",
+    "text": "Samuele Soraggi\n\n\nData Scientist, Aarhus University\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "LICENSE.html",
@@ -376,6 +516,90 @@
     "title": "GenomeDK workshops",
     "section": "",
     "text": "Attribution-ShareAlike 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More_considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nAdditional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material,\nincluding for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "index.html#slides-portability",
+    "href": "index.html#slides-portability",
+    "title": "GenomeDK workshops",
+    "section": "Slides portability",
+    "text": "Slides portability\nThe slides are intended for GenomeDK, which is based on Linux Ubuntu. Very similarly, you can use these slides as a reference for other computing clusters based on Linux distributions. Please note that some tools might not be installed in your specific system, so some examples will eventually not work - you can always ask your local system administrator for a specific tool installation.\n\n\n\n\n\n\nWarning\n\n\n\nRemember always that GenomeDK has a documentation page."
+  },
+  {
+    "objectID": "cards/SamueleSoraggi.html",
+    "href": "cards/SamueleSoraggi.html",
+    "title": "Samuele Soraggi",
+    "section": "",
+    "text": "Samuele is a Sandbox data scientist based at the university of Aarhus. During his academic activity he has gained experience in population genomics, transcriptomics, single cell multiomics and spans his knowledge across various themes of advanced computational statistics."
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#when-you-need-to-ask-for-help",
+    "href": "resources/Slides/gwf/slides.html#when-you-need-to-ask-for-help",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "When you need to ask for help",
+    "text": "When you need to ask for help\n\nPractical help:\nSamuele (BiRC, MBG) - samuele@birc.au.dk\nDrop in hours:\n\nBioinformatics Cafe: https://abc.au.dk, abcafe@au.dk\nSamuele (BiRC, MBG) - samuele@birc.au.dk\n\nGeneral mail for assistance\nsupport@genome.au.dk"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#what-you-need",
+    "href": "resources/Slides/gwf/slides.html#what-you-need",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "What you need",
+    "text": "What you need\n\nThe basics to use the cluster\nBeing able to edit documents on the cluster\nHave conda or pixi installed\nIf possible have a project on the cluster"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#program",
+    "href": "resources/Slides/gwf/slides.html#program",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Program",
+    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nBackground on workflows/pipelines\nWorkflow file structure and templates\nA small example\n\n11:00-12:00:\n\nWorkflow for the exercise\nPrepare for the workflow: data, software, workflow file\nInvestigate specific parts of the workflow\nExecute one or more targets\nVerify what happens with each target\n\n12:45-13:45:\n\ncalibrate your resources\nadd a template and targets to a pipeline\n\n13:45-14:00:\n\nQuestions\nFeedback"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#workflow-terminology",
+    "href": "resources/Slides/gwf/slides.html#workflow-terminology",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Workflow terminology",
+    "text": "Workflow terminology\n\n\n\n\n\nflowchart LR\n  A0([\"Start\"]) ---&gt;|data.txt| A[\"Rename\"]\n  A ---&gt;|samples.txt| B([\"End\"])\n\n\n\n\n\n\n \n\n\n\n\n\n\n\nWorkflow and W. Management System\n\n\nA workflow is a series of calculations and data manipulations which have to be performed in a specific sequence.\n \nA workflow management system organizes the workflow steps through defined dependencies, can assign different computing resources to each step, keeps a log of the workflow, interacts with a cluster’s queueing system."
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#workflow-management-systems",
+    "href": "resources/Slides/gwf/slides.html#workflow-management-systems",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Workflow Management Systems",
+    "text": "Workflow Management Systems\nThere are many workflow management systems available, e.g. Snakemake, Nextflow, Cromwell, Gwf, Airflow, Luigi, …\nMost known in bioinformatics and in a production environment are Snakemake and Nextflow.\n \n\nNextflow and Snakemake have a specific workflow language\n\neasier to learn for non-programmers\nmore difficult to customize for programmers\nNextflow is used in many production environments (e.g. nf-core pipelines) and in industry  \n\nGwf is written in python\n\neasier to customize\nrequires some python knowledge but it is easy to pick up what is necessary"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#pros-and-cons",
+    "href": "resources/Slides/gwf/slides.html#pros-and-cons",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Pros and cons",
+    "text": "Pros and cons\n\n\nNextflow\nPros\n\nPopular, mature ecosystem (nf-core)\nMany production-ready pipelines\nExcellent container (Docker/Singularity) and cloud support (AWS, GCP)\nStrong reproducibility and portability\nGood for complex dataflow\n\nCons\n\nUses a Groovy-based language\nStrep learning curve\nLess natural for custom code\nHigh runtime footprint\n\n\nSnakemake\nPros\n\nPythonic language — easy to learn\nTight integration with conda, containers\nWorkflows are concise\nStrong community and good documentation\nGood support\n\nCons\n\nVery large or highly dynamic workflows can become complex\nNot cloud-native as Nextflow is\n\n\nGwf\nPros\n\nPure Python workflows — full flexibility\nLightweight and pedagogical; easy to teach and tweak\nFine-grained control of resources\nGood local/HPC integration\nSimple template reuse\nStrong local support at GenomeDK / AU\n\nCons\n\nSmall community\nLess documentation\nmainly HPC-oriented\nNo ecosystem tools"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
+    "href": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Gwf workflow manager",
+    "text": "Gwf workflow manager\nA lightweight and easy to adopt workflow manager. It requires only some basic Python - you can learn it along the way starting from examples. Some features:\n \n\nDeveloped at AU (Dan at GenomeDK) and used also at MOMA, AUH, …\n\nEasy to find support\n\nIn python, no need for a workflow language\n\nYou can use all python functions to build your workflow!\n\nEasy to structure a workflow and check resource usage\n\nReusable templates\nVery pedagogical\n\nConda, Pixi, Container usage out-of-the-box"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-environments",
+    "href": "resources/Slides/gwf/slides.html#exercise-i-workflow-with-conda-environments",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Exercise I: workflow with conda environments",
+    "text": "Exercise I: workflow with conda environments\nPrepare everything for the exercise: create a new folder, then download data and workflow file\n mkdir -p myPipeline\n cd myPipeline\n\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/data.fq -O data.fq\n wget https://github.com/hds-sandbox/GDKworkshops/raw/refs/heads/main/Examples/smallGwf/workflow.py -O workflow.py"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#exercise-ii-singularity-in-workflows",
+    "href": "resources/Slides/gwf/slides.html#exercise-ii-singularity-in-workflows",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Exercise II: singularity in workflows",
+    "text": "Exercise II: singularity in workflows\nNow, you will change the executor for the template table. Your task is to:\n\nopen the workflow.py file\nbelow importing the Conda module (line 2), add a new line with\nfrom gwf.executors import Singularity\nNow, define a new executor. Below the line where you define conda_env = Conda(\"seqkitEnv\"), use a similar syntax and write sing = Singularity(\"seqkit_2.10.0\"), where you provide the container file as argument.\nAt the end of the table template, use the new executor sing instead of conda_env.\n\n \nDid you do it right? If yes, then you should be able to run the combine target:\ngwf run combine\nand see its status become completed after some time. All output files should be created in your folder! If not, something is wrong. Ask for help, or look at the solution file, if you prefer.\n\n\n\n\n\n\nNote\n\n\nBecause combine depends on all table_ targets, it will submit all those targets as well, which need to run first.\n\n\n\nExercise break"
+  },
+  {
+    "objectID": "resources/Slides/gwf/slides.html#exercise-iii-your-own-target",
+    "href": "resources/Slides/gwf/slides.html#exercise-iii-your-own-target",
+    "title": "Introduction to workflows on GenomeDK",
+    "section": "Exercise III: Your own target!",
+    "text": "Exercise III: Your own target!\nOk, now we want to extend the workflow and do quality control on the part_###.fq files.\n\n\n\n\n\nflowchart LR\n  A0([\"Start\"]) --&gt;|data.fq| A[\"split\"]\n  A --&gt;|part001.fq| B[\"table\"]\n  A --&gt;|part002.fq| C[\"table\"]\n  A --&gt;|part....fq| D[\"table\"]\n  A --&gt;|part010.fq| E[\"table\"]\n  B --&gt;|table001.tsv| F[\"merge\"]\n  C --&gt;|table002.tsv| F\n  D --&gt;|table....tsv| F\n  E --&gt;|table010.tsv| F\n  F --&gt;|table.tsv| G([\"End\"])\n  A --&gt;|\"part[001-010].fq\"| H[\"qc\"]\n  H --&gt;|multiqc_report.html| I([\"End\"])"
   },
   {
     "objectID": "resources/Slides/linuxbasic/slides.html#interaction-with-hardware",
@@ -670,215 +894,5 @@
     "title": "Use GenomeDK",
     "section": "Your input for topics and evaluation",
     "text": "Your input for topics and evaluation\n\nIndlæser…"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#when-you-need-to-ask-for-help",
-    "href": "resources/Slides/Advanced/slides.html#when-you-need-to-ask-for-help",
-    "title": "Advanced GenomeDK",
-    "section": "When you need to ask for help",
-    "text": "When you need to ask for help\n\nPractical help:\nSamuele (BiRC, MBG) - samuele@birc.au.dk\nDrop in hours:\n\nBioinformatics Cafe: https://abc.au.dk, abcafe@au.dk\nSamuele (BiRC, MBG) - samuele@birc.au.dk - we just set up a meeting/zoom\n\nGeneral mail for assistance\nsupport@genome.au.dk"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#program",
-    "href": "resources/Slides/Advanced/slides.html#program",
-    "title": "Advanced GenomeDK",
-    "section": "Program",
-    "text": "Program\n\n10:00-11:00:\n\nWorkshop Introduction\nFrequently used on UNIX\nrsync file transfer\n\n11:00-12:00:\n\nBatch jobs on the cluster\n\n12:45-13:30:\n\nContainers (Docker, singularity)\n\n13:30-14.30:\n\nFeedback\nQuestions and discussions\nLook into one of the Extras you are interested in"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#extras",
-    "href": "resources/Slides/Advanced/slides.html#extras",
-    "title": "Advanced GenomeDK",
-    "section": "Extras",
-    "text": "Extras\nDocumentation you can explore on your own.\n\nAn advanced function to download selected folders from github\nSetting up ssh keys on github\nWeb applications on GenomeDK\nBatch scripts\nManaging multiple terminals on tmux\nSet up jupyter notebooks on VScode"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#get-the-slides",
-    "href": "resources/Slides/Advanced/slides.html#get-the-slides",
-    "title": "Advanced GenomeDK",
-    "section": "Get the slides",
-    "text": "Get the slides\nWebpage: https://hds-sandbox.github.io/GDKworkshops/\n\nSlides will always be up to date in this webpage"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#navigate-the-slides",
-    "href": "resources/Slides/Advanced/slides.html#navigate-the-slides",
-    "title": "Advanced GenomeDK",
-    "section": "Navigate the slides",
-    "text": "Navigate the slides"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#configuration-files",
-    "href": "resources/Slides/Advanced/slides.html#configuration-files",
-    "title": "Advanced GenomeDK",
-    "section": "Configuration files",
-    "text": "Configuration files\nYour ~/.bashrc file contains settings for your user. Those are bash commands which run at every login.\n \nCommon practice for many softwares is to have a configuration file in your home, often starting with ., which makes it a hidden file.\n \nExamples:\n\n.emacs for emacs\n.gitconfig for github\n.condarc for conda\n.nanorc for nano editor\n\nPlus other things like your command history on the terminal (~/.bash_history) and your settings (~/.bashrc)."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-singularity-settings",
-    "href": "resources/Slides/Advanced/slides.html#exercise-i-singularity-settings",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise I: singularity settings",
-    "text": "Exercise I: singularity settings\nLet’s make a useful setting to run at each login. We will need a temporary folder for singularity containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder ~/.singularity) with cache material.\n \nEdit the file ~/.bashrc (use nano ~/.bashrc or any editor you want). Add those lines:\nmkdir -p -m 700 /tmp/$USER\nexport SINGULARITY_TMPDIR=/tmp/$USER\nexport SINGULARITY_CACHEDIR=/tmp/$USER\n \nThe -m 700 option for mkdir command ensures also you are the only one which can access the temporary files. Useful is you use a container with password or sensitive info, so no one can access it (/tmp/ is a public folder)!"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
-    "href": "resources/Slides/Advanced/slides.html#exercise-ii---aliases",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise II - aliases",
-    "text": "Exercise II - aliases\n\n\n\n\n\n\nWarning\n\n\nPlease run this exercise so that we can use some of the aliases and functions in the rest of the workshop.\n\n\n\nNow, there are many repetitive things we do every day. For example:\n\nremove files and double check we can\ncd ../ and cd ../../ and … and cd ../../../../../../../\n\nand every time it is just annoying to waste precious time. Why not creating some aliases which you can write in their place? Copy the aliases from the list below and add them in your .bashrc file:\n## Safe file handling\nalias rmi='rm -i'\nalias cpi='cp -i'\nalias mvi='mv -i'\n\n## Upwards navigation in the File system\nalias ..='cd ..'\nalias ...='cd ../../../'\nalias ....='cd ../../../../'\nalias .....='cd ../../../../../'\n\n## List views\nalias ll='ls -laht' #detailed\nalias l='ls -aC' #compressed"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
-    "href": "resources/Slides/Advanced/slides.html#exercise-iii---functions",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise III - functions",
-    "text": "Exercise III - functions\nYou can also create functions including multiple commands: for example making a directory and then cd into it, or opening a terminal in an existing job (more about this later on). Add those to your ~/.bashrc file as well.\n\n\n\n\n\n\nNote\n\n\nThese are just inspirations, you can create any alias and function to avoid repetitive/long commands. Wrap all your useful repetitive commands into the ~/.bashrc file!\n\n\n\n## make and cd\n## make a folder and go into it\nmkcd() {\n    mkdir -p $1; cd $1\n    echo created $1\n    }\n\n## interactive job using the same resources of\n## an existing job already running\n## useful to debug and check resource usage\n## example of usage: sshell 12345678\n## job id can be found with: squeue --me\nsshell() {\n  srun --jobid $1 --overlap --pty bash\n}"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
-    "href": "resources/Slides/Advanced/slides.html#transfer-and-sync-with-rsync",
-    "title": "Advanced GenomeDK",
-    "section": "transfer and sync with rsync",
-    "text": "transfer and sync with rsync\nrsync is a very versatile tool for\n\ntransfering from remote to local host (and viceversa)\ncopying from local to local host (e.g. data backups/sync)\ntransfering only files which has changed from last copy (incremental copy)\n\n\n\n\n\n\n\nWarning\n\n\nrsync cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.\nrsync cannot download from web URLs\n\n\n\nLots of options you can find in the manual (would require a workshop only for that)\n\n rsync manual"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise",
-    "href": "resources/Slides/Advanced/slides.html#exercise",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise",
-    "text": "Exercise\nLog into GenomeDK. Create anywhere you prefere a folder called advancedGDK containing rsync/data\nmkdir -p advancedGDK/rsync/data\ncd advancedGDK/rsync\n \nCreate 100 files with extensions fastq and log in the data folder\ntouch data/file{1..100}.fastq data/file{1..100}.log"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise---continued-only-for-linux-and-mac-users",
-    "href": "resources/Slides/Advanced/slides.html#exercise---continued-only-for-linux-and-mac-users",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise - continued (only for Linux and Mac users)",
-    "text": "Exercise - continued (only for Linux and Mac users)\nExercise continues for all users in the next slide\n \nTransfer the whole folder data to your computer from GenomeDK. Open a terminal on your laptop and use the correct command from the previous slide!"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-batch-script",
-    "href": "resources/Slides/Advanced/slides.html#exercise-batch-script",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise: batch script",
-    "text": "Exercise: batch script\nPrepare the data needed for the exercise. Create a subfolder called batchGDK in the advancedGDK folder:\nmkdir -p advancedGDK/batchGDK\ncd advancedGDK/batchGDK\n \nDownload the data needed for the exercise:\nwget https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz \\\n     -O ./data.fastq.gz\n\nwget http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa -O ref.fasta.gz"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#calibrating-resources",
-    "href": "resources/Slides/Advanced/slides.html#calibrating-resources",
-    "title": "Advanced GenomeDK",
-    "section": "Calibrating resources",
-    "text": "Calibrating resources\nTry to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running\n\nuse squeue --me and look at the job id\nlog into the job from the front-end terminal using an interactive session and your job id:\nsshell 33735928\n\n\n\n\n\n\n\nWarning\n\n\nThe command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
-    "href": "resources/Slides/Advanced/slides.html#container-vs-virtual-env-vs-vm",
-    "title": "Advanced GenomeDK",
-    "section": "Container vs virtual env vs VM",
-    "text": "Container vs virtual env vs VM\nA virtual environment isolates dependencies for a specific programming language within the same operating system. It does not include the operating system or system-level dependencies, so it depends on the hosting system."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#scope-of-containers",
-    "href": "resources/Slides/Advanced/slides.html#scope-of-containers",
-    "title": "Advanced GenomeDK",
-    "section": "Scope of containers",
-    "text": "Scope of containers\n\nContainers are usually thought as packing a specific application which can run anywhere (or, which is portable).\nE.g. annoying bioinformatics software requiring specific libraries or long installations.\nMany containers are done with Docker, but this is not installed on GenomeDK\nGenomeDK has Singularity, which can also run programs installed in Docker containers.\nVery practical to pull and use containers in workflows."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#where-to-find-containers",
-    "href": "resources/Slides/Advanced/slides.html#where-to-find-containers",
-    "title": "Advanced GenomeDK",
-    "section": "Where to find containers?",
-    "text": "Where to find containers?\nTypical repositories with pre-built containers are:\n\nBiocontainers: community-driven initiative to containerize bioinf softwares.\n\nx10K tools x100K+ containers\nbioconda package index lists all software versions\nthe Registry page has a searchable interface to find what you need\n\nDockerHub registry: Public hub for Docker images, often including official containers from software developers\nQuay: Same philosophy of DockerHub.\n\nOnce you find a container on the websites, simply use (eventually adapt) the provided code to pull it locally."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
-    "href": "resources/Slides/Advanced/slides.html#exercise-i-a-simple-bioinformatics-container",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise I: a simple bioinformatics container",
-    "text": "Exercise I: a simple bioinformatics container\nWe use biocontainers to pull containers and recreate a little bulkRNA alignment.\n \nMake a folder called containers101 in the advancedGDK directory.\nmkdir -p advancedGDK/containers101\ncd advancedGDK/containers101\n \nFind a bash bioinformatics software you know on the Biocontainer Registry and open it to see a detailed description - if you have no good ideas look for the minimap2 aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-ii-docker-alternative",
-    "href": "resources/Slides/Advanced/slides.html#exercise-ii-docker-alternative",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise II: docker alternative",
-    "text": "Exercise II: docker alternative\nYou can also pull and run a container from DockerHub. For example, for the biocontainers/bwa-mem2 container you will need to adapt the command a bit, because it is not a singularity container.\nsingularity pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1\n \n\n\n\n\n\n\nNote\n\n\nThe correct path docker://biocontainers/samtools:v1.9-4-deb_cv1 can be found on the DockerHub page of the container. Here is the https://hub.docker.com/r/biocontainers/samtools."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#other-options-for-singularity",
-    "href": "resources/Slides/Advanced/slides.html#other-options-for-singularity",
-    "title": "Advanced GenomeDK",
-    "section": "Other options for singularity",
-    "text": "Other options for singularity\nA few other options which can be used in singularity. When you need those really depends on the application:\n\n--fakeroot: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.\n--writable: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. --writable-tmpfs to avoid changes to be persistent in a non-writable container.\n--contain: Isolates the container from the host system by limiting access to the host’s filesystem.\n--no-home: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.\n--cleanenv: Clears all environment variables except those explicitly set for the container.\n--nv: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is --rocm (not the case on GDK).\n--pwd: Sets the working directory inside the container.\n--bind: Binds specific directories from the host to the container. Useful to share data between host and container.\n--env: Sets environment variables inside the container. This is useful for configuring the container’s behavior or passing in secrets."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#create-ssh-key",
-    "href": "resources/Slides/Advanced/slides.html#create-ssh-key",
-    "title": "Advanced GenomeDK",
-    "section": "Create ssh key",
-    "text": "Create ssh key\nOn the cluster run the following command to create a new ssh key. Use your github email address in place of GithubAccountMail@example.com.\nssh-keygen -t ed25519 -C \"GithubAccountMail@example.com\"\n \nWhen asked, you can choose to name the file. Call it ~/.ssh/id_ed25519_github. When asked for password, you can leave it empty (press enter).\n \n\n\n\n\n\n\nWarning\n\n\nNote that the key must be saved in the folder ~/.ssh/. This is the usual place where ssh looks for keys on Linux."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#add-the-ssh-key-to-your-ssh-agent",
-    "href": "resources/Slides/Advanced/slides.html#add-the-ssh-key-to-your-ssh-agent",
-    "title": "Advanced GenomeDK",
-    "section": "Add the ssh key to your ssh agent",
-    "text": "Add the ssh key to your ssh agent\nAdd the key to the ssh agent, which manages your keys. Write the following on your ~/.bashrc file using a text editor:\n# Start ssh-agent for github if not already running\neval \"$(ssh-agent -s)\" &gt; /dev/null\nssh-add -l &&gt;/dev/null || ssh-add ~/.ssh/id_ed25519_github\n \nNow print your public key on the terminal. Copy the command’s output because you need to paste it on the github website:\ncat ~/.ssh/id_ed25519_github.pub\n\n\n\n\n\n\nNote\n\n\nThe key looks like this ssh-ed25519 ABCSC3Nza.....tDUFLn GithubAccountMail@example.com. You must copy all of it including ssh-ed25519 at the beginning and your email address at the end."
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
-    "href": "resources/Slides/Advanced/slides.html#a-more-advanced-bash-function-for-github",
-    "title": "Advanced GenomeDK",
-    "section": "A more advanced bash function for github",
-    "text": "A more advanced bash function for github\nHere a more advanced bash function you can paste into your ~/.bashrc file. Why not making one for git clone downloading only the latest commit history and choosing specific folders for the repository?\n# Git clone with depth 1 and choice of folders\n#   arg 1: username/repository\n#   arg 2: folders and files in quotes '', backspace separator\n#   arg 3: local download folder name (optional, default:repo)\n#   arg 4: branch (optional, default:main)\n# Examples:\n#   ghdir github/gitignore 'community Global' test01 main\n#   ghdir github/gitignore 'community Global' \nghdir() {\n        echo Downloading from $1 in folder $3\n        echo Selecting $2\n        if [ -z \"$4\" ]; then\n          BRANCH=\"-b main\"\n        else\n          BRANCH=\"-b $4\"\n        fi\n        git clone --no-checkout $BRANCH --filter=blob:none --depth 1 https://github.com/$1.git $3\n        if [ -z \"$3\" ]; then\n          folder=$(echo \"$1\" | cut -d'/' -f2)\n          cd \"$folder\"\n        else\n          cd \"$3\"\n        fi\n        git sparse-checkout init --cone\n        git sparse-checkout set $2\n        git checkout\n    }"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-1",
-    "href": "resources/Slides/Advanced/slides.html#exercise-1",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise",
-    "text": "Exercise\ntmux is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (only once) to enable mouse usage:\necho \"set -g mouse\" &gt;&gt; ~/.tmux.conf\n\n\n\n\n\n\nWarning\n\n\nUsing the mouse can create problems in some terminal programs, where copy-paste starts acting weird, e.g. on Mac computers and on Windows’ Moba XTerm software. In case you have a bad experience, remove the mouse setup from the file ~/.tmux.conf\n\n\n\n \nYou can start a tmux session anywhere. It is easier to navigate sessions giving them a name. For example start a session called example1:\ntmux new -s example1"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#launching-separate-downloads-at-the-same-time",
-    "href": "resources/Slides/Advanced/slides.html#launching-separate-downloads-at-the-same-time",
-    "title": "Advanced GenomeDK",
-    "section": "Launching separate downloads at the same time",
-    "text": "Launching separate downloads at the same time\nStart a new session without attaching to it (d option), and call it downloads:\ntmux new-session -d -s downloads\nverify the session is there with tmux ls.\n\n\n\n\n\n\nWarning\n\n\nIf you want a new session attaching to it, you need to detach from the current session with Ctrl + b + d.\n\n\n\nCreate a text file with few example files for this workshop to be downloaded.\ncurl -s https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync | jq -r '.[] | .download_url' &gt; downloads.txt"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#which-port-to-use",
-    "href": "resources/Slides/Advanced/slides.html#which-port-to-use",
-    "title": "Advanced GenomeDK",
-    "section": "Which port to use",
-    "text": "Which port to use\n\nEach server process on a machine needs a unique port (p2 on previous figure) to avoid conflicts.\nPorts are in common between users on GenomeDK. So you can only use the port corresponding to your user number, which you can see with\necho $UID\nYou will see all this in the next exercise\n\n\n\n\n\n\n\n\nbetter safe than sorry\n\n\nLaunch a web application which has tokens (a random code in the URL for the browser) or a password you can setup. In theory, anyone on your same node of the cluster can get into your server process and see your program and data!"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
-    "href": "resources/Slides/Advanced/slides.html#exercise-jupyterlab-web-server",
-    "title": "Advanced GenomeDK",
-    "section": "Exercise: jupyterlab web server",
-    "text": "Exercise: jupyterlab web server\nIf you DO NOT have the conda package manager, you can quickly install it from the box below, otherwise move to the next slide!\n\n\n\n\n\n\n\nInstall conda\n\n\nRun the installation script to install the software. There are some informative messages during the installation. You might need to say yes a few times\nwget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh\nchmod +x miniforge.sh\nbash miniforge.sh -b\n~/miniforge3/bin/conda init bash\nsource ~/.bashrc\nWhen you are done, you need a little bit of configuration. You can run the following command to configure conda (run them only once, they are not needed again):\nconda config --append channels conda-forge\nconda config --append channels bioconda\nconda config --set channel_priority strict\nconda config --set auto_activate_base false\nsource ~/.bashrc\nNow you are ready to move on!"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#configure-access-to-cluster-from-vscode",
-    "href": "resources/Slides/Advanced/slides.html#configure-access-to-cluster-from-vscode",
-    "title": "Advanced GenomeDK",
-    "section": "Configure access to cluster from VSCode",
-    "text": "Configure access to cluster from VSCode\nDownload VSCode and open it. Go to the plugin tab (red circle)"
-  },
-  {
-    "objectID": "resources/Slides/Advanced/slides.html#tunneling-to-a-computing-node",
-    "href": "resources/Slides/Advanced/slides.html#tunneling-to-a-computing-node",
-    "title": "Advanced GenomeDK",
-    "section": "Tunneling to a computing node",
-    "text": "Tunneling to a computing node\nNow close VScode and reopen it. Open the Remote Explorer (from the toolbar on the left). There you should now see login.genome.au.dk as configured remote. Click on the little option symbol close to the SSH menu. The option symbol is given by the little clogwheel icon (red circle)."
-  },
-  {
-    "objectID": "cards/SamueleSoraggi.html",
-    "href": "cards/SamueleSoraggi.html",
-    "title": "Samuele Soraggi",
-    "section": "",
-    "text": "Samuele is a Sandbox data scientist based at the university of Aarhus. During his academic activity he has gained experience in population genomics, transcriptomics, single cell multiomics and spans his knowledge across various themes of advanced computational statistics."
   }
 ]

@@ -15,7 +15,7 @@
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-01-22">
+  <meta name="dcterms.date" content="2026-03-08">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -240,7 +240,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-01-22</p>
+  <p class="date">2026-03-08</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -282,11 +282,11 @@ Dan Søndergaard
 </ul></li>
 <li><strong>11:00-12:00</strong>:
 <ul>
-<li>Batch jobs on the cluster</li>
+<li>Containers (Docker, apptainer)</li>
 </ul></li>
 <li><strong>12:45-13:30</strong>:
 <ul>
-<li>Containers (Docker, singularity)</li>
+<li>Batch jobs on the cluster</li>
 </ul></li>
 <li><strong>13:30-14.30</strong>:
 <ul>
@@ -342,14 +342,14 @@ Dan Søndergaard
 </ul>
 <p>Plus other things like your command history on the terminal (<code>~/.bash_history</code>) and your settings (<code>~/.bashrc</code>).</p>
 </section>
-<section id="exercise-i-singularity-settings" class="slide level2">
-<h2>Exercise I: singularity settings</h2>
-<p>Let’s make a useful setting to run at each login. We will need a temporary folder for <code>singularity</code> containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder <code>~/.singularity</code>) with cache material.</p>
+<section id="exercise-i-apptainer-settings" class="slide level2">
+<h2>Exercise I: apptainer settings</h2>
+<p>Let’s make a useful setting to run at each login. We will need a temporary folder for <code>apptainer</code> containers (more on those later) when downloaded. Default is your home, which will be filled up in no time (folder <code>~/.apptainer</code>) with cache material.</p>
 <p>&nbsp;</p>
 <p>Edit the file <code>~/.bashrc</code> (use <code>nano ~/.bashrc</code> or any editor you want). Add those lines:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="at">-m</span> 700 /tmp/<span class="va">$USER</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_TMPDIR</span><span class="op">=</span>/tmp/<span class="va">$USER</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_CACHEDIR</span><span class="op">=</span>/tmp/<span class="va">$USER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_TMPDIR</span><span class="op">=</span>/tmp/<span class="va">$USER</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_CACHEDIR</span><span class="op">=</span>/tmp/<span class="va">$USER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>The <code>-m 700</code> option for <code>mkdir</code> command ensures also <strong>you are the only one which can access the temporary files</strong>. Useful is you use a container with password or sensitive info, so no one can access it (<code>/tmp/</code> is a public folder)!</p>
 </section>
@@ -490,8 +490,8 @@ Dan Søndergaard
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/rsync/data</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/rsync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
-<p>Create 100 files with extensions <code>fastq</code> and <code>log</code> in the data folder</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data/file{1..100}.fastq data/file{1..100}.log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Create 10 files with extensions <code>fastq</code> and <code>log</code> in the data folder</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> data/file{1..10}.fastq data/file{1..10}.log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -547,201 +547,6 @@ Dan Søndergaard
 <p><strong>Exercise finished</strong></p>
 </section></section>
 <section>
-<section id="batch-jobs-on-the-cluster" class="title-slide slide level1 center">
-<h1>Batch jobs on the cluster</h1>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>A batch job is used to <strong>run a program non-interactively</strong>, usually for longer time and so without interaction from the user. A batch job is described in a <strong>batch script</strong> that contains</p>
-<ul>
-<li>the desired <strong>resources</strong></li>
-<li>the sequence of <strong>commands</strong> to be executed</li>
-</ul>
-<p>and</p>
-<ul>
-<li>has a filename <strong>without spaces</strong> (forget spaces from now on)</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="exercise-batch-script" class="slide level2">
-<h2>Exercise: batch script</h2>
-<p>Prepare the data needed for the exercise. Create a subfolder called <code>batchGDK</code> in the <code>advancedGDK</code> folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/batchGDK</span>
-<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/batchGDK</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>&nbsp;</p>
-<p>Download the data needed for the exercise:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz <span class="dt">\</span></span>
-<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data.fastq.gz</span>
-<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa <span class="at">-O</span> ref.fasta.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section class="slide level2">
-
-<p>Create a <code>conda</code> or <code>pixi</code> environment with <code>bwa-mem2</code> and <code>samtools</code> installed. For example</p>
-<p>&nbsp;</p>
-<div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Conda</a></li><li><a href="#tabset-1-2">Pixi</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-n</span> batchGDK bwa-mem2 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-1-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda</span>
-<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add bwa-mem2 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>Create a text file called <code>align.sh</code>. This contains a batch script with resources desired and the commands to run on those. The script text depends on you having used <code>conda</code> or <code>pixi</code> to create the environment.</p>
-<div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Conda</a></li><li><a href="#tabset-2-2">Pixi</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
-<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
-<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
-<span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
-<span id="cb15-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initialize conda</span></span>
-<span id="cb15-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">conda</span> shell.bash hook<span class="va">)</span><span class="st">"</span></span>
-<span id="cb15-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate Environment</span></span>
-<span id="cb15-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate batchGDK</span>
-<span id="cb15-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index reference</span></span>
-<span id="cb15-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index ref.fasta.gz</span>
-<span id="cb15-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
-<span id="cb15-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> mem <span class="at">-t</span> 4 ref.fasta.gz <span class="dt">\</span></span>
-<span id="cb15-16"><a aria-hidden="true" tabindex="-1"></a>             data.fastq <span class="dt">\</span></span>
-<span id="cb15-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
-<span id="cb15-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 3 <span class="dt">\</span></span>
-<span id="cb15-19"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
-<span id="cb15-20"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
-<span id="cb15-21"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> data.bam</span>
-<span id="cb15-22"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-23"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-2-2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
-<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
-<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
-<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
-<span id="cb16-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index reference</span></span>
-<span id="cb16-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 index ref.fasta.gz</span>
-<span id="cb16-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
-<span id="cb16-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 mem <span class="at">-t</span> 4 ref.fasta.gz <span class="dt">\</span></span>
-<span id="cb16-11"><a aria-hidden="true" tabindex="-1"></a>             data.fastq <span class="dt">\</span></span>
-<span id="cb16-12"><a aria-hidden="true" tabindex="-1"></a>            <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
-<span id="cb16-13"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 3 <span class="dt">\</span></span>
-<span id="cb16-14"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
-<span id="cb16-15"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
-<span id="cb16-16"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> data.bam</span>
-<span id="cb16-17"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>Send the script to the queueing system using the terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>&nbsp;</p>
-<p>It will provide a job id number, e.g.&nbsp;<code>33735298</code>, on the terminal. You will need it to check the job status. For example</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Submitted</span> batch job 33735298</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section class="slide level2">
-
-<p>Interrogate SLURM about the specific job with the provided number. For example</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>&gt;Name                : align.sh
-&gt;User                : samuele
-&gt;Account             : my_project
-&gt;Partition           : short
-&gt;Nodes               : s21n43
-&gt;Cores               : 4
-&gt;GPUs                : 0
-&gt;State               : RUNNING
-&gt;...</code></pre>
-</section>
-<section class="slide level2">
-
-<p>or about all the queued jobs</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-&gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
-<p>&nbsp;</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>If you change your mind and want to cancel a job:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</section>
-<section id="calibrating-resources" class="slide level2">
-<h2>Calibrating resources</h2>
-<p>Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running</p>
-<ul>
-<li><p>use <code>squeue --me</code> and <strong>look at the job id</strong></p></li>
-<li><p><strong>log into the job</strong> from the front-end terminal using an interactive session and your job id:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sshell</span> 33735928</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ul>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.</p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>use <code>htop -u &lt;username&gt;</code> to see what is running and how much memory and CPU it uses <img data-src="img/htop.png"></li>
-</ul>
-<p><strong>Exercise finished</strong></p>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>While the job runs, you can evaluate if resources are used properly, and eventually adjust them to a lower/higher value, so that you can stop the job and resubmit it with the right resources.</li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>When the job is finished, successfully or not, check the output files and the log file <code>slurm-&lt;jobid&gt;.out</code> for any error or warning.</li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>The log file is really useful to understand why a job fails, or if there have been errors or unusual behaviour even if the job is successfully ended.</li>
-</ul>
-</section></section>
-<section>
 <section id="containers" class="title-slide slide level1 center">
 <h1>Containers</h1>
 <div title="What is a container">
@@ -787,7 +592,7 @@ Dan Søndergaard
 <li><p>Containers are usually thought as packing a specific application which can run anywhere (or, which is portable).</p></li>
 <li><p>E.g. annoying bioinformatics software requiring specific libraries or long installations.</p></li>
 <li><p>Many containers are done with <em>Docker</em>, but this is not installed on GenomeDK</p></li>
-<li><p>GenomeDK has <em>Singularity</em>, which can also run programs installed in Docker containers.</p></li>
+<li><p>GenomeDK has <em>Apptainer</em>, which can also run programs installed in Docker containers.</p></li>
 <li><p>Very practical to <strong>pull and use</strong> containers <strong>in workflows</strong>.</p></li>
 </ul>
 </section>
@@ -811,8 +616,8 @@ Dan Søndergaard
 <p>We use <em>biocontainers</em> to pull containers and recreate a little bulkRNA alignment.</p>
 <p>&nbsp;</p>
 <p>Make a folder called <code>containers101</code> in the <code>advancedGDK</code> directory.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/containers101</span>
-<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/containers101</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> advancedGDK/containers101</span>
+<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> advancedGDK/containers101</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Find a bash bioinformatics software you know on the <a href="https://biocontainers.pro/registry">Biocontainer Registry</a> and open it to see a detailed description - if you have no good ideas look for the <code>minimap2</code> aligner. You should see a software documentation illustrating how to run the software in various ways - see next slide for a screenshot.</p>
 </section>
@@ -831,25 +636,25 @@ Dan Søndergaard
 </section>
 <section class="slide level2">
 
-<p>The page will suggest to run immediately the container with <code>singularity</code>. I would suggest downloading it first (<code>pull</code> instead of <code>run</code>) and then running it.</p>
+<p>The page will suggest to run immediately the container with <code>apptainer</code>. I would suggest downloading it first (<code>pull</code> instead of <code>run</code>) and then running it.</p>
 <p>In the case of <code>minimap2</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull minimap2.sif https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> pull minimap2.sif https://depot.galaxyproject.org/singularity/minimap2:2.28--h577a1d6_4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>which creates a container file in your current directory, and calls it <code>minimap2.sif</code> (better name than the default <code>minimap2:2.28--h577a1d6_4</code>).</p>
 <p>&nbsp;</p>
 <p>You can either <code>run</code> the container, which opens a CLI into it, where you can execute the program. A non-interactive way (useful for pipelines) is to write the command directly. For example:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>This will operate the command line inside the container. Here you can then run <code>minimap2</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run minimap2.sif</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> run minimap2.sif</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p>This will immediately run <code>minimap2</code> from the container - useful for a pipeline where you do not need any interaction with the command line.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> run minimap2.sif minimap2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> run minimap2.sif minimap2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
 <section id="exercise-ii-docker-alternative" class="slide level2">
 <h2>Exercise II: docker alternative</h2>
 <p>You can also pull and run a container from DockerHub. For example, for the <code>biocontainers/bwa-mem2</code> container you will need to adapt the command a bit, because it is not a singularity container.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> pull samtools_docker.sif docker://biocontainers/samtools:v1.9-4-deb_cv1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -868,10 +673,10 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>Doing operations with a container is really easy For example, you can run a command inside the container like the following, which outputs a <code>.bam</code> genome file read from a URL:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a> <span class="ex">singularity</span> run samtools_docker.sif <span class="dt">\</span></span>
-<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a>                 samtools view <span class="dt">\</span></span>
-<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
-<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-O</span> bam <span class="op">&gt;</span> test01.bam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> run samtools_docker.sif <span class="dt">\</span></span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>                 samtools view <span class="dt">\</span></span>
+<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-h</span> https://github.com/roryk/tiny-test-data/raw/refs/heads/master/wgs/mt.sorted.bam <span class="dt">\</span></span>
+<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>                 <span class="at">-O</span> bam <span class="op">&gt;</span> test01.bam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p><strong>Exercise finished</strong></p>
 </section>
@@ -880,15 +685,14 @@ Dan Søndergaard
 <h3 id="building-containers">Building containers</h3>
 <p>If you want to build containers with Docker, you need to</p>
 <ul>
-<li>build locally with Docker or Singularity, and then upload the container to a repository (e.g.&nbsp;DockerHub or Quay).</li>
-<li>pull them on GenomeDK with singularity</li>
+<li>build locally with Docker or apptainer, and then upload the container to a repository (e.g.&nbsp;DockerHub or Quay).</li>
+<li>pull them on GenomeDK with apptainer</li>
+<li>or <a href="https://singularity-tutorial.github.io/03-building/">build with apptainer directly on genomeDK</a></li>
 </ul>
-<p>&nbsp;</p>
-<p>Singularity is installed on GenomeDK, but because you need root privileges to build a container on the cluster, you cannot do that.</p>
 </section>
-<section id="other-options-for-singularity" class="slide level2 scrollable">
-<h2>Other options for singularity</h2>
-<p>A few other options which can be used in singularity. When you need those really depends on the application:</p>
+<section id="other-options-for-apptainer" class="slide level2 scrollable">
+<h2>Other options for apptainer</h2>
+<p>A few other options which can be used in apptainer. When you need those really depends on the application:</p>
 <ul>
 <li><p><code>--fakeroot</code>: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.</p></li>
 <li><p><code>--writable</code>: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. <code>--writable-tmpfs</code> to avoid changes to be persistent in a non-writable container.</p></li>
@@ -899,6 +703,389 @@ Dan Søndergaard
 <li><p><code>--pwd</code>: Sets the working directory inside the container.</p></li>
 <li><p><code>--bind</code>: Binds specific directories from the host to the container. Useful to share data between host and container.</p></li>
 <li><p><code>--env</code>: Sets environment variables inside the container. This is useful for configuring the container’s behavior or passing in secrets.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="batch-jobs-on-the-cluster" class="title-slide slide level1 center">
+<h1>Batch jobs on the cluster</h1>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>A batch job is used to <strong>run a program non-interactively</strong>, usually for longer time and so without interaction from the user. A batch job is described in a <strong>batch script</strong> that contains</p>
+<ul>
+<li>the desired <strong>resources</strong></li>
+<li>the sequence of <strong>commands</strong> to be executed</li>
+<li>other advanced settings (e.g.&nbsp;job dependencies, array jobs, …)</li>
+</ul>
+<p>and</p>
+<ul>
+<li>has a filename <strong>without spaces</strong> (forget spaces from now on)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-batch-script" class="slide level2 scrollable">
+<h2>Exercise: batch script</h2>
+<p>Prepare the data needed for the exercise. Create a subfolder called <code>batchGDK</code> in the <code>advancedGDK</code> folder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/advancedGDK/batchGDK</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/advancedGDK/batchGDK</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>&nbsp;</p>
+<p>Download the data needed for the exercise:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R1_001.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data.fastq.gz</span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L001_R2_001.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data2.fastq.gz</span>
+<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L002_R1_001.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-8"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data3.fastq.gz</span>
+<span id="cb18-9"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/hartwigmedical/testdata/raw/master/100k_reads_hiseq/TESTX/TESTX_H7YRLADXX_S1_L002_R2_001.fastq.gz <span class="dt">\</span></span>
+<span id="cb18-11"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">-O</span> ./data4.fastq.gz</span>
+<span id="cb18-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data<span class="pp">*</span>.fastq.gz</span>
+<span id="cb18-14"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://genomedata.org/rnaseq-tutorial/fasta/GRCh38/chr22_with_ERCC92.fa <span class="at">-O</span> ref.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Create a <code>conda</code> or <code>pixi</code> environment with <code>bwa-mem2</code> and <code>samtools</code> installed. For example</p>
+<p>&nbsp;</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Conda</a></li><li><a href="#tabset-1-2">Pixi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-n</span> batchGDK bwa-mem2 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda</span>
+<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add bwa-mem2 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Create a text file called <code>align.sh</code>. This contains a batch script with resources desired and the commands to run on those. The script text depends on you having used <code>conda</code> or <code>pixi</code> to create the environment.</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Conda</a></li><li><a href="#tabset-2-2">Pixi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
+<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
+<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
+<span id="cb21-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#initialize conda</span></span>
+<span id="cb21-8"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/miniconda3/etc/profile.d/conda.sh</span>
+<span id="cb21-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#activate Environment</span></span>
+<span id="cb21-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate batchGDK</span>
+<span id="cb21-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index reference</span></span>
+<span id="cb21-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> index ref.fasta</span>
+<span id="cb21-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
+<span id="cb21-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> mem <span class="at">-t</span> 4 ref.fasta <span class="dt">\</span></span>
+<span id="cb21-16"><a aria-hidden="true" tabindex="-1"></a>             data.fastq <span class="dt">\</span></span>
+<span id="cb21-17"><a aria-hidden="true" tabindex="-1"></a>            <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
+<span id="cb21-18"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 3 <span class="dt">\</span></span>
+<span id="cb21-19"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb21-20"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb21-21"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> data.bam</span>
+<span id="cb21-22"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem 16g</span></span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 04:00:00</span></span>
+<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#index reference</span></span>
+<span id="cb22-8"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 index ref.fasta</span>
+<span id="cb22-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#align data</span></span>
+<span id="cb22-10"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 mem <span class="at">-t</span> 4 ref.fasta <span class="dt">\</span></span>
+<span id="cb22-11"><a aria-hidden="true" tabindex="-1"></a>             data.fastq <span class="dt">\</span></span>
+<span id="cb22-12"><a aria-hidden="true" tabindex="-1"></a>            <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="dt">\</span></span>
+<span id="cb22-13"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-@</span> 3 <span class="dt">\</span></span>
+<span id="cb22-14"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb22-15"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb22-16"><a aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> data.bam</span>
+<span id="cb22-17"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Send the script to the queueing system using the terminal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>&nbsp;</p>
+<p>It will provide a job id number, e.g.&nbsp;<code>33735298</code>, on the terminal. You will need it to check the job status. For example</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Submitted</span> batch job 33735298</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Interrogate SLURM about the specific job with the provided number. For example</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jobinfo</span> 33735298</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>&gt;Name                : align.sh
+&gt;User                : samuele
+&gt;Account             : my_project
+&gt;Partition           : short
+&gt;Nodes               : s21n43
+&gt;Cores               : 4
+&gt;GPUs                : 0
+&gt;State               : RUNNING
+&gt;...</code></pre>
+<p>or about all the queued jobs</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>&gt;JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+&gt;33735928     short align.sh  samuele  R       1:12      1 s21n43</code></pre>
+<p>&nbsp;</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>If you change your mind and want to cancel a job:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> 33735928</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-parallel-batch-with-slurm-arrays" class="slide level2 scrollable">
+<h2>Exercise: parallel batch with SLURM arrays</h2>
+<p>Now run the same type of operation on multiple files in parallel using a <strong>job array</strong>.</p>
+<p>Create folders for results and logs. Then generate a list with the FASTQ files:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> results logs</span>
+<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># create a list with the data files</span></span>
+<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.fastq <span class="op">&gt;</span> fastq_list.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>&nbsp;</p>
+<p>Create a script called <code>align_array.sh</code>.</p>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Conda</a></li><li><a href="#tabset-3-2">Pixi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb31-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=8g</span></span>
+<span id="cb31-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb31-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4%2</span></span>
+<span id="cb31-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=alignArray</span></span>
+<span id="cb31-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/align_%A_%a.out</span></span>
+<span id="cb31-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/align_%A_%a.err</span></span>
+<span id="cb31-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb31-12"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/miniconda3/etc/profile.d/conda.sh</span>
+<span id="cb31-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate batchGDK</span>
+<span id="cb31-14"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mapfile</span> <span class="at">-t</span> fastqs <span class="op">&lt;</span> fastq_list.txt</span>
+<span id="cb31-16"><a aria-hidden="true" tabindex="-1"></a><span class="va">fq</span><span class="op">=</span><span class="st">"</span><span class="va">${fastqs</span><span class="op">[</span><span class="va">$((SLURM_ARRAY_TASK_ID</span><span class="op">-</span><span class="dv">1</span><span class="va">))</span><span class="op">]</span><span class="va">}</span><span class="st">"</span></span>
+<span id="cb31-17"><a aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> .fastq<span class="va">)</span></span>
+<span id="cb31-18"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a aria-hidden="true" tabindex="-1"></a><span class="ex">bwa-mem2</span> mem <span class="at">-t</span> <span class="st">"</span><span class="va">$SLURM_CPUS_PER_TASK</span><span class="st">"</span> ref.fasta.gz <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb31-20"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-@</span> 1 <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb31-21"><a aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> <span class="st">"results/</span><span class="va">${sample}</span><span class="st">.bam"</span></span>
+<span id="cb31-22"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=2</span></span>
+<span id="cb32-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=8g</span></span>
+<span id="cb32-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb32-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4%2</span></span>
+<span id="cb32-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=alignArray</span></span>
+<span id="cb32-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/align_%A_%a.out</span></span>
+<span id="cb32-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/align_%A_%a.err</span></span>
+<span id="cb32-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb32-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mapfile</span> <span class="at">-t</span> fastqs <span class="op">&lt;</span> fastq_list.txt</span>
+<span id="cb32-14"><a aria-hidden="true" tabindex="-1"></a><span class="va">fq</span><span class="op">=</span><span class="st">"</span><span class="va">${fastqs</span><span class="op">[</span><span class="va">$((SLURM_ARRAY_TASK_ID</span><span class="op">-</span><span class="dv">1</span><span class="va">))</span><span class="op">]</span><span class="va">}</span><span class="st">"</span></span>
+<span id="cb32-15"><a aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> .fastq<span class="va">)</span></span>
+<span id="cb32-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run bwa-mem2 mem <span class="at">-t</span> <span class="st">"</span><span class="va">$SLURM_CPUS_PER_TASK</span><span class="st">"</span> ref.fasta <span class="st">"</span><span class="va">$fq</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb32-18"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="ex">pixi</span> run samtools sort <span class="at">-@</span> 1 <span class="at">-O</span> BAM <span class="dt">\</span></span>
+<span id="cb32-19"><a aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> <span class="st">"results/</span><span class="va">${sample}</span><span class="st">.bam"</span></span>
+<span id="cb32-20"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Submit and monitor the array job:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> align_array.sh</span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span> <span class="at">-n</span> alignArray</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>&nbsp;</p>
+<p>Check that outputs and logs are separated by array task id (<code>%a</code>) and parent job id (<code>%A</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> results/</span>
+<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> logs/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div title="What is happening">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What is happening</strong></p>
+</div>
+<div class="callout-content">
+<p>With <code>--array=1-6%3</code>, SLURM creates 6 tasks and runs at most 3 concurrently.</p>
+<p>Each task gets its own <code>SLURM_ARRAY_TASK_ID</code>, used to pick one input file from <code>fastq_list.txt</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Exercise finished</strong></p>
+</section>
+<section id="exercise-chained-jobs-with-dependencies" class="slide level2 scrollable">
+<h2>Exercise: chained jobs with dependencies</h2>
+<p>Now run a 3-step pipeline where indexing starts only if alignment succeeds.</p>
+<p>Create a second script called <code>index_array.sh</code>:</p>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Conda</a></li><li><a href="#tabset-4-2">Pixi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb35-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=4g</span></span>
+<span id="cb35-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=00:30:00</span></span>
+<span id="cb35-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
+<span id="cb35-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=indexArray</span></span>
+<span id="cb35-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/index_%A_%a.out</span></span>
+<span id="cb35-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/index_%A_%a.err</span></span>
+<span id="cb35-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb35-12"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/miniconda3/etc/profile.d/conda.sh</span>
+<span id="cb35-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate batchGDK</span>
+<span id="cb35-14"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">mapfile</span> <span class="at">-t</span> bams=<span class="er">(</span><span class="ex">results/*.bam</span><span class="kw">)</span></span>
+<span id="cb35-16"><a aria-hidden="true" tabindex="-1"></a><span class="va">bam</span><span class="op">=</span><span class="st">"</span><span class="va">${bams</span><span class="op">[</span><span class="va">$((SLURM_ARRAY_TASK_ID</span><span class="op">-</span><span class="dv">1</span><span class="va">))</span><span class="op">]</span><span class="va">}</span><span class="st">"</span></span>
+<span id="cb35-17"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> index <span class="st">"</span><span class="va">$bam</span><span class="st">"</span></span>
+<span id="cb35-19"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb36-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=4g</span></span>
+<span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=00:30:00</span></span>
+<span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=1-4</span></span>
+<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=indexArray</span></span>
+<span id="cb36-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/index_%A_%a.out</span></span>
+<span id="cb36-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=logs/index_%A_%a.err</span></span>
+<span id="cb36-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb36-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a aria-hidden="true" tabindex="-1"></a><span class="va">bams</span><span class="op">=</span><span class="va">(</span>results/<span class="pp">*</span>.bam<span class="va">)</span></span>
+<span id="cb36-14"><a aria-hidden="true" tabindex="-1"></a><span class="va">bam</span><span class="op">=</span><span class="st">"</span><span class="va">${bams</span><span class="op">[</span><span class="va">$((SLURM_ARRAY_TASK_ID</span><span class="op">-</span><span class="dv">1</span><span class="va">))</span><span class="op">]</span><span class="va">}</span><span class="st">"</span></span>
+<span id="cb36-15"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run samtools index <span class="st">"</span><span class="va">$bam</span><span class="st">"</span></span>
+<span id="cb36-17"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Create a final reporting job called <code>report_job.sh</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account PROJECT_NAME</span></span>
+<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb37-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=1g</span></span>
+<span id="cb37-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=00:10:00</span></span>
+<span id="cb37-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=arrayReport</span></span>
+<span id="cb37-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=logs/report_%j.out</span></span>
+<span id="cb37-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb37-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"BAM files"</span> <span class="op">&gt;</span> results/summary.txt</span>
+<span id="cb37-12"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> results/<span class="pp">*</span>.bam <span class="op">&gt;&gt;</span> results/summary.txt</span>
+<span id="cb37-13"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">""</span> <span class="op">&gt;&gt;</span> results/summary.txt</span>
+<span id="cb37-14"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"BAI files"</span> <span class="op">&gt;&gt;</span> results/summary.txt</span>
+<span id="cb37-15"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> results/<span class="pp">*</span>.bam.bai <span class="op">&gt;&gt;</span> results/summary.txt</span>
+<span id="cb37-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Submit with dependencies:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="va">ALIGN_ID</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> align_array.sh<span class="va">)</span></span>
+<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a><span class="va">INDEX_ID</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">${ALIGN_ID}</span> index_array.sh<span class="va">)</span></span>
+<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a><span class="va">REPORT_ID</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">${INDEX_ID}</span> report_job.sh<span class="va">)</span></span>
+<span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"ALIGN=</span><span class="va">${ALIGN_ID}</span><span class="st"> INDEX=</span><span class="va">${INDEX_ID}</span><span class="st"> REPORT=</span><span class="va">${REPORT_ID}</span><span class="st">"</span></span>
+<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span> <span class="at">-n</span> alignArray,indexArray,arrayReport</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>&nbsp;</p>
+<p>Check the final report:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> results/summary.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div title="What is happening">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What is happening</strong></p>
+</div>
+<div class="callout-content">
+<p><code>--dependency=afterok:&lt;jobid&gt;</code> means the next job starts only if the previous job exits successfully.</p>
+<p>If a parent job fails, dependent jobs stay pending and are marked as unsatisfied dependency.</p>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Exercise finished</strong></p>
+</section>
+<section id="calibrating-resources" class="slide level2">
+<h2>Calibrating resources</h2>
+<p>Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type. While the job is running</p>
+<ul>
+<li><p>use <code>squeue --me</code> and <strong>look at the job id</strong></p></li>
+<li><p><strong>log into the job</strong> from the front-end terminal using an interactive session and your job id:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sshell</span> 33735928</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>use <code>htop -u &lt;username&gt;</code> to see what is running and how much memory and CPU it uses <img data-src="img/htop.png"></li>
+</ul>
+<p><strong>Exercise finished</strong></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>While the job runs, you can evaluate if resources are used properly, and eventually adjust them to a lower/higher value, so that you can stop the job and resubmit it with the right resources.</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>When the job is finished, successfully or not, check the output files and the log file <code>slurm-&lt;jobid&gt;.out</code> for any error or warning.</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>The log file is really useful to understand why a job fails, or if there have been errors or unusual behaviour even if the job is successfully ended.</li>
 </ul>
 </section></section>
 <section>
@@ -957,7 +1144,7 @@ Indlæser…
 <section id="create-ssh-key" class="slide level2">
 <h2>Create ssh key</h2>
 <p>On the cluster run the following command to create a new ssh key. Use your github email address in place of <code>GithubAccountMail@example.com</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"GithubAccountMail@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"GithubAccountMail@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>When asked, you can choose to name the file. Call it <code>~/.ssh/id_ed25519_github</code>. When asked for password, you can leave it empty (press enter).</p>
 <p>&nbsp;</p>
@@ -978,12 +1165,12 @@ Indlæser…
 <section id="add-the-ssh-key-to-your-ssh-agent" class="slide level2">
 <h2>Add the ssh key to your ssh agent</h2>
 <p>Add the key to the ssh agent, which manages your keys. Write the following on your <code>~/.bashrc</code> file using a text editor:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Start ssh-agent for github if not already running</span></span>
-<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span> <span class="op">&gt;</span> /dev/null</span>
-<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> <span class="at">-l</span> <span class="op">&amp;&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">ssh-add</span> ~/.ssh/id_ed25519_github</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Start ssh-agent for github if not already running</span></span>
+<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span> <span class="op">&gt;</span> /dev/null</span>
+<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> <span class="at">-l</span> <span class="op">&amp;&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">ssh-add</span> ~/.ssh/id_ed25519_github</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Now print your public key on the terminal. Copy the command’s output because you need to paste it on the github website:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519_github.pub</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519_github.pub</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1006,8 +1193,8 @@ Indlæser…
 <section class="slide level2">
 
 <p>Now, test your connection to github. First apply the changes from the <code>~/.bashrc</code> file.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
-<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You should see a welcome message. From now on pull and push will work without asking for your username and password.</p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -1019,7 +1206,7 @@ Indlæser…
 </div>
 <div class="callout-content">
 <p>If you have <strong>previously</strong> cloned a repository using its URL (starting with <code>https</code>), you might need this command to switch to <code>ssh</code>, so that you use the ssh key for that repository. Adapt the following code with username and repository name:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote set-url origin git@github.com:username/repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote set-url origin git@github.com:username/repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1027,33 +1214,33 @@ Indlæser…
 <section id="a-more-advanced-bash-function-for-github" class="slide level2 scrollable">
 <h2>A more advanced bash function for github</h2>
 <p>Here a more advanced bash function you can paste into your <code>~/.bashrc</code> file. Why not making one for <code>git clone</code> downloading only the latest commit history and choosing specific folders for the repository?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Git clone with depth 1 and choice of folders</span></span>
-<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 1: username/repository</span></span>
-<span id="cb36-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 2: folders and files in quotes '', backspace separator</span></span>
-<span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 3: local download folder name (optional, default:repo)</span></span>
-<span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 4: branch (optional, default:main)</span></span>
-<span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Examples:</span></span>
-<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   ghdir github/gitignore 'community Global' test01 main</span></span>
-<span id="cb36-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   ghdir github/gitignore 'community Global' </span></span>
-<span id="cb36-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ghdir()</span> <span class="kw">{</span></span>
-<span id="cb36-10"><a aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> Downloading from <span class="va">$1</span> in folder <span class="va">$3</span></span>
-<span id="cb36-11"><a aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> Selecting <span class="va">$2</span></span>
-<span id="cb36-12"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$4</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb36-13"><a aria-hidden="true" tabindex="-1"></a>          <span class="va">BRANCH</span><span class="op">=</span><span class="st">"-b main"</span></span>
-<span id="cb36-14"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb36-15"><a aria-hidden="true" tabindex="-1"></a>          <span class="va">BRANCH</span><span class="op">=</span><span class="st">"-b </span><span class="va">$4</span><span class="st">"</span></span>
-<span id="cb36-16"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
-<span id="cb36-17"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> clone <span class="at">--no-checkout</span> <span class="va">$BRANCH</span> <span class="at">--filter</span><span class="op">=</span>blob:none <span class="at">--depth</span> 1 https://github.com/<span class="va">$1</span>.git <span class="va">$3</span></span>
-<span id="cb36-18"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$3</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb36-19"><a aria-hidden="true" tabindex="-1"></a>          <span class="va">folder</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$1</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">'/'</span> <span class="at">-f2</span><span class="va">)</span></span>
-<span id="cb36-20"><a aria-hidden="true" tabindex="-1"></a>          <span class="bu">cd</span> <span class="st">"</span><span class="va">$folder</span><span class="st">"</span></span>
-<span id="cb36-21"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb36-22"><a aria-hidden="true" tabindex="-1"></a>          <span class="bu">cd</span> <span class="st">"</span><span class="va">$3</span><span class="st">"</span></span>
-<span id="cb36-23"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
-<span id="cb36-24"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> sparse-checkout init <span class="at">--cone</span></span>
-<span id="cb36-25"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> sparse-checkout set <span class="va">$2</span></span>
-<span id="cb36-26"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> checkout</span>
-<span id="cb36-27"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Git clone with depth 1 and choice of folders</span></span>
+<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 1: username/repository</span></span>
+<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 2: folders and files in quotes '', backspace separator</span></span>
+<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 3: local download folder name (optional, default:repo)</span></span>
+<span id="cb46-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   arg 4: branch (optional, default:main)</span></span>
+<span id="cb46-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Examples:</span></span>
+<span id="cb46-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   ghdir github/gitignore 'community Global' test01 main</span></span>
+<span id="cb46-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   ghdir github/gitignore 'community Global' </span></span>
+<span id="cb46-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ghdir()</span> <span class="kw">{</span></span>
+<span id="cb46-10"><a aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> Downloading from <span class="va">$1</span> in folder <span class="va">$3</span></span>
+<span id="cb46-11"><a aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> Selecting <span class="va">$2</span></span>
+<span id="cb46-12"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$4</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb46-13"><a aria-hidden="true" tabindex="-1"></a>          <span class="va">BRANCH</span><span class="op">=</span><span class="st">"-b main"</span></span>
+<span id="cb46-14"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb46-15"><a aria-hidden="true" tabindex="-1"></a>          <span class="va">BRANCH</span><span class="op">=</span><span class="st">"-b </span><span class="va">$4</span><span class="st">"</span></span>
+<span id="cb46-16"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb46-17"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> clone <span class="at">--no-checkout</span> <span class="va">$BRANCH</span> <span class="at">--filter</span><span class="op">=</span>blob:none <span class="at">--depth</span> 1 https://github.com/<span class="va">$1</span>.git <span class="va">$3</span></span>
+<span id="cb46-18"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$3</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb46-19"><a aria-hidden="true" tabindex="-1"></a>          <span class="va">folder</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$1</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">'/'</span> <span class="at">-f2</span><span class="va">)</span></span>
+<span id="cb46-20"><a aria-hidden="true" tabindex="-1"></a>          <span class="bu">cd</span> <span class="st">"</span><span class="va">$folder</span><span class="st">"</span></span>
+<span id="cb46-21"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb46-22"><a aria-hidden="true" tabindex="-1"></a>          <span class="bu">cd</span> <span class="st">"</span><span class="va">$3</span><span class="st">"</span></span>
+<span id="cb46-23"><a aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb46-24"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> sparse-checkout init <span class="at">--cone</span></span>
+<span id="cb46-25"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> sparse-checkout set <span class="va">$2</span></span>
+<span id="cb46-26"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">git</span> checkout</span>
+<span id="cb46-27"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section></section>
 <section>
 <section id="manage-multiple-terminals-with-tmux" class="title-slide slide level1 center">
@@ -1070,7 +1257,7 @@ Indlæser…
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
 <p><code>tmux</code> is a keyboard-only software. But you can set it up also to change windows and panes with the mouse. Simply run this command (<strong>only once</strong>) to enable mouse usage:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"set -g mouse"</span> <span class="op">&gt;&gt;</span> ~/.tmux.conf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"set -g mouse"</span> <span class="op">&gt;&gt;</span> ~/.tmux.conf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1086,7 +1273,7 @@ Indlæser…
 </div>
 <p>&nbsp;</p>
 <p>You can start a <code>tmux</code> session anywhere. It is easier to navigate sessions giving them a name. For example start a session called <code>example1</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> example1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new <span class="at">-s</span> example1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -1112,7 +1299,7 @@ Ctrl + b    ""</code></pre>
 <p>&nbsp;</p>
 <p>You should see another window added in the bottom window bar. Again, switch between windows with your mouse (left-click!)</p>
 <p>In the new window, let’s look at which tmux sessions and windows are open. Run</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>The output will tell you that session <code>example1</code> is in use (attached) and has 2 windows. Something like this:</p>
 <pre><code>example1: 2 windows (created Wed Apr  2 16:12:54 2025) (attached)</code></pre>
@@ -1120,7 +1307,7 @@ Ctrl + b    ""</code></pre>
 <section id="launching-separate-downloads-at-the-same-time" class="slide level2">
 <h2>Launching separate downloads at the same time</h2>
 <p>Start a new session without attaching to it (<code>d</code> option), and call it <code>downloads</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new-session <span class="at">-d</span> <span class="at">-s</span> downloads</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> new-session <span class="at">-d</span> <span class="at">-s</span> downloads</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>verify the session is there with <code>tmux ls</code>.</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -1136,26 +1323,26 @@ Ctrl + b    ""</code></pre>
 </div>
 </div>
 <p>Create a text file with few example files for this workshop to be downloaded.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> <span class="st">'.[] | .download_url'</span> <span class="op">&gt;</span> downloads.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://api.github.com/repos/hds-sandbox/GDKworkshops/contents/Examples/rsync <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> <span class="st">'.[] | .download_url'</span> <span class="op">&gt;</span> downloads.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
 <p>Now, the script below launches all the URLs from the list in the download session in a new window. The new window closes after the download. If there are less than K downloads active, a new one starts, until the end! You can use this and close your terminal. The downloads will keep going and the window names will be shown to keep an eye on the current downloads. Try it out and use it whenever you have massive number of file downloads.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> downloaded</span>
-<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a><span class="va">K</span><span class="op">=</span>2  <span class="co"># Maximum number of concurrent downloads</span></span>
-<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">url</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb44-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wait until the number of active tmux windows in the "downloads" session is less than K</span></span>
-<span id="cb44-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$(</span><span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span> <span class="ot">-ge</span> <span class="st">"</span><span class="va">$((K</span><span class="op">+</span><span class="dv">1</span><span class="va">))</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">do</span>     </span>
-<span id="cb44-6"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">sleep</span> 1</span>
-<span id="cb44-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
-<span id="cb44-8"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract the filename from the URL</span></span>
-<span id="cb44-10"><a aria-hidden="true" tabindex="-1"></a>    <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$url</span><span class="st">"</span><span class="va">)</span></span>
-<span id="cb44-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-12"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start a new tmux window for the download</span></span>
-<span id="cb44-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> new-window <span class="at">-t</span> downloads <span class="at">-n</span> <span class="st">"</span><span class="va">$filename</span><span class="st">"</span> <span class="st">"wget -c </span><span class="va">$url</span><span class="st"> -O downloaded/</span><span class="va">$filename</span><span class="st"> &amp;&amp; tmux kill-window"</span></span>
-<span id="cb44-14"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="at">-F</span> <span class="st">"#{window_name}"</span>   </span>
-<span id="cb44-15"><a aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> downloads.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> downloaded</span>
+<span id="cb54-2"><a aria-hidden="true" tabindex="-1"></a><span class="va">K</span><span class="op">=</span>2  <span class="co"># Maximum number of concurrent downloads</span></span>
+<span id="cb54-3"><a aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">url</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb54-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wait until the number of active tmux windows in the "downloads" session is less than K</span></span>
+<span id="cb54-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$(</span><span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st">"</span> <span class="ot">-ge</span> <span class="st">"</span><span class="va">$((K</span><span class="op">+</span><span class="dv">1</span><span class="va">))</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">do</span>     </span>
+<span id="cb54-6"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">sleep</span> 1</span>
+<span id="cb54-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb54-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract the filename from the URL</span></span>
+<span id="cb54-10"><a aria-hidden="true" tabindex="-1"></a>    <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$url</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb54-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-12"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start a new tmux window for the download</span></span>
+<span id="cb54-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> new-window <span class="at">-t</span> downloads <span class="at">-n</span> <span class="st">"</span><span class="va">$filename</span><span class="st">"</span> <span class="st">"wget -c </span><span class="va">$url</span><span class="st"> -O downloaded/</span><span class="va">$filename</span><span class="st"> &amp;&amp; tmux kill-window"</span></span>
+<span id="cb54-14"><a aria-hidden="true" tabindex="-1"></a>    <span class="ex">tmux</span> list-windows <span class="at">-t</span> downloads <span class="at">-F</span> <span class="st">"#{window_name}"</span>   </span>
+<span id="cb54-15"><a aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> downloads.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section></section>
 <section>
 <section id="web-applications-ports-tunneling" class="title-slide slide level1 center">
@@ -1225,17 +1412,17 @@ Ctrl + b    ""</code></pre>
 </div>
 <div class="callout-content">
 <p>Run the installation script to install the software. There are some informative messages during the installation. You might need to say <code>yes</code> a few times</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
-<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
-<span id="cb45-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
-<span id="cb45-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniforge3/bin/conda</span> init bash</span>
-<span id="cb45-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh <span class="at">-O</span> miniforge.sh</span>
+<span id="cb55-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x miniforge.sh</span>
+<span id="cb55-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> miniforge.sh <span class="at">-b</span></span>
+<span id="cb55-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniforge3/bin/conda</span> init bash</span>
+<span id="cb55-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>When you are done, you need a little bit of configuration. You can run the following command to configure <code>conda</code> (run them only once, they are not needed again):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span>
-<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span>
-<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
-<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span>
-<span id="cb46-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels conda-forge</span>
+<span id="cb56-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--append</span> channels bioconda</span>
+<span id="cb56-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
+<span id="cb56-4"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> auto_activate_base false</span>
+<span id="cb56-5"><a aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Now you are ready to move on!</p>
 </div>
 </div>
@@ -1245,14 +1432,14 @@ Ctrl + b    ""</code></pre>
 <section class="slide level2">
 
 <p>Create a new <code>conda</code> environment:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> GDKjupyter jupyterlab numpy pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> GDKjupyter jupyterlab numpy pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Start a job with just a few resources.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Now activate your environment and run jupyterlab. The node name (remote host) and your user ID (for the port number) <strong>are given as variables</strong> to the web server simply using <code>$(hostname)</code> and <code>$UID</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate GDKjupyter</span>
-<span id="cb49-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate GDKjupyter</span>
+<span id="cb59-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -1261,7 +1448,7 @@ Ctrl + b    ""</code></pre>
 <img data-src="img/jupyterUrl.png" class="quarto-figure quarto-figure-center r-stretch" width="800"><p>&nbsp;</p>
 <p>Write down your node number and user id you got from jupyterlab.</p>
 <p><strong>We now need a tunnel</strong> from the local host (your PC)! Write in a new terminal <strong>(not logged into GenomeDK)</strong> a command like the following (matching the example figure above), substituting the correct values:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L6835:s21n34:6835</span> USERNAME@login.genome.au.dk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L6835:s21n34:6835</span> USERNAME@login.genome.au.dk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
 <p>Your tunnel is now opened. The web application can be accessed <strong>from your browser</strong> at the address given by the server process on GenomeDK, which starts with <code>127.0.0.1/PORT_NUMBER</code> (put your correct port number). Copy and paste it in your browser.</p>
 <p><strong>Exercise finished</strong></p>
@@ -1321,7 +1508,7 @@ Ctrl + b    ""</code></pre>
 <p>When done, click on the remote symbol on the bottom-left corner (red circle),</p>
 
 <img data-src="img/vscode3.png" class="r-stretch"><p>choose <code>Connect current window to host</code> then <code>Add new SSH host</code>, and type:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@login.genome.au.dk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@login.genome.au.dk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If asked, select the file <code>.ssh/config</code>.</p>
 </section>
 <section class="slide level2">
@@ -1350,10 +1537,10 @@ Ctrl + b    ""</code></pre>
 <section class="slide level2">
 
 <p>This should open the configuration file for ssh access, in which you already have some settings. Eventually, you are asked to choose which file to open, and it is usually the first one of the list. Now, the file should contain a configuration like the one below.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a><span class="at">Host login.genome.au.dk</span></span>
-<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a><span class="at">  HostName login.genome.au.dk</span></span>
-<span id="cb52-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  User YOUR_USERNAME</span></span>
-<span id="cb52-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ControlMaster auto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb62-1"><a aria-hidden="true" tabindex="-1"></a><span class="at">Host login.genome.au.dk</span></span>
+<span id="cb62-2"><a aria-hidden="true" tabindex="-1"></a><span class="at">  HostName login.genome.au.dk</span></span>
+<span id="cb62-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  User YOUR_USERNAME</span></span>
+<span id="cb62-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ControlMaster auto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -1363,11 +1550,11 @@ Ctrl + b    ""</code></pre>
 <li>YOUR_USERNAME is your username on GenomeDK</li>
 <li>YOUR_UID is your user id (you can see it with <code>echo $UID</code> on GenomeDK)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a><span class="at">Host A_COMPUTING_NODE</span></span>
-<span id="cb53-2"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ProxyJump login.genome.au.dk</span></span>
-<span id="cb53-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  HostName A_COMPUTING_NODE</span></span>
-<span id="cb53-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  User YOUR_USERNAME</span></span>
-<span id="cb53-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  LocalForward YOUR_UID A_COMPUTING_NODE:YOUR_UID</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb63-1"><a aria-hidden="true" tabindex="-1"></a><span class="at">Host A_COMPUTING_NODE</span></span>
+<span id="cb63-2"><a aria-hidden="true" tabindex="-1"></a><span class="at">  ProxyJump login.genome.au.dk</span></span>
+<span id="cb63-3"><a aria-hidden="true" tabindex="-1"></a><span class="at">  HostName A_COMPUTING_NODE</span></span>
+<span id="cb63-4"><a aria-hidden="true" tabindex="-1"></a><span class="at">  User YOUR_USERNAME</span></span>
+<span id="cb63-5"><a aria-hidden="true" tabindex="-1"></a><span class="at">  LocalForward YOUR_UID A_COMPUTING_NODE:YOUR_UID</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section class="slide level2">
 
@@ -1377,9 +1564,9 @@ Ctrl + b    ""</code></pre>
 <section class="slide level2">
 
 <p>Now, on the cluster you can run a job on that node so that you can run jupyterlab. To chose the node in an interactive job, use the option <code>--nodelist</code>. For example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodelist</span><span class="op">=</span>cn-1019 <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb64-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodelist</span><span class="op">=</span>cn-1019 <span class="at">--mem</span><span class="op">=</span>4g <span class="at">--cores</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>4:00:0 <span class="at">--pty</span> /bin/bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Remember to run jupyterlab on the node with your user id as port and the node name as ip/hostname:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-lab</span> <span class="at">--port</span><span class="op">=</span><span class="va">$UID</span> <span class="at">--ip</span><span class="op">=</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You then open VScode, connect on the node from the remote explorer, and use the file browser of VScode to open your notebooks. When the notebook is open, you can also choose all the jupyter kernels related to your conda or pixi environment where you have jupyterlab installed!</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/people.html</loc>
-    <lastmod>2026-01-22T08:55:22.406Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/gwf/slides.html</loc>
-    <lastmod>2026-01-22T08:55:22.516Z</lastmod>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.html</loc>
+    <lastmod>2026-03-08T19:47:59.024Z</lastmod>
   </url>
   <url>
     <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/gwf2024/slides.html</loc>
-    <lastmod>2026-01-22T08:55:22.523Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.html</loc>
-    <lastmod>2026-01-22T08:55:22.512Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/index.html</loc>
-    <lastmod>2026-01-22T08:55:22.406Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/LICENSE.html</loc>
-    <lastmod>2026-01-22T08:55:22.403Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/linuxbasic/slides.html</loc>
-    <lastmod>2026-01-22T08:55:22.531Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.backup.html</loc>
-    <lastmod>2026-01-22T08:55:22.511Z</lastmod>
+    <lastmod>2026-03-08T19:47:59.035Z</lastmod>
   </url>
   <url>
     <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Advanced/slides.html</loc>
-    <lastmod>2026-01-22T08:55:22.450Z</lastmod>
+    <lastmod>2026-03-08T19:47:58.963Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/people.html</loc>
+    <lastmod>2026-03-08T19:47:58.919Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/LICENSE.html</loc>
+    <lastmod>2026-03-08T19:47:58.915Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/index.html</loc>
+    <lastmod>2026-03-08T19:47:58.918Z</lastmod>
   </url>
   <url>
     <loc>https://hds-sandbox.github.io/GDKworkshops/cards/SamueleSoraggi.html</loc>
-    <lastmod>2026-01-22T08:55:22.403Z</lastmod>
+    <lastmod>2026-03-08T19:47:58.916Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/gwf/slides.html</loc>
+    <lastmod>2026-03-08T19:47:59.028Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/linuxbasic/slides.html</loc>
+    <lastmod>2026-03-08T19:47:59.044Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hds-sandbox.github.io/GDKworkshops/resources/Slides/Introduction/slides.backup.html</loc>
+    <lastmod>2026-03-08T19:47:59.024Z</lastmod>
   </url>
 </urlset>
