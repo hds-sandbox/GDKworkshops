@@ -66,17 +66,19 @@ smaller: true
   - Background on workflows/pipelines
   - Workflow file structure and templates
   - A small example
-
-- **11:00-12:00**: 
   - Workflow for the exercise
+
+- **10:45-12:00**: 
   - Prepare for the workflow: data, software, workflow file
   - Investigate specific parts of the workflow
   - Execute one or more targets
   - Verify what happens with each target
-
-- **12:45-13:45**: 
   - calibrate your resources
   - add a template and targets to a pipeline
+
+- **12:45-13:45**: 
+  - python debugging
+  - parametrized workflows
 
 - **13:45-14:00**: 
   - Questions
@@ -226,7 +228,7 @@ Most known in bioinformatics and in a production environment are `Snakemake` and
 **Cons**
 
 - Uses a Groovy-based language
-- Strep learning curve
+- Steep learning curve
 - Less natural for custom code
 - High runtime footprint
 :::
@@ -431,7 +433,7 @@ Create a conda environment for `seqkit` and one for the `gwf` workflow software.
 ```{.bash}
 conda config --add channels gwforg
 #conda env pipelineEnv for gwf
-conda create -y -n pipelineEnv gwf=2.1.1
+conda create -y -n pipelineEnv gwf
 #add package for resource usage/check
 conda install -y -n pipelineEnv -c micknudsen gwf-utilization
 #conda env seqKitEnv for seqkit
@@ -696,15 +698,25 @@ Ask for help, or [look at the solution file, if you prefere](https://raw.githubu
 
 ---
 
-:::{.callout-note}
-Good practices:
+Other useful tips when developing a `gwf` workflow:
 
- - do not make tiny and numerous targets, try to put together things which can run quickly
+- you can write your templates library in a separate file (e.g. `templates.py`) and import them in your workflow file (e.g. `workflow.py`), to keep it more organized
+- your workflow is a python script! Use all the advantages of it, for example:
+  - use loops to create targets from templates, instead of writing each target separately
+  - find files or parse their names with python functions
+  - test a step of the workflow directly in python instead of running it as a script
+- generalize workflows through templates
+
+---
+
+:::{.callout-note title="Take home messages"}
+
+ - A workflow manager interacts with the queueing manager of the cluster and organize dependencies
+ - GWF works with `slurm` and other backends, so it is portable locally and on many other clusters
  - start testing one of many parallel elements of a workflow before running them all at once
     - determine resource usage (`gwf utilization` - needs a plugin, see earlier exercises)
     - then adjust your templates' resources accordingly
  - verify often your code is correct
-    - `gwf info | less -S` to check dependencies
     - remember you are using python, check some of your code directly in it!
   - when done, you are reproducible if you share with your datasets:
     - container pull commands
