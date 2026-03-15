@@ -12,7 +12,7 @@
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-03-08">
+  <meta name="dcterms.date" content="2026-03-15">
   <title>GenomeDK workshops – Introduction to workflows on GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -240,7 +240,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-03-08</p>
+  <p class="date">2026-03-15</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -285,19 +285,21 @@ Dan Søndergaard
 <li>Background on workflows/pipelines</li>
 <li>Workflow file structure and templates</li>
 <li>A small example</li>
-</ul></li>
-<li><strong>11:00-12:00</strong>:
-<ul>
 <li>Workflow for the exercise</li>
+</ul></li>
+<li><strong>10:45-12:00</strong>:
+<ul>
 <li>Prepare for the workflow: data, software, workflow file</li>
 <li>Investigate specific parts of the workflow</li>
 <li>Execute one or more targets</li>
 <li>Verify what happens with each target</li>
+<li>calibrate your resources</li>
+<li>add a template and targets to a pipeline</li>
 </ul></li>
 <li><strong>12:45-13:45</strong>:
 <ul>
-<li>calibrate your resources</li>
-<li>add a template and targets to a pipeline</li>
+<li>python debugging</li>
+<li>parametrized workflows</li>
 </ul></li>
 <li><strong>13:45-14:00</strong>:
 <ul>
@@ -493,7 +495,7 @@ Dan Søndergaard
 <p><strong>Cons</strong></p>
 <ul>
 <li>Uses a Groovy-based language</li>
-<li>Strep learning curve</li>
+<li>Steep learning curve</li>
 <li>Less natural for custom code</li>
 <li>High runtime footprint</li>
 </ul>
@@ -727,7 +729,7 @@ Dan Søndergaard
 <p>&nbsp;</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels gwforg</span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#conda env pipelineEnv for gwf</span></span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineEnv gwf=2.1.1</span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-y</span> <span class="at">-n</span> pipelineEnv gwf</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#add package for resource usage/check</span></span>
 <span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-y</span> <span class="at">-n</span> pipelineEnv <span class="at">-c</span> micknudsen gwf-utilization</span>
 <span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#conda env seqKitEnv for seqkit</span></span>
@@ -994,18 +996,33 @@ Dan Søndergaard
 </section>
 <section class="slide level2">
 
+<p>Other useful tips when developing a <code>gwf</code> workflow:</p>
+<ul>
+<li>you can write your templates library in a separate file (e.g.&nbsp;<code>templates.py</code>) and import them in your workflow file (e.g.&nbsp;<code>workflow.py</code>), to keep it more organized</li>
+<li>your workflow is a python script! Use all the advantages of it, for example:
+<ul>
+<li>use loops to create targets from templates, instead of writing each target separately</li>
+<li>find files or parse their names with python functions</li>
+<li>test a step of the workflow directly in python instead of running it as a script</li>
+</ul></li>
+<li>generalize workflows through templates</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div title="Take home messages">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>Take home messages</strong></p>
 </div>
 <div class="callout-content">
-<p>Good practices:</p>
 <ul>
-<li>do not make tiny and numerous targets, try to put together things which can run quickly</li>
+<li>A workflow manager interacts with the queueing manager of the cluster and organize dependencies</li>
+<li>GWF works with <code>slurm</code> and other backends, so it is portable locally and on many other clusters</li>
 <li>start testing one of many parallel elements of a workflow before running them all at once
 <ul>
 <li>determine resource usage (<code>gwf utilization</code> - needs a plugin, see earlier exercises)</li>
@@ -1013,7 +1030,6 @@ Dan Søndergaard
 </ul></li>
 <li>verify often your code is correct
 <ul>
-<li><code>gwf info | less -S</code> to check dependencies</li>
 <li>remember you are using python, check some of your code directly in it!</li>
 </ul></li>
 <li>when done, you are reproducible if you share with your datasets:
@@ -1023,6 +1039,7 @@ Dan Søndergaard
 <li>workflow files</li>
 </ul></li>
 </ul>
+</div>
 </div>
 </div>
 </div>

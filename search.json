@@ -550,7 +550,7 @@
     "href": "resources/Slides/gwf/slides.html#program",
     "title": "Introduction to workflows on GenomeDK",
     "section": "Program",
-    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nBackground on workflows/pipelines\nWorkflow file structure and templates\nA small example\n\n11:00-12:00:\n\nWorkflow for the exercise\nPrepare for the workflow: data, software, workflow file\nInvestigate specific parts of the workflow\nExecute one or more targets\nVerify what happens with each target\n\n12:45-13:45:\n\ncalibrate your resources\nadd a template and targets to a pipeline\n\n13:45-14:00:\n\nQuestions\nFeedback"
+    "text": "Program\n\n10:00-10:45:\n\nWorkshop Introduction\nBackground on workflows/pipelines\nWorkflow file structure and templates\nA small example\nWorkflow for the exercise\n\n10:45-12:00:\n\nPrepare for the workflow: data, software, workflow file\nInvestigate specific parts of the workflow\nExecute one or more targets\nVerify what happens with each target\ncalibrate your resources\nadd a template and targets to a pipeline\n\n12:45-13:45:\n\npython debugging\nparametrized workflows\n\n13:45-14:00:\n\nQuestions\nFeedback"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#workflow-terminology",
@@ -571,7 +571,7 @@
     "href": "resources/Slides/gwf/slides.html#pros-and-cons",
     "title": "Introduction to workflows on GenomeDK",
     "section": "Pros and cons",
-    "text": "Pros and cons\n\n\nNextflow\nPros\n\nPopular, mature ecosystem (nf-core)\nMany production-ready pipelines\nExcellent container (Docker/Singularity) and cloud support (AWS, GCP)\nStrong reproducibility and portability\nGood for complex dataflow\n\nCons\n\nUses a Groovy-based language\nStrep learning curve\nLess natural for custom code\nHigh runtime footprint\n\n\nSnakemake\nPros\n\nPythonic language — easy to learn\nTight integration with conda, containers\nWorkflows are concise\nStrong community and good documentation\nGood support\n\nCons\n\nVery large or highly dynamic workflows can become complex\nNot cloud-native as Nextflow is\n\n\nGwf\nPros\n\nPure Python workflows — full flexibility\nLightweight and pedagogical; easy to teach and tweak\nFine-grained control of resources\nGood local/HPC integration\nSimple template reuse\nStrong local support at GenomeDK / AU\n\nCons\n\nSmall community\nLess documentation\nmainly HPC-oriented\nNo ecosystem tools"
+    "text": "Pros and cons\n\n\nNextflow\nPros\n\nPopular, mature ecosystem (nf-core)\nMany production-ready pipelines\nExcellent container (Docker/Singularity) and cloud support (AWS, GCP)\nStrong reproducibility and portability\nGood for complex dataflow\n\nCons\n\nUses a Groovy-based language\nSteep learning curve\nLess natural for custom code\nHigh runtime footprint\n\n\nSnakemake\nPros\n\nPythonic language — easy to learn\nTight integration with conda, containers\nWorkflows are concise\nStrong community and good documentation\nGood support\n\nCons\n\nVery large or highly dynamic workflows can become complex\nNot cloud-native as Nextflow is\n\n\nGwf\nPros\n\nPure Python workflows — full flexibility\nLightweight and pedagogical; easy to teach and tweak\nFine-grained control of resources\nGood local/HPC integration\nSimple template reuse\nStrong local support at GenomeDK / AU\n\nCons\n\nSmall community\nLess documentation\nmainly HPC-oriented\nNo ecosystem tools"
   },
   {
     "objectID": "resources/Slides/gwf/slides.html#gwf-workflow-manager",
