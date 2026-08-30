@@ -6,12 +6,12 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-03-15">
+  <meta name="dcterms.date" content="2026-08-30">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,10 +19,16 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -97,7 +103,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QZP3HK6BQT"></script>
 
   <script type="text/javascript">
@@ -215,7 +221,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Samuele Soraggi 
+Samuele Soraggi
 </div>
         <p class="quarto-title-affiliation">
             Health Data Science sandbox, BiRC
@@ -223,7 +229,7 @@ Samuele Soraggi
     </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dan Søndergaard 
+Dan Søndergaard
 </div>
         <p class="quarto-title-affiliation">
             GenomeDK, Health
@@ -231,7 +237,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-03-15</p>
+  <p class="date">2026-08-30</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -454,10 +460,10 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="94e8a987" class="cell" data-execution_count="1">
+<div id="9f17ea18" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="HyqGsJxzwzTj" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#HyqGsJxzwzTj {
+<div id="UyQDbfOqKvUG" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#UyQDbfOqKvUG {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -684,7 +690,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsHyqGsJxzwzTj=[
+var questionsUyQDbfOqKvUG=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1799,8 +1805,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("HyqGsJxzwzTj")) {
-    show_questions(questionsHyqGsJxzwzTj, HyqGsJxzwzTj);
+  if (document.getElementById("UyQDbfOqKvUG")) {
+    show_questions(questionsUyQDbfOqKvUG, UyQDbfOqKvUG);
   } else {
     setTimeout(try_show, 200);
   }
@@ -1902,10 +1908,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="d596387f" class="cell" data-execution_count="2">
+<div id="ed43bd8e" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="IwUtqRtLDcVY" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#IwUtqRtLDcVY {
+<div id="jVTTnkBXtDMd" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#jVTTnkBXtDMd {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2132,7 +2138,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsIwUtqRtLDcVY=[
+var questionsjVTTnkBXtDMd=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3221,8 +3227,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("IwUtqRtLDcVY")) {
-    show_questions(questionsIwUtqRtLDcVY, IwUtqRtLDcVY);
+  if (document.getElementById("jVTTnkBXtDMd")) {
+    show_questions(questionsjVTTnkBXtDMd, jVTTnkBXtDMd);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3628,10 +3634,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="e2665fb8" class="cell" data-execution_count="3">
+<div id="8a4938be" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div id="ZHmygHebsebm" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#ZHmygHebsebm {
+<div id="pGSugAcsEPzg" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#pGSugAcsEPzg {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3858,7 +3864,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsZHmygHebsebm=[
+var questionspGSugAcsEPzg=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -4947,8 +4953,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("ZHmygHebsebm")) {
-    show_questions(questionsZHmygHebsebm, ZHmygHebsebm);
+  if (document.getElementById("pGSugAcsEPzg")) {
+    show_questions(questionspGSugAcsEPzg, pGSugAcsEPzg);
   } else {
     setTimeout(try_show, 200);
   }
@@ -5061,10 +5067,10 @@ function try_show() {
 <p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
-<div id="9d1dfbb3" class="cell" data-execution_count="4">
+<div id="a7b0998d" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div id="HQPPWFgcqBOC" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#HQPPWFgcqBOC {
+<div id="ZHiVYieSAaAp" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#ZHiVYieSAaAp {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -5291,7 +5297,7 @@ function try_show() {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsHQPPWFgcqBOC=[
+var questionsZHiVYieSAaAp=[
     {
         "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
         "type": "many_choice",
@@ -6380,8 +6386,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("HQPPWFgcqBOC")) {
-    show_questions(questionsHQPPWFgcqBOC, HQPPWFgcqBOC);
+  if (document.getElementById("ZHiVYieSAaAp")) {
+    show_questions(questionsZHiVYieSAaAp, ZHiVYieSAaAp);
   } else {
     setTimeout(try_show, 200);
   }

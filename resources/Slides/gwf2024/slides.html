@@ -6,8 +6,8 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
@@ -19,10 +19,16 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -97,7 +103,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QZP3HK6BQT"></script>
 
   <script type="text/javascript">
@@ -211,7 +217,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Samuele Soraggi 
+Samuele Soraggi
 </div>
         <p class="quarto-title-affiliation">
             Health Data Science sandbox, BiRC
@@ -219,7 +225,7 @@ Samuele Soraggi
     </div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dan Søndergaard 
+Dan Søndergaard
 </div>
         <p class="quarto-title-affiliation">
             GenomeDK, Health
@@ -338,20 +344,20 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>You can easily spot all the elements of a workflow graph:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
-<span id="cb7-4"><a></a></span>
-<span id="cb7-5"><a></a><span class="co">## A target doing FastQC on a file</span></span>
-<span id="cb7-6"><a></a>gwf.target(<span class="st">'FastQC'</span>, </span>
-<span id="cb7-7"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb7-8"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb7-9"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb7-10"><a></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
-<span id="cb7-11"><a></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
-<span id="cb7-12"><a></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb7-13"><a></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
-<span id="cb7-14"><a></a><span class="st">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
+<span id="cb7-2"><a aria-label="2"></a></span>
+<span id="cb7-3"><a aria-label="3"></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
+<span id="cb7-4"><a aria-label="4"></a></span>
+<span id="cb7-5"><a aria-label="5"></a><span class="co">## A target doing FastQC on a file</span></span>
+<span id="cb7-6"><a aria-label="6"></a>gwf.target(<span class="st">'FastQC'</span>, </span>
+<span id="cb7-7"><a aria-label="7"></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb7-8"><a aria-label="8"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb7-9"><a aria-label="9"></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
+<span id="cb7-10"><a aria-label="10"></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
+<span id="cb7-11"><a aria-label="11"></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
+<span id="cb7-12"><a aria-label="12"></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
+<span id="cb7-13"><a aria-label="13"></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
+<span id="cb7-14"><a aria-label="14"></a><span class="st">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="status-and-submission" class="slide level2">
 <h2>Status and submission</h2>
@@ -387,26 +393,26 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>You can use python to automatically parsing names in a folder and creating targets:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-code-line-numbers="1-5|8|9-10|10-12|16-18|19-20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co">#find .fastq.gz files in the data folder</span></span>
-<span id="cb16-2"><a></a>pattern <span class="op">=</span> os.path.join(<span class="st">'data'</span>, <span class="st">'*.fastq.gz'</span>)</span>
-<span id="cb16-3"><a></a>fastq_files <span class="op">=</span> glob.glob(pattern) </span>
-<span id="cb16-4"><a></a><span class="co">#keep only the file name without the folder path</span></span>
-<span id="cb16-5"><a></a>fastq_files <span class="op">=</span> [os.path.basename(<span class="bu">file</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> fastq_files] <span class="co">#remove the path from the file</span></span>
-<span id="cb16-6"><a></a></span>
-<span id="cb16-7"><a></a></span>
-<span id="cb16-8"><a></a><span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files:</span>
-<span id="cb16-9"><a></a>    <span class="co">#name without extensions</span></span>
-<span id="cb16-10"><a></a>    FASTQ_BASENAME <span class="op">=</span> FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] </span>
-<span id="cb16-11"><a></a>    <span class="co">#target with file-dependent name and inputs/outputs</span></span>
-<span id="cb16-12"><a></a>    gwf.target( <span class="ss">f'FastQC_</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">'</span>, </span>
-<span id="cb16-13"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb16-14"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb16-15"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb16-16"><a></a>           inputs<span class="op">=</span>[<span class="ss">f'data/</span><span class="sc">{</span>FASTQ<span class="sc">}</span><span class="ss">'</span>], </span>
-<span id="cb16-17"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span>, </span>
-<span id="cb16-18"><a></a>                    <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb16-19"><a></a><span class="st">    fastqc data/</span><span class="sc">{FASTQ}</span></span>
-<span id="cb16-20"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ<span class="op">=</span>FASTQ)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-code-line-numbers="1-5|8|9-10|10-12|16-18|19-20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co">#find .fastq.gz files in the data folder</span></span>
+<span id="cb16-2"><a aria-label="2"></a>pattern <span class="op">=</span> os.path.join(<span class="st">'data'</span>, <span class="st">'*.fastq.gz'</span>)</span>
+<span id="cb16-3"><a aria-label="3"></a>fastq_files <span class="op">=</span> glob.glob(pattern) </span>
+<span id="cb16-4"><a aria-label="4"></a><span class="co">#keep only the file name without the folder path</span></span>
+<span id="cb16-5"><a aria-label="5"></a>fastq_files <span class="op">=</span> [os.path.basename(<span class="bu">file</span>) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> fastq_files] <span class="co">#remove the path from the file</span></span>
+<span id="cb16-6"><a aria-label="6"></a></span>
+<span id="cb16-7"><a aria-label="7"></a></span>
+<span id="cb16-8"><a aria-label="8"></a><span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files:</span>
+<span id="cb16-9"><a aria-label="9"></a>    <span class="co">#name without extensions</span></span>
+<span id="cb16-10"><a aria-label="10"></a>    FASTQ_BASENAME <span class="op">=</span> FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] </span>
+<span id="cb16-11"><a aria-label="11"></a>    <span class="co">#target with file-dependent name and inputs/outputs</span></span>
+<span id="cb16-12"><a aria-label="12"></a>    gwf.target( <span class="ss">f'FastQC_</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">'</span>, </span>
+<span id="cb16-13"><a aria-label="13"></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb16-14"><a aria-label="14"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb16-15"><a aria-label="15"></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
+<span id="cb16-16"><a aria-label="16"></a>           inputs<span class="op">=</span>[<span class="ss">f'data/</span><span class="sc">{</span>FASTQ<span class="sc">}</span><span class="ss">'</span>], </span>
+<span id="cb16-17"><a aria-label="17"></a>           outputs<span class="op">=</span>[<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span>, </span>
+<span id="cb16-18"><a aria-label="18"></a>                    <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
+<span id="cb16-19"><a aria-label="19"></a><span class="st">    fastqc data/</span><span class="sc">{FASTQ}</span></span>
+<span id="cb16-20"><a aria-label="20"></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ<span class="op">=</span>FASTQ)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="useful-gwf-checks-and-debug" class="slide level2">
 <h2>Useful gwf checks and debug</h2>
@@ -462,21 +468,21 @@ Dan Søndergaard
 <img data-src="img/whole_gwf_2.png" class="r-stretch quarto-figure-center"><p class="caption">A single target (MultiQC) is dependent on the execution of multiple targets (FastQC of the data files)</p></section>
 <section class="slide level2">
 
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-code-line-numbers="1-2|4|8-11|12-14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="co">#names without path and extensions</span></span>
-<span id="cb23-2"><a></a>fastq_basenames <span class="op">=</span> [ FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files ] </span>
-<span id="cb23-3"><a></a></span>
-<span id="cb23-4"><a></a>gwf.target( <span class="st">'MultiQC'</span>, <span class="co">#name of the target</span></span>
-<span id="cb23-5"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb23-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb23-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb23-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ZIP'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames],</span>
-<span id="cb23-9"><a></a>                    <span class="st">'REPORTS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames] }, </span>
-<span id="cb23-10"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>],</span>
-<span id="cb23-11"><a></a>           protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb23-12"><a></a><span class="st">    mkdir -p results/multiqc_output</span></span>
-<span id="cb23-13"><a></a><span class="st">    multiqc --outdir results/multiqc_output </span><span class="op">\</span></span>
-<span id="cb23-14"><a></a><span class="st">            data/</span></span>
-<span id="cb23-15"><a></a><span class="st">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-code-line-numbers="1-2|4|8-11|12-14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="co">#names without path and extensions</span></span>
+<span id="cb23-2"><a aria-label="2"></a>fastq_basenames <span class="op">=</span> [ FASTQ.split(<span class="st">"."</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_files ] </span>
+<span id="cb23-3"><a aria-label="3"></a></span>
+<span id="cb23-4"><a aria-label="4"></a>gwf.target( <span class="st">'MultiQC'</span>, <span class="co">#name of the target</span></span>
+<span id="cb23-5"><a aria-label="5"></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb23-6"><a aria-label="6"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb23-7"><a aria-label="7"></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
+<span id="cb23-8"><a aria-label="8"></a>           inputs<span class="op">=</span> {<span class="st">'ZIP'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.zip'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames],</span>
+<span id="cb23-9"><a aria-label="9"></a>                    <span class="st">'REPORTS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_BASENAME<span class="sc">}</span><span class="ss">_fastqc.html'</span> <span class="cf">for</span> FASTQ_BASENAME <span class="kw">in</span> fastq_basenames] }, </span>
+<span id="cb23-10"><a aria-label="10"></a>           outputs<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>],</span>
+<span id="cb23-11"><a aria-label="11"></a>           protect<span class="op">=</span>[<span class="st">'results/multiqc_output/multiqc_report.html'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
+<span id="cb23-12"><a aria-label="12"></a><span class="st">    mkdir -p results/multiqc_output</span></span>
+<span id="cb23-13"><a aria-label="13"></a><span class="st">    multiqc --outdir results/multiqc_output </span><span class="op">\</span></span>
+<span id="cb23-14"><a aria-label="14"></a><span class="st">            data/</span></span>
+<span id="cb23-15"><a aria-label="15"></a><span class="st">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="protected-outputs-and-cleaning" class="slide level2">
 <h2>protected outputs and cleaning</h2>
@@ -539,28 +545,28 @@ Dan Søndergaard
 </section>
 <section id="code" class="slide level2">
 <h2>Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29" data-code-line-numbers="1|4|8-15|22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>fastq_pairs <span class="op">=</span> np.unique([ FASTQ.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_basenames ]) <span class="co">#names without pair number and extension</span></span>
-<span id="cb29-2"><a></a></span>
-<span id="cb29-3"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
-<span id="cb29-4"><a></a>    gwf.target( <span class="ss">f"Trimmomatic_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
-<span id="cb29-5"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb29-6"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb29-7"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb29-8"><a></a>           inputs<span class="op">=</span> {<span class="st">'ADAPTERS'</span>: [<span class="st">'fasta/NexteraPE-PE.fa'</span>],</span>
-<span id="cb29-9"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.fastq.gz'</span>,</span>
-<span id="cb29-10"><a></a>                               <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.fastq.gz'</span>],</span>
-<span id="cb29-11"><a></a>                    <span class="st">'MULTIQC'</span>: [<span class="st">'results/multiqc_output/multiqc_report.html'</span>]}, </span>
-<span id="cb29-12"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
-<span id="cb29-13"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1un.trim.fastq.gz'</span>,</span>
-<span id="cb29-14"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>,</span>
-<span id="cb29-15"><a></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2un.trim.fastq.gz'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb29-16"><a></a><span class="st">    mkdir -p data_trim</span></span>
-<span id="cb29-17"><a></a><span class="st">    trimmomatic PE -threads 8 </span><span class="op">\</span></span>
-<span id="cb29-18"><a></a><span class="st">                data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.fastq.gz data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.fastq.gz </span><span class="op">\</span></span>
-<span id="cb29-19"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1un.trim.fastq.gz </span><span class="op">\</span></span>
-<span id="cb29-20"><a></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2un.trim.fastq.gz </span><span class="op">\</span></span>
-<span id="cb29-21"><a></a><span class="st">                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:</span><span class="sc">{ADAPTERFILE}</span><span class="st">:2:40:15</span></span>
-<span id="cb29-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR, ADAPTERFILE<span class="op">=</span><span class="st">'fasta/NexteraPE-PE.fa'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29" data-code-line-numbers="1|4|8-15|22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>fastq_pairs <span class="op">=</span> np.unique([ FASTQ.split(<span class="st">'_'</span>)[<span class="dv">0</span>] <span class="cf">for</span> FASTQ <span class="kw">in</span> fastq_basenames ]) <span class="co">#names without pair number and extension</span></span>
+<span id="cb29-2"><a aria-label="2"></a></span>
+<span id="cb29-3"><a aria-label="3"></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
+<span id="cb29-4"><a aria-label="4"></a>    gwf.target( <span class="ss">f"Trimmomatic_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
+<span id="cb29-5"><a aria-label="5"></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb29-6"><a aria-label="6"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb29-7"><a aria-label="7"></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
+<span id="cb29-8"><a aria-label="8"></a>           inputs<span class="op">=</span> {<span class="st">'ADAPTERS'</span>: [<span class="st">'fasta/NexteraPE-PE.fa'</span>],</span>
+<span id="cb29-9"><a aria-label="9"></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.fastq.gz'</span>,</span>
+<span id="cb29-10"><a aria-label="10"></a>                               <span class="ss">f'data/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.fastq.gz'</span>],</span>
+<span id="cb29-11"><a aria-label="11"></a>                    <span class="st">'MULTIQC'</span>: [<span class="st">'results/multiqc_output/multiqc_report.html'</span>]}, </span>
+<span id="cb29-12"><a aria-label="12"></a>           outputs<span class="op">=</span>[<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
+<span id="cb29-13"><a aria-label="13"></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1un.trim.fastq.gz'</span>,</span>
+<span id="cb29-14"><a aria-label="14"></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>,</span>
+<span id="cb29-15"><a aria-label="15"></a>                    <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2un.trim.fastq.gz'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb29-16"><a aria-label="16"></a><span class="st">    mkdir -p data_trim</span></span>
+<span id="cb29-17"><a aria-label="17"></a><span class="st">    trimmomatic PE -threads 8 </span><span class="op">\</span></span>
+<span id="cb29-18"><a aria-label="18"></a><span class="st">                data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.fastq.gz data/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.fastq.gz </span><span class="op">\</span></span>
+<span id="cb29-19"><a aria-label="19"></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1un.trim.fastq.gz </span><span class="op">\</span></span>
+<span id="cb29-20"><a aria-label="20"></a><span class="st">                data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2un.trim.fastq.gz </span><span class="op">\</span></span>
+<span id="cb29-21"><a aria-label="21"></a><span class="st">                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:</span><span class="sc">{ADAPTERFILE}</span><span class="st">:2:40:15</span></span>
+<span id="cb29-22"><a aria-label="22"></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR, ADAPTERFILE<span class="op">=</span><span class="st">'fasta/NexteraPE-PE.fa'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="answers" class="slide level2">
 <h2>Answers</h2>
@@ -619,47 +625,47 @@ Dan Søndergaard
 </section>
 <section id="code-1" class="slide level2">
 <h2>Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37" data-code-line-numbers="1-2|6-10|11-24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
-<span id="cb37-2"><a></a>    gwf.target( <span class="ss">f"BWA_mem_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
-<span id="cb37-3"><a></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb37-4"><a></a>           memory<span class="op">=</span><span class="st">'16gb'</span>,</span>
-<span id="cb37-5"><a></a>           walltime<span class="op">=</span><span class="st">'00:15:00'</span>, </span>
-<span id="cb37-6"><a></a>           inputs<span class="op">=</span> {<span class="st">'INDEXING'</span>: [ <span class="st">'fasta/ecoli_rel606.fasta.'</span><span class="op">+</span> extension <span class="cf">for</span> extension <span class="kw">in</span> [<span class="st">'amb'</span>,<span class="st">'ann'</span>,<span class="st">'bwt'</span>,<span class="st">'pac'</span>,<span class="st">'sa'</span>] ],</span>
-<span id="cb37-7"><a></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
-<span id="cb37-8"><a></a>                               <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>]}, </span>
-<span id="cb37-9"><a></a>           outputs<span class="op">=</span>[<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span>,</span>
-<span id="cb37-10"><a></a>                    <span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span>,<span class="st">'results/depths/hellosamtools.txt'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb37-11"><a></a><span class="st">    mkdir -p results/alignments</span></span>
-<span id="cb37-12"><a></a><span class="st">    bwa mem -t 8 fasta/ecoli_rel606.fasta </span><span class="op">\</span></span>
-<span id="cb37-13"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz </span><span class="op">\</span></span>
-<span id="cb37-14"><a></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz &gt; </span><span class="op">\</span></span>
-<span id="cb37-15"><a></a><span class="st">            results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam</span></span>
-<span id="cb37-16"><a></a><span class="st">    samtools view -S -b results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam &gt; results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
-<span id="cb37-17"><a></a><span class="st">    samtools sort -o results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
-<span id="cb37-18"><a></a><span class="st">    ### print depths in text file</span></span>
-<span id="cb37-19"><a></a><span class="st">    mkdir -p results/depths</span></span>
-<span id="cb37-20"><a></a><span class="st">    samtools index results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam</span></span>
-<span id="cb37-21"><a></a><span class="st">    samtools depth results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam &gt; results/depths/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.depth &amp;&amp; touch hellosamtools.txt</span></span>
-<span id="cb37-22"><a></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR)</span>
-<span id="cb37-23"><a></a></span>
-<span id="cb37-24"><a></a>gwf.target( <span class="st">"BAM_merge"</span>, <span class="co">#name of the target</span></span>
-<span id="cb37-25"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb37-26"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb37-27"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb37-28"><a></a>           inputs<span class="op">=</span> [<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
-<span id="cb37-29"><a></a>           outputs<span class="op">=</span>[<span class="st">'results/alignments/merged.bam'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb37-30"><a></a><span class="st">    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam</span></span>
-<span id="cb37-31"><a></a><span class="st">    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam</span></span>
-<span id="cb37-32"><a></a><span class="st">    """</span></span>
-<span id="cb37-33"><a></a></span>
-<span id="cb37-34"><a></a>gwf.target( <span class="st">"Histogram"</span>, <span class="co">#name of the target</span></span>
-<span id="cb37-35"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb37-36"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb37-37"><a></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
-<span id="cb37-38"><a></a>           inputs<span class="op">=</span> [<span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
-<span id="cb37-39"><a></a>           outputs<span class="op">=</span>[ <span class="st">'results/depths/histogram.pdf'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
-<span id="cb37-40"><a></a><span class="st">    Rscript plotscript.R</span></span>
-<span id="cb37-41"><a></a><span class="st">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37" data-code-line-numbers="1-2|6-10|11-24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a><span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs:</span>
+<span id="cb37-2"><a aria-label="2"></a>    gwf.target( <span class="ss">f"BWA_mem_</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">"</span>, <span class="co">#name of the target</span></span>
+<span id="cb37-3"><a aria-label="3"></a>           cores<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb37-4"><a aria-label="4"></a>           memory<span class="op">=</span><span class="st">'16gb'</span>,</span>
+<span id="cb37-5"><a aria-label="5"></a>           walltime<span class="op">=</span><span class="st">'00:15:00'</span>, </span>
+<span id="cb37-6"><a aria-label="6"></a>           inputs<span class="op">=</span> {<span class="st">'INDEXING'</span>: [ <span class="st">'fasta/ecoli_rel606.fasta.'</span><span class="op">+</span> extension <span class="cf">for</span> extension <span class="kw">in</span> [<span class="st">'amb'</span>,<span class="st">'ann'</span>,<span class="st">'bwt'</span>,<span class="st">'pac'</span>,<span class="st">'sa'</span>] ],</span>
+<span id="cb37-7"><a aria-label="7"></a>                    <span class="st">'FASTQS'</span>: [<span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_1.trim.fastq.gz'</span>,</span>
+<span id="cb37-8"><a aria-label="8"></a>                               <span class="ss">f'data_trim/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">_2.trim.fastq.gz'</span>]}, </span>
+<span id="cb37-9"><a aria-label="9"></a>           outputs<span class="op">=</span>[<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span>,</span>
+<span id="cb37-10"><a aria-label="10"></a>                    <span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span>,<span class="st">'results/depths/hellosamtools.txt'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-11"><a aria-label="11"></a><span class="st">    mkdir -p results/alignments</span></span>
+<span id="cb37-12"><a aria-label="12"></a><span class="st">    bwa mem -t 8 fasta/ecoli_rel606.fasta </span><span class="op">\</span></span>
+<span id="cb37-13"><a aria-label="13"></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_1.trim.fastq.gz </span><span class="op">\</span></span>
+<span id="cb37-14"><a aria-label="14"></a><span class="st">            data_trim/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">_2.trim.fastq.gz &gt; </span><span class="op">\</span></span>
+<span id="cb37-15"><a aria-label="15"></a><span class="st">            results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam</span></span>
+<span id="cb37-16"><a aria-label="16"></a><span class="st">    samtools view -S -b results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sam &gt; results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
+<span id="cb37-17"><a aria-label="17"></a><span class="st">    samtools sort -o results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.bam</span></span>
+<span id="cb37-18"><a aria-label="18"></a><span class="st">    ### print depths in text file</span></span>
+<span id="cb37-19"><a aria-label="19"></a><span class="st">    mkdir -p results/depths</span></span>
+<span id="cb37-20"><a aria-label="20"></a><span class="st">    samtools index results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam</span></span>
+<span id="cb37-21"><a aria-label="21"></a><span class="st">    samtools depth results/alignments/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.sort.bam &gt; results/depths/</span><span class="sc">{FASTQ_PAIR}</span><span class="st">.depth &amp;&amp; touch hellosamtools.txt</span></span>
+<span id="cb37-22"><a aria-label="22"></a><span class="st">    """</span>.<span class="bu">format</span>(FASTQ_PAIR<span class="op">=</span>FASTQ_PAIR)</span>
+<span id="cb37-23"><a aria-label="23"></a></span>
+<span id="cb37-24"><a aria-label="24"></a>gwf.target( <span class="st">"BAM_merge"</span>, <span class="co">#name of the target</span></span>
+<span id="cb37-25"><a aria-label="25"></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb37-26"><a aria-label="26"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb37-27"><a aria-label="27"></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
+<span id="cb37-28"><a aria-label="28"></a>           inputs<span class="op">=</span> [<span class="ss">f'results/alignments/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.sort.bam'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
+<span id="cb37-29"><a aria-label="29"></a>           outputs<span class="op">=</span>[<span class="st">'results/alignments/merged.bam'</span>]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-30"><a aria-label="30"></a><span class="st">    samtools merge -f results/alignments/merged.bam results/alignments/*.sort.bam</span></span>
+<span id="cb37-31"><a aria-label="31"></a><span class="st">    samtools sort results/alignments/merged.bam -o results/alignments/merged.final.bam</span></span>
+<span id="cb37-32"><a aria-label="32"></a><span class="st">    """</span></span>
+<span id="cb37-33"><a aria-label="33"></a></span>
+<span id="cb37-34"><a aria-label="34"></a>gwf.target( <span class="st">"Histogram"</span>, <span class="co">#name of the target</span></span>
+<span id="cb37-35"><a aria-label="35"></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb37-36"><a aria-label="36"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb37-37"><a aria-label="37"></a>           walltime<span class="op">=</span><span class="st">'00:10:00'</span>, </span>
+<span id="cb37-38"><a aria-label="38"></a>           inputs<span class="op">=</span> [<span class="ss">f'results/depths/</span><span class="sc">{</span>FASTQ_PAIR<span class="sc">}</span><span class="ss">.depth'</span> <span class="cf">for</span> FASTQ_PAIR <span class="kw">in</span> fastq_pairs], </span>
+<span id="cb37-39"><a aria-label="39"></a>           outputs<span class="op">=</span>[ <span class="st">'results/depths/histogram.pdf'</span> ]) <span class="op">&lt;&lt;</span> <span class="st">"""</span></span>
+<span id="cb37-40"><a aria-label="40"></a><span class="st">    Rscript plotscript.R</span></span>
+<span id="cb37-41"><a aria-label="41"></a><span class="st">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="answers-1" class="slide level2">
 <h2>Answers</h2>
@@ -774,22 +780,22 @@ Dan Søndergaard
 <section class="slide level2">
 
 <p>For example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
-<span id="cb46-2"><a></a></span>
-<span id="cb46-3"><a></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
-<span id="cb46-4"><a></a></span>
-<span id="cb46-5"><a></a><span class="co">## A target doing FastQC on a file</span></span>
-<span id="cb46-6"><a></a>gwf.target(<span class="st">'FastQC'</span>, </span>
-<span id="cb46-7"><a></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb46-8"><a></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
-<span id="cb46-9"><a></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
-<span id="cb46-10"><a></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
-<span id="cb46-11"><a></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
-<span id="cb46-12"><a></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
-<span id="cb46-13"><a></a><span class="st">eval "$(conda shell.bash hook)" </span></span>
-<span id="cb46-14"><a></a><span class="st">conda activate tools_environment</span></span>
-<span id="cb46-15"><a></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
-<span id="cb46-16"><a></a><span class="st">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46" data-code-line-numbers="1-3|6|7-9|10-12|13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a aria-label="1"></a><span class="im">from</span> gwf <span class="im">import</span> Workflow</span>
+<span id="cb46-2"><a aria-label="2"></a></span>
+<span id="cb46-3"><a aria-label="3"></a>gwf <span class="op">=</span> Workflow(defaults<span class="op">=</span>{<span class="st">'account'</span>: <span class="st">'your_project'</span>})</span>
+<span id="cb46-4"><a aria-label="4"></a></span>
+<span id="cb46-5"><a aria-label="5"></a><span class="co">## A target doing FastQC on a file</span></span>
+<span id="cb46-6"><a aria-label="6"></a>gwf.target(<span class="st">'FastQC'</span>, </span>
+<span id="cb46-7"><a aria-label="7"></a>           cores<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb46-8"><a aria-label="8"></a>           memory<span class="op">=</span><span class="st">'8gb'</span>,</span>
+<span id="cb46-9"><a aria-label="9"></a>           walltime<span class="op">=</span><span class="st">'00:05:00'</span>, </span>
+<span id="cb46-10"><a aria-label="10"></a>           inputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1.fastq.gz'</span>], </span>
+<span id="cb46-11"><a aria-label="11"></a>           outputs<span class="op">=</span>[<span class="st">'data/SRR2584863_1_fastqc.html'</span>, </span>
+<span id="cb46-12"><a aria-label="12"></a>                    <span class="st">'data/SRR2584863_1_fastqc.zip'</span>]) <span class="op">&lt;&lt;</span> <span class="st">""" </span></span>
+<span id="cb46-13"><a aria-label="13"></a><span class="st">eval "$(conda shell.bash hook)" </span></span>
+<span id="cb46-14"><a aria-label="14"></a><span class="st">conda activate tools_environment</span></span>
+<span id="cb46-15"><a aria-label="15"></a><span class="st">fastqc data/SRR2584863_1.fastq.gz</span></span>
+<span id="cb46-16"><a aria-label="16"></a><span class="st">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="use-templates" class="slide level2">
 <h2>Use templates</h2>
