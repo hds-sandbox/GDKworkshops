@@ -57,7 +57,7 @@ navigation-mode: vertical
 
 ## Get the slides
 
-Webpage: [https://hds-sandbox.github.io/GDKworkshops/](https://hds-sandbox.github.io/GDKworkshops/)
+Webpage: [https://tinyurl.com/GDKslides/](https://hds-sandbox.github.io/GDKworkshops/)
 
 ![Slides will always be up to date in this webpage](./img/webpageGDK.png)
 
@@ -104,6 +104,15 @@ Learn your way around the basics of the `GenomeDK` cluster.
 - A CPU has multiple **cores**, each core can execute instructions independently at the cost of reduced bandwidth
 
 ![](./img/cpucores.png){fig-align="center"}
+
+---
+
+### High throughput computing
+
+High throughput computing (HTC): a large number of tasks are executed **in parallel** to achieve high performance and efficiency. 
+
+![](./img/highthroughput.gif){fig-align="center"}
+
 
 ---
 
@@ -163,7 +172,7 @@ It is nice to avoid writing the password at every access. If you are on the clus
 
 &nbsp;
 
-Now we set up a public-key authentication. We generate a key pair (public and private):
+Now we set up a public-key authentication. We generate a key pair (public and private) ...
 
 ```{.bash}
 [local]$  ssh-keygen -t ed25519
@@ -173,14 +182,14 @@ Always press <kbd>Enter</kbd> and do not insert any password when asked.
 
 ---
 
-and create a folder on the cluster called `.ssh` to contain the public key
+... and create a folder on the cluster called `.ssh` to contain the public key ...
 
 ```{.bash}
 [local]$  ssh USERNAME@login.genome.au.dk mkdir -p .ssh
 ```
 &nbsp;
 
-and finally send the public key to the cluster, into the file `authorized_keys`
+... and finally send the public key to the cluster, into the file `authorized_keys`
 
 ::: {.panel-tabset}
 ## Linux/Mac
@@ -795,7 +804,7 @@ When done, open `Filezilla` and use the following information on the login bar:
 
 ---
 
-Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK`. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.
+Press on `Quick Connect`. As a result, you will establish a secure connection to `GenomeDK` after 2-factor authentication. On the left-side browser you can see your local folders and files. On the right-side, the folders and files on `GenomeDK` starting from your `home`.
 
 ![](./img/filezilla1.png){fig-align="center"}
 
@@ -830,8 +839,6 @@ A computational task **executed on requested HPC resources** (computing nodes), 
 The command `gnodes` will tell you if there is heavy usage across the computing nodes
 
 ![Usage of computing nodes. Each node has a name (e.g. cn-1001). The symbols for each node mean running a program (`0`), assigned to an user (`_`) and available (`.`)](./img/gnodes.png)
-
-If you want to venture more into checking the queueing status, Moi has done [a great interactive script](https://github.com/MoiColl/cluster_status) in R Shiny for that.
 
 ---
 
