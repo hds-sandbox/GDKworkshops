@@ -73,7 +73,8 @@ Learn your way around the basics of the `GenomeDK` cluster.
 
 `GenomeDK` is a **High performance computing (HPC) cluster**, i.e. a set of interconnected computers (nodes). `GenomeDK` has:
 
-- **computing nodes** used for running programs (~15000 cores, 16GPUs)
+- **computing nodes** used for running programs \newline
+  (21000+ cores, 48GPUs, 0.75 or 1.5TB RAM per node)
 - **storage nodes** storing data in many hard drives (~23 PiB)
 - a **network** making nodes talk to each other
 - a **frontend** node from which you can send your programs to a node to be executed
@@ -112,7 +113,6 @@ Learn your way around the basics of the `GenomeDK` cluster.
 High throughput computing (HTC): a large number of tasks are executed **in parallel** to achieve high performance and efficiency. 
 
 ![](./img/highthroughput.gif){fig-align="center"}
-
 
 ---
 
