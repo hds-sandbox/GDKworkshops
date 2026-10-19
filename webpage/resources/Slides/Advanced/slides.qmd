@@ -34,6 +34,7 @@ smaller: true
 
 - Most important message before starting any workshop: [RTFM - Read The Field Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/). Though
   - Some manuals can be lousy, but the ones for UNIX tools are usually good
+  
   - Unusual options might be buried somewhere or badly explained
 
 ## When you need to ask for help
@@ -148,7 +149,7 @@ Please run this exercise so that we can use some of the aliases and functions in
 
 Now, there are many repetitive things we do every day. For example:
 
-- remove files and double check we can
+- create a folder and `cd` into it
 - `cd ../` and `cd ../../` and ... and `cd ../../../../../../../`
 
 and every time it is just annoying to waste precious time. Why not creating some aliases **which you can write in their place**? Copy the aliases from the list below and add them in your `.bashrc` file:
@@ -471,28 +472,6 @@ If you want to build containers with Docker, you need to
   - pull them on GenomeDK with apptainer
   - or [build with apptainer directly on genomeDK](https://singularity-tutorial.github.io/03-building/)
 
-## Other options for apptainer {.scrollable}
-
-A few other options which can be used in apptainer. When you need those really depends on the application:
-
-- `--fakeroot`: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.
-
-- `--writable`: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. `--writable-tmpfs` to avoid changes to be persistent in a non-writable container.
-
-- `--contain`: Isolates the container from the host system by limiting access to the host's filesystem.
-
-- `--no-home`: Prevents the container from automatically binding the user's home directory. Avoids exposing your home directory to the container.
-
-- `--cleanenv`: Clears all environment variables except those explicitly set for the container.
-
-- `--nv`: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is `--rocm` (not the case on GDK).
-
-- `--pwd`: Sets the working directory inside the container. 
-
-- `--bind`: Binds specific directories from the host to the container. Useful to share data between host and container.
-
-- `--env`: Sets environment variables inside the container. This is useful for configuring the container's behavior or passing in secrets.
-
 # Batch jobs on the cluster
 
 :::{.callout-note}
@@ -504,7 +483,7 @@ A batch job is used to **run a program non-interactively**, usually for longer t
 
 and
 
-- has a filename **without spaces** (forget spaces from now on)
+- has a filename **without spaces** (forget spaces)
 :::
 
 ## Exercise: batch script {.scrollable}

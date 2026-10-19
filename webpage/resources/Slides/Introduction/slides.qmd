@@ -77,7 +77,7 @@ Learn your way around the basics of the `GenomeDK` cluster.
   (21000+ cores, 48GPUs, 0.75 or 1.5TB RAM per node)
 - **storage nodes** storing data in many hard drives (~23 PiB)
 - a **network** making nodes talk to each other
-- a **frontend** node from which you can send your programs to a node to be executed
+- a **frontend** node to log into
 - a **queueing system** called *slurm* to prioritize the users' program to be run
 
 ---
