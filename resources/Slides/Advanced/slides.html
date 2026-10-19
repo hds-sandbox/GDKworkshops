@@ -6,16 +6,16 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+  <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Manuel Peral-Vázquez">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-08-31">
+  <meta name="dcterms.date" content="2026-10-19">
   <title>GenomeDK workshops – Advanced GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -246,7 +246,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-08-31</p>
+  <p class="date">2026-10-19</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -258,8 +258,8 @@ Dan Søndergaard
 <li><p>Some advanced things require a bit of practice/frustration, but I hope to reduce it</p></li>
 <li><p>Most important message before starting any workshop: <a href="https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/">RTFM - Read The Field Manual!</a>. Though</p>
 <ul>
-<li>Some manuals can be lousy, but the ones for UNIX tools are usually good</li>
-<li>Unusual options might be buried somewhere or badly explained</li>
+<li><p>Some manuals can be lousy, but the ones for UNIX tools are usually good</p></li>
+<li><p>Unusual options might be buried somewhere or badly explained</p></li>
 </ul></li>
 </ul>
 </section>
@@ -376,7 +376,7 @@ Dan Søndergaard
 </div>
 <p>Now, there are many repetitive things we do every day. For example:</p>
 <ul>
-<li>remove files and double check we can</li>
+<li>create a folder and <code>cd</code> into it</li>
 <li><code>cd ../</code> and <code>cd ../../</code> and … and <code>cd ../../../../../../../</code></li>
 </ul>
 <p>and every time it is just annoying to waste precious time. Why not creating some aliases <strong>which you can write in their place</strong>? Copy the aliases from the list below and add them in your <code>.bashrc</code> file:</p>
@@ -695,21 +695,6 @@ Dan Søndergaard
 <li>pull them on GenomeDK with apptainer</li>
 <li>or <a href="https://singularity-tutorial.github.io/03-building/">build with apptainer directly on genomeDK</a></li>
 </ul>
-</section>
-<section id="other-options-for-apptainer" class="slide level2 scrollable">
-<h2>Other options for apptainer</h2>
-<p>A few other options which can be used in apptainer. When you need those really depends on the application:</p>
-<ul>
-<li><p><code>--fakeroot</code>: Allows running the container with root privileges in a user namespace. Useful for containers that require root access without needing actual root privileges.</p></li>
-<li><p><code>--writable</code>: Enables writing to the container image. This is useful for making changes to the container, but it requires the container to be writable. <code>--writable-tmpfs</code> to avoid changes to be persistent in a non-writable container.</p></li>
-<li><p><code>--contain</code>: Isolates the container from the host system by limiting access to the host’s filesystem.</p></li>
-<li><p><code>--no-home</code>: Prevents the container from automatically binding the user’s home directory. Avoids exposing your home directory to the container.</p></li>
-<li><p><code>--cleanenv</code>: Clears all environment variables except those explicitly set for the container.</p></li>
-<li><p><code>--nv</code>: Enables NVIDIA GPU support by binding the necessary libraries and drivers. Equivalent for AMD GPUs is <code>--rocm</code> (not the case on GDK).</p></li>
-<li><p><code>--pwd</code>: Sets the working directory inside the container.</p></li>
-<li><p><code>--bind</code>: Binds specific directories from the host to the container. Useful to share data between host and container.</p></li>
-<li><p><code>--env</code>: Sets environment variables inside the container. This is useful for configuring the container’s behavior or passing in secrets.</p></li>
-</ul>
 </section></section>
 <section>
 <section id="batch-jobs-on-the-cluster" class="title-slide slide level1 center">
@@ -731,7 +716,7 @@ Dan Søndergaard
 </ul>
 <p>and</p>
 <ul>
-<li>has a filename <strong>without spaces</strong> (forget spaces from now on)</li>
+<li>has a filename <strong>without spaces</strong> (forget spaces)</li>
 </ul>
 </div>
 </div>
