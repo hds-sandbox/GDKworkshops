@@ -32,23 +32,20 @@ smaller: true
 
 - Some advanced things require a bit of practice/frustration, but I hope to reduce it
 
-- Most important message before starting any workshop: [RTFM - Read The Field Manual!](https://idratherbewriting.com/2012/08/30/the-blame-game-of-rtfm/). Though
-  - Some manuals can be lousy, but the ones for UNIX tools are usually good
+- Most important: **Behave on the cluster**, **Ask for help if you feel close to a catastrophic error**, **Read documentations**
   
-  - Unusual options might be buried somewhere or badly explained
 
 ## When you need to ask for help
 
 - **Practical help:** 
   
-  Samuele (BiRC, MBG) - samuele@birc.au.dk 
+  Samuele (Consultant, BiRC, MBG) - samuele@birc.au.dk 
 
-- **Drop in hours:**
+- **Data management help:** 
 
-  - Bioinformatics Cafe: [https://abc.au.dk](abc.au.dk), abcafe@au.dk
-  - Samuele (BiRC, MBG) - samuele@birc.au.dk - we just set up a meeting/zoom
+  Cornelia (Consultant, BiRC, MBG) - cobu@birc.au.dk
 
-- **General mail for assistance**
+- **support for account, login, access**
 
   support@genome.au.dk
 
