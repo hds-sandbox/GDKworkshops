@@ -6,16 +6,16 @@
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
   <meta name="author" content="Samuele Soraggi">
   <meta name="author" content="Dan Søndergaard">
-  <meta name="dcterms.date" content="2026-10-19">
+  <meta name="dcterms.date" content="2026-11-04">
   <title>GenomeDK workshops – Use GenomeDK</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
@@ -103,7 +103,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-00ad5a49dff614330cd349bcec985ec3.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QZP3HK6BQT"></script>
 
   <script type="text/javascript">
@@ -237,7 +237,7 @@ Dan Søndergaard
     </div>
 </div>
 
-  <p class="date">2026-10-19</p>
+  <p class="date">2026-11-04</p>
 </section>
 <section>
 <section id="some-background" class="title-slide slide level1 center">
@@ -434,7 +434,6 @@ Dan Søndergaard
 <li><p>Run <code>echo "hello" &gt; ./GDKintro/file.txt</code> to write hello in a file</p></li>
 <li><p>Use <code>ls ./GDKintro</code> to see if the text file is there.</p></li>
 </ul>
-<div title="Relative and absolute paths">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -451,7 +450,6 @@ Dan Søndergaard
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
@@ -460,10 +458,10 @@ Dan Søndergaard
 <div class="column" style="width:40%;">
 <p><img data-src="img/complexTree.png" width="300"></p>
 </div><div class="column" style="width:60%;">
-<div id="ffbfb089" class="cell" data-execution_count="1">
+<div id="cbbc5468" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div id="hAZhEoahpsmq" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#hAZhEoahpsmq {
+<div id="LxCOoYLvmWfV" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#LxCOoYLvmWfV {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -690,7 +688,7 @@ Dan Søndergaard
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionshAZhEoahpsmq=[
+var questionsLxCOoYLvmWfV=[
     {
         "question": "Two of the following are correct:",
         "type": "many_choice",
@@ -1805,8 +1803,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("hAZhEoahpsmq")) {
-    show_questions(questionshAZhEoahpsmq, hAZhEoahpsmq);
+  if (document.getElementById("LxCOoYLvmWfV")) {
+    show_questions(questionsLxCOoYLvmWfV, LxCOoYLvmWfV);
   } else {
     setTimeout(try_show, 200);
   }
@@ -1866,7 +1864,6 @@ function try_show() {
 <h3 id="some-notes-about-the-commands">Some notes about the commands</h3>
 <ul>
 <li><p><code>rm *.txt</code> removes all files ending with <code>.txt</code>. The symbol <code>*</code> is a wildcard for the file name</p>
-<div title="Forever away">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1877,7 +1874,6 @@ function try_show() {
 </div>
 <div class="callout-content">
 <p>There is no trash bin - <strong>removed files are lost forever</strong> - with no exception</p>
-</div>
 </div>
 </div>
 </div></li>
@@ -1900,7 +1896,6 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </section>
 <section class="slide level2">
 
-<div title="Exercise">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1908,10 +1903,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="2ece3aae" class="cell" data-execution_count="2">
+<div id="116b6054" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div id="LSDaZekYDcGS" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#LSDaZekYDcGS {
+<div id="tlOxBCYyUBCO" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#tlOxBCYyUBCO {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2138,7 +2133,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsLSDaZekYDcGS=[
+var questionstlOxBCYyUBCO=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -3227,8 +3222,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("LSDaZekYDcGS")) {
-    show_questions(questionsLSDaZekYDcGS, LSDaZekYDcGS);
+  if (document.getElementById("tlOxBCYyUBCO")) {
+    show_questions(questionstlOxBCYyUBCO, tlOxBCYyUBCO);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3240,7 +3235,6 @@ function try_show() {
 }
 
 </script>
-</div>
 </div>
 </div>
 </div>
@@ -3269,7 +3263,6 @@ function try_show() {
 <h2>Virtual environments</h2>
 <p>Each project needs specific software versions dependent on each other for <strong>reproducibility</strong> - without interferring with other projects.</p>
 <p>&nbsp;</p>
-<div title="Definition">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -3282,7 +3275,6 @@ function try_show() {
 <p>A <strong>virtual environment</strong> keeps project-specific softwares and their dependencies separated</p>
 <p>&nbsp;</p>
 <p>A <strong>package manager</strong> is a software that can retrieve, download, install, upgrade packages <strong>easily and reliably</strong></p>
-</div>
 </div>
 </div>
 </div>
@@ -3387,7 +3379,6 @@ function try_show() {
 <p>We update Conda with <code>libmamba solver</code> - a lot faster in installing many packages at once.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-n</span> base <span class="at">--yes</span> conda-libmamba-solver</span>
 <span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> solver libmamba</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div title="Don't touch the Base">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -3398,7 +3389,6 @@ function try_show() {
 </div>
 <div class="callout-content">
 <p>This is <strong>the only time</strong> you should install in the <code>base</code> environment! You might otherwise ruin the conda installation.</p>
-</div>
 </div>
 </div>
 </div>
@@ -3453,8 +3443,7 @@ function try_show() {
 <section class="slide level2">
 
 
-<img data-src="img/anaconda2.png" style="width:10cm" class="r-stretch quarto-figure-center"><p class="caption">Figure: suggested commands to install the package</p><div title="Channels">
-<div class="callout callout-note callout-titled callout-style-default">
+<img data-src="img/anaconda2.png" style="width:10cm" class="r-stretch quarto-figure-center"><p class="caption">Figure: suggested commands to install the package</p><div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -3465,7 +3454,6 @@ function try_show() {
 <div class="callout-content">
 <p>packages are archived in channels. Typical ones are <code>conda-forge</code> and <code>bioconda</code>.</p>
 <p><code>conda-forge</code> packages are often more up-to-date, but a few times show compatibility problems with other packages.</p>
-</div>
 </div>
 </div>
 </div>
@@ -3626,7 +3614,6 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </section>
 <section class="slide level2">
 
-<div title="Exercise">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -3634,10 +3621,10 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="callout-content">
 <p>Search online (or with <code>less --help)</code> how to look for a specific word in a file with <code>less</code>. Then visualize the data with <code>less</code>, and try to find if there is any sequence of ten adjacent <code>N</code>s (which is, ten missing nucleotides). Then, answer the question below</p>
-<div id="21e0b6eb" class="cell" data-execution_count="3">
+<div id="91194a1f" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div id="JIXhltvJtakC" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#JIXhltvJtakC {
+<div id="ybpPcZEwBcki" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#ybpPcZEwBcki {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3864,7 +3851,7 @@ FFFFFFFEDDEEEEDDDDDDDDD</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsJIXhltvJtakC=[
+var questionsybpPcZEwBcki=[
     {
         "question": "How long is the shortest sequence of missing nucleotides not found anywhere in the file data.fastq?",
         "type": "many_choice",
@@ -4953,8 +4940,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("JIXhltvJtakC")) {
-    show_questions(questionsJIXhltvJtakC, JIXhltvJtakC);
+  if (document.getElementById("ybpPcZEwBcki")) {
+    show_questions(questionsybpPcZEwBcki, ybpPcZEwBcki);
   } else {
     setTimeout(try_show, 200);
   }
@@ -4966,7 +4953,6 @@ function try_show() {
 }
 
 </script>
-</div>
 </div>
 </div>
 </div>
@@ -5008,7 +4994,6 @@ function try_show() {
 <p>&nbsp;</p>
 <p>Well, we changed our mind and do not want a copy of our data. Remove it with</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> dataCopy.fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div title="Forever away">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -5019,7 +5004,6 @@ function try_show() {
 </div>
 <div class="callout-content">
 <p>There is no trash bin - <strong>removed files are lost forever</strong> - with no exception</p>
-</div>
 </div>
 </div>
 </div>
@@ -5067,10 +5051,10 @@ function try_show() {
 <p>The output of that pipe was a small output on screen - but <strong>outputs can be huge</strong>! We could count the number of sequences by piping again into <code>wc</code>!</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-400</span> dataOriginal.fastq <span class="kw">|</span> <span class="fu">grep</span> NNNNN <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>&nbsp;</p>
-<div id="5958d0cb" class="cell" data-execution_count="4">
+<div id="5bcab49a" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div id="xewuCwaSEgYT" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
-#xewuCwaSEgYT {
+<div id="CHBFZqtmywKG" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: center"><style>
+#CHBFZqtmywKG {
    --jq-multiple-choice-bg: #392061;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -5297,7 +5281,7 @@ function try_show() {
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/javascript">
-var questionsxewuCwaSEgYT=[
+var questionsCHBFZqtmywKG=[
     {
         "question": "Wait a second! That sequence absolutely needs to be saved into a file. How do you do it?",
         "type": "many_choice",
@@ -6386,8 +6370,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("xewuCwaSEgYT")) {
-    show_questions(questionsxewuCwaSEgYT, xewuCwaSEgYT);
+  if (document.getElementById("CHBFZqtmywKG")) {
+    show_questions(questionsCHBFZqtmywKG, CHBFZqtmywKG);
   } else {
     setTimeout(try_show, 200);
   }
@@ -6595,7 +6579,6 @@ function try_show() {
 </section>
 <section id="gdk-projects" class="slide level2">
 <h2>GDK projects</h2>
-<div title="what is a project">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -6615,7 +6598,6 @@ function try_show() {
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
@@ -6623,7 +6605,6 @@ function try_show() {
 <img data-src="img/projectScheme.png" class="r-stretch quarto-figure-center"><p class="caption">Example of a project managed by <code>you</code> with two invited users. <code>you</code> has requested the creation of <code>coolProject</code> and manages the project. <code>you</code> invited two users to the project.</p></section>
 <section class="slide level2">
 
-<div title="Common-sense in project creation">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -6641,7 +6622,6 @@ function try_show() {
 </ul></li>
 <li>Why? <strong>Projects cannot be deleted</strong>, so they keep cumulating</li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -6703,7 +6683,6 @@ function try_show() {
 </section>
 <section class="slide level2">
 
-<div title="Accounting Tips">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -6726,11 +6705,9 @@ function try_show() {
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
-<div title="Private files or folders">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -6748,7 +6725,6 @@ function try_show() {
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="folders-management" class="slide level2">
 <h2>Folders management</h2>
@@ -6762,7 +6738,7 @@ function try_show() {
 <img data-src="img/multistructure.png" class="quarto-figure quarto-figure-center r-stretch" width="400"></section>
 <section class="slide level2">
 
-<div title="MUST-KNOWs for a GDK project" data-layout-align="center">
+<div data-layout-align="center">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -7071,7 +7047,6 @@ or
 </section>
 <section class="slide level2">
 
-<div title="exercise (1/4)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -7083,11 +7058,9 @@ or
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
-<div title="exercise (2/4)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -7108,11 +7081,9 @@ or
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
-<div title="exercise (3/4)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -7123,11 +7094,9 @@ or
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
-<div title="exercise (3/4)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -7138,11 +7107,9 @@ or
 </div>
 </div>
 </div>
-</div>
 </section>
 <section class="slide level2">
 
-<div title="exercise (3/4)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -7150,7 +7117,6 @@ or
 </div>
 <div class="callout-content">
 <p>Q1 split</p>
-</div>
 </div>
 </div>
 </div>
@@ -7250,7 +7216,7 @@ Indlæser…
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -7506,7 +7472,8 @@ Indlæser…
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -7515,8 +7482,69 @@ Indlæser…
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -7530,6 +7558,7 @@ Indlæser…
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;
