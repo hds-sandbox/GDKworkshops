@@ -56,12 +56,18 @@ smaller: true
 
 - **10:00-11:00**: 
   - Workshop Introduction
-  - Frequently used on UNIX
+  - Aliases and functions in `~/.bashrc`
+  - Working comfortably on the cluster
+     - `~/.ssh/config`, `tmux`/`screen`, port forwarding, VS Code
   - `rsync` file transfer
+     - a related download/upload tip
 
-- **11:00-12:00**: 
+- **11:00-12:00**:
+  - `crontab` for scheduled tasks
+  - Advanced project management
+     - quotas, sharing, backups, compression
   - Containers (Docker, apptainer)
-  
+
 
 - **12:45-13:30**: 
   - Batch jobs on the cluster
@@ -207,13 +213,120 @@ source ~/.bashrc
 
 &nbsp;
 
-**Exercise finished** 
+**Exercise finished**
+
+# Working comfortably on the cluster
+
+This section covers various tools and techniques to make your work on the cluster more efficient and comfortable.
+
+- `~/.ssh/config`: aliases, keys
+- `tmux` and `screen`: sessions surviving a dropped connection
+- Port forwarding and VS Code Remote-SSH
+
+## `~/.ssh/config`: host aliases
+
+The file `~/.ssh/config` **on your own computer** (on windows `C:\Users\YourName\.ssh\config`) stores settings for each host you connect to. If you created a key on your computer and copied it to GenomeDK ([Introduction workshop](../Introduction/slides.qmd)), then the file should contain something like this:
+
+```{.yml filename="~/.ssh/config"}
+Host gdk
+  HostName login.genome.au.dk
+  User USERNAME
+  IdentityFile ~/.ssh/id_ed25519
+```
+:::{.callout-warning}
+GenomeDK might still ask the 2FA code when logging in with a key
+:::
+
+---
+
+This should also be visible in VSCode `Remote-SSH` plugin, which uses the same `~/.ssh/config` file.
+
+## ProxyJump: reaching a compute node
+
+Compute nodes cannot be reached directly from your computer, but you can **jump through the login node**. Add to `~/.ssh/config`:
+
+```{.yml filename="~/.ssh/config"}
+Host cn-*
+  ProxyJump gdk
+  User USERNAME
+```
+
+You can do this directly on VSCode remote plugin, by clicking on the setting wheel of the host and selecting *Configure SSH Hosts...*. You will be able to open the file `~/.ssh/config` and add the lines above.
+
+FIGURE
+
+:::{.callout-warning}
+You need to have an interactive job (or a job running through slurm) on the compute node before being able to connect to it.
+:::
+
+## `tmux` or `screen`
+
+If your connection drops (wifi, laptop asleep), everything running in your terminal is killed. A **terminal multiplexer** keeps your session alive on the cluster.
+
+| | `tmux` | `screen` |
+|---|---|---|
+| new named session | `tmux new -s work` | `screen -S work` |
+| detach (leave it running) | `Ctrl-b` then `d` | `Ctrl-a` then `d` |
+| list sessions | `tmux ls` | `screen -ls` |
+| reattach | `tmux attach -t work` | `screen -r work` |
+| close | `exit` inside the session | `exit` inside the session |
+
+&nbsp;
+
+:::{.callout-warning}
+- sessions live on the front-end node where you started them. Check with `hostname`
+- Remember: do not run heavy work in a session on the front-end: start an interactive job with `srun` **inside** the session
+- for heavy work, start a session on a compute node (e.g. with `srun --pty tmux new -s work`) and then run your commands there
+:::
+
+More about `tmux` panes and windows in the Extras.
+
+## Port forwarding
+
+Jupyter, RStudio server or Streamlit are web servers. You run them **on a compute node** and see them in **your browser** through an ssh tunnel.
+
+1. On GenomeDK, start an interactive job and the server, using your user id as port:
+
+   ```{.bash}
+   srun --mem=4g --cores=1 --time=4:00:00 --pty bash
+   echo $UID; hostname   # write down the port and the node
+   jupyter-lab --port=$UID --ip=$(hostname) --no-browser
+   ```
+
+2. On **your computer**, open the tunnel (with your numbers):
+
+   ```{.bash}
+   ssh -N -L PORT:NODE:PORT gdk
+   ```
+
+3. Open `http://localhost:PORT` in your browser (for jupyter, use the link including the token).
+
+A full exercise is in the Extras, chapter *Web applications, ports, tunneling*.
+
+## VS Code Remote-SSH
+
+VS Code can open files and terminals on GenomeDK from your computer (setup in the Extras). It uses your `~/.ssh/config`, so `ssh gdk` works there as well.
+
+&nbsp;
+
+:::{.callout-warning title="VS Code can overload the front-end"}
+Remote-SSH starts a server **on the front-end** that indexes your files and runs extensions for you. With large folders, it slows down the node for everybody. Always open folders you work on, not your whole home or project. If VS Code hangs, kill the server with `pkill -u $USER -f vscode-server` on the terminal.
+:::
+
+- connect to a **compute node** with a running job (the `cn-*` ProxyJump above) instead of the front-end when you work for long
+- open only the folder you work on, never your whole home or project
+- exclude data folders from watching and searching, in the VS Code settings:
+
+  ```{.json}
+  "files.watcherExclude": { "**/data/**": true, "**/.pixi/**": true, "**/.snakemake/**": true },
+  "search.exclude": { "**/data/**": true }
+  ```
+- if VS Code hangs or leaves processes behind: `pkill -u $USER -f vscode-server`
 
 # Syncronizations of data
 
 - How to copy using `rsync`
 - Local copy and remote copy
-- Incremental copy
 
 ## transfer and sync with `rsync`
 
@@ -221,12 +334,11 @@ source ~/.bashrc
 
 - transfering **from remote to local** host (and viceversa)
 - copying from **local to local** host (e.g. data backups/sync) 
-- transfering only files which has changed from last copy (**incremental copy**)
 
 :::{.callout-warning}
 `rsync` cannot make a transfer between two remote hosts, e.g. running from your PC to transfer data between GenomeDK and Computerome.
 
-`rsync` cannot download from web URLs
+Also, `rsync` cannot download from web URLs
 :::
 
 Lots of options you can find in the manual (would require a workshop only for that)
@@ -323,6 +435,333 @@ Using `data` will copy the entire folder, while `data/` will copy only its conte
 :::
 
 **Exercise finished**
+
+# Scheduled tasks with `crontab`
+
+- What cron jobs are
+- The crontab syntax
+- Adding, listing and removing jobs
+- Organizing jobs into scripts in your home
+
+## What is a cron job?
+
+`cron` is a service running on every UNIX machine, which **executes commands at scheduled times**, also when you are not logged in.
+
+&nbsp;
+
+Each user has a **crontab** (cron table): a text file where each line is a job with its schedule. Typical uses:
+
+- a weekly report of your project usage
+- a nightly `rsync` backup of results into a `BACKUP` folder
+- cleaning up temporary files
+- submitting a recurring `sbatch` job (e.g. updating a database every month)
+
+:::{.callout-warning}
+Cron jobs run **on the front-end node** where you created them. Keep them light: anything heavy must be submitted to the queue with `sbatch` (see later slides).
+:::
+
+## The crontab syntax
+
+Each line has **five time fields** followed by the command:
+
+```
+# ┌───────── minute (0-59)
+# │ ┌─────── hour (0-23)
+# │ │ ┌───── day of month (1-31)
+# │ │ │ ┌─── month (1-12)
+# │ │ │ │ ┌─ day of week (0-7, 0 and 7 are Sunday)
+# │ │ │ │ │
+  * * * * *  command to run
+```
+
+&nbsp;
+
+| Field value | Meaning | Example |
+|---|---|---|
+| `*` | every value | `* * * * *` every minute |
+| `a,b` | a list | `0 8,16 * * *` at 8:00 and 16:00 |
+| `a-b` | a range | `0 9 * * 1-5` at 9:00, Monday to Friday |
+| `*/n` | every n steps | `*/15 * * * *` every 15 minutes |
+| `@daily`, `@weekly`, ... | shortcuts | `@weekly` is `0 0 * * 0` |
+
+&nbsp;
+
+Not sure about your schedule? Test it on [crontab.guru](https://crontab.guru).
+
+---
+
+## Add, list and remove jobs
+
+```{.bash}
+crontab -e   # edit your crontab (opens an editor)
+crontab -l   # list your jobs
+crontab -r   # REMOVE ALL your jobs, without asking!
+```
+
+To choose the editor, use for example `EDITOR=nano crontab -e`.
+
+:::{.callout-warning title="Avoid a typical error"}
+`-r` is next to `-e` on the keyboard. Keep your jobs in a file (e.g. `~/scripts/crontab.txt`) and install it with
+
+```{.bash}
+crontab ~/scripts/crontab.txt
+```
+
+so you can always restore them. Note: this **replaces** your whole crontab with the content of the file.
+:::
+
+---
+
+:::{.callout-note title="Cron is not your terminal"}
+Cron runs commands with a **minimal environment**: your `~/.bashrc` is not read, so aliases, conda/pixi environments and most of your `PATH` are missing.
+
+- run scripts with `bash -l script.sh` (a login shell, which loads your settings) or use full paths to programs
+- always **redirect the output to a log file**, otherwise you will never see errors:
+
+```
+0 7 * * 1  bash -l ~/scripts/report_usage.sh >> ~/scripts/logs/report_usage.log 2>&1
+```
+:::
+
+## Organize jobs into scripts
+
+Do not write long commands in the crontab. Keep **one script per task** in a folder of your home, and let the crontab only call the scripts:
+
+```
+~/scripts/
+├── crontab.txt         # your crontab, installed with: crontab ~/scripts/crontab.txt
+├── logs/               # output of all jobs
+├── report_usage.sh     # light task: runs on the front-end
+└── update_database.sh  # heavy task: submitted with sbatch
+```
+
+&nbsp;
+
+A trick: `#SBATCH` lines are just comments for `bash`. A script with an `#SBATCH` header can therefore **run both on the front-end with `bash` and on the queue with `sbatch`**, without changes.
+
+---
+
+```{.bash filename="~/scripts/report_usage.sh"}
+#!/bin/bash
+#SBATCH --account=PROJECT_NAME
+#SBATCH --mem=1g
+#SBATCH --cores=1
+#SBATCH --time=00:30:00
+#SBATCH --output=logs/%x-%j.out
+
+# where are we running? SLURM_JOB_ID only exists inside a job
+echo "$(date) - running on $(hostname), job: ${SLURM_JOB_ID:-none (front-end)}"
+
+gdk-project-show PROJECT_NAME
+gdk-project-usage -p PROJECT_NAME -u
+du -sh ~
+```
+
+&nbsp;
+
+Both work from the `~/scripts` folder:
+
+```{.bash}
+cd ~/scripts
+bash report_usage.sh     # on the front-end, output on screen
+sbatch report_usage.sh   # on the queue, output in logs/
+```
+
+---
+
+The crontab then only has short lines. `cd` into the scripts folder first, so that the relative `logs/` paths work:
+
+```{.bash filename="~/scripts/crontab.txt"}
+# light: weekly usage report every Monday at 7:00, on the front-end
+0 7 * * 1  cd ~/scripts && bash -l report_usage.sh >> logs/report_usage.log 2>&1
+
+# heavy: on the 1st of every month at 2:00, submitted to the queue
+0 2 1 * *  cd ~/scripts && bash -l -c "sbatch update_database.sh" >> logs/cron.log 2>&1
+```
+
+Install it with `crontab ~/scripts/crontab.txt` and check with `crontab -l`.
+
+## Exercise: your first cron job
+
+Create the scripts folder and a small script writing the date in a file:
+
+```{.bash}
+mkdir -p ~/scripts/logs
+cd ~/scripts
+echo 'echo "cron says hi at $(date) from $(hostname)"' > hello.sh
+```
+
+Add a job running **every minute** with `crontab -e`:
+
+```
+* * * * *  cd ~/scripts && bash -l hello.sh >> logs/hello.log 2>&1
+```
+
+Wait a couple of minutes, then look at the log and write down the node you are on:
+
+```{.bash}
+cat ~/scripts/logs/hello.log
+hostname
+```
+
+---
+
+Now remove the job: open `crontab -e` again and delete the line (**do not** use `crontab -r` if you have other jobs!). Check that it is gone:
+
+```{.bash}
+crontab -l
+```
+
+:::{.callout-warning}
+Your crontab belongs to the front-end node you were logged into (see `hostname`). If you log in and `crontab -l` is empty, you might be on another front-end node: `ssh` into the one you used to find your jobs again.
+:::
+
+**Exercise finished**
+
+# Advanced project management
+
+- Project folders, quotas and usage
+- Sharing data
+- Backups and snapshots
+- Compression: `gzip` vs `bgzip`
+
+## Project folders and quotas
+
+| Location | Quota | Backup | Snapshots |
+|---|---|---|---|
+| `/home/<username>` | 100 GB | No | Yes |
+| `/faststorage/project/<project>` | none by default | only `BACKUP` folders | No |
+| `/tmp/$SLURM_JOB_ID` (in jobs) | node disk | No | No |
+
+&nbsp;
+
+- Your home is **only for you** and cannot be shared: keep data in project folders
+- The project owner can set a quota on storage, backup and billing hours with `gdk-project-set-quota` (quotas can only be increased, not decreased)
+
+## Check your usage and the project's
+
+**Your home** has no dedicated command. Use `du` and sort the folders by size:
+
+```{.bash}
+du -sh ~                              # total size of your home
+du -h --max-depth=1 ~ | sort -h      # which folders are the largest
+```
+
+Hidden folders like `~/.conda`, `~/.cache` and `~/.apptainer` are often the culprits!
+
+&nbsp;
+
+**The project**:
+
+```{.bash}
+gdk-project-show PROJECT_NAME          # storage and backup usage
+gdk-project-usage -p PROJECT_NAME -u   # billing hours, per user
+```
+
+:::{.callout-tip}
+This is exactly what the `report_usage.sh` script of the `crontab` chapter does: put it in a weekly cron job and you will notice when someone fills up the project folder.
+:::
+
+## Sharing data
+
+On GenomeDK, data is shared **only through project folders**: everyone in the project can access them. The project owner adds members:
+
+```{.bash}
+gdk-project-add-user -g PROJECT_NAME -u USERNAME
+```
+
+&nbsp;
+
+Inside a project folder, the usual UNIX permissions decide who can read and write. Look at them with `ls -l`:
+
+```
+drwxrwx--- 2 samuele myproject 4096 Nov  3 10:00 results
+ │  │  │       │        │
+ │  │  │       owner    group
+ │  │  others
+ │  group
+ owner
+```
+
+---
+
+Useful `chmod` commands on project folders:
+
+```{.bash}
+chmod -R g+rX results     # the group can read files and enter folders
+chmod -R g+w results      # the group can also modify them
+chmod go-rwx private.txt  # only you can access this file
+chmod -R a-w raw_data     # nobody can modify the raw data, you included
+```
+
+:::{.callout-note}
+The capital `X` gives the execute permission only to folders (needed to enter them) and to files that are already executable, so you do not make all your data files executable.
+:::
+
+## Backups and snapshots
+
+:::{.callout-warning title="By default, nothing is backed up"}
+Only folders called `BACKUP`, `Backup` or `backup` inside **project folders** are backed up. Your home is not backed up!
+:::
+
+- backups run **weekly** and are kept for **14 days**. Check when the last ones happened with
+
+  ```{.bash}
+  gdk-project-events PROJECT_NAME
+  ```
+- moving or renaming backed up files causes a full re-transfer: decide the structure of `BACKUP` before filling it
+- put there what you cannot recreate: raw data, scripts, final results. Not intermediate files!
+
+---
+
+**Snapshots** are automatic copies of your **home folder** (not of project folders), taken every
+
+| Interval | Kept |
+|---|---|
+| 15 minutes | last 4 |
+| 1 hour | last 24 |
+| 1 day | last 31 |
+| 1 week | last 8 |
+| 1 month | last 12 |
+
+&nbsp;
+
+**Deleted a file by mistake?** Contact support@genome.au.dk with the full path of the file and approximately when it was still there.
+
+:::{.callout-tip}
+Snapshots are not a backup. A cron job with `rsync` from your home into a `BACKUP` folder of your project is a cheap way to have your scripts backed up as well (see the `rsync` and `crontab` chapters).
+:::
+
+## Compression: `gzip` vs `bgzip`
+
+Both produce `.gz` files which `zcat` and `gunzip` can read. The difference:
+
+- `gzip` compresses the file as **one block**: to read line 1 million you have to decompress everything before it
+- `bgzip` (from `htslib`) compresses **many independent blocks**: tools can jump to a region of the file, and it can use multiple cores
+
+&nbsp;
+
+```{.bash}
+gzip file.fastq                     # creates file.fastq.gz
+bgzip -@ 4 variants.vcf             # creates variants.vcf.gz, using 4 threads
+tabix -p vcf variants.vcf.gz        # index it, only possible with bgzip
+tabix variants.vcf.gz chr1:1000-2000   # read just one region
+```
+
+---
+
+| | `gzip` | `bgzip` |
+|---|---|---|
+| Readable with `zcat`, `gunzip` | yes | yes |
+| Random access with an index (`tabix`, `samtools faidx`) | no | yes |
+| Multithreaded | no (use `pigz`) | yes (`-@`) |
+| Installed by default | yes | no, via `htslib` (conda/pixi) |
+
+&nbsp;
+
+:::{.callout-note title="Rule of thumb"}
+Use `bgzip` for VCF, BED, GFF and FASTA files you want to index and query. `gzip` is fine for FASTQ files and archives you only read from start to end.
+:::
 
 # Containers
 
@@ -857,7 +1296,7 @@ If a parent job fails, dependent jobs stay pending and are marked as unsatisfied
 
 ## Calibrating resources
 
-Try to run a job with a smaller dataset as a test. Or run one of many jobs of the same type.
+Try to run a job with a smaller dataset as a test, or with the whole data if it does not need too much time loading-opening it. Run only one of many jobs of the same type if they are in parallel.
 While the job is running
 
 - use `squeue --me` and **look at the job id**
@@ -869,13 +1308,26 @@ While the job is running
   ```
 
 :::{.callout-warning}
-The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
+- The command above only works if your job is still running! Otherwise it is finished, has failed or is still in queue.
 :::
 
 ---
 
-- use `htop -u <username>` to see what is running and how much memory and CPU it uses
+- use `top` or `htop -u <username>` or `btop` to see what is running and how much memory and CPU it uses
   ![](img/htop.png)
+
+&nbsp;
+
+:::{.callout-note}
+`btop` is a more modern and colorful alternative to `top` and `htop`. To install it with `conda` or `pixi`, run
+
+```{.bash}
+conda create -n btop -c conda-forge btop     # then: conda activate btop
+# or
+pixi global install btop                      # puts it on your PATH globally
+```
+
+:::
 
 **Exercise finished**
 
@@ -891,9 +1343,6 @@ The command above only works if your job is still running! Otherwise it is finis
 
 - The log file is really useful to understand why a job fails, or if there have been errors or unusual behaviour even if the job is successfully ended.
 
-
-
-
 # Closing the workshop
 
 Please fill out this form :)
@@ -906,7 +1355,7 @@ Please fill out this form :)
 
 - use the official documentation! 
 
-- ask for help, use drop in hours ([ABC cafe](https://abc.au.dk))
+- ask for help, use drop in hours ([ABC focus group](https://abc.au.dk))
 
 - try out stuff and google yourself out of small problems
   
